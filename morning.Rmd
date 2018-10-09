@@ -1,0 +1,22 @@
+
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+### <b> Morning session </b>
+
+#### Introduction to R for aquatic research: introductory
+
+<br>
+
+The tutorial for the morning session will be here.
+
+<img src="./images/roh.png" alt="">
+
+The morning session of this workshop will provide an introduction to the basics of working in R. It is our hope that by the end of this session, you will be comfortable working through these and other examples on your own in the future.
+
+By the end of this session, you will have been exposed to a broad overview of programming in R, read in some data from an external file, done basic data manipulation, and used data to make some simple graphs.
+
+<br>
+ 
