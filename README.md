@@ -1,2 +1,3 @@
 # danStich.github.io
-website
+
+### Website for workshops and lectures
