@@ -2,8 +2,10 @@
 ```
 
 <br>
- 
-### <b> Introduction to R for Aquatic Research </b>
+
+---
+title: "Introduction to R for Aquatic Research"
+---
 
 #### 2018 NALMS International Symposium 
 

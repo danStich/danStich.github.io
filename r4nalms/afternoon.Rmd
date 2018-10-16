@@ -4,7 +4,9 @@
 
 <br>
 
-### <b> Afternoon session </b>
+---
+title: "Afternoon session"
+---
 
 #### Introduction to R for aquatic research: intermediate 
 

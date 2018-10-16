@@ -3,7 +3,11 @@
 
 <br>
 
-## <b> Introductory R </b>
+---
+title: "Introductory R"
+---
+
+<br>
 
 <img src="./images/roh.png" alt="">
 

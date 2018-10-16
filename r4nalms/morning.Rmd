@@ -4,7 +4,9 @@
 
 <br>
 
-### <b> Morning session </b>
+---
+title: "Morning session"
+---
 
 #### Introduction to R for aquatic research: introductory
 
