@@ -694,8 +694,7 @@ This returns a pretty unwieldy result because of the number of unique depths (go
 
 More importanly for now, we are limited in our ability to summarize a variable in more than one way using `aggregate` or other functions in the `base` package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of `base` and into the myriad **packages** that make up R.
 
-Normally, we would just load a package from the default **library** location once we have installed it. 
-
+Normally, we would just load a package from the default **library** location once we have installed it, like this:
 ```{r, eval=FALSE}
 library(plyr)
 ```
@@ -704,7 +703,7 @@ library(plyr)
 
 But, in the absence of a network connection we can't install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the **relative path** to load the `plyr` package.
 ```{r, eval=FALSE, echo=TRUE}
-library(plyr, lib.loc = "./plyr")
+library(plyr, lib.loc = "./r_libs/plyr")
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
