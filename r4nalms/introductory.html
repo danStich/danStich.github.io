@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R4NALMS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="software.html">Software needs</a>
+</li>
+<li>
+  <a href="morning.html">Morning session</a>
+</li>
+<li>
+  <a href="afternoon.html">Afternoon session</a>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="introductory-r" class="section level2">
+<h2><b> Introductory R </b></h2>
+<p><img src="images/roh.png" alt=""></p>
+<p><br></p>
+<p>Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way.</p>
+<p>Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like this one (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a> ones) can help you along the way by serving as handy references.</p>
+<p><br></p>
+</div>
+<div id="working-with-code" class="section level2">
+<h2>Working with code</h2>
+<p>We will spend a bit of time during the morning session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.</p>
+<p>There are a lot of different ways to write computer code. Each has pros and cons and <strong>all</strong> of them are intended to increase efficiency and readability. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:</p>
+<p><br></p>
+<div id="commenting-code-is-helpful" class="section level3">
+<h3>Commenting code is helpful</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is a comment. </span>
+<span class="co"># We know because it is preceded </span>
+<span class="co"># by a hashtag, or &#39;octothorpe&#39;.</span>
+
+<span class="co"># R ignores comments so you have</span>
+<span class="co"># a way to write down what you have</span>
+<span class="co"># done or what you are doing.</span>
+
+<span class="co"># This is useful for sharing</span>
+<span class="co"># code or just figuring out</span>
+<span class="co"># what you did.</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="there-are-a-few-ways-to-run-code" class="section level3">
+<h3>There are a few ways to run code:</h3>
+<ol style="list-style-type: decimal">
+<li><p>Click on a line of code and press ctrl + Enter</p></li>
+<li><p>Highlight a chunk of code and do the same</p></li>
+<li><p>Either 1 or 2, but press the ‘Run’ button at the top of the source file to run the code block.</p></li>
+<li><p>Once you’ve run a code block you can change it and then press the button next to ‘Run’ (or ctrl+shift+P) to ‘re-run’ the previous block of code.</p></li>
+</ol>
+<blockquote>
+<p>Try it on your own!</p>
+</blockquote>
+<p>Type the following line of code into a blank source file, and run it.</p>
+<blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add 1 and 1 together</span>
+<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
+</blockquote>
+<p><br></p>
+</div>
+<div id="section-breaks-help-organization" class="section level3">
+<h3>Section breaks help organization</h3>
+<p>I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I’ve written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Section heading ----</span>
+<span class="co"># Follow a comment with four dashes</span>
+<span class="co"># to insert a section heading</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="some-stricter-r-programming-rules" class="section level3">
+<h3>Some stricter R programming rules:</h3>
+<p>All code is in R is case sensitive</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example (run the following lines):</span>
+a =<span class="st"> </span><span class="dv">1</span>
+A =<span class="st"> </span><span class="dv">2</span>
+a <span class="op">==</span><span class="st"> </span>A</code></pre></div>
+<pre><code>## [1] FALSE</code></pre>
+<p><br></p>
+<p>We have few things going on above.</p>
+<ol style="list-style-type: decimal">
+<li><p>We’ve defined a couple of objects for the first time. You do this by assigning the value on the right of the arrow to the variable on the left. We can use the assignment arrow <code>&lt;-</code> or an equal sign <code>=</code>. The former is preferred, but for our purposes it will make absolutely no difference, and <code>=</code> is much faster to type than <code>&lt;-</code>.</p></li>
+<li><p>Note in the output that the two objects are not the same, and R knows this when we test to see.</p></li>
+<li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then R would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This <strong>operator</strong> is very useful, and is common to a number of programming languages.</p></li>
+</ol>
+<p><br></p>
+<p>You can’t start an object name with a number, but you can end it with one.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In Rstudio there are nifty little </span>
+<span class="co"># markers to show this is broken</span>
+1a =<span class="st"> </span><span class="dv">1</span> 
+
+<span class="co"># But this one works </span>
+<span class="co"># Try it by typing </span>
+<span class="co"># a1,</span>
+<span class="co"># print(a) or</span>
+<span class="co"># show(a) </span>
+<span class="co"># in the console: </span>
+a1 =<span class="st"> </span><span class="dv">1</span> </code></pre></div>
+<p><br></p>
+<p>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first. Even then it is risky business. In the example below, our object <code>a</code> takes on the second value provided.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
+a =<span class="st"> </span><span class="dv">2</span>
+a</code></pre></div>
+<pre><code>## [1] 2</code></pre>
+<p><br></p>
+<p>Some things can be expressed in multiple ways. For example, both ‘T’ and ‘TRUE’ can be used to indicate a logical value of TRUE.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><br></p>
+<p>Some names are reserved or pre-defined. Did you notice that R already knew what T and TRUE were without us defining them? These reserved operators, and built in <strong>functions</strong> are the building blocks of the R language.</p>
+<p>For example,</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
+<p>…and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.</p>
+<p><br></p>
+<p>Some <strong>symbols</strong> are also reserved for special use as operators, like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">+</span>,<span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
+<p>…and a bunch of others.</p>
+<p><br></p>
+</div>
+<div id="some-other-handy-coding-tricks" class="section level3">
+<h3>Some other handy coding tricks</h3>
+<p>The <code>home</code> button will move you to the start of the line of code, and to the start of the line if you press it twice.</p>
+<p>The <code>end</code> button on your keyboard will take you to the end of a line so you can edit code. These will help you move around your code faster.</p>
+<p>The <code>tab</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>SHIFT + TAB</code> will move code to the left. These can help you organize your code.</p>
+<p>Single click moves the cursor into position. Double click will highlight the word you are clicking, and a triple left click will highlight an entire line.</p>
+<p>Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press <code>CTRL + F</code> to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.</p>
+<p><br></p>
+<div id="functions-are-the-life-blood" class="section level4">
+<h4>Functions are the life blood</h4>
+<p>Functions make R what it is. These are all of the “commands”&quot; that are available to a user through the base software, or through <strong>packages</strong> that can be added on. When you can’t find the function you need you can write one to do it (eventually). At its most basic level, <strong>functions</strong> do stuff to <strong>objects</strong> in R. This is what makes R both a functional programming language and an object-oriented programming language.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="data-structures-and-manipulation" class="section level2">
+<h2>Data structures and manipulation</h2>
+<div id="vectors" class="section level3">
+<h3>Vectors</h3>
+<p>Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of functionality outside this original scope. R is what is known as a “high-level” or “interpreted” programming language. This means the pieces that make it up are a little more intuitive to the average user than most low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. This means that R has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language.</p>
+<p>Part of this flexibility comes from the fact that R is also a “vectorized” language. Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
+<p>Let’s take a look at how this works and why it matters. Here, we have defined <code>a</code> as a variable with the value of <code>1</code>…or have we?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
+a</code></pre></div>
+<pre><code>## [1] 1</code></pre>
+<p><br></p>
+<p>What is the square bracket in the output here? It’s an index. The index is telling us that the first element of <code>a</code> is <code>1</code>. This means that <code>a</code> is actually a “vector”, not a “scalar” or singular value. You can think of a vector as a column in an excel spreadsheet or an analagous data table. By treating every variable as a vector, or an element thereof, the language becomes much more generalizable.</p>
+<p>So, even if we define something with a single value, it is still just a vector with one element. For us, this is important because of the way that it lets us do math. It makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. It makes working through the math a zillion times easier than on paper! In terms of programming, it can make a lot of things easier, too.</p>
+<p>The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox <em>that</em> is. Let’s play with some:</p>
+<p><br></p>
+<div id="atomic-vectors" class="section level4">
+<h4>Atomic vectors</h4>
+<p>A vector that can hold one and only one kind of data:</p>
+<ul>
+<li>Character</li>
+<li>Numeric</li>
+<li>Integer</li>
+<li>Logical</li>
+<li>Factor</li>
+<li>Date/time</li>
+</ul>
+<p>And some others, but none with which we’ll concern ourselves.</p>
+<p>Below are some examples of <code>atomic vectors</code>. Run the code to see what it does:</p>
+<p><br></p>
+</div>
+<div id="integers-and-numerics" class="section level4">
+<h4>Integers and numerics</h4>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1-5</span>
+<span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show</span>(a)  <span class="co"># Another way to look at it</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a        <span class="co"># A third way to look at it</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(a)   <span class="co"># Look at the structure, integer class</span></code></pre></div>
+<pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
+<p><br></p>
+<p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the same vector using a sequence</span>
+a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">5</span>, <span class="dt">by=</span><span class="dv">1</span>) 
+<span class="kw">str</span>(a)       </code></pre></div>
+<pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
+<p><br></p>
+</div>
+<div id="characters-and-factors" class="section level4">
+<h4>Characters and factors</h4>
+<p><strong>Characters</strong> are anything that is represented as text strings.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>) <span class="co"># Make a character vector</span>
+b                              <span class="co"># Print it to the console</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(b)                         <span class="co"># Now it&#39;s a character vector</span></code></pre></div>
+<pre><code>##  chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">as.factor</span>(b)               <span class="co"># But we can change if we want</span>
+b                             </code></pre></div>
+<pre><code>## [1] a b c d e
+## Levels: a b c d e</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(b)                         <span class="co"># Look at the data structure</span></code></pre></div>
+<pre><code>##  Factor w/ 5 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5</code></pre>
+<p><br></p>
+<p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
+<p><br></p>
+<p>This is what it looks like when we code a factor as number:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(b) 
+
+<span class="co"># What did that do?</span>
+?as.numeric   </code></pre></div>
+<p><br></p>
+<p>Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it…in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.</p>
+<p><br></p>
+</div>
+<div id="logical-vectors" class="section level4">
+<h4>Logical vectors</h4>
+<p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span>
+c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b 
+c            </code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(c)       </code></pre></div>
+<pre><code>##  logi [1:5] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p><br></p>
+<p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(a)     <span class="co"># We can check for missing values</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></code></pre></div>
+<pre><code>## [1] a b c d e
+## Levels: a b c d e</code></pre>
+<p><br></p>
+<p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
+<p><br></p>
+</div>
+<div id="vector-operations" class="section level4">
+<h4>Vector operations</h4>
+<p>A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.</p>
+<p>For example, we can reference specific elements of vectors directly. Here, we specify that we want to print the third element of <code>a</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This one just prints it</span>
+a[<span class="dv">3</span>] </code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This one stores it in a new object</span>
+f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
+<blockquote>
+<p>Important</p>
+</blockquote>
+<p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
+<p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] </code></pre></div>
+<pre><code>## [1] c
+## Levels: a b c d e</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<p><br></p>
+<p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
+<pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
+<pre><code>## [1] 101 102 103 104 105</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
+<pre><code>## [1] -2 -1  0  1  2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
+<pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
+<pre><code>## [1]  1  4  9 16 25</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></code></pre></div>
+<pre><code>## [1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(a)   <span class="co"># Natural logarithm</span></code></pre></div>
+<pre><code>## [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log10</span>(a) <span class="co"># Log base 10</span></code></pre></div>
+<pre><code>## [1] 0.0000000 0.3010300 0.4771213 0.6020600 0.6989700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">as.character</span>(b)
+<span class="kw">paste</span>(b, <span class="st">&#39;AAAA&#39;</span>, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can append text</span></code></pre></div>
+<pre><code>## [1] &quot;aAAAA&quot; &quot;bAAAA&quot; &quot;cAAAA&quot; &quot;dAAAA&quot; &quot;eAAAA&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can do it the other way</span></code></pre></div>
+<pre><code>## [1] &quot;AAAAa&quot; &quot;AAAAb&quot; &quot;AAAAc&quot; &quot;AAAAd&quot; &quot;AAAAe&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;--&#39;</span>) <span class="co"># Add symbols to separate</span></code></pre></div>
+<pre><code>## [1] &quot;AAAA--a&quot; &quot;AAAA--b&quot; &quot;AAAA--c&quot; &quot;AAAA--d&quot; &quot;AAAA--e&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gsub</span>(<span class="dt">pattern=</span><span class="st">&#39;c&#39;</span>, <span class="dt">replacement=</span><span class="st">&#39;AAAA&#39;</span>, b) <span class="co"># We can replace text</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;    &quot;b&quot;    &quot;AAAA&quot; &quot;d&quot;    &quot;e&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># Make a new object</span>
+e                            <span class="co"># Print to console</span></code></pre></div>
+<pre><code>## [1] &quot;AAAAa&quot; &quot;AAAAb&quot; &quot;AAAAc&quot; &quot;AAAAd&quot; &quot;AAAAe&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(e, <span class="dt">start=</span><span class="dv">5</span>, <span class="dt">stop=</span><span class="dv">5</span>)   <span class="co"># We can strip text (or dates, or times, etc.)</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
+<p>We can check how many elements are in a vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a         <span class="co"># Yup, looks about right</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p><br></p>
+<p>And we can do lots of other nifty things like this.</p>
+<p><br></p>
+</div>
+</div>
+<div id="matrices" class="section level3">
+<h3>Matrices</h3>
+<p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
+<p>We can make matrices by binding vectors that already exist</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(a,e)</code></pre></div>
+<pre><code>##      a   e      
+## [1,] &quot;1&quot; &quot;AAAAa&quot;
+## [2,] &quot;2&quot; &quot;AAAAb&quot;
+## [3,] &quot;3&quot; &quot;AAAAc&quot;
+## [4,] &quot;4&quot; &quot;AAAAd&quot;
+## [5,] &quot;5&quot; &quot;AAAAe&quot;</code></pre>
+<p><br></p>
+<p>Or we can make an empty one to fill.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)</code></pre></div>
+<pre><code>##      [,1] [,2] [,3] [,4]
+## [1,]    0    0    0    0
+## [2,]    0    0    0    0
+## [3,]    0    0    0    0</code></pre>
+<p><br></p>
+<p>Or we can make one from scratch.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</code></pre></div>
+<p><br></p>
+<p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span></code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(mat)   <span class="co"># Number of rows</span></code></pre></div>
+<pre><code>## [1] 4</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></code></pre></div>
+<pre><code>## [1] 12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="dv">2</span>, <span class="dv">3</span>]   <span class="co"># Value of row 2, column 3</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat)    </code></pre></div>
+<pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
+<p><br></p>
+<p>See how no. of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)
+<span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)
+mat</code></pre></div>
+<pre><code>##        first second third
+## This       1      5     9
+## is         2      6    10
+## a          3      7    11
+## matrix     4      8    12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat) <span class="co"># Take a look to understand</span></code></pre></div>
+<pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...
+##  - attr(*, &quot;dimnames&quot;)=List of 2
+##   ..$ : chr [1:4] &quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;matrix&quot;
+##   ..$ : chr [1:3] &quot;first&quot; &quot;second&quot; &quot;third&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat<span class="op">*</span><span class="dv">2</span> </code></pre></div>
+<pre><code>##        first second third
+## This       2     10    18
+## is         4     12    20
+## a          6     14    22
+## matrix     8     16    24</code></pre>
+<p><br></p>
+<p>All the same operations we did on vectors above…one example.</p>
+<p><br></p>
+<p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.</p>
+<p><br></p>
+</div>
+<div id="dataframes" class="section level3">
+<h3>Dataframes</h3>
+<p>Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!</p>
+<p><strong>Dataframes</strong> are made up of <strong>atomic vectors</strong>.</p>
+<p>This is probably the data structure that we will use most here, along with atomic vectors.</p>
+<p>Let’s make a dataframe to see how it works.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new object &#39;a&#39; from a sequence  </span>
+a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
+  
+<span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
+b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
+
+<span class="co"># Replicates values in object a # of times  </span>
+c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
+
+<span class="co"># Note, we don&#39;t use quotes for objects,</span>
+<span class="co"># but we do for character variables</span>
+d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </code></pre></div>
+<p><br></p>
+<p>Now we can look at it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="co"># Print the dataframe</span></code></pre></div>
+<pre><code>##       a      b c
+## 1   0.5   0.25 a
+## 2   1.0   1.00 b
+## 3   1.5   2.25 c
+## 4   2.0   4.00 d
+## 5   2.5   6.25 a
+## 6   3.0   9.00 b
+## 7   3.5  12.25 c
+## 8   4.0  16.00 d
+## 9   4.5  20.25 a
+## 10  5.0  25.00 b
+## 11  5.5  30.25 c
+## 12  6.0  36.00 d
+## 13  6.5  42.25 a
+## 14  7.0  49.00 b
+## 15  7.5  56.25 c
+## 16  8.0  64.00 d
+## 17  8.5  72.25 a
+## 18  9.0  81.00 b
+## 19  9.5  90.25 c
+## 20 10.0 100.00 d</code></pre>
+<p><br></p>
+<p>Notice that R assigns names to dataframes on the fly based on object names. They are not <code>colnames</code> as with matrices, they are <code>names</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can look at these</span>
+<span class="kw">names</span>(d)     <span class="co"># All of the names</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(d)[<span class="dv">2</span>]  <span class="co"># One at a time: note indexing, names(d) is a vector!!</span></code></pre></div>
+<pre><code>## [1] &quot;b&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can change the names</span>
+<span class="kw">names</span>(d) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Increment&#39;</span>, <span class="st">&#39;Squared&#39;</span>, <span class="st">&#39;Class&#39;</span>) <span class="co"># All at once- note quotes</span>
+<span class="kw">names</span>(d)               <span class="co"># Print it to see what this does</span></code></pre></div>
+<pre><code>## [1] &quot;Increment&quot; &quot;Squared&quot;   &quot;Class&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(d)[<span class="dv">3</span>] =<span class="st"> &#39;Letter&#39;</span> <span class="co"># Or, change one at a time..</span>
+<span class="kw">names</span>(d)               <span class="co"># Print it again to see what changed</span></code></pre></div>
+<pre><code>## [1] &quot;Increment&quot; &quot;Squared&quot;   &quot;Letter&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e =<span class="st"> </span>d                  <span class="co"># We can also rename the entire dataframe</span>
+<span class="kw">head</span>(e)                <span class="co"># Head shows first six rows by default</span></code></pre></div>
+<pre><code>##   Increment Squared Letter
+## 1       0.5    0.25      a
+## 2       1.0    1.00      b
+## 3       1.5    2.25      c
+## 4       2.0    4.00      d
+## 5       2.5    6.25      a
+## 6       3.0    9.00      b</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(e, <span class="dv">10</span>)            <span class="co"># Or, we can look at any other number that we want</span></code></pre></div>
+<pre><code>##    Increment Squared Letter
+## 1        0.5    0.25      a
+## 2        1.0    1.00      b
+## 3        1.5    2.25      c
+## 4        2.0    4.00      d
+## 5        2.5    6.25      a
+## 6        3.0    9.00      b
+## 7        3.5   12.25      c
+## 8        4.0   16.00      d
+## 9        4.5   20.25      a
+## 10       5.0   25.00      b</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
+e <span class="co"># We can make new columns in data frames like this!</span></code></pre></div>
+<pre><code>##    Increment Squared Letter      Sqrt
+## 1        0.5    0.25      a 0.7071068
+## 2        1.0    1.00      b 1.0000000
+## 3        1.5    2.25      c 1.2247449
+## 4        2.0    4.00      d 1.4142136
+## 5        2.5    6.25      a 1.5811388
+## 6        3.0    9.00      b 1.7320508
+## 7        3.5   12.25      c 1.8708287
+## 8        4.0   16.00      d 2.0000000
+## 9        4.5   20.25      a 2.1213203
+## 10       5.0   25.00      b 2.2360680
+## 11       5.5   30.25      c 2.3452079
+## 12       6.0   36.00      d 2.4494897
+## 13       6.5   42.25      a 2.5495098
+## 14       7.0   49.00      b 2.6457513
+## 15       7.5   56.25      c 2.7386128
+## 16       8.0   64.00      d 2.8284271
+## 17       8.5   72.25      a 2.9154759
+## 18       9.0   81.00      b 3.0000000
+## 19       9.5   90.25      c 3.0822070
+## 20      10.0  100.00      d 3.1622777</code></pre>
+<p><br></p>
+<p>Referencing specific elements of a dataframe is similar to a the same in a matrix, with some added capabilities. We’ll look at this with some real data so it’s more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let’s read in our first real data file as most of our data are stored that way and will be read in as <code>.csv</code> or <code>.txt</code> files.</p>
+<p><br></p>
+</div>
+<div id="loading-data-from-files" class="section level3">
+<h3>Loading data from files</h3>
+<p>First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., <code>setwd(&quot;C:/Users/.../physical.csv&quot;)</code>), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in <em>this</em> case). Then, we can set the working directory in R to that folder using any number of different options.</p>
+<p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our environment. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
+<p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
+<p>Now that we have some real data, let’s break it down a little bit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;      &quot;A&quot;      &quot;b&quot;      &quot;c&quot;      &quot;d&quot;      &quot;e&quot;      &quot;f&quot;      &quot;mat&quot;   
+## [9] &quot;otsego&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
+<pre><code>##          lake      date month year depth  temp   pH do_mgl  cond do_sat
+## 1 Otsego Lake 4/28/2017     4 2017   0.1  8.82 7.90  11.69 0.307  100.0
+## 2 Otsego Lake 5/17/2017     5 2017   0.1 10.15 7.76  11.48 0.308  101.1
+## 3 Otsego Lake  6/1/2017     6 2017   0.1 14.90 8.10  10.41 0.315  103.1
+## 4 Otsego Lake 6/14/2017     6 2017   0.1 20.91 8.32   9.85 0.312  110.5
+## 5 Otsego Lake 6/29/2017     6 2017   0.1 20.57 8.45   9.14 0.303  101.8
+## 6 Otsego Lake 7/13/2017     7 2017   0.1 23.13 8.39   8.66 0.310     NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(otsego)    <span class="co"># How many rows does it have?</span></code></pre></div>
+<pre><code>## [1] 10006</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(otsego)    <span class="co"># How many columns?</span></code></pre></div>
+<pre><code>## [1] 10</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(otsego)   <span class="co"># What are the column names?</span></code></pre></div>
+<pre><code>##  [1] &quot;lake&quot;   &quot;date&quot;   &quot;month&quot;  &quot;year&quot;   &quot;depth&quot;  &quot;temp&quot;   &quot;pH&quot;    
+##  [8] &quot;do_mgl&quot; &quot;cond&quot;   &quot;do_sat&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(otsego)     <span class="co"># Have a look at the data structure</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    10006 obs. of  10 variables:
+##  $ lake  : Factor w/ 1 level &quot;Otsego Lake&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ date  : Factor w/ 539 levels &quot;1/10/1995&quot;,&quot;1/10/1996&quot;,..: 200 218 264 272 309 341 387 427 536 518 ...
+##  $ month : int  4 5 6 6 6 7 7 8 9 9 ...
+##  $ year  : int  2017 2017 2017 2017 2017 2017 2017 2017 2017 2017 ...
+##  $ depth : num  0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 ...
+##  $ temp  : num  8.82 10.15 14.9 20.91 20.57 ...
+##  $ pH    : num  7.9 7.76 8.1 8.32 8.45 8.39 8.17 8.38 7.94 8.16 ...
+##  $ do_mgl: num  11.69 11.48 10.41 9.85 9.14 ...
+##  $ cond  : num  0.307 0.308 0.315 0.312 0.303 0.31 0.3 0.292 0.282 0.285 ...
+##  $ do_sat: num  100 101 103 110 102 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(otsego) <span class="co"># Summarize the variables in the dataframe</span></code></pre></div>
+<pre><code>##           lake               date          month             year     
+##  Otsego Lake:10006   8/17/2006 :  24   Min.   : 1.000   Min.   :1988  
+##                      10/18/1994:  20   1st Qu.: 5.000   1st Qu.:1995  
+##                      10/3/1994 :  20   Median : 7.000   Median :2001  
+##                      11/6/1995 :  20   Mean   : 7.268   Mean   :2002  
+##                      12/13/1994:  20   3rd Qu.: 9.000   3rd Qu.:2010  
+##                      6/16/1994 :  20   Max.   :12.000   Max.   :2018  
+##                      (Other)   :9882                                  
+##      depth            temp              pH             do_mgl      
+##  Min.   : 0.10   Min.   : 0.000   Min.   : 6.080   Min.   : 0.410  
+##  1st Qu.: 8.00   1st Qu.: 4.660   1st Qu.: 7.590   1st Qu.: 7.950  
+##  Median :18.00   Median : 6.110   Median : 7.860   Median : 9.450  
+##  Mean   :21.95   Mean   : 8.263   Mean   : 7.869   Mean   : 9.121  
+##  3rd Qu.:40.00   3rd Qu.: 9.710   3rd Qu.: 8.130   3rd Qu.:10.960  
+##  Max.   :50.00   Max.   :26.120   Max.   :11.020   Max.   :16.440  
+##  NA&#39;s   :1                        NA&#39;s   :504      NA&#39;s   :40      
+##       cond            do_sat       
+##  Min.   :0.1430   Min.   :   0.30  
+##  1st Qu.:0.2640   1st Qu.:  77.90  
+##  Median :0.2800   Median :  89.30  
+##  Mean   :0.2804   Mean   :  86.51  
+##  3rd Qu.:0.3020   3rd Qu.:  97.00  
+##  Max.   :0.3770   Max.   :1145.90  
+##  NA&#39;s   :251      NA&#39;s   :7801</code></pre>
+<p><br></p>
+<p>Now let’s look at some specific things.</p>
+<p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="dv">4</span>]</code></pre></div>
+<pre><code>## [1] 2017</code></pre>
+<p><br></p>
+<p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="st">&#39;depth&#39;</span>]</code></pre></div>
+<pre><code>## [1] 0.1</code></pre>
+<p><br> More realistically, we might want to know the avereage temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="fl">10.0</span>] , <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## [1] 10.49944</code></pre>
+<p><br></p>
+<p>Wow…heavy stuff, but this is how the wheels turn. Let’s take another step back and break this down even further.</p>
+<p>In the example above, we are using a <strong>function</strong> called <code>mean</code> to do stuff to an object that is a subset of <code>otsego$temp</code>. The way these functions do things is critical to working in R.</p>
+<p>For example, we could write a new function to calculate the mean if we wanted to,… right? Here, we define a function called <code>myMean</code> that takes one required <strong>argument</strong>. Each required argument can take on user-specified <strong>values</strong>. In this case, that value must be a vector that is or can be coerced into <code>numeric</code> format. Here, we also add a chunk of code to deal with <code>NA</code> values.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a new function to calculate mean</span>
+myMean &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="co"># If any of the observations are NA</span>
+  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">is.na</span>(x))){
+    <span class="co"># Then exclude those values of </span>
+    <span class="co"># x from calculation</span>
+    x_bar =<span class="st"> </span><span class="kw">sum</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])<span class="op">/</span><span class="kw">length</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])
+      <span class="co"># Otherwise</span>
+      } <span class="cf">else</span> {
+        <span class="co"># Calculate from all values of x</span>
+        x_bar =<span class="st"> </span><span class="kw">sum</span>(x)<span class="op">/</span><span class="kw">length</span>(x)
+      }
+  
+  <span class="kw">return</span>(x_bar)
+  }</code></pre></div>
+<p><br></p>
+<p>Just to make sure it works right, let’s go ahead and test it out.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">myMean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="dv">10</span>])
+test</code></pre></div>
+<pre><code>## [1] 10.49944</code></pre>
+<p><br></p>
+<p>Yay!</p>
+<p><br></p>
+<p>Now, what if we wanted to do something more useful, like convert temperature from celcius to Farenheit? We can apply the same idea here:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function to convert temperature</span>
+<span class="co"># in celcius to temperature in farenheit:</span>
+cToF &lt;-<span class="st"> </span><span class="cf">function</span>(cels){
+  faren &lt;-<span class="st"> </span>cels<span class="op">*</span>(<span class="dv">9</span><span class="op">/</span><span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">32</span>
+  <span class="kw">return</span>(faren)
+}
+
+<span class="co"># Test the function out.</span>
+<span class="co"># Here, we create a new variable in the</span>
+<span class="co"># otsego dataframe to hold the result</span>
+otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego<span class="op">$</span>temp)
+
+<span class="co"># Look at the first few elements</span>
+<span class="kw">head</span>(otsego<span class="op">$</span>tempF)</code></pre></div>
+<pre><code>## [1] 47.876 50.270 58.820 69.638 69.026 73.634</code></pre>
+<p><br></p>
+<p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Farenheit scale?).</p>
+<p>There are a couple of ways to do this.</p>
+<p>First, we could just use the <code>write.csv</code> function. This one is pretty limited in terms of options, but that also makes it easy to use. We just need to tell R what the object is that we want to write to a csv file and what the name of the file will be. Do be careful because this will overwrite existing files with the same name without asking if that is okay.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>I like a little more flexibility in the file write process, so I usually use the <code>write.table</code> function. This can be used to achieve the same end depending on options, but allows other options like ommitting <code>rownames</code> from the output file. Here is an example of how it works:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write the data set to a csv file.</span>
+<span class="co"># We specify the object, the filename, and</span>
+<span class="co"># we tell R we don&#39;t want rownames or quotes</span>
+<span class="co"># around character strings. Finally, we tell</span>
+<span class="co"># R to separate columns using a comma.</span>
+
+<span class="co"># We could do exactly the same thing, but use a &quot;.txt&quot;</span>
+<span class="co"># file extensions, and we would get a comma-separated</span>
+<span class="co"># text file if we needed one.</span>
+<span class="kw">write.table</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>, <span class="dt">rownames=</span><span class="ot">FALSE</span>,
+            <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>A third way to write objects from R to a file is by saving it as an R data file (<code>.rda</code> extension). This comes in handy when we have very large or very complex objects. In general, <code>.rda</code> files save and load more quickly because they are stored as <strong>compressed</strong> code (in the form of <strong>lists</strong>). Here is what it looks like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(otsego, <span class="dt">file=</span><span class="st">&#39;otsego.rda&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>When this kind of a data file is loaded back into the environment (using <code>load(file='otsego.rda')</code>)’ it has the same name, but is stored as a <strong>list</strong>. Dun, dun, dun…</p>
+<p><br></p>
+</div>
+<div id="lists" class="section level3">
+<h3>Lists</h3>
+<p>Lists are the ultimate container in R. They are actually a generalized vector that can hold different classes of data. Each element of a list can be any kind of object (an atomic vector, a matrix, a dataframe, or even another list!!). In fact, even a dataframe can be thought of as a list with just one element (the dataframe). In fact, a data frame is an element of the list that comprises our environments. Gross, right?</p>
+<p>The real, filthy R programming relies heavily on lists. We will have to work with them at some point, but we won’t take a ton of time on them here. In general, when you run a regression model or do an interpolation, you can expect that the results will come back in a list.</p>
+<p>Let’s make a list, just to see how they work</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myList =<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&#39;list&#39;</span>, <span class="dt">length=</span><span class="dv">4</span>)
+myList[[<span class="dv">1</span>]] =<span class="st"> </span>a
+myList[[<span class="dv">2</span>]] =<span class="st"> </span>c
+myList[[<span class="dv">3</span>]] =<span class="st"> </span>mat
+myList[[<span class="dv">4</span>]] =<span class="st"> </span>d
+
+<span class="co"># Print it</span>
+myList                                   <span class="co"># Cool, huh?</span></code></pre></div>
+<pre><code>## [[1]]
+##  [1]  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0
+## [15]  7.5  8.0  8.5  9.0  9.5 10.0
+## 
+## [[2]]
+##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot;
+## [18] &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## [[3]]
+##        first second third
+## This       1      5     9
+## is         2      6    10
+## a          3      7    11
+## matrix     4      8    12
+## 
+## [[4]]
+##    Increment Squared Letter
+## 1        0.5    0.25      a
+## 2        1.0    1.00      b
+## 3        1.5    2.25      c
+## 4        2.0    4.00      d
+## 5        2.5    6.25      a
+## 6        3.0    9.00      b
+## 7        3.5   12.25      c
+## 8        4.0   16.00      d
+## 9        4.5   20.25      a
+## 10       5.0   25.00      b
+## 11       5.5   30.25      c
+## 12       6.0   36.00      d
+## 13       6.5   42.25      a
+## 14       7.0   49.00      b
+## 15       7.5   56.25      c
+## 16       8.0   64.00      d
+## 17       8.5   72.25      a
+## 18       9.0   81.00      b
+## 19       9.5   90.25      c
+## 20      10.0  100.00      d</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(myList)                            <span class="co"># No names on the fly like a df</span></code></pre></div>
+<pre><code>## NULL</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(myList) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;mat&#39;</span>, <span class="st">&#39;d&#39;</span>)  <span class="co"># Give it names like a dataframe</span>
+myList                                   <span class="co"># See how the names work now?</span></code></pre></div>
+<pre><code>## $a
+##  [1]  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0
+## [15]  7.5  8.0  8.5  9.0  9.5 10.0
+## 
+## $c
+##  [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;a&quot;
+## [18] &quot;b&quot; &quot;c&quot; &quot;d&quot;
+## 
+## $mat
+##        first second third
+## This       1      5     9
+## is         2      6    10
+## a          3      7    11
+## matrix     4      8    12
+## 
+## $d
+##    Increment Squared Letter
+## 1        0.5    0.25      a
+## 2        1.0    1.00      b
+## 3        1.5    2.25      c
+## 4        2.0    4.00      d
+## 5        2.5    6.25      a
+## 6        3.0    9.00      b
+## 7        3.5   12.25      c
+## 8        4.0   16.00      d
+## 9        4.5   20.25      a
+## 10       5.0   25.00      b
+## 11       5.5   30.25      c
+## 12       6.0   36.00      d
+## 13       6.5   42.25      a
+## 14       7.0   49.00      b
+## 15       7.5   56.25      c
+## 16       8.0   64.00      d
+## 17       8.5   72.25      a
+## 18       9.0   81.00      b
+## 19       9.5   90.25      c
+## 20      10.0  100.00      d</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myList[[<span class="dv">1</span>]]                              <span class="co"># We reference these differently [[]]</span></code></pre></div>
+<pre><code>##  [1]  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.5  6.0  6.5  7.0
+## [15]  7.5  8.0  8.5  9.0  9.5 10.0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myList[[<span class="dv">2</span>]][<span class="dv">5</span>]                           <span class="co"># But can still get into each object</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Play around with the numbers to see what they do!</span>
+myList<span class="op">$</span>c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
+<pre><code>## [1] &quot;a&quot;</code></pre>
+<p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.</p>
+<p><br></p>
+</div>
+</div>
+<div id="summarizing-and-visualizing-data" class="section level2">
+<h2>Summarizing and visualizing data</h2>
+<p>Now that we have a handle on how R works, and how to get our data in, let’s take a little time to examine statistical and graphical summaries of our data.</p>
+<p><br></p>
+<div id="data-summaries" class="section level3">
+<h3>Data summaries</h3>
+<p>Some of the most fundamental work we do involves summarizing information across ranges of categories or factors (e.g. mean water temperature in July). This helps us start to detangle complicated patterns in data, and can be helpful to others when they read about our awesome research.</p>
+<p>Most data summaries are handled effectively using a limited number of R functions applied in different ways. A fairly small number of functions can be used to imitate the functionality of things like queries, look-up tables, and pivot tables that one might use in other software programs. Once you get used to working with these functions, the whole process is a lot faster and a lot more reproducible in R compared to other programs.</p>
+<p>We have already encountered a few functions for data summary in our time together. Most of these have intuitive names and serve obvious purposes once you know what they are called.</p>
+<p>Here is a quick run-down on a few of the basics. Each of these requires a vector as input.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) </code></pre></div>
+<pre><code>## [1] 8.262847</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  </code></pre></div>
+<pre><code>## [1] 6.11</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</code></pre></div>
+<pre><code>## [1] 0</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</code></pre></div>
+<pre><code>## [1] 26.12</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  <span class="co"># Standard deviation</span></code></pre></div>
+<pre><code>## [1] 5.734517</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) <span class="co"># Variance  </span></code></pre></div>
+<pre><code>## [1] 32.88469</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(otsego<span class="op">$</span>temp, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T) <span class="co"># Quantiles, with user-defined thresholds</span></code></pre></div>
+<pre><code>##  2.5% 97.5% 
+##  1.84 22.89</code></pre>
+<p><br></p>
+<p>We can combine these into a single function to summarize entire dataframes, but this is not usually very useful. For example, we could use <code>summary</code> to return <code>min</code>, <code>median</code>, <code>mean</code>, <code>max</code> and the inner quartile range for each variable in an entire dataframe or matrix, but this is a little meaningless when we are looking at <strong>marginal</strong> summary stats for each variable.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(otsego)</code></pre></div>
+<p><br></p>
+<p>Usually, we would like to summarize variables across groups (e.g., ‘control’ or ‘treatment’) or discrete ranges of data (e.g., <code>month</code> in <code>otsego</code>). There are a number of ways to do this in R, and what we use depends partly on the application, and partly on personal preference. Most of these operate using what is known as the <strong>split-apply-combine</strong> approach. The simplest is probably the <code>aggregate</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
+<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
+<pre><code>##    month      temp
+## 1      1  2.645176
+## 2      2  2.114755
+## 3      3  2.201694
+## 4      4  3.922480
+## 5      5  6.657329
+## 6      6  9.297003
+## 7      7 10.670483
+## 8      8 11.140326
+## 9      9 10.698824
+## 10    10  9.495450
+## 11    11  7.471370
+## 12    12  5.375337</code></pre>
+<p><br></p>
+<p>We can even use this to summarize a variable across multiple grouping variables. Perhaps we want to see mean temperature by month and depth?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
+<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month<span class="op">+</span>depth, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
+<p><br></p>
+<p>This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make <strong>isopleths</strong> during the intermediate session in the afternoon.</p>
+<p>More importanly for now, we are limited in our ability to summarize a variable in more than one way using <code>aggregate</code> or other functions in the <code>base</code> package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of <code>base</code> and into the myriad <strong>packages</strong> that make up R.</p>
+<p>Normally, we would just load a package from the default <strong>library</strong> location once we have installed it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
+<p><br></p>
+<p>But, in the absence of a network connection we can’t install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the <strong>relative path</strong> to load the <code>plyr</code> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;./plyr&quot;</span>)</code></pre></div>
+<p><br></p>
+<p>With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use <code>ddply</code> to summarize the <code>otsego</code> data. (There is also a function called <code>ddply</code> in the <code>dplyr</code> package that is a newer, beefed-up version of <code>plyr</code> focusing only on <code>dataframes</code> and remote <code>datatables</code>)</p>
+<p>Here is one way that we can use <code>ddply</code> to summarize temperature across multiple factors.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize mean and sd by month and depth</span>
+summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
+  <span class="dt">.data =</span> otsego,
+  <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&#39;month&#39;</span>, <span class="st">&#39;depth&#39;</span>),
+  summarize,
+  <span class="dt">mean =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> T),
+  <span class="dt">sd =</span> <span class="kw">sd</span>(temp, <span class="dt">na.rm =</span> T)
+)</code></pre></div>
+<p><br></p>
+<p>Now, we can take a look at the summary:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="dt">x=</span>summarydata, <span class="dt">n=</span><span class="dv">10</span>)</code></pre></div>
+<pre><code>##    month depth     mean        sd
+## 1      1   0.1 1.732143 1.3281982
+## 2      1   2.0 2.099231 1.0747904
+## 3      1   4.0 2.123571 0.9881421
+## 4      1   6.0 2.248462 0.9621144
+## 5      1   8.0 2.366923 0.9079775
+## 6      1  10.0 2.385714 0.8795341
+## 7      1  12.0 2.500000 0.8600775
+## 8      1  14.0 2.515714 0.8127703
+## 9      1  16.0 2.595385 0.8133635
+## 10     1  18.0 2.649231 0.7865162</code></pre>
+<p><br></p>
+<p>And, we can write it out to a <code>.csv</code> file that we can use to build tables in Excel or Word (or any number of non-Microsoft applications that we like!).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(summarydata, <span class="st">&#39;summary.csv&#39;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>,
+            <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</code></pre></div>
+<p>The result is a table that is ready to go with just a few formatting changes, even if it is ridiculously long.</p>
+<p><br></p>
+</div>
+<div id="basic-graphs" class="section level3">
+<h3>Basic graphs</h3>
+<p>Now that we have an informative table, let’s see what we can do about distilling the 10,000 rows of data we have into a couple of simple graphs.</p>
+<p>One of the most attractive aspects of working with data in R is the power of the base graphics package. We basically have access to any kind of plot you can imagine, and if you can imagine a kind of plot that isn’t there, you can create it by hand. I have even used cartesian coordinates to create useful plots where no other functions were available.</p>
+<p>One of the most powerful aspects of plotting in R is that we are working with a scripted language. That means, that if we go out and collect more data, we can add those to our existing data files, or replace the old files with new ones, and re-run our code, with minimal changes, to produce updated graphs. This will make you feel a lot better about writing 20 or 30 lines of code to produce the kind of graph that you’ll be happy with.</p>
+<p><br></p>
+<div id="boxplots" class="section level4">
+<h4>Boxplots</h4>
+<p>Usually, when we are trying to summarize a <strong>continuous</strong> response across <strong>categorical</strong> explanatory variables, a <strong>boxplot</strong> is a reasonable starting place. Wow, that’s a lot of bold in one sentence.</p>
+<p>Why don’t we start simple? Let’s make a boxplot of temperatures by month in the lake.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a simple boxplot of epilimnion temperatures by month</span>
+<span class="co"># Note that I pass this restriction using the depth variable</span>
+<span class="co"># in the Otsego data because I know (about) where the</span>
+<span class="co"># thermocline is in that lake.</span>
+<span class="kw">boxplot</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,])</code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><br></p>
+<p>Well, that was really easy, but let’s face it…it’s ugly. In fact, this is the kind of output that makes the old-school statisticians not like the “clunky” graphics from R, so let’s see if we can snaz it up a little bit. I am going to spread out the code across multiple lines so you can get a feel for what’s going on here.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the plot</span>
+<span class="kw">boxplot</span>(
+  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],
+  <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span>
+  <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span>
+  <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span>
+  <span class="dt">xlab=</span><span class="st">&#39;Month&#39;</span>, <span class="co"># Here is an x-axis label</span>
+  <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>))
+)
+
+<span class="co"># Add x-axis. substr() takes the</span>
+<span class="co"># first 3 letters of month</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,
+     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),
+     <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)
+     )
+
+<span class="co"># Add the y-axis, las rotates the labels</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><br></p>
+<p>This is looking a lot better, and we didn’t even need to change that much to get here. But, we <em>could</em> do a little better by specifying some additional, low-level parameters (<code>pars</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up the plotting window</span>
+<span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+<span class="co"># Make the plot</span>
+<span class="kw">boxplot</span>(
+  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],
+  <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span>
+  <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span>
+  <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span>
+  <span class="dt">xlab=</span><span class="st">&#39;Month&#39;</span>, <span class="co"># Here is an x-axis label</span>
+  <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
+  <span class="dt">outline=</span><span class="ot">FALSE</span>,
+  <span class="dt">pars=</span><span class="kw">list</span>(
+    <span class="dt">staplewex=</span><span class="dv">0</span>,
+    <span class="dt">boxcol=</span><span class="st">&#39;gray60&#39;</span>, <span class="co"># Another of the great grays</span>
+    <span class="dt">boxlwd=</span><span class="dv">2</span>,
+    <span class="dt">medlwd=</span><span class="dv">1</span>, <span class="dt">medcol=</span><span class="st">&#39;gray60&#39;</span>,
+    <span class="dt">medpch=</span><span class="dv">21</span>, <span class="dt">medbg=</span><span class="st">&#39;gray40&#39;</span>, <span class="co"># Yet another...so many!</span>
+    <span class="dt">whisklty=</span><span class="dv">1</span>, <span class="dt">whisklwd=</span><span class="dv">2</span>, <span class="dt">whiskcol=</span><span class="st">&#39;gray60&#39;</span>
+  )
+)
+
+<span class="co"># Add x-axis</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,
+     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),
+     <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)
+     )
+
+<span class="co"># Add the y-axis</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
+<p><br></p>
+<p>Alright, now our graph is starting to look pretty snazy!</p>
+<p>Let’s move on and check out a couple more plots to show off some of the power of the base <code>graphics</code> package that is loaded by default.</p>
+<p><br></p>
+</div>
+<div id="scatterplots" class="section level4">
+<h4>Scatterplots</h4>
+<p>Here, we will skip the niceties and cut right to the chase. We will set a couple of graphical parameters up front so we can compare our two graphs side by side. To do this, we specify a graphical matrix using the argument <code>mfrow</code>, which needs to be a vector containing the number of rows, and the number of columns for the plotting window (defaults to <code>c(1,1)</code>). Then, we will make a default scatterplot on the left, and a juiced-up version on the right.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subset the data so we are just working with </span>
+<span class="co"># temps from the epilimnion in July</span>
+july &lt;-<span class="st"> </span>otsego[otsego<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>, ]
+
+<span class="co"># Set main graphical parameters</span>
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
+
+<span class="co"># Make the default scatterplot</span>
+<span class="kw">plot</span>(july<span class="op">$</span>year, july<span class="op">$</span>temp)
+
+<span class="co"># Now, make a better plot and add it</span>
+<span class="kw">plot</span>(july<span class="op">$</span>year, july<span class="op">$</span>temp,
+     <span class="dt">xlab=</span><span class="st">&#39;Year&#39;</span>, 
+     <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
+     <span class="dt">pch =</span> <span class="dv">21</span>,               <span class="co"># Use a filled circle</span>
+     <span class="dt">bg=</span><span class="kw">rgb</span>(.<span class="dv">5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>,<span class="fl">0.10</span>),  <span class="co"># RGB colors for point background</span>
+     <span class="dt">col=</span><span class="kw">rgb</span>(.<span class="dv">5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>,<span class="fl">0.10</span>), <span class="co"># RGB colors for point outline</span>
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>                <span class="co"># Don&#39;t plot y-axis...yet</span>
+     )
+<span class="co"># Add the y-axis</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="histograms" class="section level4">
+<h4>Histograms</h4>
+<p>Scatterplots are great for looking at bivariate relationships, but sometimes all we want to see is a univariate distribution? We usually use histograms for this, and this is done very easily in R. We will take the same approach to the one we used to demonstrate scatterplots here, with some different tweaks and extra arguments because of the quirks associated with histograms in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up the graphing space</span>
+<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+
+<span class="co"># Make the default histogram</span>
+<span class="kw">hist</span>(july<span class="op">$</span>temp)
+
+<span class="co"># Now, make a better one</span>
+<span class="kw">hist</span>(july<span class="op">$</span>temp,
+     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">27</span>),
+     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
+     <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>,
+     <span class="dt">xlab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;July temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>))
+     )
+
+<span class="co"># Add the x-axis</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+
+<span class="co"># Add the x-axis</span>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">17</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
+<p><br></p>
+<p>This sets us up to do the kind of plotting that is fundamental to describing research results, and that is germane to testing assumptions of statistical tests, all of which will follow the lunch break.</p>
+<p>Stay tuned!</p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2018 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

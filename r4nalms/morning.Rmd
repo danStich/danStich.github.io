@@ -10,13 +10,15 @@
 
 <br>
 
-The tutorial for the morning session will be here.
+The tutorial for the morning session is <a href="introductory.html"> here </a>.
+
+The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 
 <img src="./images/roh.png" alt="">
 
-The morning session of this workshop will provide an introduction to the basics of working in R. It is our hope that by the end of this session, you will be comfortable working through these and other examples on your own in the future.
+The morning session of this workshop will provide an introduction to the basics of working in R. By the end of this session, you should be comfortable working through these and other examples on your own in the future so you can learn more about the program.
 
-By the end of this session, you will have been exposed to a broad overview of programming in R, read in some data from an external file, done basic data manipulation, and used data to make some simple graphs.
+During this session, you will be exposed to a broad overview of programming in R, read in data from external files, do some basic data manipulation and summaries, and use data to make some basic graphs.
 
 <br>
  
