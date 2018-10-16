@@ -23,14 +23,14 @@
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="favicon/favicon.ico">
 <meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
 <meta name="theme-color" content="#382121">
 </head>
 
@@ -729,8 +729,9 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>## [1] &quot;a&quot;      &quot;A&quot;      &quot;b&quot;      &quot;c&quot;      &quot;d&quot;      &quot;e&quot;      &quot;f&quot;      &quot;mat&quot;   
-## [9] &quot;otsego&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;           &quot;A&quot;           &quot;b&quot;           &quot;c&quot;           &quot;cToF&quot;       
+##  [6] &quot;d&quot;           &quot;e&quot;           &quot;f&quot;           &quot;july&quot;        &quot;mat&quot;        
+## [11] &quot;myList&quot;      &quot;myMean&quot;      &quot;otsego&quot;      &quot;summarydata&quot; &quot;test&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
 <pre><code>##          lake      date month year depth  temp   pH do_mgl  cond do_sat
 ## 1 Otsego Lake 4/28/2017     4 2017   0.1  8.82 7.90  11.69 0.307  100.0
@@ -1018,11 +1019,11 @@ myList<span class="op">$</span>c[<span class="dv">1</span>]                     
 <p><br></p>
 <p>This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make <strong>isopleths</strong> during the intermediate session in the afternoon.</p>
 <p>More importanly for now, we are limited in our ability to summarize a variable in more than one way using <code>aggregate</code> or other functions in the <code>base</code> package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of <code>base</code> and into the myriad <strong>packages</strong> that make up R.</p>
-<p>Normally, we would just load a package from the default <strong>library</strong> location once we have installed it.</p>
+<p>Normally, we would just load a package from the default <strong>library</strong> location once we have installed it, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
 <p><br></p>
 <p>But, in the absence of a network connection we can’t install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the <strong>relative path</strong> to load the <code>plyr</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;./plyr&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;./r_libs/plyr&quot;</span>)</code></pre></div>
 <p><br></p>
 <p>With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use <code>ddply</code> to summarize the <code>otsego</code> data. (There is also a function called <code>ddply</code> in the <code>dplyr</code> package that is a newer, beefed-up version of <code>plyr</code> focusing only on <code>dataframes</code> and remote <code>datatables</code>)</p>
 <p>Here is one way that we can use <code>ddply</code> to summarize temperature across multiple factors.</p>
