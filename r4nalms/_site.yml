@@ -11,6 +11,8 @@ navbar:
       href: morning.html
     - text: "Afternoon session"
       href: afternoon.html
+    - text: "Instructors"
+      href: instructors.html
     - text: "Contact"
       href: contact.html
 output:
