@@ -15,7 +15,7 @@ title: "Introductory R"
 
 Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. 
 
-Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like this one (or [these](https://www.rstudio.com/resources/cheatsheets/) ones) can help you along the way by serving as handy references.
+Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or [these](https://www.rstudio.com/resources/cheatsheets/)) can help you along the way by serving as handy references.
 
 <br>
 
@@ -87,7 +87,7 @@ I like to use the built-in headings to separate big chunks of code and keep thin
 <br>
 
 ### Some stricter R programming rules:
-All code is in R is case sensitive
+All code is in R is case sensitive.
 ```{r}
 # Example (run the following lines):
 a = 1
@@ -110,7 +110,8 @@ We have few things going on above.
 You can't start an object name with a number, but you can end it with one.
 ```{r, eval=FALSE}  
 # In Rstudio there are nifty little 
-# markers to show this is broken
+# markers to show this is broken once
+# you have saved your source file.
 1a = 1 
 
 # But this one works 
@@ -587,7 +588,7 @@ write.csv(x=otsego, file='physicalF.csv')
 
 <br> 
 
-I like a little more flexibility in the file write process, so I usually use the `write.table` function. This can be used to achieve the same end depending on options, but allows other options like ommitting `rownames` from the output file. Here is an example of how it works:
+I like a little more flexibility in the file write process, so I usually use the `write.table` function. This can be used to achieve the same end depending on options, but allows other options like ommitting `row.names` from the output file. Here is an example of how it works:
 ```{r, eval=F}
 # Write the data set to a csv file.
 # We specify the object, the filename, and
@@ -598,7 +599,7 @@ I like a little more flexibility in the file write process, so I usually use the
 # We could do exactly the same thing, but use a ".txt"
 # file extensions, and we would get a comma-separated
 # text file if we needed one.
-write.table(x=otsego, file='physicalF.csv', rownames=FALSE,
+write.table(x=otsego, file='physicalF.csv', row.names=FALSE,
             quote=FALSE, sep=',')
 ```
 
