@@ -6,8 +6,7 @@
 ---
 title: "Introduction to R for Aquatic Research"
 ---
-
-#### 2018 NALMS International Symposium 
+## 2018 NALMS International Symposium 
 
 <img src="./images/graphs.png" alt="">
 
