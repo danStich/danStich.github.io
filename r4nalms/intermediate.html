@@ -11,7 +11,7 @@
 
 
 
-<title>Afternoon session</title>
+<title>Intermediate R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -35,6 +35,49 @@
 </head>
 
 
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
 
 
 <style type="text/css">
@@ -204,7 +247,7 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Afternoon session</h1>
+<h1 class="title toc-ignore">Intermediate R</h1>
 
 </div>
 
@@ -234,15 +277,20 @@ pre code, pre, code {
 
 </style>
 <p><br></p>
-<div id="introduction-to-r-for-aquatic-research-intermediate" class="section level4">
-<h4>Introduction to R for aquatic research: intermediate</h4>
-<p><br></p>
-<p>The tutorial for the afternoon session will be located <a> here </a> (but are not yet).</p>
-<p>The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>.</p>
 <p><img src="images/roboshad.png" alt=""></p>
-<p>The afternoon session of this workshop will provide an intermediate tutorial for working with aquatic data in R. It is our hope that by the end of this session, you will be comfortable conducting some basic statistical analyses and producing related graphics.</p>
-<p>During this session, you will be exposed to intermediate data manipulation, regression analysis (including diagnostics and predictions), and learned how to make publication-quality plots (including <em>isopleths</em>) using the powerful base graphics in R.</p>
-<p>This workshop assumes a basic understanding of elementary statistics, and some working knowledge of R and Rstudio. Those attending the morning session will be sufficiently prepared for the afternoon session.</p>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>Once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and spend a little more time with data visualization tools.</p>
+<p><br></p>
+</div>
+<div id="data-overview-and-management" class="section level2">
+<h2>Data overview and management</h2>
+<p>Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road.</p>
+<p>Let’s start by reading in the Secchi Dip-In data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Ohio.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;ohio.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>So, what are we working with here?</p>
 <p><br></p>
 </div>
 

@@ -10,7 +10,9 @@ title: "Afternoon session"
 
 #### Introduction to R for aquatic research: intermediate 
 
-The tutorial for the afternoon session will be located <a> here </a>.
+<br>
+
+The tutorial for the afternoon session will be located <a> here </a> (but are not yet).
 
 The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 

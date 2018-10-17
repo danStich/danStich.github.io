@@ -1,0 +1,37 @@
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+---
+title: "Intermediate R"
+---
+
+<img src="./images/roboshad.png" alt="">
+
+<br>
+
+## Introduction
+Once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and spend a little more time with data visualization tools.
+
+<br>
+
+## Data overview and management
+Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road.
+
+Let's start by reading in the Secchi Dip-In data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Ohio.
+```{r, eval=FALSE}
+ohio <- read.csv('ohio.csv')
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ohio <- read.csv('data/ohio.csv')
+```
+
+<br>
+
+So, what are we working with here? Let's have a look.
+
+Remember that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the **structure** of your data using `str`.
+
+<br>
