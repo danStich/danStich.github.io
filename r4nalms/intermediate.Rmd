@@ -92,7 +92,14 @@ Now that we have had a quick look at our data, and we have made some changes for
 
 For this afternoon, we are going to use `Secchi` as our **response**, or **independent** variable to demonstrate some basic statistical techniques in R. Before we can do any actual statistics, though, it is good practice to scrutinize the data we intend to use.
 
-
+To start with, let's take a quick look at Secchi depth using a histogram.
+```{r}
+# Make the histogram
+hist(ohio$Secchi, col='gray87', yaxt='n', xaxt='n',
+     xlab='Secchi depth (m)', main='')
+axis(side=1, pos=0)
+axis(side=2, las=2, pos=0)
+```
 
 
 

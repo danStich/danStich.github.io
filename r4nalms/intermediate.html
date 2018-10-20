@@ -335,6 +335,13 @@ pre code, pre, code {
 <h2>Data exploration</h2>
 <p>Now that we have had a quick look at our data, and we have made some changes for the sake of convenience, let’s dig a little deeper.</p>
 <p>For this afternoon, we are going to use <code>Secchi</code> as our <strong>response</strong>, or <strong>independent</strong> variable to demonstrate some basic statistical techniques in R. Before we can do any actual statistics, though, it is good practice to scrutinize the data we intend to use.</p>
+<p>To start with, let’s take a quick look at Secchi depth using a histogram.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram</span>
+<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">0</span>)</code></pre></div>
+<p><img src="intermediate_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p><br></p>
 </div>
 
