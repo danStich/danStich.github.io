@@ -22,12 +22,14 @@ The plan for the afternoon is to introduce a subset of the Secchi Dip-In data to
 Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road.
 
 Let's start by reading in the Secchi Dip-In data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Ohio.
+
+We read the data in with the argument `stringsAsFactors = FALSE` because there are a lot of string variables in the data, and factors can add extra handling time to our workflow (see <a href="introductory.html"> morning session tutorial </a>).
 ```{r, eval=FALSE}
-ohio <- read.csv('ohio.csv')
+ohio <- read.csv('ohio.csv', stringsAsFactors = FALSE)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-ohio <- read.csv('data/ohio.csv')
+ohio <- read.csv('data/ohio.csv', stringsAsFactors = FALSE)
 ```
 
 <br>
@@ -95,10 +97,136 @@ For this afternoon, we are going to use `Secchi` as our **response**, or **indep
 To start with, let's take a quick look at Secchi depth using a histogram.
 ```{r}
 # Make the histogram
-hist(ohio$Secchi, col='gray87', yaxt='n', xaxt='n',
-     xlab='Secchi depth (m)', main='')
+hist(ohio$Secchi, 
+     col='gray87',
+     yaxt='n', xaxt='n',
+     xlab='Secchi depth (m)',
+     main='')
 axis(side=1, pos=0)
 axis(side=2, las=2, pos=0)
+```
+ <br>
+ 
+From this plot alone, there are a few things that should be obvious. 
+
+First, we can see that the distribution of our response is **right-skewed**, with many more observations near zero than near the maximum.
+
+Second, perhaps more nuanced, is that there are no values less than zero. For anyone who has spent some time using a Secchi disk, the reason for this is probably obvious. We can't have negative values for light penetration into the water column^[citation needed]^. This variable is **positive definitive**. This is actually common for a lot of parameters we measure in lake management because we frequently are interested in concentrations, depths, areas, and other non-negative quantities.
+
+We will need to think about both of these characteristics as we move into statistical analyses. One of the central assumptions of modern regression tools relates to normality of residuals, which in the absence of heterogenous groups, can initially be approximated using a histogram of the response. To show this, we can plot the residuals:
+
+```{r}
+# Make the histogram, this time
+# subtracting the mean from each 
+# value. Is the result normal?
+hist(ohio$Secchi-mean(ohio$Secchi),
+     col='gray87', 
+     yaxt='n', xaxt='n',
+     xlab='Error',
+     main='')
+axis(side=1, pos=0)
+axis(side=2, las=2, pos=-1)
+```
+
+<br>
+
+This looks pretty much the same as the one above, but the x-axis has changed. We should know, at this point that the distribution above is decidedly *not* normal.
+
+<br>
+
+## Transformations
+We can handle both of these problems by log-transforming our data like this:
+
+```{r}
+ohio$logSecchi <- log(ohio$Secchi)
+```
+
+<br>
+
+We can plot histogram of the residuals again to see what it did:
+```{r}
+# Make the histogram,
+# subtracting the mean from each 
+# value. Is the result normal?
+hist(ohio$logSecchi-mean(ohio$logSecchi),
+     col='gray87', 
+     yaxt='n', xaxt='n',
+     xlab='Error',
+     main='')
+axis(side=1, pos=0)
+axis(side=2, las=2, pos=-3.5)
+```
+
+<br>
+
+Clear to see here that our residuals look much more like a normal distribution now.
+
+<br>
+
+What has this done to our data, though? Let's have a look:
+```{r}
+# Make the histogram.
+hist(ohio$logSecchi-mean(ohio$logSecchi),
+     col='gray87', 
+     yaxt='n', xaxt='n',
+     xlab='Error',
+     main='')
+axis(side=1, pos=0)
+axis(side=2, las=2, pos=-3.5)
+```
+
+<br>
+
+As you can see, our response variable is no longer constrained to be greater than zero on the log scale, so we don't have to worry about how that influences normality in our residuals anymore, and we won't get negative predictions from any of the statistical models that we make.
+
+Now we can move forward with some statistics!
+
+<br>
+
+## Introductory statistics in R
+Let's start with the simple case of comparing `Secchi` between lakes and reservoirs. If you have a basic understanding of statistics, you might immediately realize that this is a comparison of a continuous variable between two groups. We have a couple of paths forward here. We could either set aside distributional assumpstions and use **non-parametric** methods, or we could assume some distribution for our error structure and proceed using **parametric** or **semi-parametric** statistics.
+
+In either case, we are going to have to make sure we only have data for lakes and reservoirs first. (If you looked closely at the data you will have realized that there are also records for `Dam` in our dataset.)
+
+To get rid of the observations related to `Dam` for now, let's just drop that level from our `GNIS.Class` variable in the `ohio` data set.
+
+```{r}
+ohio <- ohio[ohio$GNIS.Class=="Lake" | ohio$GNIS.Class=="Reservoir", ]
+```
+
+
+<br>
+
+### Wilcoxon rank-sums test
+Let's start by fitting a quick Wilcoxon rank-sums test (aka Mann-Whitney U-test). While our options for non-parametric statistics are limited in complexity, they do not require distributional assumptions, and they tend to be more **conservative** than parametric tests, especially under limited sample sizes (not the case here).
+
+Here is how we do it:
+```{r}
+wilcox.test(x=ohio$Secchi[ohio$GNIS.Class=='Lake'],
+            y=ohio$Secchi[ohio$GNIS.Class=='Reservoir'])
+```
+
+<br>
+
+Okay, if you have never done a Wilcox test by hand, or even in Excel, please appreciate how ridiculously easy this is. But, more importantly, what is going in the output here?
+
+First, we can see that we have conducted a Wilcoxon rank sum test. Second, R gives us a friendly reminder of what our data were that went into this. Next, we have the actual statistics for the test, including the test statistic `W` and the `p-value` for the comparison. With the handy-dandy `alternative hypothesis` that R provides us, we can conclude that since p < 0.05 we reject the null hypothesis that there is no difference between groups.
+
+While this is useful for making inference, we don't get a good sense of how the group means actually differed from this test (although we could graph it). For that, we need to start making some assumptions about our data and the shape of the error associated with those data.
+
+<br>
+
+## Parametric statistics in R
+Parametric statistics rely on some basic **assumptions** about or data and the error structure around our observations. There are a number of fundamental assumptions that guide our forays into what is essentially "the rest of statistics". How we deal with these assumptions can range from doing nothing, to data transormation, to use of alternative model structures that allow us to shift or relax them.
+
+What are these assumptions? Glad you ask!
+
+### Assumptions of linear models
+Linear models you say? Yes. While we don't have time to go in the math here, suffice to say that most of the statistics we use in aquatic research are special cases, or generalizations, of the linear model. This includes things like t-tests, linear regression, ANOVA, ANCOVA, GLM, GLMM, and even multivariate statistics. The same holds true whether we are working with classical frequentist tools relying on least-squares estimation and maximum likelihood, or Bayesian methods using MCMC estimation. That means we always need to have these assumptions in mind.
+
+1. Normality of the residuals
+```{r}
+
 ```
 
 
@@ -107,4 +235,9 @@ axis(side=2, las=2, pos=0)
 
 
 
-<br>
+
+
+
+
+
+

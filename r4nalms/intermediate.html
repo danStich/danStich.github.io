@@ -289,7 +289,8 @@ pre code, pre, code {
 <h2>Data overview and management</h2>
 <p>Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road.</p>
 <p>Let’s start by reading in the Secchi Dip-In data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Ohio.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;ohio.csv&#39;</span>)</code></pre></div>
+<p>We read the data in with the argument <code>stringsAsFactors = FALSE</code> because there are a lot of string variables in the data, and factors can add extra handling time to our workflow (see <a href="introductory.html"> morning session tutorial </a>).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;ohio.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
 <p><br></p>
 <p>So, what are we working with here? Let’s have a look.</p>
 <p>Remember from the morning session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the <strong>structure</strong> of your data using <code>str</code>.</p>
@@ -337,12 +338,79 @@ pre code, pre, code {
 <p>For this afternoon, we are going to use <code>Secchi</code> as our <strong>response</strong>, or <strong>independent</strong> variable to demonstrate some basic statistical techniques in R. Before we can do any actual statistics, though, it is good practice to scrutinize the data we intend to use.</p>
 <p>To start with, let’s take a quick look at Secchi depth using a histogram.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram</span>
-<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
-     <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi, 
+     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>,
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">0</span>)</code></pre></div>
-<p><img src="intermediate_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="intermediate_files/figure-html/unnamed-chunk-8-1.png" width="672" /> <br></p>
+<p>From this plot alone, there are a few things that should be obvious.</p>
+<p>First, we can see that the distribution of our response is <strong>right-skewed</strong>, with many more observations near zero than near the maximum.</p>
+<p>Second, perhaps more nuanced, is that there are no values less than zero. For anyone who has spent some time using a Secchi disk, the reason for this is probably obvious. We can’t have negative values for light penetration into the water column<sup>[citation needed]</sup>. This variable is <strong>positive definitive</strong>. This is actually common for a lot of parameters we measure in lake management because we frequently are interested in concentrations, depths, areas, and other non-negative quantities.</p>
+<p>We will need to think about both of these characteristics as we move into statistical analyses. One of the central assumptions of modern regression tools relates to normality of residuals, which in the absence of heterogenous groups, can initially be approximated using a histogram of the response. To show this, we can plot the residuals:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram, this time</span>
+<span class="co"># subtracting the mean from each </span>
+<span class="co"># value. Is the result normal?</span>
+<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>Secchi),
+     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="intermediate_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p><br></p>
+<p>This looks pretty much the same as the one above, but the x-axis has changed. We should know, at this point that the distribution above is decidedly <em>not</em> normal.</p>
+<p><br></p>
+</div>
+<div id="transformations" class="section level2">
+<h2>Transformations</h2>
+<p>We can handle both of these problems by log-transforming our data like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio<span class="op">$</span>logSecchi &lt;-<span class="st"> </span><span class="kw">log</span>(ohio<span class="op">$</span>Secchi)</code></pre></div>
+<p><br></p>
+<p>We can plot histogram of the residuals again to see what it did:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram,</span>
+<span class="co"># subtracting the mean from each </span>
+<span class="co"># value. Is the result normal?</span>
+<span class="kw">hist</span>(ohio<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>logSecchi),
+     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">3.5</span>)</code></pre></div>
+<p><img src="intermediate_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>Clear to see here that our residuals look much more like a normal distribution now.</p>
+<p><br></p>
+<p>What has this done to our data, though? Let’s have a look:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram.</span>
+<span class="kw">hist</span>(ohio<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>logSecchi),
+     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
+     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">3.5</span>)</code></pre></div>
+<p><img src="intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><br></p>
+<p>As you can see, our response variable is no longer constrained to be greater than zero on the log scale, so we don’t have to worry about how that influences normality in our residuals anymore, and we won’t get negative predictions from any of the statistical models that we make.</p>
+<p>Now we can move forward with some statistics!</p>
+<p><br></p>
+</div>
+<div id="introductory-statistics-in-r" class="section level2">
+<h2>Introductory statistics in R</h2>
+<p>Let’s start with the simple case of comparing <code>Secchi</code> between lakes and reservoirs. If you have a basic understanding of statistics, you might immediately realize that this is a comparison of a continuous variable between two groups. We have a couple of paths forward here. We could either set aside distributional assumpstions and use <strong>non-parametric</strong> methods, or we could assume some distribution for our error structure and proceed using <strong>parametric</strong> or <strong>semi-parametric</strong> statistics.</p>
+<p>In either case, we are going to have to make sure we only have data for lakes and reservoirs first. (If you looked closely at the data you will have realized that there are also records for <code>Dam</code> in our dataset.)</p>
+<p>To get rid of the observations related to <code>Dam</code> for now, let’s just drop that level from our <code>GNIS.Class</code> variable in the <code>ohio</code> data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohioT &lt;-<span class="st"> </span>ohio[ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Lake&quot;</span> <span class="op">|</span><span class="st"> </span>ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Reservoir&quot;</span>, ]</code></pre></div>
+<p><br></p>
+<div id="wilcoxon-rank-sums-test" class="section level3">
+<h3>Wilcoxon rank-sums test</h3>
+<p>Let’s start by</p>
+</div>
 </div>
 
 <!DOCTYPE html>
