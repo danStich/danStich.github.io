@@ -20,7 +20,7 @@ The data and files needed for both sessions are located <a href="https://github.
 
 The afternoon session of this workshop will provide an intermediate tutorial for working with aquatic data in R. It is our hope that by the end of this session, you will be comfortable conducting some basic statistical analyses and producing related graphics.
 
-During this session, you will be exposed to intermediate data manipulation, regression analysis (including diagnostics and predictions), and learned how to make publication-quality plots (including *isopleths*) using the powerful base graphics in R.
+During this session, you will be exposed to intermediate data manipulation, regression analysis (including diagnostics and predictions), and learn how to make publication-quality plots (including *isopleths*) using the powerful base graphics in R.
 
 This workshop assumes a basic understanding of elementary statistics, and some working knowledge of R and Rstudio. Those attending the morning session will be sufficiently prepared for the afternoon session.
 
