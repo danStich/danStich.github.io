@@ -22,6 +22,7 @@ You will need to install some software before you arrive for the workshop. All s
 3. <b> Download the workshop data </b> from 
 <a href= https://github.com/danStich/data4_r4nalms> this github repository</a> following the instructions in the `README.md` file.
 
+4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during the workshop). 
 
 <br>
  
