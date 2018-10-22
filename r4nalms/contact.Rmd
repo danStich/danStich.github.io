@@ -1,9 +1,10 @@
----
-title: "Contact"
----
 
 ```{r, child="_styles.Rmd"}
 ```
+
+---
+title: "Contact"
+---
 
 <br>
 
