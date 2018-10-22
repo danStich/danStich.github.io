@@ -291,8 +291,8 @@ pre code, pre, code {
 <span class="co"># specify a format so R knows where it</span>
 <span class="co"># is looking for specific elements of</span>
 <span class="co"># the date info we are trying to pass.</span>
-otsego<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(
-  <span class="kw">as.character</span>(otsego<span class="op">$</span>date),
+otsego$date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(
+  <span class="kw">as.character</span>(otsego$date),
   <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>
   )
 
@@ -301,7 +301,7 @@ lim &lt;-<span class="st"> </span><span class="kw">na.omit</span>(otsego)
 
 <span class="co"># Multiply depth column by -1 so depth will</span>
 <span class="co"># plot from top to bottom.</span>
-lim<span class="op">$</span>depth =<span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">*</span>lim<span class="op">$</span>depth</code></pre></div>
+lim$depth =<span class="st"> </span>-<span class="dv">1</span> *lim$depth</code></pre></div>
 <p><br></p>
 </div>
 <div id="load-the-akima-package" class="section level3">
@@ -314,7 +314,7 @@ lim<span class="op">$</span>depth =<span class="st"> </span><span class="op">-</
 <p>We interpolate <code>do_mgl</code> across <code>date</code> and <code>depth</code>. The interpolation we are using is basically just a bunch of linear regresions to predict <code>do_mgl</code> for values of <code>date</code> and <code>depth</code> across a regular grid. Then, we make the plot.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame containing the</span>
 <span class="co"># x, y, and z variables of interest</span>
-plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim<span class="op">$</span>date, <span class="dt">y=</span>lim<span class="op">$</span>depth, <span class="dt">z=</span>lim<span class="op">$</span>do_mgl)
+plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim$date, <span class="dt">y=</span>lim$depth, <span class="dt">z=</span>lim$do_mgl)
 
 <span class="co"># Sort it so we have ascending values of x and y</span>
 plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, <span class="kw">order</span>(x, y)), ]
@@ -323,8 +323,8 @@ plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, 
 <span class="co"># linear interpolation from the akima package</span>
 im =<span class="st"> </span><span class="kw">with</span>(plotter,
           <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>,
-                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>date)),
-                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>depth)))
+                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim$date)),
+                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim$depth)))
           )
 
 <span class="co"># Plot the isopleth</span>
@@ -334,17 +334,17 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
   
   <span class="co"># Make the graph</span>
   <span class="kw">filled.contour</span>(
-    im<span class="op">$</span>x, <span class="co"># Variable on x-axis (date)</span>
-    im<span class="op">$</span>y, <span class="co"># Variable on y-axis (depth)</span>
-    im<span class="op">$</span>z, <span class="co"># Response (wq parameter) </span>
+    im$x, <span class="co"># Variable on x-axis (date)</span>
+    im$y, <span class="co"># Variable on y-axis (depth)</span>
+    im$z, <span class="co"># Response (wq parameter) </span>
     <span class="dt">col=</span><span class="kw">topo.colors</span>(<span class="dv">26</span>),  
-    <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Oxygen (mg&#39;</span>, <span class="st">&quot;\u00b7&quot;</span>, <span class="st">&#39;l&#39;</span><span class="op">^</span><span class="st">&#39;-1&#39;</span>,<span class="st">&#39;)&#39;</span>)),
+    <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Oxygen (mg&#39;</span>, <span class="st">&quot;\u00b7&quot;</span>, <span class="st">&#39;l&#39;</span>^<span class="st">&#39;-1&#39;</span>,<span class="st">&#39;)&#39;</span>)),
     <span class="co"># Specify y-axis limits.</span>
-    <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im<span class="op">$</span>y), <span class="kw">max</span>(im<span class="op">$</span>y)),
+    <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im$y), <span class="kw">max</span>(im$y)),
     <span class="co"># Specify x-axis limits. In</span>
     <span class="co"># this case, we are &quot;zooming in&quot;</span>
     <span class="co"># on year 2017</span>
-    <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im<span class="op">$</span>x)), 
+    <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im$x)), 
     <span class="co"># X-axis label</span>
     <span class="dt">xlab=</span><span class="st">&#39;Date&#39;</span>, 
     <span class="co"># Y-axis label</span>
@@ -354,9 +354,9 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
           <span class="co"># This is how we include</span>
           <span class="co"># countour lines</span>
           <span class="kw">contour</span>(                            
-          im<span class="op">$</span>x,                             
-          im<span class="op">$</span>y,                             
-          im<span class="op">$</span>z,                             
+          im$x,                             
+          im$y,                             
+          im$z,                             
           <span class="dt">nlevels =</span> <span class="dv">26</span>,                     
           <span class="dt">drawlabels =</span> <span class="ot">FALSE</span>,               
           <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">26</span>),
@@ -365,7 +365,7 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
           <span class="dt">add =</span> <span class="ot">TRUE</span>
           )
       <span class="co"># Y-axis</span>
-      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="op">-</span><span class="dv">50</span>,<span class="op">-</span><span class="dv">10</span>),
+      <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,-<span class="dv">50</span>,-<span class="dv">10</span>),
            <span class="dt">labels=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">10</span>)
       )
       <span class="co"># X-axis</span>
