@@ -12,7 +12,7 @@ title: "Afternoon session"
 
 <br>
 
-The tutorial for the afternoon session will be located <a> here </a> (but is not yet).
+The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>.
 
 The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 

@@ -4,12 +4,19 @@ title: "Contact"
 
 ```{r, child="_styles.Rmd"}
 ```
+
 <br>
 
-<img src="./images/StichPicture.png" alt="">
+### Questions about the workshop or downloading necessary content? 
+
 <br>
 
-##### **Dan Stich**
+### Please contact: 
+
+<br>
+
+**Dan Stich** 
+
 ##### Assistant Professor
 ##### Biology Department and Biological Field Station
 ##### State University of New York College at Oneonta
