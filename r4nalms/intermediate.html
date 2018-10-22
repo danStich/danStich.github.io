@@ -296,7 +296,7 @@ pre code, pre, code {
 <p>Remember from the morning session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the <strong>structure</strong> of your data using <code>str</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Like this:</span>
 <span class="kw">str</span>(ohio)</code></pre></div>
-<p><img src="images/ohio.PNG" alt=""></p>
+<p><img src="./images/ohio.png" alt=""></p>
 <p><br></p>
 <p>Now that we have an idea of what the data set looks like, let’s take a little closer look. First, there are a couple of things that we can do that will clean up our code down the road a little bit. Let’s have a quick look at our column names again.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(ohio)</code></pre></div>
@@ -338,7 +338,7 @@ pre code, pre, code {
 <p>For this afternoon, we are going to use <code>Secchi</code> as our <strong>response</strong>, or <strong>independent</strong> variable to demonstrate some basic statistical techniques in R. Before we can do any actual statistics, though, it is good practice to scrutinize the data we intend to use.</p>
 <p>To start with, let’s take a quick look at Secchi depth using a histogram.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram</span>
-<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi, 
+<span class="kw">hist</span>(ohio$Secchi, 
      <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
      <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
      <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>,
@@ -353,13 +353,13 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram, this time</span>
 <span class="co"># subtracting the mean from each </span>
 <span class="co"># value. Is the result normal?</span>
-<span class="kw">hist</span>(ohio<span class="op">$</span>Secchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>Secchi),
+<span class="kw">hist</span>(ohio$Secchi-<span class="kw">mean</span>(ohio$Secchi),
      <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
      <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
      <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
      <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
-<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="dv">1</span>)</code></pre></div>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span>-<span class="dv">1</span>)</code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p><br></p>
 <p>This looks pretty much the same as the one above, but the x-axis has changed. We should know, at this point that the distribution above is decidedly <em>not</em> normal.</p>
@@ -368,32 +368,32 @@ pre code, pre, code {
 <div id="transformations" class="section level2">
 <h2>Transformations</h2>
 <p>We can handle both of these problems by log-transforming our data like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio<span class="op">$</span>logSecchi &lt;-<span class="st"> </span><span class="kw">log</span>(ohio<span class="op">$</span>Secchi)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio$logSecchi &lt;-<span class="st"> </span><span class="kw">log</span>(ohio$Secchi)</code></pre></div>
 <p><br></p>
 <p>We can plot histogram of the residuals again to see what it did:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram,</span>
 <span class="co"># subtracting the mean from each </span>
 <span class="co"># value. Is the result normal?</span>
-<span class="kw">hist</span>(ohio<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>logSecchi),
+<span class="kw">hist</span>(ohio$logSecchi-<span class="kw">mean</span>(ohio$logSecchi),
      <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
      <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
      <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
      <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
-<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">3.5</span>)</code></pre></div>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span>-<span class="fl">3.5</span>)</code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><br></p>
 <p>Clear to see here that our residuals look much more like a normal distribution now.</p>
 <p><br></p>
 <p>What has this done to our data, though? Let’s have a look:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the histogram.</span>
-<span class="kw">hist</span>(ohio<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(ohio<span class="op">$</span>logSecchi),
+<span class="kw">hist</span>(ohio$logSecchi-<span class="kw">mean</span>(ohio$logSecchi),
      <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, 
      <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
      <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,
      <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
-<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">3.5</span>)</code></pre></div>
+<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span>-<span class="fl">3.5</span>)</code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p><br></p>
 <p>As you can see, our response variable is no longer constrained to be greater than zero on the log scale, so we don’t have to worry about how that influences normality in our residuals anymore, and we won’t get negative predictions from any of the statistical models that we make.</p>
@@ -405,7 +405,7 @@ pre code, pre, code {
 <p>Let’s start with the simple case of comparing <code>Secchi</code> between lakes and reservoirs. If you have a basic understanding of statistics, you might immediately realize that this is a comparison of a continuous variable between two groups. We have a couple of paths forward here. We could either set aside distributional assumpstions and use <strong>non-parametric</strong> methods, or we could assume some distribution for our error structure and proceed using <strong>parametric</strong> or <strong>semi-parametric</strong> statistics.</p>
 <p>In either case, we are going to have to make sure we only have data for lakes and reservoirs first. (If you looked closely at the data you will have realized that there are also records for <code>Dam</code> in our dataset.)</p>
 <p>To get rid of the observations related to <code>Dam</code> for now, let’s just drop that level from our <code>GNIS.Class</code> variable in the <code>ohio</code> data set.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio &lt;-<span class="st"> </span>ohio[ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Lake&quot;</span> <span class="op">|</span><span class="st"> </span>ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Reservoir&quot;</span>, ]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ohio &lt;-<span class="st"> </span>ohio[ohio$GNIS.Class==<span class="st">&quot;Lake&quot;</span> |<span class="st"> </span>ohio$GNIS.Class==<span class="st">&quot;Reservoir&quot;</span>, ]</code></pre></div>
 <p><br></p>
 <div id="wilcoxon-rank-sums-test" class="section level3">
 <h3>Wilcoxon rank-sums test</h3>
@@ -414,8 +414,8 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Wilcox test to assess the null hypothesis</span>
 <span class="co"># that there is no difference in Secchi between</span>
 <span class="co"># lakes and reservoirs.</span>
-<span class="kw">wilcox.test</span>(<span class="dt">x=</span>ohio<span class="op">$</span>Secchi[ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Lake&#39;</span>],
-            <span class="dt">y=</span>ohio<span class="op">$</span>Secchi[ohio<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Reservoir&#39;</span>])</code></pre></div>
+<span class="kw">wilcox.test</span>(<span class="dt">x=</span>ohio$Secchi[ohio$GNIS.Class==<span class="st">&#39;Lake&#39;</span>],
+            <span class="dt">y=</span>ohio$Secchi[ohio$GNIS.Class==<span class="st">&#39;Reservoir&#39;</span>])</code></pre></div>
 <pre><code>## 
 ##  Wilcoxon rank sum test with continuity correction
 ## 
@@ -464,7 +464,7 @@ pre code, pre, code {
 <span class="co"># are not equal, and this defaults to </span>
 <span class="co"># a Welch&#39;s t-test that uses a calculated df</span>
 <span class="co"># to adjust the calculated test statistic.</span>
-<span class="kw">t.test</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>ohio, <span class="dt">equal=</span><span class="ot">FALSE</span>)</code></pre></div>
+<span class="kw">t.test</span>(logSecchi~GNIS.Class, <span class="dt">data=</span>ohio, <span class="dt">equal=</span><span class="ot">FALSE</span>)</code></pre></div>
 <pre><code>## 
 ##  Welch Two Sample t-test
 ## 
@@ -497,7 +497,7 @@ pre code, pre, code {
 <span class="co"># flat, wide boxes look gross and </span>
 <span class="co"># make people not want to use R for</span>
 <span class="co"># graphing even though it is awesome.</span>
-<span class="kw">boxplot</span>(logSecchi<span class="op">~</span>GNIS.Class,
+<span class="kw">boxplot</span>(logSecchi~GNIS.Class,
         <span class="dt">data =</span> ohio,
         <span class="dt">notch=</span><span class="ot">TRUE</span>,
         <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
@@ -526,16 +526,18 @@ pre code, pre, code {
 <p>It can be more convenient to store the results of ANOVA in an object than just dumping the output to the console, so let’s start there. First, we will fit our ANOVA with the <code>lm</code> function (stands for linear model) because this is the most general tool for us.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit an ANOVA to test for differences in</span>
 <span class="co"># means between groups</span>
-mod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>ohio)</code></pre></div>
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi~GNIS.Class, <span class="dt">data=</span>ohio)</code></pre></div>
 <p><br></p>
 <p>Now, before we get into looking at p-values here, it is <strong>important</strong> that <strong>we diagnose the model first</strong>.</p>
 <blockquote>
 <p>Residual plots for linear models</p>
+</blockquote>
+<blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># There are four plots that come out</span>
 <span class="co"># of this call. To see them all at </span>
 <span class="co"># once, you need to set up the plotting</span>
 <span class="co"># window to accomodate that. Otherwise, </span>
-<span class="co"># you have to hit &lt;ENTER&gt; to scroll</span>
+<span class="co"># you have to hit ENTER to scroll</span>
 <span class="co"># through them one at a time.</span>
 
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))
@@ -611,13 +613,13 @@ mod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span clas
 <p>How about fitting this kind of model in R? It will take us less time than to write out the equation. Here, we will fit a linear regression to test the effects of <code>Latitude</code> and <code>Year</code> on <code>logSecchi</code>. To do this, we can stick with the <code>lm</code> function. But first, we need to do some work to get <code>Year</code> into a format we can use.</p>
 <p>Right now, <code>Year</code> is stored as a character string. But, we need to have it as a numeric. We can convert this to a numeric easily:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Change </span>
-ohio<span class="op">$</span>Year &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(ohio<span class="op">$</span>Year, <span class="st">&#39;Year &#39;</span>)</code></pre></div>
+ohio$Year &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(ohio$Year, <span class="st">&#39;Year &#39;</span>)</code></pre></div>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <p><strong>Note</strong>: You will get a warning letting you know that <code>NA</code> values have been introduced by <code>coersion</code>. This means that R found some values that it didn’t know how to convert to <code>numeric</code>. In this case, it is obvservations that were reported as means across a range of dates (e.g., <code>1972-1975</code>). R will ignore these <code>NA</code> values in statistical analyses, and we have plenty of data from that range, so we will just move on with life for now.</p>
 <p><br></p>
 <p>Next, we will fit the model using the same <code>lm</code> function that we used for ANOVA above. The reason we can do this is that ANOVA, t-tests, and linear regressions are all just specific cases of the linear model.</p>
 <p>First, we will fit a model testing the effect of <code>Latitude</code> on <code>logSecchi</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>Latitude, <span class="dt">data=</span>ohio)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">lmod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi~Latitude, <span class="dt">data=</span>ohio)</code></pre></div>
 <p>Don’t forget to look at the residuals!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at residuals for model</span>
 <span class="co"># testing effect of latitude</span>
@@ -675,8 +677,8 @@ ohio<span class="op">$</span>Year &lt;-<span class="st"> </span><span class="kw"
 
 newd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="dt">Latitude =</span> <span class="kw">seq</span>(
-    <span class="dt">from=</span><span class="kw">min</span>(ohio<span class="op">$</span>Latitude, <span class="dt">na.rm=</span>T),
-    <span class="dt">to=</span><span class="kw">max</span>(ohio<span class="op">$</span>Latitude, <span class="dt">na.rm=</span>T),
+    <span class="dt">from=</span><span class="kw">min</span>(ohio$Latitude, <span class="dt">na.rm=</span>T),
+    <span class="dt">to=</span><span class="kw">max</span>(ohio$Latitude, <span class="dt">na.rm=</span>T),
     <span class="dt">by=</span>.<span class="dv">01</span>
     )
   )</code></pre></div>
@@ -722,8 +724,8 @@ preds &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="d
 ## 6 0.7141784 0.1466453 3.478125</code></pre>
 <p><br></p>
 <p>These look a little more reasonable. Now, we can just make a plot of the relationship. We start with the raw data, and add our predictions from there.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dt">x =</span> ohio<span class="op">$</span>Latitude,
-     <span class="dt">y =</span> ohio<span class="op">$</span>Secchi,
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="dt">x =</span> ohio$Latitude,
+     <span class="dt">y =</span> ohio$Secchi,
      <span class="dt">xlab =</span> <span class="st">&#39;Latitude (decimal min)&#39;</span>,
      <span class="dt">ylab =</span> <span class="st">&#39;Secchi depth (m)&#39;</span>,
      <span class="dt">pch=</span><span class="dv">21</span>,
@@ -734,9 +736,9 @@ preds &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="d
 
 <span class="co"># Now, add the lines for the mean, lower, and</span>
 <span class="co"># upper CIs from the model that we used</span>
-<span class="kw">lines</span>(newd<span class="op">$</span>Latitude, preds[,<span class="dv">1</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
-<span class="kw">lines</span>(newd<span class="op">$</span>Latitude, preds[,<span class="dv">2</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
-<span class="kw">lines</span>(newd<span class="op">$</span>Latitude, preds[,<span class="dv">3</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre></div>
+<span class="kw">lines</span>(newd$Latitude, preds[,<span class="dv">1</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
+<span class="kw">lines</span>(newd$Latitude, preds[,<span class="dv">2</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
+<span class="kw">lines</span>(newd$Latitude, preds[,<span class="dv">3</span>], <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <p><br> Wow, this graph is almost as underwhelming as the R<sup>2</sup> for the model that was used to create it. <strong>This should highlight the importance of communicating biological effect sizes</strong>. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result. This is why we chose to retain this analysis for the workshop, and is also the reason why you should ask to see this kind of result communicated as a responsible reviewer of peer-reviewed research.</p>
 <p><br></p>
@@ -745,7 +747,7 @@ preds &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="d
 <p>Now, let’s fit a model for <code>Year</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a linear regression model to test</span>
 <span class="co"># effect of `year` on `logSecchi`</span>
-ymod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>Year, <span class="dt">data=</span>ohio)</code></pre></div>
+ymod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi~Year, <span class="dt">data=</span>ohio)</code></pre></div>
 <p><br></p>
 <p>We can summarize the model again like so:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(ymod)</code></pre></div>
@@ -782,7 +784,7 @@ ymod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span cla
 <p>First, we can see that if we combine <code>GNIS.Class</code> and <code>Year</code> in an <strong>additive</strong> way (main-effects only), we get the same results as we did in our individual ANOVA and linear regression models. We see a significant effect of <code>GNIS.Class</code>, and fail to detect a main effect of <code>Year</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(car)</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and store it to an object</span>
-mainmod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula=</span>logSecchi<span class="op">~</span>GNIS.Class <span class="op">+</span><span class="st"> </span>Year,
+mainmod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt">formula=</span>logSecchi~GNIS.Class +<span class="st"> </span>Year,
               <span class="dt">data=</span>ohio)
 
 <span class="co"># Take a look at the summary of the model</span>
@@ -858,8 +860,8 @@ mainmod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt
 <span class="co"># specify a format so R knows where it</span>
 <span class="co"># is looking for specific elements of</span>
 <span class="co"># the date info we are trying to pass.</span>
-otsego<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(
-  <span class="kw">as.character</span>(otsego<span class="op">$</span>date),
+otsego$date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(
+  <span class="kw">as.character</span>(otsego$date),
   <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>
   )</code></pre></div>
 <p><br></p>
@@ -872,7 +874,7 @@ lim &lt;-<span class="st"> </span><span class="kw">na.omit</span>(otsego)</code>
 <p>Finally, we just do a little math trick to reverse the order of depths for interpolation and plotting in order to make the surface of the water show up at the top of our graphs. We will undo this when we label the graph.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Multiply depth column by -1 so depth will</span>
 <span class="co"># plot from top to bottom.</span>
-lim<span class="op">$</span>depth =<span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">*</span>lim<span class="op">$</span>depth</code></pre></div>
+lim$depth =<span class="st"> </span>-<span class="dv">1</span> *lim$depth</code></pre></div>
 <p><br></p>
 <p>Now, we are ready to do the math behind the isopleth and plot it.</p>
 <p>To do the math, we need to load the <code>akima</code> package:</p>
@@ -880,7 +882,7 @@ lim<span class="op">$</span>depth =<span class="st"> </span><span class="op">-</
 <p>Next, we interpolate <code>temp</code> across <code>date</code> and <code>depth</code>. The interpolation we are using is basically just a bunch of linear regresions to predict <code>temp</code> for values of <code>date</code> and <code>temp</code> across a regular grid.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame containing the</span>
 <span class="co"># x, y, and z variables of interest</span>
-plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim<span class="op">$</span>date, <span class="dt">y=</span>lim<span class="op">$</span>depth, <span class="dt">z=</span>lim<span class="op">$</span>temp)
+plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim$date, <span class="dt">y=</span>lim$depth, <span class="dt">z=</span>lim$temp)
 
 <span class="co"># Sort it so we have ascending values of x and y</span>
 plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, <span class="kw">order</span>(x, y)), ]
@@ -889,8 +891,8 @@ plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, 
 <span class="co"># linear interpolation from the akima package</span>
 im =<span class="st"> </span><span class="kw">with</span>(plotter,
           <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>,
-                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>date)),
-                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>depth)))
+                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim$date)),
+                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim$depth)))
           )</code></pre></div>
 <p><br></p>
 <p>To wrap it all up, we can make the plot. This looks like a lot of code, but it is mostly comments. For this plot, we will zoom in on year 2017 by limiting the range of the x-axis.</p>
@@ -913,9 +915,9 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
 
 <span class="co"># Make the graph</span>
 <span class="kw">filled.contour</span>(
-  im<span class="op">$</span>x, <span class="co"># Variable on x-axis (date)</span>
-  im<span class="op">$</span>y, <span class="co"># Variable on y-axis (depth)</span>
-  im<span class="op">$</span>z, <span class="co"># Response (wq parameter) </span>
+  im$x, <span class="co"># Variable on x-axis (date)</span>
+  im$y, <span class="co"># Variable on y-axis (depth)</span>
+  im$z, <span class="co"># Response (wq parameter) </span>
   <span class="co"># Could also choose &#39;grey.colors&#39; or &#39;terrain.colors&#39;.</span>
   <span class="co"># If you want the ramp to go the other way,</span>
   <span class="co"># just delete the &#39;rev&#39;. Note that you will</span>
@@ -929,11 +931,11 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
   <span class="co"># to par above.</span>
   <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
   <span class="co"># Specify y-axis limits.</span>
-  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im<span class="op">$</span>y), <span class="kw">max</span>(im<span class="op">$</span>y)),
+  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im$y), <span class="kw">max</span>(im$y)),
   <span class="co"># Specify x-axis limits. In</span>
   <span class="co"># this case, we are &quot;zooming in&quot;</span>
   <span class="co"># on year 2017</span>
-  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im<span class="op">$</span>x)), 
+  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im$x)), 
   <span class="co"># X-axis label</span>
   <span class="dt">xlab=</span><span class="st">&#39;Date&#39;</span>, 
   <span class="co"># Y-axis label</span>
@@ -943,9 +945,9 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
         <span class="co"># This is how we include</span>
         <span class="co"># countour lines</span>
         <span class="kw">contour</span>(                            
-        im<span class="op">$</span>x,                             
-        im<span class="op">$</span>y,                             
-        im<span class="op">$</span>z,                             
+        im$x,                             
+        im$y,                             
+        im$z,                             
         <span class="dt">nlevels =</span> <span class="dv">26</span>,                     
         <span class="dt">drawlabels =</span> <span class="ot">FALSE</span>,               
         <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">26</span>),
@@ -954,7 +956,7 @@ im =<span class="st"> </span><span class="kw">with</span>(plotter,
         <span class="dt">add =</span> <span class="ot">TRUE</span>
         )
     <span class="co"># Y-axis</span>
-    <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="op">-</span><span class="dv">50</span>,<span class="op">-</span><span class="dv">10</span>),
+    <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,-<span class="dv">50</span>,-<span class="dv">10</span>),
          <span class="dt">labels=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">10</span>)
     )
     <span class="co"># X-axis</span>

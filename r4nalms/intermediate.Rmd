@@ -344,20 +344,20 @@ mod <- lm(logSecchi~GNIS.Class, data=ohio)
 Now, before we get into looking at p-values here, it is **important** that **we diagnose the model first**.
 
 > Residual plots for linear models
->
+
 > ```{r}
 > # There are four plots that come out
 > # of this call. To see them all at 
 > # once, you need to set up the plotting
 > # window to accomodate that. Otherwise, 
-> # you have to hit <ENTER> to scroll
+> # you have to hit ENTER to scroll
 > # through them one at a time.
->
+
 > par(mfrow=c(2, 2))
-> 
+
 > # The default plot function knows what
 > # to do with lm objects.
->
+
 > plot(mod)
 > ```
 
