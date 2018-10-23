@@ -1,15 +1,11 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
-
 ---
 title: "Thermocline analysis"
 ---
 
 Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.
-
-<br>
 
 ### Package load
 ```{r, echo=T, eval=F}
@@ -26,7 +22,7 @@ library(rLakeAnalyzer)
 library(ggplot2)
 ```
 
-<br>
+
 
 ### Data read
 ```{r, eval=F, echo=T}
@@ -39,7 +35,7 @@ limnos <- read.csv('physical.csv')
 limnos <- read.csv('data/physical.csv')
 ```
 
-<br>
+
   
 ### Data manipulation
 ```{r}
@@ -58,7 +54,7 @@ limnos <- na.omit(limnos)
 limlist <- split(limnos, list(limnos$date))
 ```
 
-<br>
+
 
 ### Calculate thermocline depth
 If you just have a single dataframe, you can pass the appropriate columns straight to the `thermo.depth` function in `rLakeAnalyzer`. But, we are looking to calculate thermocline depth for `r length(limlist)` different datasets. To make this easier, we pack them in a list (above) and then use `lapply` to apply the `thermo.depth` function to each element of the list. But, the `thermo.depth` function was not designed for this specifically, so we will first write a function that can be applied to a list, with a short name.
@@ -77,7 +73,7 @@ ltd <- function(x){
 }
 ```
 
-<br>
+
 
 Now we can use the function we made to apply across all elements of our list.
 ```{r}
@@ -85,7 +81,7 @@ Now we can use the function we made to apply across all elements of our list.
 test <- lapply(limlist, ltd)
 ```
 
-<br>
+
 
 Once we've done that, we can put everything back into a single dataframe.
 ```{r}
@@ -94,7 +90,7 @@ Once we've done that, we can put everything back into a single dataframe.
 out <- do.call(rbind, test)
 ```
 
-<br>
+
 
 ### Plot changes in thermocline depth
 Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the `ggplot2` library.
@@ -107,8 +103,6 @@ First, subset the data so we are just working with July data.
 # First, subset the data
 out1 <- out[out$month==7,]
 ```
-
-<br>
 
 Next, fit the plot. Note the differences between the `ggplot2` code and the code we have used thus far for plotting. You can do a lot more out of the box with `ggplot` graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.
 ```{r}

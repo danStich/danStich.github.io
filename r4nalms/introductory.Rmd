@@ -1,30 +1,30 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
+
 
 ---
 title: "Introductory R"
 ---
 
-<br>
+
 
 <img src="./images/roh.png" alt="">
 
-<br>
+
 
 Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. 
 
 Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or [these](https://www.rstudio.com/resources/cheatsheets/)) can help you along the way by serving as handy references.
 
-<br>
+
 
 ## Working with code
 We will spend a bit of time during the morning session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.
 
 There are a lot of different ways to write computer code. Each has pros and cons and **all** of them are intended to increase efficiency and readability. There is no "right" way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:
 
-<br>
+
 
 ### Commenting code is helpful
 
@@ -46,7 +46,7 @@ knitr::opts_chunk$set(width=20)
 # what you did.
 ```
 
-<br>
+
 
 ### There are a few ways to run code:
 
@@ -70,7 +70,7 @@ Type the following line of code into a blank source file, and run it.
 > 1 + 1
 > ```
 
-<br>
+
 
 ### Section breaks help organization
 
@@ -84,7 +84,7 @@ I like to use the built-in headings to separate big chunks of code and keep thin
 
 ```
 
-<br>
+
 
 ### Some stricter R programming rules:
 All code is in R is case sensitive.
@@ -95,7 +95,7 @@ A = 2
 a == A
 ```      
 
-<br>
+
 
 We have few things going on above.
 
@@ -105,7 +105,7 @@ We have few things going on above.
 
 3. The `==` that we typed is a logical test that checks to see if the two objects are identical. If they were, then R would have returned a `TRUE` instead of `FALSE`. This **operator** is very useful, and is common to a number of programming languages.
 
-<br>
+
 
 You can't start an object name with a number, but you can end it with one.
 ```{r, eval=FALSE}  
@@ -123,7 +123,7 @@ You can't start an object name with a number, but you can end it with one.
 a1 = 1 
 ```
 
-<br>
+
 
 R will overwrite objects sequentially, so don't name two things the same, unless you don't need the first. Even then it is risky business. In the example below, our object `a` takes on the second value provided.
 ```{r}
@@ -132,14 +132,14 @@ a = 2
 a
 ```
 
-<br>
+
 
 Some things can be expressed in multiple ways. For example, both 'T' and 'TRUE' can be used to indicate a logical value of TRUE.
 ```{r}
 T == TRUE
 ```
 
-<br>
+
 
 Some names are reserved or pre-defined. Did you notice that R already knew what T and TRUE were without us defining them? These reserved operators, and built in **functions** are the building blocks of the R language.
 
@@ -149,7 +149,7 @@ in, if, else, for, function()
 ```
 ...and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.
 
-<br>
+
 
 Some **symbols** are also reserved for special use as operators, like:
 ```{r, eval=FALSE}
@@ -157,7 +157,7 @@ Some **symbols** are also reserved for special use as operators, like:
 ```
 ...and a bunch of others.
 
-<br>
+
 
 ### Some other handy coding tricks
 
@@ -171,12 +171,12 @@ Single click moves the cursor into position. Double click will highlight the wor
 
 Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press `CTRL + F` to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.
 
-<br>
+
 
 #### Functions are the life blood
 Functions make R what it is. These are all of the "commands"" that are available to a user through the base software, or through **packages** that can be added on. When you can't find the function you need you can write one to do it (eventually). At its most basic level, **functions** do stuff to **objects** in R. This is what makes R both a functional programming language and an object-oriented programming language.
 
-<br>
+
 
 ## Data structures and manipulation
 ### Vectors
@@ -190,7 +190,7 @@ a = 1
 a
 ```  
 
-<br>
+
 
 What is the square bracket in the output here? It's an index. The index is telling us that the first element of `a` is `1`. This means that `a` is actually a "vector", not a "scalar" or singular value. You can think of a vector as a column in an excel spreadsheet or an analagous data table. By treating every variable as a vector, or an element thereof, the language becomes much more generalizable.
 
@@ -198,7 +198,7 @@ So, even if we define something with a single value, it is still just a vector w
 
 The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox *that* is. Let's play with some:
 
-<br>
+
 
 #### Atomic vectors
 
@@ -215,7 +215,7 @@ And some others, but none with which we'll concern ourselves.
 
 Below are some examples of `atomic vectors`. Run the code to see what it does:
 
-<br>
+
 
 #### Integers and numerics
 ```{r}    
@@ -226,11 +226,11 @@ a        # A third way to look at it
 str(a)   # Look at the structure, integer class
 ```    
 
-<br>
+
     
 Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a **numeric** vector (`num`) instead of an **integer** vector (`int`). For the most part, this one won't make a huge difference, but it can become important when writing statistical models.
 
-<br>
+
 
 ```{r}
 # Define the same vector using a sequence
@@ -238,7 +238,7 @@ a = seq(from=1, to=5, by=1)
 str(a)       
 ```
 
-<br>
+
    
 #### Characters and factors
 **Characters** are anything that is represented as text strings.
@@ -251,11 +251,11 @@ b
 str(b)                         # Look at the data structure
 ```
 
-<br>
+
 
 **Factors** are a special kind of data type in R that we may run across from time to time. They have **levels** that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won't have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.
 
-<br>
+
 
 This is what it looks like when we code a factor as number:
 ```{r, eval=FALSE}
@@ -265,11 +265,11 @@ as.numeric(b)
 ?as.numeric   
 ```
 
-<br>
+
 
 Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it...in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.
 
-<br>
+
 
 #### Logical vectors
 Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object `a` we created earlier is the same as object `b`. If we store the results of this logical check to a new vector `c`, we get a new logical vector of `TRUE` and `FALSE`.
@@ -280,7 +280,7 @@ c
 str(c)       
 ```
 
-<br>
+
 
 We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like `c` above).
 ```{r}   
@@ -291,11 +291,11 @@ a == 3       # We can see if specific elements meet a criterion
 unique(b)    # We can just look at unique values
 ```
 
-<br>
+
 
 The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.
 
-<br>
+
 
 #### Vector operations
 A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.
@@ -320,7 +320,7 @@ b[b=='c']
 which(b=='c')
 ```
 
-<br>
+
 
 Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.
 ```{r}
@@ -350,11 +350,11 @@ length(a) # A has a length of 5, try it and check it
 a         # Yup, looks about right
 ```
 
-<br>
+
 
 And we can do lots of other nifty things like this.
 
-<br>
+
 
 ### Matrices
 Matrices are rectangular objects that we can think of as being made up of vectors.
@@ -364,21 +364,21 @@ We can make matrices by binding vectors that already exist
 cbind(a,e)
 ```
 
-<br>
+
  
 Or we can make an empty one to fill.
 ```{r}
 matrix(0, nrow=3, ncol=4)
 ```
 
-<br>
+
  
 Or we can make one from scratch.
 ```{r}
 mat = matrix(seq(1, 12), ncol=3, nrow=4)
 ```
 
-<br>
+
  
 We can do all of the things we did with vectors to matrices, but now we have more than one column, and official 'rows' that we can also use to these ends:
 ```{r}
@@ -389,7 +389,7 @@ mat[2, 3]   # Value of row 2, column 3
 str(mat)    
 ```
 
-<br>
+
  
 See how no. of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.
 ```{r}
@@ -400,15 +400,15 @@ str(mat) # Take a look to understand
 mat*2 
 ```  
 
-<br>
+
 
 All the same operations we did on vectors above...one example.
 
-<br>
+
 
 More on matrices as we need them. We won't use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.
 
-<br>
+
 
 ### Dataframes
 Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!
@@ -433,14 +433,14 @@ c = rep(c('a','b','c','d'), 5)
 d = data.frame(a, b, c)           
 ```
 
-<br>
+
 
 Now we can look at it:
 ```{r}
 d # Print the dataframe
 ```
 
-<br>
+
 
 Notice that R assigns names to dataframes on the fly based on object names. They are not `colnames` as with matrices, they are `names`.
 ```{r}
@@ -459,11 +459,11 @@ e$Sqrt = sqrt(e$Increment)
 e # We can make new columns in data frames like this!
 ```
 
-<br>
+
 
 Referencing specific elements of a dataframe is similar to a the same in a matrix, with some added capabilities. We'll look at this with some real data so it's more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let's read in our first real data file as most of our data are stored that way and will be read in as `.csv` or `.txt` files.
 
-<br>
+
 
 ### Loading data from files
 First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., `setwd("C:/Users/.../physical.csv")`), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in *this* case). Then, we can set the working directory in R to that folder using any number of different options.
@@ -480,7 +480,7 @@ otsego <- read.csv('physical.csv')
 otsego <- read.csv('data/physical.csv')
 ```
 
-<br>
+
 
 If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).
 
@@ -495,7 +495,7 @@ str(otsego)     # Have a look at the data structure
 summary(otsego) # Summarize the variables in the dataframe
 ```
 
-<br>
+
 
 Now let's look at some specific things.
 
@@ -504,20 +504,20 @@ What is the value in 12th row of the 4th column of `otsego`? Notice that we have
 otsego[12, 4]
 ```   
 
-<br>
+
 
 Another way to say this is, "What is the 12th value of `depth` in `otsego`"?
 ```{r}
 otsego[12, 'depth']
 ```
 
-<br>
+
 More realistically, we might want to know the avereage temperature (`temp`) at a given `depth` in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets `[]` because the column `temp` is an atomic vector inside of `otsego`. The dollar sign (`$`) here is telling R to look for something called `temp` inside of the `otsego` dataframe.
 ```{r}
 mean( otsego$temp[otsego$depth==10.0] , na.rm=TRUE)
 ```
 
-<br>
+
 
 Wow...heavy stuff, but this is how the wheels turn. Let's take another step back and break this down even further.
 
@@ -543,7 +543,7 @@ myMean <- function(x){
   }
 ```
 
-<br>
+
 
 Just to make sure it works right, let's go ahead and test it out.
 ```{r}
@@ -551,11 +551,11 @@ test <- myMean(otsego$temp[otsego$depth==10])
 test
 ```
 
-<br>
+
 
 Yay!
 
-<br>
+
 
 Now, what if we wanted to do something more useful, like convert temperature from celcius to Farenheit? We can apply the same idea here:
 ```{R}
@@ -575,7 +575,7 @@ otsego$tempF <- cToF(otsego$temp)
 head(otsego$tempF)
 ```
 
-<br>
+
 
 Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Farenheit scale?).
 
@@ -586,7 +586,7 @@ First, we could just use the `write.csv` function. This one is pretty limited in
 write.csv(x=otsego, file='physicalF.csv')
 ```
 
-<br> 
+ 
 
 I like a little more flexibility in the file write process, so I usually use the `write.table` function. This can be used to achieve the same end depending on options, but allows other options like ommitting `row.names` from the output file. Here is an example of how it works:
 ```{r, eval=F}
@@ -603,18 +603,18 @@ write.table(x=otsego, file='physicalF.csv', row.names=FALSE,
             quote=FALSE, sep=',')
 ```
 
-<br> 
+ 
 
 A third way to write objects from R to a file is by saving it as an R data file (`.rda` extension). This comes in handy when we have very large or very complex objects. In general, `.rda` files save and load more quickly because they are stored as **compressed** code (in the form of **lists**). Here is what it looks like:
 ```{r, eval=FALSE}
 save(otsego, file='otsego.rda')
 ```
 
-<br>
+
 
 When this kind of a data file is loaded back into the environment (using `load(file='otsego.rda')`)' it has the same name, but is stored as a **list**. Dun, dun, dun...
 
-<br>
+
 
 ### Lists
 Lists are the ultimate container in R. They are actually a generalized vector that can hold different classes of data. Each element of a list can be any kind of object (an atomic vector, a matrix, a dataframe, or even another list!!). In fact, even a dataframe can be thought of as a list with just one element (the dataframe). In fact, a data frame is an element of the list that comprises our environments. Gross, right?
@@ -642,12 +642,12 @@ myList$c[1]                              # Can also reference it this way!
 
 Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.
 
-<br>
+
 
 ## Summarizing and visualizing data
 Now that we have a handle on how R works, and how to get our data in, let's take a little time to examine statistical and graphical summaries of our data.
 
-<br>
+
 
 ### Data summaries
 Some of the most fundamental work we do involves summarizing information across ranges of categories or factors (e.g. mean water temperature in July). This helps us start to detangle complicated patterns in data, and can be helpful to others when they read about our awesome research.
@@ -667,7 +667,7 @@ var(otsego$temp, na.rm=T) # Variance
 quantile(otsego$temp, probs=c(0.025, 0.975), na.rm=T) # Quantiles, with user-defined thresholds
 ```
 
-<br>
+
 
 We can combine these into a single function to summarize entire dataframes, but this is not usually very useful. For example, we could use `summary` to return `min`, `median`, `mean`, `max` and the inner quartile range for each variable in an entire dataframe or matrix, but this is a little meaningless when we are looking at **marginal** summary stats for each variable.
 
@@ -675,7 +675,7 @@ We can combine these into a single function to summarize entire dataframes, but 
 summary(otsego)
 ```
 
-<br>
+
 
 Usually, we would like to summarize variables across groups (e.g., 'control' or 'treatment') or discrete ranges of data (e.g., `month` in `otsego`). There are a number of ways to do this in R, and what we use depends partly on the application, and partly on personal preference. Most of these operate using what is known as the **split-apply-combine** approach. The simplest is probably the `aggregate` function.
 
@@ -685,7 +685,7 @@ aggregate(formula=temp~month, data=otsego, FUN=mean)
 ```
 
 
-<br>
+
 
 We can even use this to summarize a variable across multiple grouping variables. Perhaps we want to see mean temperature by month and depth?
 ```{r, eval = FALSE}
@@ -693,7 +693,7 @@ We can even use this to summarize a variable across multiple grouping variables.
 aggregate(formula=temp~month+depth, data=otsego, FUN=mean)
 ```
 
-<br>
+
 
 This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make **isopleths** during the intermediate session in the afternoon.
 
@@ -704,7 +704,7 @@ Normally, we would just load a package from the default **library** location onc
 library(plyr)
 ```
 
-<br>
+
 
 But, in the absence of a network connection we can't install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the **relative path** to load the `plyr` package.
 ```{r, eval=FALSE, echo=TRUE}
@@ -715,7 +715,7 @@ library(plyr, lib.loc = "./r_libs/plyr")
 library(plyr)
 ```
 
-<br>
+
 
 With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use `ddply` to summarize the `otsego` data. (There is also a function called `ddply` in the `dplyr` package that is a newer, beefed-up version of `plyr` focusing only on `dataframes` and remote `datatables`)
 
@@ -732,14 +732,14 @@ summarydata <- ddply(
 )
 ```
 
-<br>
+
 
 Now, we can take a look at the summary:
 ```{r}
 head(x=summarydata, n=10)
 ```
 
-<br>
+
 
 And, we can write it out to a `.csv` file that we can use to build tables in Excel or Word (or any number of non-Microsoft applications that we like!).
 
@@ -750,7 +750,7 @@ write.table(summarydata, 'summary.csv', row.names = FALSE,
 
 The result is a table that is ready to go with just a few formatting changes, even if it is ridiculously long.
 
-<br>
+
 
 ### Basic graphs
 Now that we have an informative table, let's see what we can do about distilling the 10,000 rows of data we have into a couple of simple graphs.
@@ -759,7 +759,7 @@ One of the most attractive aspects of working with data in R is the power of the
 
 One of the most powerful aspects of plotting in R is that we are working with a scripted language. That means, that if we go out and collect more data, we can add those to our existing data files, or replace the old files with new ones, and re-run our code, with minimal changes, to produce updated graphs. This will make you feel a lot better about writing 20 or 30 lines of code to produce the kind of graph that you'll be happy with.
 
-<br>
+
 
 #### Boxplots
 Usually, when we are trying to summarize a **continuous** response across **categorical** explanatory variables, a **boxplot** is a reasonable starting place. Wow, that's a lot of bold in one sentence. 
@@ -775,7 +775,7 @@ Why don't we start simple? Let's make a boxplot of temperatures by month in the 
 boxplot(formula=temp~month, data=otsego[otsego$depth<8,])
 ```
 
-<br>
+
 
 Well, that was really easy, but let's face it...it's ugly. In fact, this is the kind of output that makes the old-school statisticians not like the "clunky" graphics from R, so let's see if we can snaz it up a little bit. I am going to spread out the code across multiple lines so you can get a feel for what's going on here.
 
@@ -801,7 +801,7 @@ axis(side=1,
 axis(side=2, las=2)
 ```
 
-<br>
+
 
 This is looking a lot better, and we didn't even need to change that much to get here. But, we *could* do a little better by specifying some additional, low-level parameters (`pars`:
 ```{r}
@@ -836,13 +836,13 @@ axis(side=1,
 axis(side=2, las=2)
 ```
 
-<br>
+
 
 Alright, now our graph is starting to look pretty snazy! 
 
 Let's move on and check out a couple more plots to show off some of the power of the base `graphics` package that is loaded by default.
 
-<br>
+
 
 #### Scatterplots
 Here, we will skip the niceties and cut right to the chase. We will set a couple of graphical parameters up front so we can compare our two graphs side by side. To do this, we specify a graphical matrix using the argument `mfrow`, which needs to be a vector containing the number of rows, and the number of columns for the plotting window (defaults to `c(1,1)`). Then, we will make a default scatterplot on the left, and a juiced-up version on the right.
@@ -870,7 +870,7 @@ plot(july$year, july$temp,
 axis(side=2, las=2)
 ```
 
-<br> 
+ 
 
 #### Histograms
 Scatterplots are great for looking at bivariate relationships, but sometimes all we want to see is a univariate distribution? We usually use histograms for this, and this is done very easily in R. We will take the same approach to the one we used to demonstrate scatterplots here, with some different tweaks and extra arguments because of the quirks associated with histograms in R.
@@ -899,10 +899,11 @@ axis(side=1, pos=0)
 axis(side=2, pos=17, las=2)
 ```
 
-<br>
+
 
 This sets us up to do the kind of plotting that is fundamental to describing research results, and that is germane to testing assumptions of statistical tests, all of which will follow the lunch break.
 
 Stay tuned!
 
 <br>
+

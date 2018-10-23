@@ -276,18 +276,13 @@ pre code, pre, code {
 }
 
 </style>
-<p><br></p>
-<p><br></p>
 <p><img src="images/roh.png" alt=""></p>
-<p><br></p>
 <p>Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way.</p>
 <p>Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a>) can help you along the way by serving as handy references.</p>
-<p><br></p>
 <div id="working-with-code" class="section level2">
 <h2>Working with code</h2>
 <p>We will spend a bit of time during the morning session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.</p>
 <p>There are a lot of different ways to write computer code. Each has pros and cons and <strong>all</strong> of them are intended to increase efficiency and readability. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:</p>
-<p><br></p>
 <div id="commenting-code-is-helpful" class="section level3">
 <h3>Commenting code is helpful</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is a comment. </span>
@@ -301,7 +296,6 @@ pre code, pre, code {
 <span class="co"># This is useful for sharing</span>
 <span class="co"># code or just figuring out</span>
 <span class="co"># what you did.</span></code></pre></div>
-<p><br></p>
 </div>
 <div id="there-are-a-few-ways-to-run-code" class="section level3">
 <h3>There are a few ways to run code:</h3>
@@ -320,7 +314,6 @@ pre code, pre, code {
 <span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </blockquote>
-<p><br></p>
 </div>
 <div id="section-breaks-help-organization" class="section level3">
 <h3>Section breaks help organization</h3>
@@ -328,7 +321,6 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Section heading ----</span>
 <span class="co"># Follow a comment with four dashes</span>
 <span class="co"># to insert a section heading</span></code></pre></div>
-<p><br></p>
 </div>
 <div id="some-stricter-r-programming-rules" class="section level3">
 <h3>Some stricter R programming rules:</h3>
@@ -338,14 +330,12 @@ a =<span class="st"> </span><span class="dv">1</span>
 A =<span class="st"> </span><span class="dv">2</span>
 a <span class="op">==</span><span class="st"> </span>A</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
-<p><br></p>
 <p>We have few things going on above.</p>
 <ol style="list-style-type: decimal">
 <li><p>We’ve defined a couple of objects for the first time. You do this by assigning the value on the right of the arrow to the variable on the left. We can use the assignment arrow <code>&lt;-</code> or an equal sign <code>=</code>. The former is preferred, but for our purposes it will make absolutely no difference, and <code>=</code> is much faster to type than <code>&lt;-</code>.</p></li>
 <li><p>Note in the output that the two objects are not the same, and R knows this when we test to see.</p></li>
 <li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then R would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This <strong>operator</strong> is very useful, and is common to a number of programming languages.</p></li>
 </ol>
-<p><br></p>
 <p>You can’t start an object name with a number, but you can end it with one.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In Rstudio there are nifty little </span>
 <span class="co"># markers to show this is broken once</span>
@@ -359,26 +349,21 @@ a <span class="op">==</span><span class="st"> </span>A</code></pre></div>
 <span class="co"># show(a) </span>
 <span class="co"># in the console: </span>
 a1 =<span class="st"> </span><span class="dv">1</span> </code></pre></div>
-<p><br></p>
 <p>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first. Even then it is risky business. In the example below, our object <code>a</code> takes on the second value provided.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
 a =<span class="st"> </span><span class="dv">2</span>
 a</code></pre></div>
 <pre><code>## [1] 2</code></pre>
-<p><br></p>
 <p>Some things can be expressed in multiple ways. For example, both ‘T’ and ‘TRUE’ can be used to indicate a logical value of TRUE.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p><br></p>
 <p>Some names are reserved or pre-defined. Did you notice that R already knew what T and TRUE were without us defining them? These reserved operators, and built in <strong>functions</strong> are the building blocks of the R language.</p>
 <p>For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
 <p>…and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.</p>
-<p><br></p>
 <p>Some <strong>symbols</strong> are also reserved for special use as operators, like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">+</span>,<span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
 <p>…and a bunch of others.</p>
-<p><br></p>
 </div>
 <div id="some-other-handy-coding-tricks" class="section level3">
 <h3>Some other handy coding tricks</h3>
@@ -387,11 +372,9 @@ a</code></pre></div>
 <p>The <code>tab</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>SHIFT + TAB</code> will move code to the left. These can help you organize your code.</p>
 <p>Single click moves the cursor into position. Double click will highlight the word you are clicking, and a triple left click will highlight an entire line.</p>
 <p>Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press <code>CTRL + F</code> to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.</p>
-<p><br></p>
 <div id="functions-are-the-life-blood" class="section level4">
 <h4>Functions are the life blood</h4>
 <p>Functions make R what it is. These are all of the “commands”&quot; that are available to a user through the base software, or through <strong>packages</strong> that can be added on. When you can’t find the function you need you can write one to do it (eventually). At its most basic level, <strong>functions</strong> do stuff to <strong>objects</strong> in R. This is what makes R both a functional programming language and an object-oriented programming language.</p>
-<p><br></p>
 </div>
 </div>
 </div>
@@ -405,11 +388,9 @@ a</code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
 a</code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p><br></p>
 <p>What is the square bracket in the output here? It’s an index. The index is telling us that the first element of <code>a</code> is <code>1</code>. This means that <code>a</code> is actually a “vector”, not a “scalar” or singular value. You can think of a vector as a column in an excel spreadsheet or an analagous data table. By treating every variable as a vector, or an element thereof, the language becomes much more generalizable.</p>
 <p>So, even if we define something with a single value, it is still just a vector with one element. For us, this is important because of the way that it lets us do math. It makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. It makes working through the math a zillion times easier than on paper! In terms of programming, it can make a lot of things easier, too.</p>
 <p>The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox <em>that</em> is. Let’s play with some:</p>
-<p><br></p>
 <div id="atomic-vectors" class="section level4">
 <h4>Atomic vectors</h4>
 <p>A vector that can hold one and only one kind of data:</p>
@@ -423,7 +404,6 @@ a</code></pre></div>
 </ul>
 <p>And some others, but none with which we’ll concern ourselves.</p>
 <p>Below are some examples of <code>atomic vectors</code>. Run the code to see what it does:</p>
-<p><br></p>
 </div>
 <div id="integers-and-numerics" class="section level4">
 <h4>Integers and numerics</h4>
@@ -436,14 +416,11 @@ a</code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(a)   <span class="co"># Look at the structure, integer class</span></code></pre></div>
 <pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
-<p><br></p>
 <p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the same vector using a sequence</span>
 a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">5</span>, <span class="dt">by=</span><span class="dv">1</span>) 
 <span class="kw">str</span>(a)       </code></pre></div>
 <pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
-<p><br></p>
 </div>
 <div id="characters-and-factors" class="section level4">
 <h4>Characters and factors</h4>
@@ -459,17 +436,13 @@ b                             </code></pre></div>
 ## Levels: a b c d e</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(b)                         <span class="co"># Look at the data structure</span></code></pre></div>
 <pre><code>##  Factor w/ 5 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5</code></pre>
-<p><br></p>
 <p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
-<p><br></p>
 <p>This is what it looks like when we code a factor as number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(b) 
 
 <span class="co"># What did that do?</span>
 ?as.numeric   </code></pre></div>
-<p><br></p>
 <p>Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it…in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.</p>
-<p><br></p>
 </div>
 <div id="logical-vectors" class="section level4">
 <h4>Logical vectors</h4>
@@ -480,7 +453,6 @@ c            </code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(c)       </code></pre></div>
 <pre><code>##  logi [1:5] FALSE FALSE FALSE FALSE FALSE</code></pre>
-<p><br></p>
 <p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(a)     <span class="co"># We can check for missing values</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
@@ -493,9 +465,7 @@ c            </code></pre></div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></code></pre></div>
 <pre><code>## [1] a b c d e
 ## Levels: a b c d e</code></pre>
-<p><br></p>
 <p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
-<p><br></p>
 </div>
 <div id="vector-operations" class="section level4">
 <h4>Vector operations</h4>
@@ -516,7 +486,6 @@ f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
 ## Levels: a b c d e</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p><br></p>
 <p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
 <pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
@@ -553,9 +522,7 @@ e                            <span class="co"># Print to console</span></code></
 <pre><code>## [1] 5</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a         <span class="co"># Yup, looks about right</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<p><br></p>
 <p>And we can do lots of other nifty things like this.</p>
-<p><br></p>
 </div>
 </div>
 <div id="matrices" class="section level3">
@@ -569,17 +536,14 @@ e                            <span class="co"># Print to console</span></code></
 ## [3,] &quot;3&quot; &quot;AAAAc&quot;
 ## [4,] &quot;4&quot; &quot;AAAAd&quot;
 ## [5,] &quot;5&quot; &quot;AAAAe&quot;</code></pre>
-<p><br></p>
 <p>Or we can make an empty one to fill.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    0    0    0    0
 ## [2,]    0    0    0    0
 ## [3,]    0    0    0    0</code></pre>
-<p><br></p>
 <p>Or we can make one from scratch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</code></pre></div>
-<p><br></p>
 <p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
@@ -591,7 +555,6 @@ e                            <span class="co"># Print to console</span></code></
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat)    </code></pre></div>
 <pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
-<p><br></p>
 <p>See how no. of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)
 <span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)
@@ -612,11 +575,8 @@ mat</code></pre></div>
 ## is         4     12    20
 ## a          6     14    22
 ## matrix     8     16    24</code></pre>
-<p><br></p>
 <p>All the same operations we did on vectors above…one example.</p>
-<p><br></p>
 <p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.</p>
-<p><br></p>
 </div>
 <div id="dataframes" class="section level3">
 <h3>Dataframes</h3>
@@ -636,7 +596,6 @@ c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span
 <span class="co"># Note, we don&#39;t use quotes for objects,</span>
 <span class="co"># but we do for character variables</span>
 d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </code></pre></div>
-<p><br></p>
 <p>Now we can look at it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="co"># Print the dataframe</span></code></pre></div>
 <pre><code>##       a      b c
@@ -660,7 +619,6 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 ## 18  9.0  81.00 b
 ## 19  9.5  90.25 c
 ## 20 10.0 100.00 d</code></pre>
-<p><br></p>
 <p>Notice that R assigns names to dataframes on the fly based on object names. They are not <code>colnames</code> as with matrices, they are <code>names</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can look at these</span>
 <span class="kw">names</span>(d)     <span class="co"># All of the names</span></code></pre></div>
@@ -718,9 +676,7 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 ## 18       9.0   81.00      b 3.0000000
 ## 19       9.5   90.25      c 3.0822070
 ## 20      10.0  100.00      d 3.1622777</code></pre>
-<p><br></p>
 <p>Referencing specific elements of a dataframe is similar to a the same in a matrix, with some added capabilities. We’ll look at this with some real data so it’s more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let’s read in our first real data file as most of our data are stored that way and will be read in as <code>.csv</code> or <code>.txt</code> files.</p>
-<p><br></p>
 </div>
 <div id="loading-data-from-files" class="section level3">
 <h3>Loading data from files</h3>
@@ -728,7 +684,6 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our environment. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
 <p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</code></pre></div>
-<p><br></p>
 <p>If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
@@ -791,19 +746,16 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 ##  3rd Qu.:0.3020   3rd Qu.:  97.00  
 ##  Max.   :0.3770   Max.   :1145.90  
 ##  NA&#39;s   :251      NA&#39;s   :7800</code></pre>
-<p><br></p>
 <p>Now let’s look at some specific things.</p>
 <p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="dv">4</span>]</code></pre></div>
 <pre><code>## [1] 1988</code></pre>
-<p><br></p>
 <p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="st">&#39;depth&#39;</span>]</code></pre></div>
 <pre><code>## [1] 25</code></pre>
-<p><br> More realistically, we might want to know the avereage temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
+<p>More realistically, we might want to know the avereage temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="fl">10.0</span>] , <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] 10.49944</code></pre>
-<p><br></p>
 <p>Wow…heavy stuff, but this is how the wheels turn. Let’s take another step back and break this down even further.</p>
 <p>In the example above, we are using a <strong>function</strong> called <code>mean</code> to do stuff to an object that is a subset of <code>otsego$temp</code>. The way these functions do things is critical to working in R.</p>
 <p>For example, we could write a new function to calculate the mean if we wanted to,… right? Here, we define a function called <code>myMean</code> that takes one required <strong>argument</strong>. Each required argument can take on user-specified <strong>values</strong>. In this case, that value must be a vector that is or can be coerced into <code>numeric</code> format. Here, we also add a chunk of code to deal with <code>NA</code> values.</p>
@@ -822,14 +774,11 @@ myMean &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   
   <span class="kw">return</span>(x_bar)
   }</code></pre></div>
-<p><br></p>
 <p>Just to make sure it works right, let’s go ahead and test it out.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">myMean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="dv">10</span>])
 test</code></pre></div>
 <pre><code>## [1] 10.49944</code></pre>
-<p><br></p>
 <p>Yay!</p>
-<p><br></p>
 <p>Now, what if we wanted to do something more useful, like convert temperature from celcius to Farenheit? We can apply the same idea here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function to convert temperature</span>
 <span class="co"># in celcius to temperature in farenheit:</span>
@@ -846,12 +795,10 @@ otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="
 <span class="co"># Look at the first few elements</span>
 <span class="kw">head</span>(otsego<span class="op">$</span>tempF)</code></pre></div>
 <pre><code>## [1] 32.702 34.574 34.646 34.682 34.862 34.898</code></pre>
-<p><br></p>
 <p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Farenheit scale?).</p>
 <p>There are a couple of ways to do this.</p>
 <p>First, we could just use the <code>write.csv</code> function. This one is pretty limited in terms of options, but that also makes it easy to use. We just need to tell R what the object is that we want to write to a csv file and what the name of the file will be. Do be careful because this will overwrite existing files with the same name without asking if that is okay.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.csv</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>)</code></pre></div>
-<p><br></p>
 <p>I like a little more flexibility in the file write process, so I usually use the <code>write.table</code> function. This can be used to achieve the same end depending on options, but allows other options like ommitting <code>row.names</code> from the output file. Here is an example of how it works:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write the data set to a csv file.</span>
 <span class="co"># We specify the object, the filename, and</span>
@@ -864,12 +811,9 @@ otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="
 <span class="co"># text file if we needed one.</span>
 <span class="kw">write.table</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>,
             <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</code></pre></div>
-<p><br></p>
 <p>A third way to write objects from R to a file is by saving it as an R data file (<code>.rda</code> extension). This comes in handy when we have very large or very complex objects. In general, <code>.rda</code> files save and load more quickly because they are stored as <strong>compressed</strong> code (in the form of <strong>lists</strong>). Here is what it looks like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">save</span>(otsego, <span class="dt">file=</span><span class="st">&#39;otsego.rda&#39;</span>)</code></pre></div>
-<p><br></p>
 <p>When this kind of a data file is loaded back into the environment (using <code>load(file='otsego.rda')</code>)’ it has the same name, but is stored as a <strong>list</strong>. Dun, dun, dun…</p>
-<p><br></p>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
@@ -971,13 +915,11 @@ myList                                   <span class="co"># See how the names wo
 myList<span class="op">$</span>c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
 <p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.</p>
-<p><br></p>
 </div>
 </div>
 <div id="summarizing-and-visualizing-data" class="section level2">
 <h2>Summarizing and visualizing data</h2>
 <p>Now that we have a handle on how R works, and how to get our data in, let’s take a little time to examine statistical and graphical summaries of our data.</p>
-<p><br></p>
 <div id="data-summaries" class="section level3">
 <h3>Data summaries</h3>
 <p>Some of the most fundamental work we do involves summarizing information across ranges of categories or factors (e.g. mean water temperature in July). This helps us start to detangle complicated patterns in data, and can be helpful to others when they read about our awesome research.</p>
@@ -999,10 +941,8 @@ myList<span class="op">$</span>c[<span class="dv">1</span>]                     
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(otsego<span class="op">$</span>temp, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T) <span class="co"># Quantiles, with user-defined thresholds</span></code></pre></div>
 <pre><code>##   2.5%  97.5% 
 ##  1.840 22.888</code></pre>
-<p><br></p>
 <p>We can combine these into a single function to summarize entire dataframes, but this is not usually very useful. For example, we could use <code>summary</code> to return <code>min</code>, <code>median</code>, <code>mean</code>, <code>max</code> and the inner quartile range for each variable in an entire dataframe or matrix, but this is a little meaningless when we are looking at <strong>marginal</strong> summary stats for each variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(otsego)</code></pre></div>
-<p><br></p>
 <p>Usually, we would like to summarize variables across groups (e.g., ‘control’ or ‘treatment’) or discrete ranges of data (e.g., <code>month</code> in <code>otsego</code>). There are a number of ways to do this in R, and what we use depends partly on the application, and partly on personal preference. Most of these operate using what is known as the <strong>split-apply-combine</strong> approach. The simplest is probably the <code>aggregate</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
 <span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
@@ -1019,19 +959,15 @@ myList<span class="op">$</span>c[<span class="dv">1</span>]                     
 ## 10    10  9.495450
 ## 11    11  7.471370
 ## 12    12  5.375337</code></pre>
-<p><br></p>
 <p>We can even use this to summarize a variable across multiple grouping variables. Perhaps we want to see mean temperature by month and depth?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
 <span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month<span class="op">+</span>depth, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
-<p><br></p>
 <p>This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make <strong>isopleths</strong> during the intermediate session in the afternoon.</p>
 <p>More importanly for now, we are limited in our ability to summarize a variable in more than one way using <code>aggregate</code> or other functions in the <code>base</code> package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of <code>base</code> and into the myriad <strong>packages</strong> that make up R.</p>
 <p>Normally, we would just load a package from the default <strong>library</strong> location once we have installed it, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
-<p><br></p>
 <p>But, in the absence of a network connection we can’t install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the <strong>relative path</strong> to load the <code>plyr</code> package.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;./r_libs/plyr&quot;</span>)</code></pre></div>
-<p><br></p>
 <p>With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use <code>ddply</code> to summarize the <code>otsego</code> data. (There is also a function called <code>ddply</code> in the <code>dplyr</code> package that is a newer, beefed-up version of <code>plyr</code> focusing only on <code>dataframes</code> and remote <code>datatables</code>)</p>
 <p>Here is one way that we can use <code>ddply</code> to summarize temperature across multiple factors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize mean and sd by month and depth</span>
@@ -1042,7 +978,6 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
   <span class="dt">mean =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> T),
   <span class="dt">sd =</span> <span class="kw">sd</span>(temp, <span class="dt">na.rm =</span> T)
 )</code></pre></div>
-<p><br></p>
 <p>Now, we can take a look at the summary:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(<span class="dt">x=</span>summarydata, <span class="dt">n=</span><span class="dv">10</span>)</code></pre></div>
 <pre><code>##    month depth     mean        sd
@@ -1056,19 +991,16 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 ## 8      1  14.0 2.515714 0.8127703
 ## 9      1  16.0 2.595385 0.8133635
 ## 10     1  18.0 2.649231 0.7865162</code></pre>
-<p><br></p>
 <p>And, we can write it out to a <code>.csv</code> file that we can use to build tables in Excel or Word (or any number of non-Microsoft applications that we like!).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">write.table</span>(summarydata, <span class="st">&#39;summary.csv&#39;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>,
             <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</code></pre></div>
 <p>The result is a table that is ready to go with just a few formatting changes, even if it is ridiculously long.</p>
-<p><br></p>
 </div>
 <div id="basic-graphs" class="section level3">
 <h3>Basic graphs</h3>
 <p>Now that we have an informative table, let’s see what we can do about distilling the 10,000 rows of data we have into a couple of simple graphs.</p>
 <p>One of the most attractive aspects of working with data in R is the power of the base graphics package. We basically have access to any kind of plot you can imagine, and if you can imagine a kind of plot that isn’t there, you can create it by hand. I have even used cartesian coordinates to create useful plots where no other functions were available.</p>
 <p>One of the most powerful aspects of plotting in R is that we are working with a scripted language. That means, that if we go out and collect more data, we can add those to our existing data files, or replace the old files with new ones, and re-run our code, with minimal changes, to produce updated graphs. This will make you feel a lot better about writing 20 or 30 lines of code to produce the kind of graph that you’ll be happy with.</p>
-<p><br></p>
 <div id="boxplots" class="section level4">
 <h4>Boxplots</h4>
 <p>Usually, when we are trying to summarize a <strong>continuous</strong> response across <strong>categorical</strong> explanatory variables, a <strong>boxplot</strong> is a reasonable starting place. Wow, that’s a lot of bold in one sentence.</p>
@@ -1079,7 +1011,6 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="co"># thermocline is in that lake.</span>
 <span class="kw">boxplot</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,])</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
-<p><br></p>
 <p>Well, that was really easy, but let’s face it…it’s ugly. In fact, this is the kind of output that makes the old-school statisticians not like the “clunky” graphics from R, so let’s see if we can snaz it up a little bit. I am going to spread out the code across multiple lines so you can get a feel for what’s going on here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the plot</span>
 <span class="kw">boxplot</span>(
@@ -1101,7 +1032,6 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="co"># Add the y-axis, las rotates the labels</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
-<p><br></p>
 <p>This is looking a lot better, and we didn’t even need to change that much to get here. But, we <em>could</em> do a little better by specifying some additional, low-level parameters (<code>pars</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up the plotting window</span>
 <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
@@ -1133,10 +1063,8 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="co"># Add the y-axis</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
-<p><br></p>
 <p>Alright, now our graph is starting to look pretty snazy!</p>
 <p>Let’s move on and check out a couple more plots to show off some of the power of the base <code>graphics</code> package that is loaded by default.</p>
-<p><br></p>
 </div>
 <div id="scatterplots" class="section level4">
 <h4>Scatterplots</h4>
@@ -1163,7 +1091,6 @@ july &lt;-<span class="st"> </span>otsego[otsego<span class="op">$</span>month<s
 <span class="co"># Add the y-axis</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<p><br></p>
 </div>
 <div id="histograms" class="section level4">
 <h4>Histograms</h4>
@@ -1190,7 +1117,6 @@ july &lt;-<span class="st"> </span>otsego[otsego<span class="op">$</span>month<s
 <span class="co"># Add the x-axis</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">17</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-58-1.png" width="672" /></p>
-<p><br></p>
 <p>This sets us up to do the kind of plotting that is fundamental to describing research results, and that is germane to testing assumptions of statistical tests, all of which will follow the lunch break.</p>
 <p>Stay tuned!</p>
 <p><br></p>

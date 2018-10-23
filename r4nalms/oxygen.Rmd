@@ -1,7 +1,7 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
+
 
 ---
 title: "Dissolved oxygen isopleths"
@@ -17,7 +17,7 @@ otsego <- read.csv('physical.csv')
 otsego <- read.csv('data/physical.csv')
 ```
 
-<br>
+
 
 ### Date manipulation
 ```{r}
@@ -41,7 +41,7 @@ lim <- na.omit(otsego)
 lim$depth = -1 *lim$depth
 ```
 
-<br>
+
 
 ### Load the `akima` package:
 ```{r, eval=T, echo=FALSE, warning=FALSE, message=FALSE}
@@ -52,7 +52,7 @@ library(akima)
 library(akima, lib.loc = '/r_lib/akima')
 ```
 
-<br>
+
 
 ### Isopleth creation
 We interpolate `do_mgl` across `date` and `depth`. The interpolation we are using is basically just a bunch of linear regresions to predict `do_mgl` for values of `date` and `depth` across a regular grid. Then, we make the plot.

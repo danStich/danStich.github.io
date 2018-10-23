@@ -2,15 +2,13 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
-
 ---
 title: "Afternoon session"
 ---
 
-### Introduction to R for aquatic research: intermediate 
+<h3 top-margin:10px;> Introduction to R for aquatic research: intermediate </h3> 
 
-<br>
+<br bottom-margin:10px;>
 
 The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>.
 
@@ -26,4 +24,3 @@ This workshop assumes a basic understanding of elementary statistics, and some w
 
 <br>
  
-<br>

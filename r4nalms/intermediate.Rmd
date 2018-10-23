@@ -1,22 +1,17 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
-
 ---
 title: "Intermediate R"
 ---
 
 <img src="./images/roboshad.png" alt="">
 
-<br>
+<h2 top-margin:10px; > Introduction </h2> 
 
-## Introduction
 Once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and spend a little more time with data visualization tools.
 
 The plan for the afternoon is to introduce a subset of the **Secchi Dip-In data** to do some standard statistical analysis with individual data points from many lakes, and then switch back to data visualization tools to create some isopleths of physical parameters measured at multiple times and depths over time in a single lake using the Otsego Lake data from the morning session.
-
-<br>
 
 ## Data overview and management
 Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road.
@@ -32,8 +27,6 @@ ohio <- read.csv('ohio.csv', stringsAsFactors = FALSE)
 ohio <- read.csv('data/ohio.csv', stringsAsFactors = FALSE)
 ```
 
-<br>
-
 So, what are we working with here? Let's have a look.
 
 Remember from the morning session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the **structure** of your data using `str`.
@@ -44,15 +37,11 @@ str(ohio)
 
 <img src="images/ohio.png" alt="">
 
-<br>
-
 Now that we have an idea of what the data set looks like, let's take a little closer look. First, there are a couple of things that we can do that will clean up our code down the road a little bit. Let's have a quick look at our column names again.
 
 ```{r}
 names(ohio)
 ```
-
-<br>
 
 Most of these are nice and clean, but there are some things that happen when we read data into R from Excel files. One of the things that R does is to replace all spaces and special characters with periods (`.`). This can make things a little difficult to read when we write code. For example, the column that said `Secchi (m)` in our Excel spreadsheet now says `Secchi..m.`. This confusion is compounded by the fact that some programming languages and R functions rely on the `.` for special purposes.
 
@@ -73,8 +62,6 @@ names(ohio)[7] <- "Secchi"
 names(ohio)[11] <- "County"
 ```
 
-<br>
-
 Of course, we could always do this in one fell swoop:
 ```{r}
 # Replace names of both at once
@@ -83,11 +70,15 @@ Of course, we could always do this in one fell swoop:
 names(ohio)[c(7,11)] <- c('Secchi', 'County')
 ```
 
-<br>
+Have a quick look to make sure you are happy with the new names.
+```{r}
+# Print the names of the df
+# to the console so we can 
+# see them.
+names(ohio)
+```
 
 Notice that above, we need to put indices inside of a call to `c` (the concatenate function) because otherwise R tries to interpret these as row and column indices and the program will return an error.
-
-<br>
 
 ## Data exploration
 Now that we have had a quick look at our data, and we have made some changes for the sake of convenience, let's dig a little deeper. 
@@ -105,7 +96,6 @@ hist(ohio$Secchi,
 axis(side=1, pos=0)
 axis(side=2, las=2, pos=0)
 ```
- <br>
  
 From this plot alone, there are a few things that should be obvious. 
 
@@ -128,11 +118,7 @@ axis(side=1, pos=0)
 axis(side=2, las=2, pos=-1)
 ```
 
-<br>
-
 This looks pretty much the same as the one above, but the x-axis has changed. We should know, at this point that the distribution above is decidedly *not* normal.
-
-<br>
 
 ## Transformations
 We can handle both of these problems by log-transforming our data like this:
@@ -140,8 +126,6 @@ We can handle both of these problems by log-transforming our data like this:
 ```{r}
 ohio$logSecchi <- log(ohio$Secchi)
 ```
-
-<br>
 
 We can plot histogram of the residuals again to see what it did:
 ```{r}
@@ -157,11 +141,7 @@ axis(side=1, pos=0)
 axis(side=2, las=2, pos=-3.5)
 ```
 
-<br>
-
 Clear to see here that our residuals look much more like a normal distribution now.
-
-<br>
 
 What has this done to our data, though? Let's have a look:
 ```{r}
@@ -172,16 +152,12 @@ hist(ohio$logSecchi,
      xlab='Error',
      main='')
 axis(side=1, pos=0)
-axis(side=2, las=2, pos=-3.5)
+axis(side=2, las=2, pos=-4)
 ```
-
-<br>
 
 As you can see, our response variable is no longer constrained to be greater than zero on the log scale, so we don't have to worry about how that influences normality in our residuals anymore, and we won't get negative predictions from any of the statistical models that we make.
 
 Now we can move forward with some statistics!
-
-<br>
 
 ## Introductory statistics in R
 Let's start with the simple case of comparing `Secchi` between lakes and reservoirs. If you have a basic understanding of statistics, you might immediately realize that this is a comparison of a continuous variable between two groups. We have a couple of paths forward here. We could either set aside distributional assumpstions and use **non-parametric** methods, or we could assume some distribution for our error structure and proceed using **parametric** or **semi-parametric** statistics.
@@ -193,9 +169,6 @@ To get rid of the observations related to `Dam` for now, let's just drop that le
 ```{r}
 ohio <- ohio[ohio$GNIS.Class=="Lake" | ohio$GNIS.Class=="Reservoir", ]
 ```
-
-
-<br>
 
 ### Wilcoxon rank-sums test
 Let's start by fitting a quick Wilcoxon rank-sums test (aka Mann-Whitney U-test). While our options for non-parametric statistics are limited in complexity, they do not require distributional assumptions, and they tend to be more **conservative** than parametric tests, especially under limited sample sizes (not the case here).
@@ -209,47 +182,34 @@ wilcox.test(x=ohio$Secchi[ohio$GNIS.Class=='Lake'],
             y=ohio$Secchi[ohio$GNIS.Class=='Reservoir'])
 ```
 
-<br>
-
 Okay, if you have never done a Wilcox test by hand, or even in Excel, please appreciate how ridiculously easy this is. But, more importantly, what is going in the output here?
 
 First, we can see that we have conducted a Wilcoxon rank sum test. Second, R gives us a friendly reminder of what our data were that went into this. Next, we have the actual statistics for the test, including the test statistic `W` and the `p-value` for the comparison. With the handy-dandy `alternative hypothesis` that R provides us, we can conclude that since p < 0.05 we reject the null hypothesis that there is no difference between groups.
 
 While this is useful for making inference, we don't get a good sense of how the group means actually differed from this test (although we could graph it). For that, we need to start making some assumptions about our data and the shape of the error associated with those data.
 
-<br>
-
 ### Parametric statistics in R
 Parametric statistics rely on some basic **assumptions** about or data and the error structure around our observations. There are a number of fundamental assumptions that guide our forays into what is essentially "the rest of statistics". How we deal with these assumptions can range from doing nothing, to data transormation, to use of alternative model structures that allow us to shift or relax them.
 
 What are these assumptions? Glad you ask!
-
-<br>
 
 ### Assumptions of linear models
 Linear models you say? Yes. While we don't have time to go in the math behind this (ahem, **the beautiful, unifying math** behind this), suffice to say that most of the statistics we use in aquatic research are special cases, or generalizations, of the linear model. This includes things like t-tests, linear regression, ANOVA, ANCOVA, GLM, GLMM, GLS, GEE, and even multivariate statistics. The same holds true whether we are working with classical frequentist tools relying on least-squares estimation and maximum likelihood, or Bayesian methods using MCMC estimation. That means we always need to have these assumptions in mind.
 
 Briefly, these assumptions include:
 
-<br>
- 
   **1.** Independence of observations.
 
   **2.** Normality of residuals (with mean=0).
 
   **3.** Homogeneity of variances (i.e. homoscedasticity).
 
-<br>
-
 We will discuss quickly in the afternoon session, but a more detailed explanation of each can be found <a href="assumptions.html"> here </a>.
-
-<br>
 
 ### The t-test
 The t-test is our go-to tool for comparing two group means with parametric statistics. Even when we use analysis of variance (ANOVA) to test for differences in means between more than two groups, we still need to use t-tests to follow up and determine pair-wise differences (usually using a Tukey HSD or analagous test).
 
 Using a t-test in R is pretty straightforward. For this example, we will use a t-test to test the null hypothesis that there is no difference in `Secchi` between `Lake` and `Reservoir` classes. To do this, we use the function `t.test`.
-
 ```{r}
 # T-test to assess the null hypothesis
 # that there is no difference in Secchi
@@ -277,7 +237,6 @@ t.test(logSecchi~GNIS.Class, data=ohio, equal=FALSE)
 # We can specify this one using a formula.
 mod <- t.test(logSecchi~GNIS.Class, data=ohio, equal=FALSE)
 ```
-<br>
 
 Yay, more output!
 
@@ -327,7 +286,6 @@ boxplot(logSecchi~GNIS.Class,
 axis(side=2, las=2)
 ```
 
-
 ### Analysis of variance
 It is only a small step to move from a t-test to analysis of variance (ANOVA) conceptually, and this also requires only a small change to code in R. In theory, ANOVA is usually used to compare means of a continuous response when we have three or more groups. In practice, it is mathematically equivelant to a t-test if we have only two groups (the F-statistic is, in fact, just the sqaure of the t-statistic).
 
@@ -340,8 +298,6 @@ It can be more convenient to store the results of ANOVA in an object than just d
 # means between groups
 mod <- lm(logSecchi~GNIS.Class, data=ohio)
 ```
-
-<br>
 
 Now, before we get into looking at p-values here, it is **important** that **we diagnose the model first**.
 
@@ -385,8 +341,6 @@ This is the one we are most interested in for examining the normality of our res
 
 This plot is useful for identifying points that might be exerting undo influence on the intercept and slope of the line that we are trying to fit here. In general we are looking for values of Cook's D greater than $\frac{4}{(N-k-1)}$ where $N$ is sample size and $k$ is number of explanatory variables, if we are going to set a threshold: [check it out.](http://stats.stackexchange.com/questions/22161/how-to-read-cooks-distance-plots). Here, we see that most of our data are within this, but we might have a couple of data points worth looking into.
 
-<br>
-
 Now that we have verified that we are not in gross violation of our assumptions, let's have a look at the results.
 
 We can make an ANOVA summary table in R using the lowercase `anova` function to get overall factor significance.
@@ -396,7 +350,7 @@ We can make an ANOVA summary table in R using the lowercase `anova` function to 
 anova(mod)
 ```
 
-<br>
+
 
 Here, we can see that out factor `GNIS.Class` had a significant effect on `logSecchi`, and we can reject the null hypothesis that there is no difference between any of the group means.
 
@@ -406,38 +360,53 @@ To poke this a bit further, we can ask R to conduct a **multiple-comparisons** t
 TukeyHSD( aov(mod))
 ```
 
-<br>
+
 
 The output from this function produces a mean and CI of the difference for each pair-wise comparison, along with a p-value for the test. In this case, we see that we only have one comparison, but that `logSecchi` is significantly different between groups.
 
 From there, we can go on to make group-specific boxplots of the response to make the difference clearer for the reader. One of the cool things about doing this in R is that the code for the boxplot above wouldn't change, even if we had more than two groups in our data.
 
-<br>
 
 ### Linear Regression
 Non-parametric statistics, t-tests, and ANOVAs are great for testing hypotheses about differences between groups, but they don't really allow us to examine changes that occur along continual gradients. In our fields, those kinds of changes are often the things we are actually interested in. For example, we may wish to understand how temperature or secchi change with year to quantify long-term trends. To do this, we will rely on linear regression.
 
 Linear regression takes the familiar form of the equation for a line:
 
+
+
 $y = mx + b$
 
-Where $y$ is the dependent variable, $b$ is the y-intercept, $m$ is the slope of the line, and $x$ is the independent variable.
+
+
+Where $y$ is the dependent variable, $b$ is the y-intercept, $m$ is the slope of the line, and $X$ is the independent variable.
+
+
 
 In statistics, we write this as
 
-$y = \beta_{0} + \beta_{i} \cdot x_{i} + \epsilon$
 
-Where $y$ is the expected value of the dependent variable, $\beta_{0}$ is the y-intercept, $beta_{0}$ is the slope of the line, $x$ is the independent variable, and $\epsilon$ is our error (assumed to have a mean of zero so it can be dropped- that's why it is important to check).
+
+$y_{i} = \beta_{0} + \beta_{j} \cdot X_{j,i} + \epsilon_{i}$
+
+
+
+Where $y_{i}$ is the i^th^ value of the dependent variable, $\beta_{0}$ is the y-intercept, $\beta_{j}$ is the slope of the line, $X_{j,i}$ is an independent variable, and $\epsilon_{i}$ is our error (assumed to have a mean of zero so it can be dropped- that's why it is important to check).
 
 More generally, we could extend this to have an arbitrarily large number of slopes and independent variables (i.e., multiple regression):
 
-$y_{i,j} = \beta_{0} + \sum_{\substack{i=0}}^k (\beta_{i} \cdot X_{i}, ..., \beta_{k} \cdot X_{k}) + \epsilon$
 
-<br>
+
+$y_{i} = \beta_{0} + \sum_{\substack{j=0}}^k (\beta_{j} \cdot X_{j,i}, ..., \beta_{k} \cdot X_{k,i}) + \epsilon_{i}$
+
+
 
 What fun!
 
-How about fitting this kind of model in R? It will take us less time than to write out the equation. Here, we will fit a linear regression to test the effects of `Latitude` and `Year` on `logSecchi`. To do this, we can stick with the `lm` function. But first, we need to do some work to get `Year` into a format we can use.
+
+
+How about fitting this kind of model in R? It will take us less time than it did to write out the equations. 
+
+Here, we will fit a linear regression to test the effects of `Latitude` and `Year` on `logSecchi`. To do this, we can stick with the `lm` function. But first, we need to do some work to get `Year` into a format we can use.
 
 Right now, `Year` is stored as a character string. But, we need to have it as a numeric. We can convert this to a numeric easily:
 
@@ -447,7 +416,7 @@ ohio$Year <- as.numeric(ohio$Year, 'Year ')
 ```
 **Note**: You will get a warning letting you know that `NA` values have been introduced by `coersion`. This means that R found some values that it didn't know how to convert to `numeric`. In this case, it is obvservations that were reported as means across a range of dates (e.g., `1972-1975`). R will ignore these `NA` values in statistical analyses, and we have plenty of data from that range, so we will just move on with life for now.
 
-<br>
+
 
 Next, we will fit the model using the same `lm` function that we used for ANOVA above. The reason we can do this is that ANOVA, t-tests, and linear regressions are all just specific cases of the linear model.
 
@@ -466,7 +435,7 @@ par(mfrow=c(2,2))
 plot(lmod)
 ```
 
-<br>
+
 
 From our residual diagnostics, we see that we have some minor issues with the residuals and leverage exerted by what appear to be our our most extreme Secchi readings, but that overall things look pretty good. We do have some points that might warrant further investigation if we were going to submit this for journal publication. For now, let's move along with the demonstration.
 
@@ -475,7 +444,7 @@ We can get the regression coefficients for our model directly from a summary of 
 summary(lmod)
 ```
 
-<br>
+
 
 Here, `(Intercept)` is the y-intercept for our model, and ``r names(lmod$coefficients)[2]`` is our "slope". In this case, we see that our y-intercept is significantly different from zero (p = `r format(summary(lmod)$coefficients[,4][1], digits=2)`), and detected a significant effect of `Latitude` on `logSecchi` (p = `r format(summary(lmod)$coefficients[,4][2], digits=2)`). The interpretation of the latter is that the slope is not equal to zero. 
 
@@ -529,7 +498,7 @@ preds <- predict(object = lmod,
                  )
 ```
 
-<br>
+
 
 Let's have a look at what our predictions look like:
 ```{r}
@@ -538,7 +507,7 @@ Let's have a look at what our predictions look like:
 head(preds)
 ```
 
-<br>
+
 
 **Whoa**! Why are all of our predicted values negative? This is because they are on the log~e~ scale. We can get them back on the real scale by exponentiating. Here, we do this using the `apply` function.
 ```{r}
@@ -552,7 +521,7 @@ preds <- apply(X=preds, MARGIN=2, FUN=exp)
 head(preds)
 ```
 
-<br>
+
 
 These look a little more reasonable. Now, we can just make a plot of the relationship. We start with the raw data, and add our predictions from there.
 
@@ -576,13 +545,13 @@ lines(newd$Latitude, preds[,3], lwd=2, lty=2, col='red')
 ```
 
 
-<br> Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. **This should highlight the importance of communicating biological effect sizes**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result. This is why we chose to retain this analysis for the workshop, and is also the reason why you should ask to see this kind of result communicated as a responsible reviewer of peer-reviewed research. 
+ Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. **This should highlight the importance of communicating biological effect sizes**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result. This is why we chose to retain this analysis for the workshop, and is also the reason why you should ask to see this kind of result communicated as a responsible reviewer of peer-reviewed research. 
 
-<br>
+
 
 [gets off stump]
 
-<br>
+
 
 For a more exciting example, you can have a look at <a href='thermoclines.html'> this </a> thermocline analysis. We may swing back to this if we have time.
 
@@ -594,7 +563,7 @@ Next, let's fit a model for `Year`.
 ymod <- lm(logSecchi~Year, data=ohio)
 ```
 
-<br>
+
 
 We can summarize the model again like so:
 
@@ -602,7 +571,7 @@ We can summarize the model again like so:
 summary(ymod)
 ```
 
-<br>
+
 
 We see that our intercept is not significantly different from zero (p = `r summary(ymod)$coefficients[,4][1]`), and we failed to detect a significant effect of `Year` on `logSecchi` (p = `r summary(ymod)$coefficients[,4][2]`). 
 
@@ -610,11 +579,11 @@ We can also see that the R^2^ indicates we have explained virtually none of the 
 
 **But**, what if there was some really cool way that we could look at differences in the effect of `Year` on `logSecchi` between `Lake` and `Reservoir`?
 
-<br>
+
 
 Another fantastic question!
 
-<br>
+
 
 ### Analysis of covariance 
 The final statistical analysis that we will discuss today is the analysis of covariance, or ANCOVA. The ANCOVA (aka general linear model) is the most general form of the class of linear models to which the t-test, ANOVA, and linear regression all belong.
@@ -650,7 +619,7 @@ mainmod <- lm(formula=logSecchi~GNIS.Class + Year,
 Anova(mainmod)
 ```
 
-<br>
+
 
 Next, we can modify this to include an interaction term. At this point, the change is trivial, whether or not you feel like you know what you are doing at this point.
 
@@ -665,7 +634,7 @@ intmod <- lm(formula=logSecchi~GNIS.Class*Year,
 Anova(intmod)
 ```
 
-<br>
+
 
 In this case, we can see that the interaction between `GNIS.Class` and `Year` is significant, meaning that there are differences in the relationship between `logSecchi` and `Year` depending on what kind of waterbody we are looking at.
 
@@ -675,11 +644,11 @@ If we dig a little deeper into the model, we can see what these relationships lo
 summary(intmod)
 ```
 
-<br>
+
 
 This model summary shows us that, in general, `Reservoir` appears to have lower Secchi depths than `Lake` (Intercept). We can also see that there was a significant decrease in Secchi depth across `Year` because the coefficient for that variable is **negative**, and the 95% CI for the parameter (calculated as 1.96 * SE) does not overlap zero. But that decrease was significantly less in `Reservoir` because of the positive change in slope from `r round(summary(intmod)$coefficients[,1][3],3)` to `r round(summary(intmod)$coefficients[,1][3],3)` + `r round(summary(intmod)$coefficients[,1][4],3)` = `r round ((summary(intmod)$coefficients[,1][3] + summary(intmod)$coefficients[,1][4]),3)`. If we derived the 95% CI around this parameter estimate by propogating errors, we would find that it overlaps zero significantly, and would thus conclude that we failed to detect an effect of `Year` on `logSecchi` for `Reservoir`.
 
-<br>
+
 
 ## Response surfaces (isopleths)
 When we have more than one continuous variable in a regression model, it can be helpful to think about **surfaces** instead of **lines**. While it sounds difficult conceptually, these are actually fairly common tools in our everyday lives. Elevation contours are one such example of a response surface (think `formula=elevation~Latitude*Longitude` in the simplest sense).
@@ -700,7 +669,7 @@ otsego <- read.csv('physical.csv')
 otsego <- read.csv('data/physical.csv')
 ```
 
-<br>
+
 One of the first things that we are going to have to deal with is the formatting of dates in this data set. Right now, R sees the column `date` as a **factor** with 539 **levels**. To do this, we will need to first convert `date` to `character`, and then to `Date` by specifying the format.
 
 Converting from factor/character to Date is probably one of the most frustrating aspects of working in R early on, so take your time and make sure you understand what this code is doing.
@@ -720,20 +689,16 @@ otsego$date <- as.Date(
   )
 ```
 
-<br>
+
 
 Next, we *could* optionally subset the data, retaining only those observations for a given year. But, we are better off just using all of the data, and then zooming in on our contour plot by setting the x-axis (date) to the time period we desire (see below).
 
-<br>
- 
 Then, we will omit any of the `NA` values in our data to make the next part a little easier to do.
 ```{r}
 # Remove NA values to make life easier
 lim <- na.omit(otsego)
 ```
 
-<br>
- 
 Finally, we just do a little math trick to reverse the order of depths for interpolation and plotting in order to make the surface of the water show up at the top of our graphs. We will undo this when we label the graph.
 ```{r}
 # Multiply depth column by -1 so depth will
@@ -741,8 +706,8 @@ Finally, we just do a little math trick to reverse the order of depths for inter
 lim$depth = -1 *lim$depth
 ```
 
-<br>
- 
+
+
 Now, we are ready to do the math behind the isopleth and plot it.
 
 To do the math, we need to load the `akima` package:
@@ -771,8 +736,6 @@ im = with(plotter,
                  ny=length(unique(lim$depth)))
           )
 ```
-
-<br>
 
 To wrap it all up, we can make the plot. This looks like a lot of code, but it is mostly comments. For this plot, we will zoom in on year 2017 by limiting the range of the x-axis.
 ```{r}
@@ -857,15 +820,11 @@ filled.contour(
 )             
 ```
 
-<br>
-
 One of the things we have to be careful about with these graphs is that they are models, and if we are missing data at critical time periods, then our models are only as good as our data allow. This can be seen in the plot above. There is a gap in info from late November 2017 when the lake starts to turnover and conditions got rough until early January, when safe ice had set up for winter sampling. The result, in this case, is the apparent loss of the 4 C layer of water in the lake.
-
-<br>
 
 Have a go at these isopleths again, substituting DO or pH. You should find that the only code that needs to be changed is the variable used for `z` when you create the `plotter` data above, and the title of the plot.
 
 If you are struggling, have a look at these cool isopleths for <a href="pH.html"> pH </a> and <a href="oxygen.html"> dissolved oxygen </a> to get a better idea of the workflow.
 
-<br>
+
 

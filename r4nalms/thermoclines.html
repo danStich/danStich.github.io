@@ -276,22 +276,18 @@ pre code, pre, code {
 }
 
 </style>
-<p><br></p>
 <p>Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.</p>
-<p><br></p>
 <div id="package-load" class="section level3">
 <h3>Package load</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load necessary packages</span>
 <span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)
 <span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)
 <span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)</code></pre></div>
-<p><br></p>
 </div>
 <div id="data-read" class="section level3">
 <h3>Data read</h3>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data</span>
 limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</code></pre></div>
-<p><br></p>
 </div>
 <div id="data-manipulation" class="section level3">
 <h3>Data manipulation</h3>
@@ -308,7 +304,6 @@ limnos &lt;-<span class="st"> </span><span class="kw">na.omit</span>(limnos)
 <span class="co"># so each date corresponds to a df that is an</span>
 <span class="co"># element of the list</span>
 limlist &lt;-<span class="st"> </span><span class="kw">split</span>(limnos, <span class="kw">list</span>(limnos<span class="op">$</span>date))</code></pre></div>
-<p><br></p>
 </div>
 <div id="calculate-thermocline-depth" class="section level3">
 <h3>Calculate thermocline depth</h3>
@@ -325,16 +320,13 @@ ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[,<span class="dv">6</span>], x[,<span class="dv">5</span>])
   <span class="kw">return</span>(x)
 }</code></pre></div>
-<p><br></p>
 <p>Now we can use the function we made to apply across all elements of our list.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a test object that contains the </span>
 test &lt;-<span class="st"> </span><span class="kw">lapply</span>(limlist, ltd)</code></pre></div>
-<p><br></p>
 <p>Once we’ve done that, we can put everything back into a single dataframe.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Stack all of the dfs in the list into</span>
 <span class="co"># a single, large df</span>
 out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</code></pre></div>
-<p><br></p>
 </div>
 <div id="plot-changes-in-thermocline-depth" class="section level3">
 <h3>Plot changes in thermocline depth</h3>
@@ -345,7 +337,6 @@ out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</
 <span class="co"># a GAM for data viz.</span>
 <span class="co"># First, subset the data</span>
 out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span>,]</code></pre></div>
-<p><br></p>
 <p>Next, fit the plot. Note the differences between the <code>ggplot2</code> code and the code we have used thus far for plotting. You can do a lot more out of the box with <code>ggplot</code> graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now, plot it with ggplot2 functions</span>
 plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(out1, <span class="kw">aes</span>(year, thermo)) <span class="op">+</span>
