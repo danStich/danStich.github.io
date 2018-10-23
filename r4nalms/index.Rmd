@@ -1,13 +1,11 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
-
 ---
 title: "Introduction to R for Aquatic Research"
 ---
 
-<h2 top-margin:10px> 2018 NALMS International Symposium </h2> 
+<h3 top-margin:10px;> 2018 NALMS International Symposium </h3> 
 
 <img src="./images/graphs.png" alt="">
 

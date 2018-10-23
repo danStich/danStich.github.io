@@ -380,8 +380,9 @@ a</code></pre></div>
 </div>
 <div id="data-structures-and-manipulation" class="section level2">
 <h2>Data structures and manipulation</h2>
-<div id="vectors" class="section level3">
-<h3>Vectors</h3>
+<h3 top-margin:10px;>
+Vectors
+</h3>
 <p>Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of functionality outside this original scope. R is what is known as a “high-level” or “interpreted” programming language. This means the pieces that make it up are a little more intuitive to the average user than most low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. This means that R has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language.</p>
 <p>Part of this flexibility comes from the fact that R is also a “vectorized” language. Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
 <p>Let’s take a look at how this works and why it matters. Here, we have defined <code>a</code> as a variable with the value of <code>1</code>…or have we?</p>
@@ -524,7 +525,6 @@ e                            <span class="co"># Print to console</span></code></
 <pre><code>## [1] 1 2 3 4 5</code></pre>
 <p>And we can do lots of other nifty things like this.</p>
 </div>
-</div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
 <p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
@@ -555,7 +555,7 @@ e                            <span class="co"># Print to console</span></code></
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat)    </code></pre></div>
 <pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
-<p>See how no. of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
+<p>See how number of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)
 <span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)
 mat</code></pre></div>
