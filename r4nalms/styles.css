@@ -33,5 +33,9 @@ img {
 .content {
     width: 75%;
 }
+
+body{
+  font-size: 14pt;
+}
 </style>
 </head>

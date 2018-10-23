@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Thermocline analysis</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+<link rel="manifest" href="favicon/site.webmanifest">
+<link rel="mask-icon" href="favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">R4NALMS</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="software.html">Software needs</a>
+</li>
+<li>
+  <a href="morning.html">Morning session</a>
+</li>
+<li>
+  <a href="afternoon.html">Afternoon session</a>
+</li>
+<li>
+  <a href="instructors.html">Instructors</a>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Thermocline analysis</h1>
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<p>Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.</p>
+<p><br></p>
+<div id="package-load" class="section level3">
+<h3>Package load</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load necessary packages</span>
+<span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)
+<span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)
+<span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)</code></pre></div>
+<p><br></p>
+</div>
+<div id="data-read" class="section level3">
+<h3>Data read</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data</span>
+limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+</div>
+<div id="data-manipulation" class="section level3">
+<h3>Data manipulation</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data formatting &amp; extraction</span>
+limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)
+limnos<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(limnos<span class="op">$</span>date)
+limnos<span class="op">$</span>day &lt;-<span class="st">  </span><span class="kw">yday</span>(limnos<span class="op">$</span>date)
+limnos<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">month</span>(limnos<span class="op">$</span>date)
+
+<span class="co"># Remove rows with NA to make life easier for now</span>
+limnos &lt;-<span class="st"> </span><span class="kw">na.omit</span>(limnos)
+
+<span class="co"># Create a list of dataframes split by date</span>
+<span class="co"># so each date corresponds to a df that is an</span>
+<span class="co"># element of the list</span>
+limlist &lt;-<span class="st"> </span><span class="kw">split</span>(limnos, <span class="kw">list</span>(limnos<span class="op">$</span>date))</code></pre></div>
+<p><br></p>
+</div>
+<div id="calculate-thermocline-depth" class="section level3">
+<h3>Calculate thermocline depth</h3>
+<p>If you just have a single dataframe, you can pass the appropriate columns straight to the <code>thermo.depth</code> function in <code>rLakeAnalyzer</code>. But, we are looking to calculate thermocline depth for 114 different datasets. To make this easier, we pack them in a list (above) and then use <code>lapply</code> to apply the <code>thermo.depth</code> function to each element of the list. But, the <code>thermo.depth</code> function was not designed for this specifically, so we will first write a function that can be applied to a list, with a short name.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a function to calculate thermocline</span>
+<span class="co"># depth that can be applied to a list as long</span>
+<span class="co"># as depth is in the 5th column and temperature</span>
+<span class="co"># is in the 6th column of each list element (matrix</span>
+<span class="co"># or dataframe). This function creates a new</span>
+<span class="co"># variable (column) called &#39;thermo&#39; in each df,</span>
+<span class="co"># and returns the original object modified in </span>
+<span class="co"># place.</span>
+ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[,<span class="dv">6</span>], x[,<span class="dv">5</span>])
+  <span class="kw">return</span>(x)
+}</code></pre></div>
+<p><br></p>
+<p>Now we can use the function we made to apply across all elements of our list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a test object that contains the </span>
+test &lt;-<span class="st"> </span><span class="kw">lapply</span>(limlist, ltd)</code></pre></div>
+<p><br></p>
+<p>Once we’ve done that, we can put everything back into a single dataframe.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Stack all of the dfs in the list into</span>
+<span class="co"># a single, large df</span>
+out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</code></pre></div>
+<p><br></p>
+</div>
+<div id="plot-changes-in-thermocline-depth" class="section level3">
+<h3>Plot changes in thermocline depth</h3>
+<p>Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the <code>ggplot2</code> library.</p>
+<p>First, subset the data so we are just working with July data.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a plot of July thermocline depth </span>
+<span class="co"># across years, and include predictions from</span>
+<span class="co"># a GAM for data viz.</span>
+<span class="co"># First, subset the data</span>
+out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span>,]</code></pre></div>
+<p><br></p>
+<p>Next, fit the plot. Note the differences between the <code>ggplot2</code> code and the code we have used thus far for plotting. You can do a lot more out of the box with <code>ggplot</code> graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now, plot it with ggplot2 functions</span>
+plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(out1, <span class="kw">aes</span>(year, thermo)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">pch=</span><span class="dv">21</span>,<span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;gam&#39;</span>, <span class="dt">level=</span>.<span class="dv">999</span>,
+              <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;tomato&#39;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Year&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">2011</span>, <span class="dv">2017</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;July thermocline depth (m)&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">5</span>,<span class="dv">10</span>)
+plot<span class="op">+</span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">margin</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>))</code></pre></div>
+<p><img src="thermoclines_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2018 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

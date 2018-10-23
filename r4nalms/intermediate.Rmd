@@ -42,7 +42,7 @@ Remember from the morning session that it might be useful to understand how R se
 str(ohio)
 ```
 
-<img src="./images/ohio.png" alt="">
+<img src="images/ohio.png" alt="">
 
 <br>
 
@@ -166,7 +166,7 @@ Clear to see here that our residuals look much more like a normal distribution n
 What has this done to our data, though? Let's have a look:
 ```{r}
 # Make the histogram.
-hist(ohio$logSecchi-mean(ohio$logSecchi),
+hist(ohio$logSecchi,
      col='gray87', 
      yaxt='n', xaxt='n',
      xlab='Error',
@@ -224,8 +224,10 @@ Parametric statistics rely on some basic **assumptions** about or data and the e
 
 What are these assumptions? Glad you ask!
 
-#### Assumptions of linear models
-Linear models you say? Yes. While we don't have time to go in the math here, suffice to say that most of the statistics we use in aquatic research are special cases, or generalizations, of the linear model. This includes things like t-tests, linear regression, ANOVA, ANCOVA, GLM, GLMM, GLS, GEE, and even multivariate statistics. The same holds true whether we are working with classical frequentist tools relying on least-squares estimation and maximum likelihood, or Bayesian methods using MCMC estimation. That means we always need to have these assumptions in mind.
+<br>
+
+### Assumptions of linear models
+Linear models you say? Yes. While we don't have time to go in the math behind this (ahem, **the beautiful, unifying math** behind this), suffice to say that most of the statistics we use in aquatic research are special cases, or generalizations, of the linear model. This includes things like t-tests, linear regression, ANOVA, ANCOVA, GLM, GLMM, GLS, GEE, and even multivariate statistics. The same holds true whether we are working with classical frequentist tools relying on least-squares estimation and maximum likelihood, or Bayesian methods using MCMC estimation. That means we always need to have these assumptions in mind.
 
 Briefly, these assumptions include:
 
@@ -574,7 +576,7 @@ lines(newd$Latitude, preds[,3], lwd=2, lty=2, col='red')
 ```
 
 
-<br> Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. **This should highlight the importance of communicating biological effect sizes**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result. This is why we chose to retain this analysis for the workshop, and is also the reason why you should ask to see this kind of result communicated as a responsible reviewer of peer-reviewed research.
+<br> Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. **This should highlight the importance of communicating biological effect sizes**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result. This is why we chose to retain this analysis for the workshop, and is also the reason why you should ask to see this kind of result communicated as a responsible reviewer of peer-reviewed research. 
 
 <br>
 
@@ -582,7 +584,10 @@ lines(newd$Latitude, preds[,3], lwd=2, lty=2, col='red')
 
 <br>
 
-Now, let's fit a model for `Year`.
+For a more exciting example, you can have a look at <a href='thermoclines.html'> this </a> thermocline analysis. We may swing back to this if we have time.
+
+
+Next, let's fit a model for `Year`.
 ```{r}
 # Fit a linear regression model to test
 # effect of `year` on `logSecchi`
@@ -630,7 +635,7 @@ mainmod <- lm(formula=logSecchi~GNIS.Class + Year,
               data=ohio)
 
 # Take a look at the summary of the model
-library(car, lib.loc = 'r_libs/car')
+library(car, lib.loc = 'r_libs/')
 Anova(mainmod)
 ```
 
@@ -746,7 +751,7 @@ library(akima)
 ```
 
 ```{r, eval=FALSE}
-library(akima, lib.loc = '/r_lib/akima')
+library(akima, lib.loc = 'r_libs/')
 ```
 
 Next, we interpolate `temp` across `date` and `depth`. The interpolation we are using is basically just a bunch of linear regresions to predict `temp` for values of `date` and `temp` across a regular grid.

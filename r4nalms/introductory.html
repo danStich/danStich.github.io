@@ -317,7 +317,7 @@ pre code, pre, code {
 <p>Type the following line of code into a blank source file, and run it.</p>
 <blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add 1 and 1 together</span>
-<span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span></code></pre></div>
+<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 </blockquote>
 <p><br></p>
@@ -336,7 +336,7 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example (run the following lines):</span>
 a =<span class="st"> </span><span class="dv">1</span>
 A =<span class="st"> </span><span class="dv">2</span>
-a ==<span class="st"> </span>A</code></pre></div>
+a <span class="op">==</span><span class="st"> </span>A</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p><br></p>
 <p>We have few things going on above.</p>
@@ -367,16 +367,16 @@ a</code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p><br></p>
 <p>Some things can be expressed in multiple ways. For example, both ‘T’ and ‘TRUE’ can be used to indicate a logical value of TRUE.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T ==<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p><br></p>
 <p>Some names are reserved or pre-defined. Did you notice that R already knew what T and TRUE were without us defining them? These reserved operators, and built in <strong>functions</strong> are the building blocks of the R language.</p>
 <p>For example,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in, if, else, for, function()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
 <p>…and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.</p>
 <p><br></p>
 <p>Some <strong>symbols</strong> are also reserved for special use as operators, like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">+,-, *, /, % %, &amp;, |, &lt;, &gt;, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">+</span>,<span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
 <p>…and a bunch of others.</p>
 <p><br></p>
 </div>
@@ -475,7 +475,7 @@ b                             </code></pre></div>
 <h4>Logical vectors</h4>
 <p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span>
-c &lt;-<span class="st">  </span>a ==<span class="st"> </span>b 
+c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b 
 c            </code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(c)       </code></pre></div>
@@ -486,9 +486,9 @@ c            </code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">!<span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a ==<span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></code></pre></div>
 <pre><code>## [1] a b c d e
@@ -511,22 +511,22 @@ f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
 </blockquote>
 <p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
 <p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b==<span class="st">&#39;c&#39;</span>] </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] </code></pre></div>
 <pre><code>## [1] c
 ## Levels: a b c d e</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b==<span class="st">&#39;c&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p><br></p>
 <p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a *<span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
 <pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
 <pre><code>## [1] 101 102 103 104 105</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a -<span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
 <pre><code>## [1] -2 -1  0  1  2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a /<span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
 <pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a ^<span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
 <pre><code>## [1]  1  4  9 16 25</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></code></pre></div>
 <pre><code>## [1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
@@ -606,7 +606,7 @@ mat</code></pre></div>
 ##  - attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..$ : chr [1:4] &quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;matrix&quot;
 ##   ..$ : chr [1:3] &quot;first&quot; &quot;second&quot; &quot;third&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat*<span class="dv">2</span> </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat<span class="op">*</span><span class="dv">2</span> </code></pre></div>
 <pre><code>##        first second third
 ## This       2     10    18
 ## is         4     12    20
@@ -628,7 +628,7 @@ mat</code></pre></div>
 a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
   
 <span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
-b =<span class="st"> </span>a^<span class="dv">2</span>                           
+b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
 
 <span class="co"># Replicates values in object a # of times  </span>
 c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
@@ -695,7 +695,7 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 ## 8        4.0   16.00      d
 ## 9        4.5   20.25      a
 ## 10       5.0   25.00      b</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e$Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e$Increment)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
 e <span class="co"># We can make new columns in data frames like this!</span></code></pre></div>
 <pre><code>##    Increment Squared Letter      Sqrt
 ## 1        0.5    0.25      a 0.7071068
@@ -732,51 +732,56 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>## [1] &quot;a&quot;      &quot;A&quot;      &quot;b&quot;      &quot;c&quot;      &quot;d&quot;      &quot;e&quot;      &quot;f&quot;      &quot;mat&quot;   
-## [9] &quot;otsego&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;           &quot;A&quot;           &quot;b&quot;           &quot;c&quot;           &quot;cToF&quot;       
+##  [6] &quot;d&quot;           &quot;e&quot;           &quot;f&quot;           &quot;im&quot;          &quot;intmod&quot;     
+## [11] &quot;july&quot;        &quot;lim&quot;         &quot;limlist&quot;     &quot;limnos&quot;      &quot;lmod&quot;       
+## [16] &quot;ltd&quot;         &quot;mainmod&quot;     &quot;mat&quot;         &quot;mod&quot;         &quot;myList&quot;     
+## [21] &quot;myMean&quot;      &quot;newd&quot;        &quot;ohio&quot;        &quot;otsego&quot;      &quot;out&quot;        
+## [26] &quot;out1&quot;        &quot;plot&quot;        &quot;plotter&quot;     &quot;preds&quot;       &quot;summarydata&quot;
+## [31] &quot;test&quot;        &quot;ymod&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
-<pre><code>##          lake      date month year depth  temp   pH do_mgl  cond do_sat
-## 1 Otsego Lake 4/28/2017     4 2017   0.1  8.82 7.90  11.69 0.307  100.0
-## 2 Otsego Lake 5/17/2017     5 2017   0.1 10.15 7.76  11.48 0.308  101.1
-## 3 Otsego Lake  6/1/2017     6 2017   0.1 14.90 8.10  10.41 0.315  103.1
-## 4 Otsego Lake 6/14/2017     6 2017   0.1 20.91 8.32   9.85 0.312  110.5
-## 5 Otsego Lake 6/29/2017     6 2017   0.1 20.57 8.45   9.14 0.303  101.8
-## 6 Otsego Lake 7/13/2017     7 2017   0.1 23.13 8.39   8.66 0.310     NA</code></pre>
+<pre><code>##          lake      date month year depth temp   pH do_mgl  cond do_sat
+## 1 Otsego Lake 1/29/1988     1 1988   0.1 0.39 7.88   12.7 0.300     NA
+## 2 Otsego Lake 1/29/1988     1 1988   2.0 1.43 7.88   12.2 0.297     NA
+## 3 Otsego Lake 1/29/1988     1 1988   4.0 1.47 7.89   12.2 0.301     NA
+## 4 Otsego Lake 1/29/1988     1 1988   6.0 1.49 7.89   12.1 0.301     NA
+## 5 Otsego Lake 1/29/1988     1 1988   8.0 1.59 7.86   11.7 0.302     NA
+## 6 Otsego Lake 1/29/1988     1 1988  10.0 1.61 7.86   11.8 0.308     NA</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(otsego)    <span class="co"># How many rows does it have?</span></code></pre></div>
-<pre><code>## [1] 10006</code></pre>
+<pre><code>## [1] 10005</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(otsego)    <span class="co"># How many columns?</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(otsego)   <span class="co"># What are the column names?</span></code></pre></div>
 <pre><code>##  [1] &quot;lake&quot;   &quot;date&quot;   &quot;month&quot;  &quot;year&quot;   &quot;depth&quot;  &quot;temp&quot;   &quot;pH&quot;    
 ##  [8] &quot;do_mgl&quot; &quot;cond&quot;   &quot;do_sat&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(otsego)     <span class="co"># Have a look at the data structure</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    10006 obs. of  10 variables:
+<pre><code>## &#39;data.frame&#39;:    10005 obs. of  10 variables:
 ##  $ lake  : Factor w/ 1 level &quot;Otsego Lake&quot;: 1 1 1 1 1 1 1 1 1 1 ...
-##  $ date  : Factor w/ 539 levels &quot;10/10/1995&quot;,&quot;10/10/2017&quot;,..: 200 218 268 272 309 341 387 427 536 518 ...
-##  $ month : int  4 5 6 6 6 7 7 8 9 9 ...
-##  $ year  : int  2017 2017 2017 2017 2017 2017 2017 2017 2017 2017 ...
-##  $ depth : num  0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 0.1 ...
-##  $ temp  : num  8.82 10.15 14.9 20.91 20.57 ...
-##  $ pH    : num  7.9 7.76 8.1 8.32 8.45 8.39 8.17 8.38 7.94 8.16 ...
-##  $ do_mgl: num  11.69 11.48 10.41 9.85 9.14 ...
-##  $ cond  : num  0.307 0.308 0.315 0.312 0.303 0.31 0.3 0.292 0.282 0.285 ...
-##  $ do_sat: num  100 101 103 110 102 ...</code></pre>
+##  $ date  : Factor w/ 539 levels &quot;1/10/1995&quot;,&quot;1/10/1996&quot;,..: 9 9 9 9 9 9 9 9 9 9 ...
+##  $ month : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ year  : int  1988 1988 1988 1988 1988 1988 1988 1988 1988 1988 ...
+##  $ depth : num  0.1 2 4 6 8 10 12 14 16 18 ...
+##  $ temp  : num  0.39 1.43 1.47 1.49 1.59 1.61 1.66 1.75 1.79 1.86 ...
+##  $ pH    : num  7.88 7.88 7.89 7.89 7.86 7.86 7.85 7.86 7.84 7.82 ...
+##  $ do_mgl: num  12.7 12.2 12.2 12.1 11.7 11.8 11.7 11.8 11.5 11.3 ...
+##  $ cond  : num  0.3 0.297 0.301 0.301 0.302 0.308 0.309 0.309 0.308 0.309 ...
+##  $ do_sat: num  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(otsego) <span class="co"># Summarize the variables in the dataframe</span></code></pre></div>
 <pre><code>##           lake               date          month             year     
-##  Otsego Lake:10006   8/17/2006 :  24   Min.   : 1.000   Min.   :1988  
+##  Otsego Lake:10005   8/17/2006 :  24   Min.   : 1.000   Min.   :1988  
 ##                      10/18/1994:  20   1st Qu.: 5.000   1st Qu.:1995  
 ##                      10/3/1994 :  20   Median : 7.000   Median :2001  
 ##                      11/6/1995 :  20   Mean   : 7.268   Mean   :2002  
 ##                      12/13/1994:  20   3rd Qu.: 9.000   3rd Qu.:2010  
 ##                      6/16/1994 :  20   Max.   :12.000   Max.   :2018  
-##                      (Other)   :9882                                  
+##                      (Other)   :9881                                  
 ##      depth            temp              pH             do_mgl      
 ##  Min.   : 0.10   Min.   : 0.000   Min.   : 6.080   Min.   : 0.410  
 ##  1st Qu.: 8.00   1st Qu.: 4.660   1st Qu.: 7.590   1st Qu.: 7.950  
 ##  Median :18.00   Median : 6.110   Median : 7.860   Median : 9.450  
-##  Mean   :21.95   Mean   : 8.263   Mean   : 7.869   Mean   : 9.121  
+##  Mean   :21.95   Mean   : 8.261   Mean   : 7.869   Mean   : 9.121  
 ##  3rd Qu.:40.00   3rd Qu.: 9.710   3rd Qu.: 8.130   3rd Qu.:10.960  
-##  Max.   :50.00   Max.   :26.120   Max.   :11.020   Max.   :16.440  
+##  Max.   :50.00   Max.   :25.970   Max.   :11.020   Max.   :16.440  
 ##  NA&#39;s   :1                        NA&#39;s   :504      NA&#39;s   :40      
 ##       cond            do_sat       
 ##  Min.   :0.1430   Min.   :   0.30  
@@ -785,41 +790,41 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 ##  Mean   :0.2804   Mean   :  86.51  
 ##  3rd Qu.:0.3020   3rd Qu.:  97.00  
 ##  Max.   :0.3770   Max.   :1145.90  
-##  NA&#39;s   :251      NA&#39;s   :7801</code></pre>
+##  NA&#39;s   :251      NA&#39;s   :7800</code></pre>
 <p><br></p>
 <p>Now let’s look at some specific things.</p>
 <p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="dv">4</span>]</code></pre></div>
-<pre><code>## [1] 2017</code></pre>
+<pre><code>## [1] 1988</code></pre>
 <p><br></p>
 <p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">otsego[<span class="dv">12</span>, <span class="st">&#39;depth&#39;</span>]</code></pre></div>
-<pre><code>## [1] 0.1</code></pre>
+<pre><code>## [1] 25</code></pre>
 <p><br> More realistically, we might want to know the avereage temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( otsego$temp[otsego$depth==<span class="fl">10.0</span>] , <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>( otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="fl">10.0</span>] , <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</code></pre></div>
 <pre><code>## [1] 10.49944</code></pre>
 <p><br></p>
 <p>Wow…heavy stuff, but this is how the wheels turn. Let’s take another step back and break this down even further.</p>
 <p>In the example above, we are using a <strong>function</strong> called <code>mean</code> to do stuff to an object that is a subset of <code>otsego$temp</code>. The way these functions do things is critical to working in R.</p>
 <p>For example, we could write a new function to calculate the mean if we wanted to,… right? Here, we define a function called <code>myMean</code> that takes one required <strong>argument</strong>. Each required argument can take on user-specified <strong>values</strong>. In this case, that value must be a vector that is or can be coerced into <code>numeric</code> format. Here, we also add a chunk of code to deal with <code>NA</code> values.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a new function to calculate mean</span>
-myMean &lt;-<span class="st"> </span>function(x){
+myMean &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   <span class="co"># If any of the observations are NA</span>
-  if(<span class="kw">any</span>(<span class="kw">is.na</span>(x))){
+  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">is.na</span>(x))){
     <span class="co"># Then exclude those values of </span>
     <span class="co"># x from calculation</span>
-    x_bar =<span class="st"> </span><span class="kw">sum</span>(x[!<span class="kw">is.na</span>(x)])/<span class="kw">length</span>(x[!<span class="kw">is.na</span>(x)])
+    x_bar =<span class="st"> </span><span class="kw">sum</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])<span class="op">/</span><span class="kw">length</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])
       <span class="co"># Otherwise</span>
-      } else {
+      } <span class="cf">else</span> {
         <span class="co"># Calculate from all values of x</span>
-        x_bar =<span class="st"> </span><span class="kw">sum</span>(x)/<span class="kw">length</span>(x)
+        x_bar =<span class="st"> </span><span class="kw">sum</span>(x)<span class="op">/</span><span class="kw">length</span>(x)
       }
   
   <span class="kw">return</span>(x_bar)
   }</code></pre></div>
 <p><br></p>
 <p>Just to make sure it works right, let’s go ahead and test it out.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">myMean</span>(otsego$temp[otsego$depth==<span class="dv">10</span>])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">test &lt;-<span class="st"> </span><span class="kw">myMean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="dv">10</span>])
 test</code></pre></div>
 <pre><code>## [1] 10.49944</code></pre>
 <p><br></p>
@@ -828,19 +833,19 @@ test</code></pre></div>
 <p>Now, what if we wanted to do something more useful, like convert temperature from celcius to Farenheit? We can apply the same idea here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a function to convert temperature</span>
 <span class="co"># in celcius to temperature in farenheit:</span>
-cToF &lt;-<span class="st"> </span>function(cels){
-  faren &lt;-<span class="st"> </span>cels*(<span class="dv">9</span>/<span class="dv">5</span>) +<span class="st"> </span><span class="dv">32</span>
+cToF &lt;-<span class="st"> </span><span class="cf">function</span>(cels){
+  faren &lt;-<span class="st"> </span>cels<span class="op">*</span>(<span class="dv">9</span><span class="op">/</span><span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">32</span>
   <span class="kw">return</span>(faren)
 }
 
 <span class="co"># Test the function out.</span>
 <span class="co"># Here, we create a new variable in the</span>
 <span class="co"># otsego dataframe to hold the result</span>
-otsego$tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego$temp)
+otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego<span class="op">$</span>temp)
 
 <span class="co"># Look at the first few elements</span>
-<span class="kw">head</span>(otsego$tempF)</code></pre></div>
-<pre><code>## [1] 47.876 50.270 58.820 69.638 69.026 73.634</code></pre>
+<span class="kw">head</span>(otsego<span class="op">$</span>tempF)</code></pre></div>
+<pre><code>## [1] 32.702 34.574 34.646 34.682 34.862 34.898</code></pre>
 <p><br></p>
 <p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Farenheit scale?).</p>
 <p>There are a couple of ways to do this.</p>
@@ -963,7 +968,7 @@ myList                                   <span class="co"># See how the names wo
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">myList[[<span class="dv">2</span>]][<span class="dv">5</span>]                           <span class="co"># But can still get into each object</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Play around with the numbers to see what they do!</span>
-myList$c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
+myList<span class="op">$</span>c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
 <p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.</p>
 <p><br></p>
@@ -979,28 +984,28 @@ myList$c[<span class="dv">1</span>]                              <span class="co
 <p>Most data summaries are handled effectively using a limited number of R functions applied in different ways. A fairly small number of functions can be used to imitate the functionality of things like queries, look-up tables, and pivot tables that one might use in other software programs. Once you get used to working with these functions, the whole process is a lot faster and a lot more reproducible in R compared to other programs.</p>
 <p>We have already encountered a few functions for data summary in our time together. Most of these have intuitive names and serve obvious purposes once you know what they are called.</p>
 <p>Here is a quick run-down on a few of the basics. Each of these requires a vector as input.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(otsego$temp, <span class="dt">na.rm=</span>T) </code></pre></div>
-<pre><code>## [1] 8.262847</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(otsego$temp, <span class="dt">na.rm=</span>T)  </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) </code></pre></div>
+<pre><code>## [1] 8.261062</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">median</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  </code></pre></div>
 <pre><code>## [1] 6.11</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(otsego$temp, <span class="dt">na.rm=</span>T)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">min</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</code></pre></div>
 <pre><code>## [1] 0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(otsego$temp, <span class="dt">na.rm=</span>T)</code></pre></div>
-<pre><code>## [1] 26.12</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(otsego$temp, <span class="dt">na.rm=</span>T)  <span class="co"># Standard deviation</span></code></pre></div>
-<pre><code>## [1] 5.734517</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(otsego$temp, <span class="dt">na.rm=</span>T) <span class="co"># Variance  </span></code></pre></div>
-<pre><code>## [1] 32.88469</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(otsego$temp, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T) <span class="co"># Quantiles, with user-defined thresholds</span></code></pre></div>
-<pre><code>##  2.5% 97.5% 
-##  1.84 22.89</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">max</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</code></pre></div>
+<pre><code>## [1] 25.97</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">sd</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  <span class="co"># Standard deviation</span></code></pre></div>
+<pre><code>## [1] 5.732024</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">var</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) <span class="co"># Variance  </span></code></pre></div>
+<pre><code>## [1] 32.8561</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">quantile</span>(otsego<span class="op">$</span>temp, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T) <span class="co"># Quantiles, with user-defined thresholds</span></code></pre></div>
+<pre><code>##   2.5%  97.5% 
+##  1.840 22.888</code></pre>
 <p><br></p>
 <p>We can combine these into a single function to summarize entire dataframes, but this is not usually very useful. For example, we could use <code>summary</code> to return <code>min</code>, <code>median</code>, <code>mean</code>, <code>max</code> and the inner quartile range for each variable in an entire dataframe or matrix, but this is a little meaningless when we are looking at <strong>marginal</strong> summary stats for each variable.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(otsego)</code></pre></div>
 <p><br></p>
 <p>Usually, we would like to summarize variables across groups (e.g., ‘control’ or ‘treatment’) or discrete ranges of data (e.g., <code>month</code> in <code>otsego</code>). There are a number of ways to do this in R, and what we use depends partly on the application, and partly on personal preference. Most of these operate using what is known as the <strong>split-apply-combine</strong> approach. The simplest is probably the <code>aggregate</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
-<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp~month, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
+<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
 <pre><code>##    month      temp
 ## 1      1  2.645176
 ## 2      2  2.114755
@@ -1008,7 +1013,7 @@ myList$c[<span class="dv">1</span>]                              <span class="co
 ## 4      4  3.922480
 ## 5      5  6.657329
 ## 6      6  9.297003
-## 7      7 10.670483
+## 7      7 10.660528
 ## 8      8 11.140326
 ## 9      9 10.698824
 ## 10    10  9.495450
@@ -1017,7 +1022,7 @@ myList$c[<span class="dv">1</span>]                              <span class="co
 <p><br></p>
 <p>We can even use this to summarize a variable across multiple grouping variables. Perhaps we want to see mean temperature by month and depth?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize temperature by month in otsego data</span>
-<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp~month+depth, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
+<span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month<span class="op">+</span>depth, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</code></pre></div>
 <p><br></p>
 <p>This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make <strong>isopleths</strong> during the intermediate session in the afternoon.</p>
 <p>More importanly for now, we are limited in our ability to summarize a variable in more than one way using <code>aggregate</code> or other functions in the <code>base</code> package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of <code>base</code> and into the myriad <strong>packages</strong> that make up R.</p>
@@ -1072,13 +1077,13 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="co"># Note that I pass this restriction using the depth variable</span>
 <span class="co"># in the Otsego data because I know (about) where the</span>
 <span class="co"># thermocline is in that lake.</span>
-<span class="kw">boxplot</span>(<span class="dt">formula=</span>temp~month, <span class="dt">data=</span>otsego[otsego$depth&lt;<span class="dv">8</span>,])</code></pre></div>
+<span class="kw">boxplot</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,])</code></pre></div>
 <p><img src="introductory_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
 <p><br></p>
 <p>Well, that was really easy, but let’s face it…it’s ugly. In fact, this is the kind of output that makes the old-school statisticians not like the “clunky” graphics from R, so let’s see if we can snaz it up a little bit. I am going to spread out the code across multiple lines so you can get a feel for what’s going on here.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the plot</span>
 <span class="kw">boxplot</span>(
-  <span class="dt">formula=</span>temp~month, <span class="dt">data=</span>otsego[otsego$depth&lt;<span class="dv">8</span>,],
+  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],
   <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span>
   <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span>
   <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span>
@@ -1089,7 +1094,7 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="co"># Add x-axis. substr() takes the</span>
 <span class="co"># first 3 letters of month</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,
-     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">12</span>),
+     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),
      <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)
      )
 
@@ -1102,7 +1107,7 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
 <span class="co"># Make the plot</span>
 <span class="kw">boxplot</span>(
-  <span class="dt">formula=</span>temp~month, <span class="dt">data=</span>otsego[otsego$depth&lt;<span class="dv">8</span>,],
+  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],
   <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span>
   <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span>
   <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span>
@@ -1121,7 +1126,7 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 
 <span class="co"># Add x-axis</span>
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,
-     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>:<span class="dv">12</span>),
+     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),
      <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)
      )
 
@@ -1138,16 +1143,16 @@ summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(
 <p>Here, we will skip the niceties and cut right to the chase. We will set a couple of graphical parameters up front so we can compare our two graphs side by side. To do this, we specify a graphical matrix using the argument <code>mfrow</code>, which needs to be a vector containing the number of rows, and the number of columns for the plotting window (defaults to <code>c(1,1)</code>). Then, we will make a default scatterplot on the left, and a juiced-up version on the right.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Subset the data so we are just working with </span>
 <span class="co"># temps from the epilimnion in July</span>
-july &lt;-<span class="st"> </span>otsego[otsego$month==<span class="dv">7</span> &amp;<span class="st"> </span>otsego$depth&lt;<span class="dv">8</span>, ]
+july &lt;-<span class="st"> </span>otsego[otsego<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>, ]
 
 <span class="co"># Set main graphical parameters</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>))
 
 <span class="co"># Make the default scatterplot</span>
-<span class="kw">plot</span>(july$year, july$temp)
+<span class="kw">plot</span>(july<span class="op">$</span>year, july<span class="op">$</span>temp)
 
 <span class="co"># Now, make a better plot and add it</span>
-<span class="kw">plot</span>(july$year, july$temp,
+<span class="kw">plot</span>(july<span class="op">$</span>year, july<span class="op">$</span>temp,
      <span class="dt">xlab=</span><span class="st">&#39;Year&#39;</span>, 
      <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
      <span class="dt">pch =</span> <span class="dv">21</span>,               <span class="co"># Use a filled circle</span>
@@ -1167,10 +1172,10 @@ july &lt;-<span class="st"> </span>otsego[otsego$month==<span class="dv">7</span
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
 
 <span class="co"># Make the default histogram</span>
-<span class="kw">hist</span>(july$temp)
+<span class="kw">hist</span>(july<span class="op">$</span>temp)
 
 <span class="co"># Now, make a better one</span>
-<span class="kw">hist</span>(july$temp,
+<span class="kw">hist</span>(july<span class="op">$</span>temp,
      <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">27</span>),
      <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
      <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
