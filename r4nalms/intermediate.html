@@ -760,7 +760,7 @@ mainmod &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="dt
               <span class="dt">data=</span>ohio)
 
 <span class="co"># Take a look at the summary of the model</span>
-<span class="kw">library</span>(car, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)
+<span class="kw">library</span>(car, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)
 <span class="kw">Anova</span>(mainmod)</code></pre></div>
 <pre><code>## Anova Table (Type II tests)
 ## 
@@ -842,7 +842,7 @@ lim &lt;-<span class="st"> </span><span class="kw">na.omit</span>(otsego)</code>
 lim<span class="op">$</span>depth =<span class="st"> </span><span class="op">-</span><span class="dv">1</span> <span class="op">*</span>lim<span class="op">$</span>depth</code></pre></div>
 <p>Now, we are ready to do the math behind the isopleth and plot it.</p>
 <p>To do the math, we need to load the <code>akima</code> package:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(akima, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs/&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(akima, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</code></pre></div>
 <p>Next, we interpolate <code>temp</code> across <code>date</code> and <code>depth</code>. The interpolation we are using is basically just a bunch of linear regresions to predict <code>temp</code> for values of <code>date</code> and <code>temp</code> across a regular grid.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create a data frame containing the</span>
 <span class="co"># x, y, and z variables of interest</span>

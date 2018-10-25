@@ -615,7 +615,7 @@ library(plyr)
 
 But, in the absence of a network connection we can't install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the **relative path** to load the `plyr` package.
 ```{r, eval=FALSE, echo=TRUE}
-library(plyr, lib.loc = "./r_libs/plyr")
+library(plyr, lib.loc = "r_libs")
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}

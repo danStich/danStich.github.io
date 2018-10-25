@@ -10,9 +10,9 @@ Below, we run through a quick example of slightly more complex data manipulation
 ### Package load
 ```{r, echo=T, eval=F}
 # Load necessary packages
-library(lubridate, lib.loc = 'r_libs/')
-library(rLakeAnalyzer, lib.loc = 'r_libs/')
-library(ggplot2, lib.loc = 'r_libs/')
+library(lubridate, lib.loc = 'r_libs')
+library(rLakeAnalyzer, lib.loc = 'r_libs')
+library(ggplot2, lib.loc = 'r_libs')
 ```
 
 ```{r, echo=F, eval=T, message=F, warning=F}

@@ -14,8 +14,6 @@ otsego <- read.csv('physical.csv')
 otsego <- read.csv('data/physical.csv')
 ```
 
-
-
 ### Date manipulation
 ```{r}
 # First, we convert the date column
@@ -38,18 +36,14 @@ lim <- na.omit(otsego)
 lim$depth = -1 *lim$depth
 ```
 
-
-
 ### Load the `akima` package:
 ```{r, eval=T, echo=FALSE, warning=FALSE, message=FALSE}
 library(akima)
 ```
 
 ```{r, eval=FALSE}
-library(akima, lib.loc = '/r_lib/akima')
+library(akima, lib.loc = 'r_lib')
 ```
-
-
 
 ### Isopleth creation
 We interpolate `pH` across `date` and `depth`. The interpolation we are using is basically just a bunch of linear regresions to predict `pH` for values of `date` and `depth` across a regular grid. Then, we make the plot.

@@ -49,7 +49,7 @@ library(akima)
 ```
 
 ```{r, eval=FALSE}
-library(akima, lib.loc = '/r_lib/akima')
+library(akima, lib.loc = 'r_lib')
 ```
 
 

@@ -687,13 +687,8 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>If it looks like nothing happened, then it probably worked. Have a look at your environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot;           &quot;A&quot;           &quot;b&quot;           &quot;c&quot;           &quot;cToF&quot;       
-##  [6] &quot;d&quot;           &quot;e&quot;           &quot;f&quot;           &quot;im&quot;          &quot;intmod&quot;     
-## [11] &quot;july&quot;        &quot;lim&quot;         &quot;limlist&quot;     &quot;limnos&quot;      &quot;lmod&quot;       
-## [16] &quot;ltd&quot;         &quot;mainmod&quot;     &quot;mat&quot;         &quot;mod&quot;         &quot;myList&quot;     
-## [21] &quot;myMean&quot;      &quot;newd&quot;        &quot;ohio&quot;        &quot;otsego&quot;      &quot;out&quot;        
-## [26] &quot;out1&quot;        &quot;plot&quot;        &quot;plotter&quot;     &quot;preds&quot;       &quot;summarydata&quot;
-## [31] &quot;test&quot;        &quot;ymod&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot;      &quot;A&quot;      &quot;b&quot;      &quot;c&quot;      &quot;d&quot;      &quot;e&quot;      &quot;f&quot;      &quot;mat&quot;   
+## [9] &quot;otsego&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
 <pre><code>##          lake      date month year depth temp   pH do_mgl  cond do_sat
 ## 1 Otsego Lake 1/29/1988     1 1988   0.1 0.39 7.88   12.7 0.300     NA
@@ -967,7 +962,7 @@ myList<span class="op">$</span>c[<span class="dv">1</span>]                     
 <p>Normally, we would just load a package from the default <strong>library</strong> location once we have installed it, like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr)</code></pre></div>
 <p>But, in the absence of a network connection we can’t install packages, so we will load them from a local library (directory) today. To do this, we just need to point R to the correct location. In this case, we have put this right in the data file that you downloaded for the workshop, so we will use the <strong>relative path</strong> to load the <code>plyr</code> package.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;./r_libs/plyr&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(plyr, <span class="dt">lib.loc =</span> <span class="st">&quot;r_libs&quot;</span>)</code></pre></div>
 <p>With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use <code>ddply</code> to summarize the <code>otsego</code> data. (There is also a function called <code>ddply</code> in the <code>dplyr</code> package that is a newer, beefed-up version of <code>plyr</code> focusing only on <code>dataframes</code> and remote <code>datatables</code>)</p>
 <p>Here is one way that we can use <code>ddply</code> to summarize temperature across multiple factors.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize mean and sd by month and depth</span>
