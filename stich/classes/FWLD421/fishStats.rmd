@@ -1,0 +1,500 @@
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+  
+# Intro to fisheries statistics in R (FWLD 441)
+
+<br>
+ 
+## Introduction
+
+Now that we have looked at some of the basic programming and common statistical tools in R, we can dive into some of the tools that have been created just for fish! There are a few packages for dealing with data from fish and fisheries, and we will just glance off the tip of the ice berg here to demonstrate some tools that we use all of the time.
+
+<br>
+ 
+## Length-frequency histograms
+
+### Doing it 'by hand'
+
+Let's start by reading in some data for American shad in the Connecticut River so we can look at length-frequency histograms in R. We will walk through some basic steps that you should do pretty much everytime you start working with a new dataset- *even if you are the one who collected and entered the data*. The reason for this is that we always want to know how R is treating our data.
+
+<br>
+ 
+```{r}
+# Read in the data file
+  shad = read.csv('shad.txt')
+
+# Have a quick look at the first ten lines of the data
+  head(shad, 10)
+  
+# Take a quick look at the data structure
+  str(shad)
+```
+  
+> We can even look at it like a spreadsheet!
+
+```{r, eval=FALSE}
+View(shad)
+```  
+  
+<br>
+ 
+We will convert the `Length` variable from cm to mm first, so we can play later on.
+```{r}
+# Convert the variable 'Length' to mm by multiplying by 100
+  shad$Length = shad$Length * 10
+```
+
+<br>
+ 
+Now, let's make a basic l-f histogram of the shad data
+```{r}
+# Make a histogram with all of the arguments set to their defaults
+  hist(x = shad$Length)
+```
+
+<br>
+ 
+This is pretty ugly, and it doesn't do a whole lot for us in terms of biological meaning. We can modify this plot to use standard `breaks` or `bins` so that we can get, for example, 10-mm length bins that may have more biological meaning.
+
+<br>
+ 
+```{r}
+# Make a histogram with all of the arguments set to their defaults
+  hist(x = shad$Length,
+       breaks = diff(range(shad$Length))/10
+       )
+```
+
+<br>
+  
+Here, we told R to calculate the difference (`diff`) between the upper and lower values returned from the function `range`. Then, we divide that difference (250 mm) by 10 to get 25 10-mm length bins.
+
+<br>
+ 
+Okay, so this plot is better, but there is still a lot of ugly crap going on here. For one, the labels make no sense. The axes don't cross at zero, we have no color, and we have an ugly main heading in our figure that we will virtually never use for papers. So, let's fix it!!
+
+<br>
+ 
+```{r}
+# Make a histogram with 10-mm length bins that looks much better than the previous.
+  hist(x = shad$Length,
+       breaks = diff(range(shad$Length))/10,
+       yaxt = 'n',  # Don't print y-axis yet
+       xaxt = 'n',  # Don't print x-axis yet
+       col = 'gray87',
+       main = '',
+       xlab = 'Fork length (mm)'
+       )
+  axis(side = 1, pos = 0)
+  axis(side = 2, pos = min(shad$Length), las = 2)
+```
+
+<br>
+ 
+There, that looks a lot better. We might even think about putting this in a report or an article. 
+
+If you want to get really crazy, you can start plotting males and females in different shades of gray, we could add lines and text to the plot to indicate means of each distribution, we can add legends, and indicate areas of overlap using transparent RGB color encoding:
+
+<br>
+ 
+```{r}
+# Adjust the outer figure margins
+par(mar = c(4.5, 4.5, 1, 1))
+ 
+# Make a histogram showing length data for roes only
+hist(x = shad$Length[shad$Sex=='R'],
+     col = rgb(0.1, 0.1, 0.1, 0.5),
+     xlim = c(min(shad$Length), max(shad$Length)), 
+     ylim = c(0, 600),
+     main = '', 
+     xlab = 'Fork length (mm)', 
+     yaxt = 'n', 
+     xaxt = 'n', 
+     cex.lab= 1.5
+)
+
+# Add the histogram for bucks over the top of the roes  
+hist(x = shad$Length[shad$Sex=='B'], col = rgb(0.8,0.8,0.8,0.5), add = TRUE)
+
+# Add the x-axis
+axis(side = 1, pos = 0, cex.axis = 1.15)
+
+# Go back and plot the y-xis
+axis(side = 2, 
+     pos = min(shad$Length)-0.03*min(shad$Length),
+     las = 2,
+     cex.axis = 1.15)
+
+# Add a blue vertical line showing the mean length of roes
+abline(v=mean(shad$Length[shad$Sex=='R']),
+       col='blue',
+       lwd=2)
+
+# Add red line showing the mean length of bucks
+abline(v=mean(shad$Length[shad$Sex=='B']),
+       col='red',
+       lwd=2)
+
+# Add the mean length of Roes to the table
+text(x = mean(shad$Length[shad$Sex=='R']),
+     y=520,
+     expression(paste(mu['Roes'])),
+     adj=-.25,
+     cex=1.25
+)
+
+# Add the mean length of Bucks to the figure
+text(x = mean(shad$Length[shad$Sex=='B']),
+     y=520,
+     expression(paste(mu['Bucks'])),
+     adj=1.25,
+     cex=1.25
+)
+
+# Add a legend to the figure
+legend(x=300,
+       y=500,
+       legend=c('Roes', 'Bucks'),
+       fill=c('gray40', 'gray87'),
+       col='black',
+       bty='n'
+)   
+```
+
+<br>
+ 
+### Doing it in the `FSA` package
+
+So, we can make some pretty nice figures by hand, but this can be a lot to learn and not everyone is into it. If we want a faser solution, there are a number of **packages** that are maintained in R specifically for fish data. The most comprehensive toolsets is are `FSA` and the `fishmethods` packages. Here we will start to play with some of the tools in `FSA`, with examples from the package documentation, to see how some of the more common fish population assessment tools work.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Load the FSA library
+  library(FSA)
+```
+
+<br>
+ 
+The `FSA` package contains a lot of really cool tools that make life a lot easier. And, you can even get an [introductory fish stats book](http://derekogle.com/IFAR/) that goes along with it. We will cover some basic applications here, but realize that this package can be used for a whole lot of other stuff, and now includes much of what previously was housed in the `fishmethods package`.
+
+For example, if we wanted to create a length-frequency histogram that shows some of the Gabelhouse length categories, we could do it like this:
+
+<br>
+ 
+```{r}
+# suppose this is yellow perch to the nearest mm
+  mm <- c(rnorm(100, mean=125, sd=15),
+          rnorm(50, mean=200, sd=25),
+          rnorm(20, mean=300, sd=40))
+
+# same data to the nearest 0.1 cm
+  cm <- mm/10
+  
+# same data to the nearest 0.1 in
+  inch <- mm/25.4
+  
+# put together as data.frame
+  df <- data.frame(mm, cm, inch)
+
+# Make an l-f histogram that 
+psdPlot(~mm,  # Tell R the name of your length data          
+        data=df, # Tell it the name of the data frame
+        species="Yellow perch", # Pass species
+        w=10) # Tell R how wide length-bins are
+
+```
+
+<br>
+ 
+This is a heck of a lot easier than going through all of that other stuff if what we want is an l-f histogram with all of this stuff on it. But, if that's not what you want then you have to do it by hand or customize the code from `FSA`, so it's good to know both. 
+
+<br>
+ 
+## PSD calculations and graphing
+ 
+The plots we used above are neat, but if what we are really after are the numbers or a tic-tac-toe graph for multiple species, then this is only going to give us part of what we want. Luckily, there are other tools for that stuff in the `FSA` package.
+
+We will start by simulating some more yellow perch data and use these to demonstrate PSD calculations in R. Note that these functions are for convenience only, and you could do it by hand in R if you were inclined...**ha!**
+
+<br>
+ 
+```{r}
+# Let's make up some more yellow perch data.
+# Here, we are simulating three different age
+# classes with decreasing numbers of fish, but
+# increasing mean lengths and sd of lengths.
+  yepdf <- data.frame(
+    yepmm=round(c(rnorm(100, mean=125, sd=15),
+                  rnorm(50, mean=200, sd=25),
+                  rnorm(20, mean=300, sd=40)
+                  ),
+                0
+                ),
+    species=rep("Yellow Perch", 170)
+  )
+# Calculate PSD for Gabelhouse length categories
+# and each of the intervals
+  psdCalc(~yepmm, data=yepdf, species="Yellow perch", digits=1)
+```
+
+<br>
+ 
+If you take a close look at the output, you can see that we not only get point estimates for each of the standard length categories we normally care about, but we also get 95% confidence intervals from those estimates! Very cool...
+
+<br>
+ 
+#### Tic-tac-toe graphs
+
+The `psdCalc` function is really great for getting PSD for one species, but we are often interested in PSDs of predator and prey simultaneously for gauging things like 'balance' in fish communities.
+
+So, let's pretend we have some predator-prey data for which we have already calculated psDs. If we want to make a tic-tac-toe graph, all we have to do is:
+
+Let's start by simulating data for predator PSD and prey SD with 95% Confidence intervals.
+
+<br>
+ 
+```{r}
+# Make up mean and 95% CI of PSD for each species
+  prey <- c(45.4, 30.2, 56.8)
+  pred <- c(24.5, 10.2, 36.7)
+  
+# Give names to the values in each of those objects  
+  names(prey) <- names(pred) <- c("Estimate", "95% LCI", "95% UCI")
+  
+# Print predator and prey objects to see what they look like
+  prey
+  pred
+```
+
+<br>
+ 
+Next, we will make a blank plotting window for our tic-tac-toe graph.
+
+<br>
+ 
+```{r}
+tictactoe(predobj = c(30, 70),
+          preyobj = c(30, 70),
+          predlab = "Predator PSD",
+          preylab = "Prey PSD", obj.col = "black",
+          obj.trans = 0.2,
+          bnd.col = "black",
+          bnd.lwd = 1,
+          bnd.lty = 2
+          )
+```
+
+<br>
+ 
+Finally, we can plot the data on our tic-tac-toe graph.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+tictactoe()
+if (require(plotrix)) {
+  plotCI(prey[1],pred[1],li=prey[2],ui=prey[3],err="x",pch=16,add=TRUE)
+  plotCI(prey[1],pred[1],li=pred[2],ui=pred[3],err="y",pch=16,add=TRUE)
+}
+
+```
+
+<br>
+ 
+Beautiful...
+
+<br>
+  
+## Estimating growth curves
+
+Individual growth, based on length-at-age data can be really useful information when we are developing stock assessments on which we will eventually base fishery management decisions. There are a number of different tools that we can use to estimate growth curves.
+
+The most common kind of growth curve for length-at-age data is the von Bertalanffy growth model. We can estimate this model using either individual length-at-age data, or by using population averages. If we have the data, the former is usually preferred.
+
+Let's look at an example of how to do this using the built-in functions in the `fishmethods` package.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Load the 'fishmethods' package
+  library(fishmethods)
+
+# Load the built-in data for pin fish
+  data(pinfish)
+
+# Now, fit a growth curve
+  growth(intype=1, unit=1, size=pinfish$sl, age=pinfish$age,
+  calctype=1, wgtby=1, error=1, Sinf=200, K=0.3, t0=-1)
+```
+
+<br>
+ 
+Here, we get estimated parameters from the von Bertalanffy growth model, in addition to some plots of the raw data with model predictions, and the residual diagnostic plots. Again, we can do all of this stuff manually in R or many other software programs, but it is much more convenient to do it like this!
+
+One useful aspect of these estimates is that we can estimate annual mortality rate (Z) from the von Bertalanffy growth parameters. A simple way to do this is to use the method of Jensen (1996) and estimate Z as $1.5 x k$:
+
+<br>
+ 
+```{r}
+# Estimate mortality of pinfish
+  1.5*0.3781
+```
+
+<br>
+
+## Survival and mortality
+
+One other piece of information that we might be very interested in using for fishery stock assessment is mortality. Of course, we can think of mortality both in terms of annual rates, and in terms of instantaneous rates. 
+
+One of the easiest tools with which we can estimate mortality is the catch curve. We can use catch curves to estimate mortality based on a linear regression of abundance on age. This can be kind of a pain to do by hand, and there are a lot of different methods that we can use to do this.
+
+Thankfully, a lot of this stuff has been packaged in R within the `fishmethods` package for us. The basic tool for estimating mortality from catch curves allows us to choose a single method, or a bunch of different methods. All we need to know is the age of fish in a sample and how many there were!
+
+Here is an example: 
+
+<br>
+ 
+```{r}
+# Load the built-in rockbass data
+  data(rockbass)
+
+# Calculate both annual survival and
+# instantaneous mortality rates using
+# a variety of estimators.
+  agesurv(age=rockbass$age, full=6)
+```
+
+<br>
+ 
+You'll notice here that the instantaneous mortality rates can be greater than one because this is actually the same as `-log(S)`, as you may remember from other classes- so, no need to freak out because you are getting numbers > 1.00.
+
+As a sanity check, we could even go back and estimate the annual mortality of pinfish from our example above and compare it to the value of 0.567 that we got from the von Bertalanffy growth parameters:
+
+<br>
+ 
+```{r}
+# Estimate mortality of pinfish using
+# catch-curve analysis assuming full 
+# recruitment to gear by age 2:
+agesurv(age=round(pinfish$age), full=2)
+```
+
+<br>
+ 
+Here, we can see that the estimates are pretty close because most estimates of annual survival are about `0.43` or `0.44`, and `1-0.43 = 0.57`!
+
+<br>
+ 
+## Exercise
+ 
+Now, it is time for you to take the steering wheel. Try some of the following exercises to test your skills.
+
+<br>
+ 
+### Read in the data
+
+Read in the data contained in `cando.csv` and save it to a named object.
+
+```{r}
+cando = read.csv('cando.csv')
+```
+
+<br>
+ 
+This file contains lengths and ages for walleye and yellow perch in Canadarago Lake. There are 3854 individual fish. We will use these for the exercises below. For the sake of demonstration, let's just pretend that these data come from a set of years during which we might not have expected to see much change in population demographics (maybe not the case for Canadarago!)
+
+<br>
+ 
+### L-f histogram
+
+Make a length-frequency histogram of walleye using one of the methods described above. About how many age classes does it look like you have here?
+
+<br>
+ 
+### PSD
+ 
+Calculate PSD seperately for walleye and yellow perch in Canadarago Lake using the psdCalc function in the FSA package. Note that you will have to use only those data for the species you want to work with. For example, you could make a yellow perch dataframe like this:
+
+<br>
+ 
+```{r}
+# Make a new df containing only yellow perch
+yp = cando[cando$Name=='Yellow Perch', ]
+```
+
+<br>
+ 
+```{r, eval=FALSE, echo=FALSE}
+yp = cando[cando$Name=='Yellow Perch', ]
+wae = cando[cando$Name=='Walleye', ]
+
+psdCalc(~Length, data=yp, species="Yellow perch",digits=1)
+
+psdCalc(~Length, data=wae, species="Walleye",digits=1)
+```
+
+<br>
+ 
+Plot the tic-tac-toe graph of PSD values for walleye and yellow perch. What does the graph indicate with respect to the balance in this fishery?
+
+<br>
+ 
+```{r, eval = FALSE, echo=FALSE}
+prey <- c(53.5, 48.5, 58.6)
+pred <- c(78.3, 75.6, 81.1)
+  
+tictactoe(predobj = c(30, 70), preyobj = c(30, 70), predlab = "Predator PSD", preylab = "Prey PSD", obj.col = "black", obj.trans = 0.2, bnd.col = "black", bnd.lwd = 1, bnd.lty = 2) 
+  
+tictactoe()
+if (require(plotrix)) {
+  plotCI(prey[1],pred[1],li=prey[2],ui=prey[3],err="x",pch=16,add=TRUE)
+  plotCI(prey[1],pred[1],li=pred[2],ui=pred[3],err="y",pch=16,add=TRUE)
+}  
+```
+
+<br>
+ 
+### Growth
+
+<br>
+ 
+Estimate growth parameters of the von Bertalanffy growth model for walleye and yellow perch using the ```growth``` function in the ```fishmethods``` package. Note that you might need to supply new starting values for Sinf...
+
+```{r, eval=FALSE, echo=FALSE}
+# Fit a growth curve for yellow perch
+  growth(intype=1, unit=1, size=yp$Length, age=yp$Age,
+  calctype=1, wgtby=1, error=1, Sinf=300, K=0.3, t0=-1)
+
+# Fit a growth curve for walleye
+  growth(intype=1,unit=1,size=wae$Length,age=wae$Age,
+  calctype=1, wgtby=1, error=1, Sinf=600,K=0.3, t0=-1)
+
+```
+
+<br>
+ 
+What are the expected annual mortality rates for yellow perch and walleye in this system based on the von Bertalanffy growth parameters?
+
+### Mortality
+
+<br>
+ 
+Finally, wrap this up by estimating mortality of yellow perch and walleye using catch-curve analysis. Let's assume that both yellow perch and walleye are both fully recruited to our sampling gear by age 3.
+
+<br>
+ 
+```{r, eval=FALSE, echo=FALSE}
+agesurv(age=round(wae$Age),full=7)
+```
+
+<br>
+ 
+How do these values compare to the life-history estimates from the von Bertalanffy growth model? What do you think might be causing this discrepancy?
+
+<br>
+ 
+<br>
+ 
