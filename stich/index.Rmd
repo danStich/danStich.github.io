@@ -1,11 +1,9 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<br>
-
-### Assistant Professor
-### Biology Department and Biological Field Station
-### State University of New York College at Oneonta
+## Assistant Professor
+Biology Department and Biological Field Station
+State University of New York College at Oneonta
 
 <img src="./images/logo.png" alt="">
 
