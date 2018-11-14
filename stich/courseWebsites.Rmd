@@ -1,34 +1,18 @@
+```{r, child="_styles.Rmd"}
+```
 
-<br>
- 
 ---
 title: "Course websites"
 ---
 
-```{r, child="_styles.Rmd"}
-```
-
-<br>
- 
 Please use the links below to access course websites for Quantititative Biology (BIOL 217) and Advanced Quantitative Biology (BIOL 678).
 
-<br>
- 
 These sites contain lecture content and homework exercises for each course module content changes from year to year (and sometimes day to day).
 
-<br>
- 
 <a href="classes/BIOL217/index.html"> Quantitative Biology  (BIOL 217) </a>
 
-<br>
  
 <a href="classes/BIOL678/index.html"> Advanced Quantitative Biology (BIOL 678) </a>
 
-<br>
-
 **Please note** that links to online data in lecture and homework pages will only work if you are connected to the campus network at SUNY Data for these classes can be downloaded as a compressed folder from <a href="https://github.com/danStich/classData"> this </a> GitHub repository.
 
-<br>
- 
-<br>
- 
