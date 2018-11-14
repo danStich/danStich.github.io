@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<link rel="manifest" href="./favicon/site.webmanifest">
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+  
+<meta charset="utf-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+<title>danStich</title>
+ 
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="research.html">Research</a>
+</li>
+<li>
+  <a href="cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="current-graduate-students" class="section level2">
+<h2>Current graduate students</h2>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/davidAndrews.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>David Andrews</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: State of the lake and comprehensive lake management plan for Butterfield Lake, NY.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/sam.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Samantha Carey</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: State of the lake and comprehensive management plan for Forest and Allure lakes in NY.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/ben.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Joseph (Ben) Casscles</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management, Professional Science Master's
+</p>
+<p>
+<b>Project description</b>: My research interests include aquatic plant communities, adaptive management strategies, and applied fisheries management.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/stradder.jpeg">
+</p>
+</div>
+<div>
+<h4>
+<b>Stradder Caves</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: State of the lake and comprehensive lake management plan for Crooked, Song, and Tully lakes in NY
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/hayley.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Hayley Dower</b>
+</h4>
+<p>
+<b>Program</b>: MS Biology
+</p>
+<p>
+<b>Project description</b>: I am currently studying population dynamics and behavior of spawning walleye in Otsego Lake, NY. I am attempting to characterize the timing and duration of spawning, and I am using mark and recapture of tagged walleye to estimate growth, survival, and abundance.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/ryan.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Ryan Elliott</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: My thesis research is focused on Lake of the Woods located in northern New York State. The Lake of the Woods Association and Indian River Lakes Conservancy have enlisted my help to investigate the current state of Lake of the Woods and to write a management plan that will help guide future management strategies. Current concerns among stakeholders on Lake of the Woods include the introduction of invasive species, harmful algal blooms, and the growth of invasive Eurasian watermilfoil, which is already well established in the lake.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/justin.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Justin Hulbert</b>
+</h4>
+<p>
+<b>Program</b>: MS Biology
+</p>
+<p>
+<b>Project description</b>: I am investigating drivers of patterns in regional and state-wide growth and population size structure of walleye and yellow perch, popular sport fish in North America. This work is being conducted in collaboration with the New York State Department of Environmental Conservation (NYSDEC), and includes a variety of stakeholders.
+</p>
+<p>
+<b>Contact:</b> <a href="mailto:hulbjr82@oneonta.edu">hulbjr82@oneonta.edu</a>
+</P>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/joey.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Joey O’Reilly</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: My thesis work is focused on the Cassadaga Lakes system in Chautauqua County, New York. A science based state of the lake report and comprehensive management plan is being developed for the Cassadaga Lakes Association. Additionally, I am working to determine whether the different basins in Cassadaga Lakes differ from each other with respect to important lake parameters such as dissolved oxygen, temperature profiles, etc., to inform future sampling.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/blankPhoto.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>David Pfuhler</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: State of the lake and comprehensive lake management plan for Crumhorn Lake, NY.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/george.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>George Smith</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: My thesis work is concentrated on the construction of a state of a lake report and a comprehensive management plan for Big Bowman Pond, which is a small 30 acre lake located within Rensselaer County, NY. I work with the local lake association and home owners around the lake to establish their management goals. The primary management issue on the lake is excessive vegetation (bladderworts) that restricts access to the lake for some. Overall, the goal of this study will provide high-quality information on the lake and determine the best method to solve the issue of vegetation.
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/alexa.png">
+</p>
+</div>
+<div>
+<h4>
+<b>Alexa Tumbarello</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management
+</p>
+<p>
+<b>Project description</b>: Paradox Lake is a dual-basin lake in Essex County, NY. The biggest concerns among stakeholders include invasive macrophytes, water clarity, and long-term sustainability. For my thesis, I am developing a state of the lake report and comprehensive management plan for the Paradox Lake Association that addresses stakeholder-identified issues and guidance for sustainable management.
+</p>
+</div>
+</div>
+<p><br></p>
+</div>
+<div id="former-students" class="section level2">
+<h2>Former students</h2>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/ed.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Ed Kwietniewski</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management (2017)
+</p>
+<p>
+<b>Current</b>: Aqua Doc
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/blankPhoto.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Christian Jenne</b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management (2017)
+</p>
+<p>
+<b>Project description</b>: Education program, SUNY Oneonta
+</p>
+</div>
+</div>
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150"    src="./images/blankPhoto.jpg">
+</p>
+</div>
+<div>
+<h4>
+<b>Alejandro (AJ) Reyes </b>
+</h4>
+<p>
+<b>Program</b>: MS Lake Management (2016)
+</p>
+<p>
+<b>Current</b>: Aquatic ecologist, Northeas Aquatic Research
+</p>
+</div>
+</div>
+<p><br></p>
+</div>
+
+
+<p>Copyright &copy; 2018 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

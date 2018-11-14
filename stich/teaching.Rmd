@@ -1,0 +1,21 @@
+---
+title: "Teaching"
+---
+
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+<img src="./images/classes.jpg" alt="">
+
+I teach graduate and undergraduate classes in the Biology Department at SUNY Oneonta. 
+
+In addition to lab sections for Ecology and Evolution (BIOL 181) and Ecology (BIOL 282), I teach undergraduate classes in <a href="biol217.html"> Quantitative Biology </a> and <a href="biol351.html"> Ichthyology </a> on a rotating basis during spring semesters. 
+
+At the graduate level, I teach classes in <a href="biol501.html"> Experimental Design </a>, <a href="biol678.html"> Advanced Quantitative Biology </a>, <a href="biol682.html"> Advanced Ichthyology </a>, <a href="biol690.html">Lake Management</a>, and special topics in other subjects as needed. 
+
+I also teach R workshops here and there, and I have been known to haunt the halls of my alma mater to teach <a href="classes/FWLD421/fishStats.html"> introductory fisheries statistics in FWLD 421 </a>  at SUNY Cobleskill.
+
+<br>
+ 

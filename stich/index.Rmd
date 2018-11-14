@@ -1,0 +1,18 @@
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+### Assistant Professor
+### Biology Department and Biological Field Station
+### State University of New York College at Oneonta
+
+<img src="./images/logo.png" alt="">
+
+I am a fishery biologist by training, and I have been with the Biology Department and Biological Field Station at SUNY Oneonta since Fall 2015. 
+
+I teach classes in biology, ecology, lake management, and biostatistics. Learn more about those classes <a href="teaching.html"> here </a>.
+
+Research in my lab includes both undergraduate and graduate students, and very often finds its way into class examples, activities, and extra credit opportunities. Learn more about research <a href="research.html"> here </a>.
+
+<br>

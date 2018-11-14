@@ -1,0 +1,17 @@
+---
+title: "Experimental design"
+---
+
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+ 
+<img src="./images/watch.jpg" alt="">
+
+<br>
+ 
+Aimed at first semester graduate students, this course familiarizes students with the processes of managing their research projects, their design, implementation, and analysis. Students learn how to develop questions into research projects and to more efficiently plan and execute their projects. Co-taught with [Dr. Tsitsi McPherson](http://www.oneonta.edu/academics/biology/faculty/mcpherson.asp).
+
+<br>
+ 

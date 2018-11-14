@@ -1,0 +1,21 @@
+---
+title: "Quantitative biology"
+---
+
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+ 
+<img src="./images/crabs.jpg" alt="">
+
+<br>
+
+### Looking for the <a href="classes/BIOL217/index.html"> course website  </a>? 
+
+<br>
+ 
+This course is designed to help undergraduates construct a basic framework of knowledge that will provide a foundation for further learning about quantitative reasoning in the sciences. Upon successful completion of this course, students will have developed i) technical skills and the capacity for quantitative reasoning that are fundamental to modern data analysis, ii) an understanding of why and how specific methods are implemented in research, iv) the ability to interpret and communicate the results of commonly applied quantitative tools, and iv) a cognitive framework for critically evaluating experimental design and data analyses encountered in professional and everyday life. Topics range from science philosophy to linear models and extensions thereof, to non-parametric statistics, multivariate analyses, machine learning, and Bayesian estimation.
+
+<br>
+ 
