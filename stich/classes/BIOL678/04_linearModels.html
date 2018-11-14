@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="linear-models" class="section level1">
+<h1>Linear models</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p>This week, we will introduce a class of statistical tools known collectively as linear models. This class of tools includes such examples as one-way ANOVA, linear regression and correlation, and by extension includes all other n-way ANOVAs, and multiple linear regression. Later this semester, we will see that these models can also be extended to include generalized linear models, generalized linear mixed models, and a number of multivariate techniques for complex data analysis.</p>
+<p><br></p>
+<p>So, that said, this week is the gateway into the rest of the world of parametric and semi-parametric statistics. As a result, we will focus primarily on parametric applications this week and next, although we will discuss the simple case of the Kruskal-Wallis test as an alternative to the parametric ANOVA. In two weeks you will know why you will almost never need this test again! The over-arching theme for this week is that any of these methods can be expressed as the formula for a line, which is how they got their names. We will start with ANOVA because it is analagous to many of the methods that we’ve already discussed. However, it is important to recognize that this is just a special case of linear models. We will show this during our discussions this week.</p>
+<p><br></p>
+<p>Because we are now entering into the realm of ‘the rest of statistics’ we also need to start ‘talking the talk’ in addition to ‘walking the walk’, so we will practice how to write methods sections for these tests and how to report the results. In reality, once you are comfortable using a couple of functions in R, writing up the methods and results is more challenging than fitting models, so we want to be thoughtful about how we do it!</p>
+<p><br></p>
+</div>
+<div id="analysis-of-variance-anova" class="section level2">
+<h2>Analysis of variance (ANOVA)</h2>
+<p><br></p>
+<div id="one-way-anova" class="section level3">
+<h3>One-way ANOVA</h3>
+<p>We will use some of the built-in datasets in R this week to demonstrate our analyses and show how to communicate the methods and the results of our statistical inference.</p>
+<p>Let’s start by loading up the <code>PlantGrowth</code> dataset in R:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(PlantGrowth)</code></pre></div>
+<p><br></p>
+<p>Here, we see that we have a dataframe with 30 observations of two variables. The first variable describes plant growth (in units of mass), and the second variable describes control and treatment groups for individual plants.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(PlantGrowth)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    30 obs. of  2 variables:
+##  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
+##  $ group : Factor w/ 3 levels &quot;ctrl&quot;,&quot;trt1&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<p><br></p>
+<p>Let’s begin by fitting a simple one-way ANOVA to the plant data. In practice, this is <em>very</em> easy. First of all though, we would report our <strong>methods</strong> like this:</p>
+<blockquote>
+<p>We used a one-way analysis of variance (ANOVA) to estimate the effects of treatment group on the mass (g) of plants assuming a Type-I error rate of <span class="math inline">\(\alpha\)</span> = 0.05. Differences between groups were assumed to be significant at p &lt; 0.05.</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
+  model =<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth)
+<span class="co"># Print the model object to the console</span>
+  model</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ group, data = PlantGrowth)
+## 
+## Coefficients:
+## (Intercept)    grouptrt1    grouptrt2  
+##       5.032       -0.371        0.494</code></pre>
+<p><br></p>
+<p>Easy to do, but not very useful for getting the information that we need. What we get here is essentially just one part of the information that we would like to (read ‘should’) report.</p>
+<p>If we look at the summary of the output, we can get more of what we need:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at a summary of the model object</span>
+  <span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ group, data = PlantGrowth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.0710 -0.4180 -0.0060  0.2627  1.3690 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   5.0320     0.1971  25.527   &lt;2e-16 ***
+## grouptrt1    -0.3710     0.2788  -1.331   0.1944    
+## grouptrt2     0.4940     0.2788   1.772   0.0877 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.6234 on 27 degrees of freedom
+## Multiple R-squared:  0.2641, Adjusted R-squared:  0.2096 
+## F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+<p><br></p>
+<p>That’s better, and we get some useful information here. First of all, we get the value of the test statistic, the df, and the p-value for the model. We also get the <span class="math inline">\(R^2\)</span> for the model: 0.26. This statistic tells us roughly what percentage of the total variance in the data is explained by the model we fit. Another way of thinking of this is as a signal-to-noise ratio. More formally, it is the sum of squares between groups divided by the sum of squares total:</p>
+<p><span class="math display">\[R^2 = \frac{SSB}{SST}\]</span></p>
+<p>Let’s use the <code>anova</code> function to summarize the object a little further.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get an ANOVA table for the model</span>
+  <span class="kw">anova</span>(model)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: weight
+##           Df  Sum Sq Mean Sq F value  Pr(&gt;F)  
+## group      2  3.7663  1.8832  4.8461 0.01591 *
+## Residuals 27 10.4921  0.3886                  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p>Okay, this is really what we needed: an ANOVA table with a break down of the residuals, mean squared errors, etc. And, we can now say:</p>
+<blockquote>
+<p>We found that the treatment had a significant effect on plant weight (ANOVA, F = 4.846, df<sub>1</sub> = 2, df<sub>2</sub> = 27, p = 0.0159).</p>
+</blockquote>
+<p><strong>NOTE</strong> that all of these statistics were present in the summary of the model, as well. They just weren’t neatly organized, and we would need to do the calculations by hand to drag them out of it.</p>
+<p>But, what if we want to know more about how treatment affected weight? Then, we could use a ‘pair-wise’ comparison to test for differences between factor levels. Because this essentially means conducting a whole bunch of t-tests, we need a way to account for our repeated Type-I error rate, because at <span class="math inline">\(\alpha\)</span> = 0.05 we stand a 1 in 20 chance of falsely rejecting the null even if it is true.</p>
+<p>One tool that lets us make multiple comparisons between groups is the Tukey HSD (honest significant difference) test. This test makes comparisons between each group while controlling for Type-I error. Essentially, this makes it harder to detect differences between groups but when we do we are more sure that they are not spurious. Sound confusing? At least it’s easy to do in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We need to recast this as an ANOVA model with avo() in R...</span>
+<span class="co"># this is essentially the same thing as the `lm` function, but  </span>
+<span class="co"># in a different wrapper (literally) that allows us to access </span>
+<span class="co"># the info in a different way</span>
+
+  <span class="kw">TukeyHSD</span>(    <span class="co"># The function that does the Tukey test</span>
+    <span class="kw">aov</span>(       <span class="co"># A wrapper for lm objects</span>
+      model    <span class="co"># The model that we ran above</span>
+      )
+    )</code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = model)
+## 
+## $group
+##             diff        lwr       upr     p adj
+## trt1-ctrl -0.371 -1.0622161 0.3202161 0.3908711
+## trt2-ctrl  0.494 -0.1972161 1.1852161 0.1979960
+## trt2-trt1  0.865  0.1737839 1.5562161 0.0120064</code></pre>
+<p><br></p>
+<p>This report shows us exactly how the response differs with respect to the treatment groups. Here, we see that the only significant difference occurs between <code>trt2</code> and <code>trt1</code>. How do we know this? based on the p-values…</p>
+<p>For the readers, and for us, it may be easier to see this information displayed graphically:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a boxplot of weight by group using the PlantGrowth data</span>
+  <span class="kw">boxplot</span>(
+    weight<span class="op">~</span>group,           <span class="co"># Relationship of interest, entered as formula with &#39;~&#39;</span>
+    <span class="dt">data=</span>PlantGrowth,       <span class="co"># Name of the data set</span>
+    <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,             <span class="co"># Fill color for boxes</span>
+    <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,        <span class="co"># Y-axis label</span>
+    <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>  <span class="co"># X-axis label</span>
+    )</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+<p>In addition to what we wrote before, we can now say something along the lines of:</p>
+<blockquote>
+<p>“We found that the mass of plants in the trt2 group (5.5 +/- .4 g) was significantly greater than plants in the trt1 group (4.7 +/- .8 g; Tukey HSD, p = 0.012). However, we failed to detect differences in mass between plants in the control group (5.0 +/- 0.6 g) and trt1 (p = 0.39) or trt2 (p = 0.20).</p>
+</blockquote>
+<p><br></p>
+</div>
+<div id="two-way-anova" class="section level3">
+<h3>Two-way ANOVA</h3>
+<p>Next, we’ll step up the complexity and talk about cases for which we have more than one grouping variable and some kind of numeric response. In these cases, we can use a two-way (or ‘n-way’ depending on number of factors) ANOVA to examine effects of more than one grouping variable on the response.</p>
+<p>Here, we will use a dataset describing differences in the mass of belly- button lint collected from males and females of three species of apes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data:</span>
+  lint =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/lint.txt&#39;</span>)</code></pre></div>
+<p><br></p>
+<div id="main-effects-model" class="section level4">
+<h4>Main effects model</h4>
+<p>Now we can fit a model to the data. This will work the same way as for the one-way ANOVA above, but this time we will add more terms on the right hand side of the equation. We will start by looking at the <em>main effects</em> model for this dataset.</p>
+<p>What is a main-effects model? This model assumes that the response of interest, in this case the mass of belly button lint, <code>lintmass</code>, is affected by both <code>species</code> and <code>gender</code>, and that within species the effect of gender is the same. For example, the mass of belly button lint could be greater in one species compared to others, and if there is a difference between sexes we would expect that trend to be the same across species (e.g., boys always have more lint than girls- sorry guys, it’s probably true!).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and save it to an object</span>
+  lint.model =<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
+<span class="co"># Look at the summary of the model fit</span>
+  <span class="kw">summary</span>(lint.model)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = lintmass ~ species + gender, data = lint)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -2.5792 -0.9021  0.0875  0.8448  2.3917 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)       15.5458     0.6133  25.346  &lt; 2e-16 ***
+## speciesSpecies 2  -3.4375     0.7512  -4.576 0.000183 ***
+## speciesSpecies 3  -1.8750     0.7512  -2.496 0.021414 *  
+## genderMale         4.9083     0.6133   8.003 1.16e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.502 on 20 degrees of freedom
+## Multiple R-squared:  0.8096, Adjusted R-squared:  0.781 
+## F-statistic: 28.35 on 3 and 20 DF,  p-value: 2.107e-07</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the anova table</span>
+  <span class="kw">anova</span>(lint.model)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: lintmass
+##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## species    2  47.396  23.698  10.499 0.0007633 ***
+## gender     1 144.550 144.550  64.041  1.16e-07 ***
+## Residuals 20  45.143   2.257                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p>As you can see, the output for the model is much the same as for the one- way ANOVA. The only real difference is that we have more than one grouping variable here.</p>
+<p>We could look at the data all at once, but this gets a bit messy:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the boxplot to start with</span>
+  <span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species<span class="op">+</span>gender, <span class="co"># Formula</span>
+          <span class="dt">data=</span>lint,                       <span class="co"># The data set</span>
+          <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,                      <span class="co"># Color for box fill</span>
+          <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,                 <span class="co"># Label for y-axis</span>
+          <span class="dt">names=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;Species 1&#39;</span>, <span class="st">&#39;Species 2&#39;</span>, <span class="st">&#39;Species 3&#39;</span>), <span class="dv">2</span>)
+          )
+<span class="co"># Add a vertical line to separate sexes</span>
+  <span class="kw">abline</span>(<span class="dt">v=</span><span class="fl">3.5</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lwd=</span><span class="dv">1</span>)
+<span class="co"># Label sexes at the top of the plot</span>
+  <span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Female&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">2</span>))
+  <span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Male&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">5</span>))</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>So, we can also look at the factors seperately:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the plotting window so it can fit two boxplots side by side</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+<span class="co"># Add the first boxplot to the plotting window</span>
+  <span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species,
+          <span class="dt">data=</span>lint,
+          <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
+          <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,
+          <span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&#39;Sp. 1&#39;</span>, <span class="st">&#39;Sp. 2&#39;</span>, <span class="st">&#39;Sp. 3&#39;</span>)
+          )
+<span class="co"># Add the second boxplot</span>
+  <span class="kw">boxplot</span>(lintmass<span class="op">~</span>gender,
+          <span class="dt">data=</span>lint,
+          <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
+          <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,
+          <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&#39;Female&#39;</span>, <span class="st">&#39;Male&#39;</span>)
+          )</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><br></p>
+<p>Hopefully after seeing these results you are now starting to realize how important a few well-placed figures and tables can be for clearly communicating the results of your research (even if it is about belly-button lint).</p>
+<p><br></p>
+</div>
+<div id="interaction-terms" class="section level4">
+<h4>Interaction terms</h4>
+<p>The n-way ANOVA is the first kind of model we have used in which it is possible to consider <em>interactions</em> between two factors. An interaction is a situation that occurs when the effects of two or more factors is not additive. This means that the effect of gender might change for different species. For example, let us consider the following scenario in the lint data.</p>
+<p>Perhaps we hypothesize that lint accumulation in the belly buttons of females differs in pattern from males due to social grooming patterns and sex-specific behavioral patterns favoring females. As a result, we might expect that sex and species could have some kind of non-additive effect on lint mass in these apes. To test this, we would use the following:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a new model that includes an interaction, signified by &#39;*&#39;</span>
+  lint.modeli =<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
+  <span class="kw">summary</span>(lint.modeli)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = lintmass ~ species * gender, data = lint)
+## 
+## Residuals:
+##    Min     1Q Median     3Q    Max 
+## -2.525 -0.750  0.050  1.019  1.875 
+## 
+## Coefficients:
+##                             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)                  14.9250     0.7404  20.159 8.40e-14 ***
+## speciesSpecies 2             -2.2500     1.0471  -2.149   0.0455 *  
+## speciesSpecies 3             -1.2000     1.0471  -1.146   0.2668    
+## genderMale                    6.1500     1.0471   5.874 1.46e-05 ***
+## speciesSpecies 2:genderMale  -2.3750     1.4808  -1.604   0.1261    
+## speciesSpecies 3:genderMale  -1.3500     1.4808  -0.912   0.3740    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.481 on 18 degrees of freedom
+## Multiple R-squared:  0.8335, Adjusted R-squared:  0.7873 
+## F-statistic: 18.03 on 5 and 18 DF,  p-value: 1.898e-06</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">anova</span>(lint.modeli)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: lintmass
+##                Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## species         2  47.396  23.698 10.8079 0.0008253 ***
+## gender          1 144.550 144.550 65.9253 1.983e-07 ***
+## species:gender  2   5.676   2.838  1.2943 0.2984104    
+## Residuals      18  39.468   2.193                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p>Alas, in the case of the lint model, this interaction is not significant, so we now have some evidence to suggest that either our hypothesis or our experimental design (or both) were flawed.</p>
+<p>Note that the n-way ANOVA is also the framework within which the randomized block design is implemented. We will not cover that in this course as the implementation is identical to that above and virtually none of you will ever have any occasion to actually use a randomized block design.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="non-parametric-anova-kruskal-wallis" class="section level2">
+<h2>Non-parametric “ANOVA”: Kruskal-Wallis</h2>
+<p>We will give the non-parametric Kruskal-Wallis test a brief treatment here. The main reason that the treatment will be brief is that we will cover a wide variety of methods from now until the end of this course that will all but eliminate the need for this technique in your tool box. However, some of you will inevitably have some need for this (probably because the edict has been passed down to you from a superior who doesn’t ‘get’ GLM).</p>
+<p>We will use the <code>airquality</code> data for this example</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the data set</span>
+  <span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)
+<span class="co"># Now test for test for differences in Ozone levels between months in the</span>
+<span class="co"># data set.</span>
+  air.test =<span class="st"> </span><span class="kw">kruskal.test</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)
+  air.test</code></pre></div>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  Ozone by Month
+## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</code></pre>
+<p><br></p>
+<p>We find that there are signigicant shifts in median <code>Ozone</code> between <code>months</code>. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">boxplot</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Ozone&#39;</span>,
+    <span class="dt">xlab =</span> <span class="st">&#39;Month&#39;</span>)</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><br></p>
+<p>As far as the utility of Kruskal-Wallis goes, this is about it without getting into gross complexities that, in and of themselves, warrant an alternative approach. The alternative approach will be the focus of much discussion for the rest of the semester.</p>
+<p><br></p>
+</div>
+<div id="linear-regression" class="section level2">
+<h2>Linear regression</h2>
+<p>We have now considered the case of what to do when we have a numerical response and categorical explanatory variable(s). But, what if we have both a numerical response and numerical explanatory variables? Fear not, there is a stat for that! Now we are entering the realm of correlation and regression.</p>
+<p>When we fit a linear regression model, we are trying to explain relationships between some response of interest (dependent variable) and one or more explanatory (independent) variables.</p>
+<p>As with all linear models the goal of regression analysis is, in it’s simplest sense, to fit a line through all of the points in bivariate space that minimizes the distance between the points and a line of the form:</p>
+<p><span class="math display">\[y = mx + b\]</span></p>
+<p>or more appropriately:</p>
+<p><span class="math display">\[Y_i = \beta_0 + \beta_i X_i\]</span></p>
+<p>We will discuss this and other ideas related to linear models in class. In most cases, though, we will be estimating a parameter for the intercept and one parameter for each eplanatory variable of interest.</p>
+<blockquote>
+<p>Data!</p>
+</blockquote>
+<p>These data are for fertility and infant mortality rates as related to a number of socio-economic indicators. Take a moment to look at them:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(swiss)
+  ?swiss</code></pre></div>
+<p><br></p>
+<p>Now, let’s get cracking.</p>
+<p>We’ll start by fitting a simple model and then build complexity</p>
+<p>Fit a model that relates fertility to education level. Notice that this looks exactly the same as the call to lm for the ANOVAs above? That’s because they are the same thing and people have been lying to you your whole life!!!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and assign it to a named object</span>
+  fert.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)
+<span class="co"># Summarize the model</span>
+  <span class="kw">summary</span>(fert.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education, data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.036  -6.711  -1.011   9.526  19.689 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
+## Education    -0.8624     0.1448  -5.954 3.66e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.446 on 45 degrees of freedom
+## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
+<p><br></p>
+<p>We see that there is a significant negative relation between <code>Education</code> level and <code>fertility</code>. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.</p>
+<p>We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the <span class="math inline">\(R^2\)</span> value that is returned.</p>
+<p>This is as far as the summary goes for linear regression for now. That is, we don’t need the ANOVA table any more because we have no factors- just continuous variables. What we end up with in this summary are the coefficients (corresponding to parameters of a model) that can be used to describe the line that passes through the data and minimizes the residual errors.</p>
+<blockquote>
+<p>WHAT??</p>
+</blockquote>
+<p>Let’s explain this by actually looking at the data</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># First make a sequence of new values for Education across observed range</span>
+    new =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Education=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,.<span class="dv">1</span>))
+
+  <span class="co"># Plot the raw data</span>
+    <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="fl">4.5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+    <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility&#39;</span>,
+      <span class="dt">xlab=</span><span class="st">&#39;Education&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>))
+  <span class="co"># Now, we will add a trendline</span>
+    preds =<span class="st"> </span><span class="kw">predict</span>(fert.mod, <span class="dt">newdata=</span>new,
+      <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)
+    <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+    <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+    <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><br></p>
+<p>FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself</p>
+<p>We can, of course, extend this to include multiple continuous explanatory variables of interest. <strong>Example:</strong></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Effects of Education and % Catholic on fertility</span>
+  multiple.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">+</span>Catholic, <span class="dt">data=</span>swiss)
+  <span class="kw">summary</span>(multiple.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education + Catholic, data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -15.042  -6.578  -1.431   6.122  14.322 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 74.23369    2.35197  31.562  &lt; 2e-16 ***
+## Education   -0.78833    0.12929  -6.097 2.43e-07 ***
+## Catholic     0.11092    0.02981   3.721  0.00056 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.331 on 44 degrees of freedom
+## Multiple R-squared:  0.5745, Adjusted R-squared:  0.5552 
+## F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or if we want to get really crazy:</span>
+  full.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Agriculture<span class="op">+</span>Examination<span class="op">+</span>Education<span class="op">+</span>Catholic,
+    <span class="dt">data=</span>swiss)
+  <span class="kw">summary</span>(full.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Agriculture + Examination + Education + 
+##     Catholic, data = swiss)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -15.7813  -6.3308   0.8113   5.7205  15.5569 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 91.05542    6.94881  13.104  &lt; 2e-16 ***
+## Agriculture -0.22065    0.07360  -2.998  0.00455 ** 
+## Examination -0.26058    0.27411  -0.951  0.34722    
+## Education   -0.96161    0.19455  -4.943 1.28e-05 ***
+## Catholic     0.12442    0.03727   3.339  0.00177 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.736 on 42 degrees of freedom
+## Multiple R-squared:  0.6498, Adjusted R-squared:  0.6164 
+## F-statistic: 19.48 on 4 and 42 DF,  p-value: 3.95e-09</code></pre>
+<p><br></p>
+<p>During the next couple of weeks, we’ll try to figure out a way to deal with this rat’s nest of different explanatory variables.</p>
+<p><br></p>
+</div>
+<div id="analysis-of-covariance-ancova" class="section level2">
+<h2>Analysis of covariance (ANCOVA)</h2>
+<p>Alright, to wrap up this crazy, eye-opening week we are going to unleash the power of ANCOVA. Hopefully the power and limitations of this approach will be readily apparent to you. If not, we will talk about them to finish anyway so don’t worry.</p>
+<p>ANCOVA is the way into the world of real, complex data analyses. It will serve as the foundation for the next several weeks in this course. Get to know it well, it is your friend.</p>
+<p>So here we are:</p>
+<p>We are in the real world and we have multiple explanatory variables that we would like to test; some are factors and some are continuous. We want a nice elegant way of wrapping these all in to one analysis. How? It’s easier than you might think…</p>
+<p>Read in a new data set.</p>
+<p>This data set contains pulses of two species of crickets collected under varying temperatures.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the cricket data and assign it to a named object</span>
+  crickets =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/crickets.txt&#39;</span>)
+
+<span class="co"># Have a look</span>
+  <span class="kw">head</span>(crickets)</code></pre></div>
+<pre><code>##   Species Temp Pulse
+## 1      ex 20.8  67.9
+## 2      ex 20.8  65.1
+## 3      ex 24.0  77.3
+## 4      ex 24.0  78.7
+## 5      ex 24.0  79.4
+## 6      ex 24.0  80.4</code></pre>
+<p><br></p>
+<p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Fit the model</span>
+    cricket.mod =<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)</code></pre></div>
+<p><br></p>
+<p>Install the car package. We need a function from this library for summary.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># install.packages(&#39;car&#39;) # Uncomment front of line to install</span>
+    <span class="kw">library</span>(car)
+  <span class="co"># Now we create the anova table for our ancova model</span>
+    <span class="kw">Anova</span>(cricket.mod, <span class="dt">type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
+<pre><code>## Anova Table (Type III tests)
+## 
+## Response: Pulse
+##             Sum Sq Df   F value    Pr(&gt;F)    
+## (Intercept)   25.5  1    7.9906  0.008582 ** 
+## Species      598.0  1  187.3994 6.272e-14 ***
+## Temp        4376.1  1 1371.3541 &lt; 2.2e-16 ***
+## Residuals     89.3 28                        
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># And we can look at the summary of the linear model</span>
+    <span class="kw">summary</span>(cricket.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Pulse ~ Species + Temp, data = crickets)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0128 -1.1296 -0.3912  0.9650  3.7800 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -7.21091    2.55094  -2.827  0.00858 ** 
+## Speciesniv  -10.06529    0.73526 -13.689 6.27e-14 ***
+## Temp          3.60275    0.09729  37.032  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.786 on 28 degrees of freedom
+## Multiple R-squared:  0.9896, Adjusted R-squared:  0.9888 
+## F-statistic:  1331 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><br></p>
+<p>We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.</p>
+<p><br></p>
+<div id="making-and-plotting-model-predictions" class="section level3">
+<h3>Making and plotting model predictions</h3>
+<p>Here we will take a quick look at how to plot model predictions over our raw data to demonstrate the relationships we have discovered and to show how they compare to our observations.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Plot the raw data</span>
+    <span class="kw">plot</span>(crickets<span class="op">$</span>Temp,
+      crickets<span class="op">$</span>Pulse,
+      <span class="dt">pch=</span><span class="dv">21</span>,
+      <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[crickets<span class="op">$</span>Species],
+      <span class="dt">cex=</span><span class="fl">1.5</span>,
+      <span class="dt">ylab =</span> <span class="st">&#39;Pulse&#39;</span>,
+      <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
+      <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>)
+  <span class="co"># Add the y-axis labels and rotate them</span>
+    <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+
+
+<span class="co"># Make predictions from the fitted model object</span>
+  preds =<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod, <span class="dt">newdata =</span> crickets,
+    <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))
+
+  <span class="co"># Plot the predictions</span>
+    <span class="co"># Add prediction lines for species &#39;ex&#39;</span>
+      <span class="co"># Mean</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="co"># Lower</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="co"># Upper</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="co"># Add prediction lines for species &#39;niv&#39;</span>
+      <span class="co"># Mean</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="co"># Lower</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="co"># Upper</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="04_linearModels_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="assumptions-of-general-linear-models" class="section level2">
+<h2>Assumptions of general linear models</h2>
+<p>Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.</p>
+<p>There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.</p>
+<ol style="list-style-type: decimal">
+<li>Independence of observations.</li>
+<li>Normality of residuals (with mean=0 and sd=1)</li>
+<li>Homogeneity of variances (i.e. homoscedasticity)</li>
+</ol>
+<p>We will discuss what each of these means in class next week, and during the next several weeks we will discuss methods for verifying these assumptions or relaxing the assumptions to meet our needs through specific techniques</p>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

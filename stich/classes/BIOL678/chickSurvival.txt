@@ -1,0 +1,13 @@
+                 
+  model {                       
+    # Likelihood
+      for(i in 1:nobs){          
+        y[i] ~ dbin(p, N[i])      
+      }                         
+
+    # Priors
+      p ~ dbeta(a, b)               
+      a <- 1                    
+      b <- 1
+  }                             
+

@@ -1,0 +1,25 @@
+
+model {
+
+# Likelihood
+ for (i in 1:n) {
+    mass[i] ~ dnorm(mu[i], tau)		           # The random variable
+    mu[i] <- alpha[pop[i]] + beta* length[i] # Expectation
+ }
+
+# Priors
+ for (i in 1:ngroups){		
+    alpha[i] ~ dnorm(mu.int, tau.int)	# Random intercepts
+ }
+
+ mu.int ~ dnorm(0, 0.001)	  	# Mean hyperparameter for random intercepts
+ tau.int <- 1 / (sigma.int * sigma.int)
+ sigma.int ~ dunif(0, 100)		# SD hyperparameter for random intercepts
+
+ beta ~ dnorm(0, 0.001)			    # Common slope
+ tau <- 1 / ( sigma * sigma)		# Residual precision
+ sigma ~ dunif(0, 100)			    # Residual standard deviation
+
+
+}
+

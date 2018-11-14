@@ -1,0 +1,701 @@
+```{r child="_styles.Rmd"}
+```
+
+<br>
+ 
+## Generalized linear mixed models (GLMM)
+
+<br>
+
+This week in lecture, we introduced the generalized linear mixed model (GLMM). As we have discussed, the GLMM is to the linear mixed model as the GLM is to the general linear model (ANOVA, linear regression, ANCOVA, etc.). That is to say, the GLMM is just an LMM that assumes some error distribution other than normal. This week in lab, we will practice running GLMMs using restricted maximum likelihood estimation (REML) in the `lme4` package in R, and using Bayesian estimation in JAGS through the `R2jags` package in R. We will play with a couple of different data sets this week, and give you the choice of which to pursue further.
+
+<br>
+
+## Choose your own data adventure {.tabset .tabset-fade} 
+<!-- .tabset-fade .tabset-pills} -->
+
+<br>
+ 
+This week we will work with two different data examples to demonstrate a couple different applications of GLMM to non-normal data. The binomial and Poisson distributions are commonly used to describe biological and ecological processes due to the nature of the data we collect. Therefore, one of the examples this week will use a Bernouli response (special case of the binomial where `N` = 1), and the other will use a Poisson (count) response to demonstrate the application of GLMMs in biology and ecology. Please realize that these examples hold true for any response that takes similar forms, and they are easily generalized to include a wide variety of other sampling distributions.
+
+<br>
+For our assignments this week, students can choose to work with either one of these examples, and must only submit a write-up for one of them. You choose, although I encourage you to explore with both of them to investigate similarities and differences in how things work for the models.
+
+<br>
+
+### <span style="color:black"> Walleye phenology</span>
+
+<br>
+ 
+#### **Walleye in spring** 
+
+<br>
+ 
+It is that magical time of year again. Birds are returning from their winter vacations, and all of the critters are twitterpaited. The salamanders and frogs are making there way to breeding pools in the soaked leaf litter, and even the fish are warming up for the spawn. There's only one problem: we don't quite know when those fish are going to get into the streams so we can catch them, clip their fins, put some tags in them, and study their every move (...muwahaha...).
+
+<br>
+ 
+For this first example, we will attempt to predict counts of walleye, *Sander vitreus*, in spawning streams of Otsego Lake based on historical counts and climate data.
+
+<br>
+ 
+##### **Walleye data**
+
+<br>
+ 
+We begin by reading in the data set:
+
+<br>
+ 
+```{r}
+# Read in the walleye data
+  wae = read.csv('http://employees.oneonta.edu/stichds/data/otsegoRunCounts.csv', stringsAsFactors = FALSE)
+```
+
+<br>
+ 
+Have a look at the first ten lines of the data set:
+```{r}
+  head(wae, 10)
+```
+
+<br>
+ 
+And check out the data structure   
+
+<br>
+ 
+```{r}  
+ str(wae)
+```
+
+<br>
+ 
+These data are measurements of the length and mass of individual walleye at various reproductive stages that were captured in spawning tributaries of Otsego Lake during the 2009 and 2013 spawning season. 
+
+We will use the data to predict number of walleye we expect to see each day in the spawning tribs during spring 2017 based on historical counts.
+
+<br>
+ 
+##### **Climate data**
+
+<br>
+ 
+For this example, we are interested in predicting the timing of the walleye run. Generally speaking, phenology of spawning events in fishes and many other animals is driven by circannual rhythms entrained by photoperiod. However, temperature often acts as a trigger for releasing behavior related to spawning...**Translation**: if we want to predict timing of the spawning run, we need to have data for photoperiod and temperature, too!
+
+I collected some of this information ahead of time for you. Temperature, precipitation, and snow depth data were downloaded from the following, surely reliable, [website](http://www.usclimatedata.com/climate/cooperstown/new-york/united-states/usny0326/2017/3).
+
+Read in the data an have a look at the structure
+
+<br>
+ 
+```{r}
+# Read in the climate data
+  climate=read.csv('http://employees.oneonta.edu/stichds/data/tempdata.csv', stringsAsFactors = FALSE)
+
+# Have a look at the data structure
+  str(climate)
+```
+
+<br>
+ 
+##### **Data management**
+
+<br>
+ 
+###### **Walleye counts**
+
+<br>
+ 
+Okay, so now we have fish records by date and we have some climate data for those same dates and then some. Now, we need to smash all of those data together so we can use them.
+
+Our first step will be to summarize the walleye data by date. To do this, we will use the `plyr` package in R.
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+# Load the package
+  library(plyr)
+```
+
+<br>
+ 
+Tally up total counts of walleye in each stream on each day.
+
+<br>
+ 
+```{r}
+# Make a column of ones that we can sum
+wae$pres = 1
+
+weye = ddply(wae, c('date', 'site'), summarize, counts = sum(pres))
+```
+
+<br>
+ 
+###### **Climate data**
+
+<br>
+ 
+Next, we will get the climate data in order. 
+
+Because temperature fluctuates pretty widely in the spring, we often think of accumulated thermal units (ATU) or degree days as having more of an influence on the reproductive biology of many organisms rather than just absolute temperatures. You can think of degree days as the sum of all temperatures from some starting date until some ending date. In our case, we will add up the degree days from January 1 until date i in our dataframe to get degree days for each observation.
+
+First, we will convert our temperatures to celcius like the rest of the world.
+
+<br>
+ 
+```{r}
+# Convert from farenheit to celcius
+  climate$high_c = (climate$high_f-32)*5/9
+  climate$low_c = (climate$low_f-32)*5/9
+```
+
+<br>
+ 
+Next, we will calculate degree days (in $^{\circ}$C) using both the high temp and the low temp. We will start by calculating the mean of highs and lows, and then add them up for the time period of interest. Ideally, we would be working with averages, but this will do for now.
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+# Calculate mean based on daily highs and lows
+  climate$mean_c = apply(climate[ , 4:5], 1, mean)
+
+# Exclude values less than zero from this calculation
+  climate$ddPrep = climate$mean_c
+  
+  climate$ddPrep[climate$ddPrep < 0] = 0
+
+# Change date to a date object from factor
+  # Load lubridate package
+    library(lubridate)
+  # Convert to date
+    climate$date = as.Date(as.character(climate$date),
+                           format="%m/%d/%Y")
+  # Get ordinal date
+    climate$day = yday(climate$date)
+  # Get year
+    climate$year = year(climate$date)
+  # Sort climate data by date and year
+    climate = climate[with(climate, order(year, day)), ]    
+    
+# Add up the values to calculate degree days for each year
+  # Split the dataframe up into a list with a df for each year
+    test = split(climate$ddPrep, climate$year)
+  # Replace NA values of temperature with arithmetic mean of 
+  # preceding and following elements
+    library(zoo)
+    test = mapply(na.approx, test)
+  # Calculate degree days for each year  
+    dd = mapply(cumsum, test)
+  # Unlist the result and add it to the climate data  
+    climate$dd = unlist(dd)
+    climate$dd2 = climate$dd^2
+```
+
+<br>
+ 
+We can now add degree days to our fish data. What? Fish data? I forgot we had that!
+
+To wrap up our climate analysis, we will quickly calculate day length at Otsego Lake based on lattitude for each day of our historical records using the `geosphere` package.
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+library(geosphere)
+climate$daylight = daylength(lat = 42.76, doy = climate$day)
+climate$daylight2 = climate$daylight^2
+```
+
+<br>
+ 
+Our final job will be to add all of the climate data to our new dataframe containing walleye counts. This is relatively easy to do in R using the `merge` function, like so:
+
+<br>
+ 
+```{r}
+# First, format the date column in the weye df
+  weye$date = as.Date(as.character(weye$date),
+                      format="%m/%d/%Y")  
+
+# Merge the two dataframes
+  eyes = merge(weye, climate)
+
+# Finally, we are going to get rid of Leatherstocking 
+# for now because there are few data points there
+  eyes = eyes[eyes$site!='Leatherstocking Creek', ]
+  
+# Check to see how much data we have left
+  nrow(eyes)
+```
+
+<br>
+ 
+Wow, that's rough! We went from several hundred lines of data to just a handful pretty quickly!!
+
+<br>
+ 
+##### Modeling counts
+
+<br>
+ 
+After our data management triathalon, we can finally model walleye counts as a function of some explanatory variables of interest. As has become our practice during the last several lessons, we will do this in both frequentist and Bayesian frameworks.
+
+<br>
+ 
+###### REML Estimation
+
+<br>
+ 
+We start by estimating a model using REML. Let's say for the sake of argument that we are simply interested in the lake-wide mean of our counts so that we know when students should, for example, be heading out to tributaries to look for walleyes in streams. 
+
+For now, we will model walleye count as a function of photoperiod, with a random effect of site on the intercepts. This model assumes that there is variability in counts of spawning individuals between sites, but that the relationship between photoperiod and count is the same across all sites. In this case, we will specify a quadratic relationship between counts and dates because we expect the number of fish to increase to some point in the run before it decreases. We are not interested
+
+In the `lme4` package, the model might look something like this:
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Load the package
+  library(lme4)
+
+# Make the model
+  waeMod1 = glmer(counts~dd + dd2 + (1|site), data=eyes, family=poisson)
+  
+# Have a look-see at the results
+  summary(waeMod1)
+```
+
+<br>
+ 
+Crap! Our model failed to converge. It looks like this is probably because we have variables on really different scales, and because we have a lot of colinearity between them. So, let's try standardizing our covariates to see what we can do about that:
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Standardize photoperiod
+  eyes$sdd = scale(eyes$dd) 
+
+# Make the model
+  waeMod2 = glmer(counts~sdd + I(sdd^2) + (1|site), data=eyes,
+                  family=negative.binomial(theta=1000))
+  
+# Have a look-see at the results
+  summary(waeMod2)
+```
+
+<br>
+ 
+Okay, looks like we are doing a lot better with this now.
+
+As we look through these results, we can see that we have a significant effect of daylight on spawning behavior. What's more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.
+
+Now, if we want, we can make a graph to show these predictions. Here, we make predictions for all years, and then we plot those predictions for a single site (`Shadow Brook`).
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+# Load the merTools package
+  library(merTools)
+  
+# Make a new dataframe for prediction
+  sdd = seq(from = min(eyes$sdd), to = max(eyes$sdd), by = .1)
+  site = sort(rep(unique(eyes$site), length(sdd)))
+  sdd = rep(sdd, length(unique(eyes$site)))
+  newdata = data.frame(sdd)
+  
+# Simulate predictions from the relationship stored in the model fit using
+# our new data
+  PI <- predictInterval(merMod = waeMod2, newdata = newdata, 
+                        level = 0.95, n.sims = 1000,
+                        stat = "median", type="linear.prediction",
+                        include.resid.var = TRUE)
+  PI = apply(PI, c(1, 2), exp)
+  
+# Plot the raw data but don't label the x-axis
+# because we will want to add unstandardized labels
+# even though our regression used standardized labels
+  plot(eyes$sdd[eyes$site=='Shadow Brook'],
+       eyes$counts[eyes$site=='Shadow Brook'],
+       ylim = c(0,500), pch=21,
+       bg=c('gray87', 'gray60','gray40', 'black')[as.factor(eyes$year)],
+       cex=1.9, xlab='Degree days', ylab='Count',
+       xaxt='n'
+       )
+
+# Add lines to the plot
+  lines(newdata$sdd[site=='Shadow Brook'],
+        PI[site=='Shadow Brook',1], lty=2, lwd=2, col='blue') # Mean
+  lines(newdata$sdd[site=='Shadow Brook'],
+        PI[site=='Shadow Brook',2], lty=2, lwd=2, col='red') # Lower
+  lines(newdata$sdd[site=='Shadow Brook'],
+        PI[site=='Shadow Brook',3], lty=2, lwd=2, col='red') # Upper
+```
+
+<br>
+ 
+We could also do this using our global parameter estimates and some new data. We see that our mean predictions aren't terrible, but there is quite a bit of uncertainty here.
+
+<br>
+ 
+##### **Bayesian estimation**
+
+<br>
+ 
+We can fit the same model in the Bayesian framework, too. Here we specify it just as we have during the past couple of weeks.
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+# Write model
+modelstring="
+model {
+
+# Likelihood
+ for(i in 1:n){
+    count[i] ~ dnegbin(p[i], r)     # The random variable
+    p[i] <- r/(r+lambda[i])
+    log(lambda[i]) <- mu[i]
+    mu[i] <- alpha[site[i]] + beta*sdd[i] + beta2*(sdd[i]^2) # Expectation
+ }
+
+# Priors
+ for (i in 1:ngroups){      
+    alpha[i] ~ dnorm(mu.int, tau.int)   # Random intercepts
+ }
+
+ mu.int ~ dnorm(0, 0.1)       # Mean hyperparameter for random intercepts
+ tau.int <- 1 / (sigma.int * sigma.int)
+ sigma.int ~ dunif(0, 100)      # SD hyperparameter for random intercepts
+
+ beta ~ dnorm(0, 0.001)          # Common slope
+ taub <- 1 / ( sigmab * sigmab)    # Residual precision
+ sigmab ~ dunif(0, 100)          # Residual standard deviation
+
+ beta2 ~ dnorm(0, 0.0001)          # Common slope
+ taub2 <- 1 / ( sigmab2 * sigmab2)    # Residual precision
+ sigmab2 ~ dunif(0, 100)          # Residual standard deviation
+
+ r ~ dgamma(0.01, 0.001)          # Site-specific overdispersion
+
+
+}
+"
+writeLines(modelstring, "waeModel.txt")
+
+# Bundle data
+  wae.data <- list(count=eyes$count,
+                   site = as.numeric(as.factor(eyes$site)), 
+                   sdd = as.vector(eyes$sdd),
+                   ngroups = length(unique(eyes$site)),
+                   n = nrow(eyes)
+                   )
+  
+# Inits function
+inits <- function(){
+  list(
+    alpha = rnorm(length(unique(eyes$site)), 0, 1),
+    r = rgamma(length(unique(eyes$site)), 0.1, 0.01),
+    beta = rnorm(1, 0, 1),
+    beta2 = rnorm(1, 0, 10),
+    mu.int = rnorm(1, 0, 1),
+    sigma.int = rlnorm(1),
+    sigmab = rlnorm(1),
+    sigmab2=rlnorm(1)
+  )}
+
+# Parameters to estimate
+parameters <- c("alpha", "beta", "beta2","mu.int", "sigma.int", "sigmab",
+                "sigmab2")
+
+# MCMC settings
+ni <- 5000
+nb <- 1000
+nt <- 10
+nc <- 3
+
+# Load the package
+  library(R2jags)
+
+# Run the Gibbs sampler
+  out <-jags(wae.data, inits=NULL, parameters, "waeModel.txt", n.thin=nt, 
+  n.chains=nc, n.burnin=nb, n.iter=ni, progress.bar = 'none')
+  
+# Print the results  
+  print(out$BUGSoutput$summary[ , c(1:3, 7:9)], digits=3)
+```
+
+<br>
+ 
+We notice that all parameters converge. Note that if we run this without standardizing our degree day covariate, convergence is not quite as clean. This is likely because of correlations between `dd` and `dd2`. Just as we did for the REML model, we could plot predictions for these results...
+
+<br>
+ 
+```{r}
+# Make a new sequence of standardized degree days  
+  sdd = seq(-3, 3, .1)
+
+# Make prediction from the model parameters
+  fit = exp(
+    mean(out$BUGSoutput$sims.list$mu.int)+
+    mean(out$BUGSoutput$sims.list$beta)*sdd+
+    mean(out$BUGSoutput$sims.list$beta2)*(sdd^2))
+
+  lcis = exp(
+    quantile(out$BUGSoutput$sims.list$mu.int, probs=.025)+
+    quantile(out$BUGSoutput$sims.list$beta, probs=.025)*sdd+
+    quantile(out$BUGSoutput$sims.list$beta2, probs=.025)*(sdd^2))
+  
+  ucis = exp(
+    quantile(out$BUGSoutput$sims.list$mu.int, probs=.975)+
+    quantile(out$BUGSoutput$sims.list$beta, probs=.975)*sdd+
+    quantile(out$BUGSoutput$sims.list$beta2, probs=.975)*(sdd^2))
+  
+# Plot the predictions
+  plot(eyes$sdd, eyes$counts,
+       pch=21, bg='gray', cex=1.2,
+       ylim=c(0, max(eyes$counts)+50),
+       xlim=c(-3, 3),
+       xlab='Degree days (C)', ylab='Count of spawners',
+       xaxt='n', yaxt='n')
+  lines(sdd, fit, lwd=2, lty=1, col='blue')
+  lines(sdd, lcis, lwd=2, lty=2, col='red')
+  lines(sdd, ucis, lwd=2, lty=2, col='red')
+
+# Add a new x-axis 
+  axis(side=1,
+         at=seq(-3, 3, 0.5),
+         labels= 
+           #Get dd on original scale from a sequence
+           # of new standardized values
+           round(
+             seq(-3, 3, 0.5)*sd(eyes$dd)+mean(eyes$dd)
+             )
+         )
+  
+# Add a rotated y-axis
+  axis(2, las=2)
+```
+
+<br>
+ 
+##### **Your mission**
+
+<br>
+ 
+For this option, I want you to do the following:
+
+<br>
+ 
+\item 1. Use the degree day data from 2018 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. Treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now!
+
+\item 2. Tell me how many walleye you predicted that the crew caught on Tuesday 10 April 2018. Then, tell me how many you predict they will catch 12 April 2018 (tonight).
+
+<br>
+ 
+### <span style="color:gray"><b> **Plant surveys** </b></span>
+
+<br>
+
+#### **Big milfoil problems**
+
+<br>
+ 
+For this example, we will look at increases or decreases in Eurasian watermilfoil (*Myriophylum spicatum*) following herbicide treatment at different doses. We will use a Bernoulli response (1 or 0) to test effects of secchi depth on treatment response across 30 sites.
+
+<br>
+ 
+#### **Data**
+
+<br>
+ 
+Start by reading in the data:
+
+<br>
+ 
+```{r}
+# Read in the plant data
+  plants = read.csv("http://employees.oneonta.edu/stichds/data/plants.csv")
+```
+
+<br>
+ 
+This is a pretty straightforward data set compared to the walleye phenology set (hopefully that is not what led you here). We have 5 paired samples of Eurasian watermilfoil from each of 30 sites before and after treatment with herbicide. Those data have been condensed to indicate whether the species increased or decreased at each site following herbicide application. Here, we will investigate the influence of Secchi depth (an index for water clarity where greater values indicate clearer water) on this response, while accounting for random variation between sites.
+
+<br>
+ 
+##### **Estimation with REML**
+
+<br>
+ 
+To start with, we will fit the model using REML. Here, we need to remember to specify a site-specific random effect on the intercept and we need to give R the `family` for our link function.
+
+<br>
+ 
+```{r}
+# Fit the model and store it to an object
+  plantMod1=glmer(increase~secchi+(1|site), data=plants, family=binomial)
+
+# Take a look at the results
+  summary(plantMod1)
+```
+
+<br>
+ 
+After a quick look at the results, we see that Secchi depth has a significant, poositive effect on the probability that plant biomass will increase following this herbicide application.
+
+We could make a graph of these results as follows:
+
+<br>
+ 
+```{r}
+# First, make a function to invert the logit
+  invlogit=function(x){exp(x)/(1+exp(x))}
+
+# Now we can make predictions
+  newSecchi = seq(0, 5, 0.10)
+  preds = -4.744 + 1.980*newSecchi
+  
+  plot(newSecchi, invlogit(preds), type='l', lwd=2, col='blue')
+  
+```
+
+<br>
+ 
+##### **Bayesian estimation**
+
+<br>
+ 
+Now, we will estimate a model using Bayesian methods.
+
+<br>
+ 
+```{r}
+modelstring="
+      model{
+
+        # Priors
+          for(i in 1:ngroups){
+            alpha[i] ~ dnorm(mu.int, tau.int) # Random intercepts
+          }
+
+          mu.int ~ dnorm(0, 0.001)            # Mean hyperparameter for ran. intercepts
+          tau.int <- 1/(sigma.int*sigma.int)  # Precision for random intercepts
+          sigma.int ~ dunif(0, 100)           # SD hyperparameter for ran. intercepts
+
+          beta ~ dnorm(0, 0.001)              # Common slope for beta
+
+        # Likelihood
+          for(i in 1:N){
+            y[i] ~ dbern(mu[i])
+            logit(mu[i]) <- alpha[site[i]] + beta*secchi[i]
+          }
+        }
+"
+writeLines(modelstring, "plantModel.txt")
+
+```
+
+> Make the data 
+
+```{r}
+# Package the data in a list for JAGS
+    jags.data <- list(
+      y = plants$increase,
+      site = plants$site,
+      secchi=plants$secchi,
+      ngroups=length(unique(plants$site)),
+      N = nrow(plants)
+    )
+```
+
+> Define parameters for monitoring
+
+```{r}
+# Specify the parameters we want to monitor
+    parameters = c("alpha", "beta", "mu.int", "sigma.int")
+```
+
+> Specify initial values
+
+```{r}
+# Make a function to declare some initial values.
+    inits = function(){
+      list(
+        alpha = rnorm(length(unique(plants$site)), 0, 2),
+        beta = rnorm(1,1,1),
+        mu.int = rnorm(1,0,1),
+        sigma.int = rlnorm(1)
+      )
+    }
+```
+
+> Define MCMC settings for Gibbs sampler
+
+```{r}
+# MCMC settings
+  ni <- 15000
+  nt <- 3
+  nb <- 5000
+  nc <- 3
+```
+
+> Run the model
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Load the R2jags package
+  library(R2jags)
+
+# Call JAGS from R and run the model
+   plant_glmm <- jags(jags.data, inits, parameters,
+     "plantModel.txt", n.chains = nc, n.thin = nt, n.iter = ni,
+     n.burnin = nb, progress.bar = 'none')
+```
+
+```{r, eval=FALSE, message=FALSE, warning=FALSE}
+# Load the R2jags package
+  library(R2jags)
+
+# Call JAGS from R and run the model
+   plant_glmm <- jags(jags.data, inits, parameters,
+     "plantModel.txt", n.chains = nc, n.thin = nt, n.iter = ni,
+     n.burnin = nb)
+```
+
+> Look at the results
+
+```{r}
+# Print the model
+  print(plant_glmm, digits=3)
+```
+
+<br>
+ 
+As you can see from the output, we have estimates of probability of increase in plant biomass on the logits scale for each site. If we wanted to see the overall average effect of Secchi depth on treatment effectiveness, we could look at it like this:
+
+<br>
+ 
+```{r}
+newSecchi = seq(0, 10, 1)
+preds = plant_glmm$BUGSoutput$mean$mu.int + plant_glmm$BUGSoutput$mean$beta*newSecchi
+preds = invlogit(preds)
+plot(newSecchi, preds, type='l', col='blue', xlab='Secchi depth (m)', ylab='Probability of increase')
+
+```
+
+<br>
+ 
+##### **Your mission**
+
+<br>
+ 
+For this option, I want you to do the following:
+
+\item 1. Run the model out to convergence and make sure n.eff is sufficiently large.
+
+\item 2. Plot the overall mean posterior predictions for *each iteration* of the simulation in gray, and show lines for the mean, and 95% CRI, as we did in lab last week (and in the LMM lecture, and in the GLMM lecture).
+
+<br>
+ 
+<br>
+ 

@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="linear-mixed-models" class="section level1">
+<h1>Linear mixed models</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>We introduced the linear mixed effects model this week, and we looked at examples of how to incorporate random effects in our inference within both frequentist and Bayesian frameworks for analysis. We will continue to probe these tools in our lab exercise this week and build some comfort working with these hierarchical models. By the end of this lab, you should be comfortable 1) specifying random effects in models, 2) running those models using restricted maximum likelihood (REML) estimation and Bayesian hierarchical models, 3) graphically dsiplaying results, and 4) communicating the methods and the results of this work through technical writing.</p>
+<p><br></p>
+</div>
+<div id="the-data" class="section level2">
+<h2>The data</h2>
+<p><br></p>
+<p>This week we will play with Yellow Perch data from the New York State Department of Environmental Conservation (NYSDEC) fisheries database. These data were collected by the NYSDEC throughout NY over the past few decades.</p>
+<p>Let’s have a look:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data file</span>
+<span class="co"># We are reading it in with the optional argument because we don&#39;t want to deal</span>
+<span class="co"># with code relicts when we start dropping factor levels</span>
+  fish =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;http://employees.oneonta.edu/stichds/data/allwaters.txt&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)
+
+<span class="co"># Look at the data structure</span>
+  <span class="kw">str</span>(fish)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    64935 obs. of  15 variables:
+##  $ Water    : chr  &quot;Lake Ronkonkoma&quot; &quot;Lake Ronkonkoma&quot; &quot;Lake Ronkonkoma&quot; &quot;Lake Ronkonkoma&quot; ...
+##  $ County   : chr  &quot;Suffolk&quot; &quot;Suffolk&quot; &quot;Suffolk&quot; &quot;Suffolk&quot; ...
+##  $ Region   : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ Date     : chr  &quot;9/8/2004 0:00:00&quot; &quot;9/8/2004 0:00:00&quot; &quot;9/8/2004 0:00:00&quot; &quot;9/8/2004 0:00:00&quot; ...
+##  $ GearCd   : chr  &quot;1G0191&quot; &quot;1G0191&quot; &quot;1G0191&quot; &quot;1G0191&quot; ...
+##  $ IF_Key   : int  1467469506 17576464 -1806054190 -658875809 -1027593693 1548594411 654285523 573244617 1576250293 -216573083 ...
+##  $ Length   : int  611 260 281 423 492 264 452 462 265 488 ...
+##  $ Weight   : int  2268 133 168 693 1076 141 870 970 147 1087 ...
+##  $ SpeciesCd: int  626 626 626 626 626 626 626 626 626 626 ...
+##  $ Name     : chr  &quot;Walleye&quot; &quot;Walleye&quot; &quot;Walleye&quot; &quot;Walleye&quot; ...
+##  $ Age      : int  7 1 1 3 5 1 3 3 1 3 ...
+##  $ IF_ID    : int  1467469506 17576464 -1806054190 -658875809 -1027593693 1548594411 654285523 573244617 1576250293 -216573083 ...
+##  $ NYTME    : num  6583 6583 6583 6583 6583 ...
+##  $ NYTMN    : num  45211 45211 45211 45211 45211 ...
+##  $ Altitude : num  55 55 55 55 55 55 55 55 55 55 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And, have a look at the first few lines of data</span>
+  <span class="kw">head</span>(fish)</code></pre></div>
+<pre><code>##             Water  County Region             Date GearCd      IF_Key
+## 1 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1467469506
+## 2 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191    17576464
+## 3 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1806054190
+## 4 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  -658875809
+## 5 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1027593693
+## 6 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1548594411
+##   Length Weight SpeciesCd    Name Age       IF_ID NYTME NYTMN Altitude
+## 1    611   2268       626 Walleye   7  1467469506  6583 45211       55
+## 2    260    133       626 Walleye   1    17576464  6583 45211       55
+## 3    281    168       626 Walleye   1 -1806054190  6583 45211       55
+## 4    423    693       626 Walleye   3  -658875809  6583 45211       55
+## 5    492   1076       626 Walleye   5 -1027593693  6583 45211       55
+## 6    264    141       626 Walleye   1  1548594411  6583 45211       55</code></pre>
+<p><br></p>
+<p>As you can see, there are a <em>ton</em> of lakes in this dataset, and it contains information for both yellow perch (<em>Perca flavescens</em>) and walleye (<em>Sander vitreus</em>). The lakes are scattered throughout NY. So, before we can start working with the data we want, we need to get them out of this mess.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove observations for which we lack mass</span>
+  fish =<span class="st"> </span>fish[fish<span class="op">$</span>Name<span class="op">==</span><span class="st">&#39;Yellow Perch&#39;</span> <span class="op">&amp;</span><span class="st"> </span>fish<span class="op">$</span>Region<span class="op">==</span><span class="dv">4</span>, ]
+
+<span class="co"># Check to see how many rows we have left</span>
+  <span class="kw">nrow</span>(fish)  </code></pre></div>
+<pre><code>## [1] 2786</code></pre>
+<p><br></p>
+<p>And that’s the sad reality. In any case, this is more than enough for what we will do this week.</p>
+<p><br></p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p><br></p>
+<p>Following in the footsteps of the great Kery (2010), we will play around with some length-weight relationships this week. Length-weight regression is a standard tool used in fishery assessment, but also has application to a wide variety of body condition metrics in other species (including people!). And, the methods that we will use to analyze length-weight relationships are more generally just one example of the linear mixed models we might use whenever we have normal or log-normal data that we want to use for inference.</p>
+<p>This week, we are going to fit some random effects models in order to investigate relationships between length and mass for fish collected in different lakes. We will start with a random effect on the intercept, and you will push on to fit a model that includes random effects on both the intercepts and slopes.</p>
+<p>For our first example, we will fit length-weight regressions for fish with random effects of age on the intercept.</p>
+<p>We will start by taking a look at the data we have to work with. First, we want to see how many unique waterbodies we have, and what they are.</p>
+<p>We see that we have thirteen waters left in the data that actually contain yellow perch and are in Region 4. Let’s also make ourselves a variable to store the number of lakes we have to make the programming below a little easier.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How many unique lakes do we have left?</span>
+  <span class="kw">sort</span>(<span class="kw">unique</span>(fish<span class="op">$</span>Water))</code></pre></div>
+<pre><code>##  [1] &quot;Blenheim Gilboa Reservoir&quot; &quot;Burden Lake&quot;              
+##  [3] &quot;Canadarago Lake&quot;           &quot;Dunham Reservoir&quot;         
+##  [5] &quot;Dyking Pond&quot;               &quot;Goodyear Lake&quot;            
+##  [7] &quot;Kinderhook Lake&quot;           &quot;Mariaville Lake&quot;          
+##  [9] &quot;Rossman Pond&quot;              &quot;Schenevus Lake&quot;           
+## [11] &quot;Schoharie Reservoir&quot;       &quot;Tomhannock Reservoir&quot;     
+## [13] &quot;Unnamed Water&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Count the number of unique values and store it in an object</span>
+  nwaters =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(fish<span class="op">$</span>Water))  </code></pre></div>
+<p><br></p>
+<p>Okay, now that we know what we are working with here, we can specify our models in much the same way that we did in lecture this week.</p>
+<p><br></p>
+<div id="reml-implementation" class="section level3">
+<h3>REML implementation</h3>
+<p><br></p>
+<p>We start by estimating the model with REML. The model converges quickly.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the lme4 library</span>
+  <span class="kw">library</span>(lme4)
+
+<span class="co"># Fit the model</span>
+  ypLME =<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">I</span>(<span class="kw">log10</span>(Weight))<span class="op">~</span><span class="kw">I</span>(<span class="kw">log10</span>(Length)) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>Water), <span class="dt">data=</span>fish)
+  
+<span class="co"># Examine the fit</span>
+  <span class="kw">summary</span>(ypLME)</code></pre></div>
+<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
+## Formula: I(log10(Weight)) ~ I(log10(Length)) + (1 | Water)
+##    Data: fish
+## 
+## REML criterion at convergence: -2384.8
+## 
+## Scaled residuals: 
+##     Min      1Q  Median      3Q     Max 
+## -5.5287 -0.5322  0.0217  0.5541  5.5680 
+## 
+## Random effects:
+##  Groups   Name        Variance Std.Dev.
+##  Water    (Intercept) 0.002782 0.05274 
+##  Residual             0.004934 0.07024 
+## Number of obs: 984, groups:  Water, 12
+## 
+## Fixed effects:
+##                  Estimate Std. Error t value
+## (Intercept)      -5.48908    0.04219  -130.1
+## I(log10(Length))  3.23911    0.01754   184.7
+## 
+## Correlation of Fixed Effects:
+##             (Intr)
+## I(lg10(Ln)) -0.927</code></pre>
+<p><br></p>
+<p>We see that we got a nice tight fit to the data in this case. Also notable in this specific model is the negative correlation between the fixed effects. This is a well-known phenomenon, but worth recognizing. If we wanted to go further, we could account for this correlation in our model structures directly.</p>
+<p>For reporting, we could make a graph showing the mean of the regional relationship, or we could dig into the random coefficients for each model using the methods detailed in the lecture material from this week.</p>
+<p><br></p>
+</div>
+<div id="bayesian-implementation" class="section level3">
+<h3>Bayesian implementation</h3>
+<p><br></p>
+<p>Next, we will fit the model in JAGS.</p>
+<p>Here, we tell JAGS that the response (mass) is a random variable that has a normal distribution with a mean of <span class="math inline">\(\mu\)</span>, and a precision of <span class="math inline">\(\tau\)</span>. Recall that <span class="math inline">\(\tau\)</span> is precision (the inverse of <span class="math inline">\(\sigma\)</span>). Next, we tell JAGS that the mean (expected value) of the response can be described as a linear function of waterbody and length. We specify waterbody-specific priors for the intercept term, <span class="math inline">\(\alpha\)</span>, each of which has a mean of <span class="math inline">\(\mu_int\)</span> and a standard deviation of <span class="math inline">\(\sigma_int\)</span>. The values of hyperparameters <span class="math inline">\(\mu_int\)</span> and <span class="math inline">\(\sigma_int\)</span> are drawn from hyperpriors on the regional mean and standard deviations for the length-weight relationship. Finally, we specify a single prior for <span class="math inline">\(\beta\)</span> to indicate that the slope (relationship between length and mass) is the same across all water bodies.</p>
+<blockquote>
+<p>Specify the model</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write model</span>
+  modelstring=<span class="st">&quot;</span>
+<span class="st">    model {</span>
+<span class="st">  </span>
+<span class="st">    # Likelihood</span>
+<span class="st">     for (i in 1:n) {</span>
+<span class="st">        mass[i] ~ dnorm(mu[i], tau)                  # The random variable</span>
+<span class="st">        mu[i] &lt;- alpha[water[i]] + beta* length[i] # Expectation</span>
+<span class="st">     }</span>
+<span class="st">    </span>
+<span class="st">    # Priors</span>
+<span class="st">     for (i in 1:nwaters){      </span>
+<span class="st">        alpha[i] ~ dnorm(mu.int, tau.int)     # Random intercepts</span>
+<span class="st">     }</span>
+<span class="st">    </span>
+<span class="st">     mu.int ~ dnorm(0, 0.01)          # Mean hyperparameter for random intercepts</span>
+<span class="st">     tau.int &lt;- 1 / (sigma.int * sigma.int)</span>
+<span class="st">     sigma.int ~ dunif(0, 10)           # SD hyperparameter for random intercepts</span>
+<span class="st">    </span>
+<span class="st">     beta ~ dnorm(0, 0.01)          # Slope</span>
+<span class="st">     </span>
+<span class="st">     tau &lt;- 1 / ( sigma * sigma)        # Residual precision</span>
+<span class="st">     sigma ~ dunif(0, 10)                 # Residual standard deviation</span>
+
+<span class="st">    }</span>
+<span class="st">  &quot;</span>
+  <span class="kw">writeLines</span>(modelstring, <span class="st">&quot;ypModel.txt&quot;</span>)</code></pre></div>
+<blockquote>
+<p>Make a list of the data for JAGS</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Bundle data</span>
+  fish.data &lt;-<span class="st"> </span><span class="kw">list</span>(
+    <span class="dt">mass =</span> <span class="kw">log10</span>(fish<span class="op">$</span>Weight),
+    <span class="dt">water =</span> <span class="kw">as.numeric</span>(<span class="kw">as.factor</span>(fish<span class="op">$</span>Water)), 
+    <span class="dt">length =</span> <span class="kw">log10</span>(fish<span class="op">$</span>Length),
+    <span class="dt">nwaters =</span> <span class="kw">length</span>(<span class="kw">unique</span>(fish<span class="op">$</span>Water)),
+    <span class="dt">n =</span> <span class="kw">nrow</span>(fish))</code></pre></div>
+<blockquote>
+<p>Specify initial values for each of the Markov chains</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Inits function</span>
+inits &lt;-<span class="st"> </span><span class="cf">function</span>(){<span class="kw">list</span>(
+  <span class="dt">mu.int =</span> <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">sigma.int =</span> <span class="kw">rlnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">beta =</span> <span class="kw">rnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>),
+  <span class="dt">sigma =</span> <span class="kw">rlnorm</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">1</span>)
+)}</code></pre></div>
+<blockquote>
+<p>Specify parameters to monitor</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters to estimate</span>
+parameters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;alpha&quot;</span>, <span class="st">&quot;beta&quot;</span>, <span class="st">&quot;mu.int&quot;</span>, <span class="st">&quot;sigma.int&quot;</span>, <span class="st">&quot;sigma&quot;</span>)</code></pre></div>
+<blockquote>
+<p>Define MCMC settings</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MCMC settings</span>
+ni &lt;-<span class="st"> </span><span class="dv">5000</span>
+nb &lt;-<span class="st"> </span><span class="dv">1000</span>
+nt &lt;-<span class="st"> </span><span class="dv">5</span>
+nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
+<blockquote>
+<p>Calibrate the model</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the R2jags library</span>
+  <span class="kw">library</span>(R2jags)
+
+<span class="co"># Start Gibbs sampling</span>
+  ypModel &lt;-<span class="kw">jags</span>(fish.data, inits, parameters, <span class="st">&quot;ypModel.txt&quot;</span>, <span class="dt">n.thin=</span>nt, 
+  <span class="dt">n.chains=</span>nc, <span class="dt">n.burnin=</span>nb, <span class="dt">n.iter=</span>ni)</code></pre></div>
+<blockquote>
+<p>Take a look at the output and diagnostics</p>
+</blockquote>
+<p>First, we can take a look at the model coefficients and diagnostics. Here, I am just going to print the model results for mean, sd, 95% CRI, and N<sub>eff</sub>.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get parameter estimates all by themselves</span>
+  res =<span class="st"> </span>ypModel<span class="op">$</span>BUGSoutput<span class="op">$</span>summary[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)]
+
+<span class="co"># Inspect results</span>
+  <span class="kw">print</span>(res, <span class="dt">digits =</span> <span class="dv">3</span>)</code></pre></div>
+<p><br></p>
+<p>After a quick look at the convergence diagnostics, things look more or less a-okay, but we may need to bump up our sampling to get a larger sample size if we ever want to get this sucker published.</p>
+<p><br></p>
+</div>
+<div id="interpretting-the-results" class="section level3">
+<h3>Interpretting the results</h3>
+<p><br></p>
+<p>Usually, we don’t get too sucked into the interpretation of results in this class, but the actual parameters of this equation have some pretty cool meaning in and of themselves. For length-weight regressions, the parameter <span class="math inline">\(\beta\)</span> actually is a measure of how fish rotundity changes throughout their life. For cases where <span class="math inline">\(\beta\)</span> &gt; 3, we say that the fish generally gets fatter as it increases in length. At <span class="math inline">\(\beta\)</span> &lt; 3, we assume that fish get skinnier as the grow in length. This can be really useful for monitoring population trends. For these data, it is clear that beta is “significantly” larger than 3 given that the 95% CRI for our estimate does not overlap zero. <strong>But</strong> what if some of these populations had <span class="math inline">\(\beta\)</span> &lt; 3.0 and we are just not picking it up because we only estimated one <span class="math inline">\(\beta\)</span>?!</p>
+<p><br></p>
+</div>
+</div>
+<div id="your-mission" class="section level2">
+<h2>Your mission</h2>
+<p><br></p>
+<p>Did you see that one coming?</p>
+
+<ol style="list-style-type: decimal">
+<li>Choose REML or Bayesian methods for fitting a model.</li>
+</ol>
+
+<ol start="2" style="list-style-type: decimal">
+<li>Fit a model that includes random effects on intercept <em>and</em> slope.</li>
+</ol>
+
+<ol start="3" style="list-style-type: decimal">
+<li>Graph the mean overall relationship between length and mass based on the overall intercept and slope.</li>
+</ol>
+
+<ol start="4" style="list-style-type: decimal">
+<li>Determine whether any of the <span class="math inline">\(\beta\)</span>s overlap with zero.</li>
+</ol>
+
+<ol start="5" style="list-style-type: decimal">
+<li>Write a brief methods and brief results section.</li>
+</ol>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

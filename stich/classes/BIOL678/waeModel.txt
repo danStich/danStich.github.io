@@ -1,0 +1,33 @@
+
+model {
+
+# Likelihood
+ for(i in 1:n){
+    count[i] ~ dnegbin(p[i], r)     # The random variable
+    p[i] <- r/(r+lambda[i])
+    log(lambda[i]) <- mu[i]
+    mu[i] <- alpha[site[i]] + beta*sdd[i] + beta2*(sdd[i]^2) # Expectation
+ }
+
+# Priors
+ for (i in 1:ngroups){      
+    alpha[i] ~ dnorm(mu.int, tau.int)   # Random intercepts
+ }
+
+ mu.int ~ dnorm(0, 0.1)       # Mean hyperparameter for random intercepts
+ tau.int <- 1 / (sigma.int * sigma.int)
+ sigma.int ~ dunif(0, 100)      # SD hyperparameter for random intercepts
+
+ beta ~ dnorm(0, 0.001)          # Common slope
+ taub <- 1 / ( sigmab * sigmab)    # Residual precision
+ sigmab ~ dunif(0, 100)          # Residual standard deviation
+
+ beta2 ~ dnorm(0, 0.0001)          # Common slope
+ taub2 <- 1 / ( sigmab2 * sigmab2)    # Residual precision
+ sigmab2 ~ dunif(0, 100)          # Residual standard deviation
+
+ r ~ dgamma(0.01, 0.001)          # Site-specific overdispersion
+
+
+}
+

@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="lab-homework-rubric" class="section level1">
+<h1>Lab homework rubric</h1>
+<p><br></p>
+<p>The purpose of this document is to help us organize the laboratory exercises for this course in a way that will facilitate clear communication, and will improve my ability to evaluate your work more fairly and efficiently.</p>
+<p><br></p>
+<blockquote>
+<p><strong>Each lab exercise in this course has two components</strong>:</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p>There are activities that will require you to write code or use the RStudio IDE in some other (e.g., interactive) way.</p></li>
+<li><p>Specific questions that will require you to execute commands and provide answers as text.</p></li>
+</ol>
+<p><br></p>
+<blockquote>
+<p><strong>Each lab will require the submission of two separate pieces of work for evaluation of learning</strong>:</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p><strong>Computer code</strong>: You will need to write some R code to complete each lab. This code will be necessary for the completion of both 1 and 2 above and must be submitted upon completion of the lab. Please keep this code in a source file (script) while you work and save it frequently. In addition to writing the code necessary to complete the lab, you will need to comment your script to explain what it does. This is to reinforce your understanding and engagement with the technical skills and tools that are necessary to be successful in this course (and quantitative applications more generally), and is a required component of the exercise.</p></li>
+<li><p><strong>Answers to questions</strong>: Please answer all questions from the lab handout in order (and numbered) at the very bottom of your script, not in line with the rest of the code to make it easier to read and evaluate your answers to the questions. Please use start-of-line hashtags (a.k.a. octothorpe, pound sign, whatever) to comment the answers to questions. You can do this all at once when you are done by highlighting your answers and pressing &lt;<code>Ctrl</code> + <code>Shift</code> + <code>C</code>&gt;.</p></li>
+</ol>
+<p><br></p>
+<blockquote>
+<p><strong>Each lab will be evaluated as follows</strong>:</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><strong>Working script</strong> with commented code (10 pts)</li>
+<li><strong>Answers to questions</strong> at the bottom of the same file (10 pts)</li>
+</ol>
+<p><br></p>
+<blockquote>
+<p>An <strong>example of a completed lab</strong> is below:</p>
+</blockquote>
+<p><br></p>
+<pre><code># Script for completion of lab 2 exercises -----
+
+# Read in the data for the lab
+  some_data = read.csv(file = â€someFile.csvâ€, header = TRUE)
+
+# Examine the structure of the data
+  str(some_data)
+  names(some_data)
+  
+# Calculate mean and sd of the column fish length using built-in functions
+  mean(some_data$fish_length)
+  mean(some_data$fish_length)   
+  
+# Calculate the mean only for grouper fish
+  mean(some_data$fish_length[species==&#39;grouper&#39;])
+  mean(some_data$fish_length[species==&#39;grouper&#39;])   
+
+# Fit a linear model to the length-weight data for grouper  
+  grouper_mod = lm(log(mass)~fish_length, data = some_data[species==&#39;grouper&#39;, ])
+  plot(grouper_mod)
+  summary(grouper_mod)
+  AIC(grouper_mod)
+  .....
+  and so on and so forth
+  ...
+
+# ANSWERS TO QUESTIONS -----
+
+# 1. The data was a dataframe that contained 100 observations of 9 variables
+# 2. The names of the variables were ...
+# 3. The mean value of fish_lengths was 140.7 cm, and the standard deviation was
+# 4. Mean grouper length was 109 cm and the standard deviation was 20 cm
+# 5. Yes, the length-weight regression appeared to fit the data well according
+#     to the residual plots. There was a significant relationship between length
+#     and mass of grouper. The overall variation explained by the model was 97%
+#     as indicated by the adjusted R2-value. 
+# 6. The AIC value of the grouper model with no individual effect was 216.37.
+       ...
+       and so on and so forth
+       ...
+</code></pre>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

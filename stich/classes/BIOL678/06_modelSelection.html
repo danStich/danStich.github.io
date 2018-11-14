@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="model-selection-and-validation" class="section level1">
+<h1>Model selection and validation</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>As we have learned in the past couple weeks, we often encounter situations for which there are mulitiple, competing hypotheses about what factors, or combinations of factors, best explain the observed patterns in our response of interest. This uncertainty can arise for one of two primary reasons:</p>
+<p><br></p>
+<p><strong>1. Complexity of the study system</strong> Biological systems are complex, and often we are interested in which factor, or set of factors, best predict the patterns we observe in the natural world. In carefully designed experiments, we might be interested in evaluating competing hypotheses about mechanistic drivers of biological phenomena. In complex observational studies, we might simply wish to know what factor or subset of possible factors best predicts the patterns we observe, with the understanding that these findings cannot necessarily be used to infer causality (or ‘mechanism’).</p>
+<p><strong>2. Collinearity</strong> Oh, snap! What did he just say? “Collinearity” is the idea that certain explanatory variables are related to one another. I know, I know; last week I told you that the <em>independence of observations</em> was one of the fundamental assumptions that we make about linear models. That is, all observations are sampled independently from one another. This is a nice ideal, and in certain experimental designs that are “orthogonal”, we can design experiments in such a manner that variables are not collinear. But, in the real world, this is almost never the case.</p>
+<p>Model selection offers a means for us to weigh the information redundancy and effects of collinearity against the information that is gained as a result of including explanatory variables that are related to one another. In real-world cases, our best model will almost always fall somewhere between a model that contains all of the variables we want to include, and a model that contains only those variables that are not collinear.</p>
+<p><br></p>
+<div id="methods-for-model-selection" class="section level3">
+<h3>Methods for model selection</h3>
+<p><br></p>
+<p>Here, we discuss approaches for applying our model-selection tool of choice. As always, I know it is hard to believe, but there is some controversy as to which method of model selection is best for a given situation. Generally speaking, there are 3 major classes of methods for model selection: step-wise selection, all possible subsets, and <em>a priori</em> subsets.</p>
+<p><br></p>
+<div id="step-wise-selection--a-limited-treatment" class="section level4">
+<h4>Step-wise selection- a limited treatment</h4>
+<p><br></p>
+<p>This approach has some well-known pitfalls. For example, it is easy to miss out on important relationships that are not considered because of the automated inclusion or exclusion of ‘significant’ explanatory variables and the order in which they are entered or dropped. This tool also does not include interaction terms that might be of biological interest!</p>
+<p><br></p>
+<div id="forward-selection" class="section level5">
+<h5>Forward selection</h5>
+<p><br></p>
+<p>We start by making a null model and a full model.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">null=<span class="kw">lm</span>(Fertility<span class="op">~</span><span class="dv">1</span>, <span class="dt">data=</span>swiss) <span class="co"># 1 means include no x&#39;s</span>
+full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class="dt">data=</span>swiss) <span class="co"># Dot means include all x&#39;s</span></code></pre></div>
+<p><br></p>
+<p>Now we perform the forward selection.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">step</span>(null, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>null, <span class="dt">upper=</span>full), <span class="dt">direction =</span><span class="st">&#39;forward&#39;</span>)</code></pre></div>
+<pre><code>## Start:  AIC=238.35
+## Fertility ~ 1
+## 
+##                    Df Sum of Sq    RSS    AIC
+## + Education         1    3162.7 4015.2 213.04
+## + Examination       1    2994.4 4183.6 214.97
+## + Catholic          1    1543.3 5634.7 228.97
+## + Infant.Mortality  1    1245.5 5932.4 231.39
+## + Agriculture       1     894.8 6283.1 234.09
+## &lt;none&gt;                          7178.0 238.34
+## 
+## Step:  AIC=213.04
+## Fertility ~ Education
+## 
+##                    Df Sum of Sq    RSS    AIC
+## + Catholic          1    961.07 3054.2 202.18
+## + Infant.Mortality  1    891.25 3124.0 203.25
+## + Examination       1    465.63 3549.6 209.25
+## &lt;none&gt;                          4015.2 213.04
+## + Agriculture       1     61.97 3953.3 214.31
+## 
+## Step:  AIC=202.18
+## Fertility ~ Education + Catholic
+## 
+##                    Df Sum of Sq    RSS    AIC
+## + Infant.Mortality  1    631.92 2422.2 193.29
+## + Agriculture       1    486.28 2567.9 196.03
+## &lt;none&gt;                          3054.2 202.18
+## + Examination       1      2.46 3051.7 204.15
+## 
+## Step:  AIC=193.29
+## Fertility ~ Education + Catholic + Infant.Mortality
+## 
+##               Df Sum of Sq    RSS    AIC
+## + Agriculture  1   264.176 2158.1 189.86
+## &lt;none&gt;                     2422.2 193.29
+## + Examination  1     9.486 2412.8 195.10
+## 
+## Step:  AIC=189.86
+## Fertility ~ Education + Catholic + Infant.Mortality + Agriculture
+## 
+##               Df Sum of Sq    RSS    AIC
+## &lt;none&gt;                     2158.1 189.86
+## + Examination  1    53.027 2105.0 190.69</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education + Catholic + Infant.Mortality + 
+##     Agriculture, data = swiss)
+## 
+## Coefficients:
+##      (Intercept)         Education          Catholic  Infant.Mortality  
+##          62.1013           -0.9803            0.1247            1.0784  
+##      Agriculture  
+##          -0.1546</code></pre>
+<p><br></p>
+<p>Here, we see that the best model is that which includes the additive effects of <code>Education</code>, <code>Catholic</code>, <code>Infant.Mortality</code>, and <code>Agriculture</code>.</p>
+<p><br></p>
+</div>
+<div id="backward-selection" class="section level5">
+<h5>Backward selection</h5>
+<p><br></p>
+<p>We can do backward selection using just the full model.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">step</span>(full, <span class="dt">data=</span>swiss, <span class="dt">direction =</span> <span class="st">&#39;backward&#39;</span>)</code></pre></div>
+<pre><code>## Start:  AIC=190.69
+## Fertility ~ Agriculture + Examination + Education + Catholic + 
+##     Infant.Mortality
+## 
+##                    Df Sum of Sq    RSS    AIC
+## - Examination       1     53.03 2158.1 189.86
+## &lt;none&gt;                          2105.0 190.69
+## - Agriculture       1    307.72 2412.8 195.10
+## - Infant.Mortality  1    408.75 2513.8 197.03
+## - Catholic          1    447.71 2552.8 197.75
+## - Education         1   1162.56 3267.6 209.36
+## 
+## Step:  AIC=189.86
+## Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
+## 
+##                    Df Sum of Sq    RSS    AIC
+## &lt;none&gt;                          2158.1 189.86
+## - Agriculture       1    264.18 2422.2 193.29
+## - Infant.Mortality  1    409.81 2567.9 196.03
+## - Catholic          1    956.57 3114.6 205.10
+## - Education         1   2249.97 4408.0 221.43</code></pre>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Agriculture + Education + Catholic + 
+##     Infant.Mortality, data = swiss)
+## 
+## Coefficients:
+##      (Intercept)       Agriculture         Education          Catholic  
+##          62.1013           -0.1546           -0.9803            0.1247  
+## Infant.Mortality  
+##           1.0784</code></pre>
+<p><br></p>
+<p>In this case we end up with the same model. Note that this is not always the case.</p>
+<p><br></p>
+</div>
+<div id="all-possible-models-all-subsets" class="section level5">
+<h5>All possible models (all subsets)</h5>
+<p><br></p>
+<p>Just as the name states- compare all possible combinations of variables. This is an exploratory approach. It is usually not needed or justified .</p>
+<p>We will not discuss these techniques in this class because 1) they are usually not needed 2) they can lead to laziness in formulation of hypotheses and in a worst case data dredging, and 3) plain and simple: there are just better tools available for these purposes now (e.g. GAMM, CART, and network analysis).</p>
+<p><br></p>
+</div>
+</div>
+<div id="a-priori-model-subsets" class="section level4">
+<h4><em>A priori</em> model subsets</h4>
+<p><br></p>
+<p>Consideration of only those models for which we have <em>a priori</em> reasons for inclusion.</p>
+<p><br></p>
+<div id="multi-phase-heirarchical-selection" class="section level5">
+<h5>Multi-phase (heirarchical) selection</h5>
+<p><br></p>
+<p>More later in the course…maybe</p>
+<p>Essentially, this means that we impose some kind of hierarchy on the steps we take to test competing hypotheses. For instance, we might first wish to compare hypotheses about some process that we think is of highest relevance. Then, we could use the best model(s) from that set of candidate hypotheses to test hypotheses about other processes of interest, taking into account previous findings. This becomes important if we are thinking about collinear effects of different explanatory variables on multiple (usually categorical) outcomes.</p>
+<p><br></p>
+</div>
+<div id="single-phase-selection" class="section level5">
+<h5>Single phase selection</h5>
+<p><br></p>
+<p>We will discuss this in detail below.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="tools-for-a-priori-model-selection" class="section level3">
+<h3>Tools for <em>a priori</em> model selection</h3>
+<p><br></p>
+<p>Here, we will focus on a few common approaches to model selection that can be useful in different situations. Although it is a popular alternative, we will not discuss Mallow’s Cp because it involves ‘all subset’ regression and we don’t want to get into that if we can help it. In truth, there are a limited number of exploratory purposes for which this selection method is useful, and in those cases thoughtful study design and alternative statistical approaches are often superior than throwing spaghetti at the wall and looking to see what sticks.</p>
+<p><br></p>
+<p>We will examine:</p>
+<ul>
+<li><p>Adjusted R<sup>2</sup></p></li>
+<li><p>PRESS statistic</p></li>
+<li><p>AIC</p></li>
+</ul>
+<p><br></p>
+<blockquote>
+<p>Let’s check some of these tools out!</p>
+</blockquote>
+<p><br></p>
+<p>Start by fitting some models, we will use the <code>swiss</code> data again.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(<span class="st">&#39;swiss&#39;</span>)
+
+<span class="co"># Fit the model that tests the effects of education on the fertility index</span>
+  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>swiss)
+  
+<span class="co"># Fit another model that tests effects of % Catholic on Fertility</span>
+  mod.Cath =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Catholic, <span class="dt">data=</span>swiss)
+  
+<span class="co"># Fit a model with additive effects of both explanatory variables</span>
+  mod.EdCath =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education <span class="op">+</span><span class="st"> </span>Catholic, <span class="dt">data=</span>swiss)
+  
+<span class="co"># Fit a model with multiplicative effects of both explanatory variables</span>
+  mod.EdxCath =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">*</span>Catholic, <span class="dt">data=</span>swiss)</code></pre></div>
+<p><br></p>
+<p>Now we have four models that represent competing hypotheses:</p>
+<p>1.<code>Education</code> alone is the best explanation among those considered for variability in <code>fertility</code></p>
+<p>2.Percent <code>Catholic</code> alone is the best explanation among those considered for variability in <code>fertility</code></p>
+<p>3.The additive effects of <code>Education</code> and percent <code>Catholic</code> are the best explanation among those considered for variability in <code>fertility</code></p>
+<p>4.The multiplicative effects of <code>Education</code> and percent <code>Catholic</code> are the best explanation among those considered for variability in <code>fertility</code></p>
+<p><br></p>
+<p>Great, but how can we evaluate which of these hypotheses is best supported by our data?</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s start by making all of our models into a list</span>
+  mods =<span class="st"> </span><span class="kw">list</span>(mod.Ed, mod.Cath, mod.EdCath, mod.EdxCath)
+<span class="co"># We&#39;ll give the list some names, too</span>
+  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Ed&#39;</span>, <span class="st">&#39;Cath&#39;</span>, <span class="st">&#39;EdCath&#39;</span>, <span class="st">&#39;EdxCath&#39;</span>)</code></pre></div>
+<p><br></p>
+<div id="adjusted-r2" class="section level4">
+<h4>Adjusted R<sup>2</sup></h4>
+<p><br></p>
+<p>This offers a relatively simple tool for model selection, and balances the number of parameters in the model with the number of observations in our data.</p>
+<p>Just as before, we can look at the summary of our model objects that we have stored in this list.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Education only model, we can take a look, like this</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education, data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.036  -6.711  -1.011   9.526  19.689 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
+## Education    -0.8624     0.1448  -5.954 3.66e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.446 on 45 degrees of freedom
+## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># REMEMBER: this model is an object stored in R,</span>
+<span class="co"># so we can also look at the names of this summary,</span>
+<span class="co"># like this</span>
+  <span class="kw">names</span>(<span class="kw">summary</span>(mods<span class="op">$</span>Ed))</code></pre></div>
+<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
+##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
+##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+<p><br></p>
+<p><em>Whoa</em>, this is some heavy stuff. To recap, we have made a list of models, each of which are stored in R as lists. Each model has lots of elements, one of which is the summary of the model, which has its own elements that are named.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here, we see that we can extract the adjusted </span>
+<span class="co"># R-squared directly from the model summary</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>adj.r.squared</code></pre></div>
+<pre><code>## [1] 0.4281849</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>adj.r.squared</code></pre></div>
+<pre><code>## [1] 0.1975591</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>adj.r.squared</code></pre></div>
+<pre><code>## [1] 0.5551665</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>adj.r.squared</code></pre></div>
+<pre><code>## [1] 0.5700628</code></pre>
+<p><br></p>
+<p>When we compare adjusted R-squares, we consider the model with the highest value for this statistic to be the best model. So, in this case, we would conclude that <code>EdxCath</code> is the best model.</p>
+<p><br></p>
+</div>
+<div id="press-statistic-predicted-sum-of-squares" class="section level4">
+<h4>PRESS statistic (Predicted sum of squares)</h4>
+<p><br></p>
+<p>To use the PRESS statistic in R, we need to load a new package. Yay!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#install.packages(&#39;qpcR&#39;)</span>
+<span class="kw">library</span>(qpcR)
+
+<span class="co"># Let&#39;s start with a single example. </span>
+<span class="co"># Here, we are given three things in the</span>
+<span class="co"># output from the &#39;PRESS&#39; function.</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)</code></pre></div>
+<pre><code>## .........10.........20.........30.........40.......</code></pre>
+<pre><code>## $stat
+## [1] 4323.733
+## 
+## $residuals
+##  [1]  11.1787318  11.5065064  17.7278799  12.5398747  10.4882280
+##  [6]   2.5911695  10.4885953  20.1597326   9.0526997  14.8302796
+## [11]  13.0168641  -5.2753911  -6.8447158  -0.3698141 -14.0142691
+## [16]  -9.9871628  -1.0354472   0.2588946  -8.4026213  -6.9021136
+## [21]  -5.6071189 -12.4751694 -12.9403552 -17.5105794  -6.5399771
+## [26]   1.5243571  -5.2119131 -10.7169905  -5.1114868  -7.4861541
+## [31]  -2.4853488  -5.2790448  -0.6098953  -4.0456127   2.4663864
+## [36]  -7.0043837  15.7477692  11.1484049   1.1631787  -4.5203842
+## [41]   4.3983013  14.1573518   4.1296291  -6.1267680   1.9422167
+## [46] -10.9733208 -13.0789076
+## 
+## $P.square
+## [1] 0.3976372</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What we are really interested in here is the</span>
+<span class="co"># first element in this list, the PRESS statistic.</span>
+<span class="co"># We can call this statistic out by name</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>stat</code></pre></div>
+<pre><code>## .........10.........20.........30.........40.......</code></pre>
+<pre><code>## [1] 4323.733</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>stat</code></pre></div>
+<pre><code>## .........10.........20.........30.........40.......</code></pre>
+<pre><code>## [1] 6036.623</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>stat</code></pre></div>
+<pre><code>## .........10.........20.........30.........40.......</code></pre>
+<pre><code>## [1] 3490.614</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>stat</code></pre></div>
+<pre><code>## .........10.........20.........30.........40.......</code></pre>
+<pre><code>## [1] 3455.346</code></pre>
+<p><br></p>
+<p>Opposite from the adjusted R<sup>2</sup>, the lower the value of this statistic, the better the model. The meaning of this statistic is that the model is not “internally” sensitive the the data points. We can draw this interpretation because PRESS is a form of cross validation (which we will discuss later this week).</p>
+<p>So, these are nice tools, but they are based almost exclusively on the sums of squares for our regressions, so they don’t take much into account redundancy in the parameters of the regression. This leads to some problems</p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li><p>Most of the time we are using maximum likelihood estimation for these techniques, and it would be nice to have a tool that takes into account the actual likelihood of the models.</p></li>
+<li><p>This doesn’t allow us to compare two models with respect to how much better one is than another.</p></li>
+<li><p>We have no way to communicate the uncertainty in model selection, nor any simple method for incorporating this uncertainty into our model predictions.</p></li>
+</ol>
+<p><br></p>
+</div>
+<div id="information-theoretic-approaches" class="section level4">
+<h4>Information theoretic approaches</h4>
+<p><br></p>
+<div id="akaikes-information-criterion-aic" class="section level5">
+<h5>Akaike’s information criterion (AIC)</h5>
+<p><br></p>
+<p>This tool (or the popular alternative, BIC) will be more useful for us during the next several weeks than any of the previous methods because it makes inference based on the likelihood of the model rather than the sums of squares, which we will learn that GLMs and other generalizations do not have!</p>
+<p>Information-theoretic approaches to model selection are based on the trade off in information gained through addition of parameters and the added complexity of the models, with respect to sample size. I will hold off on a detailed Rscript explanation because you will read more about this tool in your readings for this week. So, let’s cut straight to the chase.</p>
+<p>Remember that we made a list of <em>a priori</em> models above that we would like to consider</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the names of those models</span>
+  <span class="kw">names</span>(mods)</code></pre></div>
+<pre><code>## [1] &quot;Ed&quot;      &quot;Cath&quot;    &quot;EdCath&quot;  &quot;EdxCath&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can strip the AIC values from each</span>
+<span class="co"># of the model objects using a</span>
+<span class="co"># function from the apply family:</span>
+  <span class="kw">mapply</span>(<span class="dt">FUN =</span> <span class="st">&#39;AIC&#39;</span>, mods)</code></pre></div>
+<pre><code>##       Ed     Cath   EdCath  EdxCath 
+## 348.4223 364.3479 337.5636 336.8823</code></pre>
+<p><br></p>
+<p>Now we have a named vector holding AIC values for each of our named models. At a glance, we can see that our model with the interaction is the ‘best’ model in the set as indicated by our other statistics, but this time it is only better by less than 1 AIC (lower is better). Can we say anything about that?</p>
+<p>Funny you should ask, yes we can. We have a few general rules of thumb for interpreting the AIC statistic, and we can actually derive a whole set of statistics based on these rankings.</p>
+<blockquote>
+<p>Open can of worms…</p>
+</blockquote>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we need another library</span>
+  <span class="co">#install.packages(&#39;AICcmodavg&#39;)</span>
+  <span class="kw">library</span>(AICcmodavg)
+
+<span class="co"># Let&#39;s start digging into this stuff</span>
+<span class="co"># by making a table that can help us along. </span>
+  <span class="kw">aictab</span>(<span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods))</code></pre></div>
+<pre><code>## 
+## Model selection based on AICc:
+## 
+##         K   AICc Delta_AICc AICcWt Cum.Wt      LL
+## EdxCath 5 338.35       0.00   0.52   0.52 -163.44
+## EdCath  4 338.52       0.17   0.48   1.00 -164.78
+## Ed      3 348.98      10.63   0.00   1.00 -171.21
+## Cath    3 364.91      26.56   0.00   1.00 -179.17</code></pre>
+<p><br></p>
+<p>Lots going on here…What does it all mean?</p>
+<p>From left to right</p>
+<p>First, notice that the rownames are actually our model names</p>
+<p><strong><code>K</code></strong> is the number of parameters in each of the models</p>
+<p><strong><code>AICc</code></strong> is the AIC score, but it is corrected for sample size. Generally speaking, this means models with many parameters and small number of observations are penalized for potential instability in the likelihood. In general, using the AIC<sub>c</sub> is almost always a practical approach because it is conservative and the effect of the penalty goes away with sufficient sample sizes.</p>
+<p><strong><code>Delta_AICc</code></strong> is the difference in AIC<sub>c</sub> between the best model and each of the other models.</p>
+<p><strong><code>AICcWt</code></strong> is the probability that a given model is the best model in the candidate set.</p>
+<p><strong><code>Cum.Wt</code></strong> is the cumulative weights represented by each of the models from best to last. This can be used to create a 95% confidence set of models.</p>
+<p><strong><code>LL</code></strong> is the log likelihood of each model, the very same discussed at the beginning of our discussions about probability distributions!</p>
+<p><br></p>
+</div>
+<div id="interpreting-the-model-selection-table" class="section level5">
+<h5>Interpreting the model selection table</h5>
+<p><br></p>
+<p><strong>In general:</strong></p>
+<p>A lower AIC is better.</p>
+<p>Models with <span class="math inline">\(\Delta\)</span>AIC<sub>c</sub> of less than 2.0 are considered to have similar support as the best model. Models with <span class="math inline">\(\Delta\)</span>AIC<sub>c</sub> from 2 to 4 have some support in the data, but not as much. Models with <span class="math inline">\(\Delta\)</span>AIC<sub>c</sub> &gt; 4 have virtually no support.</p>
+<p>The ratio of AIC weights (w<sub>i</sub>)can be used to interpret the improvement between the best model and each subsequent model. In this example, the best model is only <span class="math inline">\(\frac{0.52}{0.48} = 1.08 \times\)</span> better supported than the next best model, but the best two models have all of the support</p>
+<p>Our results suggest that <code>Education</code> and <code>Catholic</code> are the both important in explaining the variation in <code>Fertility</code>, because both are included in any model receiving any support in the candidate set.</p>
+<p>Unlike our previous results, we have no clear winner in this case, and we are left wondering whether it is the additive effects or the multiplicative effects of <code>Education</code> and <code>Catholic</code> that are important. But, we still may want to get estimates for our main effects, at least, so we can make some good solid inference on the effect sizes. If only we had a method for dealing with this uncertainty now…Oh wait, we do!</p>
+<p>Using model averaging to account for the model uncertainty, we can see that the unconditional confidence interval for <code>Education</code> is negative and does not overlap zero, and the opposite trend is evident in the trend for <code>Catholic</code>. However. set, we find out that the interaction is actually not significant, which is probably why the main effects model had equivelent support in the candidate set</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Education&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Multimodel inference on &quot;Education&quot; based on AICc
+## 
+## AICc table used to obtain model-averaged estimate:
+## 
+##         K   AICc Delta_AICc AICcWt Estimate   SE
+## Ed      3 348.98      10.63   0.00    -0.86 0.14
+## EdCath  4 338.52       0.17   0.48    -0.79 0.13
+## EdxCath 5 338.35       0.00   0.52    -0.43 0.26
+## 
+## Model-averaged estimate: -0.6 
+## Unconditional SE: 0.28 
+## 95% Unconditional confidence interval: -1.14, -0.06</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Multimodel inference on &quot;Catholic&quot; based on AICc
+## 
+## AICc table used to obtain model-averaged estimate:
+## 
+##         K   AICc Delta_AICc AICcWt Estimate   SE
+## Cath    3 364.91      26.56   0.00     0.14 0.04
+## EdCath  4 338.52       0.17   0.48     0.11 0.03
+## EdxCath 5 338.35       0.00   0.52     0.18 0.05
+## 
+## Model-averaged estimate: 0.15 
+## Unconditional SE: 0.06 
+## 95% Unconditional confidence interval: 0.04, 0.26</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Education:Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<pre><code>## 
+## Multimodel inference on &quot;Education:Catholic&quot; based on AICc
+## 
+## AICc table used to obtain model-averaged estimate:
+## 
+##         K   AICc Delta_AICc AICcWt Estimate   SE
+## EdxCath 5 338.35          0      1    -0.01 0.01
+## 
+## Model-averaged estimate: -0.01 
+## Unconditional SE: 0.01 
+## 95% Unconditional confidence interval: -0.02, 0</code></pre>
+<p><br></p>
+<p>Isn’t that fantastic? From here we could move on to make predictions based on the model-averaged parameter estimates using what you learned last week. But…what if we weren’t convinced so easily and wanted a reliable means of seeing how well our model actually performs now that we’ve selected one (or more)? More on this below…</p>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div id="model-validation" class="section level2">
+<h2>Model validation</h2>
+<p><br></p>
+<p>Once we have selected a best model, or a set of explanatory variables that we want to consider in our analysis, it is often important that we validate that model whenever possible. In truth, comparison of the validity of multiple models can even be a method for model selection, but we are not going to go there this semester because it would require a much richer understanding of programming than we can achieve in a week.</p>
+<p><br></p>
+<div id="what-is-model-validation" class="section level3">
+<h3>What is model validation?</h3>
+<p><br></p>
+<p>Model validation is the use of external data, or subsets of data that we have set aside for use in assessing the predictive ability of our models. That is, we can use new data to test how well our model works for making predictions about the system of interest. Pretty cool, I know!</p>
+<p><br></p>
+<p>There are lots of different methods for model validation, each of which uses some of your data for fitting the model and then saves some of the data for predicting new observations based on your model parameters. We can do this by hand if we want to, but for the sake of this course, let’s avoid the extraneous programming knowledge required for this and just use some of the built-in functions in readily available R packages.</p>
+<p><br></p>
+<p>Very generally speaking, there are a large (near-infinite) number of ways to do model validation based on how you split up your data set and how you choose to evaluate predictions. This <a href="http://machinelearningmastery.com/how-to-estimate-model-accuracy-in-r-using-the-caret-package/">blog</a> gives a nice overview of these methods with the <code>iris</code> data set in R using the <code>caret</code> package.</p>
+<p><br></p>
+</div>
+<div id="worked-example" class="section level3">
+<h3>Worked example</h3>
+<p><br></p>
+<p>Let’s work an example for the models we built for the swiss data above. We do this ‘by hand’ to show how this works:</p>
+<p><br></p>
+<div id="leave-one-out-cross-validation" class="section level4">
+<h4>Leave one out cross validation</h4>
+<p>First, make a couple of empty vectors to hold our training and predicting.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ed.obs =<span class="st"> </span><span class="kw">c</span>()  <span class="co"># Will hold observation witheld for each iteration</span>
+  ed.pred =<span class="st"> </span><span class="kw">c</span>() <span class="co"># Will hold our prediction for each iteration</span></code></pre></div>
+<p><br></p>
+<p>Now, drop one data point, fit the model, and predict the missing data point one row at a time until you have done them all.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Repeat this for each row of the data set</span>
+<span class="co"># until we have left each out</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(swiss)){
+
+<span class="co"># Sample the data, leaving out one row</span>
+  <span class="co"># These will be our &#39;training data&#39;</span>
+    data.train =<span class="st"> </span>swiss[<span class="op">-</span>i, ]
+  <span class="co"># These will be the data we use for prediction</span>
+    data.pred =<span class="st"> </span>swiss[(<span class="kw">rownames</span>(swiss) <span class="op">%in%</span>
+<span class="st">                       </span><span class="kw">rownames</span>(data.train))<span class="op">==</span><span class="ot">FALSE</span>,]
+
+<span class="co"># Fit the model that tests the effects of Education</span>
+<span class="co"># on the Fertility</span>
+  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>swiss)
+
+<span class="co"># Predict Fertility from the fitted model and store</span>
+  ed.pred[i] =<span class="st"> </span><span class="kw">predict</span>(mod.Ed, data.pred)
+  ed.obs[i] =<span class="st"> </span>data.pred<span class="op">$</span>Fertility
+}</code></pre></div>
+<p><br></p>
+<p>Now, We can look at a plot to subjectively judge the fit.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set plot margins</span>
+  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+
+<span class="co"># Plot the predictions against the observed value</span>
+<span class="co"># that we left out, do for each iteration.</span>
+  <span class="kw">plot</span>(ed.obs, ed.pred, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;black&#39;</span>,
+       <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>,
+       <span class="dt">cex.lab=</span><span class="fl">1.15</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicted&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;Observed&#39;</span>)
+  
+<span class="co"># Add the rotated y-axis</span>
+  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>)</code></pre></div>
+<p><img src="06_modelSelection_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><br></p>
+<p>We could also look at a regression of our predictions on the observed data used for predictions to see how good we are. In this case, not great!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
+  pred.line =<span class="st"> </span><span class="kw">lm</span>(ed.obs<span class="op">~</span>ed.pred)
+<span class="co"># Summarize the model</span>
+  <span class="kw">summary</span>(pred.line)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = ed.obs ~ ed.pred)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.036  -6.711  -1.011   9.526  19.689 
+## 
+## Coefficients:
+##               Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) -1.658e-14  1.186e+01   0.000        1    
+## ed.pred      1.000e+00  1.680e-01   5.954 3.66e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.446 on 45 degrees of freedom
+## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract the R-squared for observed vs predicted</span>
+  <span class="kw">summary</span>(pred.line)<span class="op">$</span>r.squared</code></pre></div>
+<pre><code>## [1] 0.4406156</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot predictive line</span>
+<span class="co"># Get coefficients</span>
+  <span class="kw">summary</span>(pred.line)<span class="op">$</span>coefficients</code></pre></div>
+<pre><code>##                  Estimate Std. Error       t value     Pr(&gt;|t|)
+## (Intercept) -1.658293e-14 11.8617938 -1.398012e-15 1.000000e+00
+## ed.pred      1.000000e+00  0.1679651  5.953619e+00 3.658617e-07</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use sequence of new data</span>
+  pred.pts =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="kw">min</span>(ed.obs), <span class="kw">max</span>(ed.obs), <span class="dv">1</span>))
+  <span class="kw">names</span>(pred.pts) =<span class="st"> &#39;ed.pred&#39;</span>
+<span class="co"># Make predictions using coefficients from regression</span>
+  pred=<span class="st"> </span><span class="kw">predict</span>(pred.line, pred.pts, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
+
+<span class="co"># Plot the data again (same as above)</span>
+  <span class="kw">plot</span>(ed.obs, ed.pred, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;black&#39;</span>,
+       <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>,
+       <span class="dt">cex.lab=</span><span class="fl">1.15</span>, <span class="dt">ylab=</span><span class="st">&#39;Predicted&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;Observed&#39;</span>)
+  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>)  
+  
+<span class="co"># Plot the lines</span>
+  <span class="kw">lines</span>(pred.pts[,<span class="dv">1</span>], pred[,<span class="dv">1</span>], <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">3</span>)
+  <span class="kw">lines</span>(pred.pts[,<span class="dv">1</span>], pred[,<span class="dv">2</span>], <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(pred.pts[,<span class="dv">1</span>], pred[,<span class="dv">3</span>], <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="06_modelSelection_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><br></p>
+<p>There are lots of other takes on cross-validation, including popular approaches such as k-fold cross-validation, many of which can be implemented in wrappers available through various R packages. I will leave you to explore these in your leisure time.</p>
+<p><br></p>
+</div>
+<div id="boot-strapping-method" class="section level4">
+<h4>Boot-strapping method</h4>
+<p>Boot strapping is similar to cross validation in that we leave out some chunk of data and fit a model. The only difference here is that we are randomly selecting the training data each time, rather than working our way through the data systematically. The only difficulty now becomes choosing the appropriate amount of data to leave out for this validation tool…</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, make an empty vector to</span>
+<span class="co"># hold our training and predicting data</span>
+  p.Rsquare =<span class="st"> </span><span class="kw">c</span>()
+
+<span class="co"># We will randomly sample our data 10,000 times</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e4</span>){
+
+<span class="co"># Sample the data, taking only 22 </span>
+<span class="co"># data points (about half the data).</span>
+<span class="co"># These will be our &#39;training data&#39;</span>
+  data.train=swiss[<span class="kw">sample</span>(<span class="kw">nrow</span>(swiss), <span class="dv">22</span>, <span class="dt">replace=</span><span class="ot">FALSE</span>) , ]
+  
+<span class="co"># These will be the data we use for prediction:</span>
+  data.pred=swiss[(<span class="kw">rownames</span>(swiss) <span class="op">%in%</span><span class="st"> </span>
+<span class="st">                   </span><span class="kw">rownames</span>(data.train))<span class="op">==</span><span class="ot">FALSE</span>,]
+
+<span class="co"># Fit the model that tests the effects of education on the fertility index</span>
+  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>swiss)
+
+<span class="co"># Predict fertility from the fitted</span>
+<span class="co"># model and store the result</span>
+  ed.pred =<span class="st"> </span><span class="kw">predict</span>(mod.Ed, data.pred)
+  ed.obs =<span class="st"> </span>data.pred<span class="op">$</span>Fertility
+
+<span class="co"># Get predictive R-squared</span>
+  p.Rsquare[i] =<span class="st"> </span><span class="kw">summary</span>(<span class="kw">lm</span>(ed.pred<span class="op">~</span>ed.obs))<span class="op">$</span>r.squared
+
+}</code></pre></div>
+<p><br></p>
+<p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)</code></pre></div>
+<pre><code>## [1] 0.4570823</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</code></pre></div>
+<pre><code>##      2.5%     97.5% 
+## 0.1146250 0.6205628</code></pre>
+<p><br></p>
+<p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the histogram</span>
+  <span class="kw">hist</span>(p.Rsquare, <span class="dt">breaks=</span><span class="dv">100</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+       <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">5e2</span>), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,.<span class="dv">75</span>), <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,
+       <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="st">&#39;Predicted R&#39;</span><span class="op">^</span><span class="st">&#39;2&#39;</span>),
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">cex.lab=</span><span class="fl">1.3</span>)
+
+  <span class="co"># Add some axis labels in position them</span>
+  <span class="co"># in the correct spot</span>
+    <span class="kw">axis</span>(<span class="dv">1</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+    <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.1</span>, <span class="dt">pos=</span><span class="dv">0</span>)
+    
+  <span class="co"># Add a blue vertical line for the median</span>
+  <span class="co"># of our predicted R-squared</span>
+    <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">median</span>(p.Rsquare),
+           <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+    <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">quantile</span>(p.Rsquare, <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)),
+           <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)    </code></pre></div>
+<p><img src="06_modelSelection_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

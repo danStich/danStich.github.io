@@ -1,0 +1,1300 @@
+```{r child="_styles.Rmd"}
+```
+
+<br>
+ 
+# Diagnostics and effect sizes
+
+<br>
+ 
+## Introduction
+
+<br>
+ 
+This week in lectures and the lab exercises we will start by taking a step back for an in-depth look at the assumptions we make when we fit parametric models to data in an effort to explain the effects of explanatory variables on some response of interest, using linear models as the backdrop for our discussions. In previous lectures we learned how to fit linear models. The purpose of this lab is to provide you with the tools you need on the front end and the back end of that process so we are surrounding linear models with the goodness they deserve.
+
+<br>
+ 
+We will also continue to talk about linear models that include multiple explanatory variables. Specifically, we will discuss how relationships between these variables might influence which ones we include in a given model and how we make defensible decisions when it comes to these choices. We will further probe the concept of the R^2^ statistic as a measure of model fit, and how this is influenced by the inclusion of multiple explanatory variables.
+
+<br>
+ 
+Finally, we will conclude our discussions this week with tools for communicating the results of our analyses once we have verified that we are not in major violation of assumptions. To do this, we will need to look a little more closely at the math behind linear models (not too closely!) and what exactly we are doing when we fit a linear model. These discussions will include the essential concepts of main effects, interaction effects, and response 'surfaces' for the case in which we include more than one explanatory variable. Please keep in mind that although we are using strictly linear models to introduce these concepts their application in the suite of models that we will discuss for the next several weeks is identical, and we will discuss exactly why this is.
+
+<br>
+ 
+## Assumptions of linear models & diagnostics
+
+<br>
+ 
+From last week:
+
+Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.
+
+There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.
+
+<br>
+ 
+**1.** Independence of observations.
+
+**2.** Normality of residuals (with mean=0)
+
+**3.** Homogeneity of variances (i.e. homoscedasticity)
+
+<br>
+ 
+We will discuss what each of these means in class this week, and during the next several weeks we will discuss methods for verifying these assumptions or relaxing the assumptions to meet our needs through specific techniques.
+
+Let's get some data to demonstrate these assumptions.
+
+<br>
+ 
+```{r}
+# Read in the turtles data, it's a bit messy, so we will read it
+# in with an extra option to strip white spaces.
+  turtles = read.csv('http://employees.oneonta.edu/stichds/data/turtles.txt', header = TRUE, strip.white = TRUE)
+```
+
+<br>
+ 
+These are data that were collected 2013-2015 for Kemp's Ridley sea turtles incidentally caught by anglers in the Gulf of Mexico. After being caught, the turtles were taken to a wildlife rehabilitation center so they could have fishing hooks removed.
+
+The data columns mean:
+
+<br>
+ 
+```{r}
+  # ID: turtle ID
+  # Year: year of capture
+  # Gear: the gear type with which the turtle was hooked
+  # Width: the gape width of the hook
+  # Removed: the location from which the hook was removed
+  # Status: survived (1) or did not (0)
+  # Stay: length of stay in the rehab facility
+  # nHooks: Number of hooks in the turtle
+```
+
+<br>
+ 
+We will use 'Stay' as the response variable here.
+
+<br>
+ 
+### Independence of observations
+
+<br>
+ 
+This assumption basically means that each row of your data was collected independently of all others. In other words, no two rows of your data are related to one another.
+
+Note that we can relax this assumption by explicitly including variables and constructs within the models that actually account for these kinds of relationships.
+
+For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups
+
+This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.
+
+We will discuss specific extensions of our basic linear models (ANOVA and regression) to relax more difficult violations such as repeated observations, and temporal or spatial autocorrelation among observations. Although we can't cover all of these extensions in this course, we can point you in the right direction for most of them.
+
+What are we looking for here?
+We want data that were sampled randomly and independently from all other data points. For this information, we have to examine the actual experimental design.
+
+There is one obvious thing that is going to tell us that the observations in the turtles df are not collected independently.
+
+<br>
+ 
+```{r}
+head(turtles, 10) # What is it?
+```
+
+<br>
+ 
+So, we already know that our data do not conform to the assumptions of ANOVA linear regression, or ANCOVA- but let's keep using these data for the sake of demonstration...There is, of course another major violation of our assumptions that has to do with experimental design (that is commonly violated): these are DISCRETE data!! We'll pretend for now that we can think of 'Stay' as a continuous variable, though.
+
+You can see how this could get tedious to do for every level of every grouping factor and then for each continuous variable. So, we can also take a "shotgun" approach and look at how variables are related to one another.
+
+<br>
+ 
+```{r}
+# Look at correlations between variables
+  pairs(turtles)
+```
+
+<br>
+ 
+### Normality of residuals
+
+<br>
+ 
+In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero. This allows us to drop the error term, 'epsilon' from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we solve everything through optimization now and not ordinary least squares).
+
+There are a multitude of tools at our disposal for examining normality of the residuals for linear models. One option is to examine group-specific error structures as a surrogate for residual error prior to analysis. The other option is to examine diagnostic plots of residuals directly from a fitted model object in R or other software programs (this is actually the more appropriate tool).
+
+<br>
+ 
+#### Option 1. Data exploration
+
+<br>
+ 
+*What are we looking for here?*
+We are looking to see if the response variable within each group is normally distributed. To assess this, we need to think in terms of the moments of a normal distribution that we learned about earlier in the course, specifically skew and kurtosis. Here we are looking for outliers in the data, or sample distributions that are highly skewed.
+
+First, we could go level by level for all of our grouping variables and conduct Shapiro tests (not shown here). 
+
+We can look at a few different plots of our response to start teasing apart some of the potential violations of our assumptions.
+
+We know we will need to look at a year effect here because that is yet another form of non-independence (and potentially homogeneity) in our data. Let's start with a boxplot:
+
+<br>
+ 
+```{r}
+  boxplot(Stay~Year, data=turtles, notch=TRUE, col='gray')
+```
+
+<br>
+ 
+Whoa! We have a couple of issues here.
+
+First of all: we have clearly identified a number of 'outliers' in our data. These are the circles that are outside the whiskers of our boxplots.
+
+One way to address these outliers is by dropping them from the data. We only want to do this if we have a pretty good justification for this ahead of time ("*a priori*"). And, sometimes these can be some of the most interesting observations.
+
+Another way to deal with this is through data transformation. For example, we could use a log transformation in an attempt to normalize extreme values in our data. This certainly looks a little better, but may not get us all the way there...
+
+<br>
+ 
+```{r}
+# Make a boxplot of log-transformed data
+  boxplot(log(Stay)~Year, data=turtles, notch=TRUE, col='gray')
+```
+
+<br>
+ 
+> NOTE: I will not cover variable transformation extensively in this class. The justification is: 1) you can google it to learn more about what transformations are useful for what, and 3) I will argue that most of the time there are better methods for dealing with non-normal data (this is why we are focused on breadth) and then I will show you how to use those methods.
+
+<br>
+ 
+We can also look at histograms to investigate normality:
+
+<br>
+ 
+```{r}
+  par(mfrow=c(1,3))
+  hist(turtles$Stay[turtles$Year==2013], main='', col='black')
+  hist(turtles$Stay[turtles$Year==2014], main='', col='black')
+  hist(turtles$Stay[turtles$Year==2015], main='', col='black')
+```  
+
+<br>
+ 
+Clearly these data are not normal! So we try a log transformation.
+
+<br>
+ 
+```{r}
+    hist(log(turtles$Stay[turtles$Year==2013]), main='', col='black')
+    hist(log(turtles$Stay[turtles$Year==2014]), main='', col='black')
+    hist(log(turtles$Stay[turtles$Year==2015]), main='', col='black')
+```    
+
+<br>
+ 
+Again, a little better, but perhaps not as good as we'd like.
+
+The preferred method for examining the normality of residuals for us is going to be actually looking at the diagnostics from a fitted model object:
+
+<br>
+ 
+```{r}
+# Set up a plotting window so we can see 4 plots at once
+  par(mfrow=c(2,2))
+# Plot the residual diagnostics
+  plot(lm(Stay~Year, data=turtles))
+```
+
+<br>
+ 
+Cool! But...what the heck are we looking at here??
+
+<br>
+ 
+**Top left**:  residuals vs fitted values- this shows us how the residual error changes between groups (see below). This also shows us that we have clearly violated the assumption that the residuals are normally distributed with a mean of zero.
+
+**Top right**:  this is the one we are most interested in for examining the normality of our residual errors. If our residuals are normally distributed, then the points on this plot should (approximately) follow the straight, dotted line here. It does not! Q-Q plots, like others, can also be useful for identifying outliers in our data. These are labeled.
+
+**Bottom left**:  we will discuss below
+
+**Bottom right**:  this plot is useful for identifying points that might be exerting undo influence on the intercept and slope of the line that we are trying to fit here. In general we are looking for values of Cook's D greater than $\frac{4}{(N-k-1)}$ where $N$ is sample size and $k$ is number of explanatory variables, if we are going to set a threshold: [check it out.](http://stats.stackexchange.com/questions/22161/how-to-read-cooks-distance-plots)
+
+Here, we see that most of our data are within this, but it looks like we actually have much bigger problems based on previous plots.
+
+We can hit the data with a log transformation to see if it fixes any of our problems:
+
+<br>
+ 
+```{r}
+par(mfrow=c(2,2))
+plot(lm(log(Stay)~Year, data=turtles))
+```  
+
+<br>
+ 
+In fact, we see that the model fit has improved substantially, although the outliers in our data are still outliers.
+
+Finally, what if we have a continuous explanatory variable? We use the same approach:
+
+<br>
+ 
+```{r}
+  plot(lm(log(Stay)~Width, data=turtles))
+```
+
+<br>
+ 
+Which leads us to our next assumption...
+
+<br>
+ 
+### Homogeneity of variances
+
+<br>
+ 
+This assumption states that the residual error within groups is about equal (still normal, with a mean of zero). 
+
+One option for assessing the validity of this assumption is to use the Kolmogrov-Smirnov test to determine whether the data from different groups come from the same distribution. The null hypothesis for this test is that the two distributions do not differ.
+
+<br>
+ 
+```{r}
+ ks.test(turtles$Stay[turtles$Year==2013],turtles$Stay[turtles$Year==2014])
+ ks.test(turtles$Stay[turtles$Year==2013],turtles$Stay[turtles$Year==2015])
+ ks.test(turtles$Stay[turtles$Year==2014],turtles$Stay[turtles$Year==2015])
+```
+
+<br>
+ 
+**BUT**: this only works for grouping variables, and it only compares two groups at a time, so this could be VERY cumbersome. And, since we are using R to make our lives easier, we do not want cumbersome if we can help it.This test also is supposed to be reserved for continuous distributions.
+
+As with assumption #2 above, we have two ways (the same two) to visualize this information.
+
+First, we can use our boxplots again to look at variability within groups to visually assess whether or not the variance differs from one group to the next:
+
+<br>
+ 
+```{r}
+# Plot the data
+  par(mfrow=c(1,1))
+  boxplot(Stay~Year, data=turtles, notch=TRUE, col='gray')
+```
+
+<br>
+          
+We can see that the variance is very clearly different between groups. A log transformation will fix that...
+
+<br>
+ 
+```{r}
+# Plot the log-transformed data
+  par(mfrow=c(1,1))
+  boxplot(log(Stay)~Year, data=turtles, notch=TRUE, col='gray')
+```
+
+<br>
+
+## Residual diagnostics from a fitted model object
+
+<br>
+ 
+Again, this is the preferred method for assessing normality in the RESIDUALS (notice the key word here?).
+
+We can look at how residual error changes (or doesn't) across group factors such as 'Year'.
+
+<br>
+ 
+```{r}
+  par(mfrow=c(2,2))
+  plot(lm(Stay~Year, data=turtles))
+```
+
+<br>
+ 
+Now we are interested in the two plots on the left side of this multipanel plot.
+
+In the top left: we can see pretty clearly that there is a distinct trend in the residual error between groups. The group on the far right is much more variable than the others!
+
+In the bottom left, we essentially see the same thing. Our standardized residuals show us that the variances are clearly not equal.
+
+Looking at a log transformation demonstrates that these problems are pretty well solved by transformation, at least enough that a linear model should be robust to the differences between groups.
+
+<br>
+ 
+```{r}
+  par(mfrow=c(2,2))
+  plot(lm(log(Stay)~Year, data=turtles))
+```
+
+<br>
+      
+We are looking for slightly different patterns with continuous explanatory variables.
+
+<br>
+ 
+```{r}
+  par(mfrow=c(2,2))
+  plot(lm(log(Stay)~Width, data=turtles))
+``` 
+
+<br>
+ 
+In the top left, we want to see two things:
+
+**1.** Most of our data should be contained on the interval (-3,3), so it looks like we are good to go here.
+
+**2.** If the residuals are normally distributed, we should see what looks like random scatter in the plots.
+
+<br>
+    
+In the bottom left, we want to see:
+**1.** Most of our data should be less than 3 (this is the square root of standardized residual so they are all positive)
+   
+**2.** We should see random scatter in these as well.
+
+<br>
+ 
+### Summary
+
+<br>
+ 
+Do this stuff **before** you start fitting all kinds of models because it is important to think about ahead of time! Examination of residual plots should become second nature to you in these analyses because it is the most powerful tool you have for testing assumptions. Don't freak out if things don't look perfect (they almost never will), and realize that there may be ways of dealing with violations within the context of linear models. If not, there certainly are other models designed specifically for this purpose.
+
+<br>
+ 
+## Communicating effect sizes
+
+<br>
+ 
+### Interpretting group effects
+
+<br>
+ 
+When we are working in the world of one-way ANOVA, or even more complex models that contain only "main effects" of categorical, explanatory variables, the interpretation of these effects is relatively straightforward. Let's use the plant growth data as an example.
+
+<br>
+ 
+```{r}
+  data("PlantGrowth")
+```
+
+<br>
+ 
+We'll start here by fitting a one-way anova to test effects of treatment on on plant weight.
+
+<br>
+ 
+```{r}
+# Get the names of the df
+names(PlantGrowth)
+
+# Fit the model
+  mod = lm(weight~group, data = PlantGrowth)
+# Do the post-hoc comparisons of means
+  TukeyHSD(aov(mod)) # Just a reminder that the only difference is trt2-trt1
+```
+
+<br>
+ 
+We've seen these data and this model before. We know there was a significant effect of treatment on plant weight. So, for now we will ignore the ANOVA and just look at the summary (if you want the ANOVA you can either summarize it yourself or go back to previous reference scripts).
+
+<br>
+ 
+```{r}
+summary(mod)
+```
+
+<br>
+ 
+The summary gives us the predicted means of the response for each factor level based on the fitted model. In the case of ANOVA, we can actually calculate these form the data because that is what the model solution should be if we haven't violated any of our assumptions.
+
+<br>
+   
+#### Calculations and numerical representation 
+
+<br>
+ 
+```{r}  
+# We can get the model coefficients like this:
+  names(mod)
+  coeffs = data.frame(mod$coefficients)
+# From the model, we see that:
+  # Mean of control
+    y_control = coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*0
+  # Mean of trt1
+    y_trt1 = coeffs[1,1] + coeffs[2,1]*1 + coeffs[3,1]*0
+  # Mean of trt2
+    y_trt2 = coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*1
+```
+
+<br>
+ 
+Now, let's compare our model predictions to the actual means.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Model predictions
+  group = c('ctrl', 'trt1', 'trt2')
+  mu = c(y_control, y_trt1, y_trt2)
+  preds = data.frame(group, mu)
+# Observed means
+  library(plyr)
+  obs = ddply(PlantGrowth, 'group', summarize, mu=mean(weight))
+# Compare them
+  preds
+  obs
+```
+
+<br>
+ 
+#### Graphical representation
+
+<br>
+ 
+We could use any number of graphical tools to represent these results. Given that we've met the assumptions of normality, the simplest (and most common) method for visualizing these results is with a box plot.
+
+<br>
+ 
+```{r}
+    # Set the plotting margins in a call to par
+      par(mar=c(5,5,1,1), mfrow=c(1,1))
+    # Make the box plot, but don't use the default axis
+      boxplot(weight~group, data=PlantGrowth, col='gray', yaxt='n', xaxt='n',
+        xlab='Treatment group', cex.lab=1.5, ylim=c(3, 7)
+      )
+    # Add the x axis with good labels
+      axis(side=1, at=c(1, 2, 3),
+        labels=c('Control', 'Treatment 1', 'Treatment 2')
+      )
+    # Add the default y-axis, but rotated
+      axis(side=2, las=2)
+    # Add the y-axis label
+      mtext(text='Mass (g)', side=2, line=3, cex=1.5)
+    # Add a letter report to indicate significant differences between groups
+      text(x=1, y=6.5, 'a, b')
+      text(x=2, y=6.5, 'a')
+      text(x=3, y=6.5, 'b')
+```      
+
+<br>
+ 
+### Interpretting effects of continuous covariates
+
+<br>
+ 
+As with group effects, the interpretation of a single, continuous predictor is pretty straightforward. Here, all we are doing is looking to use the equation for a line we have fit (y = b + mx) to predict the effects of one continuous variable on another. Let's use the 'swiss' data again for this. Remember that this dataset compares fertility rates to a number of socio-economic indicators:
+
+<br>
+ 
+```{r}
+  data('swiss')
+  names(swiss)
+```
+
+<br>
+ 
+We'll make a model to predict the effect of education level on fertility:
+
+<br>
+ 
+```{r}
+# Make the model and save it to a named object called 'swiss.mod'
+  swiss.mod = lm(Fertility~Education, data = swiss)
+```
+
+<br>
+ 
+Next, we can look at the coefficient estimates for `swiss.mod`:
+
+<br>
+ 
+```{r} 
+# Summarize the model
+  summary(swiss.mod)
+```
+
+<br>
+ 
+From this summary, we can see that we have an intercept of...
+
+<br>
+ 
+```{r}
+# Save intercept to a named object
+  intcpt = 79.6101
+```  
+
+<br>
+ 
+...and a 'slope' for `Education` of...
+
+<br>
+ 
+```{r}
+# Save slope to a named object
+  slp = -0.8624
+```
+
+<br>
+ 
+As with the case of categorical explanatory variables, we are now interested in understanding how the response changes with respect to the variable of interest. But, this time we want to see what the mean (or some other measure) of the response is for all possible values of the explanatory variable from the lowest value to the maximum value, rather than just a few discrete values that we observed. To do this, we first need to formalize our equation. Let's make a function that will predict the mean fertility for any given value of education level based on our model:
+
+<br>
+ 
+```{r}
+  y_fert = function(x){
+    intcpt + slp * x
+  }
+```
+
+<br>
+ 
+Now, we can apply that function to either our observed data, or to newly generated data to make some predictions!
+
+<br>
+ 
+```{r}
+# Using our observed data:
+  # Calculate new y values using the model parameters and our new data
+    obs_fit = y_fert(swiss$Education)
+  # Plot the results
+    plot(swiss$Education, obs_fit, type='l', xlab='Education level',
+      ylab='Fertility index')
+# Using new data based on the range of our explanatory variable:
+  # Make a sequence of new values based on the range of our data
+    newEd = data.frame(seq(from=min(swiss$Education), to=max(swiss$Education),
+      by=0.01))
+    # Give the only column a name that matches the data in the model above
+    names(newEd) = 'Education'
+  # Predict changes in fertility based on education using our new values for
+  # education level, 'newEd', and our model parameters
+    pred_fit = y_fert(newEd$Education)
+  # Plot the changes
+    par(new=TRUE)    # This tells R to add it to the same graph
+    plot(swiss$Education, obs_fit, type='l', col='red', xlab='', ylab='')
+```      
+
+<br>
+       
+As you can see, the plotted lines completely overlap, which is exactly what we would expect.
+
+This is really useful for showing the effects of a continuous explanatory variable on the response, but there are a couple of issues:
+
+<br>
+ 
+**1.** We are showing the model predictions without any data, which can be use- ful sometimes in very complex datasets but not for simple linear models.
+   
+**2.** We are only showing the mean predictions. It would be nice to incorporate some of the uncertainty in our model, too.
+
+<br>
+ 
+How can we fix these things? Glad you asked! First of all, we can actually plot the raw data against our predictions...
+
+<br>
+ 
+```{r}  
+# Make the plot
+  plot(swiss$Education, swiss$Fertility, ylab='Fertility index',
+    xlab='Education level', pch=21, bg='gray', cex=1.5, ylim=c(0, 100),
+    cex.lab=1.5, cex.axis=1.25, yaxt='n')
+  axis(side = 2, las = 2)
+
+# That's better. Now, we can plot our predictions over the top of that
+  lines(swiss$Education, obs_fit, col='blue', lwd=2)
+```
+
+<br>
+ 
+What about the uncertainty in our model and our data? We can add this in by using the handy-dandy predict function in R!
+
+<br>
+ 
+```{r, eval=FALSE}
+  ?predict
+```
+
+<br>
+ 
+To get info on how to do this for linear models, scroll down and click on the link to `predict.lm`. You will see that we need to supply some kind offitted model object, some data from which to make predictions, and the type of interval you would like to show.
+
+<br>
+ 
+```
+object:   in this case it is our 'swiss.mod'
+newdata:  This needs to be a data frame. It can either be the original,
+          or it can be a new dataframe, but it must contain columns with
+          the same names as the explanatory variables used in the model.
+interval: usually, we are interested in the prediction interval, as this
+          tends to be more honest about the uncertainty in our model
+          predictions and our data, but there are other options
+```
+
+<br>
+ 
+```{r}
+pred_int = predict(object=swiss.mod, newdata=newEd, interval='prediction')
+```
+
+<br>
+ 
+So, what does the predict function give us?
+
+<br>
+ 
+```{r}
+  head(pred_int)
+```
+
+<br>
+ 
+As you can see, this is a **matrix** with three columns named `fit`, `lwr`, and `upr`. The column `fit` is the mean prediction from our model for the new data. The columns `lwr` and `upr` are the lower and upper limits for our prediction intervals. We already have our mean line fit, so we'll just throw in some lines for the lower and upper bounds to our predictions! To do this, we can't use our dollar-sign notation for pred_int because it is a **matrix**, so we can either do `pred_int[ , i]` or `pred_int[ , 'colname i']`.
+
+<br>
+ 
+```{r}
+# Make the original plot
+  plot(swiss$Education, swiss$Fertility, ylab='Fertility index',
+    xlab='Education level', pch=21, bg='gray', cex=1.5, ylim=c(0, 100),
+    cex.lab=1.5, cex.axis=1.25, yaxt='n')
+  axis(side = 2, las = 2)
+
+# Add line for mean predictions over the top of that
+  lines(swiss$Education, obs_fit, col='blue', lwd=2)
+  
+# Add prediction intervals
+  lines(x=newEd$Education, y=pred_int[ ,2], col='red', lty=2, lwd=2)
+  lines(x=newEd$Education, y=pred_int[ ,3], col='red', lty=2, lwd=2)
+```
+
+<br>
+ 
+Now that is a **money**, high-quality figure that shows your raw data, the model predictions, and the uncertainty associated with both of these.
+
+<br>
+ 
+### Main effects in ANCOVA
+
+<br>
+ 
+Now, we are going to step up the complexity a little bit and start to look at how to interpret linear models with more than one variable, and more than one variable type. Exciting, I know!
+
+One categorical and one continuous explanatory variable- last week:
+
+<br>
+ 
+```{r}
+# Read in a new data set
+  # This data set contains pulses of 2 species of crickets collected under
+  # varying temperatures
+    crickets = read.csv('http://employees.oneonta.edu/stichds/data/crickets.txt')
+```
+
+<br>
+ 
+Here we want to investigate the effects of species and temperature on pulses of individual crickets.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Fit the model
+  cricket.mod = lm(Pulse~Species + Temp, data=crickets)
+# Install the car package. We need a function from this library for summary.
+  # install.packages('car') # Uncomment front of line to install
+  library(car)
+# Now we create the anova table for our ancova model
+  Anova(cricket.mod)
+# And we can look at the summary of the linear model
+  summary(cricket.mod)
+```
+
+<br>
+ 
+We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.
+
+Plot the predictions by species.
+
+<br>
+ 
+```{r}
+  # Plot the raw data
+    plot(crickets$Temp,
+      crickets$Pulse,
+      pch=21,
+      bg=c('gray', 'black')[crickets$Species],
+      cex=1.5,
+      ylab = 'Pulse',
+      xlab = 'Temperature (C)',
+      yaxt = 'n')
+  # Add the y-axis labels and rotate them
+    axis(side=2, las=2)
+
+  # Make predictions from the fitted model object
+    preds = (predict.lm(cricket.mod, newdata = crickets,
+      interval = 'prediction'))
+
+  # Plot the predictions
+    # Add prediction lines for species 'ex'
+      # Mean
+        lines(crickets$Temp[crickets$Species=='ex'],
+          preds[,1][crickets$Species=='ex'], col='gray', lty=1)
+      # Lower
+        lines(crickets$Temp[crickets$Species=='ex'],
+          preds[,2][crickets$Species=='ex'], col='gray', lty=2)
+      # Upper
+        lines(crickets$Temp[crickets$Species=='ex'],
+          preds[,3][crickets$Species=='ex'], col='gray', lty=2)
+    # Add prediction lines for species 'niv'
+      # Mean
+        lines(crickets$Temp[crickets$Species=='niv'],
+          preds[,1][crickets$Species=='niv'], col='black', lty=1)
+      # Lower
+        lines(crickets$Temp[crickets$Species=='niv'],
+          preds[,2][crickets$Species=='niv'], col='black', lty=2)
+      # Upper
+        lines(crickets$Temp[crickets$Species=='niv'],
+          preds[,3][crickets$Species=='niv'], col='black', lty=2)
+```       
+
+<br>
+ 
+### Main effects with two categorical explanatory variables
+
+<br>
+ 
+For this example, we will consider a new data set. These data are from an experiment in Restorative Dentistry and Endodontics that was published in 2014. The study examines effects of drying light and resin type on the strength of a bonding resin for teeth.
+
+The full citation for the paper is:
+
+Kim, H-Y. 2014. Statistical notes for clinical researchers: Two-way analysis of variance (ANOVA)-exploring possible interaction between factors. Restorative Dentistry and Endodontics 39(2):143-147.
+
+Here are the data:
+
+<br>
+ 
+```{r}
+  dental = read.csv('http://employees.oneonta.edu/stichds/data/dental.csv')
+```
+
+<br>
+ 
+Now, fit a model to the data.
+
+<br>
+ 
+```{r}
+# We are looking only at main effects
+  dental.mod = lm(mpa~lights + resin, data=dental)
+```
+
+<br>
+ 
+If we make an ANOVA table for this two-way ANOVA, we see that there are significant main effects of resin type but not lights used for drying.
+
+<br>
+ 
+```{r}
+  anova(dental.mod)
+```   
+
+<br>
+ 
+We can also examine the model coeffficients for a closer look at what this means.
+```{r}
+  summary(dental.mod)
+```    
+
+<br>
+ 
+Remember, in our data we had 2 kinds of lights, and 4 kinds of resin. But, here we have one less of each! Why is this? It is because of the way categorical variables are dummy coded for linear models, so one level of each variable is wrapped up in the estimate for our intercept.
+
+Right now, you might be a little confused about how to calculate and show the effect size for these variables. If not, you should probably take a more advanced stats class.
+
+One reasonable option might be to summarize the data by the means and plot the means.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+# Summarize the means
+  library(plyr)
+  mus = ddply(dental, c('lights', 'resin'), summarize, mean=mean(mpa))
+# Plot the summaries
+  # Set graphical parameters
+    par(mfrow=c(1,2), mar=c(5,5,1,1))
+  # Make resin into a numeric for plotting trick
+    resin= as.numeric(dental$resin)
+  # Plot the raw data by resin type and color code for lights on the second
+  # linen of code ( bg=c('blue', 'red')[c(dental$lights)] )
+    plot(x=resin, y=dental$mpa, type='p',
+        pch=21, bg=c('blue', 'red')[c(dental$lights)],
+        ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+    par(new=TRUE)
+  # Plot the means for Halogen lights by resin type
+    plot(mus$mean[mus$lights=='Halogen'], pch=21, bg='blue',
+      ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n', cex=1.75)
+  # Add a line for Halogen lights by resin type
+    lines(mus$mean[mus$lights=='Halogen'], type='l', col='blue')
+  # Add the plot for LED lights
+    par(new=TRUE)
+  # Plot the means for LED by resin type
+    plot(mus$mean[mus$lights=='LED'], pch=21, bg='red',
+      ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n', cex=1.75)
+  # Add a line for LED lights by resin type
+    lines(mus$mean[mus$lights=='LED'], type='l', col='red')
+  # Add x and y axes
+    axis(side = 1, at=c(1,2,3,4), labels=c('A','B','C','D'))
+    axis(side = 2, las=2)
+  # Add labels
+    mtext('Resin type', side=1, line=3, cex=1.25)
+    mtext('Bond strength (mpa)', side=2, line=3, cex=1.25)
+  # Let us have a legend
+    legend(x=1, y=50, legend = c('Halogen', 'LED'), lty=1,
+      col=c('blue', 'red'), bty='n')
+```
+
+<br>
+   
+Another option is to make predictions for each combination of levels. We can do this using the math behind our model.
+
+<br>
+ 
+```{r}
+  # Store the coefficients in their own object
+    res = data.frame( summary(dental.mod)$coefficients )
+    res
+```  
+
+<br>
+ 
+Make predictions for Halogen lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term.
+
+<br>
+ 
+```{r}  
+    hal = c(
+      res[1,1],             # Halogen lights, resin A
+      res[1,1] + res[3,1],  # Halogen lights, resin B
+      res[1,1] + res[4,1],  # Halogen lights, resin C
+      res[1,1] + res[5,1]   # Halogen lights, resin D
+    )
+```
+
+<br>
+ 
+Make predictions for LEDvlights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term. Sound familiar?? Now, to predict effects of LED lights and each resin type we need to include the coefficient for lightsLED.
+
+<br>
+ 
+```{r}  
+    led = c(
+      res[1,1] + res[2,1],             # LED lights, resin A
+      res[1,1] + res[2,1] + res[3,1],  # LED lights, resin B
+      res[1,1] + res[2,1] + res[4,1],  # LED lights, resin C
+      res[1,1] + res[2,1] + res[5,1]   # LED lights, resin D
+    )
+```
+
+<br>
+ 
+How do these values compare to our empirical means? Let's see...
+
+<br>
+ 
+```{r}
+# Plot the summaries
+  # Set graphical parameters
+    par(mfrow=c(1,1), mar=c(5,5,1,1))
+  # Plot the raw data by resin type and color code for lights
+    plot(x=resin, y=dental$mpa, type='p',
+        pch=21, bg=c('blue', 'red')[c(dental$lights)],
+        ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+    par(new=TRUE)
+  # Plot the means for Halogen lights by resin type
+    plot(hal, pch=21, bg='blue', cex = 1.75,
+      ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+  # Add a line for Halogen lights by resin type
+    lines(hal, type='l', col='blue')
+  # Add the plot for LED lights
+    par(new=TRUE)
+  # Plot the means for LED by resin type
+    plot(led, pch=21, bg='red', cex=1.75,
+      ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+  # Add a line for LED lights by resin type
+    lines(led, type='l', col='red')
+  # Add x and y axes
+    axis(side = 1, at=c(1,2,3,4), labels=c('A','B','C','D'))
+    axis(side = 2, las=2)
+  # Add labels
+    mtext('Resin type', side=1, line=3, cex=1.25)
+    #mtext('Bond strength (mpa)', side=2, line=3, cex=1.25)
+  # Let us have a legend
+    legend(x=1, y=50, legend = c('Halogen', 'LED'), lty=1,
+      col=c('blue', 'red'), bty='n')
+```
+
+<br>
+ 
+Well now, that is definitely different. We can clearly see now that there is no real effect of lights on the response, and that in our model we assumed that the relationship between resin and bond strength is the same across light types. So what do the differences between our empirical data and our predictions mean?
+
+> **All models are wrong and some are useful**. 
+
+Clearly this specific model is not very useful. The reason for that is that in this model we have specified that the intercept of the line can change with light type, but not the slopes. We will examine a more useful model below.
+
+<br>
+ 
+**LESSON**: *This is why we should always check the trends in our model predictions against the raw data. These should be presented together wherever possible (becomes more difficult in complex models).*
+
+<br>
+ 
+Finally, we can use the built-in R functions to make predictions from
+our model:
+
+<br>
+ 
+```{r}
+# Get all combinations of the unique values for light and resin types
+# using the 'expand.grid' function
+  dnew = data.frame(
+    expand.grid(unique(dental$lights), unique(dental$resin))
+  )
+# Give the new df names
+  names(dnew) = c('lights', 'resin')
+# Sort the dataframe by lights for ease
+  dnew = dnew[with(dnew, order(lights)), ]
+```  
+
+<br>
+ 
+Make predictions from these data. Because we are interested in comparing the different levels here, we can look at 95% CIs instead of prediction intervals.
+
+<br>
+ 
+```{r}  
+  dpreds = predict(
+    object = dental.mod, newdata = dnew, interval = 'confidence'
+  )
+# Now plot the predictions from this model
+  # Set graphical parameters
+    par(mfrow=c(1,1), mar=c(5,5,1,1))
+  # Plot the raw data by resin type and color code for lights
+    plot(x=resin, y=dental$mpa, type='p',
+        pch=21, bg=c('blue', 'red')[c(dental$lights)],
+        ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+  # Add lines for the mean and prediction intervals for halogen
+    lines(dpreds[1:4,1], col='blue', lty=1)
+    lines(dpreds[1:4,2], col='blue', lty=2)
+    lines(dpreds[1:4,3], col='blue', lty=2)
+  # Add lines for the mean and prediction intervals for LED
+    lines(dpreds[5:8,1], col='red', lty=1)
+    lines(dpreds[5:8,2], col='red', lty=2)
+    lines(dpreds[5:8,3], col='red', lty=2)
+  # Add x and y axes
+    axis(side = 1, at=c(1,2,3,4), labels=c('A','B','C','D'))
+    axis(side = 2, las=2)
+  # Add labels
+    mtext('Resin type', side=1, line=3, cex=1.25)
+    #mtext('Bond strength (mpa)', side=2, line=3, cex=1.25)
+  # Let us have a legend
+    legend(x=1, y=50, legend = c('Halogen', 'LED'), lty=1,
+      col=c('blue', 'red'), bty='n')
+```
+
+<br>
+ 
+Two things to note here:
+
+<br>
+ 
+**1.** There is huge overlap in the CIs for these relationships, which makes us comfortable in the fact that we found no evidence for an effect of lights
+   
+**2.** These predictions are pretty messed up compared to the patterns we saw in the raw data...more to follow
+
+<br>
+
+<br>
+  
+### Main effects with two continuous covariates
+
+<br>
+ 
+Let's use the swiss data for this one. We start by fitting a model.
+
+<br>
+ 
+```{r}
+      smod = lm(Fertility~Education*Catholic, data=swiss)
+```
+
+<br>
+ 
+Now look at the results.
+
+<br>
+ 
+```{r}
+      summary(smod)
+```
+
+<br>
+ 
+Make the coefficients into a dataframe.
+
+<br>
+ 
+```{r}
+      sres  = data.frame(summary(smod)$coefficients)
+```      
+
+<br>
+ 
+The thing that's confusing about multiple continous predictors is how to simulate new data used in predictions if there is any colinearity between the explanatory variables. 
+
+So, we can do one of two things.
+
+<br>
+ 
+**1.** We can make predictions one variable at a time and hold the others constant at their means.
+
+**2.** We can make predictions based on our original data
+
+<br>
+ 
+First, let's consider the case of making predictions from a single continuous explanatory variable ('covariate') at a time.
+
+Start with `Education` since we've already done it.
+
+<br>
+ 
+```{r}
+# Make new values of Education across the range of observed values
+  ednew = seq(from=min(swiss$Education), to=max(swiss$Education), by=0.01)
+# Make a column of mean for level of Catholocism
+  cathnew = rep(mean(swiss$Catholic), length(ednew))
+# Combine them into a dataframe for use in predict function and assign names
+  new = data.frame(ednew, cathnew)
+  names(new) = c('Education', 'Catholic')
+# Use the predict function to predict new values of fertility based on
+# education holding catholic constant at the mean value
+    edpred = predict(smod, new, interval='prediction')
+# Plot the raw data
+  par(mfrow=c(1,1))
+  plot(swiss$Education, swiss$Fertility, ylab='Fertility index',
+    xlab='Education level', pch=21, bg='gray', cex=1.5, ylim=c(0, 100),
+    cex.lab=1.5, cex.axis=1.25, yaxt='n')
+  axis(side = 2, las = 2)
+# Now plot the mean prediction line
+  lines(new$Education, edpred[,1], col='blue', lwd=2)
+  lines(new$Education, edpred[,2], col='red', lwd=2, lty=2)
+  lines(new$Education, edpred[,3], col='red', lwd=2, lty=2)
+```
+
+<br>
+ 
+This should look familiar...
+
+Second, we can do the same for `Catholic` holding `Education` constant at the mean observed value.
+
+<br>
+ 
+```{r}
+# Make new values of Education across the range of observed values
+  cathnew = seq(from=min(swiss$Catholic), to=max(swiss$Catholic), by=0.01)
+# Make new column repeating the mean of Education across observations
+  ednew = rep(mean(swiss$Education), length(cathnew))
+# Combine them into a dataframe for use in predict function and assign names
+  new = data.frame(ednew, cathnew)
+  names(new) = c('Education', 'Catholic')
+# Use the predict function to predict new values of fertility based on
+# education holding catholic constant at the mean value
+  cathpred = predict(smod, new, interval='prediction')
+# Plot the raw data
+  plot(swiss$Catholic, swiss$Fertility, ylab='',
+    xlab='Percent Catholic', pch=21, bg='gray', cex=1.5, ylim=c(0, 100),
+    cex.lab=1.5, cex.axis=1.25, yaxt='n')
+  axis(side = 2, las = 2)
+# Now plot the mean prediction line
+  lines(new$Catholic, cathpred[,1], col='blue', lwd=2)
+  lines(new$Catholic, cathpred[,2], col='red', lwd=2, lty=2)
+  lines(new$Catholic, cathpred[,3], col='red', lwd=2, lty=2)
+```
+
+<br>
+ 
+This looks a little different.
+
+Here are some tricks we can use to visualize effects of 2 continuous variables at the same time.
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+  # Predictions from original data
+    swpred = predict(object = smod, newdata = swiss, interval = 'prediction')
+
+  # Load the akima library after installling
+    #install.packages('akima')
+    library(akima)
+  # Make a dataframe out of the explanatory variables and predictions
+    persp.test <- data.frame(x=swiss$Education,	y=swiss$Catholic,	z=swpred[,1])
+  # Order the dataframe so we have increasing values of x and y
+    persp.test=persp.test[with(persp.test, order(x, y)), ]
+  # Do an interpolation to get predictions over a grid of x and y values using
+  # the 'interp' function out of the akima package
+    im <- with(persp.test, interp(x, y, z, duplicate='mean', extrap=FALSE))
+```
+
+<br>
+ 
+Now we can use the default graphics to make some pretty fancy plots once we have interpolated our predictions across a grid of observed explanatory variables.
+
+<br>
+ 
+```{r}
+# A two-dimensional, colored contour plot with the filled.contour fxn:
+  filled.contour(im$x, im$y, im$z, col = rev(terrain.colors(25)))
+
+# How about a 3D contour plot? Sweet mother of swiss, these things are freakin
+# awesome
+  # Make the data into a usable form
+    Education = im$x
+    Catholic = im$y
+    Fertility = im$z
+    nrz <- nrow(Fertility)
+    ncz <- ncol(Fertility)
+  # Create a function interpolating colors in the range of specified colors
+    jet.colors <- colorRampPalette( c("blue", "green") )
+  # Generate the desired number of colors from this palette
+    nbcol <- 100
+    color <- jet.colors(nbcol)
+  # Compute the z-value at the facet centres
+    zfacet <- Fertility[-1, -1] + Fertility[-1, -ncz] +
+      Fertility[-nrz, -1] + Fertility[-nrz, -ncz]
+  # Recode facet z-values into color indices
+    facetcol <- cut(zfacet, nbcol)
+  # Now make a sweet freakin' graph
+    par(mar=c(1.5,1,0,1),  mfrow=c(1,1))
+    persp(Education, Catholic, Fertility,
+      col = color[facetcol],
+      phi = 40,
+      theta = 120,
+      scale=TRUE,
+      box=TRUE,
+      ticktype='detailed',
+      border=NULL,
+      r=10,
+      xlab='\n\nEducation',
+      ylab='\n\nCatholic',
+      zlab='\n\nFertility'
+    )
+```     
+
+<br>
+ 
+### Interpretting interaction terms 
+
+<br>
+ 
+Up to this point, we have only considered the 'main effects' of categorical and/or continuous explanatory variables on our response of interest. We are now going to extend this to include 'interaction effects' between variables.
+
+<br>
+ 
+#### Two categorical explanatory variables
+
+<br>
+ 
+```{r}
+# Here are the data:
+  dental = read.csv('http://employees.oneonta.edu/stichds/data/dental.csv')
+```
+
+<br>
+ 
+Now, fit a model to the data.
+
+<br>
+ 
+```{r}
+# To fit a model with an interaction, we are going to use a new notation in
+# the model. So, pay attention to what is going on in this call:
+  dental.mod = lm(mpa~lights*resin, data=dental)
+# If we make an ANOVA table for this two-way ANOVA, we see that there are
+# significant main effects of of resin type, but also a significant
+# interaction between resin type and lights used for drying the resin on the
+# response variable bonding strength. Cool!! What the hell does that mean?
+  anova(dental.mod)
+# And, of course, we can also examine the model coeffficients for a closer
+# look at what this means.
+  summary(dental.mod)
+```
+
+<br>
+ 
+Let's just use the built-in R functions to make predictions from our model:
+
+<br>
+ 
+```{r, warning=FALSE, message=FALSE}
+  # Get all combinations of the unique values for light and resin types
+  # using the 'expand.grid' function
+    dnew = data.frame(
+      expand.grid(unique(dental$lights), unique(dental$resin))
+    )
+  # Give the new df names
+    names(dnew) = c('lights', 'resin')
+  # Sort the dataframe by lights for ease
+    dnew = dnew[with(dnew, order(lights)), ]
+  # Make predictions from these data. Because we are interested in
+  # comparing the different levels here, we can look at 95% CIs instead
+  # of prediction intervals.
+    dpreds = predict(
+      object = dental.mod, newdata = dnew, interval = 'confidence'
+    )
+  # Get the observed means to go along with the predictions
+    library(plyr)
+    mus = ddply(dental, c('lights', 'resin'), summarize, mean=mean(mpa))
+  # Now plot the predictions from this model
+    # Set graphical parameters
+      par(mfrow=c(1,1), mar=c(5,5,1,1))
+    # Plot the raw data by resin type and color code for lights
+      plot(x=as.numeric(dental$resin), y=dental$mpa, type='p',
+          pch=21, bg=c('blue', 'red')[c(dental$lights)],
+          ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n')
+    # Plot the means for Halogen lights by resin type
+      par(new=TRUE)
+      plot(mus$mean[mus$lights=='Halogen'], pch=21, bg='blue',
+        ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n', cex=1.75)
+    # Plot the means for LED lights by resin type
+      par(new=TRUE)
+      plot(mus$mean[mus$lights=='LED'], pch=21, bg='red',
+        ylim=c(0,50), ylab='', xlab='', yaxt='n', xaxt='n', cex=1.75)
+    # Add lines for the mean and prediction intervals for halogen
+      lines(dpreds[1:4,1], col='blue', lty=1)
+      lines(dpreds[1:4,2], col='blue', lty=2)
+      lines(dpreds[1:4,3], col='blue', lty=2)
+    # Add lines for the mean and prediction intervals for LED
+      lines(dpreds[5:8,1], col='red', lty=1)
+      lines(dpreds[5:8,2], col='red', lty=2)
+      lines(dpreds[5:8,3], col='red', lty=2)
+    # Add x and y axes
+      axis(side = 1, at=c(1,2,3,4), labels=c('A','B','C','D'))
+      axis(side = 2, las=2)
+    # Add labels
+      mtext('Resin type', side=1, line=3, cex=1.25)
+      mtext('Bond strength (mpa)', side=2, line=3, cex=1.25)
+    # Let us have a legend
+      legend(x=1, y=50, legend = c('Halogen', 'LED'), lty=1,
+        col=c('blue', 'red'), bty='n')
+```
+
+<br>
+ 
+Interactions between categorical variables generally are more complicated to deal with than interactions between categorical and continuous variables, because then we are only dealing with straight lines that differ by level. This does not, however, make it any less important for us to communicate how our models fit the observations we have collected. If you can get these tools under your belt, they will be extremely powerful for preparing journal articles, and perhaps more importantly, for communicating your results and the uncertainty surrounding them to stakeholders and public audiences.
+
+<br>
+ 
+<br>
+ 

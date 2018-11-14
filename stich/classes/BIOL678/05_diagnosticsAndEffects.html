@@ -1,0 +1,1396 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="diagnostics-and-effect-sizes" class="section level1">
+<h1>Diagnostics and effect sizes</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week in lectures and the lab exercises we will start by taking a step back for an in-depth look at the assumptions we make when we fit parametric models to data in an effort to explain the effects of explanatory variables on some response of interest, using linear models as the backdrop for our discussions. In previous lectures we learned how to fit linear models. The purpose of this lab is to provide you with the tools you need on the front end and the back end of that process so we are surrounding linear models with the goodness they deserve.</p>
+<p><br></p>
+<p>We will also continue to talk about linear models that include multiple explanatory variables. Specifically, we will discuss how relationships between these variables might influence which ones we include in a given model and how we make defensible decisions when it comes to these choices. We will further probe the concept of the R<sup>2</sup> statistic as a measure of model fit, and how this is influenced by the inclusion of multiple explanatory variables.</p>
+<p><br></p>
+<p>Finally, we will conclude our discussions this week with tools for communicating the results of our analyses once we have verified that we are not in major violation of assumptions. To do this, we will need to look a little more closely at the math behind linear models (not too closely!) and what exactly we are doing when we fit a linear model. These discussions will include the essential concepts of main effects, interaction effects, and response ‘surfaces’ for the case in which we include more than one explanatory variable. Please keep in mind that although we are using strictly linear models to introduce these concepts their application in the suite of models that we will discuss for the next several weeks is identical, and we will discuss exactly why this is.</p>
+<p><br></p>
+</div>
+<div id="assumptions-of-linear-models-diagnostics" class="section level2">
+<h2>Assumptions of linear models &amp; diagnostics</h2>
+<p><br></p>
+<p>From last week:</p>
+<p>Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.</p>
+<p>There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.</p>
+<p><br></p>
+<p><strong>1.</strong> Independence of observations.</p>
+<p><strong>2.</strong> Normality of residuals (with mean=0)</p>
+<p><strong>3.</strong> Homogeneity of variances (i.e. homoscedasticity)</p>
+<p><br></p>
+<p>We will discuss what each of these means in class this week, and during the next several weeks we will discuss methods for verifying these assumptions or relaxing the assumptions to meet our needs through specific techniques.</p>
+<p>Let’s get some data to demonstrate these assumptions.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the turtles data, it&#39;s a bit messy, so we will read it</span>
+<span class="co"># in with an extra option to strip white spaces.</span>
+  turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/turtles.txt&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">strip.white =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><br></p>
+<p>These are data that were collected 2013-2015 for Kemp’s Ridley sea turtles incidentally caught by anglers in the Gulf of Mexico. After being caught, the turtles were taken to a wildlife rehabilitation center so they could have fishing hooks removed.</p>
+<p>The data columns mean:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># ID: turtle ID</span>
+  <span class="co"># Year: year of capture</span>
+  <span class="co"># Gear: the gear type with which the turtle was hooked</span>
+  <span class="co"># Width: the gape width of the hook</span>
+  <span class="co"># Removed: the location from which the hook was removed</span>
+  <span class="co"># Status: survived (1) or did not (0)</span>
+  <span class="co"># Stay: length of stay in the rehab facility</span>
+  <span class="co"># nHooks: Number of hooks in the turtle</span></code></pre></div>
+<p><br></p>
+<p>We will use ‘Stay’ as the response variable here.</p>
+<p><br></p>
+<div id="independence-of-observations" class="section level3">
+<h3>Independence of observations</h3>
+<p><br></p>
+<p>This assumption basically means that each row of your data was collected independently of all others. In other words, no two rows of your data are related to one another.</p>
+<p>Note that we can relax this assumption by explicitly including variables and constructs within the models that actually account for these kinds of relationships.</p>
+<p>For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups</p>
+<p>This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met will require alternatives to the simple cases of one- way ANOVA, ANCOVA or simple linear regression.</p>
+<p>We will discuss specific extensions of our basic linear models (ANOVA and regression) to relax more difficult violations such as repeated observations, and temporal or spatial autocorrelation among observations. Although we can’t cover all of these extensions in this course, we can point you in the right direction for most of them.</p>
+<p>What are we looking for here? We want data that were sampled randomly and independently from all other data points. For this information, we have to examine the actual experimental design.</p>
+<p>There is one obvious thing that is going to tell us that the observations in the turtles df are not collected independently.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(turtles, <span class="dv">10</span>) <span class="co"># What is it?</span></code></pre></div>
+<pre><code>##             ID Year   Gear Width Removed Status Stay nHooks
+## 1       AL-002 2013      J  1.45      UE      1    9      1
+## 2  AL-LT14-001 2014      J  6.25      ME      0    4      1
+## 3  AL-LT14-003 2014      J  5.45     NaN      1   16      1
+## 4  AL-LT14-004 2014  Kahle  2.77       B      0    6      1
+## 5  AL-LT14-006 2014      J  4.75      ME      1   49      2
+## 6  AL-LT14-006 2014 Circle  2.92     NaN      1   49      2
+## 7     LT13-001 2013  Kahle  2.22      ME      1   29      1
+## 8     LT13-003 2013      J  1.34      ME      0    4      1
+## 9     LT13-004 2013      J  1.63      ME      1   33      1
+## 10    LT13-008 2013      J    NA      LE      1   26      2</code></pre>
+<p><br></p>
+<p>So, we already know that our data do not conform to the assumptions of ANOVA linear regression, or ANCOVA- but let’s keep using these data for the sake of demonstration…There is, of course another major violation of our assumptions that has to do with experimental design (that is commonly violated): these are DISCRETE data!! We’ll pretend for now that we can think of ‘Stay’ as a continuous variable, though.</p>
+<p>You can see how this could get tedious to do for every level of every grouping factor and then for each continuous variable. So, we can also take a “shotgun” approach and look at how variables are related to one another.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at correlations between variables</span>
+  <span class="kw">pairs</span>(turtles)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="normality-of-residuals" class="section level3">
+<h3>Normality of residuals</h3>
+<p><br></p>
+<p>In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero and a standard deviation of one. This allows us to drop the error term, ‘epsilon’ from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we solve everything through optimization now and not ordinary least squares).</p>
+<p>There are a multitude of tools at our disposal for examining normality of the residuals for linear models. One option is to examine group-specific error structures as a surrogate for residual error prior to analysis. The other option is to examine diagnostic plots of residuals directly from a fitted model object in R or other software programs (this is actually the more appropriate tool).</p>
+<p><br></p>
+<div id="option-1.-data-exploration" class="section level4">
+<h4>Option 1. Data exploration</h4>
+<p><br></p>
+<p><em>What are we looking for here?</em> We are looking to see if the response variable within each group is normally distributed. To assess this, we need to think in terms of the moments of a normal distribution that we learned about earlier in the course, specifically skew and kurtosis. Here we are looking for outliers in the data, or sample distributions that are highly skewed.</p>
+<p>First, we could go level by level for all of our grouping variables and conduct Shapiro tests (not shown here).</p>
+<p>We can look at a few different plots of our response to start teasing apart some of the potential violations of our assumptions.</p>
+<p>We know we will need to look at a year effect here because that is yet another form of non-independence (and potentially homogeneity) in our data. Let’s start with a boxplot:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">boxplot</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><br></p>
+<p>Whoa! We have a couple of issues here.</p>
+<p>First of all: we have clearly identified a number of ‘outliers’ in our data. These are the circles that are outside the whiskers of our boxplots.</p>
+<p>One way to address these outliers is by dropping them from the data. We only want to do this if we have a pretty good justification for this ahead of time (“<em>a priori</em>”). And, sometimes these can be some of the most interesting observations.</p>
+<p>Another way to deal with this is through data transformation. For example, we could use a log transformation in an attempt to normalize extreme values in our data. This certainly looks a little better, but may not get us all the way there…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a boxplot of log-transformed data</span>
+  <span class="kw">boxplot</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><br></p>
+<blockquote>
+<p>NOTE: I will not cover variable transformation extensively in this class. The justification is: 1) you can google it to learn more about what transformations are useful for what, and 3) I will argue that most of the time there are better methods for dealing with non-normal data (this is why we are focused on breadth) and then I will show you how to use those methods.</p>
+</blockquote>
+<p><br></p>
+<p>We can also look at histograms to investigate normality:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))
+  <span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)
+  <span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)
+  <span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+<p>Clearly these data are not normal! So we try a log transformation.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-9-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-9-3.png" width="672" /></p>
+<p><br></p>
+<p>Again, a little better, but perhaps not as good as we’d like.</p>
+<p>The preferred method for examining the normality of residuals for us is going to be actually looking at the diagnostics from a fitted model object:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set up a plotting window so we can see 4 plots at once</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+<span class="co"># Plot the residual diagnostics</span>
+  <span class="kw">plot</span>(<span class="kw">lm</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><br></p>
+<p>Cool! But…what the heck are we looking at here??</p>
+<p><br></p>
+<p><strong>Top left</strong>: residuals vs fitted values- this shows us how the residual error changes between groups (see below). This also shows us that we have clearly violated the assumption that the residuals are normally distributed with a mean of zero.</p>
+<p><strong>Top right</strong>: this is the one we are most interested in for examining the normality of our residual errors. If our residuals are normally distributed, then the points on this plot should (approximately) follow the straight, dotted line here. It does not! Q-Q plots, like others, can also be useful for identifying outliers in our data. These are labeled.</p>
+<p><strong>Bottom left</strong>: we will discuss below</p>
+<p><strong>Bottom right</strong>: this plot is useful for identifying points that might be exerting undo influence on the intercept and slope of the line that we are trying to fit here. In general we are looking for values of Cook’s D greater than <span class="math inline">\(\frac{4}{(N-k-1)}\)</span> where <span class="math inline">\(N\)</span> is sample size and <span class="math inline">\(k\)</span> is number of explanatory variables, if we are going to set a threshold: <a href="http://stats.stackexchange.com/questions/22161/how-to-read-cooks-distance-plots">check it out.</a></p>
+<p>Here, we see that most of our data are within this, but it looks like we actually have much bigger problems based on previous plots.</p>
+<p>We can hit the data with a log transformation to see if it fixes any of our problems:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+<span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>In fact, we see that the model fit has improved substantially, although the outliers in our data are still outliers.</p>
+<p>Finally, what if we have a continuous explanatory variable? We use the same approach:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Width, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-12-1.png" width="672" /><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-12-2.png" width="672" /><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-12-3.png" width="672" /><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-12-4.png" width="672" /></p>
+<p><br></p>
+<p>Which leads us to our next assumption…</p>
+<p><br></p>
+</div>
+</div>
+<div id="homogeneity-of-variances" class="section level3">
+<h3>Homogeneity of variances</h3>
+<p><br></p>
+<p>This assumption states that the residual error within groups is about equal (still normal, with a mean of zero).</p>
+<p>One option for assessing the validity of this assumption is to use the Kolmogrov-Smirnov test to determine whether the data from different groups come from the same distribution. The null hypothesis for this test is that the two distributions do not differ.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>])</code></pre></div>
+<pre><code>## Warning in ks.test(turtles$Stay[turtles$Year == 2013], turtles$Stay[turtles
+## $Year == : p-value will be approximate in the presence of ties</code></pre>
+<pre><code>## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  turtles$Stay[turtles$Year == 2013] and turtles$Stay[turtles$Year == 2014]
+## D = 0.21955, p-value = 6.618e-05
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>])</code></pre></div>
+<pre><code>## Warning in ks.test(turtles$Stay[turtles$Year == 2013], turtles$Stay[turtles
+## $Year == : p-value will be approximate in the presence of ties</code></pre>
+<pre><code>## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  turtles$Stay[turtles$Year == 2013] and turtles$Stay[turtles$Year == 2015]
+## D = 0.13576, p-value = 0.08503
+## alternative hypothesis: two-sided</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>])</code></pre></div>
+<pre><code>## Warning in ks.test(turtles$Stay[turtles$Year == 2014], turtles$Stay[turtles
+## $Year == : p-value will be approximate in the presence of ties</code></pre>
+<pre><code>## 
+##  Two-sample Kolmogorov-Smirnov test
+## 
+## data:  turtles$Stay[turtles$Year == 2014] and turtles$Stay[turtles$Year == 2015]
+## D = 0.35531, p-value = 7.072e-11
+## alternative hypothesis: two-sided</code></pre>
+<p><br></p>
+<p><strong>BUT</strong>: this only works for grouping variables, and it only compares two groups at a time, so this could be VERY cumbersome. And, since we are using R to make our lives easier, we do not want cumbersome if we can help it.This test also is supposed to be reserved for continuous distributions.</p>
+<p>As with assumption #2 above, we have two ways (the same two) to visualize this information.</p>
+<p>First, we can use our boxplots again to look at variability within groups to visually assess whether or not the variance differs from one group to the next:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the data</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="kw">boxplot</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><br></p>
+<p>We can see that the variance is very clearly different between groups. A log transformation will fix that…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the log-transformed data</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="kw">boxplot</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="residual-diagnostics-from-a-fitted-model-object" class="section level2">
+<h2>Residual diagnostics from a fitted model object</h2>
+<p><br></p>
+<p>Again, this is the preferred method for assessing normality in the RESIDUALS (notice the key word here?).</p>
+<p>We can look at how residual error changes (or doesn’t) across group factors such as ‘Year’.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+  <span class="kw">plot</span>(<span class="kw">lm</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p><br></p>
+<p>Now we are interested in the two plots on the left side of this multipanel plot.</p>
+<p>In the top left: we can see pretty clearly that there is a distinct trend in the residual error between groups. The group on the far right is much more variable than the others!</p>
+<p>In the bottom left, we essentially see the same thing. Our standardized residuals show us that the variances are clearly not equal.</p>
+<p>Looking at a log transformation demonstrates that these problems are pretty well solved by transformation, at least enough that a linear model should be robust to the differences between groups.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+  <span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><br></p>
+<p>We are looking for slightly different patterns with continuous explanatory variables.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
+  <span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Width, <span class="dt">data=</span>turtles))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><br></p>
+<p>In the top left, we want to see two things:</p>
+<p><strong>1.</strong> Most of our data should be contained on the interval (-3,3), so it looks like we are good to go here.</p>
+<p><strong>2.</strong> If the residuals are normally distributed, we should see what looks like random scatter in the plots.</p>
+<p><br></p>
+<p>In the bottom left, we want to see: <strong>1.</strong> Most of our data should be less than 3 (this is the square root of standardized residual so they are all positive)</p>
+<p><strong>2.</strong> We should see random scatter in these as well.</p>
+<p><br></p>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p><br></p>
+<p>Do this stuff <strong>before</strong> you start fitting all kinds of models because it is important to think about ahead of time! Examination of residual plots should become second nature to you in these analyses because it is the most powerful tool you have for testing assumptions. Don’t freak out if things don’t look perfect (they almost never will), and realize that there may be ways of dealing with violations within the context of linear models. If not, there certainly are other models designed specifically for this purpose.</p>
+<p><br></p>
+</div>
+</div>
+<div id="communicating-effect-sizes" class="section level2">
+<h2>Communicating effect sizes</h2>
+<p><br></p>
+<div id="interpretting-group-effects" class="section level3">
+<h3>Interpretting group effects</h3>
+<p><br></p>
+<p>When we are working in the world of one-way ANOVA, or even more complex models that contain only “main effects” of categorical, explanatory variables, the interpretation of these effects is relatively straightforward. Let’s use the plant growth data as an example.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</code></pre></div>
+<p><br></p>
+<p>We’ll start here by fitting a one-way anova to test effects of treatment on on plant weight.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the names of the df</span>
+<span class="kw">names</span>(PlantGrowth)</code></pre></div>
+<pre><code>## [1] &quot;weight&quot; &quot;group&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
+  mod =<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data =</span> PlantGrowth)
+<span class="co"># Do the post-hoc comparisons of means</span>
+  <span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(mod)) <span class="co"># Just a reminder that the only difference is trt2-trt1</span></code></pre></div>
+<pre><code>##   Tukey multiple comparisons of means
+##     95% family-wise confidence level
+## 
+## Fit: aov(formula = mod)
+## 
+## $group
+##             diff        lwr       upr     p adj
+## trt1-ctrl -0.371 -1.0622161 0.3202161 0.3908711
+## trt2-ctrl  0.494 -0.1972161 1.1852161 0.1979960
+## trt2-trt1  0.865  0.1737839 1.5562161 0.0120064</code></pre>
+<p><br></p>
+<p>We’ve seen these data and this model before. We know there was a significant effect of treatment on plant weight. So, for now we will ignore the ANOVA and just look at the summary (if you want the ANOVA you can either summarize it yourself or go back to previous reference scripts).</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = weight ~ group, data = PlantGrowth)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -1.0710 -0.4180 -0.0060  0.2627  1.3690 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   5.0320     0.1971  25.527   &lt;2e-16 ***
+## grouptrt1    -0.3710     0.2788  -1.331   0.1944    
+## grouptrt2     0.4940     0.2788   1.772   0.0877 .  
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 0.6234 on 27 degrees of freedom
+## Multiple R-squared:  0.2641, Adjusted R-squared:  0.2096 
+## F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+<p><br></p>
+<p>The summary gives us the predicted means of the response for each factor level based on the fitted model. In the case of ANOVA, we can actually calculate these form the data because that is what the model solution should be if we haven’t violated any of our assumptions.</p>
+<p><br></p>
+<div id="calculations-and-numerical-representation" class="section level4">
+<h4>Calculations and numerical representation</h4>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can get the model coefficients like this:</span>
+  <span class="kw">names</span>(mod)</code></pre></div>
+<pre><code>##  [1] &quot;coefficients&quot;  &quot;residuals&quot;     &quot;effects&quot;       &quot;rank&quot;         
+##  [5] &quot;fitted.values&quot; &quot;assign&quot;        &quot;qr&quot;            &quot;df.residual&quot;  
+##  [9] &quot;contrasts&quot;     &quot;xlevels&quot;       &quot;call&quot;          &quot;terms&quot;        
+## [13] &quot;model&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  coeffs =<span class="st"> </span><span class="kw">data.frame</span>(mod<span class="op">$</span>coefficients)
+<span class="co"># From the model, we see that:</span>
+  <span class="co"># Mean of control</span>
+    y_control =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
+  <span class="co"># Mean of trt1</span>
+    y_trt1 =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
+  <span class="co"># Mean of trt2</span>
+    y_trt2 =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span></code></pre></div>
+<p><br></p>
+<p>Now, let’s compare our model predictions to the actual means.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Model predictions</span>
+  group =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ctrl&#39;</span>, <span class="st">&#39;trt1&#39;</span>, <span class="st">&#39;trt2&#39;</span>)
+  mu =<span class="st"> </span><span class="kw">c</span>(y_control, y_trt1, y_trt2)
+  preds =<span class="st"> </span><span class="kw">data.frame</span>(group, mu)
+<span class="co"># Observed means</span>
+  <span class="kw">library</span>(plyr)
+  obs =<span class="st"> </span><span class="kw">ddply</span>(PlantGrowth, <span class="st">&#39;group&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(weight))
+<span class="co"># Compare them</span>
+  preds</code></pre></div>
+<pre><code>##   group    mu
+## 1  ctrl 5.032
+## 2  trt1 4.661
+## 3  trt2 5.526</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  obs</code></pre></div>
+<pre><code>##   group    mu
+## 1  ctrl 5.032
+## 2  trt1 4.661
+## 3  trt2 5.526</code></pre>
+<p><br></p>
+</div>
+<div id="graphical-representation" class="section level4">
+<h4>Graphical representation</h4>
+<p><br></p>
+<p>We could use any number of graphical tools to represent these results. Given that we’ve met the assumptions of normality, the simplest (and most common) method for visualizing these results is with a box plot.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Set the plotting margins in a call to par</span>
+      <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+    <span class="co"># Make the box plot, but don&#39;t use the default axis</span>
+      <span class="kw">boxplot</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
+        <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)
+      )
+    <span class="co"># Add the x axis with good labels</span>
+      <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),
+        <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;Control&#39;</span>, <span class="st">&#39;Treatment 1&#39;</span>, <span class="st">&#39;Treatment 2&#39;</span>)
+      )
+    <span class="co"># Add the default y-axis, but rotated</span>
+      <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+    <span class="co"># Add the y-axis label</span>
+      <span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Mass (g)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)
+    <span class="co"># Add a letter report to indicate significant differences between groups</span>
+      <span class="kw">text</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;a, b&#39;</span>)
+      <span class="kw">text</span>(<span class="dt">x=</span><span class="dv">2</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;a&#39;</span>)
+      <span class="kw">text</span>(<span class="dt">x=</span><span class="dv">3</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;b&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="interpretting-effects-of-continuous-covariates" class="section level3">
+<h3>Interpretting effects of continuous covariates</h3>
+<p><br></p>
+<p>As with group effects, the interpretation of a single, continuous predictor is pretty straightforward. Here, all we are doing is looking to use the equation for a line we have fit (y = b + mx) to predict the effects of one continuous variable on another. Let’s use the ‘swiss’ data again for this. Remember that this dataset compares fertility rates to a number of socio-economic indicators:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(<span class="st">&#39;swiss&#39;</span>)
+  <span class="kw">names</span>(swiss)</code></pre></div>
+<pre><code>## [1] &quot;Fertility&quot;        &quot;Agriculture&quot;      &quot;Examination&quot;     
+## [4] &quot;Education&quot;        &quot;Catholic&quot;         &quot;Infant.Mortality&quot;</code></pre>
+<p><br></p>
+<p>We’ll make a model to predict the effect of education level on fertility:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the model and save it to a named object called &#39;swiss.mod&#39;</span>
+  swiss.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)</code></pre></div>
+<p><br></p>
+<p>Next, we can look at the coefficient estimates for <code>swiss.mod</code>:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize the model</span>
+  <span class="kw">summary</span>(swiss.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education, data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -17.036  -6.711  -1.011   9.526  19.689 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
+## Education    -0.8624     0.1448  -5.954 3.66e-07 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 9.446 on 45 degrees of freedom
+## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
+## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
+<p><br></p>
+<p>From this summary, we can see that we have an intercept of…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save intercept to a named object</span>
+  intcpt =<span class="st"> </span><span class="fl">79.6101</span></code></pre></div>
+<p><br></p>
+<p>…and a ‘slope’ for <code>Education</code> of…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save slope to a named object</span>
+  slp =<span class="st"> </span><span class="op">-</span><span class="fl">0.8624</span></code></pre></div>
+<p><br></p>
+<p>As with the case of categorical explanatory variables, we are now interested in understanding how the response changes with respect to the variable of interest. But, this time we want to see what the mean (or some other measure) of the response is for all possible values of the explanatory variable from the lowest value to the maximum value, rather than just a few discrete values that we observed. To do this, we first need to formalize our equation. Let’s make a function that will predict the mean fertility for any given value of education level based on our model:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  y_fert =<span class="st"> </span><span class="cf">function</span>(x){
+    intcpt <span class="op">+</span><span class="st"> </span>slp <span class="op">*</span><span class="st"> </span>x
+  }</code></pre></div>
+<p><br></p>
+<p>Now, we can apply that function to either our observed data, or to newly generated data to make some predictions!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using our observed data:</span>
+  <span class="co"># Calculate new y values using the model parameters and our new data</span>
+    obs_fit =<span class="st"> </span><span class="kw">y_fert</span>(swiss<span class="op">$</span>Education)
+  <span class="co"># Plot the results</span>
+    <span class="kw">plot</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>,
+      <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>)
+<span class="co"># Using new data based on the range of our explanatory variable:</span>
+  <span class="co"># Make a sequence of new values based on the range of our data</span>
+    newEd =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education), <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education),
+      <span class="dt">by=</span><span class="fl">0.01</span>))
+    <span class="co"># Give the only column a name that matches the data in the model above</span>
+    <span class="kw">names</span>(newEd) =<span class="st"> &#39;Education&#39;</span>
+  <span class="co"># Predict changes in fertility based on education using our new values for</span>
+  <span class="co"># education level, &#39;newEd&#39;, and our model parameters</span>
+    pred_fit =<span class="st"> </span><span class="kw">y_fert</span>(newEd<span class="op">$</span>Education)
+  <span class="co"># Plot the changes</span>
+    <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)    <span class="co"># This tells R to add it to the same graph</span>
+    <span class="kw">plot</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<p><br></p>
+<p>As you can see, the plotted lines completely overlap, which is exactly what we would expect.</p>
+<p>This is really useful for showing the effects of a continuous explanatory variable on the response, but there are a couple of issues:</p>
+<p><br></p>
+<p><strong>1.</strong> We are showing the model predictions without any data, which can be use- ful sometimes in very complex datasets but not for simple linear models.</p>
+<p><strong>2.</strong> We are only showing the mean predictions. It would be nice to incorporate some of the uncertainty in our model, too.</p>
+<p><br></p>
+<p>How can we fix these things? Glad you asked! First of all, we can actually plot the raw data against our predictions…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the plot</span>
+  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>,
+    <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+    <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)
+
+<span class="co"># That&#39;s better. Now, we can plot our predictions over the top of that</span>
+  <span class="kw">lines</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-32-1.png" width="672" /></p>
+<p><br></p>
+<p>What about the uncertainty in our model and our data? We can add this in by using the handy-dandy predict function in R!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ?predict</code></pre></div>
+<p><br></p>
+<p>To get info on how to do this for linear models, scroll down and click on the link to <code>predict.lm</code>. You will see that we need to supply some kind offitted model object, some data from which to make predictions, and the type of interval you would like to show.</p>
+<p><br></p>
+<pre><code>object:   in this case it is our &#39;swiss.mod&#39;
+newdata:  This needs to be a data frame. It can either be the original,
+          or it can be a new dataframe, but it must contain columns with
+          the same names as the explanatory variables used in the model.
+interval: usually, we are interested in the prediction interval, as this
+          tends to be more honest about the uncertainty in our model
+          predictions and our data, but there are other options</code></pre>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_int =<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>swiss.mod, <span class="dt">newdata=</span>newEd, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>So, what does the predict function give us?</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">head</span>(pred_int)</code></pre></div>
+<pre><code>##        fit      lwr      upr
+## 1 78.74771 59.30196 98.19346
+## 2 78.73908 59.29377 98.18440
+## 3 78.73046 59.28559 98.17534
+## 4 78.72184 59.27740 98.16628
+## 5 78.71321 59.26921 98.15722
+## 6 78.70459 59.26102 98.14816</code></pre>
+<p><br></p>
+<p>As you can see, this is a <strong>matrix</strong> with three columns named <code>fit</code>, <code>lwr</code>, and <code>upr</code>. The column <code>fit</code> is the mean prediction from our model for the new data. The columns <code>lwr</code> and <code>upr</code> are the lower and upper limits for our prediction intervals. We already have our mean line fit, so we’ll just throw in some lines for the lower and upper bounds to our predictions! To do this, we can’t use our dollar-sign notation for pred_int because it is a <strong>matrix</strong>, so we can either do <code>pred_int[ , i]</code> or <code>pred_int[ , 'colname i']</code>.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the original plot</span>
+  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>,
+    <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+    <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)
+
+<span class="co"># Add line for mean predictions over the top of that</span>
+  <span class="kw">lines</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+  
+<span class="co"># Add prediction intervals</span>
+  <span class="kw">lines</span>(<span class="dt">x=</span>newEd<span class="op">$</span>Education, <span class="dt">y=</span>pred_int[ ,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(<span class="dt">x=</span>newEd<span class="op">$</span>Education, <span class="dt">y=</span>pred_int[ ,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p><br></p>
+<p>Now that is a <strong>money</strong>, high-quality figure that shows your raw data, the model predictions, and the uncertainty associated with both of these.</p>
+<p><br></p>
+</div>
+<div id="main-effects-in-ancova" class="section level3">
+<h3>Main effects in ANCOVA</h3>
+<p><br></p>
+<p>Now, we are going to step up the complexity a little bit and start to look at how to interpret linear models with more than one variable, and more than one variable type. Exciting, I know!</p>
+<p>One categorical and one continuous explanatory variable- last week:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in a new data set</span>
+  <span class="co"># This data set contains pulses of 2 species of crickets collected under</span>
+  <span class="co"># varying temperatures</span>
+    crickets =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/crickets.txt&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
+  cricket.mod =<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)
+<span class="co"># Install the car package. We need a function from this library for summary.</span>
+  <span class="co"># install.packages(&#39;car&#39;) # Uncomment front of line to install</span>
+  <span class="kw">library</span>(car)
+<span class="co"># Now we create the anova table for our ancova model</span>
+  <span class="kw">Anova</span>(cricket.mod)</code></pre></div>
+<pre><code>## Anova Table (Type II tests)
+## 
+## Response: Pulse
+##           Sum Sq Df F value    Pr(&gt;F)    
+## Species    598.0  1   187.4 6.272e-14 ***
+## Temp      4376.1  1  1371.4 &lt; 2.2e-16 ***
+## Residuals   89.3 28                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And we can look at the summary of the linear model</span>
+  <span class="kw">summary</span>(cricket.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Pulse ~ Species + Temp, data = crickets)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -3.0128 -1.1296 -0.3912  0.9650  3.7800 
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)  -7.21091    2.55094  -2.827  0.00858 ** 
+## Speciesniv  -10.06529    0.73526 -13.689 6.27e-14 ***
+## Temp          3.60275    0.09729  37.032  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 1.786 on 28 degrees of freedom
+## Multiple R-squared:  0.9896, Adjusted R-squared:  0.9888 
+## F-statistic:  1331 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
+<p><br></p>
+<p>We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.</p>
+<p>Plot the predictions by species.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Plot the raw data</span>
+    <span class="kw">plot</span>(crickets<span class="op">$</span>Temp,
+      crickets<span class="op">$</span>Pulse,
+      <span class="dt">pch=</span><span class="dv">21</span>,
+      <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[crickets<span class="op">$</span>Species],
+      <span class="dt">cex=</span><span class="fl">1.5</span>,
+      <span class="dt">ylab =</span> <span class="st">&#39;Pulse&#39;</span>,
+      <span class="dt">xlab =</span> <span class="st">&#39;Temperature (C)&#39;</span>,
+      <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>)
+  <span class="co"># Add the y-axis labels and rotate them</span>
+    <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+
+  <span class="co"># Make predictions from the fitted model object</span>
+    preds =<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod, <span class="dt">newdata =</span> crickets,
+      <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))
+
+  <span class="co"># Plot the predictions</span>
+    <span class="co"># Add prediction lines for species &#39;ex&#39;</span>
+      <span class="co"># Mean</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="co"># Lower</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="co"># Upper</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
+          preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="co"># Add prediction lines for species &#39;niv&#39;</span>
+      <span class="co"># Mean</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="co"># Lower</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="co"># Upper</span>
+        <span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
+          preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="main-effects-with-two-categorical-explanatory-variables" class="section level3">
+<h3>Main effects with two categorical explanatory variables</h3>
+<p><br></p>
+<p>For this example, we will consider a new data set. These data are from an experiment in Restorative Dentistry and Endodontics that was published in 2014. The study examines effects of drying light and resin type on the strength of a bonding resin for teeth.</p>
+<p>The full citation for the paper is:</p>
+<p>Kim, H-Y. 2014. Statistical notes for clinical researchers: Two-way analysis of variance (ANOVA)-exploring possible interaction between factors. Restorative Dentistry and Endodontics 39(2):143-147.</p>
+<p>Here are the data:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  dental =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/dental.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>Now, fit a model to the data.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We are looking only at main effects</span>
+  dental.mod =<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights <span class="op">+</span><span class="st"> </span>resin, <span class="dt">data=</span>dental)</code></pre></div>
+<p><br></p>
+<p>If we make an ANOVA table for this two-way ANOVA, we see that there are significant main effects of resin type but not lights used for drying.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">anova</span>(dental.mod)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: mpa
+##           Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+## lights     1   34.7   34.72  0.6797    0.4123    
+## resin      3 1999.7  666.57 13.0514 6.036e-07 ***
+## Residuals 75 3830.5   51.07                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p>We can also examine the model coeffficients for a closer look at what this means.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(dental.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpa ~ lights + resin, data = dental)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -14.1162  -4.9531   0.1188   4.4613  14.4663 
+## 
+## Coefficients:
+##             Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)   19.074      1.787  10.676  &lt; 2e-16 ***
+## lightsLED     -1.318      1.598  -0.824  0.41229    
+## resinB         3.815      2.260   1.688  0.09555 .  
+## resinC         6.740      2.260   2.982  0.00386 ** 
+## resinD        13.660      2.260   6.044 5.39e-08 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 7.147 on 75 degrees of freedom
+## Multiple R-squared:  0.3469, Adjusted R-squared:  0.312 
+## F-statistic: 9.958 on 4 and 75 DF,  p-value: 1.616e-06</code></pre>
+<p><br></p>
+<p>Remember, in our data we had 2 kinds of lights, and 4 kinds of resin. But, here we have one less of each! Why is this? It is because of the way categorical variables are dummy coded for linear models, so one level of each variable is wrapped up in the estimate for our intercept.</p>
+<p>Right now, you might be a little confused about how to calculate and show the effect size for these variables. If not, you should probably take a more advanced stats class.</p>
+<p>One reasonable option might be to summarize the data by the means and plot the means.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize the means</span>
+  <span class="kw">library</span>(plyr)
+  mus =<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean=</span><span class="kw">mean</span>(mpa))
+<span class="co"># Plot the summaries</span>
+  <span class="co"># Set graphical parameters</span>
+    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="co"># Make resin into a numeric for plotting trick</span>
+    resin=<span class="st"> </span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin)
+  <span class="co"># Plot the raw data by resin type and color code for lights on the second</span>
+  <span class="co"># linen of code ( bg=c(&#39;blue&#39;, &#39;red&#39;)[c(dental$lights)] )</span>
+    <span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,
+        <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],
+        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+    <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+  <span class="co"># Plot the means for Halogen lights by resin type</span>
+    <span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>,
+      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)
+  <span class="co"># Add a line for Halogen lights by resin type</span>
+    <span class="kw">lines</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
+  <span class="co"># Add the plot for LED lights</span>
+    <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+  <span class="co"># Plot the means for LED by resin type</span>
+    <span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>,
+      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)
+  <span class="co"># Add a line for LED lights by resin type</span>
+    <span class="kw">lines</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
+  <span class="co"># Add x and y axes</span>
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+  <span class="co"># Add labels</span>
+    <span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+    <span class="kw">mtext</span>(<span class="st">&#39;Bond strength (mpa)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+  <span class="co"># Let us have a legend</span>
+    <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,
+      <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-44-1.png" width="672" /></p>
+<p><br></p>
+<p>Another option is to make predictions for each combination of levels. We can do this using the math behind our model.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Store the coefficients in their own object</span>
+    res =<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(dental.mod)<span class="op">$</span>coefficients )
+    res</code></pre></div>
+<pre><code>##             Estimate Std..Error    t.value     Pr...t..
+## (Intercept) 19.07375   1.786635 10.6757944 1.044637e-16
+## lightsLED   -1.31750   1.598015 -0.8244603 4.122925e-01
+## resinB       3.81500   2.259935  1.6881019 9.554608e-02
+## resinC       6.74000   2.259935  2.9823872 3.856472e-03
+## resinD      13.66000   2.259935  6.0444226 5.386106e-08</code></pre>
+<p><br></p>
+<p>Make predictions for Halogen lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    hal =<span class="st"> </span><span class="kw">c</span>(
+      res[<span class="dv">1</span>,<span class="dv">1</span>],             <span class="co"># Halogen lights, resin A</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">3</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin B</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">4</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin C</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">5</span>,<span class="dv">1</span>]   <span class="co"># Halogen lights, resin D</span>
+    )</code></pre></div>
+<p><br></p>
+<p>Make predictions for LEDvlights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term. Sound familiar?? Now, to predict effects of LED lights and each resin type we need to include the coefficient for lightsLED.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    led =<span class="st"> </span><span class="kw">c</span>(
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>],             <span class="co"># LED lights, resin A</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">3</span>,<span class="dv">1</span>],  <span class="co"># LED lights, resin B</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">4</span>,<span class="dv">1</span>],  <span class="co"># LED lights, resin C</span>
+      res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">5</span>,<span class="dv">1</span>]   <span class="co"># LED lights, resin D</span>
+    )</code></pre></div>
+<p><br></p>
+<p>How do these values compare to our empirical means? Let’s see…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the summaries</span>
+  <span class="co"># Set graphical parameters</span>
+    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="co"># Plot the raw data by resin type and color code for lights</span>
+    <span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,
+        <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],
+        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+    <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+  <span class="co"># Plot the means for Halogen lights by resin type</span>
+    <span class="kw">plot</span>(hal, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">cex =</span> <span class="fl">1.75</span>,
+      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="co"># Add a line for Halogen lights by resin type</span>
+    <span class="kw">lines</span>(hal, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)
+  <span class="co"># Add the plot for LED lights</span>
+    <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+  <span class="co"># Plot the means for LED by resin type</span>
+    <span class="kw">plot</span>(led, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>,
+      <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="co"># Add a line for LED lights by resin type</span>
+    <span class="kw">lines</span>(led, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
+  <span class="co"># Add x and y axes</span>
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+  <span class="co"># Add labels</span>
+    <span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+    <span class="co">#mtext(&#39;Bond strength (mpa)&#39;, side=2, line=3, cex=1.25)</span>
+  <span class="co"># Let us have a legend</span>
+    <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,
+      <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-48-1.png" width="672" /></p>
+<p><br></p>
+<p>Well now, that is definitely different. We can clearly see now that there is no real effect of lights on the response, and that in our model we assumed that the relationship between resin and bond strength is the same across light types. So what do the differences between our empirical data and our predictions mean?</p>
+<blockquote>
+<p><strong>All models are wrong and some are useful</strong>.</p>
+</blockquote>
+<p>Clearly this specific model is not very useful. The reason for that is that in this model we have specified that the intercept of the line can change with light type, but not the slopes. We will examine a more useful model below.</p>
+<p><br></p>
+<p><strong>LESSON</strong>: <em>This is why we should always check the trends in our model predictions against the raw data. These should be presented together wherever possible (becomes more difficult in complex models).</em></p>
+<p><br></p>
+<p>Finally, we can use the built-in R functions to make predictions from our model:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get all combinations of the unique values for light and resin types</span>
+<span class="co"># using the &#39;expand.grid&#39; function</span>
+  dnew =<span class="st"> </span><span class="kw">data.frame</span>(
+    <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))
+  )
+<span class="co"># Give the new df names</span>
+  <span class="kw">names</span>(dnew) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
+<span class="co"># Sort the dataframe by lights for ease</span>
+  dnew =<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]</code></pre></div>
+<p><br></p>
+<p>Make predictions from these data. Because we are interested in comparing the different levels here, we can look at 95% CIs instead of prediction intervals.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  dpreds =<span class="st"> </span><span class="kw">predict</span>(
+    <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>
+  )
+<span class="co"># Now plot the predictions from this model</span>
+  <span class="co"># Set graphical parameters</span>
+    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="co"># Plot the raw data by resin type and color code for lights</span>
+    <span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,
+        <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],
+        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="co"># Add lines for the mean and prediction intervals for halogen</span>
+    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="co"># Add lines for the mean and prediction intervals for LED</span>
+    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="co"># Add x and y axes</span>
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))
+    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+  <span class="co"># Add labels</span>
+    <span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+    <span class="co">#mtext(&#39;Bond strength (mpa)&#39;, side=2, line=3, cex=1.25)</span>
+  <span class="co"># Let us have a legend</span>
+    <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,
+      <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-50-1.png" width="672" /></p>
+<p><br></p>
+<p>Two things to note here:</p>
+<p><br></p>
+<p><strong>1.</strong> There is huge overlap in the CIs for these relationships, which makes us comfortable in the fact that we found no evidence for an effect of lights</p>
+<p><strong>2.</strong> These predictions are pretty messed up compared to the patterns we saw in the raw data…more to follow</p>
+<p><br></p>
+<p><br></p>
+</div>
+<div id="main-effects-with-two-continuous-covariates" class="section level3">
+<h3>Main effects with two continuous covariates</h3>
+<p><br></p>
+<p>Let’s use the swiss data for this one. We start by fitting a model.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      smod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">*</span>Catholic, <span class="dt">data=</span>swiss)</code></pre></div>
+<p><br></p>
+<p>Now look at the results.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">summary</span>(smod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = Fertility ~ Education * Catholic, data = swiss)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -11.953  -6.319  -1.368   6.380  14.297 
+## 
+## Coefficients:
+##                     Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        70.937553   3.106471  22.835  &lt; 2e-16 ***
+## Education          -0.427637   0.260176  -1.644  0.10754    
+## Catholic            0.184003   0.054539   3.374  0.00158 ** 
+## Education:Catholic -0.009380   0.005904  -1.589  0.11942    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 8.191 on 43 degrees of freedom
+## Multiple R-squared:  0.5981, Adjusted R-squared:  0.5701 
+## F-statistic: 21.33 on 3 and 43 DF,  p-value: 1.286e-08</code></pre>
+<p><br></p>
+<p>Make the coefficients into a dataframe.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      sres  =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">summary</span>(smod)<span class="op">$</span>coefficients)</code></pre></div>
+<p><br></p>
+<p>The thing that’s confusing about multiple continous predictors is how to simulate new data used in predictions if there is any colinearity between the explanatory variables.</p>
+<p>So, we can do one of two things.</p>
+<p><br></p>
+<p><strong>1.</strong> We can make predictions one variable at a time and hold the others constant at their means.</p>
+<p><strong>2.</strong> We can make predictions based on our original data</p>
+<p><br></p>
+<p>First, let’s consider the case of making predictions from a single continuous explanatory variable (‘covariate’) at a time.</p>
+<p>Start with <code>Education</code> since we’ve already done it.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make new values of Education across the range of observed values</span>
+  ednew =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education), <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education), <span class="dt">by=</span><span class="fl">0.01</span>)
+<span class="co"># Make a column of mean for level of Catholocism</span>
+  cathnew =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Catholic), <span class="kw">length</span>(ednew))
+<span class="co"># Combine them into a dataframe for use in predict function and assign names</span>
+  new =<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
+  <span class="kw">names</span>(new) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)
+<span class="co"># Use the predict function to predict new values of fertility based on</span>
+<span class="co"># education holding catholic constant at the mean value</span>
+    edpred =<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
+<span class="co"># Plot the raw data</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>,
+    <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+    <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)
+<span class="co"># Now plot the mean prediction line</span>
+  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
+<p><br></p>
+<p>This should look familiar…</p>
+<p>Second, we can do the same for <code>Catholic</code> holding <code>Education</code> constant at the mean observed value.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make new values of Education across the range of observed values</span>
+  cathnew =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Catholic), <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Catholic), <span class="dt">by=</span><span class="fl">0.01</span>)
+<span class="co"># Make new column repeating the mean of Education across observations</span>
+  ednew =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Education), <span class="kw">length</span>(cathnew))
+<span class="co"># Combine them into a dataframe for use in predict function and assign names</span>
+  new =<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
+  <span class="kw">names</span>(new) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)
+<span class="co"># Use the predict function to predict new values of fertility based on</span>
+<span class="co"># education holding catholic constant at the mean value</span>
+  cathpred =<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
+<span class="co"># Plot the raw data</span>
+  <span class="kw">plot</span>(swiss<span class="op">$</span>Catholic, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,
+    <span class="dt">xlab=</span><span class="st">&#39;Percent Catholic&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),
+    <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)
+<span class="co"># Now plot the mean prediction line</span>
+  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p><br></p>
+<p>This looks a little different.</p>
+<p>Here are some tricks we can use to visualize effects of 2 continuous variables at the same time.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Predictions from original data</span>
+    swpred =<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> smod, <span class="dt">newdata =</span> swiss, <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)
+
+  <span class="co"># Load the akima library after installling</span>
+    <span class="co">#install.packages(&#39;akima&#39;)</span>
+    <span class="kw">library</span>(akima)
+  <span class="co"># Make a dataframe out of the explanatory variables and predictions</span>
+    persp.test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>swiss<span class="op">$</span>Education, <span class="dt">y=</span>swiss<span class="op">$</span>Catholic,   <span class="dt">z=</span>swpred[,<span class="dv">1</span>])
+  <span class="co"># Order the dataframe so we have increasing values of x and y</span>
+    persp.test=persp.test[<span class="kw">with</span>(persp.test, <span class="kw">order</span>(x, y)), ]
+  <span class="co"># Do an interpolation to get predictions over a grid of x and y values using</span>
+  <span class="co"># the &#39;interp&#39; function out of the akima package</span>
+    im &lt;-<span class="st"> </span><span class="kw">with</span>(persp.test, <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>, <span class="dt">extrap=</span><span class="ot">FALSE</span>))</code></pre></div>
+<p><br></p>
+<p>Now we can use the default graphics to make some pretty fancy plots once we have interpolated our predictions across a grid of observed explanatory variables.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># A two-dimensional, colored contour plot with the filled.contour fxn:</span>
+  <span class="kw">filled.contour</span>(im<span class="op">$</span>x, im<span class="op">$</span>y, im<span class="op">$</span>z, <span class="dt">col =</span> <span class="kw">rev</span>(<span class="kw">terrain.colors</span>(<span class="dv">25</span>)))</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How about a 3D contour plot? Sweet mother of swiss, these things are freakin</span>
+<span class="co"># awesome</span>
+  <span class="co"># Make the data into a usable form</span>
+    Education =<span class="st"> </span>im<span class="op">$</span>x
+    Catholic =<span class="st"> </span>im<span class="op">$</span>y
+    Fertility =<span class="st"> </span>im<span class="op">$</span>z
+    nrz &lt;-<span class="st"> </span><span class="kw">nrow</span>(Fertility)
+    ncz &lt;-<span class="st"> </span><span class="kw">ncol</span>(Fertility)
+  <span class="co"># Create a function interpolating colors in the range of specified colors</span>
+    jet.colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>) )
+  <span class="co"># Generate the desired number of colors from this palette</span>
+    nbcol &lt;-<span class="st"> </span><span class="dv">100</span>
+    color &lt;-<span class="st"> </span><span class="kw">jet.colors</span>(nbcol)
+  <span class="co"># Compute the z-value at the facet centres</span>
+    zfacet &lt;-<span class="st"> </span>Fertility[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>Fertility[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span>ncz] <span class="op">+</span>
+<span class="st">      </span>Fertility[<span class="op">-</span>nrz, <span class="op">-</span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>Fertility[<span class="op">-</span>nrz, <span class="op">-</span>ncz]
+  <span class="co"># Recode facet z-values into color indices</span>
+    facetcol &lt;-<span class="st"> </span><span class="kw">cut</span>(zfacet, nbcol)
+  <span class="co"># Now make a sweet freakin&#39; graph</span>
+    <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>),  <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+    <span class="kw">persp</span>(Education, Catholic, Fertility,
+      <span class="dt">col =</span> color[facetcol],
+      <span class="dt">phi =</span> <span class="dv">40</span>,
+      <span class="dt">theta =</span> <span class="dv">120</span>,
+      <span class="dt">scale=</span><span class="ot">TRUE</span>,
+      <span class="dt">box=</span><span class="ot">TRUE</span>,
+      <span class="dt">ticktype=</span><span class="st">&#39;detailed&#39;</span>,
+      <span class="dt">border=</span><span class="ot">NULL</span>,
+      <span class="dt">r=</span><span class="dv">10</span>,
+      <span class="dt">xlab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Education&#39;</span>,
+      <span class="dt">ylab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Catholic&#39;</span>,
+      <span class="dt">zlab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Fertility&#39;</span>
+    )</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-57-2.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="interpretting-interaction-terms" class="section level3">
+<h3>Interpretting interaction terms</h3>
+<p><br></p>
+<p>Up to this point, we have only considered the ‘main effects’ of categorical and/or continuous explanatory variables on our response of interest. We are now going to extend this to include ‘interaction effects’ between variables.</p>
+<p><br></p>
+<div id="two-categorical-explanatory-variables" class="section level4">
+<h4>Two categorical explanatory variables</h4>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here are the data:</span>
+  dental =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/dental.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>Now, fit a model to the data.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To fit a model with an interaction, we are going to use a new notation in</span>
+<span class="co"># the model. So, pay attention to what is going on in this call:</span>
+  dental.mod =<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights<span class="op">*</span>resin, <span class="dt">data=</span>dental)
+<span class="co"># If we make an ANOVA table for this two-way ANOVA, we see that there are</span>
+<span class="co"># significant main effects of of resin type, but also a significant</span>
+<span class="co"># interaction between resin type and lights used for drying the resin on the</span>
+<span class="co"># response variable bonding strength. Cool!! What the hell does that mean?</span>
+  <span class="kw">anova</span>(dental.mod)</code></pre></div>
+<pre><code>## Analysis of Variance Table
+## 
+## Response: mpa
+##              Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
+## lights        1   34.72   34.72  1.1067    0.2963    
+## resin         3 1999.72  666.57 21.2499 5.792e-10 ***
+## lights:resin  3 1571.96  523.99 16.7043 2.457e-08 ***
+## Residuals    72 2258.52   31.37                      
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># And, of course, we can also examine the model coeffficients for a closer</span>
+<span class="co"># look at what this means.</span>
+  <span class="kw">summary</span>(dental.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## lm(formula = mpa ~ lights * resin, data = dental)
+## 
+## Residuals:
+##     Min      1Q  Median      3Q     Max 
+## -11.760  -3.663  -0.320   3.697  11.250 
+## 
+## Coefficients:
+##                  Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept)        17.770      1.771  10.033 2.57e-15 ***
+## lightsLED           1.290      2.505   0.515   0.6081    
+## resinB              2.130      2.505   0.850   0.3979    
+## resinC              4.770      2.505   1.904   0.0609 .  
+## resinD             22.530      2.505   8.995 2.13e-13 ***
+## lightsLED:resinB    3.370      3.542   0.951   0.3446    
+## lightsLED:resinC    3.940      3.542   1.112   0.2697    
+## lightsLED:resinD  -17.740      3.542  -5.008 3.78e-06 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## Residual standard error: 5.601 on 72 degrees of freedom
+## Multiple R-squared:  0.6149, Adjusted R-squared:  0.5775 
+## F-statistic: 16.42 on 7 and 72 DF,  p-value: 9.801e-13</code></pre>
+<p><br></p>
+<p>Let’s just use the built-in R functions to make predictions from our model:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Get all combinations of the unique values for light and resin types</span>
+  <span class="co"># using the &#39;expand.grid&#39; function</span>
+    dnew =<span class="st"> </span><span class="kw">data.frame</span>(
+      <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))
+    )
+  <span class="co"># Give the new df names</span>
+    <span class="kw">names</span>(dnew) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
+  <span class="co"># Sort the dataframe by lights for ease</span>
+    dnew =<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]
+  <span class="co"># Make predictions from these data. Because we are interested in</span>
+  <span class="co"># comparing the different levels here, we can look at 95% CIs instead</span>
+  <span class="co"># of prediction intervals.</span>
+    dpreds =<span class="st"> </span><span class="kw">predict</span>(
+      <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>
+    )
+  <span class="co"># Get the observed means to go along with the predictions</span>
+    <span class="kw">library</span>(plyr)
+    mus =<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean=</span><span class="kw">mean</span>(mpa))
+  <span class="co"># Now plot the predictions from this model</span>
+    <span class="co"># Set graphical parameters</span>
+      <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+    <span class="co"># Plot the raw data by resin type and color code for lights</span>
+      <span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin), <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,
+          <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],
+          <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)
+    <span class="co"># Plot the means for Halogen lights by resin type</span>
+      <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+      <span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>,
+        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)
+    <span class="co"># Plot the means for LED lights by resin type</span>
+      <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+      <span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>,
+        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)
+    <span class="co"># Add lines for the mean and prediction intervals for halogen</span>
+      <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="co"># Add lines for the mean and prediction intervals for LED</span>
+      <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
+      <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+      <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    <span class="co"># Add x and y axes</span>
+      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))
+      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+    <span class="co"># Add labels</span>
+      <span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+      <span class="kw">mtext</span>(<span class="st">&#39;Bond strength (mpa)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)
+    <span class="co"># Let us have a legend</span>
+      <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,
+        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-60-1.png" width="672" /></p>
+<p><br></p>
+<p>Interactions between categorical variables generally are more complicated to deal with than interactions between categorical and continuous variables, because then we are only dealing with straight lines that differ by level. This does not, however, make it any less important for us to communicate how our models fit the observations we have collected. If you can get these tools under your belt, they will be extremely powerful for preparing journal articles, and perhaps more importantly, for communicating your results and the uncertainty surrounding them to stakeholders and public audiences.</p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+<head>
+<style>
+#pre code, #pre, #code {
+  white-space: pre;
+  overflow-x: scroll;
+  word-break: keep-all;
+  word-wrap: initial;
+}
+
+
+img {
+  display: inline-block;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.content-holder {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+</style>
+</head>

@@ -1,0 +1,24 @@
+
+      model{
+
+        # Priors
+          for(i in 1:ngroups){
+            alpha[i] ~ dnorm(mu.int, tau.int) # Random intercepts
+            beta[i] ~ dnorm(mu.beta, tau.beta)  # Random slopes
+          }
+
+          mu.int ~ dnorm(0, 0.001)            # Mean hyperparameter for ran. intercepts
+          tau.int <- 1/(sigma.int*sigma.int)  # Precision for random intercepts
+          sigma.int ~ dunif(0, 100)           # SD hyperparameter for ran. intercepts
+
+          mu.beta ~ dnorm(0, 0.001)            # Mean hyperparameter for ran. slopes
+          tau.beta <- 1/(sigma.int*sigma.int)  # Precision for random slopes
+          sigma.beta ~ dunif(0, 100)           # SD hyperparameter for ran. slopes
+
+        # Likelihood
+          for(i in 1:N){
+            y[i] ~ dbern(mu[i])
+            logit(mu[i]) <- alpha[year[i]] + beta[year[i]]*flow[i]
+          }
+        }
+        

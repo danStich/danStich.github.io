@@ -1,0 +1,16 @@
+                 
+  model {                       
+    # Likelihood
+      for(i in 1:nobs){          
+        C[i] ~ dbern(p[i])
+        logit(p[i]) <- alpha[year[i]] + beta*flow[i]
+      }                         
+
+    # Priors
+      for(j in 1:nyears){
+        alpha[j] ~ dnorm(0, 0.01)
+      }
+
+      beta ~ dnorm(0, 0.01)               
+  }                             
+
