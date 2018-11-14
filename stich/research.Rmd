@@ -5,28 +5,16 @@ title: "Research"
 ```{r, child="_styles.Rmd"}
 ```
 
----
+Applied quantitative research to inform resource management
 
-
-### Applied quantitative research to inform resource management
-
-<br>
- 
 <img src="./images/roboshad.png" alt="">
 
-<br>
- 
 Graduate and undergraduate students in my lab focus on a wide variety of natural resource management problems. Interests have ranged from fish population dynamics and behavior to monitoring amphibians in vernal pools. Brief descriptions of student research projects can be found <a href="studentProjects.html"> here </a>.
 
-<br>
- 
 My personal research interests are also varied. Generally speaking, my research tends to be focused on quantitative approaches to understanding complex problems in natural resource management. This involves a combination of field and laboratory research, and simulation modeling. Specific studies have ranged from physioligical and behavioral studies to estimation of population abundance and vital rates (e.g. growth or survival) using mark-recapture and life history approaches. 
 
 <!-- You can find out more about the work that I do <a href="currentProjects.html"> here </a>. -->
 
-<br>
- 
 For a list of peer-reviewed research publications, click <a href="publications.html"> here </a>.
 
-<br>
  
