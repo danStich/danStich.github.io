@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="data-simulation-and-visualization" class="section level1">
+<h1>Data simulation and visualization</h1>
+<p><br></p>
+<p><img src="../../images/matrixSmolt.jpg" alt=""></p>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>The purpose of this unit is to get you comfortable simulating data in R and give you some tools for vizualizing the data that you have simulated or collected. This is not meant to be a comprehensive treatment of these subjects but rather an introduction to the tools that are available to you. Similarly, this is just meant to get you started. There are a lot of tools out there and you may come up with something that works better for you once you have some basics under your belt.</p>
+<p><br></p>
+<blockquote>
+<p>Why are we talking about simulating data?</p>
+</blockquote>
+<p><br></p>
+<p>There are a few good reasons for this:</p>
+<ol style="list-style-type: decimal">
+<li><p>Data simulation is a powerful tool in experimental design, and can help address problems before they arise</p></li>
+<li><p>Tools used for data simulation are similar or the same as many of the tools that you will need for manipulating and analyzing data.</p></li>
+<li><p>Simulation can be as useful on the back end of statistical analyses as it is for experimental design. For example, we need to simulate data to make predictions in many cases.</p></li>
+</ol>
+<p><br></p>
+<blockquote>
+<p>And data visualization- why do we care?</p>
+</blockquote>
+<ol style="list-style-type: decimal">
+<li><p>There are few statistical tests that hold intuitive meaning to our readers. The ability to present information in a visually meaningful way to the reader can help to make the interpretation of your science crystal clear without having to worry about whether or not your reader has the faculties to interpret the results of statistical tests.</p></li>
+<li><p>Effects and effect sizes are often (if not always) more important than the ability to detect ‘significant’ differences. If you can present clear evidence that some treatment or manipulation confers a biologically meaningful change in a visual way alongside these tests, you can provide a much stronger body of evidence with which to argue your case.</p></li>
+<li><p>There are a few graphical tools that are very useful for basic data exploration, diagnostics, etc., that can make your life a lot easier for data analysis and interpretation. They can also help you decide whether something has gone terribly wrong.</p></li>
+</ol>
+<p><br></p>
+</div>
+<div id="simulating-data-in-r" class="section level2">
+<h2>Simulating data in R</h2>
+<p><br></p>
+<p>There are a lot of tools specifically created for simulating data in R. We can’t even begin to cover them all, but we can build up a basic working knowledge of some of those that are more essential. This week we will look at some simple, common tools for basic data generation. Next week, we will extend this to include more on probability distributions.</p>
+<p>There are a lot of different reasons why we might want to simulate data, from creating derived variables, to data organization, variable coding, power analyses, model predictions and validation, and ‘heuristic’ exercises.</p>
+<p>Let’s start with some really simple functions in R</p>
+<p>We can simulate data in two ways: deterministically and stochastically.</p>
+<p><strong>Deterministic</strong>: this one is well defined. Here we are usually talking about assigning a variable based on some known characteristic or error-free mathematical formula.</p>
+<p><strong>Stochastic</strong>: this one is looser. Here we are usually talking about things like random number generation, subsampling, and a variety of other more advanced techniques. The objective usually is to incorporate some aspect of probability or uncertainty. This uncertainty can either be due to process error or observation error.</p>
+<p>Process error is due to real ‘noise’ in a study system. It can, in itself, be a focus of very interesting research. A common source of process error in biological studies is individual variability (e.g. genotypic and/or phenotypic variability).</p>
+<p>Observation error can be thought of as ‘false’ noise in the study system that has been introduced due to our inability to perfectly observe some process of interest). This more commonly is thought of as a nuisance to be accounted for in many contemporary studies, but can also be an interesting field of inquiry in its own right. A common cause of observation error is imperfect detection of individuals or species in field surverys.</p>
+<p><br></p>
+<div id="deterministic-simulation" class="section level3">
+<h3>Deterministic simulation</h3>
+<p><br></p>
+<p>By nature, deterministic simulation is inherently more boring than stochastic simulation, because relationships are known. This usually is manifested in the form of data manipulation, categorical or ordinal variable assignments, or calculation of derived quantities.</p>
+<p><br></p>
+<div id="data-read" class="section level4">
+<h4>Data read</h4>
+<p><br></p>
+<p>Let’s start by reading in a data file- this time we use REAL data. These are sex-specific length-at-age data for American shad (<em>Alosa sapidissima</em>) from the Connecticut River over the past 5 years. The data currently are being used in some models that I am building with collaborators from NOAA Fisheries, the US Geological Survey, and US Fish and Wildlife Service. The data were provided by CT Department of Energy and Environmental Protection and come from adult fish that are returning to the river from the ocean to spawn.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start by reading in the data from the class website</span>
+  am_shad =<span class="st"> </span><span class="kw">read.csv</span>((<span class="st">&quot;http://employees.oneonta.edu/stichds/data/ctr_fish.csv&quot;</span>))
+
+<span class="co"># Always a good idea to look at the first few lines of data to make sure nothing looks &#39;fishy&#39; haha, I couldn&#39;t help myself</span>
+  <span class="kw">head</span>(am_shad, <span class="dv">10</span>) <span class="co"># Look at the first 10 rows</span></code></pre></div>
+<pre><code>##    Sex Age Length yearCollected backCalculated Mass
+## 1    B   1     13          2010           TRUE   NA
+## 2    B   1     15          2010           TRUE   NA
+## 3    B   1     15          2010           TRUE   NA
+## 4    B   1     15          2010           TRUE   NA
+## 5    B   1     15          2010           TRUE   NA
+## 6    B   1     15          2010           TRUE   NA
+## 7    B   1     16          2010           TRUE   NA
+## 8    B   1     16          2010           TRUE   NA
+## 9    B   1     16          2010           TRUE   NA
+## 10   B   1     16          2010           TRUE   NA</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The NAs are supposed to be there- they are missing data.</span>
+  <span class="kw">str</span>(am_shad) <span class="co"># Look at the structure of the data</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    16946 obs. of  6 variables:
+##  $ Sex           : Factor w/ 2 levels &quot;B&quot;,&quot;R&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Age           : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ Length        : num  13 15 15 15 15 15 16 16 16 16 ...
+##  $ yearCollected : int  2010 2010 2010 2010 2010 2010 2010 2010 2010 2010 ...
+##  $ backCalculated: logi  TRUE TRUE TRUE TRUE TRUE TRUE ...
+##  $ Mass          : int  NA NA NA NA NA NA NA NA NA NA ...</code></pre>
+<p><br></p>
+</div>
+<div id="data-explanation-metadata" class="section level4">
+<h4>Data explanation (“metadata”):</h4>
+<p><br></p>
+<p>There are about 17k observations (rows) of 6 variables here</p>
+<p>Sex: fish gender. B stands for ‘buck’ (males), R stands for ‘roes’ (females) Age: an integer describing fish age<br />
+Length: fish length at age (cm)<br />
+yearCollected: the year in which the fish was caught<br />
+backCalculated: a logical indicating whether or not the length of the fish was back-calculated from aging<br />
+Mass: the mass of indnividual fish (in grams). Note that this is NA for all ages that were estimated from hard structures (so all cases for which backCalculated is TRUE)</p>
+<p><br></p>
+</div>
+<div id="example-1.-creation-of-new-grouping-variable-based-on-some-criterion" class="section level4">
+<h4>Example 1. Creation of new grouping variable based on some criterion</h4>
+<p><br></p>
+<p>We could artificially classify fish into ‘big’ and ‘small’ groups if we wanted to for some reason. To do something like that, we have a couple of options</p>
+<ol style="list-style-type: decimal">
+<li>Loop approach with conditional: despite some of the benefits, we try to avoid this approach in R for more purely vectorized solutions where possible, mostly because of performance issues.</li>
+</ol>
+<p>Pros: pretty easy to understand the syntax and read Cons: extra code to write loops can be pretty slow in R</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We define some iterator &#39;i&#39; to run this for each row from 1 to the</span>
+<span class="co"># number of rows in our df.</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(am_shad)){              
+<span class="co"># Then, we say that if length is greater than some threshold</span>
+  <span class="cf">if</span>(am_shad<span class="op">$</span>Length[i] <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>){
+<span class="co"># The length group is assigned the value &#39;big&#39;. Note that the</span>
+<span class="co"># variable &#39;length_group&#39; is being created on the fly because it</span>
+<span class="co"># is part of an existing object with a known length attribute.</span>
+  am_shad<span class="op">$</span>length_group[i] =<span class="st"> &#39;big&#39;</span>
+<span class="co"># Otherwise  </span>
+} <span class="cf">else</span> { 
+<span class="co"># For any other conditions, length group is assigned the value</span>
+<span class="co"># &#39;small&#39;</span>
+  am_shad<span class="op">$</span>length_group[i] =<span class="st"> &#39;small&#39;</span>
+}
+
+} <span class="co"># Close the loop</span></code></pre></div>
+<p><br></p>
+<ol start="2" style="list-style-type: decimal">
+<li>A faster method is to used vectorized logical tests. Note that this still creates the variable on the fly, and does the assignment much more quickly even though the code is somewhat redundant.</li>
+</ol>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">am_shad<span class="op">$</span>length_group[am_shad<span class="op">$</span>Length <span class="op">&lt;=</span><span class="st"> </span><span class="dv">30</span>] =<span class="st"> &#39;small&#39;</span>
+am_shad<span class="op">$</span>length_group[am_shad<span class="op">$</span>Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>] =<span class="st"> &#39;big&#39;</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="example-2.-derived-quantity-based-on-a-mathematical-formula." class="section level4">
+<h4>Example 2. Derived quantity based on a mathematical formula.</h4>
+<p><br></p>
+<p>If we have a formula that relates two variables, we could predict one based on the other deterministically. For example, I have fit a growth curve explaning relationships between age and mass using this data set. Now, we will use this to predict mass at age for the fish with missing data. <strong>WARNING</strong>: This is for demonstration purposes only. Think about some of the potential issues with this given the nature of the data. Why would you not want to do this in a real-world scenario with data like these (take a closer look at the data)?</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Parameters from von Bertalanffy growth curve     </span>
+  Sinf =<span class="st"> </span><span class="fl">1995.9</span>  <span class="co"># Theoretical max size</span>
+  K =<span class="st"> </span>.<span class="dv">2645</span>      <span class="co"># Brody growth coefficient</span>
+  t0 =<span class="st"> </span><span class="fl">1.0864</span>    <span class="co"># Age at mass of 0 grams</span>
+  
+<span class="co"># Use the von Bertalanffy growth function to predict mass </span>
+  am_shad<span class="op">$</span>Mass[<span class="kw">is.na</span>(am_shad<span class="op">$</span>Mass)] =<span class="st"> </span>
+<span class="st">    </span>Sinf<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>(K<span class="op">*</span>(am_shad<span class="op">$</span>Age[<span class="kw">is.na</span>(am_shad<span class="op">$</span>Mass)] <span class="op">-</span><span class="st"> </span>t0))))
+ 
+<span class="co"># Now you can see why this may not always be advisable:</span>
+  <span class="kw">hist</span>(am_shad<span class="op">$</span>Mass, <span class="dt">breaks=</span><span class="dv">70</span>)
+<span class="co"># The model grossly underpredicts the mass of fish for which we had no</span>
+<span class="co"># mass data</span>
+  <span class="co"># Why is this? Notice anything funny with mass data for fish with</span>
+  <span class="co"># back-calculated == TRUE?</span>
+<span class="co"># For the sake of demonstration, let&#39;s create a FUNCTION that will do</span>
+<span class="co"># this calculation for us:</span>
+  vonBert =<span class="st"> </span><span class="cf">function</span>(x, Sinf, K, t0){
+    Sinf<span class="op">*</span>(<span class="dv">1</span><span class="op">-</span><span class="kw">exp</span>(<span class="op">-</span>(K<span class="op">*</span>(x <span class="op">-</span><span class="st"> </span>t0))))
+  }
+  
+  am_shad<span class="op">$</span>Mass[<span class="kw">is.na</span>(am_shad<span class="op">$</span>Mass)] =<span class="st"> </span>
+<span class="st">    </span><span class="kw">vonBert</span>(am_shad<span class="op">$</span>Age[<span class="kw">is.na</span>(am_shad<span class="op">$</span>Mass)], Sinf, K, t0)
+  <span class="co"># The result is the same:</span>
+  <span class="kw">hist</span>(am_shad<span class="op">$</span>Mass, <span class="dt">breaks=</span><span class="dv">70</span>)  </code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="stochastic-simulation" class="section level3">
+<h3>Stochastic simulation</h3>
+<p><br></p>
+<p>As mentioned above, the point of stochastic simulation is usually to account for uncertainty in some process (i.e. we could just pick a single value if we knew it). This is almost always done probabilistically. There are a number of ways we could do this. One is by drawing from some probability distribution that we have described, and the other is by randomly sampling data that we have (need for tools like ‘bootstrapping’).</p>
+<p><br></p>
+<div id="example-1.-random-samples-from-a-dataset" class="section level4">
+<h4>Example 1. Random samples from a dataset</h4>
+<p><br></p>
+<p>Let’s say we want to take random samples from our huge data set so we can fit models to a subset of data and then use the rest of our data for model validation</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Randomly sample 100 rows of data from our data frame two different</span>
+<span class="co"># times to see the differences</span>
+  samp1 =<span class="st"> </span>am_shad[<span class="kw">sample</span>(<span class="kw">nrow</span>(am_shad), <span class="dt">size=</span><span class="dv">100</span>, <span class="dt">replace=</span><span class="ot">FALSE</span>), ]
+  samp2 =<span class="st"> </span>am_shad[<span class="kw">sample</span>(<span class="kw">nrow</span>(am_shad), <span class="dt">size=</span><span class="dv">100</span>, <span class="dt">replace=</span><span class="ot">FALSE</span>), ]
+
+<span class="co"># We can look at them with our histograms    </span>
+  <span class="kw">hist</span>(samp1<span class="op">$</span>Length)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(samp2<span class="op">$</span>Length)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-6-2.png" width="672" /></p>
+<p><br></p>
+<p>We could also loop this to get a dynamic look. NOTE: change the size of the sample (‘n’ below) and you can see the effect of sample size on the shape of the distribution we assume.</p>
+<p>We’ll modify our histogram now, as well.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  n =<span class="st"> </span><span class="dv">10</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">30</span>){
+    samp =<span class="st"> </span>am_shad[<span class="kw">sample</span>(<span class="kw">nrow</span>(am_shad), <span class="dt">size=</span>n, <span class="dt">replace=</span><span class="ot">FALSE</span>), ]
+    <span class="kw">hist</span>(samp<span class="op">$</span>Length, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">10</span>, <span class="dv">60</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, n), <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>)
+    <span class="kw">Sys.sleep</span>(.<span class="dv">25</span>)
+  }</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-1.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-2.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-3.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-4.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-5.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-6.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-7.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-8.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-9.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-10.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-11.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-12.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-13.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-14.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-15.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-16.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-17.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-18.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-19.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-20.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-21.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-22.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-23.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-24.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-25.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-26.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-27.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-28.png" width="672" /><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-7-29.png" width="672" /></p>
+<p><br></p>
+</div>
+<div id="example-2.-random-samples-from-a-distribution" class="section level4">
+<h4>Example 2. Random samples from a distribution</h4>
+<p><br></p>
+<p>Now, instead of sampling our data let’s say we have some distribution from which we would like to use information</p>
+<p>Let’s make a distribution</p>
+<p>We will start with the normal, and we can move into others next week when we talk about probability distributions and sample statisticsFor this, we will use the distribution of American shad lengths for age-7 females because it approximates a normal distribution: <strong>Notice</strong> that we are adding more and more complexity into our histogram!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start by looking at the size distribution for age-7 females</span>
+  <span class="kw">hist</span>(am_shad<span class="op">$</span>Length[am_shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span> <span class="op">&amp;</span><span class="st"> </span>am_shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">6</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Forklength (cm)&#39;</span>)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s make that query into an object now  </span>
+  age7_Roes =<span class="st"> </span>am_shad<span class="op">$</span>Length[am_shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span> <span class="op">&amp;</span><span class="st"> </span>am_shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">6</span>]
+<span class="co"># Let&#39;s get the mean and variance for this distribution and</span>
+<span class="co"># save those values so we can use them in a minute</span>
+  mu =<span class="st"> </span><span class="kw">mean</span>(age7_Roes)
+  sigma =<span class="st"> </span><span class="kw">sd</span>(age7_Roes)</code></pre></div>
+<p><br></p>
+<blockquote>
+<p>Quick aside:</p>
+</blockquote>
+<p>We will get into this next week, but for now it may be helpful to know that a normal distribution is described by two parameters:</p>
+<ol style="list-style-type: decimal">
+<li>The mean (<span class="math inline">\(\mu\)</span>)</li>
+<li>The standard deviation (SD, or more accurately the variance as <span class="math inline">\(\sigma^2\)</span>). R uses the SD so we’ll stick with that notation for now, and honestly, the normal density is based on both sigma and sigma squared so it’s dumb that we say that the variance is the parameter of interest. We’ll get into the reason for this next week: in a nutshell, it’s because a true, standardized normal distribution has a variance of 1, so SD and Variance are one in the same. You’ll note that these are the default values in R.</li>
+</ol>
+<blockquote>
+<p>Back to our example</p>
+</blockquote>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now, we can use the mean and standard deviation to randomly sample</span>
+<span class="co"># our normal distribution of lengths.</span>
+  length_sample =<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">10000</span>, <span class="dt">mean=</span>mu, <span class="dt">sd=</span>sigma)
+<span class="co"># Plot the sample to see if it is a normal- YAY it is!</span>
+  <span class="kw">hist</span>(length_sample, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Forklength (cm)&#39;</span>)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><br></p>
+<p>And, just as a check to make sure this is accurate, let’s go ahead and plot our new distribution over the top of the histogram of our <em>original</em> data <em>Note</em>: we will look at how to modify these plots below, just run the code for now.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">5</span>))
+  <span class="kw">hist</span>(am_shad<span class="op">$</span>Length[am_shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span> <span class="op">&amp;</span><span class="st"> </span>am_shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">6</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Forklength (cm)&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">60</span>))
+  <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)
+  <span class="kw">plot</span>(<span class="kw">density</span>(length_sample), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">60</span>), <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>,
+       <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>)
+  <span class="kw">axis</span>(<span class="dv">4</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="some-simple-graphs-in-r" class="section level2">
+<h2>Some simple graphs in R</h2>
+<p>Let’s look at a few simple kinds of plots in R</p>
+<div id="histograms" class="section level3">
+<h3>Histograms</h3>
+<p>First, let’s come back to our histogram. The function <code>hist</code> plots the actual histogram, and like other plotting utilities, can take a wide variety of arguments, all of which are optional with the exception of the data that we want to plot. This is the case for most plotting functions in the base graphics for R.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get data for age six females, and make a histogram</span>
+  lengths =<span class="st"> </span>am_shad<span class="op">$</span>Length[am_shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span> <span class="op">&amp;</span><span class="st"> </span>am_shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">6</span>]      
+  <span class="kw">hist</span>(lengths)             <span class="co"># This is really ugly, and easy to fix</span></code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>What is everything doing here ?</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Par is a function that controls graphical parameters in the active</span>
+<span class="co"># graphics device. Here, we are using it to set the margin widths outside</span>
+<span class="co"># the plotting area (with the argument &#39;mar&#39;). Take a look at the graphical</span>
+<span class="co"># parameters available in R by using ?par</span>
+    <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))      
+  <span class="co"># Let&#39;s break down the histogram function</span>
+    <span class="kw">hist</span>(
+      lengths,                <span class="co"># Data that we want to use for histogram</span>
+      <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,             <span class="co"># Fill color (different for different plot type)</span>
+      <span class="dt">main=</span><span class="st">&#39;&#39;</span>,                <span class="co"># Title for graph, I tend to leave blank</span>
+      <span class="dt">xlab=</span><span class="st">&#39;Forklength (cm)&#39;</span>, <span class="co"># x-axis label, a character string</span>
+      <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">60</span>),           <span class="co"># Limits of x-axis as min and max</span>
+      <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,               <span class="co"># y-axis display- none in this case- see others</span>
+      <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>               <span class="co"># Same</span>
+    )
+  <span class="co"># We can make the axes look a lot better if we just place them by hand</span>
+  <span class="co"># The &#39;axis&#39; funcction let&#39;s us draw axes on sides 1(bottom), 2(left),</span>
+  <span class="co"># 3(top), and 4(right)</span>
+    <span class="kw">axis</span>(
+      <span class="dt">side=</span><span class="dv">2</span>, <span class="co"># Left side</span>
+      <span class="dt">las=</span><span class="dv">2</span>,  <span class="co"># Rotate so numbers are horizontal</span>
+      <span class="dt">pos=</span><span class="dv">0</span>   <span class="co"># Position the axis at zero instead of negative buffer</span>
+    )  
+  <span class="co"># And now for a nice x-axis</span>
+    <span class="kw">axis</span>(
+      <span class="dt">side=</span><span class="dv">1</span>,
+      <span class="dt">pos=</span><span class="dv">0</span>,
+      <span class="dt">at=</span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">60</span>, <span class="dt">by=</span><span class="dv">10</span>),    <span class="co"># We can tell R where to put ticks</span>
+      <span class="dt">labels=</span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">0</span>, <span class="dt">to=</span><span class="dv">60</span>, <span class="dt">by=</span><span class="dv">10</span>) <span class="co"># And add labels (can be different!)</span>
+    )</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># MUCH better, right?  </span></code></pre></div>
+<p><br></p>
+</div>
+<div id="scatter-plots" class="section level3">
+<h3>Scatter plots</h3>
+<p><br></p>
+<p>Now let’s do a scatter plot</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Data screening  </span>
+  shad =<span class="st"> </span>am_shad[am_shad<span class="op">$</span>Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">10</span>, ]
+<span class="co"># Start with a simple scatterplot of age on length</span>
+  <span class="kw">plot</span>(<span class="dt">x=</span>shad<span class="op">$</span>Age, <span class="dt">y=</span>shad<span class="op">$</span>Length)</code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><br></p>
+<blockquote>
+<p>UGLY!!</p>
+</blockquote>
+<p>So, let’s make it nice</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># First, let&#39;s make a new column to hold age</span>
+    shad<span class="op">$</span>Age2 =<span class="st"> </span>shad<span class="op">$</span>Age
+  <span class="co"># Now, we will add a small number to the age of roes to offset the points</span>
+  <span class="co"># in our graph so things are clearer. Note that &#39;ggplot2&#39; has built in</span>
+  <span class="co"># functions for this, and you may prefer them; just remember that the more</span>
+  <span class="co"># you rely on packages like that, the more you sacrifice the freedom</span>
+  <span class="co"># inherent in using base functions in R for things like data visualization</span>
+    shad<span class="op">$</span>Age2[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>] =<span class="st"> </span>shad<span class="op">$</span>Age2[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>] <span class="op">+</span>.<span class="dv">1</span>
+  <span class="co"># Make the plot</span>
+    <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))   <span class="co"># Notice that we are shrinking top and right marg.</span>
+    <span class="kw">plot</span>(<span class="dt">x=</span>shad<span class="op">$</span>Age2,     <span class="co"># Variable to be plotted on x-axis (independent)</span>
+      <span class="dt">y=</span>shad<span class="op">$</span>Length,      <span class="co"># Variable to be plotted on y-axis (dependent)</span>
+      <span class="dt">pch =</span> <span class="kw">c</span>(<span class="dv">21</span>,<span class="dv">21</span>),     <span class="co"># Change the point type (google &#39;pch r&#39; for lists)</span>
+      <span class="dt">col =</span> <span class="st">&#39;black&#39;</span>,      <span class="co"># Black outlines for our circles</span>
+      <span class="dt">bg =</span> <span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;gray40&#39;</span>)[shad<span class="op">$</span>Sex], <span class="co"># Sex-specific fills</span>
+      <span class="dt">xlab =</span> <span class="st">&#39;Age (years)&#39;</span>,                <span class="co"># X-axis label</span>
+      <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>,         <span class="co"># Don&#39;t plot y-axis, we&#39;ll make one</span>
+      <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,          <span class="co"># No y-axis label, let&#39;s make it cool (ok, nerdy),</span>
+      <span class="dt">cex =</span> <span class="fl">1.5</span>,          <span class="co"># Make the points big- be proud of your data!</span>
+      <span class="dt">cex.axis =</span> <span class="fl">1.15</span>,    <span class="co"># Magnification for font on tick mark labels</span>
+      <span class="dt">cex.lab =</span> <span class="fl">1.5</span>       <span class="co"># Magnification for x-lab, slightly larger to show</span>
+    )                     <span class="co"># Close call to plot</span>
+    <span class="co"># Y-axis</span>
+      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>,      <span class="co"># Axis goes on the left side (#2)</span>
+        <span class="dt">las=</span><span class="dv">2</span>,            <span class="co"># Rotate by 90 degrees</span>
+        <span class="dt">cex.axis=</span><span class="fl">1.15</span>     <span class="co"># Magnification to match call to plot</span>
+      )
+    <span class="co"># Y-axis label: look what&#39;s going on below!</span>
+      <span class="co"># mtext lets us plot text in the margins of each axis</span>
+      <span class="kw">mtext</span>(
+      <span class="co"># Side refers to the side of the plotting area, 1 to 4 from top to</span>
+      <span class="co"># right counter clockwise</span>
+        <span class="dt">side=</span><span class="dv">2</span>,  
+      <span class="co"># &#39;expression&#39; let&#39;s us include all kinds of special formatting like</span>
+      <span class="co"># the subscript in the example below, but also superscripts, and</span>
+      <span class="co"># special characters like interpuncts, Greek letters, etc. It can be</span>
+      <span class="co"># a lot of fun for making super nerdy axes for your graphs and very</span>
+      <span class="co"># powerful in terms of freedom in the range of options you have. Note</span>
+      <span class="co"># that special characters usually require the UTF-8 code for a symbol.</span>
+      <span class="co"># For example, if you wanted the interpunct, it would be entered in</span>
+      <span class="co"># the paste statement as &#39;\u00b7&#39;.</span>
+        <span class="kw">expression</span>(  
+          <span class="kw">paste</span>(              <span class="co"># Paste concatenates chr strings in order</span>
+            <span class="st">&#39;Fork length ( &#39;</span>, <span class="co"># First character string- note spaces matter!</span>
+            <span class="st">&quot;L&quot;</span>[<span class="st">&quot;f&quot;</span>],         <span class="co"># Second, square brackets mean &#39;subscript&#39;</span>
+            <span class="st">&quot; , cm)&quot;</span>,         <span class="co"># Third, spaces count!</span>
+            <span class="co"># Tell R you want no characters to seperate your text strings</span>
+            <span class="co"># listed above</span>
+            <span class="dt">sep=</span><span class="st">&#39;&#39;</span> 
+          )                   <span class="co"># Close call to paste</span>
+        ),                    <span class="co"># Close call to expression</span>
+        <span class="dt">cex =</span> <span class="fl">1.5</span>,            <span class="co"># Magnification to match x-axis label above</span>
+        <span class="dt">line =</span> <span class="dv">3</span>              <span class="co"># Tell R what vertical line WRT to ordinate</span>
+      ) <span class="co"># Close call to mtext</span>
+    <span class="co"># And, just because R is AWESOME and we want to start unleashing the</span>
+    <span class="co"># darkside of the force, let&#39;s add a sweet graphical legend!</span>
+      <span class="co"># Sweet female digraph in dark gray with light gray shadow</span>
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="fl">6.04</span>, <span class="dt">y=</span><span class="fl">19.97</span>, <span class="st">&quot;\u2640&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray60&#39;</span>)
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="fl">6.01</span>, <span class="dt">y=</span><span class="fl">19.99</span>, <span class="st">&quot;\u2640&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="dv">6</span>, <span class="dt">y=</span><span class="dv">20</span>, <span class="st">&quot;\u2640&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)
+      <span class="co"># Sweet male digraph in black with dark gray shadow</span>
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="fl">6.76</span>, <span class="dt">y=</span><span class="fl">19.97</span>, <span class="st">&quot;\u2642&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray60&#39;</span>)   
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="fl">6.73</span>, <span class="dt">y=</span><span class="fl">19.99</span>, <span class="st">&quot;\u2642&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)
+        <span class="kw">text</span>(<span class="dt">x=</span><span class="fl">6.72</span>, <span class="dt">y=</span><span class="dv">20</span>, <span class="st">&quot;\u2642&quot;</span>, <span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)       </code></pre></div>
+<p><img src="02_simulationAndVisualization_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

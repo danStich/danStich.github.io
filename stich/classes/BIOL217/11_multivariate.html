@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="intro-to-multivariate-statistics" class="section level1">
+<h1>Intro to multivariate statistics</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week, we are moving into a very different realm of quantitative biology. For the first two thirds of this class, we focused on what to do in specific situations for which we were dealing only with a single, independent response at a time. These methods have taken us a long way along the road from dealing with comparisons of distributions, means, and examining correlations and effect sizes in a generalized modeling framework used to analyze univariate and bivariate relationships with one response and one or more explanatory variables of interest. We have cast this largely as a framework for modern hypothesis testing through deductive and inductive inference.</p>
+<p>Now, we will set all of this aside for a couple of weeks and move into the realm of descriptive and exploratory data analyses in those cases for which we have multiple response variables that are related to one another. This can be a rather common problem in biology and ecology because of the interelatedness of variables in natural systems. Very often, our goal is not to test a specific hypothesis but rather to do some exploratory analyses that describe the patterns that we see in complex systems and help us to develop hypotheses that we might test down the road with other methods. This is the realm of multivariate data analysis!</p>
+<p><br></p>
+</div>
+<div id="principle-component-analysis" class="section level2">
+<h2>Principle component analysis</h2>
+<p><br></p>
+<div id="overview" class="section level3">
+<h3>Overview</h3>
+<p><br></p>
+<p>Principle component analysis (PCA) is a tool for ordination, and exploring associations between multiple response variables. The objectives for using PCA can range from classification to reduction of dimensionality in the number of phenomena we are interested in. Generally speaking, this tool is largely descriptive, and almost wholly exploratory, but it can also be used to generate hypotheses that we can then test within more-robust statistical frameworks following further data collection. Another nifty use of PCA is that we can use the ordinations that result as variables in regression analyses if we see fit, and as a result we can drastically decrease the number of parameters that need to be estimated, improving accuracy and precision in our estimates. The problem with this, of course, is that we lose something with respect to the ease of interpretation.</p>
+<p><br></p>
+</div>
+<div id="worked-example" class="section level3">
+<h3>Worked example</h3>
+<p><br></p>
+<p>Adapted from Thiago G. Martins (2013). Let’s use the iris data in R to demonstrate the application of PCA in R through a worked example.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load data</span>
+  <span class="kw">data</span>(iris)
+
+<span class="co"># Have a look at the data</span>
+  <span class="kw">head</span>(iris, <span class="dv">10</span>)</code></pre></div>
+<pre><code>##    Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+## 1           5.1         3.5          1.4         0.2  setosa
+## 2           4.9         3.0          1.4         0.2  setosa
+## 3           4.7         3.2          1.3         0.2  setosa
+## 4           4.6         3.1          1.5         0.2  setosa
+## 5           5.0         3.6          1.4         0.2  setosa
+## 6           5.4         3.9          1.7         0.4  setosa
+## 7           4.6         3.4          1.4         0.3  setosa
+## 8           5.0         3.4          1.5         0.2  setosa
+## 9           4.4         2.9          1.4         0.2  setosa
+## 10          4.9         3.1          1.5         0.1  setosa</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Apply a log transformation to the morphometric data to make sure that</span>
+<span class="co"># we are working on a normal(ish) distribution and get rid of skew</span>
+  log.ir =<span class="st"> </span><span class="kw">log</span>(iris[, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>])
+  ir.species =<span class="st"> </span>iris[, <span class="dv">5</span>]</code></pre></div>
+<p><br></p>
+<p>Run the PCA. In most cases, we want to work with standardized values to avoid effects of variable scale on our interpretation of the results, so we center and scale the variables inside the call to <code>prcomp</code>.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ir.pca =<span class="st"> </span><span class="kw">prcomp</span>(log.ir, <span class="dt">center =</span> <span class="ot">TRUE</span>, <span class="dt">scale. =</span> <span class="ot">TRUE</span>)
+
+<span class="co"># Print the results for our PCA</span>
+  <span class="kw">print</span>(ir.pca)</code></pre></div>
+<pre><code>## Standard deviations (1, .., p=4):
+## [1] 1.7124583 0.9523797 0.3647029 0.1656840
+## 
+## Rotation (n x k) = (4 x 4):
+##                     PC1         PC2        PC3         PC4
+## Sepal.Length  0.5038236 -0.45499872  0.7088547  0.19147575
+## Sepal.Width  -0.3023682 -0.88914419 -0.3311628 -0.09125405
+## Petal.Length  0.5767881 -0.03378802 -0.2192793 -0.78618732
+## Petal.Width   0.5674952 -0.03545628 -0.5829003  0.58044745</code></pre>
+<p><br></p>
+<p>The summary of the PCA includes the standard deviations of each of the four principle components, in addition to their rotations (loadings).</p>
+<p>We can also look at a plot of how the standard deviation of our principle components decreases with increasing the number of components used to describe the variation.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can look at a barplot of this (default)</span>
+  <span class="kw">plot</span>(ir.pca)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># But a line graph is a little easier to interpret</span>
+  <span class="kw">plot</span>(ir.pca, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-4-2.png" width="672" /></p>
+<p><br></p>
+<p>These plots help us determine how many of the principle components we need to retain for further analyses. In this case, it is pretty clear to see that we probably only need to keep the first two components of the PCA to achieve an adequate description of the data. After that point, the amount of variation that we explain trails off very quickly.</p>
+<p>For a more-reliable approach to this, we can also look at the summary of our PCA to compare relative importance of the different components and the amount of variation that each explains.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(ir.pca)</code></pre></div>
+<pre><code>## Importance of components:
+##                           PC1    PC2     PC3     PC4
+## Standard deviation     1.7125 0.9524 0.36470 0.16568
+## Proportion of Variance 0.7331 0.2268 0.03325 0.00686
+## Cumulative Proportion  0.7331 0.9599 0.99314 1.00000</code></pre>
+<p><br></p>
+<p>Let’s take a closer look. Our summary provides us with the following info for each of the principle components in our analysis</p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li><p>Standard deviation- sd associated with each principle component</p></li>
+<li><p>Proportion of variance- variance explained by each component</p></li>
+<li><p>Cumulative proportion- total variance explained by our model</p></li>
+</ol>
+<p><br></p>
+<p>A couple of things should jump right out at you here. Right off the bat, it is clear that the first component explains the most variance, and that additions beyond the second component improve the picture minimally at best. Second, by the time we reach the second component, we have explained 96% of the total variance in our data, so we shoulde be pretty happy with this. The take home is that these data will be conducive to projecting our data in 2-dimensional space!</p>
+<p>There are multiple tools for visualizing our data in 2-d space (commonly referred to as a “biplot”)</p>
+<p>For the “prettier” option, you will need to install a couple of packages Note that if you want to install devtools, you will first need to install <code>Rtools</code> utililities <a href="https://cran.r-project.org/bin/windows/Rtools/">here</a>.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># devtools package</span>
+  <span class="co">#install.package(&#39;devtools&#39;)</span>
+  <span class="kw">library</span>(devtools)
+<span class="co"># ggbiplot and vqv packages from a git hub repository</span>
+  <span class="co">#install_github(&quot;ggbiplot&quot;, &quot;vqv&quot;)</span>
+  <span class="kw">library</span>(ggbiplot)</code></pre></div>
+<p><br></p>
+<p>The ggbiplot package makes some pretty nice biplots, but the syntax for these plots (and other <code>ggplot</code>* packages) is quite different from what we have been working with in the base graphics.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we have to specify the graphical parameters</span>
+<span class="co"># in the function</span>
+  g =<span class="st"> </span><span class="kw">ggbiplot</span>(ir.pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>,
+                <span class="dt">groups =</span> ir.species, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>,
+                <span class="dt">circle =</span> <span class="ot">TRUE</span>)
+<span class="co"># Now we specify the colors that we want to use</span>
+  g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)
+<span class="co"># Add a legend</span>
+  g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>,
+                <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)
+<span class="co"># And finally, we can actually print the biplot</span>
+<span class="co"># to our graphics device</span>
+  <span class="kw">print</span>(g)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><br></p>
+<p>If you have difficulty loading these packages, we could go ahead and make a <em>very</em> clunky biplot with base graphics, but this doesn’t really give us the nice explanation that we get from <code>ggbiplot</code>.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the PCA</span>
+  <span class="kw">biplot</span>(ir.pca)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><br></p>
+<p>We can extract the raw PCA output and use this, too. This will get us a nicer representation of the data in 2-d space and will show us how our species fall out with respect to the first two components.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the PCA (again)</span>
+  <span class="kw">biplot</span>(ir.pca)
+<span class="co"># Plot the points with species-specific colors</span>
+  raw =<span class="st"> </span>ir.pca<span class="op">$</span>x[,<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+  <span class="kw">points</span>(raw[,<span class="dv">1</span>], raw[,<span class="dv">2</span>], <span class="dt">col=</span><span class="kw">rainbow</span>(<span class="dv">3</span>)[ir.species], <span class="dt">pch=</span><span class="dv">20</span>)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><br></p>
+</div>
+</div>
+<div id="multivariate-analysis-of-variance-manova" class="section level2">
+<h2>Multivariate analysis of variance (MANOVA)</h2>
+<p><br></p>
+<p>This is great for visualizing data, but what if we actually want to test the hypothesis that these species differ with respect to their morphometric features? For this, we will need to use a technique such as the multivariate analysis of variance. Conveniently, this can actually be fit in R using the <code>lm</code> function with which you are very familiar (not going too far into it, we can say that PCA is a further generalization of the GLMMs with which we have been working).</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s start by shortening the names to make the code shorter:</span>
+  <span class="kw">names</span>(iris) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;SL&quot;</span>, <span class="st">&quot;SW&quot;</span>, <span class="st">&quot;PL&quot;</span>, <span class="st">&quot;PW&quot;</span>, <span class="st">&quot;SPP&quot;</span>)
+
+<span class="co"># Now, we can fit a MANOVA to see if the species differ WRT traits</span>
+  manova.iris &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">cbind</span>(SL, SW, PL, PW) <span class="op">~</span><span class="st"> </span>SPP, <span class="dt">data=</span>iris)</code></pre></div>
+<p><br></p>
+<p>We can summarize the statistical results, and we see that there are significant differences across responses between species.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the car package</span>
+  <span class="kw">library</span>(car)
+<span class="co"># Do the type II Anova test on the object</span>
+  results =<span class="st"> </span><span class="kw">Anova</span>(manova.iris)
+<span class="co"># Print the overall results, default is Pillai&#39;s statistical test</span>
+  <span class="kw">print</span>(results)</code></pre></div>
+<pre><code>## 
+## Type II MANOVA Tests: Pillai test statistic
+##     Df test stat approx F num Df den Df    Pr(&gt;F)    
+## SPP  2    1.1919   53.466      8    290 &lt; 2.2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or, you could look at several different significance tests for this.</span>
+<span class="co"># In this case they all tell us the same thing</span>
+  <span class="kw">summary</span>(results)</code></pre></div>
+<pre><code>## 
+## Type II MANOVA Tests:
+## 
+## Sum of squares and products for error:
+##         SL      SW      PL     PW
+## SL 38.9562 13.6300 24.6246 5.6450
+## SW 13.6300 16.9620  8.1208 4.8084
+## PL 24.6246  8.1208 27.2226 6.2718
+## PW  5.6450  4.8084  6.2718 6.1566
+## 
+## ------------------------------------------
+##  
+## Term: SPP 
+## 
+## Sum of squares and products for the hypothesis:
+##           SL        SW       PL        PW
+## SL  63.21213 -19.95267 165.2484  71.27933
+## SW -19.95267  11.34493 -57.2396 -22.93267
+## PL 165.24840 -57.23960 437.1028 186.77400
+## PW  71.27933 -22.93267 186.7740  80.41333
+## 
+## Multivariate Tests: SPP
+##                  Df test stat  approx F num Df den Df     Pr(&gt;F)    
+## Pillai            2   1.19190   53.4665      8    290 &lt; 2.22e-16 ***
+## Wilks             2   0.02344  199.1453      8    288 &lt; 2.22e-16 ***
+## Hotelling-Lawley  2  32.47732  580.5321      8    286 &lt; 2.22e-16 ***
+## Roy               2  32.19193 1166.9574      4    145 &lt; 2.22e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+</div>
+<div id="non-metric-multidimensional-scaling" class="section level2">
+<h2>Non-metric multidimensional scaling</h2>
+<p><br></p>
+<div id="overview-1" class="section level3">
+<h3>Overview</h3>
+<p>Non-metric multidimensional scaling (NMDS) is very similar in nature to PCA, but can be considerabbly more flexible. Whereas PCA relies primarily on the assumption of linearity to do ordination, NMDS makes no such assumption, working rather on ranks, and as a result can take a variety of data for analyses. For example, because of the ability to use similarity matrices other than the Euclidean distance matrix used in PCA, NMDS allows us to better handle non-normal data, but also things like missing and null data (which PCA cannot handle).</p>
+<p><br></p>
+</div>
+<div id="worked-example-front-end-adapted-from-jon-lefcheck" class="section level3">
+<h3>Worked example front end adapted from Jon Lefcheck</h3>
+<p><br></p>
+<p>Let’s have a look at an example that uses some simulated community data to show how we run the analyses, do some data visualization, and interpret the results.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;vegan&#39;) # Uncomment to install</span>
+  <span class="kw">library</span>(vegan)
+
+<span class="co"># Let&#39;s start by simulating some data that we can use for this example</span>
+<span class="co"># Set the seed for reproducibility</span>
+  <span class="kw">set.seed</span>(<span class="dv">2</span>)
+
+<span class="co"># Now, simulate the data. We tell R to turn the data into a matrix right up</span>
+<span class="co"># front</span>
+  community_matrix =<span class="st"> </span><span class="kw">matrix</span>(
+    <span class="co"># Take 300 samples between 1 and 100, with replacement</span>
+      <span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">100</span>, <span class="dv">300</span>, <span class="dt">replace=</span>T),
+    <span class="co"># Tell R that we want the matrix we are making to have 10 rows, so</span>
+    <span class="co"># it will have 30 columns by default</span>
+      <span class="dt">nrow=</span><span class="dv">10</span>,
+    <span class="co"># We will call the rows community 1 through 10 and the columns will be</span>
+    <span class="co"># species 1 through 30</span>
+      <span class="dt">dimnames=</span><span class="kw">list</span>(<span class="kw">paste</span>(<span class="st">&quot;community&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>), <span class="kw">paste</span>(<span class="st">&quot;sp&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">30</span>, <span class="dt">sep=</span><span class="st">&quot;&quot;</span>))
+    )
+
+  <span class="co"># We define two treatments, separately from the matrix to which we will</span>
+  <span class="co"># assign the communities.</span>
+    treat=<span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;Treatment1&quot;</span>,<span class="dv">5</span>),<span class="kw">rep</span>(<span class="st">&quot;Treatment2&quot;</span>,<span class="dv">5</span>))</code></pre></div>
+<p><br></p>
+<p>Now, we will fit the NMDS using the <code>metaMDS</code> function in the vegan package</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the NMDS</span>
+  example_NMDS=<span class="kw">metaMDS</span>(
+    community_matrix, <span class="co"># Community-by-species matrix</span>
+    <span class="dt">k=</span><span class="dv">2</span> <span class="co"># The number of reduced dimensions we want to use</span>
+  )</code></pre></div>
+<pre><code>## Square root transformation
+## Wisconsin double standardization
+## Run 0 stress 0.1280709 
+## Run 1 stress 0.1280709 
+## ... Procrustes: rmse 3.168062e-05  max resid 5.925658e-05 
+## ... Similar to previous best
+## Run 2 stress 0.2630959 
+## Run 3 stress 0.1424254 
+## Run 4 stress 0.1778004 
+## Run 5 stress 0.1280709 
+## ... New best solution
+## ... Procrustes: rmse 8.669277e-06  max resid 1.508905e-05 
+## ... Similar to previous best
+## Run 6 stress 0.1752059 
+## Run 7 stress 0.1624619 
+## Run 8 stress 0.1280709 
+## ... Procrustes: rmse 3.499232e-05  max resid 6.594091e-05 
+## ... Similar to previous best
+## Run 9 stress 0.1624619 
+## Run 10 stress 0.128071 
+## ... Procrustes: rmse 7.130361e-05  max resid 0.0001196693 
+## ... Similar to previous best
+## Run 11 stress 0.206671 
+## Run 12 stress 0.1424254 
+## Run 13 stress 0.157268 
+## Run 14 stress 0.2023676 
+## Run 15 stress 0.1461475 
+## Run 16 stress 0.1280709 
+## ... Procrustes: rmse 4.588009e-06  max resid 8.034253e-06 
+## ... Similar to previous best
+## Run 17 stress 0.1280709 
+## ... New best solution
+## ... Procrustes: rmse 6.914407e-06  max resid 1.306718e-05 
+## ... Similar to previous best
+## Run 18 stress 0.2028469 
+## Run 19 stress 0.1624619 
+## Run 20 stress 0.1778003 
+## *** Solution reached</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s take a look at the summary to make sure we know what is going on here</span>
+  <span class="kw">print</span>(example_NMDS)</code></pre></div>
+<pre><code>## 
+## Call:
+## metaMDS(comm = community_matrix, k = 2) 
+## 
+## global Multidimensional Scaling using monoMDS
+## 
+## Data:     wisconsin(sqrt(community_matrix)) 
+## Distance: bray 
+## 
+## Dimensions: 2 
+## Stress:     0.1280709 
+## Stress type 1, weak ties
+## Two convergent solutions found after 20 tries
+## Scaling: centring, PC rotation, halfchange scaling 
+## Species: expanded scores based on &#39;wisconsin(sqrt(community_matrix))&#39;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look at the stress plot for the ordination</span>
+  <span class="kw">stressplot</span>(example_NMDS)</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><br></p>
+<p>Now we can plot the ordination for our NMDS given that we are satisfied with the stress parameter and the convergence</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, make a blank plot of the nmds</span>
+  <span class="kw">ordiplot</span>(example_NMDS, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
+ 
+<span class="co"># Now, we can add some ellipses to show</span>
+<span class="co"># the grouping indicated by nmds</span>
+  <span class="kw">ordiellipse</span>(example_NMDS,
+              <span class="dt">groups=</span>treat,
+              <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>,
+              <span class="dt">col=</span><span class="st">&quot;grey90&quot;</span>,
+              <span class="dt">label=</span>F)
+
+<span class="co"># Add the raw species data. Note that no</span>
+<span class="co"># matter what the columns actually represent,</span>
+<span class="co"># you will always use `species` for these </span>
+<span class="co"># plots because that is what these tools </span>
+<span class="co"># were originally designed for.</span>
+  <span class="kw">orditorp</span>(example_NMDS,
+           <span class="dt">display=</span><span class="st">&quot;species&quot;</span>,
+           <span class="dt">col=</span><span class="st">&quot;red&quot;</span>,
+           <span class="dt">air=</span><span class="fl">0.01</span>
+           )
+
+<span class="co"># Next, add the `communities` to the plot.</span>
+<span class="co"># Same as above, these will always be called </span>
+<span class="co"># `sites` even if that isn&#39;t what your rows </span>
+<span class="co"># represent. It is just a convention based </span>
+<span class="co"># on the purpose for which the tools were built.</span>
+  <span class="kw">orditorp</span>(example_NMDS, 
+           <span class="dt">display=</span><span class="st">&quot;sites&quot;</span>, 
+           <span class="dt">col=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="st">&quot;green&quot;</span>, <span class="dv">5</span>), 
+                 <span class="kw">rep</span>(<span class="st">&quot;blue&quot;</span>, <span class="dv">5</span>)
+                 ), 
+           <span class="dt">air=</span><span class="fl">0.01</span>,<span class="dt">cex=</span><span class="fl">1.25</span>
+           )</code></pre></div>
+<p><img src="11_multivariate_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><br></p>
+<p>That looks pretty good, but we need to do some actual statistics if we want to draw inferences about how the species in this community tend to cluster together.</p>
+<p>To do this, we will use analysis of similarities (ANOSIM) to determine whether the dissimilarities between groups is greater than the dissimilarities between species within the groups. In order to do this, we need to provide two things:</p>
+<p><br></p>
+<ol style="list-style-type: decimal">
+<li>We need to give R a data matrix, which can be</li>
+</ol>
+<ol style="list-style-type: lower-alpha">
+<li>the matrix or data frame that we started with, or</li>
+<li>a dissimilarity matrix</li>
+</ol>
+<ol start="2" style="list-style-type: decimal">
+<li>We need to tell R what the grouping variable is, in this case it is treat</li>
+</ol>
+<p><br></p>
+<p>Let’s take a look at the dissimilarity matrix, just so we have an idea what we are dealing with here:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">vegdist</span>(community_matrix)</code></pre></div>
+<pre><code>##             community1 community2 community3 community4 community5
+## community2   0.3837249                                            
+## community3   0.3969325  0.3915228                                 
+## community4   0.3676043  0.3141153  0.3020054                      
+## community5   0.2930762  0.3290155  0.2887716  0.3822441           
+## community6   0.3758865  0.2916289  0.3292952  0.2490620  0.3233380
+## community7   0.4805793  0.3405332  0.3274498  0.3222187  0.3264346
+## community8   0.4349091  0.3099065  0.4229486  0.3210880  0.4139952
+## community9   0.5052823  0.4082397  0.4006014  0.3906582  0.3839779
+## community10  0.4100935  0.3684615  0.4594595  0.3352685  0.3029016
+##             community6 community7 community8 community9
+## community2                                             
+## community3                                             
+## community4                                             
+## community5                                             
+## community6                                             
+## community7   0.2744868                                 
+## community8   0.2709801  0.4445245                      
+## community9   0.2871351  0.3229881  0.3942811           
+## community10  0.3219560  0.3432062  0.3178616  0.3347176</code></pre>
+<p><br></p>
+<p>This matrix gives a measure of distance between any two communities in the data with respect to the species that those communities contain. If we use ANOSIM to test for differences between <code>treatment1</code> and <code>treatment2</code>, what we are really testing is the null hypothesis that the dissimilarity between communities in different treatments is less than or equal to the dissimilarity between communities in the same treatments. If we reject this null hypothesis, then the alternative is that communities exposed to the different treatments are more different from one another than communities that are exposed to the same treatment.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the ANOSIM model</span>
+  test =<span class="st"> </span><span class="kw">anosim</span>(<span class="kw">vegdist</span>(community_matrix), <span class="dt">grouping =</span> treat)
+  <span class="kw">summary</span>(test)</code></pre></div>
+<pre><code>## 
+## Call:
+## anosim(x = vegdist(community_matrix), grouping = treat) 
+## Dissimilarity: bray 
+## 
+## ANOSIM statistic R: 0.328 
+##       Significance: 0.022 
+## 
+## Permutation: free
+## Number of permutations: 999
+## 
+## Upper quantiles of permutations (null model):
+##   90%   95% 97.5%   99% 
+## 0.172 0.248 0.288 0.340 
+## 
+## Dissimilarity ranks between and within classes:
+##            0%   25% 50%   75% 100%  N
+## Between     1 17.00  27 38.00   45 25
+## Treatment1  5  8.75  23 29.75   35 10
+## Treatment2  2  6.00  15 24.25   42 10</code></pre>
+<p><br></p>
+<p>Here, we see that the dissimilarity between classes is greater than the dissimilarity within classes (p = 0.022), so we reject the null hypothesis. Do be careful to understand that the ANOSIM statistic <code>R</code> is <strong>not the same</strong> as the correlation coefficient <code>r</code>.</p>
+<p><br></p>
+<p>To quote the R documentation:</p>
+<p>“If two groups of sampling units are really different in their species composition, then compositional dissimilarities between the groups ought to be greater than those within the groups. The anosim statistic R is based on the difference of mean ranks between groups (r<sub>B</sub>) and within groups (r<sub>W</sub>):</p>
+<p><span class="math display">\[R = \frac{(r_B - r_W)}{\frac{N \times (N - 1 )}{4}}\]</span></p>
+<p>The divisor is chosen so that R will be in the interval -1 … 1, with a value of 0 indicating completely random grouping.</p>
+<p>The statistical significance of observed <code>R</code> is assessed by permuting the grouping vector to obtain the empirical distribution of <code>R</code> under null-model. See permutations for additional details on permutation tests in <code>vegan</code>. The distribution of simulated values can be inspected with the permustats function.&quot;</p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

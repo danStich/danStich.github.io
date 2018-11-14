@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="data-simulation-and-visualization" class="section level1">
+<h1>Data simulation and visualization</h1>
+<p><br></p>
+<p><img src="../../images/matrixSmolt.jpg" alt=""></p>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>The objective of this assignment is to reinforce your ability to use essential tools that you learned about last week and get you started developing necessary skills in data manipulation, simulation, and visualization. Most of the tools you will use will translate directly to other applications and functions in the R programming environment, so my hope is that we are starting to build a repertoire of useful skills for future labs.</p>
+<p>By the end of this lab, you should be comfortable: 1) reading data into R using at least one method, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots.</p>
+<p><br></p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p><br></p>
+<div id="data-import" class="section level3">
+<h3>Data import</h3>
+<p><br></p>
+<p>Read the data from <code>ctr_fish.csv</code> into R using one of the methods we used in class. If you use interactive tools in R Studio to import the data, be sure to note the name for reference in the code that follows. If you forgot to check the name of the file, you can either click on the “Environment” tab in R Studio, or you can use the function <code>ls()</code> with no arguments to view all objects in active memory within your global environment. Don’t forget, you can always read it from the website like we did last week.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">am_shad =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;http://employees.oneonta.edu/stichds/data/ctr_fish.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</code></pre></div>
+<p><br></p>
+</div>
+<div id="first-steps-in-dealing-with-a-dataset" class="section level3">
+<h3>First steps in dealing with a dataset</h3>
+<p><br></p>
+<p>I constantly forget about the fancy new point-and-click tools that R Studio brings to the table, and that werenâ€™t really available just a few years ago. Make sure that you look at your data structure using either <code>str()</code> or by clicking on the blue arrow to the left of the data set in your environment tab. See explanation of data (lines 98-110) in the reference script for this week to view variable explanations. Use the built-in function <code>summary()</code> to get a closer look at your data.</p>
+<p><br></p>
+<p><strong>Question 1</strong>. What is the minimum length of American shad in this dataset? Does this make sense to you when you look at the rest? If you are stuck think back to how we did this last week. Or, Google it.</p>
+<p><br></p>
+</div>
+<div id="fixing-erroneous-data-points-for-qc" class="section level3">
+<h3>Fixing erroneous data points for QC</h3>
+<p><br></p>
+<p>After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, replace the erroneous length measurements. Hint: you need to replace all values less than 10 cm.</p>
+<p><br></p>
+<p><strong>Question 2</strong>. Now what is the minimum length of American shad in this dataset where length was not back-calculated?</p>
+<p><br></p>
+</div>
+<div id="deterministic-variable-generation" class="section level3">
+<h3>Deterministic variable generation</h3>
+<p><br></p>
+<p>Now that we have fixed that problem, let’s generate some data using a deterministic relationship. As part of this project, we are using information about fish length to predict individual fecundity (number of eggs per female) at each age. Use your dataframe to create a new object that includes only females, and only those fish for which length is not back-calculated.</p>
+<p><br></p>
+<p><strong>Question 3</strong>. How many rows are in this dataframe?</p>
+<p><br></p>
+<p>Create a new column in the dataframe for fecundity using a mathematical relationship between length and fecundity. Federal scientists are currently collecting information about the relationship between length and fecundity for a population model on the Connecticut River. We are still waiting on the final numbers (and a publication or two) before these can be included in the assessment (this is real, cutting-edge science, folks!). As the modeler on the project, I have some inside information, though. I know that the average fecundity per female across all ages was about 302,000 eggs in 2015. I also know that fecundity is a non-linear function of length based on general characteristics of fish life-history. After some quick trial and error, the following equation does a pretty decent job of replicating the preliminary results of the federal fishery biologists:</p>
+<p><span class="math inline">\(F_i = 0.445 Ã— {L_i}^{3.5}\)</span></p>
+<p>where F is fecundity and L is fork length of each individual, i. Use this formula to create a new column in your dataframe called fecundity (and shhh…donâ€™t tell them I hacked their eggs).</p>
+<p><br></p>
+<p><strong>Question 4</strong>. What is the mean value of fecundity across all ages in your dataframe? Does this seem like a reasonable value given the expected value of fecundity across all age classes in 2015?</p>
+<p><br></p>
+<p><strong>Question 5</strong>. What is the standard deviation of fecundity?</p>
+<p><br></p>
+</div>
+<div id="stochastic-simulation-of-age-specific-fecundity" class="section level3">
+<h3>Stochastic simulation of age-specific fecundity</h3>
+<p><br></p>
+<p>Now that we have fecundity estimates for each age based on some more-or-less empirical relationship with length,let’s simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says <code>install.packages()</code>, otherwise if you are using a non-lab computer, run the following code:</p>
+<p>Let’s install the package we need</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Download the package from the internet (takes a couple minutes)</span>
+  <span class="kw">install.packages</span>(<span class="st">&#39;plyr&#39;</span>)
+<span class="co"># Loads the package from a library of installed packages. Could also </span>
+<span class="co"># use library() instead of require()</span>
+  <span class="kw">require</span>(plyr)    </code></pre></div>
+<p><br></p>
+<p>With the package installed, use the function <code>ddply( )</code> to calculate the mean and standard deviation of fecundity for each age class. <strong>Hint</strong>: if you have difficulty, remember to try: <code>?ddply</code> for a couple of useful examples. Remember to create a new object to hold this information!</p>
+<p><br></p>
+<p><strong>Question 6</strong>. What is the mean and standard deviation of fecundity for age-6 roes?</p>
+<p><br></p>
+<p>Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function rnorm from the reference script to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic fisheries stock assessment models!</p>
+<p><br></p>
+<p><strong>Question 7</strong>. How does the mean and standard deviation of your simulated values for age-6 roes compare to the ‘empirical’ estimates?</p>
+<p><br></p>
+<p><strong>Question 8</strong>. How does this change if you take 10 random samples instead of 10,000? Answers may vary.</p>
+<p><br></p>
+</div>
+<div id="data-visualization" class="section level3">
+<h3>Data visualization</h3>
+<p><br></p>
+<p>Let’s wrap this up by making a couple of nice graphs. We’ll start simple with a single panel, and then up our game to produce some nice multi-panel plots.</p>
+<p>First, make a histogram of fecundity using your random sample for age-4 roes by using <code>hist(...)</code>, replacing ‘…’ with whatever you named this data set.</p>
+<p><br></p>
+<p><strong>Question 9</strong>. What are your four least favorite things about this plot?</p>
+<p><br></p>
+<p>Change them. Donâ€™t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use <code>?hist</code> and <code>?par</code> to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, “Add custom tick mark labels to graph in R”. If you canâ€™t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do.</p>
+<p>Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:</p>
+<p><br></p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))
+<span class="kw">hist</span>(age4, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))
+<span class="kw">hist</span>(age5, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))
+<span class="kw">hist</span>(age6, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))
+<span class="kw">hist</span>(age7, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</code></pre></div>
+<p><br></p>
+<p><strong>Question 10</strong>. What does the argument ‘mfrow’ do in this code block?</p>
+<p><br></p>
+<p>You could replace the code for any of these four histograms with the code you wrote for your age-6 fecundity estimates in the example above by just replacing â€˜age6â€™ with the vector names; do this. Isnâ€™t that a much nicer multi-panel plot?</p>
+<p><br></p>
+</div>
+<div id="bonus-1-pt" class="section level3">
+<h3>BONUS (1 pt):</h3>
+<p><br></p>
+<p>Of course, now that it’s a multi-panel plot, you will need to add labels like ‘(a), (b), (c), and (d)’ before you can submit your work to a journal. To do this, you will need to use the function <code>text()</code>. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give <span class="math inline">\(1/4\)</span> point for every NICELY placed label because I bet most of you will be able to get 1 label on there.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

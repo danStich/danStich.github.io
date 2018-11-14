@@ -1,0 +1,83 @@
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+# Lab homework rubric
+
+<br>
+ 
+The purpose of this document is to help us organize the laboratory exercises for this course in a way that will facilitate clear communication, and will improve my ability to evaluate your work more fairly and efficiently. 
+
+<br>
+ 
+> **Each lab exercise in this course has two components**:
+
+1)	There are activities that will require you to write code or use the RStudio IDE in some other (e.g., interactive) way.
+
+2)	Specific questions that will require you to execute commands and provide answers as text.
+
+<br>
+ 
+> **Each lab will require the submission of two separate pieces of work for evaluation of learning**:
+
+1)	**Computer code**:  You will need to write some R code to complete each lab. This code will be necessary for the completion of both 1 and 2 above and must be submitted upon completion of the lab. Please keep this code in a source file (script) while you work and save it frequently. In addition to writing the code necessary to complete the lab, you will need to comment your script to explain what it does. This is to reinforce your understanding and engagement with the technical skills and tools that are necessary to be successful in this course (and quantitative applications more generally), and is a required component of the exercise.
+
+2)	**Answers to questions**:  Please answer all questions from the lab handout in order (and numbered) at the very bottom of your script, not in line with the rest of the code to make it easier to read and evaluate your answers to the questions. You can use start-of-line hashtags (a.k.a. octothorpe, pound sign, whatever) to comment the questions if you like, but this is not required.
+
+<br>
+ 
+> **Each lab will be evaluated as follows**:
+
+1)	**Working script** with commented code (10 pts)
+2)	**Answers to questions** at the bottom of the same file (10 pts)
+
+<br>
+ 
+> An **example of a completed lab** is below:
+
+<br>
+ 
+```
+# Script for completion of lab 2 exercises -----
+
+# Read in the data for the lab
+  some_data = read.csv(file = ”someFile.csv”, header = TRUE)
+
+# Examine the structure of the data
+  str(some_data)
+  names(some_data)
+  
+# Calculate mean and sd of the column fish length using built-in functions
+  mean(some_data$fish_length)
+  mean(some_data$fish_length)	
+  
+# Calculate the mean only for grouper fish
+  mean(some_data$fish_length[species=='grouper'])
+  mean(some_data$fish_length[species=='grouper'])	
+
+# Fit a linear model to the length-weight data for grouper  
+  grouper_mod = lm(log(mass)~fish_length, data = some_data[species=='grouper', ])
+  plot(grouper_mod)
+  summary(grouper_mod)
+  AIC(grouper_mod)
+  .....
+  and so on and so forth
+  ...
+
+# ANSWERS TO QUESTIONS -----
+
+# 1. The data was a dataframe that contained 100 observations of 9 variables
+# 2. The names of the variables were ...
+# 3. The mean value of fish_lengths was 140.7 cm, and the standard deviation was
+# 4. Mean grouper length was 109 cm and the standard deviation was 20 cm
+# 5. Yes, the length-weight regression appeared to fit the data well according
+#     to the residual plots. There was a significant relationship between length
+#     and mass of grouper. The overall variation explained by the model was 97%
+#     as indicated by the adjusted R2-value. 
+# 6. The AIC value of the grouper model with no individual effect was 216.37.
+       ...
+       and so on and so forth
+       ...
+
+```

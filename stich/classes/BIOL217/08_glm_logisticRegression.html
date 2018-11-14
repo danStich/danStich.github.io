@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="glm-logisitic-regression" class="section level1">
+<h1>GLM: logisitic regression</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week we will start to dive into the world of generalized linear models and their implementation and interpretation in R. Before we can do that, we will talk about why we might like to use these methods, and the fact that the GLM actually represents a broad class of models that are highly flexible and incredibly useful. By the end of this week, we want you to be thinking of this as a kind of “go-to” tool for modeling complex, real-world data. Then, we will continue to layer complexity on this framework to extend it further over the next couple of weeks before we leave linearized modeling behind for a while.</p>
+<p><br></p>
+</div>
+<div id="assumptions-of-linear-models" class="section level2">
+<h2>Assumptions of linear models</h2>
+<p><br></p>
+<p>Wait, what? I thought we were talking about GLMs this week? We are. The first thing you need to know is that linear models are just a special case of the GLM. That is, the linear model assumes a certain error distribution (the normal) that helps things work smoothly and correctly. The next few weeks of class are all about relaxing the assumptions of linear models so we can actually use them in the real world.</p>
+<p>Let’s take another look at the assumptions of linear models:</p>
+<p>Here are the basic assumptions that we explicitly make when we use linear models, just in case you’ve forgotten them:</p>
+<p><br></p>
+
+<ol style="list-style-type: decimal">
+<li>Residuals are normally distributed with a mean of zero</li>
+</ol>
+
+<ol start="2" style="list-style-type: decimal">
+<li>Independence of observations (residuals)</li>
+</ol>
+<ul>
+<li>Colinearity</li>
+<li>Auto correlation of errors (e.g., spatial &amp; temporal)</li>
+</ul>
+
+<ol start="3" style="list-style-type: decimal">
+<li>Homoscedasticity</li>
+</ol>
+
+<ol start="4" style="list-style-type: decimal">
+<li>Linear relationship between X and Y</li>
+</ol>
+<p><br></p>
+<div id="assumption-1-normality-of-residuals" class="section level3">
+<h3>Assumption 1: normality of residuals</h3>
+<p><br></p>
+<p>We’ve seen these before, but let’s recap. For assumption 1, we are assuming a couple of implicit things: 1. The variable is <em>continuous</em> (it must be if it’s error structure is normal), and 2. The error in our model is normally distributed. In reality, this is probably the least important assumption of linear models, and really only matters if we are trying to make predictions from the models that we make. Of course, we are often concerned with making predictions from the models that we make, so we can see why this might be important. However, more often we are in extreme violation of this assumption in some combination with assumption 4 above to such a degree that it actually does matter. For example, a response variable that is binomial (1 or zero) or multinomial in nature cannot possibly have normally distributed errors with respect to x unless there is absolutely no relationship between X and Y, right? So, if we wanted to predict the probability of patients dying from some medical treatment, or the presence/absence of species across a landscape then we <em>can’t</em> use linear models.</p>
+<p><br></p>
+</div>
+<div id="assumption-2-independence-of-observations" class="section level3">
+<h3>Assumption 2: independence of observations</h3>
+<p><br></p>
+<p>This time we’ve broken assumption 2 into two components: colinearity and autocorrelation of errors. Remember that the manifestation of these problems is in the precision of our coefficient estimates, and this has the potential to change the Type-I/II error rates in our models, causing us to draw false conclusions about which variables are important. As we discussed earlier in the course we expect to see some colinearity between observations, and we can deal with balancing this in our modeling through the use of model selection techniques to reduce Type-I and Type-II error. In the next couple of weeks, we will examine tools that will help us determine whether or not colinearity is actually causing problems in our models that go beyond minor nuisances. As for the second part, autocorrelation, we can actually look at formulations of the GLM that use ‘generalized least squares’ to include auto-regressive correlation matrices in our analysis that will allow us to relax this assumption of linear models and improve the precision of our parameter estimates.</p>
+<p><br></p>
+</div>
+<div id="assumption-3-homoscedasticity" class="section level3">
+<h3>Assumption 3: homoscedasticity</h3>
+<p><br></p>
+<p>Previously, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. During the coming weeks, we will look at models that allow us to relax this assumption further through the use of weighted least squares and random effects, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs</p>
+<p><br></p>
+<div id="assumption-4-linearity-and-additivity" class="section level4">
+<h4>Assumption 4: linearity and additivity</h4>
+<p><br></p>
+<p>We’ve already looked at a couple of ways to deal with violations of these two assumptions such as data transformation and/or polynomial formulations of the linear model. We will continue to apply these concepts during the next several weeks.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+<div id="introducing-the-glm" class="section level2">
+<h2>Introducing the GLM</h2>
+<p><br></p>
+<p>There are a number of situations that should just scream “<strong>GLM!!!</strong>” at you. The majority of these are easy to identify because you will know right away that the response variable in which you are interested is clearly not a continuous or normally distributed variable. This is the number one reason for moving into the GLM framework for most people.</p>
+<p><br></p>
+<p>The standard GLM consists of three major components:</p>
+
+<ol style="list-style-type: decimal">
+<li>A random variable (Y) that is our response of interest,</li>
+</ol>
+
+<ol start="2" style="list-style-type: decimal">
+<li>Linear predictor(s) of Y, called X, and</li>
+</ol>
+
+<ol start="3" style="list-style-type: decimal">
+<li>A invertible “link function” that transforms the expectation of Y to the linear predictor(s)</li>
+</ol>
+<p><br></p>
+<p>The first two components are familiar to us. They are the EXACT SAME basic components of ANY regression formula that takes the following form:</p>
+<p><span class="math inline">\(Y_{i,j} = \beta_0 + \beta_j \cdot X_{i,j}\)</span>,</p>
+<p>or</p>
+<p><span class="math inline">\(Y = mX + b\)</span>,</p>
+<p>if you prefer</p>
+<p>So, this much should be familiar. The major change from the linear models with which we have been working is the addition of this invertible linearizing link function, and it is the component from which the GLM inherits its name. The link function is just a way for us to put the expectation of the response within the context of an asymptotically normal distribution so that we can relax the assumptions of the linear model to accomodate new data types. In essence, it is very similar to the kinds of transformations that we talked about earlier in the semester, but is used during estimation rather than before hand.</p>
+<p>To solve for the coefficients (betas) of a GLM, we move fully into the realm of maximum likelihood, with which you are all familiar. A given link function is used for the corresponding distribution that we assume for our data set, and a likelihood for that distribution can be defined such that we can calculate the likelihood of the data given our parameter estimates in a manner similar to the method we used for the standard normal distribution earlier this semester. Within this framework, we input different values (or guesses) about the parameter values that maximize the likelihood of our data one step at a time. Once the change in likelihood becomes sufficiently small, we accept that the algorithm has ‘converged’ on the optimal estimates for our model parameters (our <span class="math inline">\(\beta_{i,j}\)</span>), and the algorithm stops. You do not need to be able to do this by hand (thank goodness for R!), but you do need to understand what is going on so you can troubleshoot when R says that the model failed to converge…</p>
+<p>Let’s take a look at a few variable types that we might consider to be common applications for GLM in biology and ecology. We will cover each of these below in detail, here is a list so you know what is coming:</p>
+<p><br></p>
+
+<ol style="list-style-type: decimal">
+<li>Binary response</li>
+</ol>
+
+<ol start="2" style="list-style-type: decimal">
+<li>Count data (Poisson)</li>
+</ol>
+
+<ol start="3" style="list-style-type: decimal">
+<li>Overdispersed count data (negative binomial)</li>
+</ol>
+<p><br></p>
+</div>
+<div id="binary-logistic-regression" class="section level2">
+<h2>Binary (logistic) regression</h2>
+<p><br></p>
+<p>Logistic regression generally is reserved for the case in which we have a binary response that, by definition, can take on values of 1 or 0. These values can be expressed as outcoms of individual trials (Bernoulli) or as outcomes of some number of trials (Binomial- last week). These data types are common in biological and ecological data analyses, and thus it is important that you understand how to analyze these data when you encounter them- <strong>linear models will not accommodate this data type</strong>. The easiest way to look at what is going on is to use a worked example.</p>
+<p>Let’s read in another smolt data set that we have not yet played with.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/StillwaterChoiceData.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>Look at the first few rows of data</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">head</span>(choice)</code></pre></div>
+<pre><code>##   path year hatchery length mass date flow
+## 1    0 2010        1    176   57  118  345
+## 2    0 2005        1    205  101  128 1093
+## 3    0 2010        1    180   56  118  345
+## 4    0 2010        1    193   74  118  345
+## 5    0 2005        1    189   76  128 1093
+## 6    0 2010        1    180   65  118  345</code></pre>
+<p><br></p>
+<div id="data-explanation" class="section level3">
+<h3>Data Explanation</h3>
+<p><br></p>
+<p>These data are from a study that examined factors affecting path choice by wild and hatchery-reared endangered Atlantic salmon smolts during seaward migration in the Penobscot River, Maine. State, local, and federal fishery managers were interested in understanding what factors affected migratory routing through the lower river because there were different numbers of dams, with different estimated smolt mortality rates, on either side of a large island hydropower project in this system. If managers could understand factors influencing migratory route, they might be able to manipulate flows, stocking dates, and dam operation to improve survival of these endangered fish. Furthermore, the results of the study were used to predict the effects of dam removal, and hydropower re-allocation in the lower river on population-level consequences for these fish. These data were part of a larger analysis:</p>
+<p>Stich, D. S., M. M. Bailey, and J. D. Zydlewski. 2014. Survival of Atlantic salmon (<em>Salmo salar</em>) smolts through a hydropower complex. Journal of Fish Biology 85:1074-1096.</p>
+<p>The data consist of the following variables:</p>
+<p><br></p>
+<pre><code>path:     The migratory route used by individual fish. The choices were
+          main-stem of the river (0) or the Stillwater Branch (1) around the
+          island.
+year:     The year in which individual fish were tagged and relocated using
+          acoustic telemetry.
+hatchery: An indicator describing if fish were reared in the wild (0) or in
+          the federal conservation hatchery (1)
+length:   Fish length (in mm)
+mass:     Fish mass (in grams)
+date:     Ordinal date on which the fish entered the hydrocomplex determined
+          from time-stamps on acoustic receivers
+flow:     Discharge recorded at the USGS gauge in the headpond of the dam
+          several kilometers upstream of the hydropower complex.</code></pre>
+<p><br></p>
+<p><strong>NOTE:</strong> the results of this analysis won’t look like the results from the paper just yet. We will talk about why in a couple of weeks when we introduce generalized linear mixed models.</p>
+<p><br></p>
+</div>
+<div id="data-analysis" class="section level3">
+<h3>Data analysis</h3>
+<p><br></p>
+<div id="maximum-likelihood-estimation" class="section level4">
+<h4>Maximum likelihood estimation</h4>
+<p><br></p>
+<p>We are going to use the 1/0 binary data to estimate the effects of a number of covariates of interest on the probability that an individual fish used the Stillwater Branch for migration in each year of this study using logistic regression.</p>
+<p>In order to do this, we will use the ‘logit’ link function, which can be defined as:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logit =<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">log</span>(x <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>x))
+}</code></pre></div>
+<p><br></p>
+<p>The inverse of the logit function is:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">invlogit =<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x))
+}</code></pre></div>
+<p><br></p>
+<p>Since we are interested in the fixed effects of year, and not the linear trend through time, we need to convert year to factor.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">choice<span class="op">$</span>year =<span class="st"> </span><span class="kw">as.factor</span>(choice<span class="op">$</span>year)</code></pre></div>
+<p><br></p>
+<p>Define a set of models based on <em>a priori</em> combinations of explanatory variables.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, make an empty list to hold the models</span>
+  mods=<span class="kw">list</span>()
+  
+<span class="co"># Now, fill the list with several a priori models</span>
+  mods[[<span class="dv">1</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>hatchery<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">2</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>flow,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">3</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">4</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>length,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">5</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>length<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">6</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
+  mods[[<span class="dv">7</span>]]=<span class="kw">glm</span>(path<span class="op">~</span>year<span class="op">+</span>hatchery<span class="op">+</span>flow,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)</code></pre></div>
+<p><br></p>
+<p>Give the models some names using the formulas for each of the models. <strong>Remember</strong>: models are stored as list objects in R, and each of those list objects (models) has names. We can reference those names using the <code>$</code> notation:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="kw">length</span>(mods)){
+    <span class="kw">names</span>(mods)[i] =<span class="st"> </span><span class="kw">as.character</span>(mods[[i]]<span class="op">$</span>call<span class="op">$</span>formula)[<span class="dv">3</span>]
+  }</code></pre></div>
+<p><br></p>
+<p>Now, we use the <code>AICcmodavg</code> package to make a model selection table like we did last week:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the library</span>
+  <span class="kw">library</span>(AICcmodavg)
+
+<span class="co"># Make the model selection table</span>
+  table =<span class="st"> </span><span class="kw">aictab</span>( <span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods) )</code></pre></div>
+<p><br></p>
+<div id="interpreting-the-results" class="section level5">
+<h5>Interpreting the results</h5>
+<p><br></p>
+<p>This pretty much proceeds the same way for GLM as it does for linear models until we get to making predictions of the response based on our best model.</p>
+<p>Our model selection table is an object in R (<em>right</em>?), and we can reference that object using <code>$</code> notation, matrix notation <code>[ , ]</code>, or by calling rownames to get the index for each of the models. Let’s use this approach to get the best model from our candidate set. Here is a worked example in the code that follows:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Print the table</span>
+    table</code></pre></div>
+<pre><code>## 
+## Model selection based on AICc:
+## 
+##                                 K   AICc Delta_AICc AICcWt Cum.Wt      LL
+## year + flow                     7 565.16       0.00   0.31   0.31 -275.51
+## year + hatchery + flow          8 565.23       0.07   0.30   0.61 -274.52
+## year + length + flow            8 565.91       0.75   0.21   0.82 -274.86
+## year + hatchery + length + flow 9 567.12       1.96   0.12   0.93 -274.44
+## year + hatchery                 7 569.50       4.34   0.04   0.97 -277.68
+## year + length                   7 570.80       5.64   0.02   0.99 -278.33
+## year + length + hatchery        8 571.37       6.21   0.01   1.00 -277.59</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Look at the structure just to show that it is, indeed, an object:</span>
+    <span class="kw">str</span>(table)</code></pre></div>
+<pre><code>## Classes &#39;aictab&#39; and &#39;data.frame&#39;:   7 obs. of  8 variables:
+##  $ Modnames  : Factor w/ 7 levels &quot;year + flow&quot;,..: 1 3 6 4 2 5 7
+##  $ K         : num  7 8 8 9 7 7 8
+##  $ AICc      : num  565 565 566 567 570 ...
+##  $ Delta_AICc: num  0 0.0674 0.7506 1.9557 4.3408 ...
+##  $ ModelLik  : num  1 0.967 0.687 0.376 0.114 ...
+##  $ AICcWt    : num  0.3078 0.2976 0.2115 0.1158 0.0351 ...
+##  $ LL        : num  -276 -275 -275 -274 -278 ...
+##  $ Cum.Wt    : num  0.308 0.605 0.817 0.933 0.968 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Look at the rownames of the table. These rownames are the index for each</span>
+  <span class="co"># of our models as they appear in the &#39;mods&#39; object, and we can use the</span>
+  <span class="co"># index to reference objects inside of the &#39;mods&#39; list...</span>
+    <span class="kw">rownames</span>(table)</code></pre></div>
+<pre><code>## [1] &quot;2&quot; &quot;7&quot; &quot;6&quot; &quot;1&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># This tells us that the rowname for the best model (the one at the top of</span>
+  <span class="co"># the table) is #2. That means that our best model is stored in position</span>
+  <span class="co"># 2 of our model list that we named &#39;mods&#39;. Let&#39;s double check it to make</span>
+  <span class="co"># sure:</span>
+    mods[[<span class="dv">2</span>]]</code></pre></div>
+<pre><code>## 
+## Call:  glm(formula = path ~ year + flow, family = binomial, data = choice)
+## 
+## Coefficients:
+## (Intercept)     year2006     year2009     year2010     year2011  
+##   -2.911624    -0.518632     0.243194    -0.043979    -0.814334  
+##    year2012         flow  
+##   -0.764289     0.001642  
+## 
+## Degrees of Freedom: 758 Total (i.e. Null);  752 Residual
+## Null Deviance:       580.2 
+## Residual Deviance: 551   AIC: 565</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># This looks pretty darn good! We could also do a summary of the model to</span>
+  <span class="co"># get the coefficient estimates and the significance codes for the</span>
+  <span class="co"># estimated coefficients:</span>
+    <span class="kw">summary</span>(mods[[<span class="dv">2</span>]])</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = path ~ year + flow, family = binomial, data = choice)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
+## year2006    -0.5186319  0.6237029  -0.832 0.405671    
+## year2009     0.2431939  0.4615202   0.527 0.598235    
+## year2010    -0.0439789  0.6525993  -0.067 0.946271    
+## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
+## year2012    -0.7642890  0.5137641  -1.488 0.136849    
+## flow         0.0016416  0.0006195   2.650 0.008052 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 580.15  on 758  degrees of freedom
+## Residual deviance: 551.01  on 752  degrees of freedom
+## AIC: 565.01
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Cool!! But, what if we wanted the script to always grab the summary of</span>
+  <span class="co"># the top model in our model selection table no matter what the rowname</span>
+  <span class="co"># was? That is, what if the rowname was subject to change with collection</span>
+  <span class="co"># of further data in the future and we want our code to be flexible? Well,</span>
+  <span class="co"># in that case, we could do this:</span>
+    <span class="kw">summary</span>( mods[[ <span class="kw">as.numeric</span>(<span class="kw">rownames</span>(table[<span class="dv">1</span>, ])) ]] )</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = path ~ year + flow, family = binomial, data = choice)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
+## year2006    -0.5186319  0.6237029  -0.832 0.405671    
+## year2009     0.2431939  0.4615202   0.527 0.598235    
+## year2010    -0.0439789  0.6525993  -0.067 0.946271    
+## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
+## year2012    -0.7642890  0.5137641  -1.488 0.136849    
+## flow         0.0016416  0.0006195   2.650 0.008052 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 580.15  on 758  degrees of freedom
+## Residual deviance: 551.01  on 752  degrees of freedom
+## AIC: 565.01
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Here we are asking for the rowname of the first row in our model</span>
+  <span class="co"># selection table. We have to convert that to a number from a character</span>
+  <span class="co"># string to reference the index in the mods list, and then we can</span>
+  <span class="co"># summarize the best model. Another way to do this is:</span>
+    <span class="co"># First, get the number corresponding to the list index for the best</span>
+    <span class="co"># model in the candidate set</span>
+      best =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">rownames</span>(table[<span class="dv">1</span>, ]))
+
+  <span class="co"># Now, get the summary for the model in mods that was the best</span>
+    <span class="kw">summary</span>( mods[[best]] )</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = path ~ year + flow, family = binomial, data = choice)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
+## 
+## Coefficients:
+##               Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
+## year2006    -0.5186319  0.6237029  -0.832 0.405671    
+## year2009     0.2431939  0.4615202   0.527 0.598235    
+## year2010    -0.0439789  0.6525993  -0.067 0.946271    
+## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
+## year2012    -0.7642890  0.5137641  -1.488 0.136849    
+## flow         0.0016416  0.0006195   2.650 0.008052 ** 
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 580.15  on 758  degrees of freedom
+## Residual deviance: 551.01  on 752  degrees of freedom
+## AIC: 565.01
+## 
+## Number of Fisher Scoring iterations: 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Since this is really THE SAME THING AS ANCOVA we can use the Anova</span>
+  <span class="co"># function from the &#39;car&#39; library to get an ANCOVA summary for the</span>
+  <span class="co"># model to look at significance of our main effects:</span>
+      <span class="kw">library</span>(car)
+      <span class="kw">Anova</span>(mods[[best]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
+<pre><code>## Analysis of Deviance Table (Type II tests)
+## 
+## Response: path
+##      LR Chisq Df Pr(&gt;Chisq)   
+## year  12.8043  5   0.025283 * 
+## flow   7.4471  1   0.006354 **
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Here, we see that there are signigicant effects of both year and</span>
+    <span class="co"># flow on our response, path choice.</span></code></pre></div>
+<p><br></p>
+</div>
+<div id="making-predictions-about-the-effect-of-x-on-y" class="section level5">
+<h5>Making predictions about the effect of x on y</h5>
+<p><br></p>
+<p>The first thing to remember here is that we have used a link function to estimate this model, so we cannot use the same method as before to make predictions about our response from the model coefficients.</p>
+<p>The second thing to remember here is that by definition we have used an <em>invertible</em> link function to estimate this model so the previous statement is a lie and we actually can use the same method as before to make predictions about our response from the model coefficients. We just need to add an extra step so that we can invert our predictions about the expected value of Y with respect to X.</p>
+<p>Confused? Yeah, it’s a little confusing. A worked example always goes a long way…</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s start by grabbing the summary for our best model</span>
+  c.res =<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(mods[[best]])<span class="op">$</span>coefficients )
+
+<span class="co"># Now we can look at the coefficient estimates</span>
+  c.res</code></pre></div>
+<pre><code>##                 Estimate   Std..Error     z.value     Pr...z..
+## (Intercept) -2.911624325 0.7981931477 -3.64776913 0.0002645272
+## year2006    -0.518631856 0.6237029032 -0.83153670 0.4056705026
+## year2009     0.243193850 0.4615202282  0.52694083 0.5982346820
+## year2010    -0.043978930 0.6525992875 -0.06739041 0.9462709073
+## year2011    -0.814334317 0.4029437518 -2.02096276 0.0432836201
+## year2012    -0.764288967 0.5137640800 -1.48762632 0.1368494687
+## flow         0.001641583 0.0006194926  2.64988401 0.0080519409</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then, we can make some predictions</span>
+  <span class="co"># First, let&#39;s just look at the effect of flow. We will do this by hand.</span>
+    <span class="co"># Make a new sequence of flow along which we will make our predictions</span>
+      newFlow =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(choice<span class="op">$</span>flow), <span class="dt">to =</span> <span class="kw">max</span>(choice<span class="op">$</span>flow), <span class="dt">by =</span> <span class="dv">1</span>)
+
+    <span class="co"># Now make predictions for the year 2005 using flow:</span>
+      c.pred =<span class="st"> </span>c.res[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>c.res[<span class="dv">7</span>, <span class="dv">1</span>]<span class="op">*</span>newFlow
+
+    <span class="co"># Let&#39;s look at these predictions:</span>
+      <span class="kw">hist</span>(c.pred)</code></pre></div>
+<p><img src="08_glm_logisticRegression_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>Well, this does not look very informative does it? And, actually, it should not. What we <em>should</em> take away from this is that these cannot possibly be predictions about the probability of using the Stillwater Branch because there are numbers that are less than zero! Why is this? It is because we need to transform these estimates back on to the probability scale from the logit scale on which we are working. We will use the <code>invlogit</code> function that we defined above to put these estimates back on the probability scale.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Invert the logit on our predictions</span>
+  c.pred  =<span class="st"> </span><span class="kw">invlogit</span>(c.pred)
+
+<span class="co"># Now, let&#39;s take a look:</span>
+  <span class="kw">hist</span>(c.pred)</code></pre></div>
+<p><img src="08_glm_logisticRegression_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can see that, in general, there is a relatively low probability of</span>
+<span class="co"># an individual fish using the Stillwater branch, now let&#39;s make a</span>
+<span class="co"># figure that shows how this changes with flow:</span>
+  <span class="kw">plot</span>(<span class="dt">x=</span>choice<span class="op">$</span>flow, <span class="dt">y=</span>choice<span class="op">$</span>path,
+       <span class="dt">xlab=</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Flow (&#39;</span>,<span class="st">&#39;ft&#39;</span><span class="op">^</span><span class="st">&#39;3&#39;</span>,<span class="st">&#39;\u00b7&#39;</span>,<span class="st">&#39;s&#39;</span><span class="op">^</span><span class="st">&#39;-1&#39;</span>,<span class="st">&#39; )&#39;</span>)),
+       <span class="dt">ylab =</span> <span class="st">&quot;p(Stillwater Branch | flow)&quot;</span>,
+       <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">lines</span>(<span class="dt">x=</span>newFlow, <span class="dt">y=</span>c.pred, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd =</span> <span class="dv">2</span>,  <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)
+  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="08_glm_logisticRegression_files/figure-html/unnamed-chunk-12-2.png" width="672" /></p>
+<p><br></p>
+<p>Now, you can see that there is an increasing probability of using the Stillwater Branch with increasing flow. Looking at the plot of the raw data, you can see 1) why we need models to look at trends like these, and 2) why it is important to provide visual aids to assist with the interpretation of your results.</p>
+<p>If we wanted to, we could go on to make predictions like we did with linear models, one for each year with respect to flow, or we could use our fitted data to show trends. We could do this either using the method we have just demonstrated, or…</p>
+<p>We could do this using the <code>predict</code> function in R like we did with linear models.</p>
+<p><strong>Example</strong>: predict effect of flow on mean probability of using Stillwater Branch by year.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create new flow data:</span>
+  flow =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(choice<span class="op">$</span>flow), <span class="dt">to=</span><span class="kw">max</span>(choice<span class="op">$</span>flow), <span class="dt">by=</span><span class="dv">1</span>)
+
+<span class="co"># Create new data for years:</span>
+  year =<span class="st"> </span><span class="kw">sort</span>( <span class="kw">rep</span>(<span class="kw">unique</span>(choice<span class="op">$</span>year), <span class="kw">length</span>(newFlow)) )
+  
+<span class="co"># Now repeat the flow vector for each year</span>
+  flow=<span class="kw">rep</span>(flow, <span class="kw">length</span>(<span class="kw">unique</span>(year)))
+  
+<span class="co"># Smoosh them together into a dataframe for prediction</span>
+  newD =<span class="st"> </span><span class="kw">data.frame</span>(flow, year)
+
+<span class="co"># Make predictions: WE DON&#39;T NEED TO INVERT THE PREDICTIONS FROM THE</span>
+<span class="co"># PREDICT.GLM FUNCTION IF WE SPECIFY &quot; type = &#39;response&#39; &quot;</span>
+  predicted =<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> mods[[best]],
+                      <span class="dt">newdata =</span> newD,
+                      <span class="dt">type=</span><span class="st">&#39;response&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>Now, plot the predictions by year:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add the raw data</span>
+  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="kw">plot</span>(<span class="dt">x=</span>choice<span class="op">$</span>flow,
+       <span class="dt">y=</span>choice<span class="op">$</span>path,
+       <span class="dt">xlab=</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Flow ( &#39;</span>,<span class="st">&#39;m&#39;</span><span class="op">^</span><span class="st">&#39;3&#39;</span>,<span class="st">&#39;\u00b7&#39;</span>,<span class="st">&#39;s&#39;</span><span class="op">^</span><span class="st">&#39;-1&#39;</span>,<span class="st">&#39; )&#39;</span>)),
+       <span class="dt">ylab =</span> <span class="st">&quot;p(Stillwater Branch | flow)&quot;</span>,
+       <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,
+       <span class="dt">pch=</span><span class="dv">21</span>,
+       <span class="dt">col=</span> <span class="kw">heat.colors</span>(<span class="kw">length</span>(<span class="kw">unique</span>(choice<span class="op">$</span>year)))[choice<span class="op">$</span>year]
+  )
+  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+<span class="co"># Then we could use a loop to go through each year and plot</span>
+<span class="co"># the predictions:</span>
+    <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(year))){
+      <span class="kw">lines</span>(<span class="dt">x =</span> flow[year<span class="op">==</span><span class="kw">unique</span>(year)[i]],
+            <span class="dt">y =</span> predicted[year<span class="op">==</span><span class="kw">unique</span>(year)[i]],
+            <span class="dt">col=</span> <span class="kw">heat.colors</span>(<span class="kw">length</span>(<span class="kw">unique</span>(year)))[i]
+            )
+    }</code></pre></div>
+<p><img src="08_glm_logisticRegression_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><br></p>
+<p>Cool!</p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,347 @@
+
+```{r child="_styles.Rmd"}
+```
+
+# Generalized linear models: logistic regression
+
+<br>
+ 
+## Introduction
+
+<br>
+ 
+This week in lab, we will start to take a closer look at generalized linear models (GLM) through the lens of logisitic regression. This is an family that includes multiple types of analyses depending on the data. For example, we might have binary data (0, 1), binomial data (number of success per some number of trials), or multinomial data (group membership as a response). We will look at the simplest of these cases, binary logistic regression, this week.
+
+<br>
+ 
+## The data
+
+<br>
+ 
+For our exercise this week, we will work with a simulated data set about lung cancer patients made available through the [UCLA Institute for Digital Research and Education](https://stats.idre.ucla.edu/r/dae/mixed-effects-logistic-regression/). The response in this data set is `remission`, a 1/0 variable indicating whether or not a given patient went into remission following hospital treatment. 
+
+Start by reading in the data.
+
+<br>
+ 
+```{r}
+cancer = read.csv('http://employees.oneonta.edu/stichds/data/lungcancer.csv')
+```
+
+<br>
+ 
+This data set contains a *pile* of variables, which of course makes it very fun to work with. We will work with some, but not all, of these variable this week for lab, and then you will make some additional choices about which of them you will work with for your homework, using `remission` as our response of interest throughout. Explanations of variables are as follows:
+
+<br>
+ 
+```
+tumorsize: the size of the tumor
+co2: patient CO2 levels
+pain: pain scale experienced by the patient
+wound: a ranking variable used to indicate surgical wound
+mobility: another ranking variable to rate patient mobility
+ntumors: number of cancer tumors (integer)
+nmorphine: number of morphine applications (integer)
+remission: whether or not patients went into remission (1/0)
+lungcapacity: percent of full lung capacity by patient
+Age: patient age (continuous)
+Married: whether or not the patient is married (1/0)
+FamilyHx: whether or not there is a family history of cancer (1/0)
+SmokingHx: patient smoking history (former, never, current)
+Sex: male or female
+CancerStage: severity of cancer by standard ranks (I-IV)
+LengthofStay: how long patients were in the hospital
+WBC: average white bloodcell count by patient
+RBC: average red bloodcell count by patient
+BMI: body mass index
+IL6: interleukin 6 levels by patient
+CRP: C-reactive protein levels by patient
+DID: doctor ID
+Experience: doctor experience level (years)
+School: doctor school performance (categorical)
+Lawsuts: number of lawsuits by doctor
+HID: hospital ID
+Medicaid: percent medicaid coverage by hospital
+```
+
+<br>
+ 
+Holy moly, what fun! 
+ 
+<br>
+ 
+## Exercises
+
+<br>
+ 
+### A worked example
+
+<br>
+ 
+Let's start with a simple example to get you moving along. First, we will pretend that we are interested in determining the effects of `Age` and `Sex` on the probability of a patient going into `remission` following treatment. If you have been following closely during the past few weeks, you will recognize that with a categorical variable (`Sex`) and a continuous variable (`Age`) we are looking at something that should resemble an analysis of covariance. **But**, our response, `remission`, can only take on values of 0 and 1, so we know that we need to use a GLM to accommodate this.
+
+<br>
+ 
+#### Analysis
+
+<br>
+ 
+To fit this model we will use the `glm` function in R, being sure to specify `family = 'binomial'` in our call:
+
+<br>
+ 
+```{r}
+# Fit the model
+  c.mod = glm(remission~Sex+Age, family='binomial', data=cancer)
+```
+
+<br>
+ 
+Cool, that was easy! 
+
+<br>
+ 
+##### Results
+
+<br>
+ 
+Let's have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the `Anova()` function in the `car` package to use the correct sums of squares for these calculations because we have continuous and categorical variables.
+
+<br>
+ 
+```{r, message=FALSE, warning=FALSE}
+# Load the car library so we can get a meaningful ANOVA table for our model
+  library(car)
+
+# Print the summary of the model
+  Anova(c.mod, Type='III')
+```
+
+<br>
+ 
+**Question 1**. Based on the output of our call to `Anova()`, what can you determine about the statistical significance of the effects of `Sex` and `Age` on the probability of patients going into remission?
+<!-- We can see that at our default confidence level ($\alpha$ = 0.05), we fail to reject the null hypothesis that there is no difference between sexes, but we  reject the null hypothesis that there is no effect of `Age` on `remission`.  -->
+
+<br>
+
+Just as with all of our other models, we can use the `summary()` function to get the output from R.
+
+<br>
+ 
+```{r}
+# Print the summary of the model
+  summary(c.mod)
+```
+
+<br>
+ 
+The `summary` of the model gives us the estimated coefficients **on the logit scale**, along with our usual significance codes and an `AIC` score (now in the default output because we are using maximum likelihood estimation).
+
+Even though these parameters are on the logit scale, we can still make limited inference about the directionality of relationships as we would with linear models used earlier in the semester. 
+
+<br>
+ 
+**Question 2**. What can you tell about the direction of the relationship between `Age` and `remission` from the output from `summary()` above?
+<!-- Here, we see that the coefficient for `Age` is negative (`{r c.mod$Coefficients[3,1]}`), meaning that we would predict probability of `remission` to be inversely related to `Age` (higher probability of younger people going into remission). -->
+
+<br>
+ 
+One thing that you'll notice is missing from this output is the R^2^ value that we have become familiar with during the past several weeks while working with linear models. There is no R^2^ value because we are no longer estimating these models using ordinary least squares, but rather maximum likelihood estimation. If we wanted to get an analagous metric of variance explained by our model, we could estimate a *pseudo-R^2^*. There are many of these available depending on the model and nature of our data. The simplest to calculate is the **McFadden R^2^**. To estimate this one, we compare the deviance of our model to the deviance of an intercept-only (i.e. "null") model using the output from the `summary` function above:
+
+<br>
+ 
+  $$McFadden R^2 = 1 - \frac{Deviance_{residual}}{Deviance_{null}}$$
+
+<br>
+ 
+Here, we can see that the model only explains about `r round(1-(c.mod$deviance/c.mod$null.deviance), 2)*100`% of the variation in the response of interest:
+
+$$R^2 = 1 - \frac{`r c.mod$deviance`}{`r c.mod$null.deviance`} = `r round(1-(c.mod$deviance/c.mod$null.deviance), 4)`$$
+
+<br>
+ 
+Now that we have a feel for just how miserable this model is, our first inclination might be to throw it all away and start over (joking). But, for the sake of demonstration let's see it through. The next step in reporting our results here is to extract some information about how `remission` changes with `Age` beyond simply stating that it was either "inversely" or "proportionally" related to `remission`. We will include `Sex` in our predictions for the sake of demonstration, realizing that this effect was not determined to be significant.
+
+Recall that we can make predictions from our model either by hand or by using the `predict` function in R. **Note** that if we use the `predict` function for `glm` objects in R, we no longer have the ability to set the `interval` argument as we did for objects resulting from the `lm()` function (well, we can- it will just be ignored). Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).
+
+Start by making some new data that we can use for predictions.
+
+<br>
+ 
+```{r}
+# Start with Age by making a sequence from the minimum
+# observed age to the maximum observed age in equal
+# increments of 1 year
+  Age = seq(from=min(cancer$Age), to=max(cancer$Age), by=1)
+
+# Now, make a column for each sex that is the same length
+  females = rep('female', length(Age))
+  males = rep('male', length(Age))
+  
+# Combine the information for both sexes into a vector with the same
+# name as is used in the original data
+  Sex = c(females, males)
+  
+# Now, duplicate the age column so it is repeated 
+# for both sexes
+  Age = rep(Age, length(unique(Sex)))
+  
+# Put it all together in a dataframe
+  newD = data.frame(Sex, Age)
+```
+
+<br>
+
+Now that we have new data for making predictions, let's go ahead and do it!
+
+<br>
+ 
+```{r}
+# Calculate mean predicted value and SE for the predictions
+# on the link scale
+  preds = data.frame(
+    predict(c.mod, newD, type='link', se.fit = TRUE)[1:2]
+  )
+
+# Now get lower and upper CIs
+  preds$lwr = preds$fit + preds$se.fit*qnorm(0.025)
+  preds$upr = preds$fit + preds$se.fit*qnorm(0.975)
+```
+
+<br>
+ 
+Now, we need to define a function to invert the logit
+
+<br>
+ 
+```{r}
+inv.logit = function(x){
+  exp(x)/(1+exp(x))
+}
+```
+
+<br>
+ 
+We can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our `preds` dataframe using the `apply` function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.
+
+<br>
+ 
+```{r}  
+# Convert the predictions to the probability scale
+  preds[ , c(1,3,4)] = apply(X=preds[ , c(1,3,4)],
+                             MARGIN=2,
+                             FUN=inv.logit
+                             )
+```
+
+<br>
+ 
+Finally, let's plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice.
+
+<br>
+ 
+```{r}
+# Plot the predictions
+# Set graphical parameters
+  par(mfrow=c(1,2))
+# Females
+  # Plot the mean predicted probability of remission
+  # given age across the range of observed ages
+    plot(y=preds$fit[newD$Sex=='female'],
+         x=newD$Age[newD$Sex=='female'],
+         col=c('red'),
+         type='l',
+         lty=1, lwd=2,
+         ylim=c(0, 1),
+         ylab = 'p( Remission | Age )',
+         xlab = 'Age (years)'
+         )
+  # Lower 95% CI
+    lines(preds$lwr[newD$Sex=='female'], 
+          x=newD$Age[newD$Sex=='female'],
+          col='red', lty=2)
+  # Upper 95% CI
+    lines(preds$upr[newD$Sex=='female'], 
+          x=newD$Age[newD$Sex=='female'],
+          col='red', lty=2)
+    
+# Males  
+  # Plot the mean predicted probability of remission
+  # given age across the range of observed ages
+    plot(y=preds$fit[newD$Sex=='male'],
+         x=newD$Age[newD$Sex=='male'],
+         col=c('blue'),
+         type='l',
+         lty=1, lwd=2,
+         ylim=c(0, 1),
+         ylab = '',
+         xlab = 'Age (years)'
+         )
+  # Lower 95% CI
+    lines(preds$lwr[newD$Sex=='male'], 
+          x=newD$Age[newD$Sex=='male'],
+          col='blue', lty=2)
+  # Upper 95% CI
+    lines(preds$upr[newD$Sex=='male'], 
+          x=newD$Age[newD$Sex=='male'],
+          col='blue', lty=2)    
+```
+
+<br>
+ 
+Using either the graph or the estimates in the `fit` column of `preds`, we can estimate about how much `remission` changes across the range of `Age` observed. We don't need to report this by `Sex` because we know that was not significant in our model, and the change is about the same. So, here we can say that probability of entering remission decreased from about `r round(max(preds$fit),2)*100`% to about `r round(min(preds$fit),2)*100`% over the range of ages observed during this study.
+
+<br>
+ 
+## Your turn
+
+<br>
+ 
+Next, I want you to strike out on your own and make a couple of models. To start, please **choose one categorical explanatory variable** other than `Sex` **and one continuous explanatory variable** (this can be the same as the one included in the previous model or different). Do not use `DID`, `Experience`, `School`, or `HID` for this analysis.
+
+<br>
+ 
+Fit a model using your two variables, and save it to a named object.
+
+Create a third model that represents the null model. If you have forgotten since last week how to specify this, remember that we can use the following notation to specify the null model:
+
+<br>
+ 
+```{r}
+null = glm(remission~1, family=binomial, data=cancer)
+```
+
+<br>
+ 
+Compare the null model to your previous model using AIC for model comparison. 
+
+<br>
+ 
+**Question 3**. Do the differences in AIC scores indicate a substantial difference in the fit of the two models (i.e. is one much better than the other?). What can you conclude about your new model based on this?
+
+<br>
+ 
+**Question 4**. Use the `Anova` function from the `car` package to report on the statistical significance of the relationship between your chosen explanatory variables and `remission`. 
+
+<br>
+ 
+Make predictions from your model using the same procedure that we used above to determined how much `remission` varied between `Sex` and by `Age` (but do it for *your* variables). Be sure to estimate separately for each group of your categorical explanatory variable if this was significant in your model.
+
+<br>
+ 
+**Question 5**. About how much does `remission` change across the range of observed values for your continuous covariate based on your model predictions?
+
+<!-- stepped = glm(formula = remission ~ tumorsize + wound + mobility + ntumors + nmorphine + Age + FamilyHx + CancerStage + BMI + IL6 + CRP + DID + Experience + School + HID, family = binomial, data = cancer) -->
+
+<br>
+ 
+## Bonus: 2 pts
+
+<br>
+ 
+Plot your model predictions for your continuous covariate like we did above, being sure to include estimates for each group of your explanatory variable if it was significant in your new model.
+
+<br>
+
+<br>
+ 

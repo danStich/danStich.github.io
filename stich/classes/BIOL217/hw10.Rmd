@@ -1,0 +1,273 @@
+```{r child="_styles.Rmd"}
+```
+
+<br>
+ 
+# Generalized linear mixed models
+
+<br>
+ 
+## Introduction
+
+<br>
+   
+This week we extended the analytical framework that we have been working with to include both fixed and random effects. We have discussed why we might want to use it and how to interpret the results of these tools. The purpose of this lab is to get you comfortable using GLMM with real data.
+
+By the end of this lab, you should 1) understand why we use mixed effects models, 2) be comfortable specifying general linear mixed models in R and applying the tool to analyze data from start to finish, and 3) be able to diagnose and interpret the results of these models.
+
+<br>
+   
+## Exercises
+
+<br>
+   
+### Linear mixed models (LMM- a special case of GLMM)
+
+<br>
+   
+We have looked at the GLMM initially this week because of it's utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on  uses. For example, we might refer to them as 'repeated measures' ANOVA, 'nested' or 'factorial' ANOVA, or 'linear mixed models' (LMM).
+
+Let's take a look at a new data set for this example. Read in the data file called `est.mvmt.txt`, either from the course website or from your working directory.
+
+<br>
+   
+```{r, eval = TRUE}
+# Read in the data
+  est.mvmt = read.csv('http://employees.oneonta.edu/stichds/data/est.mvmt.txt')
+```  
+
+<br>  
+ 
+These data are from endangered Atlantic salmon *Salmo salar* smolts. The response in the data is `Rate` and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]).
+
+A brief description of the data follows:
+
+<br>
+ 
+```
+  TagID: individual fish ID
+  FL: forklength of fish
+  Mass: mass of individual fish
+  ATP: gill Na+,K+-ATPase activity
+  RelSite: release site
+  RelDate: release date (ordinal)
+  Org: rearing history (hatchery or wild)
+  Year: year of the study
+  SW: indicator for salt water for each relocation
+  RelKM: river kilometer of release site
+  Dams: the number of dams passed by individual fish
+  RKM_Loc: river kilometer of detections following release
+  Rate: movement rate of individual fish in various reaches
+  MovDate: the date on which movement occurred
+  k: fish condition (a measure of rotundity or plumpness)
+  MovDate2: a quadratic term for movement date
+  RKM: the river kilometer of relocation
+  RKM2: a quadratic term for each relocation
+  Dis: mean river discharge over movement period
+  Phs: photoperiod (daylength) for the movement period
+  Ph2s: a quadratic term for daylength for movement period
+```
+
+<br>
+ 
+All of the covariates (potential explanatory variables) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found [here](http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185)
+
+<br>
+ 
+Your charge will be to fit a series of models and analyze them within the context of a linear mixed effects model.
+ 
+First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly colinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.
+
+<br>
+ 
+I will place two stipulations on this: 
+
+1) you need to account for repeat measurements of movement rates from individual fish in this study because there are varying numbers of measurements for each individual, and this lack of balance has the potential to bias the results if not accounted for. That means you need to include a random effect of individual on the intercept.
+
+2) Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.
+
+<br>
+    
+Make a list object of the models that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.
+
+```{r, echo=FALSE, include = FALSE, results='hide'}
+# Load the lme4 library
+  library(lme4)
+# Create a candidate model set (this is the set used in the paper)
+  Mov.mods = list()
+    Mov.mods[[1]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[2]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[3]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + k + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[4]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + ATP + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[5]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + Org + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[6]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[7]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + k + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[8]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + ATP + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[9]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + Org + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[10]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[11]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + k + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[12]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + ATP + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[13]] = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + Org + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[14]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[15]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[16]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + k + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[17]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + ATP + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[18]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + Org + SW + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[19]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[20]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + k + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[21]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + ATP + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[22]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + Org + Dams + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[23]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[24]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + k + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[25]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + ATP + RelKM + PhS + Ph2S, data = est.mvmt)
+    Mov.mods[[26]] = lmer(log(Rate) ~ (1|TagID) +  RKM + Dis + Org + RelKM + PhS + Ph2S, data = est.mvmt)
+    
+# Create a vector of names for the models
+  MovNames <- c()
+    MovNames[1] <- 'RKM + RKM 2 + Dis + PhS + PhS2'
+    MovNames[2] <- 'RKM + RKM 2 + Dis + SW + PhS + PhS2'
+    MovNames[3] <- 'RKM + RKM 2 + Dis + k + SW + PhS + PhS2'
+    MovNames[4] <- 'RKM + RKM 2 + Dis + ATP + SW + PhS + PhS2'
+    MovNames[5] <- 'RKM + RKM 2 + Dis + Org + SW + PhS + PhS2'
+    MovNames[6] <- 'RKM + RKM 2 + Dis + Dams + PhS + PhS2'
+    MovNames[7] <- 'RKM + RKM 2 + Dis + k + Dams + PhS + PhS2'
+    MovNames[8] <- 'RKM + RKM 2 + Dis + ATP + Dams + PhS + PhS2'
+    MovNames[9] <- 'RKM + RKM 2 + Dis + Org + Dams + PhS + PhS2'
+    MovNames[10] <- 'RKM + RKM 2 + Dis + RelKM + PhS + PhS2'
+    MovNames[11] <- 'RKM + RKM 2 + Dis + k + RelKM + PhS + PhS2'
+    MovNames[12] <- 'RKM + RKM 2 + Dis + ATP + RelKM + PhS + PhS2'
+    MovNames[13] <- 'RKM + RKM 2 + Dis + Org + RelKM + PhS + PhS2'
+    MovNames[14] <- 'RKM + Dis + PhS + PhS2'
+    MovNames[15] <- 'RKM + Dis + SW + PhS + PhS2'
+    MovNames[16] <- 'RKM + Dis + k + SW + PhS + PhS2'
+    MovNames[17] <- 'RKM + Dis + ATP + SW + PhS + PhS2'
+    MovNames[18] <- 'RKM + Dis + Org + SW + PhS + PhS2'
+    MovNames[19] <- 'RKM + Dis + Dams + PhS + PhS2'
+    MovNames[20] <- 'RKM + Dis + k + Dams + PhS + PhS2'
+    MovNames[21] <- 'RKM + Dis + ATP + Dams + PhS + PhS2'
+    MovNames[22] <- 'RKM + Dis + Org + Dams + PhS + PhS2'
+    MovNames[23] <- 'RKM + Dis + RelKM + PhS + PhS2'
+    MovNames[24] <- 'RKM + Dis + k + RelKM + PhS + PhS2'
+    MovNames[25] <- 'RKM + Dis + ATP + RelKM + PhS + PhS2'
+    MovNames[26] <- 'RKM + Dis + Org + RelKM + PhS + PhS2'    
+```
+
+```{r, eval = TRUE, results="hide"}
+# Here is an example of ONE FORM of the syntax we might use to
+# fit a linear mixed model in the "lme4" package using lme4::lmer
+  Mov.mod = lmer(log(Rate) ~ (1|TagID) +  RKM + RKM2 + Dis + PhS + Ph2S,
+                data = est.mvmt)
+  
+# Note that this doesn't look much different that the specification that 
+# we used for generalized linear mixed effects models earlier in the
+# within lme4. The only difference is that we have dropped the 'g' from
+# the front-end of the function.
+  
+# PLEASE NOTE: you do not need to build this model for the exercise. It 
+# just happened to be the first in the list of candidate models from the
+# R script that we used to analyze these data for the study.
+```
+
+<br>    
+ 
+**Question 1.** Why did you choose to test this model set? What factors did you consider in their development?
+
+<br>  
+ 
+Next we will use an information-theoretic approach to model selection based on Akaike's information criterion. **Another great example of how fast this field is moving forward**: the last time I taught this class, I wrote *...we cannot rely on the canned functions from `AICcmodavg` package that have been so convenient for the past several weeks. The functions in that package have still not been adapted for use with linear mixed effects models or generalized linear models in `lme4`. Part of this reason lies in the philosophical debate within the statistical community about how many degrees of freedom we should use for the estimation of the random effect in these models. I won't torture you with the gory details, but suffice it to say that this is yet another hotly contested issue in statistics that has not seen much resolution. Like I've been saying all week- this is what happens when you work on the bleeding edge of the razor. Luckily, we can write our own set of calculations, wrapped in a function called `aic.tableR` that we will `source` from a separate file.*
+
+<br>    
+
+<br>    
+ 
+Let's take a look at the function so we know how it works. **Note** that you will not be able to source the file because you don't have it.
+
+<br>    
+ 
+```{r, collapse=TRUE}        
+# Just typing the name of any function in R (and running the code) 
+# will allow us to see how it works!
+  source("aic.tableR.R")
+# Like this:    
+  aic.tableR
+```
+
+<br>    
+ 
+Fast forward two springs, and now model selection for GLMM has been implemented in the `AICcmodavg` package. So, you can now use the `aictab` function in the `AICcmodavg` package instead of the `aic.tableR` function we have defined above to calculate model selection statistics for your model list (thank goodness because I am having a heck of a time trying to source this through the web over the campus network). Go ahead: do it.
+
+<br>    
+ 
+**Question 2.** According to your model selection statistics, which of your models was the top model? Is there clear evidence for a *best* model? What is the probability that your top model is the best in the candidate set? Using the $w_i$ ratio that we introduced a few weeks back, how many times better supported is your best model compared to your second best model?
+
+<br>    
+ 
+<br>    
+**Question 3.** Were there any variables that were clearly more important than others in your candidate set?
+
+<br>    
+Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model using the `plot()` function.
+
+<br>    
+Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values? Notice that there is only one plot for the diagnostics here. This is because we are pretty much only concerned with the fact that the residuals of the random effect are normally distributed. Now that's what I call flexibility.
+
+<br>  
+ 
+Now go ahead and look at the summary of your best model.
+
+<br>    
+ 
+**Food for thought**: What factors were included in your best model? Are they all considered significant at $alpha$ = 0.05?
+
+<br>    
+ 
+```{r}
+# Note that if you have factors in your model, you can still get an 
+# overall significance level for your variables for GLMM and LMM using
+# car::Anova. Here is the first one from the model list from the paper:
+  library(car)
+  Anova(Mov.mods[[1]], Type='III')
+```  
+
+<br>    
+   
+**Question 4.** Using the standardized regression coefficients, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results?
+
+<br>    
+    
+Finally, let's actually look at the interpretation of our random effect. We can interpret this term as the amount of variability that exists between individuals in these models. In general, if the variance for our error term (TagID in this case) is larger than the residual variance, then the random effect can be thought of as 'important'. That is, a model that does not include the random effect should result in a much poorer fit than the model that includes the random effect. 
+   
+Philosophically, there is some reasonable opposition to the comparison of mixed effects models with their fixed effects counterparts, namely that exclusion of the fixed effect (if part of experimental design) is pseudo-replication (more specifically, it is 'sacrificial pseudoreplication' according to Hurlbert 1984).
+  
+Memorize [this paper](www.masterenbiodiversidad.org/docs/asig3/Hurlbert_1984_Pseudoreplication.pdf) and you will be able to cutoff a large number of editor and reviewer comments before you ever have to deal with them :)
+
+<br>    
+  
+The *point* of all of this is that we included the random effect in order to account for issues with experimental design, so we might want to use it to temper our predictions to improve the accuracy of estimating population-level means.
+
+<br>
+   
+```{r}
+# For the example model I have been using we can get a 95% CI on the mean movement 
+# rate of individuals as follows:
+  cc = fixef(Mov.mods[[1]])[1]                   # Intercept
+  ss = sqrt(unlist(VarCorr(Mov.mods[[1]])))      # Random effects SD
+  se = summary(Mov.mods[[1]])$coefficients[1,2]  # Intercept se
+
+# Print the mean movement rate for smolts (in body lengths per second). 
+# Note that we need to use exp() because the analysis was on the log scale.
+  exp(cc)
+  
+# Now we can ask R to give us a 95% CI on the estimate Note that we
+# need to use exp() because the analysis was on the log scale.
+  exp(qnorm(c(0.025,0.975), mean=cc,sd=ss+se)) 
+```
+
+<br>
+   
+**Question 5.** Using the code above, do the same thing for your best model and report the model-predicted mean and 95% CI for smolt movement through the estuary. How does this compare to the median movement rate of of smolts in the data set? Why do you suppose this is? I will take one of two answers, only one is correct though.
+
+<br>
+  
+<br>
+   

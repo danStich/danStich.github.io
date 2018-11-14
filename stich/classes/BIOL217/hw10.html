@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="generalized-linear-mixed-models" class="section level1">
+<h1>Generalized linear mixed models</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week we extended the analytical framework that we have been working with to include both fixed and random effects. We have discussed why we might want to use it and how to interpret the results of these tools. The purpose of this lab is to get you comfortable using GLMM with real data.</p>
+<p>By the end of this lab, you should 1) understand why we use mixed effects models, 2) be comfortable specifying general linear mixed models in R and applying the tool to analyze data from start to finish, and 3) be able to diagnose and interpret the results of these models.</p>
+<p><br></p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p><br></p>
+<div id="linear-mixed-models-lmm--a-special-case-of-glmm" class="section level3">
+<h3>Linear mixed models (LMM- a special case of GLMM)</h3>
+<p><br></p>
+<p>We have looked at the GLMM initially this week because of it’s utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on uses. For example, we might refer to them as ‘repeated measures’ ANOVA, ‘nested’ or ‘factorial’ ANOVA, or ‘linear mixed models’ (LMM).</p>
+<p>Let’s take a look at a new data set for this example. Read in the data file called <code>est.mvmt.txt</code>, either from the course website or from your working directory.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data</span>
+  est.mvmt =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/est.mvmt.txt&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>These data are from endangered Atlantic salmon <em>Salmo salar</em> smolts. The response in the data is <code>Rate</code> and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]).</p>
+<p>A brief description of the data follows:</p>
+<p><br></p>
+<pre><code>  TagID: individual fish ID
+  FL: forklength of fish
+  Mass: mass of individual fish
+  ATP: gill Na+,K+-ATPase activity
+  RelSite: release site
+  RelDate: release date (ordinal)
+  Org: rearing history (hatchery or wild)
+  Year: year of the study
+  SW: indicator for salt water for each relocation
+  RelKM: river kilometer of release site
+  Dams: the number of dams passed by individual fish
+  RKM_Loc: river kilometer of detections following release
+  Rate: movement rate of individual fish in various reaches
+  MovDate: the date on which movement occurred
+  k: fish condition (a measure of rotundity or plumpness)
+  MovDate2: a quadratic term for movement date
+  RKM: the river kilometer of relocation
+  RKM2: a quadratic term for each relocation
+  Dis: mean river discharge over movement period
+  Phs: photoperiod (daylength) for the movement period
+  Ph2s: a quadratic term for daylength for movement period</code></pre>
+<p><br></p>
+<p>All of the covariates (potential explanatory variables) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found <a href="http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185">here</a></p>
+<p><br></p>
+<p>Your charge will be to fit a series of models and analyze them within the context of a linear mixed effects model.</p>
+<p>First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly colinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.</p>
+<p><br></p>
+<p>I will place two stipulations on this:</p>
+<ol style="list-style-type: decimal">
+<li><p>you need to account for repeat measurements of movement rates from individual fish in this study because there are varying numbers of measurements for each individual, and this lack of balance has the potential to bias the results if not accounted for. That means you need to include a random effect of individual on the intercept.</p></li>
+<li><p>Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.</p></li>
+</ol>
+<p><br></p>
+<p>Make a list object of the models that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here is an example of ONE FORM of the syntax we might use to</span>
+<span class="co"># fit a linear mixed model in the &quot;lme4&quot; package using lme4::lmer</span>
+  Mov.mod =<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">log</span>(Rate) <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>TagID) <span class="op">+</span><span class="st">  </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,
+                <span class="dt">data =</span> est.mvmt)
+  
+<span class="co"># Note that this doesn&#39;t look much different that the specification that </span>
+<span class="co"># we used for generalized linear mixed effects models earlier in the</span>
+<span class="co"># within lme4. The only difference is that we have dropped the &#39;g&#39; from</span>
+<span class="co"># the front-end of the function.</span>
+  
+<span class="co"># PLEASE </span><span class="al">NOTE</span><span class="co">: you do not need to build this model for the exercise. It </span>
+<span class="co"># just happened to be the first in the list of candidate models from the</span>
+<span class="co"># R script that we used to analyze these data for the study.</span></code></pre></div>
+<p><br></p>
+<p><strong>Question 1.</strong> Why did you choose to test this model set? What factors did you consider in their development?</p>
+<p><br></p>
+<p>Next we will use an information-theoretic approach to model selection based on Akaike’s information criterion. <strong>Another great example of how fast this field is moving forward</strong>: the last time I taught this class, I wrote <em>…we cannot rely on the canned functions from <code>AICcmodavg</code> package that have been so convenient for the past several weeks. The functions in that package have still not been adapted for use with linear mixed effects models or generalized linear models in <code>lme4</code>. Part of this reason lies in the philosophical debate within the statistical community about how many degrees of freedom we should use for the estimation of the random effect in these models. I won’t torture you with the gory details, but suffice it to say that this is yet another hotly contested issue in statistics that has not seen much resolution. Like I’ve been saying all week- this is what happens when you work on the bleeding edge of the razor. Luckily, we can write our own set of calculations, wrapped in a function called <code>aic.tableR</code> that we will <code>source</code> from a separate file.</em></p>
+<p><br></p>
+<p><br></p>
+<p>Let’s take a look at the function so we know how it works. <strong>Note</strong> that you will not be able to source the file because you don’t have it.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Just typing the name of any function in R (and running the code) </span>
+<span class="co"># will allow us to see how it works!</span>
+  <span class="kw">source</span>(<span class="st">&quot;aic.tableR.R&quot;</span>)
+<span class="co"># Like this:    </span>
+  aic.tableR
+## function(x, y=NULL){
+##       # Create a column to hold number of parameters for our model
+##         k &lt;- c()
+##       # Get number of parameters for each ith model in our candidate model set
+##         for (i in 1:length(x)){
+##         # Note that we are adding a one to the number of parameters in each
+##         # model. This is to account for the df needed to estimate the random
+##         # effect. I suppose we could use a different number or a series of
+##         # numbers if we were interested in evaluating the sensitivity of
+##         # model selection statistics to the
+##           k[i]&lt;-nrow(data.frame(summary(x[[i]])[10]))+1
+##         }
+##       # Make blank columns to hold statistics
+##         AICc &lt;- c(rep(0, length(k)))        # AICc score
+##         DeltaAIC &lt;- c(rep(0, length(k)))    # Delta AICc
+##         AICWeight &lt;- c(rep(0, length(k)))   # Wi
+##         Deviance &lt;- c(rep(0, length(k)))    # Model deviance
+##         R.lik&lt;-c(rep(0, length(k)))         # Rel. likelihood for wi
+##       # Make a dataframe to hold results of model selection
+##         if(is.null(y)){ y=rep(&quot;&quot;, length(x))}
+## 
+##         ranks&lt;-data.frame(y, k, AICc, DeltaAIC, AICWeight)
+##         names(ranks)[1] &lt;- &quot;Model&quot;
+##       # Get AICc for each model
+##         for(i in 1:nrow(ranks)){
+##           # Note that we are penalizing the likelihood of each model based on
+##           # the number of parameters in each model in addition to sample size
+##           ranks$AICc[i] &lt;- AIC(x[[i]])+(((2*k[i])*(k[i]+1))/
+##             (nrow(est.mvmt)-k[i]-1))
+##         }
+##       # Sort the table by AICc to get them in order for calculations
+##         ranks &lt;- ranks[with(ranks, order(AICc)), ]
+##       # Calculate delta AIC
+##         for(i in 1:nrow(ranks)){
+##           ranks$DeltaAIC[i] &lt;- ranks$AICc[i]-ranks$AICc[1]
+##         }
+##       # Calculate the relative likelihood for each of the models
+##         for(i in 1:nrow(ranks)){
+##           R.lik[i] &lt;- exp(-.5*ranks$DeltaAIC[i])
+##         }
+##       # Calculate AIC weight for each of the models based on the relative
+##       # likelihood
+##         for(i in 1:length(R.lik)){
+##           ranks$AICWeight[i] &lt;- R.lik[i]/sum(R.lik[1:length(R.lik)])
+##         }
+##       # Round off the calculated columns to two decimal places because that is
+##       # really all we need for wi and we want the rest to be standardized.
+##         ranks[ , 3:5] &lt;- round(ranks[ , 3:5], 2)
+##       # Print the model selection results
+##         return(ranks)
+##   }</code></pre></div>
+<p><br></p>
+<p>Fast forward two springs, and now model selection for GLMM has been implemented in the <code>AICcmodavg</code> package. So, you can now use the <code>aictab</code> function in the <code>AICcmodavg</code> package instead of the <code>aic.tableR</code> function we have defined above to calculate model selection statistics for your model list (thank goodness because I am having a heck of a time trying to source this through the web over the campus network). Go ahead: do it.</p>
+<p><br></p>
+<p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model? What is the probability that your top model is the best in the candidate set? Using the <span class="math inline">\(w_i\)</span> ratio that we introduced a few weeks back, how many times better supported is your best model compared to your second best model?</p>
+<p><br></p>
+<p><br><br />
+<strong>Question 3.</strong> Were there any variables that were clearly more important than others in your candidate set?</p>
+<p><br><br />
+Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model using the <code>plot()</code> function.</p>
+<p><br><br />
+Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values? Notice that there is only one plot for the diagnostics here. This is because we are pretty much only concerned with the fact that the residuals of the random effect are normally distributed. Now that’s what I call flexibility.</p>
+<p><br></p>
+<p>Now go ahead and look at the summary of your best model.</p>
+<p><br></p>
+<p><strong>Food for thought</strong>: What factors were included in your best model? Are they all considered significant at <span class="math inline">\(alpha\)</span> = 0.05?</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that if you have factors in your model, you can still get an </span>
+<span class="co"># overall significance level for your variables for GLMM and LMM using</span>
+<span class="co"># car::Anova. Here is the first one from the model list from the paper:</span>
+  <span class="kw">library</span>(car)
+  <span class="kw">Anova</span>(Mov.mods[[<span class="dv">1</span>]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
+<pre><code>## Analysis of Deviance Table (Type II Wald chisquare tests)
+## 
+## Response: log(Rate)
+##        Chisq Df Pr(&gt;Chisq)    
+## RKM  29.5398  1  5.478e-08 ***
+## RKM2  1.6987  1     0.1925    
+## Dis   5.2070  1     0.0225 *  
+## PhS  24.7536  1  6.515e-07 ***
+## Ph2S  0.5392  1     0.4628    
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p><strong>Question 4.</strong> Using the standardized regression coefficients, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results?</p>
+<p><br></p>
+<p>Finally, let’s actually look at the interpretation of our random effect. We can interpret this term as the amount of variability that exists between individuals in these models. In general, if the variance for our error term (TagID in this case) is larger than the residual variance, then the random effect can be thought of as ‘important’. That is, a model that does not include the random effect should result in a much poorer fit than the model that includes the random effect.</p>
+<p>Philosophically, there is some reasonable opposition to the comparison of mixed effects models with their fixed effects counterparts, namely that exclusion of the fixed effect (if part of experimental design) is pseudo-replication (more specifically, it is ‘sacrificial pseudoreplication’ according to Hurlbert 1984).</p>
+<p>Memorize <a href="www.masterenbiodiversidad.org/docs/asig3/Hurlbert_1984_Pseudoreplication.pdf">this paper</a> and you will be able to cutoff a large number of editor and reviewer comments before you ever have to deal with them :)</p>
+<p><br></p>
+<p>The <em>point</em> of all of this is that we included the random effect in order to account for issues with experimental design, so we might want to use it to temper our predictions to improve the accuracy of estimating population-level means.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># For the example model I have been using we can get a 95% CI on the mean movement </span>
+<span class="co"># rate of individuals as follows:</span>
+  cc =<span class="st"> </span><span class="kw">fixef</span>(Mov.mods[[<span class="dv">1</span>]])[<span class="dv">1</span>]                   <span class="co"># Intercept</span>
+  ss =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">unlist</span>(<span class="kw">VarCorr</span>(Mov.mods[[<span class="dv">1</span>]])))      <span class="co"># Random effects SD</span>
+  se =<span class="st"> </span><span class="kw">summary</span>(Mov.mods[[<span class="dv">1</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># Intercept se</span>
+
+<span class="co"># Print the mean movement rate for smolts (in body lengths per second). </span>
+<span class="co"># Note that we need to use exp() because the analysis was on the log scale.</span>
+  <span class="kw">exp</span>(cc)</code></pre></div>
+<pre><code>## (Intercept) 
+##    1.352833</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we can ask R to give us a 95% CI on the estimate Note that we</span>
+<span class="co"># need to use exp() because the analysis was on the log scale.</span>
+  <span class="kw">exp</span>(<span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="dt">mean=</span>cc,<span class="dt">sd=</span>ss<span class="op">+</span>se)) </code></pre></div>
+<pre><code>## [1] 1.303878 1.403626</code></pre>
+<p><br></p>
+<p><strong>Question 5.</strong> Using the code above, do the same thing for your best model and report the model-predicted mean and 95% CI for smolt movement through the estuary. How does this compare to the median movement rate of of smolts in the data set? Why do you suppose this is? I will take one of two answers, only one is correct though.</p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

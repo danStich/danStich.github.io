@@ -1,0 +1,462 @@
+```{r, child="_styles.Rmd"}
+```
+
+<br>
+
+# Data simulation and visualization
+
+<br>
+ 
+
+<img src="../../images/matrixSmolt.jpg" alt="">
+
+<br>
+ 
+## Introduction 
+
+<br>
+ 
+The purpose of this unit is to get you comfortable simulating data in R and give you some tools for vizualizing the data that you have simulated or collected. This is not meant to be a comprehensive treatment of these subjects but rather an introduction to the tools that are available to you. Similarly, this is just meant to get you started. There are a lot of tools out there and you may come up with something that works better for you once you have some basics under your belt. 
+
+<br>
+
+>Why are we talking about simulating data?
+
+<br>
+
+There are a few good reasons for this:
+
+1. Data simulation is a powerful tool in experimental design, and can help address problems before they arise
+
+2. Tools used for data simulation are similar or the same as many of the tools that you will need for manipulating and analyzing data.
+
+3. Simulation can be as useful on the back end of statistical analyses as it is for experimental design. For example, we need to simulate data to make predictions in many cases.
+
+<br> 
+
+> And data visualization- why do we care?
+
+1. There are few statistical tests that hold intuitive meaning to our readers. The ability to present information in a visually meaningful way to the reader can help to make the interpretation of your science crystal clear without having to worry about whether or not your reader has the faculties to interpret the results of statistical tests.
+
+2. Effects and effect sizes are often (if not always) more important than the ability to detect 'significant' differences.  If you can present clear evidence that some treatment or manipulation confers a biologically meaningful change in a visual way alongside these tests, you can provide a much stronger body of evidence with which to argue your case.
+
+3. There are a few graphical tools that are very useful for basic data exploration, diagnostics, etc., that can make your life a lot easier for data analysis and interpretation. They can also help you decide whether something has gone terribly wrong.
+
+<br>
+
+## Simulating data in R
+
+<br>
+ 
+There are a lot of tools specifically created for simulating data in R. We can't even begin to cover them all, but we can build up a basic working knowledge of some of those that are more essential. This week we will look at some simple, common tools for basic data generation. Next week, we will extend this to include more on probability distributions.
+
+There are a lot of different reasons why we might want to simulate data, from creating derived variables, to data organization, variable coding, power analyses, model predictions and validation, and 'heuristic' exercises.
+
+Let's start with some really simple functions in R
+
+We can simulate data in two ways: deterministically and stochastically.
+
+__Deterministic__: this one is well defined. Here we are usually talking about assigning a variable based on some known characteristic or error-free mathematical formula.
+
+__Stochastic__: this one is looser. Here we are usually talking about things like random number generation, subsampling, and a variety of other more advanced techniques. The objective usually is to incorporate some aspect of probability or uncertainty. This uncertainty can either be due to process error or observation error. 
+
+Process error is due to real 'noise' in a study system. It can, in itself, be a focus of very interesting  research. A common source of process error in biological studies is  individual variability (e.g. genotypic and/or phenotypic variability).
+
+Observation error can be thought of as 'false' noise in the study system that has been introduced due to our inability to perfectly observe some process of interest). This more commonly is thought of as a nuisance to be accounted for in many contemporary studies, but can also be an interesting field of inquiry in its own right. A common cause of observation error is imperfect detection of individuals or species in field surverys.
+
+<br>
+
+### Deterministic simulation
+
+<br>
+ 
+By nature, deterministic simulation is inherently more boring than stochastic simulation, because relationships are known. This usually is manifested in the form of data manipulation, categorical or ordinal variable assignments, or calculation of derived quantities.
+    
+<br>
+
+#### Data read    
+
+<br>
+ 
+Let's start by reading in a data file- this time we use REAL data. These are sex-specific length-at-age data for American shad (_Alosa sapidissima_) from the Connecticut River over the past 5 years. The data currently are being used in some models that I am building with collaborators from NOAA Fisheries, the US Geological Survey, and US Fish and Wildlife Service. The data were provided by CT Department of Energy and Environmental Protection and come from adult fish that are returning to the river from the ocean to spawn.
+
+<br>
+ 
+```{r}
+# Start by reading in the data from the class website
+  am_shad = read.csv(("http://employees.oneonta.edu/stichds/data/ctr_fish.csv"))
+
+# Always a good idea to look at the first few lines of data to make sure nothing looks 'fishy' haha, I couldn't help myself
+  head(am_shad, 10) # Look at the first 10 rows
+# The NAs are supposed to be there- they are missing data.
+  str(am_shad) # Look at the structure of the data
+```
+
+<br>
+ 
+#### Data explanation ("metadata"):
+
+<br>
+ 
+There are about 17k observations (rows) of 6 variables here
+
+Sex: fish gender. B stands for 'buck' (males), R stands for 'roes' (females)
+Age: an integer describing fish age\
+Length: fish length at age (cm)\
+yearCollected: the year in which the fish was caught\
+backCalculated: a logical indicating whether or not the length
+      of the fish was back-calculated from aging\
+Mass: the mass of indnividual fish (in grams). Note that this is NA
+      for all ages that were estimated from hard structures (so all
+      cases for which backCalculated is TRUE) 
+        
+<br>
+
+#### Example 1. Creation of new grouping variable based on some criterion
+
+<br>
+ 
+We could artificially classify fish into 'big' and 'small' groups if
+we wanted to for some reason. To do something like that, we have a couple of options
+
+1. Loop approach with conditional: despite some of the benefits, we try to avoid this approach in R for more purely vectorized solutions where possible, mostly because of performance issues. 
+
+Pros: pretty easy to understand the syntax and read
+Cons: extra code to write loops can be pretty slow in R
+
+<br>
+ 
+```{r}
+# We define some iterator 'i' to run this for each row from 1 to the
+# number of rows in our df.
+  for(i in 1:nrow(am_shad)){              
+# Then, we say that if length is greater than some threshold
+  if(am_shad$Length[i] > 30){
+# The length group is assigned the value 'big'. Note that the
+# variable 'length_group' is being created on the fly because it
+# is part of an existing object with a known length attribute.
+  am_shad$length_group[i] = 'big'
+# Otherwise  
+} else { 
+# For any other conditions, length group is assigned the value
+# 'small'
+  am_shad$length_group[i] = 'small'
+}
+
+} # Close the loop
+```
+
+<br>
+ 
+2. A faster method is to used vectorized logical tests. Note that this still creates the variable on the fly, and does the assignment much more quickly even though the code is somewhat redundant.
+
+<br>
+ 
+```{r}
+am_shad$length_group[am_shad$Length <= 30] = 'small'
+am_shad$length_group[am_shad$Length > 30] = 'big'
+```
+
+<br>
+
+#### Example 2. Derived quantity based on a mathematical formula. 
+
+<br>
+ 
+If we have a formula that relates two variables, we could predict one based on the other deterministically. For example, I have fit a growth curve explaning relationships between age and mass using this data set. Now, we will use this to predict mass at age for the fish with missing data. __WARNING__: This is for demonstration purposes only. Think about some of the potential issues with this given the nature of the data. Why would you not want to do this in a real-world scenario with data like these (take a closer look at the data)?
+
+<br>
+              
+```{r}             
+# Parameters from von Bertalanffy growth curve     
+  Sinf = 1995.9  # Theoretical max size
+  K = .2645      # Brody growth coefficient
+  t0 = 1.0864    # Age at mass of 0 grams
+  
+# Use the von Bertalanffy growth function to predict mass 
+  am_shad$Mass[is.na(am_shad$Mass)] = 
+    Sinf*(1-exp(-(K*(am_shad$Age[is.na(am_shad$Mass)] - t0))))
+ 
+# Now you can see why this may not always be advisable:
+  hist(am_shad$Mass, breaks=70)
+# The model grossly underpredicts the mass of fish for which we had no
+# mass data
+  # Why is this? Notice anything funny with mass data for fish with
+  # back-calculated == TRUE?
+# For the sake of demonstration, let's create a FUNCTION that will do
+# this calculation for us:
+  vonBert = function(x, Sinf, K, t0){
+    Sinf*(1-exp(-(K*(x - t0))))
+  }
+  
+  am_shad$Mass[is.na(am_shad$Mass)] = 
+    vonBert(am_shad$Age[is.na(am_shad$Mass)], Sinf, K, t0)
+  # The result is the same:
+  hist(am_shad$Mass, breaks=70)  
+```     
+      
+<br>
+
+### Stochastic simulation
+
+<br>
+ 
+As mentioned above, the point of stochastic simulation is usually to account for uncertainty in some process (i.e. we could just pick a single value if we knew it). This is almost always done probabilistically. There are a number of ways we could do this. One is by drawing from some probability distribution that we have described, and the other is by randomly sampling data that we have (need for tools like 'bootstrapping').
+       
+<br>
+
+#### Example 1. Random samples from a dataset
+
+<br>
+ 
+Let's say we want to take random samples from our huge data set so we can fit models to a subset of data and then use the rest of our data for model validation
+
+<br>
+   
+```{r}  
+# Randomly sample 100 rows of data from our data frame two different
+# times to see the differences
+  samp1 = am_shad[sample(nrow(am_shad), size=100, replace=FALSE), ]
+  samp2 = am_shad[sample(nrow(am_shad), size=100, replace=FALSE), ]
+
+# We can look at them with our histograms    
+  hist(samp1$Length)
+  hist(samp2$Length)
+```
+
+<br>
+
+We could also loop this to get a dynamic look. NOTE:  change the size of the sample ('n' below) and you can see the effect of sample size on the shape of the distribution we assume. 
+
+We'll modify our histogram now, as well.
+
+<br>
+ 
+```{r}
+  n = 10
+  for(i in 1:30){
+    samp = am_shad[sample(nrow(am_shad), size=n, replace=FALSE), ]
+    hist(samp$Length, xlim=c(10, 60), ylim=c(0, n), col='gray', main='')
+    Sys.sleep(.25)
+  }
+```          
+  
+<br>
+
+#### Example 2. Random samples from a distribution
+
+<br>
+ 
+Now, instead of sampling our data let's say we have some distribution from which we would like to use information
+
+Let's make a distribution  
+
+We will start with the normal, and we can move into others next week when we talk about probability distributions and sample statisticsFor this, we will use the distribution of American shad lengths for age-7 females because it approximates a normal distribution: __Notice__ that we are adding more and more complexity into our histogram!
+
+<br>
+ 
+```{r}
+# Start by looking at the size distribution for age-7 females
+  hist(am_shad$Length[am_shad$Sex=='R' & am_shad$Age==6], col='gray',
+       main='', xlab='Forklength (cm)')
+# Let's make that query into an object now  
+  age7_Roes = am_shad$Length[am_shad$Sex=='R' & am_shad$Age==6]
+# Let's get the mean and variance for this distribution and
+# save those values so we can use them in a minute
+  mu = mean(age7_Roes)
+  sigma = sd(age7_Roes)
+```  
+
+<br>
+
+> Quick aside:
+
+We will get into this next week, but for now it may be helpful to know that a normal distribution is described by two parameters:
+
+1. The mean ($\mu$)
+2. The standard deviation (SD, or more accurately the variance as $\sigma^2$).
+    R uses the SD so we'll stick with that notation for now, and
+    honestly, the normal density is based on both sigma and sigma
+    squared so it's dumb that we say that the variance is the
+    parameter of interest. We'll get into the reason for this next
+    week: in a nutshell, it's because a true, standardized normal
+    distribution has a variance of 1, so SD and Variance are one in 
+    the same. You'll note that these are the default values in R.
+
+> Back to our example
+
+```{r}
+# Now, we can use the mean and standard deviation to randomly sample
+# our normal distribution of lengths.
+  length_sample = rnorm(n=10000, mean=mu, sd=sigma)
+# Plot the sample to see if it is a normal- YAY it is!
+  hist(length_sample, col='gray', main='', xlab='Forklength (cm)')
+```
+
+<br>
+
+And, just as a check to make sure this is accurate, let's go ahead and plot our new distribution over the top of the histogram of our _original_ data _Note_: we will look at how to modify these plots below, just run the code for now.
+
+<br>
+ 
+```{r}
+  par(mar=c(5,5,5,5))
+  hist(am_shad$Length[am_shad$Sex=='R' & am_shad$Age==6], col='gray',
+       main='', xlab='Forklength (cm)', xlim=c(0,60))
+  par(new=TRUE)
+  plot(density(length_sample), xlim=c(0,60), yaxt='n', main='',
+       ylab='', xlab='')
+  axis(4, las=2)
+```
+
+<br>
+
+## Some simple graphs in R 
+Let's look at a few simple kinds of plots in R    
+
+### Histograms
+First, let's come back to our histogram. The function ```hist``` plots the actual histogram, and like other plotting utilities, can take a wide variety of arguments, all of which are optional with the exception of the data that we want to plot. This is the case for most plotting functions in the base graphics for R.
+
+<br>
+ 
+```{r}
+# Get data for age six females, and make a histogram
+  lengths = am_shad$Length[am_shad$Sex=='R' & am_shad$Age==6]      
+  hist(lengths)             # This is really ugly, and easy to fix
+```
+
+<br>
+
+What is everything doing here ?   
+
+<br>
+ 
+```{r}
+# Par is a function that controls graphical parameters in the active
+# graphics device. Here, we are using it to set the margin widths outside
+# the plotting area (with the argument 'mar'). Take a look at the graphical
+# parameters available in R by using ?par
+    par(mar=c(5,5,1,1))      
+  # Let's break down the histogram function
+    hist(
+      lengths,                # Data that we want to use for histogram
+      col='gray',             # Fill color (different for different plot type)
+      main='',                # Title for graph, I tend to leave blank
+      xlab='Forklength (cm)', # x-axis label, a character string
+      xlim=c(0,60),           # Limits of x-axis as min and max
+      yaxt='n',               # y-axis display- none in this case- see others
+      xaxt='n'               # Same
+    )
+  # We can make the axes look a lot better if we just place them by hand
+  # The 'axis' funcction let's us draw axes on sides 1(bottom), 2(left),
+  # 3(top), and 4(right)
+    axis(
+      side=2, # Left side
+      las=2,  # Rotate so numbers are horizontal
+      pos=0   # Position the axis at zero instead of negative buffer
+    )  
+  # And now for a nice x-axis
+    axis(
+      side=1,
+      pos=0,
+      at=seq(from=0, to=60, by=10),    # We can tell R where to put ticks
+      labels=seq(from=0, to=60, by=10) # And add labels (can be different!)
+    )
+  # MUCH better, right?  
+```
+
+<br>
+ 
+### Scatter plots
+
+<br>
+ 
+Now let's do a scatter plot
+
+<br>
+ 
+```{r}
+# Data screening  
+  shad = am_shad[am_shad$Length > 10, ]
+# Start with a simple scatterplot of age on length
+  plot(x=shad$Age, y=shad$Length)
+```
+
+<br>
+
+> UGLY!!
+
+So, let's make it nice
+
+<br>
+ 
+```{r}
+  # First, let's make a new column to hold age
+    shad$Age2 = shad$Age
+  # Now, we will add a small number to the age of roes to offset the points
+  # in our graph so things are clearer. Note that 'ggplot2' has built in
+  # functions for this, and you may prefer them; just remember that the more
+  # you rely on packages like that, the more you sacrifice the freedom
+  # inherent in using base functions in R for things like data visualization
+    shad$Age2[shad$Sex=='R'] = shad$Age2[shad$Sex=='R'] +.1
+  # Make the plot
+    par(mar=c(5,5,1,1))   # Notice that we are shrinking top and right marg.
+    plot(x=shad$Age2,     # Variable to be plotted on x-axis (independent)
+      y=shad$Length,      # Variable to be plotted on y-axis (dependent)
+      pch = c(21,21),     # Change the point type (google 'pch r' for lists)
+      col = 'black',      # Black outlines for our circles
+      bg = c('black', 'gray40')[shad$Sex], # Sex-specific fills
+      xlab = 'Age (years)',                # X-axis label
+      yaxt = 'n',         # Don't plot y-axis, we'll make one
+      ylab = '',          # No y-axis label, let's make it cool (ok, nerdy),
+      cex = 1.5,          # Make the points big- be proud of your data!
+      cex.axis = 1.15,    # Magnification for font on tick mark labels
+      cex.lab = 1.5       # Magnification for x-lab, slightly larger to show
+    )                     # Close call to plot
+    # Y-axis
+      axis(side = 2,      # Axis goes on the left side (#2)
+        las=2,            # Rotate by 90 degrees
+        cex.axis=1.15     # Magnification to match call to plot
+      )
+    # Y-axis label: look what's going on below!
+      # mtext lets us plot text in the margins of each axis
+      mtext(
+      # Side refers to the side of the plotting area, 1 to 4 from top to
+      # right counter clockwise
+        side=2,  
+      # 'expression' let's us include all kinds of special formatting like
+      # the subscript in the example below, but also superscripts, and
+      # special characters like interpuncts, Greek letters, etc. It can be
+      # a lot of fun for making super nerdy axes for your graphs and very
+      # powerful in terms of freedom in the range of options you have. Note
+      # that special characters usually require the UTF-8 code for a symbol.
+      # For example, if you wanted the interpunct, it would be entered in
+      # the paste statement as '\u00b7'.
+        expression(  
+          paste(              # Paste concatenates chr strings in order
+            'Fork length ( ', # First character string- note spaces matter!
+            "L"["f"],         # Second, square brackets mean 'subscript'
+            " , cm)",         # Third, spaces count!
+            # Tell R you want no characters to seperate your text strings
+            # listed above
+            sep='' 
+          )                   # Close call to paste
+        ),                    # Close call to expression
+        cex = 1.5,            # Magnification to match x-axis label above
+        line = 3              # Tell R what vertical line WRT to ordinate
+      ) # Close call to mtext
+    # And, just because R is AWESOME and we want to start unleashing the
+    # darkside of the force, let's add a sweet graphical legend!
+      # Sweet female digraph in dark gray with light gray shadow
+        text(x=6.04, y=19.97, "\u2640", cex=5, col='gray60')
+        text(x=6.01, y=19.99, "\u2640", cex=5, col='gray40')
+        text(x=6, y=20, "\u2640", cex=5, col='gray40')
+      # Sweet male digraph in black with dark gray shadow
+        text(x=6.76, y=19.97, "\u2642", cex=5, col='gray60')   
+        text(x=6.73, y=19.99, "\u2642", cex=5, col='black')
+        text(x=6.72, y=20, "\u2642", cex=5, col='black')       
+```
+
+<br>
+ 
+<br>

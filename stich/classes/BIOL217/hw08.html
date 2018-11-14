@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<div id="generalized-linear-models-logistic-regression" class="section level1">
+<h1>Generalized linear models: logistic regression</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week in lab, we will start to take a closer look at generalized linear models (GLM) through the lens of logisitic regression. This is an family that includes multiple types of analyses depending on the data. For example, we might have binary data (0, 1), binomial data (number of success per some number of trials), or multinomial data (group membership as a response). We will look at the simplest of these cases, binary logistic regression, this week.</p>
+<p><br></p>
+</div>
+<div id="the-data" class="section level2">
+<h2>The data</h2>
+<p><br></p>
+<p>For our exercise this week, we will work with a simulated data set about lung cancer patients made available through the <a href="https://stats.idre.ucla.edu/r/dae/mixed-effects-logistic-regression/">UCLA Institute for Digital Research and Education</a>. The response in this data set is <code>remission</code>, a 1/0 variable indicating whether or not a given patient went into remission following hospital treatment.</p>
+<p>Start by reading in the data.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/lungcancer.csv&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>This data set contains a <em>pile</em> of variables, which of course makes it very fun to work with. We will work with some, but not all, of these variable this week for lab, and then you will make some additional choices about which of them you will work with for your homework, using <code>remission</code> as our response of interest throughout. Explanations of variables are as follows:</p>
+<p><br></p>
+<pre><code>tumorsize: the size of the tumor
+co2: patient CO2 levels
+pain: pain scale experienced by the patient
+wound: a ranking variable used to indicate surgical wound
+mobility: another ranking variable to rate patient mobility
+ntumors: number of cancer tumors (integer)
+nmorphine: number of morphine applications (integer)
+remission: whether or not patients went into remission (1/0)
+lungcapacity: percent of full lung capacity by patient
+Age: patient age (continuous)
+Married: whether or not the patient is married (1/0)
+FamilyHx: whether or not there is a family history of cancer (1/0)
+SmokingHx: patient smoking history (former, never, current)
+Sex: male or female
+CancerStage: severity of cancer by standard ranks (I-IV)
+LengthofStay: how long patients were in the hospital
+WBC: average white bloodcell count by patient
+RBC: average red bloodcell count by patient
+BMI: body mass index
+IL6: interleukin 6 levels by patient
+CRP: C-reactive protein levels by patient
+DID: doctor ID
+Experience: doctor experience level (years)
+School: doctor school performance (categorical)
+Lawsuts: number of lawsuits by doctor
+HID: hospital ID
+Medicaid: percent medicaid coverage by hospital</code></pre>
+<p><br></p>
+<p>Holy moly, what fun!</p>
+<p><br></p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p><br></p>
+<div id="a-worked-example" class="section level3">
+<h3>A worked example</h3>
+<p><br></p>
+<p>Let’s start with a simple example to get you moving along. First, we will pretend that we are interested in determining the effects of <code>Age</code> and <code>Sex</code> on the probability of a patient going into <code>remission</code> following treatment. If you have been following closely during the past few weeks, you will recognize that with a categorical variable (<code>Sex</code>) and a continuous variable (<code>Age</code>) we are looking at something that should resemble an analysis of covariance. <strong>But</strong>, our response, <code>remission</code>, can only take on values of 0 and 1, so we know that we need to use a GLM to accommodate this.</p>
+<p><br></p>
+<div id="analysis" class="section level4">
+<h4>Analysis</h4>
+<p><br></p>
+<p>To fit this model we will use the <code>glm</code> function in R, being sure to specify <code>family = 'binomial'</code> in our call:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
+  c.mod =<span class="st"> </span><span class="kw">glm</span>(remission<span class="op">~</span>Sex<span class="op">+</span>Age, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>, <span class="dt">data=</span>cancer)</code></pre></div>
+<p><br></p>
+<p>Cool, that was easy!</p>
+<p><br></p>
+<div id="results" class="section level5">
+<h5>Results</h5>
+<p><br></p>
+<p>Let’s have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the <code>Anova()</code> function in the <code>car</code> package to use the correct sums of squares for these calculations because we have continuous and categorical variables.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the car library so we can get a meaningful ANOVA table for our model</span>
+  <span class="kw">library</span>(car)
+
+<span class="co"># Print the summary of the model</span>
+  <span class="kw">Anova</span>(c.mod, <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
+<pre><code>## Analysis of Deviance Table (Type II tests)
+## 
+## Response: remission
+##     LR Chisq Df Pr(&gt;Chisq)    
+## Sex    1.257  1     0.2621    
+## Age   75.377  1     &lt;2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+<p><br></p>
+<p><strong>Question 1</strong>. Based on the output of our call to <code>Anova()</code>, what can you determine about the statistical significance of the effects of <code>Sex</code> and <code>Age</code> on the probability of patients going into remission? <!-- We can see that at our default confidence level ($\alpha$ = 0.05), we fail to reject the null hypothesis that there is no difference between sexes, but we  reject the null hypothesis that there is no effect of `Age` on `remission`.  --></p>
+<p><br></p>
+<p>Just as with all of our other models, we can use the <code>summary()</code> function to get the output from R.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the summary of the model</span>
+  <span class="kw">summary</span>(c.mod)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = remission ~ Sex + Age, family = &quot;binomial&quot;, data = cancer)
+## 
+## Deviance Residuals: 
+##     Min       1Q   Median       3Q      Max  
+## -1.1654  -0.8581  -0.7878   1.4582   1.8985  
+## 
+## Coefficients:
+##              Estimate Std. Error z value Pr(&gt;|z|)    
+## (Intercept)  0.788166   0.196091   4.019 5.83e-05 ***
+## Sexmale      0.054484   0.048557   1.122    0.262    
+## Age         -0.033089   0.003838  -8.621  &lt; 2e-16 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for binomial family taken to be 1)
+## 
+##     Null deviance: 10353  on 8524  degrees of freedom
+## Residual deviance: 10276  on 8522  degrees of freedom
+## AIC: 10282
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p><br></p>
+<p>The <code>summary</code> of the model gives us the estimated coefficients <strong>on the logit scale</strong>, along with our usual significance codes and an <code>AIC</code> score (now in the default output because we are using maximum likelihood estimation).</p>
+<p>Even though these parameters are on the logit scale, we can still make limited inference about the directionality of relationships as we would with linear models used earlier in the semester.</p>
+<p><br></p>
+<p><strong>Question 2</strong>. What can you tell about the direction of the relationship between <code>Age</code> and <code>remission</code> from the output from <code>summary()</code> above? <!-- Here, we see that the coefficient for `Age` is negative (`{r c.mod$Coefficients[3,1]}`), meaning that we would predict probability of `remission` to be inversely related to `Age` (higher probability of younger people going into remission). --></p>
+<p><br></p>
+<p>One thing that you’ll notice is missing from this output is the R<sup>2</sup> value that we have become familiar with during the past several weeks while working with linear models. There is no R<sup>2</sup> value because we are no longer estimating these models using ordinary least squares, but rather maximum likelihood estimation. If we wanted to get an analagous metric of variance explained by our model, we could estimate a <em>pseudo-R<sup>2</sup></em>. There are many of these available depending on the model and nature of our data. The simplest to calculate is the <strong>McFadden R<sup>2</sup></strong>. To estimate this one, we compare the deviance of our model to the deviance of an intercept-only (i.e. “null”) model using the output from the <code>summary</code> function above:</p>
+<p><br></p>
+<p><span class="math display">\[McFadden R^2 = 1 - \frac{Deviance_{residual}}{Deviance_{null}}\]</span></p>
+<p><br></p>
+<p>Here, we can see that the model only explains about 1% of the variation in the response of interest:</p>
+<p><span class="math display">\[R^2 = 1 - \frac{1.0275956\times 10^{4}}{1.0352637\times 10^{4}} = 0.0074\]</span></p>
+<p><br></p>
+<p>Now that we have a feel for just how miserable this model is, our first inclination might be to throw it all away and start over (joking). But, for the sake of demonstration let’s see it through. The next step in reporting our results here is to extract some information about how <code>remission</code> changes with <code>Age</code> beyond simply stating that it was either “inversely” or “proportionally” related to <code>remission</code>. We will include <code>Sex</code> in our predictions for the sake of demonstration, realizing that this effect was not determined to be significant.</p>
+<p>Recall that we can make predictions from our model either by hand or by using the <code>predict</code> function in R. <strong>Note</strong> that if we use the <code>predict</code> function for <code>glm</code> objects in R, we no longer have the ability to set the <code>interval</code> argument as we did for objects resulting from the <code>lm()</code> function (well, we can- it will just be ignored). Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).</p>
+<p>Start by making some new data that we can use for predictions.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start with Age by making a sequence from the minimum</span>
+<span class="co"># observed age to the maximum observed age in equal</span>
+<span class="co"># increments of 1 year</span>
+  Age =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(cancer<span class="op">$</span>Age), <span class="dt">to=</span><span class="kw">max</span>(cancer<span class="op">$</span>Age), <span class="dt">by=</span><span class="dv">1</span>)
+
+<span class="co"># Now, make a column for each sex that is the same length</span>
+  females =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&#39;female&#39;</span>, <span class="kw">length</span>(Age))
+  males =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&#39;male&#39;</span>, <span class="kw">length</span>(Age))
+  
+<span class="co"># Combine the information for both sexes into a vector with the same</span>
+<span class="co"># name as is used in the original data</span>
+  Sex =<span class="st"> </span><span class="kw">c</span>(females, males)
+  
+<span class="co"># Now, duplicate the age column so it is repeated </span>
+<span class="co"># for both sexes</span>
+  Age =<span class="st"> </span><span class="kw">rep</span>(Age, <span class="kw">length</span>(<span class="kw">unique</span>(Sex)))
+  
+<span class="co"># Put it all together in a dataframe</span>
+  newD =<span class="st"> </span><span class="kw">data.frame</span>(Sex, Age)</code></pre></div>
+<p><br></p>
+<p>Now that we have new data for making predictions, let’s go ahead and do it!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate mean predicted value and SE for the predictions</span>
+<span class="co"># on the link scale</span>
+  preds =<span class="st"> </span><span class="kw">data.frame</span>(
+    <span class="kw">predict</span>(c.mod, newD, <span class="dt">type=</span><span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
+  )
+
+<span class="co"># Now get lower and upper CIs</span>
+  preds<span class="op">$</span>lwr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.025</span>)
+  preds<span class="op">$</span>upr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</code></pre></div>
+<p><br></p>
+<p>Now, we need to define a function to invert the logit</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inv.logit =<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">exp</span>(x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(x))
+}</code></pre></div>
+<p><br></p>
+<p>We can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our <code>preds</code> dataframe using the <code>apply</code> function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert the predictions to the probability scale</span>
+  preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] =<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X=</span>preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)],
+                             <span class="dt">MARGIN=</span><span class="dv">2</span>,
+                             <span class="dt">FUN=</span>inv.logit
+                             )</code></pre></div>
+<p><br></p>
+<p>Finally, let’s plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the predictions</span>
+<span class="co"># Set graphical parameters</span>
+  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+<span class="co"># Females</span>
+  <span class="co"># Plot the mean predicted probability of remission</span>
+  <span class="co"># given age across the range of observed ages</span>
+    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
+         <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
+         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;red&#39;</span>),
+         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,
+         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,
+         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+         <span class="dt">ylab =</span> <span class="st">&#39;p( Remission | Age )&#39;</span>,
+         <span class="dt">xlab =</span> <span class="st">&#39;Age (years)&#39;</span>
+         )
+  <span class="co"># Lower 95% CI</span>
+    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>], 
+          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
+          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="co"># Upper 95% CI</span>
+    <span class="kw">lines</span>(preds<span class="op">$</span>upr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>], 
+          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
+          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+    
+<span class="co"># Males  </span>
+  <span class="co"># Plot the mean predicted probability of remission</span>
+  <span class="co"># given age across the range of observed ages</span>
+    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
+         <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
+         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>),
+         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,
+         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,
+         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+         <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,
+         <span class="dt">xlab =</span> <span class="st">&#39;Age (years)&#39;</span>
+         )
+  <span class="co"># Lower 95% CI</span>
+    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>], 
+          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
+          <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
+  <span class="co"># Upper 95% CI</span>
+    <span class="kw">lines</span>(preds<span class="op">$</span>upr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>], 
+          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
+          <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)    </code></pre></div>
+<p><img src="hw08_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p><br></p>
+<p>Using either the graph or the estimates in the <code>fit</code> column of <code>preds</code>, we can estimate about how much <code>remission</code> changes across the range of <code>Age</code> observed. We don’t need to report this by <code>Sex</code> because we know that was not significant in our model, and the change is about the same. So, here we can say that probability of entering remission decreased from about 49% to about 16% over the range of ages observed during this study.</p>
+<p><br></p>
+</div>
+</div>
+</div>
+</div>
+<div id="your-turn" class="section level2">
+<h2>Your turn</h2>
+<p><br></p>
+<p>Next, I want you to strike out on your own and make a couple of models. To start, please <strong>choose one categorical explanatory variable</strong> other than <code>Sex</code> <strong>and one continuous explanatory variable</strong> (this can be the same as the one included in the previous model or different). Do not use <code>DID</code>, <code>Experience</code>, <code>School</code>, or <code>HID</code> for this analysis.</p>
+<p><br></p>
+<p>Fit a model using your two variables, and save it to a named object.</p>
+<p>Create a third model that represents the null model. If you have forgotten since last week how to specify this, remember that we can use the following notation to specify the null model:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">null =<span class="st"> </span><span class="kw">glm</span>(remission<span class="op">~</span><span class="dv">1</span>, <span class="dt">family=</span>binomial, <span class="dt">data=</span>cancer)</code></pre></div>
+<p><br></p>
+<p>Compare the null model to your previous model using AIC for model comparison.</p>
+<p><br></p>
+<p><strong>Question 3</strong>. Do the differences in AIC scores indicate a substantial difference in the fit of the two models (i.e. is one much better than the other?). What can you conclude about your new model based on this?</p>
+<p><br></p>
+<p><strong>Question 4</strong>. Use the <code>Anova</code> function from the <code>car</code> package to report on the statistical significance of the relationship between your chosen explanatory variables and <code>remission</code>.</p>
+<p><br></p>
+<p>Make predictions from your model using the same procedure that we used above to determined how much <code>remission</code> varied between <code>Sex</code> and by <code>Age</code> (but do it for <em>your</em> variables). Be sure to estimate separately for each group of your categorical explanatory variable if this was significant in your model.</p>
+<p><br></p>
+<p><strong>Question 5</strong>. About how much does <code>remission</code> change across the range of observed values for your continuous covariate based on your model predictions?</p>
+<!-- stepped = glm(formula = remission ~ tumorsize + wound + mobility + ntumors + nmorphine + Age + FamilyHx + CancerStage + BMI + IL6 + CRP + DID + Experience + School + HID, family = binomial, data = cancer) -->
+<p><br></p>
+</div>
+<div id="bonus-2-pts" class="section level2">
+<h2>Bonus: 2 pts</h2>
+<p><br></p>
+<p>Plot your model predictions for your continuous covariate like we did above, being sure to include estimates for each group of your explanatory variable if it was significant in your new model.</p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

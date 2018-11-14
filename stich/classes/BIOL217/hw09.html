@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="glm-count-models" class="section level1">
+<h1>GLM: count models</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week we continued to work with the generalized linear model (GLM) and discussed why we might want to use it and how to interpret the results of these tools. The purpose of this lab is to get you comfortable with regression for count data, and help you get comfortable with some of the diagnostics we will use with these tools, while continuing to work with interpreting results with respect to the link functions we are working with. Next week, we will talk about how we can deal with things like repeated measures on the same categories and nested designs.</p>
+<p>By the end of this lab, you should 1) be comfortable specifying general linear models for count data in R, 2) be able to apply this tool to analyze count data from start to finish, and 3) be able to diagnose and interpret the results of these models.</p>
+<p><br></p>
+</div>
+<div id="exercises" class="section level2">
+<h2>Exercises</h2>
+<p><br></p>
+<p>Let’s start by reading the file and taking a look at the structure of the data set that we’ll be working with this week.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data</span>
+  uw =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/weights.csv&#39;</span>)
+
+<span class="co"># Look at the data</span>
+  <span class="kw">head</span>(uw)</code></pre></div>
+<pre><code>##   year region  country    sex number
+## 1 1986 Africa  Senegal Female   15.3
+## 2 1987 Africa     Mali Female   27.0
+## 3 1987 Africa  Burundi Female   27.8
+## 4 1988 Africa     Togo Female   19.7
+## 5 1988 Africa Zimbabwe Female    7.2
+## 6 1988 Africa   Uganda Female   19.1</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(uw)</code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    1099 obs. of  5 variables:
+##  $ year   : int  1986 1987 1987 1988 1988 1988 1988 1990 1990 1991 ...
+##  $ region : Factor w/ 6 levels &quot;Africa&quot;,&quot;Americas&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ country: Factor w/ 137 levels &quot;Afghanistan&quot;,..: 105 78 21 122 137 127 50 91 79 129 ...
+##  $ sex    : Factor w/ 2 levels &quot;Female&quot;,&quot;Male&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ number : num  15.3 27 27.8 19.7 7.2 19.1 23.4 33.3 42.1 23.3 ...</code></pre>
+<p><br></p>
+<p>These are data that I downloaded from the World Health Organization’s website free of charge. The data set contains 1099 observations of 5 variables. The variables are <code>year</code>, <code>region</code>, <code>country</code>, <code>sex</code>, and <code>number</code> of individuals per 100 that were underweight. These data are estimates, so they are presented as numeric values. We know that they actually represent counts per some unit (i.e. a <em>rate</em>) so we want to convert them to integer class before we start working with them.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we need to make the counts into an integer because these are</span>
+<span class="co"># counts and counts are</span>
+  uw<span class="op">$</span>number =<span class="st"> </span><span class="kw">as.integer</span>(uw<span class="op">$</span>number)</code></pre></div>
+<p><br></p>
+<div id="poisson-regression" class="section level3">
+<h3>Poisson regression</h3>
+<p><br></p>
+<p>Start by looking at a single region, we will use <code>Africa</code> in this case.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new dataframe that contains only those records for which</span>
+<span class="co"># the region is `Africa`</span>
+  africa =<span class="st"> </span>uw[uw<span class="op">$</span>region<span class="op">==</span><span class="st">&#39;Africa&#39;</span>,]</code></pre></div>
+<p><br></p>
+<p>Let’s do some data exploration to look at the our sampling distribution of <code>number</code>. Here, a quick histogram of your data should show you what you are looking for.</p>
+<p><br></p>
+<p><br></p>
+<p>Do these data appear to conform to a Poisson distribution? Why or why not?</p>
+<p>Now, let’s fit a model using <code>number</code> as the response and take a quick look at some regression diagnostics for the model. We will include the variable <code>sex</code> to see if there are differences between males and females. We will also include the variable <code>year</code> as a numeric variable to determine whether or not there is a linear increase or decrease in the <code>number</code> throughout the time series.</p>
+<p><br></p>
+<p><br></p>
+<p>Before you look at the summary of the model, be sure to have a look at the regression diagnostics for the count model.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To begin with, look at the regression diagnostics</span>
+  <span class="kw">library</span>(boot)
+  <span class="kw">glm.diag.plots</span>(model)</code></pre></div>
+<p><img src="hw09_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><br></p>
+<p>Have a look. Does it appear that you have violated the assumptions underlying the model that you have fit? Think about why or why not.</p>
+<p>Now that you have looked at the regression diagnostics, take a look at the model summary</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the summary of the model</span>
+  <span class="kw">summary</span>(model)</code></pre></div>
+<pre><code>## 
+## Call:
+## glm(formula = number ~ year + sex, family = negative.binomial(theta = 1), 
+##     data = africa)
+## 
+## Deviance Residuals: 
+##      Min        1Q    Median        3Q       Max  
+## -1.41262  -0.26729  -0.08145   0.25462   0.93405  
+## 
+## Coefficients:
+##              Estimate Std. Error t value Pr(&gt;|t|)    
+## (Intercept) 36.269089   6.045822   5.999 4.68e-09 ***
+## year        -0.016632   0.003018  -5.511 6.65e-08 ***
+## sexMale      0.142461   0.041978   3.394 0.000763 ***
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+## 
+## (Dispersion parameter for Negative Binomial(1) family taken to be 0.1587279)
+## 
+##     Null deviance: 72.861  on 377  degrees of freedom
+## Residual deviance: 66.292  on 375  degrees of freedom
+## AIC: 3065.2
+## 
+## Number of Fisher Scoring iterations: 4</code></pre>
+<p><br></p>
+<p>You’ll note that we have included both categorical and numerical explanatory variables in this model. This makes the interpretation of the model slightly more complicated than some of the simpler models we have looked at so far.</p>
+<p>If you try to predict the mean expected value for females (<code>Intercept</code> term) from these coefficients as we have done with previous excercises, we get <strong>huge</strong> values that don’t make much logical sense. The reason for this is the combination of categorical and numerical explanatory variables. <strong>Remember:</strong> the interpretation of regression coefficients (or <span class="math inline">\(Beta_j\)</span>) is the effect of <span class="math inline">\(X_i\)</span> on <span class="math inline">\(Y_i\)</span> given that all other <span class="math inline">\(X\)</span> are held constant. If we simply do:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Demonstrate use of the inverse link function</span>
+  <span class="kw">exp</span>(<span class="dv">36</span>)</code></pre></div>
+<pre><code>## [1] 4.311232e+15</code></pre>
+<p><br></p>
+<p>…then we are implicitly telling R that the variable <code>year</code> is being held constant at zero. Because the scale of year is <em>large</em> (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of <code>number</code> for<code>female</code> without specifying a reasonable value for <code>year</code>. So, if we want to get a reasonable prediction for the mean expected value of <code>number</code> for females, we need a reasonable value of <code>year</code>. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal):</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predict mean values of female</span>
+  female =<span class="st"> </span><span class="fl">36.269089</span> <span class="op">-</span><span class="fl">0.016106</span><span class="op">*</span><span class="kw">mean</span>(africa<span class="op">$</span>year)
+  female</code></pre></div>
+<pre><code>## [1] 4.004595</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now, we need to use the inverse of the link function to get our prediction.</span>
+<span class="co"># Since the link function was &#39;log&#39;, we use:</span>
+  <span class="kw">exp</span>(female)</code></pre></div>
+<pre><code>## [1] 54.84963</code></pre>
+<p><br></p>
+<p>We see that the mean number of females per 100 in the African region that were underweight during the time period from 1986 through 2015 was about 19. What if we wanted to do this for males? Your turn:</p>
+<p><br></p>
+<p><strong>Question 1</strong>. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this.</p>
+<p><br></p>
+<p>Realize that we could also make these predictions across <code>year</code> for each <code>sex</code>, or for both sexes if we used a value of 0.5 for <code>sexMale</code>. Let’s do it for both here.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a sequence of years for prediction</span>
+  years =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1986</span>, <span class="dv">2015</span>, <span class="dv">1</span>)
+  
+<span class="co"># Make the predictions</span>
+  bothSexes_preds =<span class="st"> </span><span class="kw">exp</span>( <span class="fl">35.216836</span> <span class="op">-</span><span class="fl">0.016106</span><span class="op">*</span>years <span class="op">+</span><span class="st"> </span><span class="fl">0.141910</span><span class="op">*</span>.<span class="dv">5</span> )
+  
+<span class="co"># Plot the results</span>
+  <span class="kw">plot</span>(africa<span class="op">$</span>year, africa<span class="op">$</span>number, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[africa<span class="op">$</span>sex],
+       <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Year&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Number underweight per 100&#39;</span>)
+  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
+  
+<span class="co"># Add the predictions</span>
+  <span class="kw">lines</span>(years, bothSexes_preds, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre></div>
+<p><img src="hw09_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>Now, do this for males and females separately by replacing <code>0.5</code> with a <code>1</code> or a <code>0</code>. Plot the raw data only once, as shown above, and add a predictive line for each sex. This plotting exercise is not optional.</p>
+<p><br></p>
+<p><strong>Question 2</strong>. Using either your predicted values or the plots you have made, what is the mean difference between males and females during the time period under study? The difference is statistically significant…do you think it is biologically meaningful? Defend your answer.</p>
+<p><br></p>
+</div>
+<div id="negative-binomial-regression" class="section level3">
+<h3>Negative binomial regression</h3>
+<p><br></p>
+<p>Now, we will take a step back and start working with the entire data set. Let’s take another quick look at it just to refresh our memories.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at the first 10 rows of data</span>
+  <span class="kw">head</span>(uw, <span class="dv">10</span>)</code></pre></div>
+<pre><code>##    year region                     country    sex number
+## 1  1986 Africa                     Senegal Female     15
+## 2  1987 Africa                        Mali Female     27
+## 3  1987 Africa                     Burundi Female     27
+## 4  1988 Africa                        Togo Female     19
+## 5  1988 Africa                    Zimbabwe Female      7
+## 6  1988 Africa                      Uganda Female     19
+## 7  1988 Africa                       Ghana Female     23
+## 8  1990 Africa                     Nigeria Female     33
+## 9  1990 Africa                  Mauritania Female     42
+## 10 1991 Africa United Republic of Tanzania Female     23</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s find out how many unique regions we have in the data set</span>
+  <span class="kw">unique</span>(uw<span class="op">$</span>region)</code></pre></div>
+<pre><code>## [1] Africa                Americas              Eastern Mediterranean
+## [4] Europe                South-East Asia       Western Pacific      
+## 6 Levels: Africa Americas Eastern Mediterranean ... Western Pacific</code></pre>
+<p><br></p>
+<p>Okay, so now instead of looking at just one <code>region</code> from the data set, we will look at all six to see if there are differences between regions. Leave us have another exploratory look at the data:</p>
+<p><br></p>
+<p><img src="hw09_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p><br></p>
+<p>It’s pretty obvious here that no matter which way we slice it, these are decidedly <em>not</em> coming from a Poisson distribution. So, what do we do? This is GLM! We just need to use a different error distribution. From our histogram, it should be clear that we are now working with a negative binomial error structure.</p>
+<p>Start by fitting a negative binomial regression model to the data. We will use the <code>glm.nb</code> function in the <code>MASS</code> package.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the Mass package</span>
+  <span class="kw">library</span>(MASS)
+  
+<span class="co"># Now fit a model</span>
+  nb.mod =<span class="st"> </span><span class="kw">glm.nb</span>(<span class="dt">formula=</span>number<span class="op">~</span>region, <span class="dt">data=</span>uw)</code></pre></div>
+<p><br></p>
+<p>Use the <code>glm.diag.plots()</code> function to look at the residual diagnostics for this model, understanding that things may look a <em>little</em> funky given that we are in the land of GLM.</p>
+<p><br></p>
+<p><strong>Question 3</strong>. Based on the residual diagnostics, does it look like this model provides a reasonable fit to our data? Are we in obvious violations of any of our assumptions?</p>
+<p><br></p>
+<p>Now that we have done some model validation, let’s have a look at the actual results of our model using the <code>summary</code> function. We can also look at the overall effect of <code>region</code> on <code>number</code> using the <code>Anova</code> function in the <code>car</code> package.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the library</span>
+  <span class="kw">library</span>(car)
+  
+<span class="co"># Using the car package</span>
+  <span class="kw">Anova</span>(model, <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
+<p><br></p>
+<p>We can see from the output, that there was there a significant effect of <code>region</code> on the number of individuals per 100 that were underweight.</p>
+<p>Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study <em>using the coefficients from the model</em>. The <code>predict</code> function that we have been working with the last few weeks does not have a method for dealing with <code>glm.nb</code> models yet, so we will need to do this by hand:</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the summary of the model coefficients</span>
+  res =<span class="st"> </span><span class="kw">summary</span>(nb.mod)<span class="op">$</span>coefficients
+  res</code></pre></div>
+<pre><code>##                               Estimate Std. Error    z value      Pr(&gt;|z|)
+## (Intercept)                  3.0314620 0.03232841  93.770839  0.000000e+00
+## regionAmericas              -1.2397025 0.05831411 -21.259049 2.718702e-100
+## regionEastern Mediterranean -0.4789620 0.06336443  -7.558847  4.066585e-14
+## regionEurope                -1.5658119 0.07876244 -19.880185  6.041058e-88
+## regionSouth-East Asia        0.4721631 0.06113325   7.723507  1.131716e-14
+## regionWestern Pacific       -0.2141699 0.06935241  -3.088139  2.014141e-03</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now, make the predictions</span>
+  preds =<span class="st"> </span><span class="kw">c</span>()
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(res)){
+    <span class="cf">if</span>(i<span class="op">==</span><span class="dv">1</span>){
+      preds[i] =<span class="st"> </span><span class="kw">exp</span>(res[<span class="dv">1</span>, <span class="dv">1</span>])
+    } <span class="cf">else</span> {
+      preds[i] =<span class="st"> </span><span class="kw">exp</span>(res[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[i, <span class="dv">1</span>])
+    }
+  }
+
+<span class="co"># Give the vector names to facilitate comparison  </span>
+  <span class="kw">names</span>(preds) =<span class="st"> </span><span class="kw">row.names</span>(res)
+  <span class="kw">names</span>(preds) =<span class="st"> </span><span class="kw">gsub</span>(<span class="kw">names</span>(preds), <span class="dt">pattern =</span> <span class="st">&#39;region&#39;</span>, <span class="dt">replacement =</span> <span class="st">&#39;&#39;</span>)  
+  <span class="kw">names</span>(preds)[<span class="dv">1</span>] =<span class="st"> &#39;Africa&#39;</span>
+  
+<span class="co"># Print the results</span>
+  preds</code></pre></div>
+<pre><code>##                Africa              Americas Eastern Mediterranean 
+##             20.727513              6.000000             12.839161 
+##                Europe       South-East Asia       Western Pacific 
+##              4.330357             33.235714             16.731481</code></pre>
+<p><br></p>
+<p><strong>Question 4</strong>. Which region reported the greatest number of individuals that were underweight? Which region reported the fewest number of individuals that were underweight?</p>
+<p><br></p>
+<p>Now that you have your model results, make a boxplot of <code>number</code> by <code>region</code> to determine whether or not your model results make sense. If they do not, do it again.</p>
+<p><br></p>
+<p>Finally, we can use these data to determine how the number of underweight individuals changed during the time series by region to determine if there were differences in how these numbers changed over time.</p>
+<p><br></p>
+<p>Make two models for this section. For the first model, consider only the additive effects of <code>region</code> and <code>year</code> on <code>number</code>. In the second model, include the interaction effect between <code>region</code> and <code>year</code> on <code>number</code>.</p>
+<p><br></p>
+<p><br></p>
+<p>Use the <code>AIC</code> function in base R to get the AIC score for each of the two models you have created. Note that we could make a model selection table for these two models, but we would have to build our own function for this, telling R how to do it by hand because the function has not yet been defined for this model class…I will show you how to do this <em>next week</em>. For now, let’s keep it a little simple(<code>R</code>).</p>
+<p><br></p>
+<p><strong>Question 5</strong>. According to the AIC scores that you have extracted, is there unequivocal evidence to indicate that one of these models is better than the other?</p>
+<p><br></p>
+</div>
+<div id="bonus-1pt" class="section level3">
+<h3>Bonus: 1pt</h3>
+<p><br></p>
+<p>Digging deeper, we probably want to know whether all regions change in pretty much the same way, or if they differ.</p>
+<p>Given that we know all regions showed a tendency to decrease in the number of individuals that were underweight during the course of this study, which region decreased the most? (You will need to look at the model coefficients using <code>summary()</code> to see which is most negative in the interaction model).</p>
+<p>Another way of asking this is: in which <code>region</code> did people tend to gain the most weight? Is this surprising to you given what you know about trends in social behaviors and obesity during the past half century in this <code>region</code>?</p>
+<p><br></p>
+<p><br></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

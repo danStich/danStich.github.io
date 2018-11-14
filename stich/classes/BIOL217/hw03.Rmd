@@ -1,0 +1,205 @@
+```{r setup, include=FALSE, child="_styles.Rmd"}
+```
+
+<br>
+
+# Lab 3: Probability distributions  
+
+<br>
+
+## Introduction  
+
+<br>
+ 
+The objective of this assignment is to apply what you have been learning in R in order to start learning about more about sampling distributions and how they apply to designing your thesis research. We have discussed a number of probability distributions in the exponential family of distributions, and now it is time to put that talk into action.
+
+By the end of this lab, you should be able to 1) simulate data from a wide variety of probability distributions in the exponential family, 2) calculate summary statistics for any sampling distribution that you come across, and 3) estimate the parameters of some probability distributions using the method of moments and/or maximum likelihood estimation.
+
+<br>
+
+## Exercises
+
+<br>
+ 
+### The normal distribution
+
+<br>
+ 
+Let's start with the normal distribution to knock the rust off and get ourselves thinking about probability distributions again. Recall that we can simulate data from the normal using something like this: 
+
+<br>
+ 
+```{r}
+ndata = rnorm(n=30, mean=0, sd=1)
+```
+
+<br>
+
+In this example, we have drawn __30__ random samples from a normal distribution with a __mean of 0__ and a __standard deviation__ of 1. Also recall that we can plot these data as samples from a _continuous distribution_ using a curved line in R to see if it looks like it should:
+
+<br>
+ 
+```{r, fig.align='center', fig.width=6, fig.height=4}
+par(mar=c(5,5,1,1))
+plot(density(ndata), main='', xlab=expression(theta), col='red', lwd='2')
+```
+
+<br>
+
+Now, what if I gave you the following plot and asked you if you could find parameters of the normal distribution from which these samples were drawn? 
+
+<br>
+ 
+```{r, echo=FALSE, fig.align='center', fig.width=6, fig.height=4}
+hist(rnorm(1e5, mean=34, sd=14), main='Mystery distribution',
+     xlab=expression(theta), col='gray')
+```
+
+<br>
+
+__Question 1.__ What are the approximate mean and standard deviation of the distribution that has been sampled here? Play with the `rnorm` function in R and change the values of the mean and standard deviation until you are able to approximately replicate the graph above. Use the `hist` function to plot the data each time you simulate them to check if the pattern is close. __NOTE__: You will be able to zero in on this faster if you use large sample sizes for n, __but__ if n is too large it will take a long time to simulate each data set. 
+
+What a pain, but it's good to see how these parameters change the shape and location of the sampling distribution so we can understand what they do.
+
+Now let's take a look at another way to do this. This time, instead of handing you a histogram, a researcher has provided you with the following data set for a project on which you are working. In this case it is for diastolic blood pressure measurements from 10,000 physically fit people (totally made up).
+
+<br>
+ 
+```{r, fig.width=6, fig.height=4}
+# I'll simulate the data for you in another file and you can read in the data
+# from an Rdata file like this (just make sure it is in the correct directory:
+  dbp = read.csv('http://employees.oneonta.edu/stichds/data/dbp.txt') 
+  str(dbp)
+```
+
+<br>
+
+__Question 2.__ Calculate the mean and _variance_ of this distribution using the method of moments. Note that you can write your own function (as in the reference script), or you can use the built-in R functions that we talked about in class this week (see reference script). What are the mean and sd using this method?  
+
+<br>
+
+__Quesiton 3.__ Now calculate the _mean_ and the _variance_ of this sampling
+distribution using maximum likelihood estimation. Recall that you can estimate the parameters using `optim()` and by writing out the likelihood inside of a function, or you can use in the built-in `fitdistr` function in R. If you do the latter, remember to pay attention to the answers that R gives you.  
+
+<br>
+
+__Question 4.__ Calculate the 95% confidence limits for this distribution using the `quantiles` function. Remember to think carefully about what probabilities you need to use for the 95% CI.  
+
+<br>
+
+### The beta distribution
+We talked about this distribution in class this week, and about how useful it can be due to its flexibility. However, given that the Beta is controlled by two shape parameters, it can be tough to wrap your head around. Let's play.  
+
+Simulate __10,000__ random draws with parameters $\alpha$ __('shape1' in R) = 30__ and $\beta$ __('shape2' in R) = 12__ and plot a histogram of the draws:
+
+<br>
+ 
+```{r, fig.align='center', fig.width=6, fig.height=4}
+beta.sample = rbeta(n=1e4, shape1=30, shape2=12)
+hist(beta.sample, main='', col='gray')
+```
+
+<br>
+
+__Question 5.__ Now, play with `shape1` and `shape2` parameters in the code above to answer the following questions.  
+
+<br>
+a. What happens when you make the numbers approximately equal?  
+b. What happens to the histogram when `shape1` is much larger than `shape2`?  
+c. What happents to the histogram when `shape2` is much larger?  
+d. Set both parameters to 500. What happens to the variance of the distribution?  
+e. Now set both parameters to 2. How does this compare to the previous?  
+f. Set both parameters to 1. Now what does the histogram look like?  
+g. What happens to the histogram if you set both parameters to 0.65?  
+
+<br>
+
+### The Bernoulli distribution 
+
+<br>
+ 
+Take a random draw from a Bernoulli distribution. Remember, this distribution is the one that is like flipping a coin one time and the only parameter that controls the distribution is the probability of success:  
+
+<br>
+ 
+```{r, eval = FALSE}
+library(Rlab)                      # Load the package
+bern.sample = rbern(n=1, prob=.5)  # Take a random sample from the Bernoulli
+```
+
+<br>
+
+__Question 6.__ If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a '1')? Use the built in R functions to figure this out, don't try to count all 2,500 elements in the vector.  
+
+<br>
+
+__Question 7.__ How does this compare to what you expected?  
+
+<br>
+
+### The binomial distribution  
+
+<br>
+ 
+Remember the binomial distribution is like the Bernoulli, but instead of flipping one coin at a time, we are flipping _N_ number of coins (`size`) per trial:  
+
+<br>
+ 
+```{r}
+rbinom(n=10, size=10, prob=0.5)
+```
+
+<br>
+
+__Question 8.__ Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (`size`) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (`n`) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise).  
+
+<br>
+
+### The Poisson distribution  
+
+<br>
+ 
+Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example): 
+
+<br>
+ 
+```{r}
+rpois(n = 10, lambda = 10)
+```
+
+<br>
+
+The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.  
+
+Suppose that we are interested in describing the distribution of the genus _Photinus_ in Upstate New York. We collected as many speciments as we could in jars (at this point if you're really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of _Photinus_ we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.  
+
+<br>
+
+__Question 9.__
+Using the data in the file `counts.txt`, estimate the mean and variance for the number of Photinae per night using any method appropriate for these data (see above or below for data read: **I want you to adapt this code**). 
+
+Suppose that the data in question 9 looked more like those contained in this file:  
+
+<br>
+ 
+```{r}
+counts2 = read.csv('http://employees.oneonta.edu/stichds/data/counts2.txt')
+```
+
+<br>
+ 
+__Question 10.__  
+a. Is the mean of the data in `counts2` similar to that in `counts`?  
+
+b. What about the median?  
+
+c. Do they look the same when you plot them?  
+
+d. If not, what type of distribution is represented by these data?
+
+e. Calculate the parameters of it using maximum likelihood estimation.
+
+<br>
+ 
+<br>
+ 

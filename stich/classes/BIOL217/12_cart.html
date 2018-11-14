@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../courseWebsites.html">Course websites</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<style>
+pre code, pre, code {
+  white-space: pre !important;
+  overflow-x: scroll !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
+}
+
+.column {
+    float: left;
+    padding: 15px;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.content {
+    width: 75%;
+}
+
+</style>
+<p><br></p>
+<div id="classification-and-regression-trees-cart" class="section level1">
+<h1>Classification and regression trees (CART)</h1>
+<p><br></p>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
+<p><br></p>
+<p>This week we will continue our explorations of machine learning techniques for understanding biological and ecological data sets. We are moving on to a set of techniques known broadly as decision trees. Within this class of models, we will focus our discussion on a group of predictive tools known as “classification and regression trees” or <strong>CART</strong>. CART relies on ‘recursive partitioning’ to identify patterns in the variance of response variables with respect to explanatory variables of interest. If the response is categorical, then we use <strong>classification trees</strong>. If it is numeric, then we call them <strong>regression trees</strong>. Relatively recent work has led to the development of tools that also handle multiple responses: multivariate decision trees. We will spend most of our time talking about the univariate applications.</p>
+<p><br></p>
+<p>In a way, CART can be thought of as a tool that is complementary to some of the tools that we have already talked about this semester. We can look at differences between groups and distributions like many tools we discussed, but now we are flipping the process on its head. Instead of looking for differences in a response between a priori groups that we have defined as experimental treatments or presumably different biological populations, we will be using computer algorithms to search for unknown statistical populations within the structure of our response of interest with respect to our explanatory variables. Sometimes these are populations that we assume exist ahead of time, but very often they are populations that would be hidden from detection through the use of other quantitative tools.</p>
+<p><br></p>
+<div id="the-basics-of-cart-go-something-like-this" class="section level4">
+<h4>The <strong>basics of CART</strong> go something like this:</h4>
+<p>We partition the response into the two most homogenous groups possible based on our explanatory variables (predictors). If categorical, this means splitting into two categories. In the case of a binomial predictor, we end up with two groups- each containg only a single category. In the case of a multinomial predictor with k categories, we still end up with two groups, but each side of the partition might contain anywhere from 1 to K-1 groups. If the predictor is numeric, then we use a rank-order to determine at which rank the distributions of two groups are most homogeneous. (This is the same concept that we used when we looked at non-parametric alternatives to t-tests and ANOVA back in the first couple weeks of the semester.) This initial split is found by maximizing homogeneity between groups in the partition based on all all possible splits for each of the explanatory variables.</p>
+<p><br></p>
+<p>Once we have made the first split, we will continue to repeat the process over and over again until the tree becomes sufficiently large that we have over-fit the model. This process is called ‘growing’ the tree. We can then use some form of k-fold cross validation to ‘prune’ the tree back based on the predictive performance of the model.</p>
+<p><br></p>
+<p>For those looking for a little more (but not too much) depth and a big- picture overview of some of the math, you can find a nice worked example with some easy-to-understand diagrams <a href="http://stats.stackexchange.com/questions/44382/mathematics-behind-classification-and-regression-trees">in this thread from Stack Overflow</a>.</p>
+<p><br></p>
+</div>
+</div>
+<div id="classification-trees" class="section level2">
+<h2>Classification trees</h2>
+<p><br></p>
+<p>We will work for the <code>iris</code> data for this example. The response in the <code>iris</code> data is a categorical variable with no particular order, <code>Species</code>. Because of this, the class of decision trees that we will be working with for the data is classification trees. In this case, our categorical variable has three levels (<code>setosa</code>, <code>versicolor</code>, and <code>virginica</code>), so we know that the initial split will include one branch that contains only one species and one branch that includes two species. The rest of our tree will be grown based on this initial structure, regardless of the variable that is used for the initial split.</p>
+<p><br></p>
+<p>First, let’s load the library and the data set that we will need to use for this example. We’ll start with the <code>rpart</code> package, but there are actually a few different packages that will do CART for us. Last, we set a seed for the random number generators in R so we all get the same results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">library</span>(rpart)
+
+<span class="co"># Load the iris data that we&#39;ve been working with</span>
+  <span class="kw">data</span>(iris)
+
+<span class="co"># Set the random number seed so that the results</span>
+<span class="co"># are the same each time we run the example (if we</span>
+<span class="co"># didn&#39;t set this the results might differ a bit each time</span>
+<span class="co"># because the subsampling process below is stochastic)</span>
+  <span class="kw">set.seed</span>(<span class="dv">2568</span>)</code></pre></div>
+<p><br></p>
+<p>Next, we will split our data into <strong>training data</strong> and <strong>test data</strong>. To do this, we will randomly select rows from our dataframe and assign them to the training data. All unsampled rows will be assigned to the test data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define a variable to subsample rows of the</span>
+<span class="co"># iris dataframe</span>
+  n =<span class="st"> </span><span class="kw">nrow</span>(iris)
+
+<span class="co"># Define a random subsample of the original data.</span>
+<span class="co"># We will use these data as a training data set,</span>
+<span class="co"># that we will then use to fit the model. The object</span>
+<span class="co"># `train` is just a random sample of row numbers from</span>
+<span class="co"># the total number of rows ini the iris data</span>
+  train =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">sample</span>(<span class="dv">1</span><span class="op">:</span>n, <span class="kw">floor</span>(n<span class="op">/</span><span class="dv">2</span>)))
+
+<span class="co"># We can define separate data frames for the training</span>
+<span class="co"># data and the test data using the indices contained</span>
+<span class="co"># in `train`.</span>
+  
+<span class="co"># Training data</span>
+  iris.train =<span class="st"> </span>iris[train, ]
+  
+<span class="co"># Test data</span>
+  iris.test =<span class="st"> </span>iris[<span class="op">-</span>train, ]</code></pre></div>
+<p><br></p>
+<p>Then, we can fit the classification tree to the training data.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the tree</span>
+  iris.ct =<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>. ,       <span class="co"># Formula: &#39;.&#39; means entire dataframe</span>
+                  <span class="dt">data =</span> iris,        <span class="co"># Using iris data</span>
+                  <span class="dt">subset =</span> train      <span class="co"># More specifically, the training data</span>
+                  )</code></pre></div>
+<p><br></p>
+<p>We can print a summary of the tree to examine where the splits occurred and how these locations were chosen by the algorithm.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the summary</span>
+  <span class="kw">summary</span>(iris.ct)</code></pre></div>
+<pre><code>## Call:
+## rpart(formula = Species ~ ., data = iris, subset = train)
+##   n= 75 
+## 
+##          CP nsplit  rel error   xerror       xstd
+## 1 0.4680851      0 1.00000000 1.191489 0.08013871
+## 2 0.0100000      2 0.06382979 0.106383 0.04596270
+## 
+## Variable importance
+##  Petal.Width Petal.Length Sepal.Length  Sepal.Width 
+##           37           32           18           13 
+## 
+## Node number 1: 75 observations,    complexity param=0.4680851
+##   predicted class=versicolor  expected loss=0.6266667  P(node) =1
+##     class counts:    21    28    26
+##    probabilities: 0.280 0.373 0.347 
+##   left son=2 (21 obs) right son=3 (54 obs)
+##   Primary splits:
+##       Petal.Length &lt; 2.45 to the left,  improve=22.69037, (0 missing)
+##       Petal.Width  &lt; 0.8  to the left,  improve=22.69037, (0 missing)
+##       Sepal.Length &lt; 5.45 to the left,  improve=14.60938, (0 missing)
+##       Sepal.Width  &lt; 3.35 to the right, improve=13.20206, (0 missing)
+##   Surrogate splits:
+##       Petal.Width  &lt; 0.8  to the left,  agree=1.000, adj=1.000, (0 split)
+##       Sepal.Length &lt; 5.45 to the left,  agree=0.907, adj=0.667, (0 split)
+##       Sepal.Width  &lt; 3.35 to the right, agree=0.907, adj=0.667, (0 split)
+## 
+## Node number 2: 21 observations
+##   predicted class=setosa      expected loss=0  P(node) =0.28
+##     class counts:    21     0     0
+##    probabilities: 1.000 0.000 0.000 
+## 
+## Node number 3: 54 observations,    complexity param=0.4680851
+##   predicted class=versicolor  expected loss=0.4814815  P(node) =0.72
+##     class counts:     0    28    26
+##    probabilities: 0.000 0.519 0.481 
+##   left son=6 (31 obs) right son=7 (23 obs)
+##   Primary splits:
+##       Petal.Width  &lt; 1.65 to the left,  improve=21.5436100, (0 missing)
+##       Petal.Length &lt; 4.75 to the left,  improve=21.3333300, (0 missing)
+##       Sepal.Length &lt; 5.75 to the left,  improve= 4.6163810, (0 missing)
+##       Sepal.Width  &lt; 2.75 to the left,  improve= 0.8198787, (0 missing)
+##   Surrogate splits:
+##       Petal.Length &lt; 4.75 to the left,  agree=0.889, adj=0.739, (0 split)
+##       Sepal.Length &lt; 6.35 to the left,  agree=0.704, adj=0.304, (0 split)
+## 
+## Node number 6: 31 observations
+##   predicted class=versicolor  expected loss=0.09677419  P(node) =0.4133333
+##     class counts:     0    28     3
+##    probabilities: 0.000 0.903 0.097 
+## 
+## Node number 7: 23 observations
+##   predicted class=virginica   expected loss=0  P(node) =0.3066667
+##     class counts:     0     0    23
+##    probabilities: 0.000 0.000 1.000</code></pre>
+<p><br></p>
+<p>Finally, we can make some very rudimentary plots in base graphics for the tree and this can greatly facilitate the interpretation of these trees. We will also add some text to the plot to make it a little easier to understand.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the plot</span>
+  <span class="kw">plot</span>(iris.ct, <span class="dt">minbranch=</span> <span class="dv">10</span>, <span class="dt">compress=</span><span class="ot">TRUE</span>, <span class="dt">margin=</span>.<span class="dv">15</span>, <span class="dt">nspace=</span><span class="dv">5</span>)
+
+<span class="co"># Adding text to the plot makes the tree understandable</span>
+  <span class="kw">text</span>(iris.ct, <span class="dt">use.n =</span> <span class="ot">TRUE</span>, <span class="dt">all =</span> <span class="ot">FALSE</span>, <span class="dt">fancy =</span> <span class="ot">FALSE</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>While this graphical representation is easier to understand than the summary output of the tree, it is not much nicer to look at than the tabular output. So, let’s see if we can do something about that!</p>
+<p><br></p>
+</div>
+</div>
+<div id="tree-visualization" class="section level1">
+<h1>Tree visualization</h1>
+<p><br></p>
+<p>Let’s load a new package for making some nicer trees that we might actually want to use in a talk, on a poster, or even in a paper. One trade off that we need to consider when making decisions about information and data visualization is what we gain and loose with various representations of our trees. For example, the plots above are a mess and we almost certainly wouldn’t want to use them for data presentation in a paper, a talk, or poster. However, they do contain a lot of useful information that we are likely going to lose with nicer looking tools.</p>
+<p><br></p>
+<p>We will rely on the aptly named <code>rpart.plot</code> package to start looking at our trees. Specifically, we are going to use the <code>prp</code> function for a nicer looking tree.</p>
+<p><br></p>
+<p>You’ll notice right away that we lose the neat-o group membership numbers that we got out of the ugly plots. On the other hand, this is a lot nicer to look at! Plus, it is a lot clearer to see which side the split for each variable represents.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Library load</span>
+  <span class="kw">library</span>(rpart.plot)
+
+<span class="co"># Plot the rpart object. Here, we add an </span>
+<span class="co"># argument to make the variable names shorter</span>
+<span class="co"># so we can fit more in a single pane</span>
+  <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><br></p>
+<p>But, wouldn’t it be nice if we could get a <em>little</em> more information out of this nicer layout? <strong>Glad you ask</strong>!</p>
+<p>One simple way to do it is to pass values to the <code>extra</code> argument in the <code>prp</code> function. With all of the options available in this plotting utility, it is hard to imagine one named <code>extra</code>, but let’s take a look at how a few of the possible values for <code>extra</code> change the plot (see <code>?prp</code> for a detailed list of possible display options.)</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># We can get counts in each category for each split</span>
+    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">1</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Classification rate (this one is only </span>
+  <span class="co"># for classification trees, not to be</span>
+  <span class="co"># used for regression trees)</span>
+    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Misclassification rates (also for classification trees only)</span>
+    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">3</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-8-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Probability of membership in a node by class...</span>
+    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">4</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-8-4.png" width="672" /></p>
+<p><br></p>
+<blockquote>
+<p>Here is a <em>really</em> nice way of visualizing these trees, though.</p>
+</blockquote>
+<p><strong>Note</strong>: You may have let the package install a <code>.dll</code> file for <code>gtk+</code> in order to get the <code>RColorBrewer</code> package to work. <code>Gtk+</code> is the cross-platform <code>GIMP tool kit</code> for building graphical user interfaces (GUIs). This will not be required as part of the assignment this week because you will probably not be able to install this on the school PCs, but I want you to there is more to life (and machine learning) than ugly graphs. Now you have the code.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install and load the packages</span>
+  <span class="kw">library</span>(rattle) <span class="co"># We&#39;ll use this one to make some more functional plots</span>
+  <span class="kw">library</span>(RColorBrewer) <span class="co"># We&#39;ll use this one for colors</span>
+
+<span class="co"># Make the plot</span>
+  <span class="co">#prp(iris.ct)</span>
+  
+<span class="co"># Now, make it fancy</span>
+  <span class="kw">fancyRpartPlot</span>(iris.ct, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p><br></p>
+<p>Wicked awesome.</p>
+<p><br></p>
+</div>
+<div id="pruning-the-tree" class="section level1">
+<h1>Pruning the tree</h1>
+<p><br></p>
+<p>Now that we have looked at how to fit a tree and how to visualize a tree, we really should take a look at how to make sure the tree is not garbage. We can do this a few different ways. We have some tools available to us that we can use to determine the number of splits we should keep, what the predictive power of the resultant trees are, and we can even explore some statistical stopping rules that can eliminate the need for pruning, at least in theory.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s start by fitting a tree to the data that we assume is overfit from the</span>
+<span class="co"># get-go</span>
+  <span class="kw">set.seed</span>(<span class="dv">5</span>)
+  iris.ot =<span class="st"> </span><span class="kw">rpart</span>(
+                  Species <span class="op">~</span><span class="st"> </span>. ,
+                  <span class="dt">data =</span> iris,
+                  <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,
+                  <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),
+                  <span class="dt">cp=</span><span class="fl">0.000001</span>,
+                  <span class="dt">minsplit =</span> <span class="dv">1</span>,
+                  <span class="dt">minbucket =</span> <span class="dv">1</span>)
+
+<span class="co"># Take a quick look at the plot</span>
+  <span class="kw">prp</span>(iris.ot)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">fancyRpartPlot</span>(iris.ot, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<p><br></p>
+<p>Now we need to pick the tree size that minimizes misclassification rate (prediction error). To do this, we are basically going to look at changes in three things:</p>
+<ol style="list-style-type: decimal">
+<li>Training error (error in predicting training data): <code>relerror</code></li>
+<li>Crossvalidation error (predictive error in x-validation): <code>xerror</code></li>
+<li>Complexity parameter: <code>cp</code></li>
+</ol>
+<ul>
+<li>This one tells us how much information gain we get for additional splits. In general, we are looking for the cp at which cross validation error is minimized so we can use that to decide how far back we want to prune our trees.</li>
+</ul>
+<p><br></p>
+<p>First, let’s look at how the cross-validation results change with respect to the size of our tree. This initial plot shows us how the relative error and the complexity parameter (cp) change with an increasing number of splits. In this plot, it is clear that by the third split we have minimized the xerror and decreases in information loss are minimized through the addition of more splits, but let’s keep moving along.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">plotcp</span>(iris.ot)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p><br></p>
+<p>Another, perhaps more familiar, way to look at this is to plot changes in the predictive R-squared value for the tree with respect to subsequent splits. Again, it is clear that by the time we get two splits out from the root that we have essentially explained as much variance as we are going to squeeze out of this tree.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
+  <span class="kw">rsq.rpart</span>(iris.ot)</code></pre></div>
+<pre><code>## 
+## Classification tree:
+## rpart(formula = Species ~ ., data = iris, method = &quot;class&quot;, parms = list(split = &quot;information&quot;), 
+##     cp = 1e-06, minsplit = 1, minbucket = 1)
+## 
+## Variables actually used in tree construction:
+## [1] Petal.Length Petal.Width  Sepal.Length
+## 
+## Root node error: 100/150 = 0.66667
+## 
+## n= 150 
+## 
+##        CP nsplit rel error xerror     xstd
+## 1 5.0e-01      0      1.00   1.16 0.051277
+## 2 4.4e-01      1      0.50   0.60 0.060000
+## 3 2.0e-02      2      0.06   0.08 0.027520
+## 4 1.0e-02      3      0.04   0.07 0.025833
+## 5 5.0e-03      6      0.01   0.07 0.025833
+## 6 1.0e-06      8      0.00   0.09 0.029086</code></pre>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><br></p>
+<p>We can also print the results of the model fit to take a look at the numbers behind all of these graphs.</p>
+<p>Some simple calculations are helpful for this:</p>
+<ul>
+<li>Prediction error rate in training data = <code>Root node error</code> * <code>rel error</code> * 100</li>
+<li>Prediction error rate in cross-validation = <code>Root node error</code> * <code>xerror</code> * 100</li>
+</ul>
+<p>We want the cp value (with a simpler tree) that minimizes the <code>xerror</code>. The key here is that we want the first model to minimize <code>xerror</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">printcp</span>(iris.ot)</code></pre></div>
+<pre><code>## 
+## Classification tree:
+## rpart(formula = Species ~ ., data = iris, method = &quot;class&quot;, parms = list(split = &quot;information&quot;), 
+##     cp = 1e-06, minsplit = 1, minbucket = 1)
+## 
+## Variables actually used in tree construction:
+## [1] Petal.Length Petal.Width  Sepal.Length
+## 
+## Root node error: 100/150 = 0.66667
+## 
+## n= 150 
+## 
+##        CP nsplit rel error xerror     xstd
+## 1 5.0e-01      0      1.00   1.16 0.051277
+## 2 4.4e-01      1      0.50   0.60 0.060000
+## 3 2.0e-02      2      0.06   0.08 0.027520
+## 4 1.0e-02      3      0.04   0.07 0.025833
+## 5 5.0e-03      6      0.01   0.07 0.025833
+## 6 1.0e-06      8      0.00   0.09 0.029086</code></pre>
+<p><br></p>
+<p>Now we can get the cp for tree that is the first to reach the minimum xerror (with the fewest number of splits):</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">bestcp =<span class="st"> </span>iris.ot<span class="op">$</span>cptable[<span class="kw">which.min</span>(iris.ot<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]
+bestcp</code></pre></div>
+<pre><code>## [1] 0.01</code></pre>
+<p><br></p>
+<p>We can use the information we have to calculate the misclassification rate for our optimal tree based on the equation on line 221. Here, we can see that our best tree will have a misclassification rate of 0.035. IN OTHER WORDS, we have effectively explained 96.5% of the variance in our data with this regression tree. Aw snap!</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="fl">5e-3</span><span class="op">*</span>.<span class="dv">07</span><span class="op">*</span><span class="dv">100</span></code></pre></div>
+<pre><code>## [1] 0.035</code></pre>
+<p><br></p>
+<p>Now we can use that cp to prune our tree by re-fitting our model with a new cp argument, changing nothing else, to see where the splits are and how they can be interpretted.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">iris.pt =<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>. ,
+                <span class="dt">data =</span> iris,
+                <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,
+                <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),
+                <span class="dt">cp=</span><span class="fl">0.01</span>
+                )</code></pre></div>
+<p><br></p>
+<p>We see that our plot is reduced compared to the original overfitted plot, and it actually is identical to the original, although this is not always the case.</p>
+<p><br></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
+  <span class="kw">prp</span>(iris.pt)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">fancyRpartPlot</span>(iris.pt, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
+<p><img src="12_cart_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<p><br></p>
+<p>That should get you started fitting and pruning CART models. Although the examples that we used above are for classification trees, you should understand that these concepts work the same way for regression trees, although the interpretation varies slightly. In fact, it is more straightforward because we are just counting the number of records in each node instead of the number of records within each group in each node.</p>
+<p><br></p>
+<p><br></p>
+</div>
+
+<!DOCTYPE html>
+<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
