@@ -184,9 +184,10 @@ A vector that can hold one and only one kind of data:
 + Factor
 + Date/time
 
+
 And some others, but none with which we'll concern ourselves.
 
-Below are some examples of `atomic vectors`. Run the code to see what it does:
+Below are some examples of **atomic vectors**. Run the code to see what it does:
 
 #### Integers and numerics
 ```{r}    

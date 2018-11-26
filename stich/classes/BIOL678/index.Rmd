@@ -7,13 +7,9 @@
 
 <img src="../../images/matrixSmolt.jpg" alt="">
 
-<br>
- 
 This site is intended to serve as a permanent link to course content so students can access online learning modules, data sets and code used for the class. This site is not intended for submission of class assignments, accessing reading materials, tracking grades, or viewing the syllabus. For all of those materials, please refer to the course blackboard site, accessible through: <a href="https://blackboard.oneonta.edu"> https://blackboard.oneonta.edu </a>.
 
 To access the content from a given topic, please click on the link corresponding links below. Please review the <a href="rubric.html"> rubric </a> for submitting programming assignments through Blackboard each week prior to submission.
-
-<br>
 
 ### Introduction to programming in R
 
@@ -21,15 +17,11 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw01_introToR.html"> Homework assignment </a>
 
-<br>
- 
 ### Probability distributions
 
 <a href="./02_probabilityDistributions.html"> Lecture tutorial </a>
 
 <a href="./hw02_probabilityDists.html"> Homework assignment </a>
-
-<br>
 
 ### Introduction to inferential statistics
 
@@ -37,21 +29,17 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw03_inferentialStats.html"> Homework assignment </a>
 
-<br>
-
 ### Linear models
 
 <a href="./04_linearModels.html"> Lecture tutorial </a>
 
 <a href="./hw04_linearModels.html"> Homework assignment </a>
 
-<br>
 
 <a href="./04_anova.html"> ANOVA worked example </a>
 
 <a href="./04_violinPlotsInR.html"> Violin plots in R </a>
 
-<br>
 
 ### Diagnostics and effect sizes
 
@@ -59,7 +47,6 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw05_diagnosticsAndEffects.html"> Homework assignment  </a>
 
-<br>
 
 ### Model selection
 
@@ -67,7 +54,6 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw06_modelSelection.html"> Homework assignment </a>
 
-<br>
 
 ### Intro to Bayesian inference
 
@@ -75,15 +61,11 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw07_introToBayes.html"> Homework assignment </a>
 
-<br>
-
 ### GLM: logistic regression
 
 <a href="./08_glm_logistic.html"> Lecture tutorial </a>
 
 <a href="./hw08_glm_logistic.html"> Homework </a>
-
-<br>
 
 ### GLM: count models
 
@@ -91,15 +73,11 @@ To access the content from a given topic, please click on the link corresponding
 
 <a href="./hw09_glm_counts.html"> Homework assignment </a>
 
-<br>
-
 ### Linear mixed models
 
 <a href="./10_lmm.html"> Lecture tutorial </a>
 
 <a href="./hw10_lmm.html"> Homework assignment </a>
-
-<br>
 
 ### Generalized linear mixed models
 
