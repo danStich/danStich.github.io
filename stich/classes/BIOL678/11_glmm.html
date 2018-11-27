@@ -483,17 +483,17 @@ pre code, pre, code {
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the model</span>
   <span class="kw">print</span>(choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>summary[ , <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">7</span><span class="op">:</span><span class="dv">9</span>)])</code></pre></div>
-<pre><code>##                  mean        sd        2.5%       97.5%     Rhat n.eff
-## alpha[1]   -1.8070283 0.3183106  -2.4377984  -1.1643720 1.001182  3000
-## alpha[2]   -2.1738420 0.2837713  -2.7736296  -1.6742801 1.000545  3000
-## alpha[3]   -1.6113944 0.2290408  -2.0540279  -1.1872152 1.000844  3000
-## alpha[4]   -1.8954304 0.2531101  -2.3852467  -1.3926898 1.001981  1400
-## alpha[5]   -2.3663729 0.3091344  -3.0315986  -1.8365852 1.002242  1100
-## alpha[6]   -2.3349551 0.3298453  -3.0722194  -1.7869347 1.005182   920
-## beta        0.5289261 0.1734550   0.2018416   0.8878117 1.006384   340
-## deviance  557.9360904 3.6968885 552.6955003 566.9291389 1.002279  1100
-## mu.int     -2.0302877 0.2893545  -2.6399805  -1.4788995 1.000542  3000
-## sigma.int   0.5424689 0.3614933   0.1006255   1.4527295 1.015593   280</code></pre>
+<pre><code>##                  mean        sd         2.5%       97.5%     Rhat n.eff
+## alpha[1]   -1.8110437 0.3255692  -2.41857196  -1.1552657 1.000966  3000
+## alpha[2]   -2.2110558 0.2940034  -2.85418112  -1.6795959 1.006103   530
+## alpha[3]   -1.6251195 0.2328094  -2.08806936  -1.1679660 1.001300  3000
+## alpha[4]   -1.9077333 0.2614235  -2.39829346  -1.3711794 1.001922  1400
+## alpha[5]   -2.3694961 0.3083907  -3.01098909  -1.8417460 1.001791  1600
+## alpha[6]   -2.3097154 0.3091971  -2.97971113  -1.7750849 1.003269   760
+## beta        0.5321079 0.1742034   0.21071044   0.8989847 1.002343  1100
+## deviance  558.0153436 3.7459742 552.70208563 566.5445372 1.001002  3000
+## mu.int     -2.0392871 0.2826074  -2.62676965  -1.5076433 1.002500  1000
+## sigma.int   0.5354165 0.3458864   0.09500748   1.4260995 1.004270   560</code></pre>
 <p><br></p>
 <p>At a glance it is clear that this model has converged and we have effectively sampled the posterior distribution, even at a relatively low number of runs. If we wanted to, we could bump up our sampling intensity to get a few more estimates, but we won’t waste class time with that right now. Besides, we have pretty solid evidence that all of our parameters are well estimated.</p>
 <p>If you have been paying close attention you are now noticing that our estimates for <code>alpha[1:6]</code> are NOT the same as the estimates in our GLM model in which p(Stillwater) was estimated separately for each year when we ran this as a fixed effects model (even if we do the logit transformation)!</p>
@@ -504,7 +504,7 @@ pre code, pre, code {
       choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>sims.list<span class="op">$</span>alpha, <span class="dv">2</span>, mean
       )
     )     </code></pre></div>
-<pre><code>## [1] 0.14099766 0.10212421 0.16639511 0.13062654 0.08577313 0.08826908</code></pre>
+<pre><code>## [1] 0.14051204 0.09876206 0.16450004 0.12923572 0.08552854 0.09032153</code></pre>
 <p><br></p>
 <p>Why is that?</p>
 <p>It’s because these <strong>are not slopes</strong>. They are random intercepts for each year that govern the relationship between flow and path choice! You’ll also notice that if you invert the logit link function that not all of the estimates are uniformally larger or smaller. This is a phenomenon known as ‘shrinkage’. Because we are sharing data across multiple levels of a random factor, the tendency is for the sampler to pull the mean of each level nearer to the overall mean for the sampling ‘universe’ that is being considered here:</p>
@@ -528,11 +528,11 @@ pre code, pre, code {
 <pre><code>## [1] &quot;alpha&quot;     &quot;beta&quot;      &quot;deviance&quot;  &quot;mu.int&quot;    &quot;sigma.int&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(posts)   <span class="co"># Notice that alpha is a matrix with six columns? Need that!</span></code></pre></div>
 <pre><code>## List of 5
-##  $ alpha    : num [1:3000, 1:6] -2.01 -1.9 -1.56 -1.73 -1.96 ...
-##  $ beta     : num [1:3000, 1] 0.525 0.593 0.367 0.528 0.439 ...
-##  $ deviance : num [1:3000, 1] 559 555 555 556 556 ...
-##  $ mu.int   : num [1:3000, 1] -1.99 -2.17 -1.9 -1.93 -1.96 ...
-##  $ sigma.int: num [1:3000, 1] 0.386 0.398 0.624 0.633 0.333 ...</code></pre>
+##  $ alpha    : num [1:3000, 1:6] -1.52 -1.42 -2.15 -1.66 -2.3 ...
+##  $ beta     : num [1:3000, 1] 0.451 0.549 0.584 0.375 0.389 ...
+##  $ deviance : num [1:3000, 1] 554 555 566 560 570 ...
+##  $ mu.int   : num [1:3000, 1] -2.36 -2.03 -2 -2.26 -2.37 ...
+##  $ sigma.int: num [1:3000, 1] 0.899 0.218 0.162 0.475 0.236 ...</code></pre>
 <p><br></p>
 <p>The first parameter we will look at here is beta to determine the overall effect of flow. The interpretation of this coefficient, because it is standardized, is the change in the probability of using the Stillwater Branch across all years given a 1 standard deviation change in flow.</p>
 <p><br></p>
@@ -721,13 +721,13 @@ pre code, pre, code {
 ## [6] &quot;sigma.beta&quot; &quot;sigma.int&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(posts)   <span class="co"># Notice that alpha AND betas are matrices now?</span></code></pre></div>
 <pre><code>## List of 7
-##  $ alpha     : num [1:3000, 1:6] -1.82 -1.93 -2.11 -1.9 -1.93 ...
-##  $ beta      : num [1:3000, 1:6] 0.379 0.142 0.527 0.382 0.325 ...
-##  $ deviance  : num [1:3000, 1] 561 567 556 564 563 ...
-##  $ mu.beta   : num [1:3000, 1] 0.632 0.131 0.549 0.356 0.345 ...
-##  $ mu.int    : num [1:3000, 1] -1.94 -2 -1.8 -1.9 -2.04 ...
-##  $ sigma.beta: num [1:3000, 1] 35.345 29.53 0.145 0.85 42.983 ...
-##  $ sigma.int : num [1:3000, 1] 0.2118 0.3669 0.2141 0.0158 0.1487 ...</code></pre>
+##  $ alpha     : num [1:3000, 1:6] -0.62 -2.22 -2 -2.38 -1.68 ...
+##  $ beta      : num [1:3000, 1:6] 0.267 0.624 0.356 0.602 0.537 ...
+##  $ deviance  : num [1:3000, 1] 558 569 565 557 556 ...
+##  $ mu.beta   : num [1:3000, 1] 1.305 0.682 0.437 0.718 0.663 ...
+##  $ mu.int    : num [1:3000, 1] -2.41 -2.68 -1.99 -2.03 -1.71 ...
+##  $ sigma.beta: num [1:3000, 1] 48.12 86.17 9.82 35.75 58.42 ...
+##  $ sigma.int : num [1:3000, 1] 1.171 0.42 0.134 0.221 0.276 ...</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Calculate the probability of using the Stillwater Branch given year and</span>
     <span class="co"># some new values for beta</span>
       rflow =<span class="st"> </span><span class="kw">max</span>(flow)<span class="op">-</span><span class="kw">min</span>(flow)
@@ -753,7 +753,12 @@ pre code, pre, code {
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

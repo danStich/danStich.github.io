@@ -374,7 +374,7 @@ original.length &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <
 mn &lt;-<span class="st"> </span><span class="kw">mean</span>(original.length)
 sd &lt;-<span class="st"> </span><span class="kw">sd</span>(original.length)
 <span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</code></pre></div>
-<pre><code>## Mean and sd used to normalise.original length: 57.22358 7.289042</code></pre>
+<pre><code>## Mean and sd used to normalise.original length: 57.62527 7.585453</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
 <span class="kw">hist</span>(length, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
@@ -393,10 +393,14 @@ lin.pred &lt;-<span class="st"> </span>Xmat[,] <span class="op">%*%</span><span 
 eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">30</span>)  <span class="co"># residuals </span>
 mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class="st"> </span>eps                      <span class="co"># response = lin.pred + residual</span>
 
-<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span>
-
-<span class="kw">library</span>(lattice)</code></pre></div>
+<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span></code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)</code></pre></div>
+<pre><code>## 
+## Attaching package: &#39;lattice&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:boot&#39;:
+## 
+##     melanoma</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 <p><br></p>
@@ -424,22 +428,22 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
 <pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
 ## Formula: mass ~ length + (1 | pop)
 ## 
-## REML criterion at convergence: 5814.8
+## REML criterion at convergence: 5879.7
 ## 
 ## Scaled residuals: 
 ##     Min      1Q  Median      3Q     Max 
-## -3.3276 -0.6077  0.0391  0.5631  3.6570 
+## -3.4225 -0.5734  0.0121  0.5985  3.3391 
 ## 
 ## Random effects:
 ##  Groups   Name        Variance Std.Dev.
-##  pop      (Intercept)  480     21.91   
-##  Residual             1681     41.00   
+##  pop      (Intercept)  418.8   20.46   
+##  Residual             1925.1   43.88   
 ## Number of obs: 560, groups:  pop, 56
 ## 
 ## Fixed effects:
 ##             Estimate Std. Error t value
-## (Intercept)  225.578      3.402   66.31
-## length        65.366      1.815   36.02
+## (Intercept)  230.369      3.304   69.72
+## length        56.577      1.938   29.19
 ## 
 ## Correlation of Fixed Effects:
 ##        (Intr)
@@ -461,7 +465,7 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
 
 <span class="co"># Print the CI to the console</span>
   lengthCI</code></pre></div>
-<pre><code>## [1] 61.80887 68.92360</code></pre>
+<pre><code>## [1] 52.77801 60.37506</code></pre>
 <p><br></p>
 <p>Here, we can see that our 95% CI excludes zero, so we can say that length has a significant effect on mass in this species. If we wanted to show this relationship in a graph, we now have to do the math by hand, which is why I forced you to learn the math involved with this. Here is an example of how one might do this:</p>
 <p><br></p>
@@ -487,12 +491,12 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
 <span class="co"># Have a look at the first few</span>
   <span class="kw">head</span>(effs<span class="op">$</span>pop)</code></pre></div>
 <pre><code>##   (Intercept)   length
-## 1    210.5218 65.36624
-## 2    177.2758 65.36624
-## 3    229.6049 65.36624
-## 4    223.1122 65.36624
-## 5    248.1194 65.36624
-## 6    253.0195 65.36624</code></pre>
+## 1    234.3450 56.57653
+## 2    253.2502 56.57653
+## 3    194.4473 56.57653
+## 4    222.0062 56.57653
+## 5    227.1267 56.57653
+## 6    225.6550 56.57653</code></pre>
 <p><br></p>
 <p>This gives us the random intercept for each population so we can make predictions about them individually if we want to! It only gives us one value for the length parameter because we specified this as a main effect. If want to plot the results for population 3, for example, our code would look like this:</p>
 <p><br></p>
@@ -639,24 +643,24 @@ nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 <span class="co"># Inspect results</span>
   <span class="kw">print</span>(res, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>##             mean     sd    2.5%   97.5%  Rhat n.eff
-## alpha[1] 209.864 10.890 188.690 230.465 1.001  2200
-## alpha[2] 176.130 11.709 153.623 198.441 1.001  1800
-## alpha[3] 229.300 11.392 206.976 250.813 1.001  2200
-## alpha[4] 222.589 11.403 200.271 244.471 1.003   720
-## alpha[5] 247.479 11.293 225.576 269.589 1.002  1500
-## alpha[6] 252.767 11.384 230.278 275.813 1.001  1800</code></pre>
+## alpha[1] 233.587 11.558 210.986 256.889 1.001  2200
+## alpha[2] 252.702 11.726 230.256 275.233 1.000  2200
+## alpha[3] 193.585 12.052 170.127 216.543 1.000  2200
+## alpha[4] 221.302 11.470 199.030 244.066 1.003   730
+## alpha[5] 226.358 11.662 203.428 248.366 1.002  1200
+## alpha[6] 224.166 11.529 201.303 245.689 1.001  2200</code></pre>
 <pre><code>## 
 ##  . 
 ##  . 
 ##  . 
 ## </code></pre>
 <pre><code>##               mean     sd     2.5%    97.5%  Rhat n.eff
-## alpha[56]  219.195 10.959  198.536  240.781 1.001  2200
-## beta        65.149  1.775   61.683   68.726 1.001  1900
-## deviance  5749.462 11.689 5729.176 5774.631 1.001  2100
-## mu.int     222.846  3.464  216.020  229.510 1.002  1600
-## sigma       41.096  1.313   38.633   43.720 1.002  2000
-## sigma.int   22.669  2.999   17.335   29.028 1.003   830</code></pre>
+## alpha[56]  248.881 11.938  225.418  271.038 1.001  1800
+## beta        56.417  1.976   52.654   60.272 1.001  2200
+## deviance  5826.045 11.353 5805.863 5849.624 1.001  2200
+## mu.int     227.676  3.477  220.908  234.314 1.002  1500
+## sigma       44.044  1.379   41.347   46.755 1.001  2200
+## sigma.int   21.187  3.250   15.572   28.314 1.002  1300</code></pre>
 <p><br></p>
 <p>Judging by our diagnostics, it looks like our estimates have converged nicely, and we see that we have sufficiently sampled posteriors for all 60(!) parameters of interest.</p>
 <p>Finally, we can look at the results for the linear predictions. This week, we’ll take a look at how to present results for linear predictors. We will use the same example as we did for the model we fit in <code>lme4</code>.</p>
@@ -716,7 +720,12 @@ nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

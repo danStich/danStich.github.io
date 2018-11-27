@@ -344,16 +344,16 @@ pre code, pre, code {
 <span class="co"># that we can describe the distribution</span>
   <span class="co"># Using a mean and standard deviation</span>
     <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</code></pre></div>
-<pre><code>## [1] 0.006537059</code></pre>
+<pre><code>## [1] 0.006534956</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</code></pre></div>
-<pre><code>## [1] 0.0004503295</code></pre>
+<pre><code>## [1] 0.0004554226</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Quantiles (95% CRI)</span>
   <span class="co"># Note that in Bayesian inference, we are going to call these &#39;credible</span>
   <span class="co"># intervals&#39; (CRI) or &#39;high density intervals&#39; (HDI), but they are </span>
   <span class="co"># functionally the same thing as &#39;confidence intervals&#39;.</span>
     <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</code></pre></div>
 <pre><code>##        2.5%         50%       97.5% 
-## 0.005676606 0.006528651 0.007442958</code></pre>
+## 0.005664844 0.006526224 0.007436258</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can also look at the actual distribution</span>
   <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
 <p><img src="07_introToBayes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
@@ -372,13 +372,13 @@ pre code, pre, code {
 <span class="co"># describe the probability</span>
   <span class="co"># Using a mean and standard deviation</span>
     <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</code></pre></div>
-<pre><code>## [1] 0.006882705</code></pre>
+<pre><code>## [1] 0.006918332</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</code></pre></div>
-<pre><code>## [1] 0.003010998</code></pre>
+<pre><code>## [1] 0.00304878</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Quantiles (95% CRI)</span>
     <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</code></pre></div>
 <pre><code>##        2.5%         50%       97.5% 
-## 0.002595714 0.006343211 0.014130169</code></pre>
+## 0.002604101 0.006361843 0.014286917</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We look at the actual distribution</span>
   <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
 <p><img src="07_introToBayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
@@ -589,14 +589,14 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 ##  3 chains, each with 33000 iterations (first 3000 discarded), n.thin = 3
 ##  n.sims = 30000 iterations saved
 ##          mu.vect sd.vect   2.5%    25%    50%    75%  97.5%  Rhat n.eff
-## p          0.876   0.026  0.821  0.860  0.878  0.894  0.922 1.001 21000
-## deviance  26.777   1.387 25.797 25.896 26.240 27.092 30.788 1.001 12000
+## p          0.876   0.026  0.821  0.859  0.877  0.894  0.922 1.001 30000
+## deviance  26.790   1.404 25.797 25.899 26.249 27.118 30.830 1.001 25000
 ## 
 ## For each parameter, n.eff is a crude measure of effective sample size,
 ## and Rhat is the potential scale reduction factor (at convergence, Rhat=1).
 ## 
 ## DIC info (using the rule, pD = var(deviance)/2)
-## pD = 1.0 and DIC = 27.7
+## pD = 1.0 and DIC = 27.8
 ## DIC is an estimate of expected predictive error (lower deviance is better).</code></pre>
 <p><br></p>
 </div>
@@ -731,7 +731,12 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

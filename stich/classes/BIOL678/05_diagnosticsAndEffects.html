@@ -327,7 +327,7 @@ pre code, pre, code {
 <p>This assumption basically means that each row of your data was collected independently of all others. In other words, no two rows of your data are related to one another.</p>
 <p>Note that we can relax this assumption by explicitly including variables and constructs within the models that actually account for these kinds of relationships.</p>
 <p>For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups</p>
-<p>This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met will require alternatives to the simple cases of one- way ANOVA, ANCOVA or simple linear regression.</p>
+<p>This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.</p>
 <p>We will discuss specific extensions of our basic linear models (ANOVA and regression) to relax more difficult violations such as repeated observations, and temporal or spatial autocorrelation among observations. Although we can’t cover all of these extensions in this course, we can point you in the right direction for most of them.</p>
 <p>What are we looking for here? We want data that were sampled randomly and independently from all other data points. For this information, we have to examine the actual experimental design.</p>
 <p>There is one obvious thing that is going to tell us that the observations in the turtles df are not collected independently.</p>
@@ -356,7 +356,7 @@ pre code, pre, code {
 <div id="normality-of-residuals" class="section level3">
 <h3>Normality of residuals</h3>
 <p><br></p>
-<p>In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero and a standard deviation of one. This allows us to drop the error term, ‘epsilon’ from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we solve everything through optimization now and not ordinary least squares).</p>
+<p>In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero. This allows us to drop the error term, ‘epsilon’ from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we solve everything through optimization now and not ordinary least squares).</p>
 <p>There are a multitude of tools at our disposal for examining normality of the residuals for linear models. One option is to examine group-specific error structures as a surrogate for residual error prior to analysis. The other option is to examine diagnostic plots of residuals directly from a fitted model object in R or other software programs (this is actually the more appropriate tool).</p>
 <p><br></p>
 <div id="option-1.-data-exploration" class="section level4">
@@ -1363,7 +1363,12 @@ interval: usually, we are interested in the prediction interval, as this
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

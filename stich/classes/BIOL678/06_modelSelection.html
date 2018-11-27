@@ -850,10 +850,10 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p><br></p>
 <p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)</code></pre></div>
-<pre><code>## [1] 0.4570823</code></pre>
+<pre><code>## [1] 0.4580079</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## 0.1146250 0.6205628</code></pre>
+## 0.1198292 0.6212351</code></pre>
 <p><br></p>
 <p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
 <p><br></p>
@@ -883,7 +883,12 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

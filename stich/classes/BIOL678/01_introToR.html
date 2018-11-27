@@ -407,7 +407,7 @@ a</code></pre></div>
 <li>Date/time</li>
 </ul>
 <p>And some others, but none with which we’ll concern ourselves.</p>
-<p>Below are some examples of <code>atomic vectors</code>. Run the code to see what it does:</p>
+<p>Below are some examples of <strong>atomic vectors</strong>. Run the code to see what it does:</p>
 </div>
 <div id="integers-and-numerics" class="section level4">
 <h4>Integers and numerics</h4>
@@ -684,7 +684,20 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>Looking at specific elements of a dataframe is similar to a matrix, with some added capabilities. We’ll do this with some real data so it’s more fun. Most of the packages in R have built in data sets that we can use for examples. Let’s start by looking at the Iris data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">data</span>(<span class="st">&#39;iris&#39;</span>)  <span class="co"># This is how you load built-in data sets</span>
     <span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>## [1] &quot;a&quot;    &quot;A&quot;    &quot;b&quot;    &quot;c&quot;    &quot;d&quot;    &quot;e&quot;    &quot;f&quot;    &quot;iris&quot; &quot;mat&quot;</code></pre>
+<pre><code>##  [1] &quot;a&quot;            &quot;A&quot;            &quot;air.test&quot;     &quot;airquality&quot;  
+##  [5] &quot;b&quot;            &quot;c&quot;            &quot;coeffs&quot;       &quot;cricket.mod&quot; 
+##  [9] &quot;crickets&quot;     &quot;d&quot;            &quot;e&quot;            &quot;est&quot;         
+## [13] &quot;f&quot;            &quot;fert.mod&quot;     &quot;full.mod&quot;     &quot;group&quot;       
+## [17] &quot;intcpt&quot;       &quot;iris&quot;         &quot;lengthCheck&quot;  &quot;lint&quot;        
+## [21] &quot;lint.model&quot;   &quot;lint.modeli&quot;  &quot;logicalCheck&quot; &quot;mat&quot;         
+## [25] &quot;mod&quot;          &quot;model&quot;        &quot;mu&quot;           &quot;multiple.mod&quot;
+## [29] &quot;myList&quot;       &quot;name&quot;         &quot;new&quot;          &quot;newEd&quot;       
+## [33] &quot;norm.mom&quot;     &quot;normal.lik&quot;   &quot;obs&quot;          &quot;obs_fit&quot;     
+## [37] &quot;plant_model&quot;  &quot;PlantGrowth&quot;  &quot;pred_fit&quot;     &quot;pred_int&quot;    
+## [41] &quot;preds&quot;        &quot;probs&quot;        &quot;setosaData&quot;   &quot;slp&quot;         
+## [45] &quot;smolts&quot;       &quot;smolts2&quot;      &quot;swiss&quot;        &quot;swiss.mod&quot;   
+## [49] &quot;test_norm&quot;    &quot;turtles&quot;      &quot;y_control&quot;    &quot;y_fert&quot;      
+## [53] &quot;y_trt1&quot;       &quot;y_trt2&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">head</span>(iris)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
@@ -868,7 +881,12 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 
