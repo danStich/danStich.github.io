@@ -278,22 +278,23 @@ pre code, pre, code {
 <p><br></p>
 <div id="working-with-probability-distributions" class="section level1">
 <h1>Working with probability distributions</h1>
+<p><br></p>
 <p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto auto auto 0;" /></p>
 <h2 style="margin-top:0px;">
 Introduction
 </h2>
-<p>This week we are going to talk about probability and probability distributions as a backdrop for the models that we will be working with during the next several weeks. Probability theory is central to statistical techniques, so it will be important for you to have a pretty firm understanding of this to grab hold of big ideas later on. If you are successful in understanding these concepts, you will have a working body of knowledge that is comparable, or better developed than many leading professionals in our fields.</p>
-<p>When we talk about probability distributions, we are talking about theprobability that a ‘random variable’ takes on some value. In most cases, there is a higher probability that a variable will take on certain values than others. That probability may be governed by any number of processes and thus may assume a number of different shapes with respect to the likelihood of any given value of our random variable. The differences in the shapes, and the mathematical ‘parameters’ that we use to describe those shapes are called ‘probability distributions’.</p>
-<p>There was a time when biologists were largely restricted to using models that relied heavily on assumptions of normality in the error structure of random variables becuase of how computationally intensive other methods were. This often led to the use of strictly ‘parametric’ tools like ANOVA and t-tests, or the use of strictly ‘non-parametric’ tools like frequency analyses and rank- order methods. While these can still be useful techniques in our toolboxes, that time has passed, and now we have access to a wide range of tools that allow us to extend simple parametric and non-parametric tools to explicitly incorporate mechanisms that allow us to relax or change distributional assumptions. We will discuss these throughout the course, but we need to look at the underlying distributions that govern our decisions about which of these tools to use. So, this week we’ll look at specific distributions that correspond to many of the ‘semi-parametric’ methods that are commonly applied.</p>
-<p>We are going to use this tutorial for our discussions about probability and probability distributions throughout the week. Next week, we will use this new information to talk about how we calculate distributional statistics from samples and how those can be used for statistical inference before we begin talking about statistical analyses for the remainder of the course. Hopefully the order of things is starting to make some sense now!</p>
+<p>This week we are going to talk about <strong>probability</strong> and <strong>probability distributions</strong> as a backdrop for the models that we will be working with during the next several weeks. Probability theory is central to statistical techniques, so it will be important for you to have a pretty firm understanding of this to grab hold of big ideas later on. If you are successful in understanding these concepts, you will have a working body of knowledge that is comparable, or better developed than many leading professionals in our fields.</p>
+<p>When we talk about probability distributions, we are talking about the probability that a <strong>random variable</strong> takes on some <strong>value</strong>. In most cases, there is a higher probability that a variable will take on certain values than others. That probability may be governed by any number of processes and thus may assume a number of different <strong>shapes</strong> with respect to the <strong>likelihood</strong> of any given value of our random variable. The differences in the shapes, and the mathematical <strong>parameters</strong> that we use to describe those shapes are called “probability distributions”.</p>
+<p>There was a time when biologists were largely restricted to using models that relied heavily on assumptions of normality in the error structure of random variables becuase of how computationally intensive other methods were. This often led to the use of strictly <strong>parametric</strong> tools like ANOVA and t-tests, or the use of strictly <strong>non-parametric</strong> tools like frequency analyses and rank- order methods. While these can still be useful techniques in our toolboxes, that time has passed, and now we have access to a wide range of tools that allow us to extend simple parametric and non-parametric tools to explicitly incorporate mechanisms that allow us to relax or change distributional assumptions. We will discuss these throughout the course, but we need to look at the underlying distributions that govern our decisions about which of these tools to use. So, this week we’ll look at specific distributions that correspond to methods that are commonly applied.</p>
+<p>We are going to use this tutorial for our discussions about probability and probability distributions throughout the week. Next week, we will use this new information to talk about how we calculate <strong>distributional statistics</strong> from samples and how those can be used for statistical inference before we begin talking about statistical analyses for the remainder of the course. Hopefully the order of things is starting to make some sense now!</p>
 <div id="probability-distributions-in-r" class="section level2">
 <h2>Probability distributions in R</h2>
-<p>R has a number of built-in distribution types, and there are random-number generators associated with most or all of these that will allow us to take random samples from a distribution. This is useful for data simulation, but is also helpful for us to learn about probability distributions and how their parameters affect the shape, spread, scale, location, etc. of those distributions. We will briefly discuss concepts like ‘skew’ because of how they can help us think about the assumptions that we are making (or breaking!) in the models that we use.</p>
+<p>R has a number of built-in distribution types, and there are random-number generators associated with most or all of these that will allow us to take random samples from a distribution. This is useful for data simulation, but is also helpful for us to learn about probability distributions and how their parameters affect the <strong>shape</strong>, <strong>spread</strong>, <strong>scale</strong>, <strong>location</strong>, etc. of those distributions. We will briefly discuss concepts like <strong>skew</strong> because of how they can help us think about the assumptions that we are making (or breaking!) in the models that we use.</p>
 <p>For this class, we will focus on one major family of distributions and then zero in on a few distributions within this family that you are guaranteed to encounter in analyses throughout your career.</p>
 <div id="exponential-family-of-distributions" class="section level3">
 <h3>Exponential family of distributions</h3>
-<p>Most or all of the distributions we will need for this class come from the ‘exponential’ family of distributions.</p>
-<p>The exponential family is VERY flexible. It includes most of the probability distributions with which you are familiar, and many more. Just ask this <em>very</em> reliable <a href="https://en.wikipedia.org/wiki/Exponential_family">Wikipedia entry</a>. Let’s face it, you were going there anyway, I just cut out the Google step.</p>
+<p>Most or all of the distributions we will need for this class come from the <strong>exponential family</strong> of distributions.</p>
+<p>The exponential family is very flexible. It includes most of the probability distributions with which you are familiar, and many more. Just ask this <em>very</em> reliable <a href="https://en.wikipedia.org/wiki/Exponential_family">Wikipedia entry</a>. Let’s face it, you were going there anyway, I just cut out the Google step.</p>
 <p>Take a look at the table at the bottom of this Wikipedia page just to get an idea of how many distributions are included within the exponential! Holy cow! We’re not going to look at all of these in this class- I just want you to be aware that this is a HUGE family of specific distributions.</p>
 <blockquote>
 <p>Distributions that we’ll focus on this week:</p>
@@ -322,18 +323,18 @@ Introduction
 <p>The normal distribution</p>
 </blockquote>
 <p>This is one distribution with which most of you have at least some nodding acquaintance.</p>
-<p>The normal is defined by two parameters:</p>
+<p>The <strong>normal distribution</strong> is defined by two parameters:</p>
 <ol style="list-style-type: decimal">
 <li><p>The mean (<span class="math inline">\(\mu\)</span>)</p></li>
 <li><p>The variance (<span class="math inline">\(\sigma^2\)</span>)</p></li>
 </ol>
-<p>Let’s take a look at what the normal distribution looks like. We’ll start with the standard normal (z distribution). The standard normal is a normal distribution with a mean of zero and a variance of 1.</p>
+<p>Let’s take a look at what the normal distribution looks like. We’ll start with the standard normal (or <em>z</em>) distribution. The standard normal is a normal distribution with a mean of zero and a variance of 1.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
   <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>,
   <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
-<p>We can change the parameters of the standard normal to increase or decrease the degree of ‘kurtosis’ or peakedness in our distribution. The blue line shows a distribution with lower kurtosis than the z distribution (this one is called a t-distribution). The red line shows a distribution with greater kurtosis than the z distribution.</p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>We can change the parameters of the standard normal to increase or decrease the degree of <strong>kurtosis</strong> or peakedness in our distribution. The blue line shows a distribution with lower kurtosis than the z distribution (this one is called a <strong>t-distribution</strong>). The red line shows a distribution with greater kurtosis than the z distribution.</p>
 <p>For line drawings like these, we can just add them to the existing plot to keep the same x and y scales and axes by using the <code>lines</code> function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
@@ -347,7 +348,7 @@ Introduction
 <span class="kw">lines</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span>.<span class="dv">5</span>)),
   <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>We can add a legend to clarify:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
@@ -371,11 +372,11 @@ Introduction
        <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="co"># Legend fill: none</span>
        <span class="dt">bty=</span><span class="st">&#39;n&#39;</span> <span class="co"># Box type for legend: none</span>
 ) <span class="co"># Close call to legend</span></code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <blockquote>
 <p>The lognormal distribution</p>
 </blockquote>
-<p>The lognormal distribution is a probability distribution that assumes our random variable is normally distributed on the log scale. This assumption allows us to incorporate ‘skew’ into the normal distribution and change the location and spread of the normal distribution by transforming the parameters (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>) onto the log scale. This is one of the more common data transformations that you will run into, e.g.: “We used a log-10 transformation to normalize the variable prior to analysis…”</p>
+<p>The <strong>lognormal distribution</strong> is a probability distribution that assumes our random variable is normally distributed on the <strong>log scale</strong>. This assumption allows us to incorporate <strong>skew</strong> into the normal distribution and change the location and spread of the normal distribution by transforming the parameters (<span class="math inline">\(\mu\)</span> and <span class="math inline">\(\sigma\)</span>) onto the log scale. This is one of the more common data transformations that you will run into, e.g.: “We log-transformed the data to achieve normality…”</p>
 <p>Let’s take a look at how changes to the mean change the location of this distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the density fucntion for a lognormal</span>
 <span class="co"># distribution that has a mean of zero and</span>
@@ -399,12 +400,12 @@ Introduction
          <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;mu=0, sd=1&#39;</span>, <span class="st">&#39;mu=1, sd=1&#39;</span>, <span class="st">&#39;mu=2, sd=1&#39;</span>), 
          <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>),
          <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <blockquote>
 <p>The beta distribution</p>
 </blockquote>
-<p>The beta distribution is a probability distribution that is constrained to the interval (0, 1). But, it is incredibly flexible in its parameterization, and as a result is very useful for stochastic simulation of variables on the probability scale, such as survival.</p>
-<p>The parameters of the beta distribution are <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, or commonly ‘a’ and ‘b’. Within this distribution, <span class="math inline">\(\alpha\)</span> pushes the distribution to the right (toward 1), and <span class="math inline">\(\beta\)</span> pushes the distribution to the left (toward 0). The relative magnitude of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> determine the location, shape, and spread of the probability distribution for our random variable. When <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are equal, the beta distribution is a t-distribution within the interval (0, 1).</p>
+<p>The <strong>beta distribution</strong> is a probability distribution that is constrained to the interval (0, 1). But, it is incredibly flexible in its parameterization, and as a result is very useful for stochastic simulation of variables on the probability scale, such as survival.</p>
+<p>The parameters of the beta distribution are <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, or commonly <code>a</code> and <code>b</code> or <code>shape 1</code> and <code>shape 2</code>. Within this distribution, <span class="math inline">\(\alpha\)</span> pushes the distribution to the right (toward 1), and <span class="math inline">\(\beta\)</span> pushes the distribution to the left (toward 0). The relative magnitude of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> determine the location, shape, and spread of the probability distribution for our random variable. When <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are equal, the beta distribution is a t-distribution within the interval (0, 1).</p>
 <p>Let’s take a look:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Within the rbeta function in R, &#39;a&#39; is called &#39;shape1&#39; and &#39;b&#39; is called</span>
 <span class="co"># &#39;shape2&#39;</span>
@@ -416,17 +417,17 @@ Introduction
 <span class="co"># Add a legend to the plot</span>
   <span class="kw">legend</span>(<span class="dt">x=</span>.<span class="dv">65</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;a=50, b=50&#39;</span>, <span class="st">&#39;a=50, b=100&#39;</span>, <span class="st">&#39;a=500, b=250&#39;</span>), 
          <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
 <div id="discrete-probability-distributions" class="section level3">
 <h3>Discrete probability distributions</h3>
-<p>Discrete probability distributions are useful for situations in which our random variable of interest can only take specific values within the interval of interest. For example, this might include age, counts, pass/fail, or any number of conceivable categories. As a result, these require a slightly different treatment of probability as a discrete, rather than continuous phenomenon.</p>
+<p><strong>Discrete</strong> probability distributions are useful for situations in which our random variable of interest can only take specific values within the interval of interest. For example, this might include age, counts, pass/fail, or any number of conceivable categories. As a result, these require a slightly different treatment of probability as a discrete, rather than continuous phenomenon.</p>
 <blockquote>
 <p>The Bernoulli distribution</p>
 </blockquote>
-<p>The Bernoulli distribution is a special case of the binomial distribution with a single trial (see below for clarification). Bernoulli outcomes are those for which the random variable can take on one of two values: a one or a zero. This distribution is useful for visualizing processes such as coin flips, yes/no responses, live/dead endpoints, and a number of other very interesting phenomena. The Bernoulli distribution has a single parameter: the probability of success, but is also governed by sample size: n.</p>
+<p>The <strong>Bernoulli distribution</strong> is a special case of the binomial distribution with a single trial (see below for clarification). Bernoulli outcomes are those for which the random variable can take on one of two values: a one or a zero. This distribution is useful for visualizing processes such as coin flips, yes/no responses, live/dead endpoints, and a number of other very interesting phenomena. The Bernoulli distribution has a single parameter: the probability of success, but is also governed by sample size: n.</p>
 <p>We can simulate data from a Bernoulli distribution in one of two ways in R</p>
-<p>The ‘old-school’ way of doing this was to draw from a binomial with a single ‘trial’. Here we randomly draw a single sample from a binomial with a single trial, and a probability of success of 50%. This can be likened to flipping a fair coin.</p>
+<p>The “old-school” way of doing this was to draw from a binomial with a single <strong>trial</strong>. Here we randomly draw a single sample from a binomial with a single trial, and a probability of success of 50%. This can be likened to flipping a fair coin.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)</code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <p>But now, there is a function in the <code>Rlab</code> package that simplifies this for the specific case of a Bernoulli.</p>
@@ -449,22 +450,22 @@ Introduction
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Flip the coin 100 times</span>
       <span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)</code></pre></div>
-<pre><code>##   [1] 1 0 1 1 1 0 1 0 0 0 1 1 0 1 1 0 0 1 1 0 0 0 1 0 0 1 1 0 0 0 1 0 1 1 1
-##  [36] 0 1 1 1 0 0 0 0 1 1 0 1 1 0 1 0 0 0 1 1 1 1 1 0 0 1 0 0 1 1 1 1 0 0 0
-##  [71] 1 1 1 1 0 0 1 1 0 1 1 0 0 1 0 0 1 0 1 1 1 0 1 1 1 1 0 1 0 0</code></pre>
+<pre><code>##   [1] 1 0 1 1 0 0 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 1 1 0 1 0 0 0 0 1 1 0 1
+##  [36] 0 1 1 0 1 0 0 1 0 1 0 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0
+##  [71] 0 0 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 1 0 1 1 0 1 0 0 1 0 1</code></pre>
 <blockquote>
 <p>The binomial distribution</p>
 </blockquote>
-<p>The binomial distribution is pretty similar to the Bernoulli distribution except that it also includes a parameter called ‘size’ which corresponds to a number of trials. In most cases in biology, it will suffice to use the Bernoulli, but for modeling we will want to understand the binomial for things like random stratified designs and nested models that rely on the use of binomial distribution</p>
+<p>The <strong>binomial distribution</strong> is pretty similar to the Bernoulli distribution except that it also includes a parameter called <span class="math inline">\(N\)</span> (<code>size</code> in R) which corresponds to a number of trials. In most cases in biology, it will suffice to use the Bernoulli, but for modeling we will want to understand the binomial for things like random stratified designs and nested models that rely on the use of binomial distribution</p>
 <p>To sample data from a binomial distribution, we can use <code>rbinom</code>. In this example we tell R that we want 10 samples (<code>n</code>) from a binomial distribution that has 10 trials (<code>size</code>) and a probability of success (<code>prob</code>) of 0.5. This is like having 10 people flip the coin 10 times instead of just one person flipping the coin 100 times.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a random draw of 10 samples from a binomial distribution with 10 trials</span>
 <span class="co"># and probability of success equal to 0.50</span>
 <span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)</code></pre></div>
-<pre><code>##  [1] 6 5 7 6 6 4 4 4 3 6</code></pre>
+<pre><code>##  [1] 7 6 1 5 7 4 5 5 5 7</code></pre>
 <blockquote>
 <p>The multinomial distribution</p>
 </blockquote>
-<p>The multinomial distribution is a further generalization of the Binomial and Bernoulli distribution. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually <strong>but all of them must sum to one</strong>. The categories are, in this case, assumed to be a <em>mutually exclusive</em> and <em>exhaustive</em> set of possible outcomes.</p>
+<p>The <strong>multinomial distribution</strong> is a further generalization of the Binomial and Bernoulli distribution. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually <strong>but all of them must sum to one</strong>. The categories are, in this case, assumed to be a <strong>mutually exclusive</strong> and <strong>exhaustive</strong> set of possible outcomes.</p>
 <p>We can use the multinomial distribution to randomly sample from categories (imagine our response variable is a categorical variable, like the names of the students in this class). To do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we make a vector of names:</span>
   name =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Amanda&#39;</span>, <span class="st">&#39;Chris&#39;</span>, <span class="st">&#39;Kendra&#39;</span>, <span class="st">&#39;Luis&#39;</span>, <span class="st">&#39;Sarah&#39;</span>, <span class="st">&#39;Steve&#39;</span>, <span class="st">&#39;Zach&#39;</span>)
@@ -476,89 +477,89 @@ Introduction
 <p>Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 8 probabilities above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]    0    0    1    0    0
-## [2,]    0    1    0    0    1
+## [1,]    0    0    0    1    0
+## [2,]    1    0    0    0    0
 ## [3,]    0    0    0    0    0
-## [4,]    1    0    0    0    0
-## [5,]    0    0    0    1    0
+## [4,]    0    0    1    0    0
+## [5,]    0    0    0    0    1
 ## [6,]    0    0    0    0    0
-## [7,]    0    0    0    0    0</code></pre>
+## [7,]    0    1    0    0    0</code></pre>
 <p><strong>WHOA</strong> a matrix??!!! HOLY CRAP, WHAT DOES IT ALL MEAN?</p>
-<p>Take a step back and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:</p>
+<p>Take a step back, breath, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a single sample from the list of student names    </span>
   <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)</code></pre></div>
 <pre><code>##      [,1]
 ## [1,]    0
 ## [2,]    0
 ## [3,]    0
-## [4,]    1
+## [4,]    0
 ## [5,]    0
 ## [6,]    0
-## [7,]    0</code></pre>
+## [7,]    1</code></pre>
 <p>Here, we pulled a single sample from the distribution, and probability of sampling a given individual was 0.14 (1/7). If it makes it easier, we can put your names next to it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</code></pre></div>
 <pre><code>##      name        
 ## [1,] &quot;Amanda&quot; &quot;0&quot;
-## [2,] &quot;Chris&quot;  &quot;0&quot;
+## [2,] &quot;Chris&quot;  &quot;1&quot;
 ## [3,] &quot;Kendra&quot; &quot;0&quot;
-## [4,] &quot;Luis&quot;   &quot;1&quot;
+## [4,] &quot;Luis&quot;   &quot;0&quot;
 ## [5,] &quot;Sarah&quot;  &quot;0&quot;
 ## [6,] &quot;Steve&quot;  &quot;0&quot;
 ## [7,] &quot;Zach&quot;   &quot;0&quot;</code></pre>
 <p>Now, if I was calling on you randomly in class, after 10 questions, the spread of people who have participated in class might look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</code></pre></div>
 <pre><code>##      name                                            
-## [1,] &quot;Amanda&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [2,] &quot;Chris&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [3,] &quot;Kendra&quot; &quot;1&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [4,] &quot;Luis&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot;
-## [5,] &quot;Sarah&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;1&quot;
+## [1,] &quot;Amanda&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+## [2,] &quot;Chris&quot;  &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot;
+## [3,] &quot;Kendra&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot;
+## [4,] &quot;Luis&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+## [5,] &quot;Sarah&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot;
 ## [6,] &quot;Steve&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [7,] &quot;Zach&quot;   &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;</code></pre>
-<p>Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are awesome!) matrices:</p>
+## [7,] &quot;Zach&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;</code></pre>
+<p>Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are <strong>awesome</strong>!) matrices:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  name[<span class="kw">which</span>(<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)&gt;<span class="dv">0</span>)]</code></pre></div>
 <pre><code>## [1] &quot;Kendra&quot;</code></pre>
 <p>And now we have a way to randomly select an individual based on a multinomial distribution!</p>
 <blockquote>
 <p>The Poisson distribution</p>
 </blockquote>
-<p>The Poisson distribution is used for counts or other integer data. This distribution is widely used (and just as widely misused!) for its ability to account for a large number of biological and ecological processes in the models that we will discuss this semester. The Poisson distribution has a single parameter, <span class="math inline">\(\lambda\)</span>, which is both the mean and the variance of the distribution. So, despite its utility, the distribution is relatively inflexible with respect to shape and spread. <strong>Fun fact</strong>: this distribution was originally worked out by a French mathematician to predict the number of soldiers who were accidentally killed from being kicked by horses.</p>
+<p>The <strong>Poisson distribution</strong> is used for counts or other integer data. This distribution is widely used (and just as widely misused!) for its ability to account for a large number of biological and ecological processes in the models that we will discuss this semester. The Poisson distribution has a single parameter, <span class="math inline">\(\lambda\)</span>, which is both the mean and the variance of the distribution. So, despite its utility, the distribution is relatively inflexible with respect to shape and spread. <strong>Fun fact</strong>: this distribution was originally worked out by a French mathematician to predict the number of soldiers who were accidentally killed from being kicked by horses.</p>
 <p>Take a look at how the distribution changes when we change <span class="math inline">\(\lambda\)</span>, and you will get an idea of how this one works.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">100</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">1000</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)    </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-18-2.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">10000</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-18-3.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-3.png" width="672" /></p>
 <blockquote>
 <p>The negative binomial distribution</p>
 </blockquote>
-<p>Okay, this one can be a little difficult to wrap your head around but it’s an important one for us to know about. So, we will spend a little extra time setting this one up to try and be clear. Often, folks start out thinking that they’re going to use a Poisson distribution and they end up collecting with data that do not conform to the relative inflexibility of that single- parameter distribution. For the purpose of this class, we are not going to dive into the mechanics of the negative binomial distribution, but we do need to know what it looks like and why we might need it.</p>
-<p>One useful way to conceptualize the negative binomial is ‘how long does it take for some event to occur?’ For example, we might ask how long it takes a fish to start migrating, how long it takes a sea turtle to recover in a rehabilitation center, how long it will take for a terminal patient to expire, or how frequently we see the expression of a gene of interest. These kinds of questions are asked in aptly named ‘time-to-event’ models that rely on the variance structure of the negative binomial. In the context of these kinds of questions, the negative binomial is a discrete probability distribution (and not a continuous distribution) because the ‘time’ components of the distribution is actually a series of independent Bernoulli trials (holy crap!). For example: if we want to know how many days it will take for a turtle to recover, what we are really doing is asking on each day until recovery, ‘Is today the day?’. Then, we flip a coin and find out. So, each day in this example is a Bernoulli trial. Another way to think about this is the number of failures occurring in a sequence before a target number of sucesses is achieved.</p>
+<p>Okay, this one can be a little difficult to wrap your head around but it’s an important one for us to know about. So, we will spend a little extra time setting this one up to try and be clear. Often, folks start out thinking that they’re going to use a Poisson distribution and they end up collecting with data that do not conform to the relative inflexibility of that single-parameter distribution. For the purpose of this class, we are not going to dive into the mechanics of the <strong>negative binomial distribution</strong>, but we do need to know what it looks like and why we might need it.</p>
+<p>One useful way to conceptualize the negative binomial is “how long does it take for some event to occur?”&quot; For example, we might ask how long it takes a fish to start migrating, how long it takes a sea turtle to recover in a rehabilitation center, how long it will take for a terminal patient to expire, or how frequently we see the expression of a gene of interest. These kinds of questions are asked in aptly named “time-to-event”&quot; models that rely on the variance structure of the negative binomial. In the context of these kinds of questions, the negative binomial is a discrete probability distribution (and not a continuous distribution) because the “time” components of the distribution is actually a series of independent Bernoulli trials (holy crap!). For example: if we want to know how many days it will take for a turtle to recover, what we are really doing is asking on each day until recovery, “Is today the day?”. Then, we flip a coin and find out. So, each day in this example is a Bernoulli trial. Another way to think about this is the number of failures occurring in a sequence before a target number of sucesses is achieved.</p>
 <p>For the classical parameterization:</p>
 <p>We will start with looking at how many failures are observed before one success in a sequence of Bernoulli trials.</p>
-<p>With probability of succes equal to .95, it doesn’t take long and most of the probability mass is on zero, with a couple of stragglers further out.</p>
+<p>With probability of succes equal to 0.95, it doesn’t take long and most of the probability mass is on zero, with a couple of stragglers further out.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">95</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>If we decrease probability of success in each trial to 0.25, we see more failures on average before we reach success. Most of the time, it still takes less than 5 trials to reach a success, but some times it takes much longer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">25</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>And, if we increase the number of successes that we use for our criterion, or target, then it spreads the distribution out even further.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span>.<span class="dv">25</span>))        </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
-<p>Now, because of it’s properties, the negative binomial is also useful for number of other applications. Specifically, it has been widely used to represent Poisson-like processes in which the mean and variance are not equal (e.g., <em>overdispersion</em>). This has seen a lot of application in the field of ecology, especially for overdispersed count data.</p>
-<p>Here, we sample 10k random draws from a distribution with a mean of 10 and an overdispersion parameter of 1. The overdispersion parameter is called ‘size’ because this is an alternative parameterization that is just making use of the relationships between existing parameters of the negative binomial. It’s easy to grasp how the mean changes the location of the distribution.</p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p>Now, because of it’s properties, the negative binomial is also useful for number of other applications. Specifically, it has been widely used to represent Poisson-like processes in which the mean and variance are not equal (e.g., <strong>overdispersion</strong>). This has seen a lot of application in the field of ecology, especially for overdispersed count data.</p>
+<p>Here, we draw 10,000 random samples from a distribution with a mean of 10 and an overdispersion parameter of 1. The overdispersion parameter is called ‘size’ because this is an alternative parameterization that is just making use of the relationships between existing parameters of the negative binomial. It’s easy to grasp how the mean changes the location of the distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>But, note how the overdispersion parameter changes things:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span>.<span class="dv">1</span>))      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">100</span>))      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1000</span>))  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-4.png" width="672" /></p>
 <p>A more intuitive way to work with the negative binomial in R is by using the <code>MASS</code> package. In this parameterization, we use the mean and the dispersion parameter explicitly so it makes more sense:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MASS comes pre-installed as part of base software</span>
   <span class="kw">library</span>(MASS)</code></pre></div>
@@ -568,19 +569,19 @@ Introduction
 ## 
 ##     michelson</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> .<span class="dv">1</span>))  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">10</span>))       </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">100</span>))       </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">1000</span>)) </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
 <p><strong>NOTE</strong> that the results are pretty much identical.</p>
 </div>
 </div>
 <div id="calculating-sample-statistics-and-distributional-parameters-in-r" class="section level2">
 <h2>Calculating sample statistics and distributional parameters in R</h2>
-<p>In this section, we will learn how to derive the parameters of the normal distribution using a few different methods in R. We will use this opportunity to re-introduce the parameters as ‘moments’ of the distribution so we can talk about what we mean by ‘confidence intervals’. We also will introduce a couple of different methods for calculating ‘moments’ of a distribution. Specifically, we will look at how to derive…</p>
+<p>In this section, we will learn how to derive the parameters of the <strong>normal distribution</strong> using a few different methods in R. We will use this opportunity to re-introduce the parameters as <strong>moments</strong> of the distribution so we can talk about what we mean by <strong>confidence intervals</strong>. We also will introduce a couple of different methods for calculating moments of a distribution. Specifically, we will look at how to derive…</p>
 <div id="moments-about-the-mean" class="section level3">
 <h3>Moments about the mean</h3>
 <p>Sounds fancy, huh?</p>
@@ -613,7 +614,7 @@ Introduction
 <blockquote>
 <p>Method of moments estimator</p>
 </blockquote>
-<p>See if you can rearrange this in a way that makes sense with how you know to calculate an ‘average’ and a variance!</p>
+<p>See if you can rearrange this in a way that makes sense with how you know to calculate a <strong>mean</strong> and a <strong>variance</strong>!</p>
 <p>First, we’ll estimate it by making our own function:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make up a vector of data to test this on</span>
   test_norm =<span class="st"> </span><span class="kw">rnorm</span>(<span class="fl">1e3</span>, <span class="dv">0</span>, <span class="dv">1</span>)
@@ -626,23 +627,23 @@ Introduction
   }
 <span class="co"># Test the function</span>
   <span class="kw">norm.mom</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.04238466 0.93551118</code></pre>
+<pre><code>## [1] 0.01230838 0.94668184</code></pre>
 <p>Because this one is so common, R has built-in estimators that rely on the exact solution provided by the formulas for the first two moments of the normal distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">mean</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.04238466</code></pre>
+<pre><code>## [1] 0.01230838</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">var</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.9364476</code></pre>
+<pre><code>## [1] 0.9476295</code></pre>
 <p>How do these compare to the answers returned by our function?</p>
 <blockquote>
 <p>Maximum likelihood estimator</p>
 </blockquote>
-<p>R has built-in maximum likelihood estimators that provide an exact solution to the first two moments of the normal distribution.</p>
+<p>R also has built-in <strong>maximum likelihood</strong> estimators that provide an exact solution to the first two moments of the normal distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(test_norm, <span class="st">&#39;normal&#39;</span>)</code></pre></div>
 <pre><code>##       mean          sd    
-##   0.04238466   0.96721827 
-##  (0.03058613) (0.02162766)</code></pre>
-<p>Only one problem here: R doesn’t report the second moment! It reports the square root of the second moment: the standard deviation!! What the crap is that all about?</p>
+##   0.01230838   0.97297577 
+##  (0.03076820) (0.02175640)</code></pre>
+<p>Only one problem here: R doesn’t report the second moment! It reports the square root of the second moment: the <strong>standard deviation</strong>!</p>
 <p>Finally, let’s write our own function and maximize the likelihood with the <code>optim()</code> function in R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the function</span>
   normal.lik =<span class="st"> </span>function(theta, y){
@@ -658,13 +659,13 @@ Introduction
     logl =<span class="st"> </span>-.<span class="dv">5</span>*n*<span class="kw">log</span>(<span class="dv">2</span>*pi) -.<span class="dv">5</span>*n*<span class="kw">log</span>(sigma2)-(<span class="dv">1</span>/(<span class="dv">2</span>*sigma2))*<span class="kw">sum</span>((y-mu)**<span class="dv">2</span>)
     <span class="kw">return</span>(-logl)
   }</code></pre></div>
-<p>Now, we use the <code>optim</code> function to maximize the likelihood of the data (technically by minimizing the -log likehood) given different values of our parameters (mu and sigma2).</p>
+<p>Now, we use the <code>optim</code> function to maximize the likelihood of the data (technically by minimizing the -log likehood) given different values of our parameters (<code>mu</code> and <code>sigma2</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))</code></pre></div>
 <pre><code>## $par
-## [1] 0.04248355 0.93551948
+## [1] 0.01221085 0.94663213
 ## 
 ## $value
-## [1] 1385.607
+## [1] 1391.542
 ## 
 ## $counts
 ## function gradient 
@@ -681,34 +682,34 @@ Introduction
 <span class="co"># Look at the structure </span>
   <span class="kw">str</span>(est)   <span class="co"># I&#39;ll be damned, it&#39;s a list! Hey, we learned about those!</span></code></pre></div>
 <pre><code>## List of 5
-##  $ par        : num [1:2] 0.0425 0.9355
-##  $ value      : num 1386
+##  $ par        : num [1:2] 0.0122 0.9466
+##  $ value      : num 1392
 ##  $ counts     : Named int [1:2] 41 NA
 ##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;function&quot; &quot;gradient&quot;
 ##  $ convergence: int 0
 ##  $ message    : NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par    <span class="co"># Here are the estimates</span></code></pre></div>
-<pre><code>## [1] 0.04248355 0.93551948</code></pre>
+<pre><code>## [1] 0.01221085 0.94663213</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par[<span class="dv">1</span>] <span class="co"># The mean</span></code></pre></div>
-<pre><code>## [1] 0.04248355</code></pre>
+<pre><code>## [1] 0.01221085</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par[<span class="dv">2</span>] <span class="co"># The variance</span></code></pre></div>
-<pre><code>## [1] 0.9355195</code></pre>
-<p>That’s better: an exact solution!! Just in case you’d like to know exactly what <code>optim</code> is doing:</p>
+<pre><code>## [1] 0.9466321</code></pre>
+<p>That’s better: an exact solution! Just in case you’d like to know exactly what <code>optim</code> is doing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ?optim</code></pre></div>
 <blockquote>
 <p>Quantiles and other descriptive statistics</p>
 </blockquote>
 <p>There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">median</span>(test_norm) <span class="co"># Here is the median, or 50th percentile</span></code></pre></div>
-<pre><code>## [1] 0.0393338</code></pre>
+<pre><code>## [1] 0.0163862</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="co"># The 95% confidence limits</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## -1.867074  1.884781</code></pre>
+## -1.940123  1.858495</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))   <span class="co"># Inner quartile range </span></code></pre></div>
 <pre><code>##        25%        75% 
-## -0.6618412  0.6936935</code></pre>
+## -0.6449083  0.6913571</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">range</span>(test_norm)                             <span class="co"># Range of sample</span></code></pre></div>
-<pre><code>## [1] -3.522890  2.972512</code></pre>
+<pre><code>## [1] -3.045907  2.825927</code></pre>
 </div>
 </div>
 </div>
