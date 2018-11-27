@@ -275,44 +275,59 @@ pre code, pre, code {
 }
 
 </style>
-<p><img src="../../images/roh.png" alt=""></p>
 <p><br></p>
 <div id="introduction-to-programming-in-r" class="section level1">
 <h1>Introduction to programming in R</h1>
-<p><br></p>
+<p><img src="../../images/roh.png" alt=""></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>Welcome to programming in R. This script will serve as a tutorial to help you get aquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way. Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot really quickly. Cheat sheets like this one (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a> ones) can help you along the way by serving as miniature reference manuals.</p>
-<p><br></p>
+<p>Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way.</p>
+<p>Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot really quickly. Cheat sheets like this module (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a> reference cards) can help you along the way by serving as miniature reference manuals.</p>
 </div>
 <div id="programming-conventions" class="section level2">
 <h2>Programming conventions</h2>
-<p>There are a lot of different ways to write computer code. Each has pros and cons and ALL of them are intended to increase efficiency and readability. For example, you’ll notice that none of my code goes beyond a certain vertical line in the editor. That is to make it so that people don’t have to scroll over to the right of the editor to see what I have written when I hand off my code. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions.</p>
+<p>There are a lot of different ways to write computer code. Each has pros and cons and <strong>all</strong> of them are intended to increase efficiency and readability. For example, you’ll notice that none of my code goes beyond a certain vertical line in the editor. That is to make it so that people don’t have to scroll over to the right of the editor to see what I have written when I hand off my code. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions.</p>
 <blockquote>
-<p><strong>First</strong>, We can comment code to help us out.</p>
+<p>Commenting code is helpful.</p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is a comment. We know because it is preceded by a hashtag, or &#39;octothorpe&#39;</span></code></pre></div>
-<p>There are different ways to comment code in different languages. We use comments to make clear what we have done by leaving a written record behind.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This is a comment. </span>
+<span class="co"># We know because it is preceded </span>
+<span class="co"># by a hashtag, or &#39;octothorpe&#39;.</span>
+
+<span class="co"># R ignores comments so you have</span>
+<span class="co"># a way to write down what you have</span>
+<span class="co"># done or what you are doing.</span>
+
+<span class="co"># This is useful for sharing</span>
+<span class="co"># code or just figuring out</span>
+<span class="co"># what you did.</span></code></pre></div>
 <blockquote>
-<p><strong>Second</strong>, There are a few ways to run a line of code:</p>
+<p>There are a few ways to run a line of code:</p>
 </blockquote>
 <ol style="list-style-type: decimal">
-<li><p>Go the front of a line and press ctrl + Enter</p></li>
-<li><p>Highlight a chunk of code and press one of the above combinations</p></li>
-<li><p>Either 1 or 2, but press the ‘Run’ button at the top of this source file to run the code block.</p></li>
-<li><p>Once you’ve run a code block you can change it and then press the button next to ‘Run’ (or ctrl+shift+p) to ‘re-run’ the previous block of code</p></li>
+<li><p>Click on a line of code and press ctrl + Enter</p></li>
+<li><p>Highlight a chunk of code and do the same</p></li>
+<li><p>Either 1 or 2, but press the ‘Run’ button at the top of the source file to run the code block.</p></li>
+<li><p>Once you’ve run a code block you can change it and then press the button next to ‘Run’ (or <code>CTRL+SHIFT+P</code>) to ‘re-run’ the previous block of code.</p></li>
 </ol>
-<p><br></p>
+<blockquote>
+<p>Try it on your own!</p>
+</blockquote>
+<p>Type the following line of code into a blank source file, and run it.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add 1 and 1 together</span>
+<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<pre><code>## [1] 2</code></pre>
 <blockquote>
 <p>Section breaks help organization</p>
 </blockquote>
 <p>I like to use the built-in heading. It works really well for code-folding in R and when I’ve written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and type the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Section heading -----</span>
-<span class="co"># Follow a comment with five dashes to insert a section heading</span></code></pre></div>
-<p><br></p>
+<p>I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I’ve written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Section heading ----</span>
+<span class="co"># Follow a comment with four dashes</span>
+<span class="co"># to insert a section heading</span></code></pre></div>
 <div id="stricter-r-programming-rules" class="section level3">
-<h3>Stricter R programming rules:</h3>
-<p>All code is in R is case sensitive</p>
+<h3>Stricter R programming rules</h3>
+<p><strong>All code is in R is case sensitive.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example (run the following lines):</span>
   a =<span class="st"> </span><span class="dv">1</span>
   A =<span class="st"> </span><span class="dv">2</span>
@@ -323,16 +338,19 @@ pre code, pre, code {
 <ol style="list-style-type: decimal">
 <li><p>We’ve defined a couple of variables for the first time. A lot of folks insist that you should use <code>&lt;-</code> instead of <code>=</code> when you define variables (and they are probably correct), but for our purposes it will make absolutely no difference, and <code>=</code> is much faster to type than <code>&lt;-</code>.</p></li>
 <li><p>Note that the two objects are not the same, and R knows this.</p></li>
-<li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then it would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This ‘operator’ is very useful, and is common in a number of languages.</p></li>
+<li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then it would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This <strong>operator</strong> is very useful, and is common in a number of languages.</p></li>
 </ol>
-<p><br></p>
 <p>You can’t start an object name with a number, but you can end it with one.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In Rstudio there are nifty little markers to show this is broken</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In Rstudio there are nifty </span>
+<span class="co"># little markers to show this</span>
+<span class="co"># is broken</span>
   1a =<span class="st"> </span><span class="dv">1</span> 
-<span class="co"># This one works (try it by typing &#39;a1&#39; in the console)</span>
+
+<span class="co"># This one works (try it by typing</span>
+<span class="co"># &#39;a1&#39; in the console)</span>
   a1 =<span class="st"> </span><span class="dv">1</span> </code></pre></div>
 <p><br></p>
-<p>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first.</p>
+<p><strong>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  a =<span class="st"> </span><span class="dv">1</span>
   a =<span class="st"> </span><span class="dv">2</span>
   a         <span class="co"># a takes on the second value here</span></code></pre></div>
@@ -342,240 +360,249 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">show</span>(a)   <span class="co"># And, here is one more</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <p><br></p>
-<p>Some things can be expressed in multiple ways. Both ‘T’ and ‘TRUE’ can be used to indicate a logical that evaluates as being TRUE</p>
+<p><strong>Some things can be expressed in multiple ways. Both <code>T</code> and <code>TRUE</code> can be used to indicate a logical that evaluates as being TRUE.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p><br></p>
-<p>Some names are reserved or pre-defined. Did you notice that R already knew what T and TRUE were? We will talk more about this later in the course if we need to.</p>
-<p>For example</p>
+<p><strong>Some names are reserved or pre-defined. Did you notice that R already knew what <code>T</code> and <code>TRUE</code> were? We will talk more about this later in the course if we need to.</strong></p>
+<p>For example:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
-<p>…and a mess of others have special uses</p>
-<p><br></p>
-<p>Some <em>symbols</em> are also reserved for special use, like:</p>
+<p>…and a mess of others have special uses.</p>
+<p><strong>Some <em>symbols</em> are also reserved for special use, like:</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">*</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">/</span>, <span class="op">&lt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
 <p>…and a bunch of others. A lot of these are really useful.</p>
-<p><br></p>
 </div>
 <div id="some-other-handy-coding-tricks" class="section level3">
 <h3>Some other handy coding tricks</h3>
-<p>The ‘home’ button will move you to the start of the line of code, and to the start of the line if you press it twice.</p>
-<p>The ‘end’ button on your keyboard will take you to the end of a line so you can edit code. These will help you move around your code faster.</p>
-<p>The ‘tab’ button on your keyboard will move the code to the right some number of spaces (user defined). Pressing SHIFT + Tab will move code to the left. These can help you organize your code.</p>
+<p>The <code>HOME</code> button will move you to the start of the line of code, and to the start of the line if you press it twice.</p>
+<p>The <code>END</code> button on your keyboard will take you to the end of a line so you can edit code. These will help you move around your code faster.</p>
+<p>The <code>TAB</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>SHIFT + TAB</code> will move code to the left. These can help you organize your code.</p>
 <p>Single click moves the cursor into position. Double click will highlight the word you are clicking, and a triple left click will highlight an entire line.</p>
-<p>Use search and replace functionality to copy big chunks of code and change names as needed. Can also use this to just search your code. PRESS CTRL + F to open the sub menu at the top.</p>
-<p><br></p>
+<p>Use search and replace functionality to copy big chunks of code and change names as needed. Can also use this to just search your code. Press <code>CTRL + F</code> to open the sub menu at the top.</p>
 </div>
 </div>
 <div id="data-structures" class="section level2">
 <h2>Data structures</h2>
-<div id="vectors" class="section level3">
-<h3>Vectors</h3>
-<p>The first thing you need to know about R is that it’s a statistical programming language. It was designed by stats programmers to be used by stats practitioners. It is not a mathematical language, although it has a lot of math functionality. R is what is known as a “high-level” or “interpreted” programming language. This means the pieces that make it up are a little more intuitive to the average user than most low-level languages like C or C++. The back-end of R is, in fact, a collection of C, C++, Fortran, etc. code that builds up the functionality that we need. This means that R has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language. Translation: you can do a lot pretty easily.</p>
-<p>The second thing you need to know about R is that it’s a “vectorized” language Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
-<p>Let’s take a look at how this works and why it matters</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  a =<span class="st"> </span><span class="dv">1</span>
-  <span class="co"># Here, we have defined &#39;a&#39; as a variable with the value of 1...or have we?</span>
-  a</code></pre></div>
+<h3 top-margin:2px>
+Vectors
+</h3>
+<p>Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of functionality outside this original scope. R is what is known as a “high-level” or “interpreted” programming language. This means the pieces that make it up are a little more intuitive to the average user than most low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. This means that R has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language.</p>
+<p>Part of this flexibility comes from the fact that R is also a “vectorized” language. Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
+<p>Let’s take a look at how this works and why it matters. Here, we have defined <code>a</code> as a variable with the value of <code>1</code>…or have we?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="dv">1</span>
+a</code></pre></div>
 <pre><code>## [1] 1</code></pre>
-<p>What is the square bracket here? It’s an index. The index is telling us that the first element of ‘a’ is 1. This means that ‘a’ is actually a “Vector”, not a “Scalar”. You can think of a vector as a column in an excel spreadsheet or an analagous data table.</p>
-<p>So, even if we define something with a singular value, it is still just a vector with one element (or row if that’s easier).</p>
-<p>This is important because of the way that it lets us do math. Even though it is a little difficult to wrap your head around now, it will help us out a lot in the future, and it makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. In terms of programming, it can make a lot of things more intuitive than low-level languages, too.</p>
-<p>The vector is the basic building block of life in R. Everything else is either made of vectors, or can be contained within one. Let’s play with some:</p>
-<p>‘ATOMIC VECTORS’ can hold one kind of data:</p>
-<p>Character Numeric Integer Logical Factor Date/time</p>
-<p>Below are some examples of <code>atomic vectors</code>. Run the code to see what it does:</p>
-<p><br></p>
+<p>What is the square bracket in the output here? It’s an index. The index is telling us that the first element of <code>a</code> is <code>1</code>. This means that <code>a</code> is actually a “vector”, not a “scalar” or singular value. You can think of a vector as a column in an excel spreadsheet or an analagous data table. By treating every variable as a vector, or an element thereof, the language becomes much more generalizable.</p>
+<p>So, even if we define something with a single value, it is still just a vector with one element. For us, this is important because of the way that it lets us do math. It makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. It makes working through the math a zillion times easier than on paper! In terms of programming, it can make a lot of things easier, too.</p>
+<p>The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox <em>that</em> is. Let’s play with some:</p>
+<div id="atomic-vectors" class="section level4">
+<h4>Atomic vectors</h4>
+<p>A vector that can hold one and only one kind of data:</p>
+<ul>
+<li>Character</li>
+<li>Numeric</li>
+<li>Integer</li>
+<li>Logical</li>
+<li>Factor</li>
+<li>Date/time</li>
+</ul>
+<p>And some others, but none with which we’ll concern ourselves.</p>
+<p>Below are some examples of <strong>atomic vectors</strong>. Run the code to see what it does:</p>
+</div>
 <div id="integers-and-numerics" class="section level4">
 <h4>Integers and numerics</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1 through five</span>
-    <span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1-5</span>
+<span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">show</span>(a)  <span class="co"># Another way to look at it</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show</span>(a)  <span class="co"># Another way to look at it</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a        <span class="co"># A third way to look at it</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a        <span class="co"># A third way to look at it</span></code></pre></div>
 <pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(a)   <span class="co"># We can look at the structure of our vector, integer class</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(a)   <span class="co"># Look at the structure, integer class</span></code></pre></div>
 <pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
-<blockquote>
-<p>Think: what is an integer? This will be important down the road when we start to look at discrete vs. continuous probability distributions.</p>
-</blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>) <span class="co"># Another way to make the same vector</span>
-    a            <span class="co"># Print the vector to the console</span></code></pre></div>
-<pre><code>## [1] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(a)       <span class="co"># Look at the data structure</span></code></pre></div>
-<pre><code>##  int [1:5] 1 2 3 4 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">8</span>, <span class="dt">to=</span><span class="dv">13</span>, <span class="dt">by=</span><span class="dv">1</span>) <span class="co"># This is the long-hand; easier to understand</span>
-    <span class="kw">str</span>(a)       <span class="co"># Notice when we make the vector this way it is &#39;numeric&#39;</span></code></pre></div>
-<pre><code>##  num [1:6] 8 9 10 11 12 13</code></pre>
-<blockquote>
-<p>Again, think: what is the difference between numeric and integer? What is the difference between discrete and continuous scales of measurement?</p>
-</blockquote>
-<p><br></p>
+<p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the same vector using a sequence</span>
+a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">5</span>, <span class="dt">by=</span><span class="dv">1</span>) 
+<span class="kw">str</span>(a)       </code></pre></div>
+<pre><code>##  num [1:5] 1 2 3 4 5</code></pre>
 </div>
 <div id="characters-and-factors" class="section level4">
 <h4>Characters and factors</h4>
 <p><strong>Characters</strong> are anything that is represented as text strings.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    b =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>) <span class="co"># Make a character vector</span>
-    b                              <span class="co"># Print it to the console</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>) <span class="co"># Make a character vector</span>
+b                              <span class="co"># Print it to the console</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(b)                         <span class="co"># Now it&#39;s a character vector</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(b)                         <span class="co"># Now it&#39;s a character vector</span></code></pre></div>
 <pre><code>##  chr [1:5] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    b =<span class="st"> </span><span class="kw">as.factor</span>(b)               <span class="co"># But we can change that if we want</span>
-    b                              <span class="co"># What does that mean???</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">as.factor</span>(b)               <span class="co"># But we can change if we want</span>
+b                             </code></pre></div>
 <pre><code>## [1] a b c d e
 ## Levels: a b c d e</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(b)                         <span class="co"># Look at the data structure for more info</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(b)                         <span class="co"># Look at the data structure</span></code></pre></div>
 <pre><code>##  Factor w/ 5 levels &quot;a&quot;,&quot;b&quot;,&quot;c&quot;,&quot;d&quot;,..: 1 2 3 4 5</code></pre>
-<p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have ‘levels’ that can be ordered numerically. This is not really important except that it becomes really useful for coding variables used in matrices for statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factor vectors to character class so they are easier to manipulate.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">as.numeric</span>(b) <span class="co"># This is what it looks like when we code a factor as number</span>
-  ?as.numeric   <span class="co"># BTW: we can ask R what functions mean like this...</span>
-                <span class="co"># And not just functions: we can ask it about pretty much</span>
-                <span class="co"># any built-in object. REMEMBER THIS.</span></code></pre></div>
-<p><br></p>
+<p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
+<p>This is what it looks like when we code a factor as number:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as.numeric</span>(b) 
+
+<span class="co"># What did that do?</span>
+?as.numeric   </code></pre></div>
+<blockquote>
+<p>Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it…in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.</p>
+</blockquote>
 </div>
 <div id="logical-vectors" class="section level4">
 <h4>Logical vectors</h4>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b   <span class="co"># Most of our logicals will be yes/no or comparisons</span>
-    c            <span class="co"># The &#39;==&#39; compares our numeric vector to the factor one</span></code></pre></div>
-<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">str</span>(c)       <span class="co"># We now have a logical vector</span></code></pre></div>
-<pre><code>##  logi [1:6] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">is.na</span>(a)     <span class="co"># We can check for missing values</span></code></pre></div>
-<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></code></pre></div>
-<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39; and is a logical operator</span></code></pre></div>
-<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements of a vector meet a criterion</span></code></pre></div>
-<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">unique</span>(b)    <span class="co"># We can just look at uniue values</span></code></pre></div>
+<p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span>
+c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b 
+c            </code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(c)       </code></pre></div>
+<pre><code>##  logi [1:5] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.na</span>(a)     <span class="co"># We can check for missing values</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
+<pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
+<pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></code></pre></div>
 <pre><code>## [1] a b c d e
 ## Levels: a b c d e</code></pre>
-<p>Vectors only hold one data type</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    d =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="st">&#39;a&#39;</span>, <span class="dv">2</span>) <span class="co"># </span></code></pre></div>
-<p>If we try this it converts everything to the lowest common denominator. In this case, we can coerce numbers to characters, but there is no way to turn ‘a’ into an integer or numeric class meaningfully…</p>
+<p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
 </div>
 <div id="vector-operations" class="section level4">
 <h4>Vector operations</h4>
-<p>We can reference specific elements of vectors</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a[<span class="dv">3</span>] <span class="co"># Here, we are printing the third element of &#39;a&#39;</span></code></pre></div>
-<pre><code>## [1] 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] <span class="co"># Here, we say, print any element of &#39;b&#39; that is equal to &#39;c&#39;</span></code></pre></div>
+<p>A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.</p>
+<p>For example, we can reference specific elements of vectors directly. Here, we specify that we want to print the third element of <code>a</code>.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This one just prints it</span>
+a[<span class="dv">3</span>] </code></pre></div>
+<pre><code>## [1] 3</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># This one stores it in a new object</span>
+f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
+<blockquote>
+<p>Important</p>
+</blockquote>
+<p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
+<p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] </code></pre></div>
 <pre><code>## [1] c
 ## Levels: a b c d e</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>) <span class="co"># Or, we can ask which elements equal &#39;c&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<p>We can do elementwise operations…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
-<pre><code>## [1] 4.0 4.5 5.0 5.5 6.0 6.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
-<pre><code>## [1] 108 109 110 111 112 113</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
-<pre><code>## [1]  5  6  7  8  9 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
-<pre><code>## [1] 4.0 4.5 5.0 5.5 6.0 6.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
-<pre><code>## [1]  64  81 100 121 144 169</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></code></pre></div>
-<pre><code>## [1]   2980.958   8103.084  22026.466  59874.142 162754.791 442413.392</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">log</span>(a)   <span class="co"># Natural logarithm</span></code></pre></div>
-<pre><code>## [1] 2.079442 2.197225 2.302585 2.397895 2.484907 2.564949</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">log10</span>(a) <span class="co"># Log base 10</span></code></pre></div>
-<pre><code>## [1] 0.9030900 0.9542425 1.0000000 1.0413927 1.0791812 1.1139434</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    b =<span class="st"> </span><span class="kw">as.character</span>(b)
-    <span class="kw">paste</span>(b, <span class="st">&#39;AAAA&#39;</span>, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can append text</span></code></pre></div>
+<p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
+<pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
+<pre><code>## [1] 101 102 103 104 105</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
+<pre><code>## [1] -2 -1  0  1  2</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
+<pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
+<pre><code>## [1]  1  4  9 16 25</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></code></pre></div>
+<pre><code>## [1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log</span>(a)   <span class="co"># Natural logarithm</span></code></pre></div>
+<pre><code>## [1] 0.0000000 0.6931472 1.0986123 1.3862944 1.6094379</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">log10</span>(a) <span class="co"># Log base 10</span></code></pre></div>
+<pre><code>## [1] 0.0000000 0.3010300 0.4771213 0.6020600 0.6989700</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b =<span class="st"> </span><span class="kw">as.character</span>(b)
+<span class="kw">paste</span>(b, <span class="st">&#39;AAAA&#39;</span>, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can append text</span></code></pre></div>
 <pre><code>## [1] &quot;aAAAA&quot; &quot;bAAAA&quot; &quot;cAAAA&quot; &quot;dAAAA&quot; &quot;eAAAA&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can do it the other way</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># We can do it the other way</span></code></pre></div>
 <pre><code>## [1] &quot;AAAAa&quot; &quot;AAAAb&quot; &quot;AAAAc&quot; &quot;AAAAd&quot; &quot;AAAAe&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;--&#39;</span>) <span class="co"># Add symbols to separate</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;--&#39;</span>) <span class="co"># Add symbols to separate</span></code></pre></div>
 <pre><code>## [1] &quot;AAAA--a&quot; &quot;AAAA--b&quot; &quot;AAAA--c&quot; &quot;AAAA--d&quot; &quot;AAAA--e&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">gsub</span>(<span class="dt">pattern=</span><span class="st">&#39;c&#39;</span>, <span class="dt">replacement=</span><span class="st">&#39;AAAA&#39;</span>, b) <span class="co"># We can replace text</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">gsub</span>(<span class="dt">pattern=</span><span class="st">&#39;c&#39;</span>, <span class="dt">replacement=</span><span class="st">&#39;AAAA&#39;</span>, b) <span class="co"># We can replace text</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;    &quot;b&quot;    &quot;AAAA&quot; &quot;d&quot;    &quot;e&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    e =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># Make a new object</span>
-    e                            <span class="co"># Print to console</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># Make a new object</span>
+e                            <span class="co"># Print to console</span></code></pre></div>
 <pre><code>## [1] &quot;AAAAa&quot; &quot;AAAAb&quot; &quot;AAAAc&quot; &quot;AAAAd&quot; &quot;AAAAe&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">substr</span>(e, <span class="dt">start=</span><span class="dv">5</span>, <span class="dt">stop=</span><span class="dv">5</span>)   <span class="co"># We can strip text (or dates, or times, etc.)</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">substr</span>(e, <span class="dt">start=</span><span class="dv">5</span>, <span class="dt">stop=</span><span class="dv">5</span>)   <span class="co"># We can strip text (or dates, or times, etc.)</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot; &quot;d&quot; &quot;e&quot;</code></pre>
-<p>We can check how many elements they have…</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></code></pre></div>
-<pre><code>## [1] 6</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    a         <span class="co"># Yup, looks about right</span></code></pre></div>
-<pre><code>## [1]  8  9 10 11 12 13</code></pre>
-<p><br></p>
-</div>
+<p>We can check how many elements are in a vector.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></code></pre></div>
+<pre><code>## [1] 5</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a         <span class="co"># Yup, looks about right</span></code></pre></div>
+<pre><code>## [1] 1 2 3 4 5</code></pre>
+<p>And we can do lots of other nifty things like this.</p>
 </div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
-<p>Matrices are made up of vectors</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can make matrices by binding vectors that already exist</span>
-  <span class="kw">cbind</span>(a,e)</code></pre></div>
-<pre><code>## Warning in cbind(a, e): number of rows of result is not a multiple of
-## vector length (arg 2)</code></pre>
-<pre><code>##      a    e      
-## [1,] &quot;8&quot;  &quot;AAAAa&quot;
-## [2,] &quot;9&quot;  &quot;AAAAb&quot;
-## [3,] &quot;10&quot; &quot;AAAAc&quot;
-## [4,] &quot;11&quot; &quot;AAAAd&quot;
-## [5,] &quot;12&quot; &quot;AAAAe&quot;
-## [6,] &quot;13&quot; &quot;AAAAa&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or we can make an empty one to fill</span>
-  <span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)</code></pre></div>
+<p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
+<p>We can make matrices by binding vectors that already exist</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(a,e)</code></pre></div>
+<pre><code>##      a   e      
+## [1,] &quot;1&quot; &quot;AAAAa&quot;
+## [2,] &quot;2&quot; &quot;AAAAb&quot;
+## [3,] &quot;3&quot; &quot;AAAAc&quot;
+## [4,] &quot;4&quot; &quot;AAAAd&quot;
+## [5,] &quot;5&quot; &quot;AAAAe&quot;</code></pre>
+<p>Or we can make an empty one to fill.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4]
 ## [1,]    0    0    0    0
 ## [2,]    0    0    0    0
 ## [3,]    0    0    0    0</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or we can make one from scratch</span>
-  mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)
-<span class="co"># We can do all of the things we did with vectors to matrices, but now we</span>
-<span class="co"># have more than one column, and official &#39;rows&#39;</span>
-  <span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span></code></pre></div>
+<p>Or we can make one from scratch.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</code></pre></div>
+<p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span></code></pre></div>
 <pre><code>## [1] 3</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">nrow</span>(mat)   <span class="co"># Number of rows</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">nrow</span>(mat)   <span class="co"># Number of rows</span></code></pre></div>
 <pre><code>## [1] 4</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></code></pre></div>
 <pre><code>## [1] 12</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mat[<span class="dv">2</span>, <span class="dv">3</span>]   <span class="co"># Value of row 2, column 3</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat[<span class="dv">2</span>, <span class="dv">3</span>]   <span class="co"># Value of row 2, column 3</span></code></pre></div>
 <pre><code>## [1] 10</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(mat)    <span class="co"># See how no. of rows and columns is defined in data structure?</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat)    </code></pre></div>
 <pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># With rows and columns, we can assign column names and row names. Honestly,</span>
-<span class="co"># we will almost never use these but you may come across it elsewhere</span>
-  <span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)
-  <span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)
-  mat</code></pre></div>
+<p>See how number of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">colnames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)
+<span class="kw">rownames</span>(mat) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)
+mat</code></pre></div>
 <pre><code>##        first second third
 ## This       1      5     9
 ## is         2      6    10
 ## a          3      7    11
 ## matrix     4      8    12</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(mat) <span class="co"># Take a look at the data structure and see if you understand</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(mat) <span class="co"># Take a look to understand</span></code></pre></div>
 <pre><code>##  int [1:4, 1:3] 1 2 3 4 5 6 7 8 9 10 ...
 ##  - attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..$ : chr [1:4] &quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;matrix&quot;
 ##   ..$ : chr [1:3] &quot;first&quot; &quot;second&quot; &quot;third&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  mat<span class="op">*</span><span class="dv">2</span> <span class="co"># All the same operations we did on vectors above...one example</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat<span class="op">*</span><span class="dv">2</span> </code></pre></div>
 <pre><code>##        first second third
 ## This       2     10    18
 ## is         4     12    20
 ## a          6     14    22
 ## matrix     8     16    24</code></pre>
-<p><br></p>
-<p>More on matrices as we need them. We won’t use these a lot in this course, but R relies heavily on matrices to do linear algebra behind the scene in the models that we will be working with.</p>
-<p><br></p>
+<p>All the same operations we did on vectors above…one example.</p>
+<p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.</p>
 </div>
 <div id="dataframes" class="section level3">
 <h3>Dataframes</h3>
-<p>Data frames are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!</p>
-<p>Data frames are made up of ‘ATOMIC VECTORS’</p>
-<p>This, and the atomic vector, is probably the data structure that we will use most in this course.</p>
-<p>Let’s make a dataframe:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  <span class="co"># Make a sequence</span>
-  b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           <span class="co"># Vector math- raise each &#39;a&#39; to power of 2</span>
-  c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    <span class="co"># Replicates values in object a # of times</span>
-  d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           <span class="co"># Note, we don&#39;t use quotes for objects</span></code></pre></div>
-<p><br></p>
+<p>Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!</p>
+<p><strong>Dataframes</strong> are made up of <strong>atomic vectors</strong>.</p>
+<p>This is probably the data structure that we will use most here, along with atomic vectors.</p>
+<p>Let’s make a dataframe to see how it works.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new object &#39;a&#39; from a sequence  </span>
+a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
+  
+<span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
+b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
+
+<span class="co"># Replicates values in object a # of times  </span>
+c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
+
+<span class="co"># Note, we don&#39;t use quotes for objects,</span>
+<span class="co"># but we do for character variables</span>
+d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </code></pre></div>
 <p>Now we can look at it:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  d <span class="co"># Print the dataframe</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="co"># Print the dataframe</span></code></pre></div>
 <pre><code>##       a      b c
 ## 1   0.5   0.25 a
 ## 2   1.0   1.00 b
@@ -597,22 +624,21 @@ pre code, pre, code {
 ## 18  9.0  81.00 b
 ## 19  9.5  90.25 c
 ## 20 10.0 100.00 d</code></pre>
-<p><br></p>
 <p>Notice that R assigns names to dataframes on the fly based on object names. They are not <code>colnames</code> as with matrices, they are <code>names</code>.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># We can look at these</span>
-    <span class="kw">names</span>(d)     <span class="co"># All of the names</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can look at these</span>
+<span class="kw">names</span>(d)     <span class="co"># All of the names</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot; &quot;b&quot; &quot;c&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">names</span>(d)[<span class="dv">2</span>]  <span class="co"># One at a time: note indexing, names(d) is a vector!!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(d)[<span class="dv">2</span>]  <span class="co"># One at a time: note indexing, names(d) is a vector!!</span></code></pre></div>
 <pre><code>## [1] &quot;b&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># We can change the names</span>
-    <span class="kw">names</span>(d) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Increment&#39;</span>, <span class="st">&#39;Squared&#39;</span>, <span class="st">&#39;Class&#39;</span>) <span class="co"># All at once- note quotes</span>
-    <span class="kw">names</span>(d)               <span class="co"># Print it to see what this does</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can change the names</span>
+<span class="kw">names</span>(d) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Increment&#39;</span>, <span class="st">&#39;Squared&#39;</span>, <span class="st">&#39;Class&#39;</span>) <span class="co"># All at once- note quotes</span>
+<span class="kw">names</span>(d)               <span class="co"># Print it to see what this does</span></code></pre></div>
 <pre><code>## [1] &quot;Increment&quot; &quot;Squared&quot;   &quot;Class&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">names</span>(d)[<span class="dv">3</span>] =<span class="st"> &#39;Letter&#39;</span> <span class="co"># Or, one at a time..</span>
-    <span class="kw">names</span>(d)               <span class="co"># Print it again to see what changed</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(d)[<span class="dv">3</span>] =<span class="st"> &#39;Letter&#39;</span> <span class="co"># Or, change one at a time..</span>
+<span class="kw">names</span>(d)               <span class="co"># Print it again to see what changed</span></code></pre></div>
 <pre><code>## [1] &quot;Increment&quot; &quot;Squared&quot;   &quot;Letter&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    e =<span class="st"> </span>d                  <span class="co"># We can also rename the entire dataframe</span>
-    <span class="kw">head</span>(e)                <span class="co"># This will show us the first six rows of a dataframe</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e =<span class="st"> </span>d                  <span class="co"># We can also rename the entire dataframe</span>
+<span class="kw">head</span>(e)                <span class="co"># Head shows first six rows by default</span></code></pre></div>
 <pre><code>##   Increment Squared Letter
 ## 1       0.5    0.25      a
 ## 2       1.0    1.00      b
@@ -620,7 +646,7 @@ pre code, pre, code {
 ## 4       2.0    4.00      d
 ## 5       2.5    6.25      a
 ## 6       3.0    9.00      b</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">head</span>(e, <span class="dv">10</span>)            <span class="co"># Or, we can look at any other number that we want</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(e, <span class="dv">10</span>)            <span class="co"># Or, we can look at any other number that we want</span></code></pre></div>
 <pre><code>##    Increment Squared Letter
 ## 1        0.5    0.25      a
 ## 2        1.0    1.00      b
@@ -632,8 +658,8 @@ pre code, pre, code {
 ## 8        4.0   16.00      d
 ## 9        4.5   20.25      a
 ## 10       5.0   25.00      b</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
-    e <span class="co"># We can make new columns in data frames really easily like this!</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
+e <span class="co"># We can make new columns in data frames like this!</span></code></pre></div>
 <pre><code>##    Increment Squared Letter      Sqrt
 ## 1        0.5    0.25      a 0.7071068
 ## 2        1.0    1.00      b 1.0000000
@@ -655,11 +681,10 @@ pre code, pre, code {
 ## 18       9.0   81.00      b 3.0000000
 ## 19       9.5   90.25      c 3.0822070
 ## 20      10.0  100.00      d 3.1622777</code></pre>
-<p><br></p>
 <p>Looking at specific elements of a dataframe is similar to a matrix, with some added capabilities. We’ll do this with some real data so it’s more fun. Most of the packages in R have built in data sets that we can use for examples. Let’s start by looking at the Iris data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">data</span>(<span class="st">&#39;iris&#39;</span>)  <span class="co"># This is how you load built-in data sets</span>
     <span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>## [1] &quot;a&quot;    &quot;A&quot;    &quot;b&quot;    &quot;c&quot;    &quot;d&quot;    &quot;e&quot;    &quot;iris&quot; &quot;mat&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot;    &quot;A&quot;    &quot;b&quot;    &quot;c&quot;    &quot;d&quot;    &quot;e&quot;    &quot;f&quot;    &quot;iris&quot; &quot;mat&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">head</span>(iris)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
@@ -732,12 +757,11 @@ pre code, pre, code {
       <span class="co"># Once we have a nice dataframe like these ones, we can actually step into</span>
       <span class="co"># The world of exploratory analyses.</span>
         <span class="kw">hist</span>(setosaData<span class="op">$</span>Sepal.Length) <span class="co"># Make a histogram of sepal lengths</span></code></pre></div>
-<p><img src="01_introToR_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
+<p><img src="01_introToR_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">plot</span>(setosaData<span class="op">$</span>Sepal.Width, setosaData<span class="op">$</span>Sepal.Length) <span class="co"># Bi-plot</span></code></pre></div>
-<p><img src="01_introToR_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
+<p><img src="01_introToR_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">boxplot</span>(Sepal.Width<span class="op">~</span>Species, <span class="dt">data=</span>iris) <span class="co"># Boxplots</span></code></pre></div>
-<p><img src="01_introToR_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
-<p><br></p>
+<p><img src="01_introToR_files/figure-html/unnamed-chunk-30-3.png" width="672" /></p>
 </div>
 <div id="lists" class="section level3">
 <h3>Lists</h3>
@@ -844,7 +868,12 @@ pre code, pre, code {
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; font-family:arial">This work is licensed under a Creative Commons Attribution 4.0 International License.</p>
 
 
 
