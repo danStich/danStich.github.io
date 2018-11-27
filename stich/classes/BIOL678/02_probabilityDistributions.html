@@ -429,7 +429,7 @@ Introduction
 <p>We can simulate data from a Bernoulli distribution in one of two ways in R</p>
 <p>The “old-school” way of doing this was to draw from a binomial with a single <strong>trial</strong>. Here we randomly draw a single sample from a binomial with a single trial, and a probability of success of 50%. This can be likened to flipping a fair coin.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)</code></pre></div>
-<pre><code>## [1] 1</code></pre>
+<pre><code>## [1] 0</code></pre>
 <p>But now, there is a function in the <code>Rlab</code> package that simplifies this for the specific case of a Bernoulli.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># First, install the necessary package</span>
     <span class="co">#install.packages(&#39;Rlab&#39;) # Uncomment to install</span>
@@ -450,9 +450,9 @@ Introduction
 <pre><code>## [1] 0</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Flip the coin 100 times</span>
       <span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)</code></pre></div>
-<pre><code>##   [1] 1 0 1 1 0 0 1 0 1 1 0 0 0 1 1 0 1 1 0 0 0 1 1 1 1 0 1 0 0 0 0 1 1 0 1
-##  [36] 0 1 1 0 1 0 0 1 0 1 0 0 0 1 0 0 1 0 1 0 0 1 0 0 1 1 0 0 1 0 0 0 0 0 0
-##  [71] 0 0 1 1 1 1 0 1 1 0 0 1 1 1 1 0 1 1 1 1 0 1 1 0 1 0 0 1 0 1</code></pre>
+<pre><code>##   [1] 0 0 0 1 1 0 0 1 1 1 1 0 1 1 0 1 1 0 1 1 1 1 0 0 0 0 0 0 1 1 0 0 0 0 1
+##  [36] 1 1 1 1 1 0 0 0 1 1 0 0 1 0 0 0 1 1 1 1 1 1 0 0 1 1 0 0 0 0 1 0 1 1 0
+##  [71] 0 1 0 1 1 0 1 1 0 1 1 1 0 1 0 0 1 0 0 0 0 1 1 1 1 1 1 1 0 0</code></pre>
 <blockquote>
 <p>The binomial distribution</p>
 </blockquote>
@@ -461,7 +461,7 @@ Introduction
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a random draw of 10 samples from a binomial distribution with 10 trials</span>
 <span class="co"># and probability of success equal to 0.50</span>
 <span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)</code></pre></div>
-<pre><code>##  [1] 7 6 1 5 7 4 5 5 5 7</code></pre>
+<pre><code>##  [1] 6 4 8 5 6 3 4 6 9 5</code></pre>
 <blockquote>
 <p>The multinomial distribution</p>
 </blockquote>
@@ -474,16 +474,18 @@ Introduction
   probs =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x=</span><span class="dv">1</span>/<span class="kw">length</span>(name), <span class="dt">times=</span><span class="kw">length</span>(name))      
   probs      </code></pre></div>
 <pre><code>## [1] 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571 0.1428571</code></pre>
+<p><br></p>
 <p>Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 8 probabilities above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)</code></pre></div>
 <pre><code>##      [,1] [,2] [,3] [,4] [,5]
-## [1,]    0    0    0    1    0
+## [1,]    0    0    0    0    0
 ## [2,]    1    0    0    0    0
-## [3,]    0    0    0    0    0
+## [3,]    0    1    0    0    1
 ## [4,]    0    0    1    0    0
-## [5,]    0    0    0    0    1
+## [5,]    0    0    0    0    0
 ## [6,]    0    0    0    0    0
-## [7,]    0    1    0    0    0</code></pre>
+## [7,]    0    0    0    1    0</code></pre>
+<p><br></p>
 <p><strong>WHOA</strong> a matrix??!!! HOLY CRAP, WHAT DOES IT ALL MEAN?</p>
 <p>Take a step back, breath, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a single sample from the list of student names    </span>
@@ -494,31 +496,35 @@ Introduction
 ## [3,]    0
 ## [4,]    0
 ## [5,]    0
-## [6,]    0
-## [7,]    1</code></pre>
+## [6,]    1
+## [7,]    0</code></pre>
+<p><br></p>
 <p>Here, we pulled a single sample from the distribution, and probability of sampling a given individual was 0.14 (1/7). If it makes it easier, we can put your names next to it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</code></pre></div>
 <pre><code>##      name        
 ## [1,] &quot;Amanda&quot; &quot;0&quot;
-## [2,] &quot;Chris&quot;  &quot;1&quot;
+## [2,] &quot;Chris&quot;  &quot;0&quot;
 ## [3,] &quot;Kendra&quot; &quot;0&quot;
-## [4,] &quot;Luis&quot;   &quot;0&quot;
+## [4,] &quot;Luis&quot;   &quot;1&quot;
 ## [5,] &quot;Sarah&quot;  &quot;0&quot;
 ## [6,] &quot;Steve&quot;  &quot;0&quot;
 ## [7,] &quot;Zach&quot;   &quot;0&quot;</code></pre>
+<p><br></p>
 <p>Now, if I was calling on you randomly in class, after 10 questions, the spread of people who have participated in class might look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</code></pre></div>
 <pre><code>##      name                                            
-## [1,] &quot;Amanda&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [2,] &quot;Chris&quot;  &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot;
-## [3,] &quot;Kendra&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot;
-## [4,] &quot;Luis&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [5,] &quot;Sarah&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot;
-## [6,] &quot;Steve&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
-## [7,] &quot;Zach&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;</code></pre>
+## [1,] &quot;Amanda&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot;
+## [2,] &quot;Chris&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+## [3,] &quot;Kendra&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+## [4,] &quot;Luis&quot;   &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;
+## [5,] &quot;Sarah&quot;  &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot;
+## [6,] &quot;Steve&quot;  &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot;
+## [7,] &quot;Zach&quot;   &quot;0&quot; &quot;0&quot; &quot;1&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot; &quot;0&quot;</code></pre>
+<p><br></p>
 <p>Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are <strong>awesome</strong>!) matrices:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  name[<span class="kw">which</span>(<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)&gt;<span class="dv">0</span>)]</code></pre></div>
-<pre><code>## [1] &quot;Kendra&quot;</code></pre>
+<pre><code>## [1] &quot;Luis&quot;</code></pre>
+<p><br></p>
 <p>And now we have a way to randomly select an individual based on a multinomial distribution!</p>
 <blockquote>
 <p>The Poisson distribution</p>
@@ -627,12 +633,14 @@ Introduction
   }
 <span class="co"># Test the function</span>
   <span class="kw">norm.mom</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.01230838 0.94668184</code></pre>
+<pre><code>## [1] 0.03927933 1.03154317</code></pre>
+<p><br></p>
 <p>Because this one is so common, R has built-in estimators that rely on the exact solution provided by the formulas for the first two moments of the normal distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">mean</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.01230838</code></pre>
+<pre><code>## [1] 0.03927933</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">var</span>(test_norm)</code></pre></div>
-<pre><code>## [1] 0.9476295</code></pre>
+<pre><code>## [1] 1.032576</code></pre>
+<p><br></p>
 <p>How do these compare to the answers returned by our function?</p>
 <blockquote>
 <p>Maximum likelihood estimator</p>
@@ -641,8 +649,9 @@ Introduction
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(test_norm, <span class="st">&#39;normal&#39;</span>)</code></pre></div>
 <pre><code>##       mean          sd    
-##   0.01230838   0.97297577 
-##  (0.03076820) (0.02175640)</code></pre>
+##   0.03927933   1.01564914 
+##  (0.03211765) (0.02271061)</code></pre>
+<p><br></p>
 <p>Only one problem here: R doesn’t report the second moment! It reports the square root of the second moment: the <strong>standard deviation</strong>!</p>
 <p>Finally, let’s write our own function and maximize the likelihood with the <code>optim()</code> function in R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the function</span>
@@ -659,41 +668,44 @@ Introduction
     logl =<span class="st"> </span>-.<span class="dv">5</span>*n*<span class="kw">log</span>(<span class="dv">2</span>*pi) -.<span class="dv">5</span>*n*<span class="kw">log</span>(sigma2)-(<span class="dv">1</span>/(<span class="dv">2</span>*sigma2))*<span class="kw">sum</span>((y-mu)**<span class="dv">2</span>)
     <span class="kw">return</span>(-logl)
   }</code></pre></div>
+<p><br></p>
 <p>Now, we use the <code>optim</code> function to maximize the likelihood of the data (technically by minimizing the -log likehood) given different values of our parameters (<code>mu</code> and <code>sigma2</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))</code></pre></div>
 <pre><code>## $par
-## [1] 0.01221085 0.94663213
+## [1] 0.03919587 1.03174844
 ## 
 ## $value
-## [1] 1391.542
+## [1] 1434.467
 ## 
 ## $counts
 ## function gradient 
-##       41       NA 
+##       35       NA 
 ## 
 ## $convergence
 ## [1] 0
 ## 
 ## $message
 ## NULL</code></pre>
+<p><br></p>
 <p>We can also make this into an object and call the parts by name:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make it into an object</span>
   est =<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))        
 <span class="co"># Look at the structure </span>
   <span class="kw">str</span>(est)   <span class="co"># I&#39;ll be damned, it&#39;s a list! Hey, we learned about those!</span></code></pre></div>
 <pre><code>## List of 5
-##  $ par        : num [1:2] 0.0122 0.9466
-##  $ value      : num 1392
-##  $ counts     : Named int [1:2] 41 NA
+##  $ par        : num [1:2] 0.0392 1.0317
+##  $ value      : num 1434
+##  $ counts     : Named int [1:2] 35 NA
 ##   ..- attr(*, &quot;names&quot;)= chr [1:2] &quot;function&quot; &quot;gradient&quot;
 ##  $ convergence: int 0
 ##  $ message    : NULL</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par    <span class="co"># Here are the estimates</span></code></pre></div>
-<pre><code>## [1] 0.01221085 0.94663213</code></pre>
+<pre><code>## [1] 0.03919587 1.03174844</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par[<span class="dv">1</span>] <span class="co"># The mean</span></code></pre></div>
-<pre><code>## [1] 0.01221085</code></pre>
+<pre><code>## [1] 0.03919587</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  est$par[<span class="dv">2</span>] <span class="co"># The variance</span></code></pre></div>
-<pre><code>## [1] 0.9466321</code></pre>
+<pre><code>## [1] 1.031748</code></pre>
+<p><br></p>
 <p>That’s better: an exact solution! Just in case you’d like to know exactly what <code>optim</code> is doing:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ?optim</code></pre></div>
 <blockquote>
@@ -701,15 +713,15 @@ Introduction
 </blockquote>
 <p>There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">median</span>(test_norm) <span class="co"># Here is the median, or 50th percentile</span></code></pre></div>
-<pre><code>## [1] 0.0163862</code></pre>
+<pre><code>## [1] 0.02716843</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) <span class="co"># The 95% confidence limits</span></code></pre></div>
 <pre><code>##      2.5%     97.5% 
-## -1.940123  1.858495</code></pre>
+## -1.977478  2.145221</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))   <span class="co"># Inner quartile range </span></code></pre></div>
 <pre><code>##        25%        75% 
-## -0.6449083  0.6913571</code></pre>
+## -0.6064773  0.7003010</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">range</span>(test_norm)                             <span class="co"># Range of sample</span></code></pre></div>
-<pre><code>## [1] -3.045907  2.825927</code></pre>
+<pre><code>## [1] -3.152212  3.497603</code></pre>
 </div>
 </div>
 </div>

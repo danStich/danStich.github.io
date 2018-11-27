@@ -278,7 +278,7 @@ pre code, pre, code {
 <p><br></p>
 <div id="introduction-to-programming-in-r" class="section level1">
 <h1>Introduction to programming in R</h1>
-<p><img src="../../images/roh.png" alt=""></p>
+<p><img src="/home/god/codeDevelopment/danStich.github.io/stich/images/roh.png" alt=""></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way.</p>
@@ -315,7 +315,7 @@ pre code, pre, code {
 </blockquote>
 <p>Type the following line of code into a blank source file, and run it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add 1 and 1 together</span>
-<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></code></pre></div>
+<span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span></code></pre></div>
 <pre><code>## [1] 2</code></pre>
 <blockquote>
 <p>Section breaks help organization</p>
@@ -331,7 +331,7 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Example (run the following lines):</span>
   a =<span class="st"> </span><span class="dv">1</span>
   A =<span class="st"> </span><span class="dv">2</span>
-  a <span class="op">==</span><span class="st"> </span>A</code></pre></div>
+  a ==<span class="st"> </span>A</code></pre></div>
 <pre><code>## [1] FALSE</code></pre>
 <p><br></p>
 <p>A few things going on here.</p>
@@ -361,15 +361,15 @@ pre code, pre, code {
 <pre><code>## [1] 2</code></pre>
 <p><br></p>
 <p><strong>Some things can be expressed in multiple ways. Both <code>T</code> and <code>TRUE</code> can be used to indicate a logical that evaluates as being TRUE.</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  T ==<span class="st"> </span><span class="ot">TRUE</span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <p><br></p>
 <p><strong>Some names are reserved or pre-defined. Did you notice that R already knew what <code>T</code> and <code>TRUE</code> were? We will talk more about this later in the course if we need to.</strong></p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  in, if, else, for, function()</code></pre></div>
 <p>…and a mess of others have special uses.</p>
 <p><strong>Some <em>symbols</em> are also reserved for special use, like:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">*</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">/</span>, <span class="op">&lt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">*, % %, &amp;, /, &lt;, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
 <p>…and a bunch of others. A lot of these are really useful.</p>
 </div>
 <div id="some-other-handy-coding-tricks" class="section level3">
@@ -454,7 +454,7 @@ b                             </code></pre></div>
 <h4>Logical vectors</h4>
 <p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span>
-c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b 
+c &lt;-<span class="st">  </span>a ==<span class="st"> </span>b 
 c            </code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(c)       </code></pre></div>
@@ -464,9 +464,9 @@ c            </code></pre></div>
 <pre><code>## [1] FALSE FALSE FALSE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">!<span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></code></pre></div>
 <pre><code>## [1] TRUE TRUE TRUE TRUE TRUE</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a ==<span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></code></pre></div>
 <pre><code>## [1] FALSE FALSE  TRUE FALSE FALSE</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></code></pre></div>
 <pre><code>## [1] a b c d e
@@ -487,21 +487,21 @@ f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
 </blockquote>
 <p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
 <p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">b[b==<span class="st">&#39;c&#39;</span>] </code></pre></div>
 <pre><code>## [1] c
 ## Levels: a b c d e</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">which</span>(b==<span class="st">&#39;c&#39;</span>)</code></pre></div>
 <pre><code>## [1] 3</code></pre>
 <p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a *<span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span></code></pre></div>
 <pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a +<span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></code></pre></div>
 <pre><code>## [1] 101 102 103 104 105</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a -<span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></code></pre></div>
 <pre><code>## [1] -2 -1  0  1  2</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a /<span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></code></pre></div>
 <pre><code>## [1] 0.5 1.0 1.5 2.0 2.5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a ^<span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></code></pre></div>
 <pre><code>## [1]  1  4  9 16 25</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></code></pre></div>
 <pre><code>## [1]   2.718282   7.389056  20.085537  54.598150 148.413159</code></pre>
@@ -574,7 +574,7 @@ mat</code></pre></div>
 ##  - attr(*, &quot;dimnames&quot;)=List of 2
 ##   ..$ : chr [1:4] &quot;This&quot; &quot;is&quot; &quot;a&quot; &quot;matrix&quot;
 ##   ..$ : chr [1:3] &quot;first&quot; &quot;second&quot; &quot;third&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat<span class="op">*</span><span class="dv">2</span> </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat*<span class="dv">2</span> </code></pre></div>
 <pre><code>##        first second third
 ## This       2     10    18
 ## is         4     12    20
@@ -593,7 +593,7 @@ mat</code></pre></div>
 a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
   
 <span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
-b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
+b =<span class="st"> </span>a^<span class="dv">2</span>                           
 
 <span class="co"># Replicates values in object a # of times  </span>
 c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
@@ -658,7 +658,7 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 ## 8        4.0   16.00      d
 ## 9        4.5   20.25      a
 ## 10       5.0   25.00      b</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e$Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e$Increment)
 e <span class="co"># We can make new columns in data frames like this!</span></code></pre></div>
 <pre><code>##    Increment Squared Letter      Sqrt
 ## 1        0.5    0.25      a 0.7071068
@@ -684,20 +684,7 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <p>Looking at specific elements of a dataframe is similar to a matrix, with some added capabilities. We’ll do this with some real data so it’s more fun. Most of the packages in R have built in data sets that we can use for examples. Let’s start by looking at the Iris data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">data</span>(<span class="st">&#39;iris&#39;</span>)  <span class="co"># This is how you load built-in data sets</span>
     <span class="kw">ls</span>()          <span class="co"># We can use ls() to see what is in our environment</span></code></pre></div>
-<pre><code>##  [1] &quot;a&quot;            &quot;A&quot;            &quot;air.test&quot;     &quot;airquality&quot;  
-##  [5] &quot;b&quot;            &quot;c&quot;            &quot;coeffs&quot;       &quot;cricket.mod&quot; 
-##  [9] &quot;crickets&quot;     &quot;d&quot;            &quot;e&quot;            &quot;est&quot;         
-## [13] &quot;f&quot;            &quot;fert.mod&quot;     &quot;full.mod&quot;     &quot;group&quot;       
-## [17] &quot;intcpt&quot;       &quot;iris&quot;         &quot;lengthCheck&quot;  &quot;lint&quot;        
-## [21] &quot;lint.model&quot;   &quot;lint.modeli&quot;  &quot;logicalCheck&quot; &quot;mat&quot;         
-## [25] &quot;mod&quot;          &quot;model&quot;        &quot;mu&quot;           &quot;multiple.mod&quot;
-## [29] &quot;myList&quot;       &quot;name&quot;         &quot;new&quot;          &quot;newEd&quot;       
-## [33] &quot;norm.mom&quot;     &quot;normal.lik&quot;   &quot;obs&quot;          &quot;obs_fit&quot;     
-## [37] &quot;plant_model&quot;  &quot;PlantGrowth&quot;  &quot;pred_fit&quot;     &quot;pred_int&quot;    
-## [41] &quot;preds&quot;        &quot;probs&quot;        &quot;setosaData&quot;   &quot;slp&quot;         
-## [45] &quot;smolts&quot;       &quot;smolts2&quot;      &quot;swiss&quot;        &quot;swiss.mod&quot;   
-## [49] &quot;test_norm&quot;    &quot;turtles&quot;      &quot;y_control&quot;    &quot;y_fert&quot;      
-## [53] &quot;y_trt1&quot;       &quot;y_trt2&quot;</code></pre>
+<pre><code>## [1] &quot;a&quot;    &quot;A&quot;    &quot;b&quot;    &quot;c&quot;    &quot;d&quot;    &quot;e&quot;    &quot;f&quot;    &quot;iris&quot; &quot;mat&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">head</span>(iris)    <span class="co"># Look at the first six rows of data in the object</span></code></pre></div>
 <pre><code>##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
 ## 1          5.1         3.5          1.4         0.2  setosa
@@ -740,7 +727,7 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
       iris[<span class="dv">12</span>, <span class="dv">4</span>]</code></pre></div>
 <pre><code>## [1] 0.2</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># What is the mean sepal length among all species in iris?</span>
-      <span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length)</code></pre></div>
+      <span class="kw">mean</span>(iris$Sepal.Length)</code></pre></div>
 <pre><code>## [1] 5.843333</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># What about the mean sepal length just for setosa?</span>
       <span class="co"># A couple of new things going on here:</span>
@@ -750,13 +737,13 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
       <span class="co"># 3. What we are saying here is:</span>
       <span class="co">#    &quot;Show me the mean of the column Sepal.Length in the dataframe iris</span>
       <span class="co">#    where the species name is setosa&quot;</span>
-        <span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>])</code></pre></div>
+        <span class="kw">mean</span>(iris$Sepal.Length[iris$Species==<span class="st">&#39;setosa&#39;</span>])</code></pre></div>
 <pre><code>## [1] 5.006</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="co"># We can write this out longhand to make sure it&#39;s correct (it is)</span>
-        logicalCheck =<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>
-        lengthCheck =<span class="st"> </span>iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>]
+        logicalCheck =<span class="st"> </span>iris$Species ==<span class="st"> &#39;setosa&#39;</span>
+        lengthCheck =<span class="st"> </span>iris$Sepal.Length[iris$Species==<span class="st">&#39;setosa&#39;</span>]
       <span class="co"># We can also look at the whole dataframe just for setosa</span>
-        setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span> , ]
+        setosaData =<span class="st"> </span>iris[iris$Species==<span class="st">&#39;setosa&#39;</span> , ]
         <span class="co"># Note that the structure of species is preserved as a factor with three</span>
         <span class="co"># levels even though setosa is the only species name in the new df</span>
           <span class="kw">str</span>(setosaData)</code></pre></div>
@@ -769,11 +756,11 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="co"># Some quick plotting code</span>
       <span class="co"># Once we have a nice dataframe like these ones, we can actually step into</span>
       <span class="co"># The world of exploratory analyses.</span>
-        <span class="kw">hist</span>(setosaData<span class="op">$</span>Sepal.Length) <span class="co"># Make a histogram of sepal lengths</span></code></pre></div>
+        <span class="kw">hist</span>(setosaData$Sepal.Length) <span class="co"># Make a histogram of sepal lengths</span></code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">plot</span>(setosaData<span class="op">$</span>Sepal.Width, setosaData<span class="op">$</span>Sepal.Length) <span class="co"># Bi-plot</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">plot</span>(setosaData$Sepal.Width, setosaData$Sepal.Length) <span class="co"># Bi-plot</span></code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-30-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">boxplot</span>(Sepal.Width<span class="op">~</span>Species, <span class="dt">data=</span>iris) <span class="co"># Boxplots</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">        <span class="kw">boxplot</span>(Sepal.Width~Species, <span class="dt">data=</span>iris) <span class="co"># Boxplots</span></code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-30-3.png" width="672" /></p>
 </div>
 <div id="lists" class="section level3">
@@ -873,7 +860,7 @@ e <span class="co"># We can make new columns in data frames like this!</span></c
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  myList[[<span class="dv">2</span>]][<span class="dv">5</span>]                           <span class="co"># But can still get into each object</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Play around with the numbers to see what they do!</span>
-  myList<span class="op">$</span>c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
+  myList$c[<span class="dv">1</span>]                              <span class="co"># Can also reference it this way!</span></code></pre></div>
 <pre><code>## [1] &quot;a&quot;</code></pre>
 <p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.</p>
 </div>

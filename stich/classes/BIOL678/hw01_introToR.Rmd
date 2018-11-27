@@ -5,16 +5,10 @@
  
 # Introduction to the R programming language
 
-
-
 <img src="../../images/roh.png" alt="">
 
-
- 
 ## Introduction
 
-
- 
 The objective of this assignment is to get you started working in R and help you apply some of the concepts we’ve been discussing so far. We’ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.
 
 
