@@ -2,16 +2,16 @@
 <style>
 #pre code, #code, pre, pre code {
   white-space: pre !important;
-  overflow-x: visible !important;
+  overflow-x: scroll !important;
   word-break: keep-all !important;
   word-wrap: initial !important;
 }
 
 img {
   display: inline-block;
-  margin-right: 1em;
+  margin-right: .5em;
   vertical-align: middle;
-  margin-bottom: 1em;
+  margin-bottom: 5px;
 }
 
 pre.r {
