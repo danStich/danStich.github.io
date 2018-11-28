@@ -1,10 +1,12 @@
 ```{r child="../../_styles.Rmd"}
 ```
+
 <br>
  
 # Introduction to programming in R
 
 <img src="../../images/roh.png" alt="">
+
 
 ## Introduction
 Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way. 
@@ -31,7 +33,6 @@ There are a lot of different ways to write computer code. Each has pros and cons
 # what you did.
 ```
 
- 
 > There are a few ways to run a line of code:
 
 1. Click on a line of code and press ctrl + Enter
@@ -58,8 +59,6 @@ Type the following line of code into a blank source file, and run it.
 > Section breaks help organization
 
 I like to use the built-in heading. It works really well for code-folding in R and when I've written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and type the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.
-
-
  
 I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I've written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.
 
@@ -80,7 +79,7 @@ Example (run the following lines):
 # We define two objects 
 # using lowercase and
 # uppercase a (A)
-a <-  1
+a <- 1
 A <- 2
 
 # Check to see if they
@@ -88,8 +87,6 @@ A <- 2
 a == A
   
 ```      
-
-<br>
 
 A couple of things going on here.
 
@@ -102,14 +99,12 @@ A couple of things going on here.
 # In Rstudio there are nifty 
 # little markers to show this
 # is broken
-  1a <- 1 
+1a <- 1 
 
 # This one works (try it by typing
 # 'a1' in the console)
-  a1 <- 1 
+a1 <- 1 
 ```
-
-<br>
 
 **R will overwrite objects sequentially, so don't name two things the same, unless you don't need the first.**
 ```{r}
@@ -121,14 +116,13 @@ a <- 2
 # 'a' takes on the second value here
 a 
 
-# Another way to look at the value of an object
+# Another way to look at the
+# value of an object
 print(a) 
 
 # And, here is one more
 show(a) 
 ```
-
-<br>
 
 **Some things can be expressed in multiple ways. Both `T` and `TRUE` can be used to indicate a logical that evaluates as being TRUE.**
 
@@ -136,21 +130,22 @@ show(a)
 T
 
 TRUE
-```
 
-<br>
+```
 
 **Some names are reserved or pre-defined. Did you notice that R already knew what `T` and `TRUE` were? We will talk more about this later in the course if we need to.**
 
 For example:
 ```{r, eval=FALSE}
 in, if, else, for, function()
+  
 ```
 ...and a mess of others have special uses.
 
 **Some *symbols* are also reserved for special use, like:**
 ```{r, eval=FALSE}
 *, % %, &, /, <, (, {, [, '', "", ...
+                        
 ```
 ...and a bunch of others. A lot of these are really useful.
 
@@ -166,7 +161,7 @@ Single click moves the cursor into position. Double click will highlight the wor
 
 Use search and replace functionality to copy big chunks of code and change names as needed. Can also use this to just search your code. Press `CTRL + F` to open the sub menu at the top.
 
-<h2> Data structures </h2>
+## Data structures
 <h3 id="multi"> Vectors </h3>
 
 Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of  functionality outside this original scope. R is what is known as a "high-level" or "interpreted" programming language. This means the pieces that make it up are a little more intuitive to the average user than most low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. This means that R has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an "intuitive", "user-friendly" language.
@@ -195,7 +190,6 @@ A vector that can hold one and only one kind of data:
 + Logical
 + Factor
 + Date/time
-
 
 And some others, but none with which we'll concern ourselves.
 

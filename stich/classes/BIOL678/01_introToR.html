@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
+<link rel="stylesheet" href="../../styles.css" type="text/css" />
 
 </head>
 
@@ -254,7 +254,7 @@ $(document).ready(function () {
 <p><br></p>
 <div id="introduction-to-programming-in-r" class="section level1">
 <h1>Introduction to programming in R</h1>
-<p><img src="../../images/roh.png" alt=""></p>
+<p><img src="/home/god/codeDevelopment/danStich.github.io/stich/images/roh.png" alt=""></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
 <p>Welcome to programming in R. This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information that will help you along your way.</p>
@@ -291,7 +291,7 @@ $(document).ready(function () {
 </blockquote>
 <p>Type the following line of code into a blank source file, and run it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add 1 and 1 together</span>
-<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span>
+<span class="dv">1</span> +<span class="st"> </span><span class="dv">1</span>
 [<span class="dv">1</span>] <span class="dv">2</span></code></pre></div>
 <blockquote>
 <p>Section breaks help organization</p>
@@ -309,14 +309,13 @@ $(document).ready(function () {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We define two objects </span>
 <span class="co"># using lowercase and</span>
 <span class="co"># uppercase a (A)</span>
-a &lt;-<span class="st">  </span><span class="dv">1</span>
+a &lt;-<span class="st"> </span><span class="dv">1</span>
 A &lt;-<span class="st"> </span><span class="dv">2</span>
 
 <span class="co"># Check to see if they</span>
 <span class="co"># are equal</span>
-a <span class="op">==</span><span class="st"> </span>A
+a ==<span class="st"> </span>A
 [<span class="dv">1</span>] <span class="ot">FALSE</span></code></pre></div>
-<p><br></p>
 <p>A couple of things going on here.</p>
 <ol style="list-style-type: decimal">
 <li><p>Note that the two objects are not the same, and R knows this.</p></li>
@@ -326,12 +325,11 @@ a <span class="op">==</span><span class="st"> </span>A
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In Rstudio there are nifty </span>
 <span class="co"># little markers to show this</span>
 <span class="co"># is broken</span>
-  1a &lt;-<span class="st"> </span><span class="dv">1</span> 
+1a &lt;-<span class="st"> </span><span class="dv">1</span> 
 
 <span class="co"># This one works (try it by typing</span>
 <span class="co"># &#39;a1&#39; in the console)</span>
-  a1 &lt;-<span class="st"> </span><span class="dv">1</span> </code></pre></div>
-<p><br></p>
+a1 &lt;-<span class="st"> </span><span class="dv">1</span> </code></pre></div>
 <p><strong>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We assign two different values</span>
 <span class="co"># to &#39;a&#39;, one after the other</span>
@@ -342,27 +340,28 @@ a &lt;-<span class="st"> </span><span class="dv">2</span>
 a 
 [<span class="dv">1</span>] <span class="dv">2</span>
 
-<span class="co"># Another way to look at the value of an object</span>
+<span class="co"># Another way to look at the</span>
+<span class="co"># value of an object</span>
 <span class="kw">print</span>(a) 
 [<span class="dv">1</span>] <span class="dv">2</span>
 
 <span class="co"># And, here is one more</span>
 <span class="kw">show</span>(a) 
 [<span class="dv">1</span>] <span class="dv">2</span></code></pre></div>
-<p><br></p>
 <p><strong>Some things can be expressed in multiple ways. Both <code>T</code> and <code>TRUE</code> can be used to indicate a logical that evaluates as being TRUE.</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">T
 [<span class="dv">1</span>] <span class="ot">TRUE</span>
 
 <span class="ot">TRUE</span>
 [<span class="dv">1</span>] <span class="ot">TRUE</span></code></pre></div>
-<p><br></p>
 <p><strong>Some names are reserved or pre-defined. Did you notice that R already knew what <code>T</code> and <code>TRUE</code> were? We will talk more about this later in the course if we need to.</strong></p>
 <p>For example:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">in, if, else, for, function()
+  </code></pre></div>
 <p>…and a mess of others have special uses.</p>
 <p><strong>Some <em>symbols</em> are also reserved for special use, like:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">*</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">/</span>, <span class="op">&lt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">*, % %, &amp;, /, &lt;, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...
+                        </code></pre></div>
 <p>…and a bunch of others. A lot of these are really useful.</p>
 </div>
 <div id="some-other-handy-coding-tricks" class="section level3">
@@ -372,9 +371,10 @@ a
 <p>The <code>TAB</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>SHIFT + TAB</code> will move code to the left. These can help you organize your code.</p>
 <p>Single click moves the cursor into position. Double click will highlight the word you are clicking, and a triple left click will highlight an entire line.</p>
 <p>Use search and replace functionality to copy big chunks of code and change names as needed. Can also use this to just search your code. Press <code>CTRL + F</code> to open the sub menu at the top.</p>
-<h2>
-Data structures
-</h2>
+</div>
+</div>
+<div id="data-structures" class="section level2">
+<h2>Data structures</h2>
 <h3 id="multi">
 Vectors
 </h3>
@@ -420,7 +420,7 @@ a
 
 <span class="co"># Look at the structure, integer class</span>
 <span class="kw">str</span>(a)   
- num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></code></pre></div>
+ num [<span class="dv">1</span>:<span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></code></pre></div>
 <p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the same vector using a sequence</span>
 a &lt;-<span class="st">  </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">5</span>, <span class="dt">by=</span><span class="dv">1</span>) </code></pre></div>
@@ -437,18 +437,18 @@ b
 
 <span class="co"># Now it&#39;s a character vector</span>
 <span class="kw">str</span>(b)  
- chr [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span>
+ chr [<span class="dv">1</span>:<span class="dv">5</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span>
 
 <span class="co"># But we can change if we want</span>
 b &lt;-<span class="st">  </span><span class="kw">as.factor</span>(b)  
 
 b           
 [<span class="dv">1</span>] a b c d e
-Levels<span class="op">:</span><span class="st"> </span>a b c d e
+Levels:<span class="st"> </span>a b c d e
 
 <span class="co"># Look at the data structure</span>
 <span class="kw">str</span>(b)                         
- Factor w<span class="op">/</span><span class="st"> </span><span class="dv">5</span> levels <span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></code></pre></div>
+ Factor w/<span class="st"> </span><span class="dv">5</span> levels <span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,..:<span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></code></pre></div>
 <p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
 <p>This is what it looks like when we code a factor as number:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print numeric representation</span>
@@ -466,7 +466,7 @@ Levels<span class="op">:</span><span class="st"> </span>a b c d e
 <p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The &#39;==&#39; compares the numeric</span>
 <span class="co"># vector to the factor vector</span>
-c &lt;-<span class="st">  </span>a <span class="op">==</span><span class="st"> </span>b 
+c &lt;-<span class="st">  </span>a ==<span class="st"> </span>b 
 
 <span class="co"># Print the contents of c</span>
 c    
@@ -475,7 +475,7 @@ c
 <span class="co"># Have a look at the </span>
 <span class="co"># data structure</span>
 <span class="kw">str</span>(c)       
- logi [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre></div>
+ logi [<span class="dv">1</span>:<span class="dv">5</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></code></pre></div>
 <p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can check for missing values</span>
 <span class="kw">is.na</span>(a)   
@@ -487,18 +487,18 @@ c
 [<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span>
 
 <span class="co"># The exclamation point means &#39;not&#39;</span>
-<span class="op">!</span><span class="kw">is.na</span>(a) 
+!<span class="kw">is.na</span>(a) 
 [<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span>
 
 <span class="co"># We can see if specific</span>
 <span class="co"># elements meet a criterion</span>
-a <span class="op">==</span><span class="st"> </span><span class="dv">3</span> 
+a ==<span class="st"> </span><span class="dv">3</span> 
 [<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span>
 
 <span class="co"># We can just look at unique values</span>
 <span class="kw">unique</span>(b)    
 [<span class="dv">1</span>] a b c d e
-Levels<span class="op">:</span><span class="st"> </span>a b c d e</code></pre></div>
+Levels:<span class="st"> </span>a b c d e</code></pre></div>
 <p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
 </div>
 <div id="vector-operations" class="section level4">
@@ -520,20 +520,20 @@ f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</code></pre></div>
 <span class="co"># b where they are equal</span>
 <span class="co"># to the corresponding</span>
 <span class="co"># elements of c</span>
-b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] 
+b[b==<span class="st">&#39;c&#39;</span>] 
 [<span class="dv">1</span>] c
-Levels<span class="op">:</span><span class="st"> </span>a b c d e
+Levels:<span class="st"> </span>a b c d e
 
 <span class="co"># Another way to do the</span>
 <span class="co"># same thing</span>
-<span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)
+<span class="kw">which</span>(b==<span class="st">&#39;c&#39;</span>)
 [<span class="dv">1</span>] <span class="dv">3</span></code></pre></div>
 <p>Perhaps more practically speaking, we can do elementwise operations on vectors easily in R. Give a few of these a shot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a <span class="op">*</span><span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span>
-a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span>
-a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span>
-a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span>
-a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">a *<span class="st"> </span>.<span class="dv">5</span>   <span class="co"># Multiplication</span>
+a +<span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span>
+a -<span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span>
+a /<span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span>
+a ^<span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span>
 <span class="kw">exp</span>(a)   <span class="co"># Same as &quot;e to the a&quot;</span>
 <span class="kw">log</span>(a)   <span class="co"># Natural logarithm</span>
 <span class="kw">log10</span>(a) <span class="co"># Log base 10</span></code></pre></div>
@@ -579,7 +579,6 @@ a
 [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></code></pre></div>
 <p>And we can do lots of other nifty things like this.</p>
 </div>
-</div>
 <div id="matrices" class="section level3">
 <h3>Matrices</h3>
 <p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
@@ -621,7 +620,7 @@ matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span cla
 <span class="co"># vectors, because matrices</span>
 <span class="co"># are just vectors smooshed</span>
 <span class="co"># into two dimensions</span>
-mat<span class="op">*</span><span class="dv">2</span> 
+mat*<span class="dv">2</span> 
        first second third
 This       <span class="dv">2</span>     <span class="dv">10</span>    <span class="dv">18</span>
 is         <span class="dv">4</span>     <span class="dv">12</span>    <span class="dv">20</span>
@@ -640,7 +639,7 @@ matrix     <span class="dv">8</span>     <span class="dv">16</span>    <span cla
 a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
   
 <span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
-b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
+b =<span class="st"> </span>a^<span class="dv">2</span>                           
 
 <span class="co"># Replicates values in object a # of times  </span>
 c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
@@ -726,7 +725,7 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new column with the</span>
 <span class="co"># square root of our increment</span>
 <span class="co"># column</span>
-e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
+e$Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e$Increment)
 e 
    Increment Squared Letter      Sqrt
 <span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a <span class="fl">0.7071068</span>
@@ -757,8 +756,7 @@ e
 <span class="co"># We can use ls() to see</span>
 <span class="co"># what is in our environment</span>
 <span class="kw">ls</span>() 
- [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>     <span class="st">&quot;A&quot;</span>     <span class="st">&quot;b&quot;</span>     <span class="st">&quot;c&quot;</span>     <span class="st">&quot;d&quot;</span>     <span class="st">&quot;e&quot;</span>     <span class="st">&quot;f&quot;</span>     <span class="st">&quot;hook1&quot;</span>
- [<span class="dv">9</span>] <span class="st">&quot;hook2&quot;</span> <span class="st">&quot;iris&quot;</span>  <span class="st">&quot;mat&quot;</span>  
+ [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>     <span class="st">&quot;A&quot;</span>     <span class="st">&quot;b&quot;</span>     <span class="st">&quot;c&quot;</span>     <span class="st">&quot;d&quot;</span>     <span class="st">&quot;e&quot;</span>     <span class="st">&quot;f&quot;</span>     <span class="st">&quot;hook1&quot;</span> <span class="st">&quot;hook2&quot;</span> <span class="st">&quot;iris&quot;</span>  <span class="st">&quot;mat&quot;</span>  
 
 <span class="co"># Look at the first six rows</span>
 <span class="co"># of data in the object</span>
@@ -781,35 +779,27 @@ e
 
 <span class="co"># What are the column names?</span>
 <span class="kw">names</span>(iris)
-[<span class="dv">1</span>] <span class="st">&quot;Sepal.Length&quot;</span> <span class="st">&quot;Sepal.Width&quot;</span>  <span class="st">&quot;Petal.Length&quot;</span> <span class="st">&quot;Petal.Width&quot;</span> 
-[<span class="dv">5</span>] <span class="st">&quot;Species&quot;</span>     
+[<span class="dv">1</span>] <span class="st">&quot;Sepal.Length&quot;</span> <span class="st">&quot;Sepal.Width&quot;</span>  <span class="st">&quot;Petal.Length&quot;</span> <span class="st">&quot;Petal.Width&quot;</span>  <span class="st">&quot;Species&quot;</span>     
 
 <span class="co"># Have a look at the data structure-</span>
 <span class="co"># tells us all of the above</span>
 <span class="kw">str</span>(iris)
-<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">150</span> obs. of  <span class="dv">5</span> variables<span class="op">:</span>
-<span class="st"> </span><span class="er">$</span><span class="st"> </span>Sepal.Length<span class="op">:</span><span class="st"> </span>num  <span class="fl">5.1</span> <span class="fl">4.9</span> <span class="fl">4.7</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">5.4</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">4.4</span> <span class="fl">4.9</span> ...
- <span class="op">$</span><span class="st"> </span>Sepal.Width <span class="op">:</span><span class="st"> </span>num  <span class="fl">3.5</span> <span class="dv">3</span> <span class="fl">3.2</span> <span class="fl">3.1</span> <span class="fl">3.6</span> <span class="fl">3.9</span> <span class="fl">3.4</span> <span class="fl">3.4</span> <span class="fl">2.9</span> <span class="fl">3.1</span> ...
- <span class="op">$</span><span class="st"> </span>Petal.Length<span class="op">:</span><span class="st"> </span>num  <span class="fl">1.4</span> <span class="fl">1.4</span> <span class="fl">1.3</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.7</span> <span class="fl">1.4</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.5</span> ...
- <span class="op">$</span><span class="st"> </span>Petal.Width <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.3</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.1</span> ...
- <span class="op">$</span><span class="st"> </span>Species     <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;versicolor&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...
+<span class="st">&#39;data.frame&#39;</span>:<span class="st">   </span><span class="dv">150</span> obs. of  <span class="dv">5</span> variables:
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>Sepal.Length:<span class="st"> </span>num  <span class="fl">5.1</span> <span class="fl">4.9</span> <span class="fl">4.7</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">5.4</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">4.4</span> <span class="fl">4.9</span> ...
+ $<span class="st"> </span>Sepal.Width :<span class="st"> </span>num  <span class="fl">3.5</span> <span class="dv">3</span> <span class="fl">3.2</span> <span class="fl">3.1</span> <span class="fl">3.6</span> <span class="fl">3.9</span> <span class="fl">3.4</span> <span class="fl">3.4</span> <span class="fl">2.9</span> <span class="fl">3.1</span> ...
+ $<span class="st"> </span>Petal.Length:<span class="st"> </span>num  <span class="fl">1.4</span> <span class="fl">1.4</span> <span class="fl">1.3</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.7</span> <span class="fl">1.4</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.5</span> ...
+ $<span class="st"> </span>Petal.Width :<span class="st"> </span>num  <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.3</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.1</span> ...
+ $<span class="st"> </span>Species     :<span class="st"> </span>Factor w/<span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;versicolor&quot;</span>,..:<span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...
 
 <span class="co"># Summarize the variables in the dataframe</span>
 <span class="kw">summary</span>(iris) 
-  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width   
- Min.   <span class="op">:</span><span class="fl">4.300</span>   Min.   <span class="op">:</span><span class="fl">2.000</span>   Min.   <span class="op">:</span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="fl">0.100</span>  
- 1st Qu.<span class="op">:</span><span class="fl">5.100</span>   1st Qu.<span class="op">:</span><span class="fl">2.800</span>   1st Qu.<span class="op">:</span><span class="fl">1.600</span>   1st Qu.<span class="op">:</span><span class="fl">0.300</span>  
- Median <span class="op">:</span><span class="fl">5.800</span>   Median <span class="op">:</span><span class="fl">3.000</span>   Median <span class="op">:</span><span class="fl">4.350</span>   Median <span class="op">:</span><span class="fl">1.300</span>  
- Mean   <span class="op">:</span><span class="fl">5.843</span>   Mean   <span class="op">:</span><span class="fl">3.057</span>   Mean   <span class="op">:</span><span class="fl">3.758</span>   Mean   <span class="op">:</span><span class="fl">1.199</span>  
- 3rd Qu.<span class="op">:</span><span class="fl">6.400</span>   3rd Qu.<span class="op">:</span><span class="fl">3.300</span>   3rd Qu.<span class="op">:</span><span class="fl">5.100</span>   3rd Qu.<span class="op">:</span><span class="fl">1.800</span>  
- Max.   <span class="op">:</span><span class="fl">7.900</span>   Max.   <span class="op">:</span><span class="fl">4.400</span>   Max.   <span class="op">:</span><span class="fl">6.900</span>   Max.   <span class="op">:</span><span class="fl">2.500</span>  
-       Species  
- setosa    <span class="op">:</span><span class="dv">50</span>  
- versicolor<span class="op">:</span><span class="dv">50</span>  
- virginica <span class="op">:</span><span class="dv">50</span>  
-                
-                
-                </code></pre></div>
+  Sepal.Length    Sepal.Width     Petal.Length    Petal.Width          Species  
+ Min.   :<span class="fl">4.300</span>   Min.   :<span class="fl">2.000</span>   Min.   :<span class="fl">1.000</span>   Min.   :<span class="fl">0.100</span>   setosa    :<span class="dv">50</span>  
+ 1st Qu.:<span class="fl">5.100</span>   1st Qu.:<span class="fl">2.800</span>   1st Qu.:<span class="fl">1.600</span>   1st Qu.:<span class="fl">0.300</span>   versicolor:<span class="dv">50</span>  
+ Median :<span class="fl">5.800</span>   Median :<span class="fl">3.000</span>   Median :<span class="fl">4.350</span>   Median :<span class="fl">1.300</span>   virginica :<span class="dv">50</span>  
+ Mean   :<span class="fl">5.843</span>   Mean   :<span class="fl">3.057</span>   Mean   :<span class="fl">3.758</span>   Mean   :<span class="fl">1.199</span>                  
+ 3rd Qu.:<span class="fl">6.400</span>   3rd Qu.:<span class="fl">3.300</span>   3rd Qu.:<span class="fl">5.100</span>   3rd Qu.:<span class="fl">1.800</span>                  
+ Max.   :<span class="fl">7.900</span>   Max.   :<span class="fl">4.400</span>   Max.   :<span class="fl">6.900</span>   Max.   :<span class="fl">2.500</span>                  </code></pre></div>
 <p>Now let’s look at some specific things</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What is the value in 12th row</span>
 <span class="co"># of the 4th column of iris?</span>
@@ -818,7 +808,7 @@ iris[<span class="dv">12</span>, <span class="dv">4</span>]
 
 <span class="co"># What is the mean sepal length</span>
 <span class="co"># among all species in iris?</span>
-<span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length)
+<span class="kw">mean</span>(iris$Sepal.Length)
 [<span class="dv">1</span>] <span class="fl">5.843333</span></code></pre></div>
 <p>What about the mean sepal length just for setosa? A couple of new things going on here:</p>
 <ol style="list-style-type: decimal">
@@ -829,25 +819,25 @@ iris[<span class="dv">12</span>, <span class="dv">4</span>]
 <span class="co">#    &quot;Show me the mean of the column</span>
 <span class="co">#    Sepal.Length in the dataframe iris</span>
 <span class="co">#    where the species name is setosa&quot;</span>
-  <span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>])
+  <span class="kw">mean</span>(iris$Sepal.Length[iris$Species==<span class="st">&#39;setosa&#39;</span>])
 [<span class="dv">1</span>] <span class="fl">5.006</span></code></pre></div>
 <p>We can write this out longhand to make sure it’s correct (it is).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logicalCheck =<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>
-lengthCheck =<span class="st"> </span>iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logicalCheck =<span class="st"> </span>iris$Species ==<span class="st"> &#39;setosa&#39;</span>
+lengthCheck =<span class="st"> </span>iris$Sepal.Length[iris$Species==<span class="st">&#39;setosa&#39;</span>]</code></pre></div>
 <p>We can also look at the whole dataframe just for setosa.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that the structure of species</span>
 <span class="co"># is preserved as a factor with three</span>
 <span class="co"># levels even though setosa is the</span>
 <span class="co"># only species name in the new df</span>
-setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span> , ]
+setosaData =<span class="st"> </span>iris[iris$Species==<span class="st">&#39;setosa&#39;</span> , ]
 
 <span class="kw">str</span>(setosaData)
-<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">50</span> obs. of  <span class="dv">5</span> variables<span class="op">:</span>
-<span class="st"> </span><span class="er">$</span><span class="st"> </span>Sepal.Length<span class="op">:</span><span class="st"> </span>num  <span class="fl">5.1</span> <span class="fl">4.9</span> <span class="fl">4.7</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">5.4</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">4.4</span> <span class="fl">4.9</span> ...
- <span class="op">$</span><span class="st"> </span>Sepal.Width <span class="op">:</span><span class="st"> </span>num  <span class="fl">3.5</span> <span class="dv">3</span> <span class="fl">3.2</span> <span class="fl">3.1</span> <span class="fl">3.6</span> <span class="fl">3.9</span> <span class="fl">3.4</span> <span class="fl">3.4</span> <span class="fl">2.9</span> <span class="fl">3.1</span> ...
- <span class="op">$</span><span class="st"> </span>Petal.Length<span class="op">:</span><span class="st"> </span>num  <span class="fl">1.4</span> <span class="fl">1.4</span> <span class="fl">1.3</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.7</span> <span class="fl">1.4</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.5</span> ...
- <span class="op">$</span><span class="st"> </span>Petal.Width <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.3</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.1</span> ...
- <span class="op">$</span><span class="st"> </span>Species     <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;versicolor&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</code></pre></div>
+<span class="st">&#39;data.frame&#39;</span>:<span class="st">   </span><span class="dv">50</span> obs. of  <span class="dv">5</span> variables:
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>Sepal.Length:<span class="st"> </span>num  <span class="fl">5.1</span> <span class="fl">4.9</span> <span class="fl">4.7</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">5.4</span> <span class="fl">4.6</span> <span class="dv">5</span> <span class="fl">4.4</span> <span class="fl">4.9</span> ...
+ $<span class="st"> </span>Sepal.Width :<span class="st"> </span>num  <span class="fl">3.5</span> <span class="dv">3</span> <span class="fl">3.2</span> <span class="fl">3.1</span> <span class="fl">3.6</span> <span class="fl">3.9</span> <span class="fl">3.4</span> <span class="fl">3.4</span> <span class="fl">2.9</span> <span class="fl">3.1</span> ...
+ $<span class="st"> </span>Petal.Length:<span class="st"> </span>num  <span class="fl">1.4</span> <span class="fl">1.4</span> <span class="fl">1.3</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.7</span> <span class="fl">1.4</span> <span class="fl">1.5</span> <span class="fl">1.4</span> <span class="fl">1.5</span> ...
+ $<span class="st"> </span>Petal.Width :<span class="st"> </span>num  <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.4</span> <span class="fl">0.3</span> <span class="fl">0.2</span> <span class="fl">0.2</span> <span class="fl">0.1</span> ...
+ $<span class="st"> </span>Species     :<span class="st"> </span>Factor w/<span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;setosa&quot;</span>,<span class="st">&quot;versicolor&quot;</span>,..:<span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</code></pre></div>
 <p>Finally, once we are working with dataframes, plotting becomes much easier to understand, and we can ease into some rudimentary, clunky R plots.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Some quick plotting code</span>
 
@@ -856,15 +846,15 @@ setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<s
 <span class="co"># The world of exploratory analyses.</span>
 
 <span class="co"># Make a histogram of sepal lengths</span>
-<span class="kw">hist</span>(setosaData<span class="op">$</span>Sepal.Length)</code></pre></div>
+<span class="kw">hist</span>(setosaData$Sepal.Length)</code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Bi-plot</span>
-<span class="kw">plot</span>(setosaData<span class="op">$</span>Sepal.Width, setosaData<span class="op">$</span>Sepal.Length) </code></pre></div>
+<span class="kw">plot</span>(setosaData$Sepal.Width, setosaData$Sepal.Length) </code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-42-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># Boxplots</span>
-<span class="kw">boxplot</span>(Sepal.Width<span class="op">~</span>Species, <span class="dt">data=</span>iris)</code></pre></div>
+<span class="kw">boxplot</span>(Sepal.Width~Species, <span class="dt">data=</span>iris)</code></pre></div>
 <p><img src="01_introToR_files/figure-html/unnamed-chunk-42-3.png" width="672" /></p>
 <p>Much, <strong>MUCH</strong> more of this to come.</p>
 </div>
@@ -887,12 +877,10 @@ setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<s
 <span class="co"># Cool, huh?</span>
   myList    
 [[<span class="dv">1</span>]]
- [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>
-[<span class="dv">15</span>]  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
+ [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
 
 [[<span class="dv">2</span>]]
- [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span>
-[<span class="dv">18</span>] <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>
+ [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>
 
 [[<span class="dv">3</span>]]
        first second third
@@ -934,22 +922,20 @@ matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span cla
   
 <span class="co"># See how the names work now?  </span>
   myList    
-<span class="op">$</span>a
- [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>
-[<span class="dv">15</span>]  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
+$a
+ [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
 
-<span class="op">$</span>c
- [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span>
-[<span class="dv">18</span>] <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>
+$c
+ [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span>
 
-<span class="op">$</span>mat
+$mat
        first second third
 This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span>
 is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span>
 a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span>
 matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span>
 
-<span class="op">$</span>d
+$d
    Increment Squared Letter
 <span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a
 <span class="dv">2</span>        <span class="fl">1.0</span>    <span class="fl">1.00</span>      b
@@ -974,8 +960,7 @@ matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span cla
   
 <span class="co"># We reference these differently [[]]  </span>
   myList[[<span class="dv">1</span>]]  
- [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>
-[<span class="dv">15</span>]  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
+ [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span>  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span>
   
 <span class="co"># But we can still get into each object </span>
 <span class="co"># Play around with the numbers to see what they do!  </span>
@@ -983,7 +968,7 @@ matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span cla
 [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>
 
 <span class="co"># Can also reference it this way!</span>
-  myList<span class="op">$</span>c[<span class="dv">1</span>]                              
+  myList$c[<span class="dv">1</span>]                              
 [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span></code></pre></div>
 <p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. Conceptually, every object in R, from your workspace on down the line, is a list <strong>AND</strong> an element of a list. It seems like a lot to take in now, but will be very useful in the future.</p>
 </div>

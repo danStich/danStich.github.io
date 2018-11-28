@@ -1,18 +1,31 @@
 <head>
 <style>
-code, #pre, #code, pre {
-  white-space: pre;
-  overflow-x: scroll;
-  word-break: keep-all;
-  word-wrap: initial;
+#pre code, #code, pre, pre code {
+  white-space: pre !important;
+  overflow-x: visible !important;
+  word-break: keep-all !important;
+  word-wrap: initial !important;
 }
 
 img {
   display: inline-block;
-  margin-right: 10px;
+  margin-right: 1em;
   vertical-align: middle;
-  margin-bottom: 5;
+  margin-bottom: 1em;
 }
+
+pre.r {
+  border-radius: 1em;
+  background-color: rgba(213, 213, 214, 0.28);
+  border: none;
+  margin-bottom: 2em;
+}
+
+/* code.r {
+  overflow-x: auto;
+  word-wrap: normal;
+} */
+
 
 .content-holder {
   display: inline-block;
@@ -46,17 +59,12 @@ p {
   padding-bottom: 1em;
 }
 
-/* h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
-/*   margin-top: 15px !important;
-/* }
-*/
-
 h2, h3, h4, h5 {
-  margin-top: 15px !important;
+  margin-top: .5em !important;
 }
 
 #multi {
-  padding-top: 0;
+  padding-top: .5em;
 } 
 
 </style>
