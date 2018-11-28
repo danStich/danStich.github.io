@@ -12,7 +12,11 @@ navbar:
     - text: "Curriculum vitae"
       href: ../../cv.html
     - text: "Course websites"  
-      href: ../../courseWebsites.html
+      menu:
+        - text: "BIOL 678"
+          href: ../BIOL678/index.html
+        - text: "BIOL 217"
+          href: index.html     
     - text: "Contact"
       href: ../../contact.html
       

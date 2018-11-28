@@ -1,10 +1,10 @@
 <head>
 <style>
-#pre code, #code, pre, pre code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
+#pre code, #code, pre {
+  white-space: pre;
+  overflow-x: visible;
+  word-break: keep-all;
+  word-wrap: initial;
 }
 
 img {
@@ -16,7 +16,7 @@ img {
 
 pre.r {
   border-radius: 1em;
-  background-color: rgba(213, 213, 214, 0.28);
+  background-color: rgb(213, 213, 214);
   border: none;
   margin-bottom: 2em;
 }
