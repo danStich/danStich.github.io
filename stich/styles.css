@@ -1,23 +1,23 @@
 <head>
 <style>
-#pre code, #pre, #code {
+code, #pre, #code, pre {
   white-space: pre;
   overflow-x: scroll;
   word-break: keep-all;
   word-wrap: initial;
-  margin-bottom: 20px;  
 }
-
 
 img {
   display: inline-block;
   margin-right: 10px;
   vertical-align: middle;
+  margin-bottom: 5;
 }
 
 .content-holder {
   display: inline-block;
   vertical-align: middle;
+  margin-bottom: 5;
 }
 
 .column {
@@ -38,7 +38,7 @@ img {
 body {
   font-size: 14pt;
   padding-left: 5%;
-  padding-right:5%;
+  padding-right: 5%;
   width: 100%;
 }
 
@@ -46,10 +46,18 @@ p {
   padding-bottom: 1em;
 }
 
-h2, .h2, h3, .h3, h4, .h4, h5, .h5 * {
+/* h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+/*   margin-top: 15px !important;
+/* }
+*/
+
+h2, h3, h4, h5 {
   margin-top: 15px !important;
 }
 
+#multi {
+  padding-top: 0;
+} 
 
 </style>
 </head>
