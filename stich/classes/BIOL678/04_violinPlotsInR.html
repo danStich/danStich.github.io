@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="violin-plots-in-r" class="section level1">
 <h1>Violin plots in R</h1>

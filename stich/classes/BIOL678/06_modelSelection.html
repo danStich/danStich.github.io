@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="model-selection-and-validation" class="section level1">
 <h1>Model selection and validation</h1>
@@ -308,61 +296,61 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p><br></p>
 <p>Now we perform the forward selection.</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">step</span>(null, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>null, <span class="dt">upper=</span>full), <span class="dt">direction =</span><span class="st">&#39;forward&#39;</span>)</code></pre></div>
-<pre><code>## Start:  AIC=238.35
-## Fertility ~ 1
-## 
-##                    Df Sum of Sq    RSS    AIC
-## + Education         1    3162.7 4015.2 213.04
-## + Examination       1    2994.4 4183.6 214.97
-## + Catholic          1    1543.3 5634.7 228.97
-## + Infant.Mortality  1    1245.5 5932.4 231.39
-## + Agriculture       1     894.8 6283.1 234.09
-## &lt;none&gt;                          7178.0 238.34
-## 
-## Step:  AIC=213.04
-## Fertility ~ Education
-## 
-##                    Df Sum of Sq    RSS    AIC
-## + Catholic          1    961.07 3054.2 202.18
-## + Infant.Mortality  1    891.25 3124.0 203.25
-## + Examination       1    465.63 3549.6 209.25
-## &lt;none&gt;                          4015.2 213.04
-## + Agriculture       1     61.97 3953.3 214.31
-## 
-## Step:  AIC=202.18
-## Fertility ~ Education + Catholic
-## 
-##                    Df Sum of Sq    RSS    AIC
-## + Infant.Mortality  1    631.92 2422.2 193.29
-## + Agriculture       1    486.28 2567.9 196.03
-## &lt;none&gt;                          3054.2 202.18
-## + Examination       1      2.46 3051.7 204.15
-## 
-## Step:  AIC=193.29
-## Fertility ~ Education + Catholic + Infant.Mortality
-## 
-##               Df Sum of Sq    RSS    AIC
-## + Agriculture  1   264.176 2158.1 189.86
-## &lt;none&gt;                     2422.2 193.29
-## + Examination  1     9.486 2412.8 195.10
-## 
-## Step:  AIC=189.86
-## Fertility ~ Education + Catholic + Infant.Mortality + Agriculture
-## 
-##               Df Sum of Sq    RSS    AIC
-## &lt;none&gt;                     2158.1 189.86
-## + Examination  1    53.027 2105.0 190.69</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Education + Catholic + Infant.Mortality + 
-##     Agriculture, data = swiss)
-## 
-## Coefficients:
-##      (Intercept)         Education          Catholic  Infant.Mortality  
-##          62.1013           -0.9803            0.1247            1.0784  
-##      Agriculture  
-##          -0.1546</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">step</span>(null, <span class="dt">scope=</span><span class="kw">list</span>(<span class="dt">lower=</span>null, <span class="dt">upper=</span>full), <span class="dt">direction =</span><span class="st">&#39;forward&#39;</span>)
+Start<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">238.35</span>
+Fertility <span class="op">~</span><span class="st"> </span><span class="dv">1</span>
+
+                   Df Sum of Sq    RSS    AIC
+<span class="op">+</span><span class="st"> </span>Education         <span class="dv">1</span>    <span class="fl">3162.7</span> <span class="fl">4015.2</span> <span class="fl">213.04</span>
+<span class="op">+</span><span class="st"> </span>Examination       <span class="dv">1</span>    <span class="fl">2994.4</span> <span class="fl">4183.6</span> <span class="fl">214.97</span>
+<span class="op">+</span><span class="st"> </span>Catholic          <span class="dv">1</span>    <span class="fl">1543.3</span> <span class="fl">5634.7</span> <span class="fl">228.97</span>
+<span class="op">+</span><span class="st"> </span>Infant.Mortality  <span class="dv">1</span>    <span class="fl">1245.5</span> <span class="fl">5932.4</span> <span class="fl">231.39</span>
+<span class="op">+</span><span class="st"> </span>Agriculture       <span class="dv">1</span>     <span class="fl">894.8</span> <span class="fl">6283.1</span> <span class="fl">234.09</span>
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                          </span><span class="fl">7178.0</span> <span class="fl">238.34</span>
+
+Step<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">213.04</span>
+Fertility <span class="op">~</span><span class="st"> </span>Education
+
+                   Df Sum of Sq    RSS    AIC
+<span class="op">+</span><span class="st"> </span>Catholic          <span class="dv">1</span>    <span class="fl">961.07</span> <span class="fl">3054.2</span> <span class="fl">202.18</span>
+<span class="op">+</span><span class="st"> </span>Infant.Mortality  <span class="dv">1</span>    <span class="fl">891.25</span> <span class="fl">3124.0</span> <span class="fl">203.25</span>
+<span class="op">+</span><span class="st"> </span>Examination       <span class="dv">1</span>    <span class="fl">465.63</span> <span class="fl">3549.6</span> <span class="fl">209.25</span>
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                          </span><span class="fl">4015.2</span> <span class="fl">213.04</span>
+<span class="op">+</span><span class="st"> </span>Agriculture       <span class="dv">1</span>     <span class="fl">61.97</span> <span class="fl">3953.3</span> <span class="fl">214.31</span>
+
+Step<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">202.18</span>
+Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic
+
+                   Df Sum of Sq    RSS    AIC
+<span class="op">+</span><span class="st"> </span>Infant.Mortality  <span class="dv">1</span>    <span class="fl">631.92</span> <span class="fl">2422.2</span> <span class="fl">193.29</span>
+<span class="op">+</span><span class="st"> </span>Agriculture       <span class="dv">1</span>    <span class="fl">486.28</span> <span class="fl">2567.9</span> <span class="fl">196.03</span>
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                          </span><span class="fl">3054.2</span> <span class="fl">202.18</span>
+<span class="op">+</span><span class="st"> </span>Examination       <span class="dv">1</span>      <span class="fl">2.46</span> <span class="fl">3051.7</span> <span class="fl">204.15</span>
+
+Step<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">193.29</span>
+Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>Infant.Mortality
+
+              Df Sum of Sq    RSS    AIC
+<span class="op">+</span><span class="st"> </span>Agriculture  <span class="dv">1</span>   <span class="fl">264.176</span> <span class="fl">2158.1</span> <span class="fl">189.86</span>
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                     </span><span class="fl">2422.2</span> <span class="fl">193.29</span>
+<span class="op">+</span><span class="st"> </span>Examination  <span class="dv">1</span>     <span class="fl">9.486</span> <span class="fl">2412.8</span> <span class="fl">195.10</span>
+
+Step<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">189.86</span>
+Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>Infant.Mortality <span class="op">+</span><span class="st"> </span>Agriculture
+
+              Df Sum of Sq    RSS    AIC
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                     </span><span class="fl">2158.1</span> <span class="fl">189.86</span>
+<span class="op">+</span><span class="st"> </span>Examination  <span class="dv">1</span>    <span class="fl">53.027</span> <span class="fl">2105.0</span> <span class="fl">190.69</span>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>Infant.Mortality <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span>Agriculture, <span class="dt">data =</span> swiss)
+
+Coefficients<span class="op">:</span>
+<span class="st">     </span>(Intercept)         Education          Catholic  Infant.Mortality  
+         <span class="fl">62.1013</span>           <span class="op">-</span><span class="fl">0.9803</span>            <span class="fl">0.1247</span>            <span class="fl">1.0784</span>  
+     Agriculture  
+         <span class="op">-</span><span class="fl">0.1546</span>  </code></pre></div>
 <p><br></p>
 <p>Here, we see that the best model is that which includes the additive effects of <code>Education</code>, <code>Catholic</code>, <code>Infant.Mortality</code>, and <code>Agriculture</code>.</p>
 <p><br></p>
@@ -372,38 +360,38 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p><br></p>
 <p>We can do backward selection using just the full model.</p>
 <p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">step</span>(full, <span class="dt">data=</span>swiss, <span class="dt">direction =</span> <span class="st">&#39;backward&#39;</span>)</code></pre></div>
-<pre><code>## Start:  AIC=190.69
-## Fertility ~ Agriculture + Examination + Education + Catholic + 
-##     Infant.Mortality
-## 
-##                    Df Sum of Sq    RSS    AIC
-## - Examination       1     53.03 2158.1 189.86
-## &lt;none&gt;                          2105.0 190.69
-## - Agriculture       1    307.72 2412.8 195.10
-## - Infant.Mortality  1    408.75 2513.8 197.03
-## - Catholic          1    447.71 2552.8 197.75
-## - Education         1   1162.56 3267.6 209.36
-## 
-## Step:  AIC=189.86
-## Fertility ~ Agriculture + Education + Catholic + Infant.Mortality
-## 
-##                    Df Sum of Sq    RSS    AIC
-## &lt;none&gt;                          2158.1 189.86
-## - Agriculture       1    264.18 2422.2 193.29
-## - Infant.Mortality  1    409.81 2567.9 196.03
-## - Catholic          1    956.57 3114.6 205.10
-## - Education         1   2249.97 4408.0 221.43</code></pre>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Agriculture + Education + Catholic + 
-##     Infant.Mortality, data = swiss)
-## 
-## Coefficients:
-##      (Intercept)       Agriculture         Education          Catholic  
-##          62.1013           -0.1546           -0.9803            0.1247  
-## Infant.Mortality  
-##           1.0784</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">step</span>(full, <span class="dt">data=</span>swiss, <span class="dt">direction =</span> <span class="st">&#39;backward&#39;</span>)
+Start<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">190.69</span>
+Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span>Infant.Mortality
+
+                   Df Sum of Sq    RSS    AIC
+<span class="op">-</span><span class="st"> </span>Examination       <span class="dv">1</span>     <span class="fl">53.03</span> <span class="fl">2158.1</span> <span class="fl">189.86</span>
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                          </span><span class="fl">2105.0</span> <span class="fl">190.69</span>
+<span class="op">-</span><span class="st"> </span>Agriculture       <span class="dv">1</span>    <span class="fl">307.72</span> <span class="fl">2412.8</span> <span class="fl">195.10</span>
+<span class="op">-</span><span class="st"> </span>Infant.Mortality  <span class="dv">1</span>    <span class="fl">408.75</span> <span class="fl">2513.8</span> <span class="fl">197.03</span>
+<span class="op">-</span><span class="st"> </span>Catholic          <span class="dv">1</span>    <span class="fl">447.71</span> <span class="fl">2552.8</span> <span class="fl">197.75</span>
+<span class="op">-</span><span class="st"> </span>Education         <span class="dv">1</span>   <span class="fl">1162.56</span> <span class="fl">3267.6</span> <span class="fl">209.36</span>
+
+Step<span class="op">:</span><span class="st">  </span>AIC=<span class="fl">189.86</span>
+Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>Infant.Mortality
+
+                   Df Sum of Sq    RSS    AIC
+<span class="op">&lt;</span>none<span class="op">&gt;</span><span class="st">                          </span><span class="fl">2158.1</span> <span class="fl">189.86</span>
+<span class="op">-</span><span class="st"> </span>Agriculture       <span class="dv">1</span>    <span class="fl">264.18</span> <span class="fl">2422.2</span> <span class="fl">193.29</span>
+<span class="op">-</span><span class="st"> </span>Infant.Mortality  <span class="dv">1</span>    <span class="fl">409.81</span> <span class="fl">2567.9</span> <span class="fl">196.03</span>
+<span class="op">-</span><span class="st"> </span>Catholic          <span class="dv">1</span>    <span class="fl">956.57</span> <span class="fl">3114.6</span> <span class="fl">205.10</span>
+<span class="op">-</span><span class="st"> </span>Education         <span class="dv">1</span>   <span class="fl">2249.97</span> <span class="fl">4408.0</span> <span class="fl">221.43</span>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span>Infant.Mortality, <span class="dt">data =</span> swiss)
+
+Coefficients<span class="op">:</span>
+<span class="st">     </span>(Intercept)       Agriculture         Education          Catholic  
+         <span class="fl">62.1013</span>           <span class="op">-</span><span class="fl">0.1546</span>           <span class="op">-</span><span class="fl">0.9803</span>            <span class="fl">0.1247</span>  
+Infant.Mortality  
+          <span class="fl">1.0784</span>  </code></pre></div>
 <p><br></p>
 <p>In this case we end up with the same model. Note that this is not always the case.</p>
 <p><br></p>
@@ -488,45 +476,46 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p>Just as before, we can look at the summary of our model objects that we have stored in this list.</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Education only model, we can take a look, like this</span>
-  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Education, data = swiss)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -17.036  -6.711  -1.011   9.526  19.689 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
-## Education    -0.8624     0.1448  -5.954 3.66e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 9.446 on 45 degrees of freedom
-## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
-## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># REMEMBER: this model is an object stored in R,</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">data =</span> swiss)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">17.036</span>  <span class="op">-</span><span class="fl">6.711</span>  <span class="op">-</span><span class="fl">1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)  <span class="fl">79.6101</span>     <span class="fl">2.1041</span>  <span class="fl">37.836</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Education    <span class="op">-</span><span class="fl">0.8624</span>     <span class="fl">0.1448</span>  <span class="op">-</span><span class="fl">5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span>
+
+<span class="co"># REMEMBER: this model is an object stored in R,</span>
 <span class="co"># so we can also look at the names of this summary,</span>
 <span class="co"># like this</span>
-  <span class="kw">names</span>(<span class="kw">summary</span>(mods<span class="op">$</span>Ed))</code></pre></div>
-<pre><code>##  [1] &quot;call&quot;          &quot;terms&quot;         &quot;residuals&quot;     &quot;coefficients&quot; 
-##  [5] &quot;aliased&quot;       &quot;sigma&quot;         &quot;df&quot;            &quot;r.squared&quot;    
-##  [9] &quot;adj.r.squared&quot; &quot;fstatistic&quot;    &quot;cov.unscaled&quot;</code></pre>
+  <span class="kw">names</span>(<span class="kw">summary</span>(mods<span class="op">$</span>Ed))
+ [<span class="dv">1</span>] <span class="st">&quot;call&quot;</span>          <span class="st">&quot;terms&quot;</span>         <span class="st">&quot;residuals&quot;</span>     <span class="st">&quot;coefficients&quot;</span> 
+ [<span class="dv">5</span>] <span class="st">&quot;aliased&quot;</span>       <span class="st">&quot;sigma&quot;</span>         <span class="st">&quot;df&quot;</span>            <span class="st">&quot;r.squared&quot;</span>    
+ [<span class="dv">9</span>] <span class="st">&quot;adj.r.squared&quot;</span> <span class="st">&quot;fstatistic&quot;</span>    <span class="st">&quot;cov.unscaled&quot;</span> </code></pre></div>
 <p><br></p>
 <p><em>Whoa</em>, this is some heavy stuff. To recap, we have made a list of models, each of which are stored in R as lists. Each model has lots of elements, one of which is the summary of the model, which has its own elements that are named.</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here, we see that we can extract the adjusted </span>
 <span class="co"># R-squared directly from the model summary</span>
-  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>adj.r.squared</code></pre></div>
-<pre><code>## [1] 0.4281849</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>adj.r.squared</code></pre></div>
-<pre><code>## [1] 0.1975591</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>adj.r.squared</code></pre></div>
-<pre><code>## [1] 0.5551665</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">summary</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>adj.r.squared</code></pre></div>
-<pre><code>## [1] 0.5700628</code></pre>
+  <span class="kw">summary</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>adj.r.squared
+[<span class="dv">1</span>] <span class="fl">0.4281849</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>adj.r.squared
+[<span class="dv">1</span>] <span class="fl">0.1975591</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>adj.r.squared
+[<span class="dv">1</span>] <span class="fl">0.5551665</span>
+  <span class="kw">summary</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>adj.r.squared
+[<span class="dv">1</span>] <span class="fl">0.5700628</span></code></pre></div>
 <p><br></p>
 <p>When we compare adjusted R-squares, we consider the model with the highest value for this statistic to be the best model. So, in this case, we would conclude that <code>EdxCath</code> is the best model.</p>
 <p><br></p>
@@ -542,40 +531,41 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <span class="co"># Let&#39;s start with a single example. </span>
 <span class="co"># Here, we are given three things in the</span>
 <span class="co"># output from the &#39;PRESS&#39; function.</span>
-  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)</code></pre></div>
-<pre><code>## .........10.........20.........30.........40.......</code></pre>
-<pre><code>## $stat
-## [1] 4323.733
-## 
-## $residuals
-##  [1]  11.1787318  11.5065064  17.7278799  12.5398747  10.4882280
-##  [6]   2.5911695  10.4885953  20.1597326   9.0526997  14.8302796
-## [11]  13.0168641  -5.2753911  -6.8447158  -0.3698141 -14.0142691
-## [16]  -9.9871628  -1.0354472   0.2588946  -8.4026213  -6.9021136
-## [21]  -5.6071189 -12.4751694 -12.9403552 -17.5105794  -6.5399771
-## [26]   1.5243571  -5.2119131 -10.7169905  -5.1114868  -7.4861541
-## [31]  -2.4853488  -5.2790448  -0.6098953  -4.0456127   2.4663864
-## [36]  -7.0043837  15.7477692  11.1484049   1.1631787  -4.5203842
-## [41]   4.3983013  14.1573518   4.1296291  -6.1267680   1.9422167
-## [46] -10.9733208 -13.0789076
-## 
-## $P.square
-## [1] 0.3976372</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># What we are really interested in here is the</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)
+.........<span class="dv">10</span>.........<span class="dv">20</span>.........<span class="dv">30</span>.........<span class="dv">40</span>.......
+<span class="op">$</span>stat
+[<span class="dv">1</span>] <span class="fl">4323.733</span>
+
+<span class="op">$</span>residuals
+ [<span class="dv">1</span>]  <span class="fl">11.1787318</span>  <span class="fl">11.5065064</span>  <span class="fl">17.7278799</span>  <span class="fl">12.5398747</span>  <span class="fl">10.4882280</span>
+ [<span class="dv">6</span>]   <span class="fl">2.5911695</span>  <span class="fl">10.4885953</span>  <span class="fl">20.1597326</span>   <span class="fl">9.0526997</span>  <span class="fl">14.8302796</span>
+[<span class="dv">11</span>]  <span class="fl">13.0168641</span>  <span class="op">-</span><span class="fl">5.2753911</span>  <span class="op">-</span><span class="fl">6.8447158</span>  <span class="op">-</span><span class="fl">0.3698141</span> <span class="op">-</span><span class="fl">14.0142691</span>
+[<span class="dv">16</span>]  <span class="op">-</span><span class="fl">9.9871628</span>  <span class="op">-</span><span class="fl">1.0354472</span>   <span class="fl">0.2588946</span>  <span class="op">-</span><span class="fl">8.4026213</span>  <span class="op">-</span><span class="fl">6.9021136</span>
+[<span class="dv">21</span>]  <span class="op">-</span><span class="fl">5.6071189</span> <span class="op">-</span><span class="fl">12.4751694</span> <span class="op">-</span><span class="fl">12.9403552</span> <span class="op">-</span><span class="fl">17.5105794</span>  <span class="op">-</span><span class="fl">6.5399771</span>
+[<span class="dv">26</span>]   <span class="fl">1.5243571</span>  <span class="op">-</span><span class="fl">5.2119131</span> <span class="op">-</span><span class="fl">10.7169905</span>  <span class="op">-</span><span class="fl">5.1114868</span>  <span class="op">-</span><span class="fl">7.4861541</span>
+[<span class="dv">31</span>]  <span class="op">-</span><span class="fl">2.4853488</span>  <span class="op">-</span><span class="fl">5.2790448</span>  <span class="op">-</span><span class="fl">0.6098953</span>  <span class="op">-</span><span class="fl">4.0456127</span>   <span class="fl">2.4663864</span>
+[<span class="dv">36</span>]  <span class="op">-</span><span class="fl">7.0043837</span>  <span class="fl">15.7477692</span>  <span class="fl">11.1484049</span>   <span class="fl">1.1631787</span>  <span class="op">-</span><span class="fl">4.5203842</span>
+[<span class="dv">41</span>]   <span class="fl">4.3983013</span>  <span class="fl">14.1573518</span>   <span class="fl">4.1296291</span>  <span class="op">-</span><span class="fl">6.1267680</span>   <span class="fl">1.9422167</span>
+[<span class="dv">46</span>] <span class="op">-</span><span class="fl">10.9733208</span> <span class="op">-</span><span class="fl">13.0789076</span>
+
+<span class="op">$</span>P.square
+[<span class="dv">1</span>] <span class="fl">0.3976372</span>
+  
+<span class="co"># What we are really interested in here is the</span>
 <span class="co"># first element in this list, the PRESS statistic.</span>
 <span class="co"># We can call this statistic out by name</span>
-  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>stat</code></pre></div>
-<pre><code>## .........10.........20.........30.........40.......</code></pre>
-<pre><code>## [1] 4323.733</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>stat</code></pre></div>
-<pre><code>## .........10.........20.........30.........40.......</code></pre>
-<pre><code>## [1] 6036.623</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>stat</code></pre></div>
-<pre><code>## .........10.........20.........30.........40.......</code></pre>
-<pre><code>## [1] 3490.614</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>stat</code></pre></div>
-<pre><code>## .........10.........20.........30.........40.......</code></pre>
-<pre><code>## [1] 3455.346</code></pre>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>Ed)<span class="op">$</span>stat
+.........<span class="dv">10</span>.........<span class="dv">20</span>.........<span class="dv">30</span>.........<span class="dv">40</span>.......
+[<span class="dv">1</span>] <span class="fl">4323.733</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>Cath)<span class="op">$</span>stat
+.........<span class="dv">10</span>.........<span class="dv">20</span>.........<span class="dv">30</span>.........<span class="dv">40</span>.......
+[<span class="dv">1</span>] <span class="fl">6036.623</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdCath)<span class="op">$</span>stat
+.........<span class="dv">10</span>.........<span class="dv">20</span>.........<span class="dv">30</span>.........<span class="dv">40</span>.......
+[<span class="dv">1</span>] <span class="fl">3490.614</span>
+  <span class="kw">PRESS</span>(mods<span class="op">$</span>EdxCath)<span class="op">$</span>stat
+.........<span class="dv">10</span>.........<span class="dv">20</span>.........<span class="dv">30</span>.........<span class="dv">40</span>.......
+[<span class="dv">1</span>] <span class="fl">3455.346</span></code></pre></div>
 <p><br></p>
 <p>Opposite from the adjusted R<sup>2</sup>, the lower the value of this statistic, the better the model. The meaning of this statistic is that the model is not “internally” sensitive the the data points. We can draw this interpretation because PRESS is a form of cross validation (which we will discuss later this week).</p>
 <p>So, these are nice tools, but they are based almost exclusively on the sums of squares for our regressions, so they don’t take much into account redundancy in the parameters of the regression. This leads to some problems</p>
@@ -598,14 +588,15 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p>Remember that we made a list of <em>a priori</em> models above that we would like to consider</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the names of those models</span>
-  <span class="kw">names</span>(mods)</code></pre></div>
-<pre><code>## [1] &quot;Ed&quot;      &quot;Cath&quot;    &quot;EdCath&quot;  &quot;EdxCath&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We can strip the AIC values from each</span>
+  <span class="kw">names</span>(mods)
+[<span class="dv">1</span>] <span class="st">&quot;Ed&quot;</span>      <span class="st">&quot;Cath&quot;</span>    <span class="st">&quot;EdCath&quot;</span>  <span class="st">&quot;EdxCath&quot;</span>
+
+<span class="co"># We can strip the AIC values from each</span>
 <span class="co"># of the model objects using a</span>
 <span class="co"># function from the apply family:</span>
-  <span class="kw">mapply</span>(<span class="dt">FUN =</span> <span class="st">&#39;AIC&#39;</span>, mods)</code></pre></div>
-<pre><code>##       Ed     Cath   EdCath  EdxCath 
-## 348.4223 364.3479 337.5636 336.8823</code></pre>
+  <span class="kw">mapply</span>(<span class="dt">FUN =</span> <span class="st">&#39;AIC&#39;</span>, mods)
+      Ed     Cath   EdCath  EdxCath 
+<span class="fl">348.4223</span> <span class="fl">364.3479</span> <span class="fl">337.5636</span> <span class="fl">336.8823</span> </code></pre></div>
 <p><br></p>
 <p>Now we have a named vector holding AIC values for each of our named models. At a glance, we can see that our model with the interaction is the ‘best’ model in the set as indicated by our other statistics, but this time it is only better by less than 1 AIC (lower is better). Can we say anything about that?</p>
 <p>Funny you should ask, yes we can. We have a few general rules of thumb for interpreting the AIC statistic, and we can actually derive a whole set of statistics based on these rankings.</p>
@@ -619,15 +610,15 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 
 <span class="co"># Let&#39;s start digging into this stuff</span>
 <span class="co"># by making a table that can help us along. </span>
-  <span class="kw">aictab</span>(<span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods))</code></pre></div>
-<pre><code>## 
-## Model selection based on AICc:
-## 
-##         K   AICc Delta_AICc AICcWt Cum.Wt      LL
-## EdxCath 5 338.35       0.00   0.52   0.52 -163.44
-## EdCath  4 338.52       0.17   0.48   1.00 -164.78
-## Ed      3 348.98      10.63   0.00   1.00 -171.21
-## Cath    3 364.91      26.56   0.00   1.00 -179.17</code></pre>
+  <span class="kw">aictab</span>(<span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods))
+
+Model selection based on AICc<span class="op">:</span>
+
+<span class="st">        </span>K   AICc Delta_AICc AICcWt Cum.Wt      LL
+EdxCath <span class="dv">5</span> <span class="fl">338.35</span>       <span class="fl">0.00</span>   <span class="fl">0.52</span>   <span class="fl">0.52</span> <span class="op">-</span><span class="fl">163.44</span>
+EdCath  <span class="dv">4</span> <span class="fl">338.52</span>       <span class="fl">0.17</span>   <span class="fl">0.48</span>   <span class="fl">1.00</span> <span class="op">-</span><span class="fl">164.78</span>
+Ed      <span class="dv">3</span> <span class="fl">348.98</span>      <span class="fl">10.63</span>   <span class="fl">0.00</span>   <span class="fl">1.00</span> <span class="op">-</span><span class="fl">171.21</span>
+Cath    <span class="dv">3</span> <span class="fl">364.91</span>      <span class="fl">26.56</span>   <span class="fl">0.00</span>   <span class="fl">1.00</span> <span class="op">-</span><span class="fl">179.17</span></code></pre></div>
 <p><br></p>
 <p>Lots going on here…What does it all mean?</p>
 <p>From left to right</p>
@@ -652,48 +643,48 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <p>Using model averaging to account for the model uncertainty, we can see that the unconditional confidence interval for <code>Education</code> is negative and does not overlap zero, and the opposite trend is evident in the trend for <code>Catholic</code>. However. set, we find out that the interaction is actually not significant, which is probably why the main effects model had equivelent support in the candidate set</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Education&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
-       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-## Multimodel inference on &quot;Education&quot; based on AICc
-## 
-## AICc table used to obtain model-averaged estimate:
-## 
-##         K   AICc Delta_AICc AICcWt Estimate   SE
-## Ed      3 348.98      10.63   0.00    -0.86 0.14
-## EdCath  4 338.52       0.17   0.48    -0.79 0.13
-## EdxCath 5 338.35       0.00   0.52    -0.43 0.26
-## 
-## Model-averaged estimate: -0.6 
-## Unconditional SE: 0.28 
-## 95% Unconditional confidence interval: -1.14, -0.06</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
-       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-## Multimodel inference on &quot;Catholic&quot; based on AICc
-## 
-## AICc table used to obtain model-averaged estimate:
-## 
-##         K   AICc Delta_AICc AICcWt Estimate   SE
-## Cath    3 364.91      26.56   0.00     0.14 0.04
-## EdCath  4 338.52       0.17   0.48     0.11 0.03
-## EdxCath 5 338.35       0.00   0.52     0.18 0.05
-## 
-## Model-averaged estimate: 0.15 
-## Unconditional SE: 0.06 
-## 95% Unconditional confidence interval: 0.04, 0.26</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Education:Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
-       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)</code></pre></div>
-<pre><code>## 
-## Multimodel inference on &quot;Education:Catholic&quot; based on AICc
-## 
-## AICc table used to obtain model-averaged estimate:
-## 
-##         K   AICc Delta_AICc AICcWt Estimate   SE
-## EdxCath 5 338.35          0      1    -0.01 0.01
-## 
-## Model-averaged estimate: -0.01 
-## Unconditional SE: 0.01 
-## 95% Unconditional confidence interval: -0.02, 0</code></pre>
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)
+
+Multimodel inference on <span class="st">&quot;Education&quot;</span> based on AICc
+
+AICc table used to obtain model<span class="op">-</span>averaged estimate<span class="op">:</span>
+
+<span class="st">        </span>K   AICc Delta_AICc AICcWt Estimate   SE
+Ed      <span class="dv">3</span> <span class="fl">348.98</span>      <span class="fl">10.63</span>   <span class="fl">0.00</span>    <span class="op">-</span><span class="fl">0.86</span> <span class="fl">0.14</span>
+EdCath  <span class="dv">4</span> <span class="fl">338.52</span>       <span class="fl">0.17</span>   <span class="fl">0.48</span>    <span class="op">-</span><span class="fl">0.79</span> <span class="fl">0.13</span>
+EdxCath <span class="dv">5</span> <span class="fl">338.35</span>       <span class="fl">0.00</span>   <span class="fl">0.52</span>    <span class="op">-</span><span class="fl">0.43</span> <span class="fl">0.26</span>
+
+Model<span class="op">-</span>averaged estimate<span class="op">:</span><span class="st"> </span><span class="op">-</span><span class="fl">0.6</span> 
+Unconditional SE<span class="op">:</span><span class="st"> </span><span class="fl">0.28</span> 
+<span class="dv">95</span>% Unconditional confidence interval<span class="op">:</span><span class="st"> </span><span class="op">-</span><span class="fl">1.14</span>, <span class="op">-</span><span class="fl">0.06</span>
+<span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)
+
+Multimodel inference on <span class="st">&quot;Catholic&quot;</span> based on AICc
+
+AICc table used to obtain model<span class="op">-</span>averaged estimate<span class="op">:</span>
+
+<span class="st">        </span>K   AICc Delta_AICc AICcWt Estimate   SE
+Cath    <span class="dv">3</span> <span class="fl">364.91</span>      <span class="fl">26.56</span>   <span class="fl">0.00</span>     <span class="fl">0.14</span> <span class="fl">0.04</span>
+EdCath  <span class="dv">4</span> <span class="fl">338.52</span>       <span class="fl">0.17</span>   <span class="fl">0.48</span>     <span class="fl">0.11</span> <span class="fl">0.03</span>
+EdxCath <span class="dv">5</span> <span class="fl">338.35</span>       <span class="fl">0.00</span>   <span class="fl">0.52</span>     <span class="fl">0.18</span> <span class="fl">0.05</span>
+
+Model<span class="op">-</span>averaged estimate<span class="op">:</span><span class="st"> </span><span class="fl">0.15</span> 
+Unconditional SE<span class="op">:</span><span class="st"> </span><span class="fl">0.06</span> 
+<span class="dv">95</span>% Unconditional confidence interval<span class="op">:</span><span class="st"> </span><span class="fl">0.04</span>, <span class="fl">0.26</span>
+<span class="kw">modavg</span>(mods, <span class="dt">parm =</span> <span class="st">&#39;Education:Catholic&#39;</span>, <span class="dt">modnames =</span> <span class="kw">names</span>(mods),
+       <span class="dt">conf.level =</span> .<span class="dv">95</span>, <span class="dt">exclude =</span> <span class="ot">TRUE</span>)
+
+Multimodel inference on <span class="st">&quot;Education:Catholic&quot;</span> based on AICc
+
+AICc table used to obtain model<span class="op">-</span>averaged estimate<span class="op">:</span>
+
+<span class="st">        </span>K   AICc Delta_AICc AICcWt Estimate   SE
+EdxCath <span class="dv">5</span> <span class="fl">338.35</span>          <span class="dv">0</span>      <span class="dv">1</span>    <span class="op">-</span><span class="fl">0.01</span> <span class="fl">0.01</span>
+
+Model<span class="op">-</span>averaged estimate<span class="op">:</span><span class="st"> </span><span class="op">-</span><span class="fl">0.01</span> 
+Unconditional SE<span class="op">:</span><span class="st"> </span><span class="fl">0.01</span> 
+<span class="dv">95</span>% Unconditional confidence interval<span class="op">:</span><span class="st"> </span><span class="op">-</span><span class="fl">0.02</span>, <span class="dv">0</span></code></pre></div>
 <p><br></p>
 <p>Isn’t that fantastic? From here we could move on to make predictions based on the model-averaged parameter estimates using what you learned last week. But…what if we weren’t convinced so easily and wanted a reliable means of seeing how well our model actually performs now that we’ve selected one (or more)? More on this below…</p>
 <p><br></p>
@@ -767,35 +758,36 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
   pred.line =<span class="st"> </span><span class="kw">lm</span>(ed.obs<span class="op">~</span>ed.pred)
 <span class="co"># Summarize the model</span>
-  <span class="kw">summary</span>(pred.line)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = ed.obs ~ ed.pred)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -17.036  -6.711  -1.011   9.526  19.689 
-## 
-## Coefficients:
-##               Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) -1.658e-14  1.186e+01   0.000        1    
-## ed.pred      1.000e+00  1.680e-01   5.954 3.66e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 9.446 on 45 degrees of freedom
-## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
-## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Extract the R-squared for observed vs predicted</span>
-  <span class="kw">summary</span>(pred.line)<span class="op">$</span>r.squared</code></pre></div>
-<pre><code>## [1] 0.4406156</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot predictive line</span>
+  <span class="kw">summary</span>(pred.line)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> ed.obs <span class="op">~</span><span class="st"> </span>ed.pred)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">17.036</span>  <span class="op">-</span><span class="fl">6.711</span>  <span class="op">-</span><span class="fl">1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="op">-</span><span class="fl">1.658e-14</span>  <span class="fl">1.186e+01</span>   <span class="fl">0.000</span>        <span class="dv">1</span>    
+ed.pred      <span class="fl">1.000e+00</span>  <span class="fl">1.680e-01</span>   <span class="fl">5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span>
+<span class="co"># Extract the R-squared for observed vs predicted</span>
+  <span class="kw">summary</span>(pred.line)<span class="op">$</span>r.squared
+[<span class="dv">1</span>] <span class="fl">0.4406156</span>
+          
+<span class="co"># Plot predictive line</span>
 <span class="co"># Get coefficients</span>
-  <span class="kw">summary</span>(pred.line)<span class="op">$</span>coefficients</code></pre></div>
-<pre><code>##                  Estimate Std. Error       t value     Pr(&gt;|t|)
-## (Intercept) -1.658293e-14 11.8617938 -1.398012e-15 1.000000e+00
-## ed.pred      1.000000e+00  0.1679651  5.953619e+00 3.658617e-07</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Use sequence of new data</span>
+  <span class="kw">summary</span>(pred.line)<span class="op">$</span>coefficients
+                 Estimate Std. Error       t value     <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="op">-</span><span class="fl">1.658293e-14</span> <span class="fl">11.8617938</span> <span class="op">-</span><span class="fl">1.398012e-15</span> <span class="fl">1.000000e+00</span>
+ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</span>  <span class="fl">5.953619e+00</span> <span class="fl">3.658617e-07</span>
+<span class="co"># Use sequence of new data</span>
   pred.pts =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="kw">min</span>(ed.obs), <span class="kw">max</span>(ed.obs), <span class="dv">1</span>))
   <span class="kw">names</span>(pred.pts) =<span class="st"> &#39;ed.pred&#39;</span>
 <span class="co"># Make predictions using coefficients from regression</span>
@@ -849,11 +841,11 @@ full=<span class="kw">lm</span>(Fertility<span class="op">~</span>., <span class
 }</code></pre></div>
 <p><br></p>
 <p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)</code></pre></div>
-<pre><code>## [1] 0.4580079</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))</code></pre></div>
-<pre><code>##      2.5%     97.5% 
-## 0.1198292 0.6212351</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)
+[<span class="dv">1</span>] <span class="fl">0.4583142</span>
+      <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
+     <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span>
+<span class="fl">0.1164624</span> <span class="fl">0.6213579</span> </code></pre></div>
 <p><br></p>
 <p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
 <p><br></p>

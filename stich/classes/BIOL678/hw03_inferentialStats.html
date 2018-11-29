@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="intro-to-inferential-statistics" class="section level1">
 <h1>Intro to inferential statistics</h1>
@@ -303,25 +291,25 @@ pre code, pre, code {
   smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/smolts.txt&#39;</span>)
 <span class="co"># Look at the first few rows of data</span>
   <span class="kw">head</span>(smolts)
-##      ID     stage  fl  mass   nka osmolality      pref max n.switch
-## 1 31B1F     Smolt 216  97.5 6.667        318 0.3638229  83       93
-## 2 31B20     Smolt 184  63.0 4.444        306 0.3922490  47      107
-## 3 31B27  Presmolt 183  61.1 1.429        418 0.3378025  45       80
-## 4 31B29 Postsmolt 204  76.4 3.899        356 0.4551466  76      123
-## 5 31B2A  Presmolt 218 117.0 3.623        419 0.4337464  62      107
-## 6 31B2E Postsmolt 199  70.8 2.151        355 0.4828588  59      100
+     ID     stage  fl  mass   nka osmolality      pref max n.switch
+<span class="dv">1</span> 31B1F     Smolt <span class="dv">216</span>  <span class="fl">97.5</span> <span class="fl">6.667</span>        <span class="dv">318</span> <span class="fl">0.3638229</span>  <span class="dv">83</span>       <span class="dv">93</span>
+<span class="dv">2</span> 31B20     Smolt <span class="dv">184</span>  <span class="fl">63.0</span> <span class="fl">4.444</span>        <span class="dv">306</span> <span class="fl">0.3922490</span>  <span class="dv">47</span>      <span class="dv">107</span>
+<span class="dv">3</span> 31B27  Presmolt <span class="dv">183</span>  <span class="fl">61.1</span> <span class="fl">1.429</span>        <span class="dv">418</span> <span class="fl">0.3378025</span>  <span class="dv">45</span>       <span class="dv">80</span>
+<span class="dv">4</span> 31B29 Postsmolt <span class="dv">204</span>  <span class="fl">76.4</span> <span class="fl">3.899</span>        <span class="dv">356</span> <span class="fl">0.4551466</span>  <span class="dv">76</span>      <span class="dv">123</span>
+<span class="dv">5</span> 31B2A  Presmolt <span class="dv">218</span> <span class="fl">117.0</span> <span class="fl">3.623</span>        <span class="dv">419</span> <span class="fl">0.4337464</span>  <span class="dv">62</span>      <span class="dv">107</span>
+<span class="dv">6</span> 31B2E Postsmolt <span class="dv">199</span>  <span class="fl">70.8</span> <span class="fl">2.151</span>        <span class="dv">355</span> <span class="fl">0.4828588</span>  <span class="dv">59</span>      <span class="dv">100</span>
 <span class="co"># Examine data structure  </span>
   <span class="kw">str</span>(smolts)
-## &#39;data.frame&#39;:    169 obs. of  9 variables:
-##  $ ID        : Factor w/ 169 levels &quot;31B1F&quot;,&quot;31B20&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
-##  $ stage     : Factor w/ 3 levels &quot;Postsmolt&quot;,&quot;Presmolt&quot;,..: 3 3 2 1 2 1 1 1 1 2 ...
-##  $ fl        : int  216 184 183 204 218 199 197 187 202 194 ...
-##  $ mass      : num  97.5 63 61.1 76.4 117 70.8 80.1 64.6 76.4 65.3 ...
-##  $ nka       : num  6.67 4.44 1.43 3.9 3.62 ...
-##  $ osmolality: int  318 306 418 356 419 355 380 402 406 425 ...
-##  $ pref      : num  0.364 0.392 0.338 0.455 0.434 ...
-##  $ max       : int  83 47 45 76 62 59 83 112 54 38 ...
-##  $ n.switch  : int  93 107 80 123 107 100 108 77 88 100 ...</code></pre></div>
+<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">169</span> obs. of  <span class="dv">9</span> variables<span class="op">:</span>
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>ID        <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">169</span> levels <span class="st">&quot;31B1F&quot;</span>,<span class="st">&quot;31B20&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...
+ <span class="op">$</span><span class="st"> </span>stage     <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;Postsmolt&quot;</span>,<span class="st">&quot;Presmolt&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> ...
+ <span class="op">$</span><span class="st"> </span>fl        <span class="op">:</span><span class="st"> </span>int  <span class="dv">216</span> <span class="dv">184</span> <span class="dv">183</span> <span class="dv">204</span> <span class="dv">218</span> <span class="dv">199</span> <span class="dv">197</span> <span class="dv">187</span> <span class="dv">202</span> <span class="dv">194</span> ...
+ <span class="op">$</span><span class="st"> </span>mass      <span class="op">:</span><span class="st"> </span>num  <span class="fl">97.5</span> <span class="dv">63</span> <span class="fl">61.1</span> <span class="fl">76.4</span> <span class="dv">117</span> <span class="fl">70.8</span> <span class="fl">80.1</span> <span class="fl">64.6</span> <span class="fl">76.4</span> <span class="fl">65.3</span> ...
+ <span class="op">$</span><span class="st"> </span>nka       <span class="op">:</span><span class="st"> </span>num  <span class="fl">6.67</span> <span class="fl">4.44</span> <span class="fl">1.43</span> <span class="fl">3.9</span> <span class="fl">3.62</span> ...
+ <span class="op">$</span><span class="st"> </span>osmolality<span class="op">:</span><span class="st"> </span>int  <span class="dv">318</span> <span class="dv">306</span> <span class="dv">418</span> <span class="dv">356</span> <span class="dv">419</span> <span class="dv">355</span> <span class="dv">380</span> <span class="dv">402</span> <span class="dv">406</span> <span class="dv">425</span> ...
+ <span class="op">$</span><span class="st"> </span>pref      <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.364</span> <span class="fl">0.392</span> <span class="fl">0.338</span> <span class="fl">0.455</span> <span class="fl">0.434</span> ...
+ <span class="op">$</span><span class="st"> </span>max       <span class="op">:</span><span class="st"> </span>int  <span class="dv">83</span> <span class="dv">47</span> <span class="dv">45</span> <span class="dv">76</span> <span class="dv">62</span> <span class="dv">59</span> <span class="dv">83</span> <span class="dv">112</span> <span class="dv">54</span> <span class="dv">38</span> ...
+ <span class="op">$</span><span class="st"> </span>n.switch  <span class="op">:</span><span class="st"> </span>int  <span class="dv">93</span> <span class="dv">107</span> <span class="dv">80</span> <span class="dv">123</span> <span class="dv">107</span> <span class="dv">100</span> <span class="dv">108</span> <span class="dv">77</span> <span class="dv">88</span> <span class="dv">100</span> ...</code></pre></div>
 <p><br></p>
 <p>The dataset contains nine columns, with variables defined as:</p>
 <p><br></p>
@@ -348,15 +336,15 @@ pre code, pre, code {
     smolt.nka =<span class="st"> </span>smolts<span class="op">$</span>nka[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>]
   <span class="co"># Quick summary of the data</span>
     <span class="kw">summary</span>(smolt.nka)
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.531   4.346   5.577   5.551   6.886  10.543
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  <span class="fl">0.531</span>   <span class="fl">4.346</span>   <span class="fl">5.577</span>   <span class="fl">5.551</span>   <span class="fl">6.886</span>  <span class="fl">10.543</span> 
   
   <span class="co"># Make a vector of presmolt gill NKA activity     </span>
     presmolt.nka =<span class="st"> </span>smolts<span class="op">$</span>nka[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>]
   <span class="co"># Another quick data summary</span>
     <span class="kw">summary</span>(presmolt.nka)
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
-##   0.378   2.406   3.111   3.146   3.631   7.779</code></pre></div>
+   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+  <span class="fl">0.378</span>   <span class="fl">2.406</span>   <span class="fl">3.111</span>   <span class="fl">3.146</span>   <span class="fl">3.631</span>   <span class="fl">7.779</span> </code></pre></div>
 <p><br></p>
 <p>Now let’s use these data to work out a simple example. Your objective is to compare nka activity of the stage ‘Smolt’ to the sampling mean for gill NKA activity in the annual sampling distribution (4.16) using a one-sample t-test. You will need to choose an appropriate Type-I error rate (confidence level), and alternative hypothesis ahead of time in your analysis.</p>
 <p><br></p>
@@ -415,17 +403,17 @@ pre code, pre, code {
 <p>If you did not specify this argument, note that R made a choice for you on the fly, and you can tell what that choice was by the df. We discussed the df for the t-test in class. In the case of the two-sample test, the df should be calculated as <span class="math inline">\((n_1-1)+(n_2-1)\)</span>, or 111 in this case, if the variances are equal. If you ran the <code>t.test</code> with this assumption, go back and run it the other way and look at the df:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Re-run the two-sample test</span>
   <span class="kw">t.test</span>(smolt.nka, presmolt.nka)    
-## 
-##  Welch Two Sample t-test
-## 
-## data:  smolt.nka and presmolt.nka
-## t = 7.6894, df = 105.22, p-value = 8.247e-12
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  1.784862 3.025163
-## sample estimates:
-## mean of x mean of y 
-##  5.551050  3.146038</code></pre></div>
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>smolt.nka and presmolt.nka
+t =<span class="st"> </span><span class="fl">7.6894</span>, df =<span class="st"> </span><span class="fl">105.22</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">8.247e-12</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">1.784862</span> <span class="fl">3.025163</span>
+sample estimates<span class="op">:</span>
+mean of x mean of y 
+ <span class="fl">5.551050</span>  <span class="fl">3.146038</span> </code></pre></div>
 <p><br></p>
 <p>Weird, huh? How do you get a part of a degree of freedom?? And, it looks like we are short a few degrees of freedom, doesn’t it? So what’s happening here? We have to sacrifice a few extra degrees of freedom to stay conservative and avoid making a Type-I error. So, we need to base the df on the means and variances of the two sampling distributions. Check out the calculation on this <code>definitely not wrong and totally reliable</code> <a href="https://en.wikipedia.org/wiki/Welch%27s_t_test">Wikepedia page</a>:</p>
 <p><br></p>
@@ -438,21 +426,21 @@ pre code, pre, code {
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># In case you have forgotten the data strucure already:</span>
   <span class="kw">str</span>(smolts)
-## &#39;data.frame&#39;:    169 obs. of  9 variables:
-##  $ ID        : Factor w/ 169 levels &quot;31B1F&quot;,&quot;31B20&quot;,..: 1 2 3 4 5 6 7 8 9 10 ...
-##  $ stage     : Factor w/ 3 levels &quot;Postsmolt&quot;,&quot;Presmolt&quot;,..: 3 3 2 1 2 1 1 1 1 2 ...
-##  $ fl        : int  216 184 183 204 218 199 197 187 202 194 ...
-##  $ mass      : num  97.5 63 61.1 76.4 117 70.8 80.1 64.6 76.4 65.3 ...
-##  $ nka       : num  6.67 4.44 1.43 3.9 3.62 ...
-##  $ osmolality: int  318 306 418 356 419 355 380 402 406 425 ...
-##  $ pref      : num  0.364 0.392 0.338 0.455 0.434 ...
-##  $ max       : int  83 47 45 76 62 59 83 112 54 38 ...
-##  $ n.switch  : int  93 107 80 123 107 100 108 77 88 100 ...</code></pre></div>
+<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">169</span> obs. of  <span class="dv">9</span> variables<span class="op">:</span>
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>ID        <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">169</span> levels <span class="st">&quot;31B1F&quot;</span>,<span class="st">&quot;31B20&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...
+ <span class="op">$</span><span class="st"> </span>stage     <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;Postsmolt&quot;</span>,<span class="st">&quot;Presmolt&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">3</span> <span class="dv">3</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">2</span> ...
+ <span class="op">$</span><span class="st"> </span>fl        <span class="op">:</span><span class="st"> </span>int  <span class="dv">216</span> <span class="dv">184</span> <span class="dv">183</span> <span class="dv">204</span> <span class="dv">218</span> <span class="dv">199</span> <span class="dv">197</span> <span class="dv">187</span> <span class="dv">202</span> <span class="dv">194</span> ...
+ <span class="op">$</span><span class="st"> </span>mass      <span class="op">:</span><span class="st"> </span>num  <span class="fl">97.5</span> <span class="dv">63</span> <span class="fl">61.1</span> <span class="fl">76.4</span> <span class="dv">117</span> <span class="fl">70.8</span> <span class="fl">80.1</span> <span class="fl">64.6</span> <span class="fl">76.4</span> <span class="fl">65.3</span> ...
+ <span class="op">$</span><span class="st"> </span>nka       <span class="op">:</span><span class="st"> </span>num  <span class="fl">6.67</span> <span class="fl">4.44</span> <span class="fl">1.43</span> <span class="fl">3.9</span> <span class="fl">3.62</span> ...
+ <span class="op">$</span><span class="st"> </span>osmolality<span class="op">:</span><span class="st"> </span>int  <span class="dv">318</span> <span class="dv">306</span> <span class="dv">418</span> <span class="dv">356</span> <span class="dv">419</span> <span class="dv">355</span> <span class="dv">380</span> <span class="dv">402</span> <span class="dv">406</span> <span class="dv">425</span> ...
+ <span class="op">$</span><span class="st"> </span>pref      <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.364</span> <span class="fl">0.392</span> <span class="fl">0.338</span> <span class="fl">0.455</span> <span class="fl">0.434</span> ...
+ <span class="op">$</span><span class="st"> </span>max       <span class="op">:</span><span class="st"> </span>int  <span class="dv">83</span> <span class="dv">47</span> <span class="dv">45</span> <span class="dv">76</span> <span class="dv">62</span> <span class="dv">59</span> <span class="dv">83</span> <span class="dv">112</span> <span class="dv">54</span> <span class="dv">38</span> ...
+ <span class="op">$</span><span class="st"> </span>n.switch  <span class="op">:</span><span class="st"> </span>int  <span class="dv">93</span> <span class="dv">107</span> <span class="dv">80</span> <span class="dv">123</span> <span class="dv">107</span> <span class="dv">100</span> <span class="dv">108</span> <span class="dv">77</span> <span class="dv">88</span> <span class="dv">100</span> ...</code></pre></div>
 <p><br></p>
 <p><em><strong>Question 6.</strong></em> Do these sampling distributions conform to the normal distribution? Why or why not (note that there are multiple reasons).</p>
 <p><br></p>
 <p>Plot a histogram of the distributions. Can’t remember how to do this?</p>
-<p><img src="../../images/inTheLabDirections.png" alt=""></p>
+<p><span class="math inline">\(p(in the lecture module = 1.00)\)</span></p>
 <p><br></p>
 <p>Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can’t remember how to do it? Don’t make me show the picture again.</p>
 <p><br></p>

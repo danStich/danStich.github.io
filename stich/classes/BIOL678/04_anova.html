@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="anova-worked-example" class="section level1">
 <h1>ANOVA worked example</h1>
@@ -297,9 +285,9 @@ pre code, pre, code {
 <p>In R, ANOVA and all other linear models that we will discuss this week are fit using the <code>lm</code> function. Let’s have a look:</p>
 <p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(lm)
-## function (formula, data, subset, weights, na.action, method = &quot;qr&quot;, 
-##     model = TRUE, x = FALSE, y = FALSE, qr = TRUE, singular.ok = TRUE, 
-##     contrasts = NULL, offset, ...)</code></pre></div>
+<span class="cf">function</span> (formula, data, subset, weights, na.action, <span class="dt">method =</span> <span class="st">&quot;qr&quot;</span>, 
+    <span class="dt">model =</span> <span class="ot">TRUE</span>, <span class="dt">x =</span> <span class="ot">FALSE</span>, <span class="dt">y =</span> <span class="ot">FALSE</span>, <span class="dt">qr =</span> <span class="ot">TRUE</span>, <span class="dt">singular.ok =</span> <span class="ot">TRUE</span>, 
+    <span class="dt">contrasts =</span> <span class="ot">NULL</span>, offset, ...)  </code></pre></div>
 <p><br></p>
 <p>This shows us that <code>lm</code> is a function. It takes a number of arguments, but the ones that will concern us in this course are <code>formula</code> and <code>data</code>. The <code>formula</code> argument needs to be specified as a mathematical formula, and takes the following form:</p>
 <p><span class="math inline">\(y \sim x_1 + x_2, ..., + x_k\)</span></p>
@@ -317,19 +305,19 @@ pre code, pre, code {
 
 <span class="co"># Look at the first few lines of it</span>
   <span class="kw">head</span>(PlantGrowth)
-##   weight group
-## 1   4.17  ctrl
-## 2   5.58  ctrl
-## 3   5.18  ctrl
-## 4   6.11  ctrl
-## 5   4.50  ctrl
-## 6   4.61  ctrl
+  weight group
+<span class="dv">1</span>   <span class="fl">4.17</span>  ctrl
+<span class="dv">2</span>   <span class="fl">5.58</span>  ctrl
+<span class="dv">3</span>   <span class="fl">5.18</span>  ctrl
+<span class="dv">4</span>   <span class="fl">6.11</span>  ctrl
+<span class="dv">5</span>   <span class="fl">4.50</span>  ctrl
+<span class="dv">6</span>   <span class="fl">4.61</span>  ctrl
   
 <span class="co"># Examine the data structure</span>
   <span class="kw">str</span>(PlantGrowth)
-## &#39;data.frame&#39;:    30 obs. of  2 variables:
-##  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
-##  $ group : Factor w/ 3 levels &quot;ctrl&quot;,&quot;trt1&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">30</span> obs. of  <span class="dv">2</span> variables<span class="op">:</span>
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>weight<span class="op">:</span><span class="st"> </span>num  <span class="fl">4.17</span> <span class="fl">5.58</span> <span class="fl">5.18</span> <span class="fl">6.11</span> <span class="fl">4.5</span> <span class="fl">4.61</span> <span class="fl">5.17</span> <span class="fl">4.53</span> <span class="fl">5.33</span> <span class="fl">5.14</span> ...
+ <span class="op">$</span><span class="st"> </span>group <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;ctrl&quot;</span>,<span class="st">&quot;trt1&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...
   
 <span class="co"># Fit an ANOVA to the data and store it as an object</span>
   plant_model =<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth)
@@ -343,36 +331,36 @@ pre code, pre, code {
 <span class="co"># Now print the anova table. Note that when we have grouping variables like this</span>
 <span class="co"># we need to use the `anova` function to get factor-level statistics like these:</span>
   <span class="kw">anova</span>(plant_model)
-## Analysis of Variance Table
-## 
-## Response: weight
-##           Df  Sum Sq Mean Sq F value  Pr(&gt;F)  
-## group      2  3.7663  1.8832  4.8461 0.01591 *
-## Residuals 27 10.4921  0.3886                  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>weight
+          Df  Sum Sq Mean Sq F value  <span class="kw">Pr</span>(<span class="op">&gt;</span>F)  
+group      <span class="dv">2</span>  <span class="fl">3.7663</span>  <span class="fl">1.8832</span>  <span class="fl">4.8461</span> <span class="fl">0.01591</span> <span class="op">*</span>
+Residuals <span class="dv">27</span> <span class="fl">10.4921</span>  <span class="fl">0.3886</span>                  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
   
 <span class="co"># Summarize the model, look at the coefficients, standard errors, and R-squared</span>
   <span class="kw">summary</span>(plant_model)
-## 
-## Call:
-## lm(formula = weight ~ group, data = PlantGrowth)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.0710 -0.4180 -0.0060  0.2627  1.3690 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   5.0320     0.1971  25.527   &lt;2e-16 ***
-## grouptrt1    -0.3710     0.2788  -1.331   0.1944    
-## grouptrt2     0.4940     0.2788   1.772   0.0877 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.6234 on 27 degrees of freedom
-## Multiple R-squared:  0.2641, Adjusted R-squared:  0.2096 
-## F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre></div>
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">1.0710</span> <span class="op">-</span><span class="fl">0.4180</span> <span class="op">-</span><span class="fl">0.0060</span>  <span class="fl">0.2627</span>  <span class="fl">1.3690</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)   <span class="fl">5.0320</span>     <span class="fl">0.1971</span>  <span class="fl">25.527</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+grouptrt1    <span class="op">-</span><span class="fl">0.3710</span>     <span class="fl">0.2788</span>  <span class="op">-</span><span class="fl">1.331</span>   <span class="fl">0.1944</span>    
+grouptrt2     <span class="fl">0.4940</span>     <span class="fl">0.2788</span>   <span class="fl">1.772</span>   <span class="fl">0.0877</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.6234</span> on <span class="dv">27</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2641</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2096</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">4.846</span> on <span class="dv">2</span> and <span class="dv">27</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.01591</span></code></pre></div>
 <p><br></p>
 <p>That’s all there is to it!</p>
 <p><br></p>

@@ -1,5 +1,6 @@
 <head>
 <style>
+
 #pre code, #code, pre {
   white-space: pre;
   overflow-x: visible;
@@ -9,23 +10,17 @@
 
 img {
   display: inline-block;
-  margin-right: .5em;
+  margin-right: 1em;
   vertical-align: middle;
   margin-bottom: 5px;
 }
 
 pre.r {
   border-radius: 1em;
-  background-color: rgb(213, 213, 214);
+  background-color: rgb(240, 240, 240);
   border: none;
   margin-bottom: 2em;
 }
-
-/* code.r {
-  overflow-x: auto;
-  word-wrap: normal;
-} */
-
 
 .content-holder {
   display: inline-block;
@@ -59,7 +54,7 @@ p {
   padding-bottom: 1em;
 }
 
-h2, h3, h4, h5 {
+h1, h2, h3, h4, h5 {
   margin-top: .5em !important;
 }
 

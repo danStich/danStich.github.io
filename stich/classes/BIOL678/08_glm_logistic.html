@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="generalized-linear-models-glm" class="section level1">
 <h1>Generalized linear models (GLM)</h1>
@@ -374,14 +362,14 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  choice =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/StillwaterChoiceData.csv&#39;</span>)</code></pre></div>
 <p><br></p>
 <p>Look at the first few rows of data</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">head</span>(choice)</code></pre></div>
-<pre><code>##   path year hatchery length mass date flow
-## 1    0 2010        1    176   57  118  345
-## 2    0 2005        1    205  101  128 1093
-## 3    0 2010        1    180   56  118  345
-## 4    0 2010        1    193   74  118  345
-## 5    0 2005        1    189   76  128 1093
-## 6    0 2010        1    180   65  118  345</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">head</span>(choice)
+  path year hatchery length mass date flow
+<span class="dv">1</span>    <span class="dv">0</span> <span class="dv">2010</span>        <span class="dv">1</span>    <span class="dv">176</span>   <span class="dv">57</span>  <span class="dv">118</span>  <span class="dv">345</span>
+<span class="dv">2</span>    <span class="dv">0</span> <span class="dv">2005</span>        <span class="dv">1</span>    <span class="dv">205</span>  <span class="dv">101</span>  <span class="dv">128</span> <span class="dv">1093</span>
+<span class="dv">3</span>    <span class="dv">0</span> <span class="dv">2010</span>        <span class="dv">1</span>    <span class="dv">180</span>   <span class="dv">56</span>  <span class="dv">118</span>  <span class="dv">345</span>
+<span class="dv">4</span>    <span class="dv">0</span> <span class="dv">2010</span>        <span class="dv">1</span>    <span class="dv">193</span>   <span class="dv">74</span>  <span class="dv">118</span>  <span class="dv">345</span>
+<span class="dv">5</span>    <span class="dv">0</span> <span class="dv">2005</span>        <span class="dv">1</span>    <span class="dv">189</span>   <span class="dv">76</span>  <span class="dv">128</span> <span class="dv">1093</span>
+<span class="dv">6</span>    <span class="dv">0</span> <span class="dv">2010</span>        <span class="dv">1</span>    <span class="dv">180</span>   <span class="dv">65</span>  <span class="dv">118</span>  <span class="dv">345</span></code></pre></div>
 <p><br></p>
 <div id="data-explanation" class="section level3">
 <h3>Data Explanation</h3>
@@ -455,116 +443,116 @@ flow:     Discharge recorded at the USGS gauge in the headpond of the dam
 <p>This pretty much proceeds the same way for GLM as it does for linear models until we get to making predictions of the response based on our best model.</p>
 <p>Our model selection table is an object in R (<em>right</em>?), and we can reference that object using <code>$</code> notation, matrix notation <code>[ , ]</code>, or by calling rownames to get the index for each of the models. Let’s use this approach to get the best model from our candidate set. Here is a worked example in the code that follows:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Print the table</span>
-    table</code></pre></div>
-<pre><code>## 
-## Model selection based on AICc:
-## 
-##                                 K   AICc Delta_AICc AICcWt Cum.Wt      LL
-## year + flow                     7 565.16       0.00   0.31   0.31 -275.51
-## year + hatchery + flow          8 565.23       0.07   0.30   0.61 -274.52
-## year + length + flow            8 565.91       0.75   0.21   0.82 -274.86
-## year + hatchery + length + flow 9 567.12       1.96   0.12   0.93 -274.44
-## year + hatchery                 7 569.50       4.34   0.04   0.97 -277.68
-## year + length                   7 570.80       5.64   0.02   0.99 -278.33
-## year + length + hatchery        8 571.37       6.21   0.01   1.00 -277.59</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Look at the structure just to show that it is, indeed, an object:</span>
-    <span class="kw">str</span>(table)</code></pre></div>
-<pre><code>## Classes &#39;aictab&#39; and &#39;data.frame&#39;:   7 obs. of  8 variables:
-##  $ Modnames  : Factor w/ 7 levels &quot;year + flow&quot;,..: 1 3 6 4 2 5 7
-##  $ K         : num  7 8 8 9 7 7 8
-##  $ AICc      : num  565 565 566 567 570 ...
-##  $ Delta_AICc: num  0 0.0674 0.7506 1.9557 4.3408 ...
-##  $ ModelLik  : num  1 0.967 0.687 0.376 0.114 ...
-##  $ AICcWt    : num  0.3078 0.2976 0.2115 0.1158 0.0351 ...
-##  $ LL        : num  -276 -275 -275 -274 -278 ...
-##  $ Cum.Wt    : num  0.308 0.605 0.817 0.933 0.968 ...</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Look at the rownames of the table. These rownames are the index for each</span>
+    table
+
+Model selection based on AICc<span class="op">:</span>
+
+<span class="st">                                </span>K   AICc Delta_AICc AICcWt Cum.Wt      LL
+year <span class="op">+</span><span class="st"> </span>flow                     <span class="dv">7</span> <span class="fl">565.16</span>       <span class="fl">0.00</span>   <span class="fl">0.31</span>   <span class="fl">0.31</span> <span class="op">-</span><span class="fl">275.51</span>
+year <span class="op">+</span><span class="st"> </span>hatchery <span class="op">+</span><span class="st"> </span>flow          <span class="dv">8</span> <span class="fl">565.23</span>       <span class="fl">0.07</span>   <span class="fl">0.30</span>   <span class="fl">0.61</span> <span class="op">-</span><span class="fl">274.52</span>
+year <span class="op">+</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>flow            <span class="dv">8</span> <span class="fl">565.91</span>       <span class="fl">0.75</span>   <span class="fl">0.21</span>   <span class="fl">0.82</span> <span class="op">-</span><span class="fl">274.86</span>
+year <span class="op">+</span><span class="st"> </span>hatchery <span class="op">+</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>flow <span class="dv">9</span> <span class="fl">567.12</span>       <span class="fl">1.96</span>   <span class="fl">0.12</span>   <span class="fl">0.93</span> <span class="op">-</span><span class="fl">274.44</span>
+year <span class="op">+</span><span class="st"> </span>hatchery                 <span class="dv">7</span> <span class="fl">569.50</span>       <span class="fl">4.34</span>   <span class="fl">0.04</span>   <span class="fl">0.97</span> <span class="op">-</span><span class="fl">277.68</span>
+year <span class="op">+</span><span class="st"> </span>length                   <span class="dv">7</span> <span class="fl">570.80</span>       <span class="fl">5.64</span>   <span class="fl">0.02</span>   <span class="fl">0.99</span> <span class="op">-</span><span class="fl">278.33</span>
+year <span class="op">+</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>hatchery        <span class="dv">8</span> <span class="fl">571.37</span>       <span class="fl">6.21</span>   <span class="fl">0.01</span>   <span class="fl">1.00</span> <span class="op">-</span><span class="fl">277.59</span>
+  <span class="co"># Look at the structure just to show that it is, indeed, an object:</span>
+    <span class="kw">str</span>(table)
+Classes <span class="st">&#39;aictab&#39;</span> and <span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">  </span><span class="dv">7</span> obs. of  <span class="dv">8</span> variables<span class="op">:</span>
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>Modnames  <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">7</span> levels <span class="st">&quot;year + flow&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">4</span> <span class="dv">2</span> <span class="dv">5</span> <span class="dv">7</span>
+ <span class="op">$</span><span class="st"> </span>K         <span class="op">:</span><span class="st"> </span>num  <span class="dv">7</span> <span class="dv">8</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">7</span> <span class="dv">7</span> <span class="dv">8</span>
+ <span class="op">$</span><span class="st"> </span>AICc      <span class="op">:</span><span class="st"> </span>num  <span class="dv">565</span> <span class="dv">565</span> <span class="dv">566</span> <span class="dv">567</span> <span class="dv">570</span> ...
+ <span class="op">$</span><span class="st"> </span>Delta_AICc<span class="op">:</span><span class="st"> </span>num  <span class="dv">0</span> <span class="fl">0.0674</span> <span class="fl">0.7506</span> <span class="fl">1.9557</span> <span class="fl">4.3408</span> ...
+ <span class="op">$</span><span class="st"> </span>ModelLik  <span class="op">:</span><span class="st"> </span>num  <span class="dv">1</span> <span class="fl">0.967</span> <span class="fl">0.687</span> <span class="fl">0.376</span> <span class="fl">0.114</span> ...
+ <span class="op">$</span><span class="st"> </span>AICcWt    <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.3078</span> <span class="fl">0.2976</span> <span class="fl">0.2115</span> <span class="fl">0.1158</span> <span class="fl">0.0351</span> ...
+ <span class="op">$</span><span class="st"> </span>LL        <span class="op">:</span><span class="st"> </span>num  <span class="op">-</span><span class="dv">276</span> <span class="op">-</span><span class="dv">275</span> <span class="op">-</span><span class="dv">275</span> <span class="op">-</span><span class="dv">274</span> <span class="op">-</span><span class="dv">278</span> ...
+ <span class="op">$</span><span class="st"> </span>Cum.Wt    <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.308</span> <span class="fl">0.605</span> <span class="fl">0.817</span> <span class="fl">0.933</span> <span class="fl">0.968</span> ...
+  <span class="co"># Look at the rownames of the table. These rownames are the index for each</span>
   <span class="co"># of our models as they appear in the &#39;mods&#39; object, and we can use the</span>
   <span class="co"># index to reference objects inside of the &#39;mods&#39; list...</span>
-    <span class="kw">rownames</span>(table)</code></pre></div>
-<pre><code>## [1] &quot;2&quot; &quot;7&quot; &quot;6&quot; &quot;1&quot; &quot;3&quot; &quot;4&quot; &quot;5&quot;</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># This tells us that the rowname for the best model (the one at the top of</span>
+    <span class="kw">rownames</span>(table)
+[<span class="dv">1</span>] <span class="st">&quot;2&quot;</span> <span class="st">&quot;7&quot;</span> <span class="st">&quot;6&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;3&quot;</span> <span class="st">&quot;4&quot;</span> <span class="st">&quot;5&quot;</span>
+  <span class="co"># This tells us that the rowname for the best model (the one at the top of</span>
   <span class="co"># the table) is #2. That means that our best model is stored in position</span>
   <span class="co"># 2 of our model list that we named &#39;mods&#39;. Let&#39;s double check it to make</span>
   <span class="co"># sure:</span>
-    mods[[<span class="dv">2</span>]]</code></pre></div>
-<pre><code>## 
-## Call:  glm(formula = path ~ year + flow, family = binomial, data = choice)
-## 
-## Coefficients:
-## (Intercept)     year2006     year2009     year2010     year2011  
-##   -2.911624    -0.518632     0.243194    -0.043979    -0.814334  
-##    year2012         flow  
-##   -0.764289     0.001642  
-## 
-## Degrees of Freedom: 758 Total (i.e. Null);  752 Residual
-## Null Deviance:       580.2 
-## Residual Deviance: 551   AIC: 565</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># This looks pretty darn good! We could also do a summary of the model to</span>
+    mods[[<span class="dv">2</span>]]
+
+Call<span class="op">:</span><span class="st">  </span><span class="kw">glm</span>(<span class="dt">formula =</span> path <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>flow, <span class="dt">family =</span> binomial, <span class="dt">data =</span> choice)
+
+Coefficients<span class="op">:</span>
+(Intercept)     year2006     year2009     year2010     year2011  
+  <span class="op">-</span><span class="fl">2.911624</span>    <span class="op">-</span><span class="fl">0.518632</span>     <span class="fl">0.243194</span>    <span class="op">-</span><span class="fl">0.043979</span>    <span class="op">-</span><span class="fl">0.814334</span>  
+   year2012         flow  
+  <span class="op">-</span><span class="fl">0.764289</span>     <span class="fl">0.001642</span>  
+
+Degrees of Freedom<span class="op">:</span><span class="st"> </span><span class="dv">758</span> <span class="kw">Total</span> (i.e. Null);  <span class="dv">752</span> Residual
+Null Deviance<span class="op">:</span><span class="st">      </span><span class="fl">580.2</span> 
+Residual Deviance<span class="op">:</span><span class="st"> </span><span class="dv">551</span>  AIC<span class="op">:</span><span class="st"> </span><span class="dv">565</span>
+  <span class="co"># This looks pretty darn good! We could also do a summary of the model to</span>
   <span class="co"># get the coefficient estimates and the significance codes for the</span>
   <span class="co"># estimated coefficients:</span>
-    <span class="kw">summary</span>(mods[[<span class="dv">2</span>]])</code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = path ~ year + flow, family = binomial, data = choice)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
-## year2006    -0.5186319  0.6237029  -0.832 0.405671    
-## year2009     0.2431939  0.4615202   0.527 0.598235    
-## year2010    -0.0439789  0.6525993  -0.067 0.946271    
-## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
-## year2012    -0.7642890  0.5137641  -1.488 0.136849    
-## flow         0.0016416  0.0006195   2.650 0.008052 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 580.15  on 758  degrees of freedom
-## Residual deviance: 551.01  on 752  degrees of freedom
-## AIC: 565.01
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Cool!! But, what if we wanted the script to always grab the summary of</span>
+    <span class="kw">summary</span>(mods[[<span class="dv">2</span>]])
+
+Call<span class="op">:</span>
+<span class="kw">glm</span>(<span class="dt">formula =</span> path <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>flow, <span class="dt">family =</span> binomial, <span class="dt">data =</span> choice)
+
+Deviance Residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min       1Q   Median       3Q      Max  
+<span class="op">-</span><span class="fl">1.2183</span>  <span class="op">-</span><span class="fl">0.5757</span>  <span class="op">-</span><span class="fl">0.4401</span>  <span class="op">-</span><span class="fl">0.3564</span>   <span class="fl">2.4577</span>  
+
+Coefficients<span class="op">:</span>
+<span class="st">              </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    
+(Intercept) <span class="op">-</span><span class="fl">2.9116243</span>  <span class="fl">0.7981931</span>  <span class="op">-</span><span class="fl">3.648</span> <span class="fl">0.000265</span> <span class="op">**</span><span class="er">*</span>
+year2006    <span class="op">-</span><span class="fl">0.5186319</span>  <span class="fl">0.6237029</span>  <span class="op">-</span><span class="fl">0.832</span> <span class="fl">0.405671</span>    
+year2009     <span class="fl">0.2431939</span>  <span class="fl">0.4615202</span>   <span class="fl">0.527</span> <span class="fl">0.598235</span>    
+year2010    <span class="op">-</span><span class="fl">0.0439789</span>  <span class="fl">0.6525993</span>  <span class="op">-</span><span class="fl">0.067</span> <span class="fl">0.946271</span>    
+year2011    <span class="op">-</span><span class="fl">0.8143343</span>  <span class="fl">0.4029438</span>  <span class="op">-</span><span class="fl">2.021</span> <span class="fl">0.043284</span> <span class="op">*</span><span class="st">  </span>
+year2012    <span class="op">-</span><span class="fl">0.7642890</span>  <span class="fl">0.5137641</span>  <span class="op">-</span><span class="fl">1.488</span> <span class="fl">0.136849</span>    
+flow         <span class="fl">0.0016416</span>  <span class="fl">0.0006195</span>   <span class="fl">2.650</span> <span class="fl">0.008052</span> <span class="op">**</span><span class="st"> </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)
+
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">580.15</span>  on <span class="dv">758</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">551.01</span>  on <span class="dv">752</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">565.01</span>
+
+Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">5</span>
+  <span class="co"># Cool!! But, what if we wanted the script to always grab the summary of</span>
   <span class="co"># the top model in our model selection table no matter what the rowname</span>
   <span class="co"># was? That is, what if the rowname was subject to change with collection</span>
   <span class="co"># of further data in the future and we want our code to be flexible? Well,</span>
   <span class="co"># in that case, we could do this:</span>
-    <span class="kw">summary</span>( mods[[ <span class="kw">as.numeric</span>(<span class="kw">rownames</span>(table[<span class="dv">1</span>, ])) ]] )</code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = path ~ year + flow, family = binomial, data = choice)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
-## year2006    -0.5186319  0.6237029  -0.832 0.405671    
-## year2009     0.2431939  0.4615202   0.527 0.598235    
-## year2010    -0.0439789  0.6525993  -0.067 0.946271    
-## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
-## year2012    -0.7642890  0.5137641  -1.488 0.136849    
-## flow         0.0016416  0.0006195   2.650 0.008052 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 580.15  on 758  degrees of freedom
-## Residual deviance: 551.01  on 752  degrees of freedom
-## AIC: 565.01
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Here we are asking for the rowname of the first row in our model</span>
+    <span class="kw">summary</span>( mods[[ <span class="kw">as.numeric</span>(<span class="kw">rownames</span>(table[<span class="dv">1</span>, ])) ]] )
+
+Call<span class="op">:</span>
+<span class="kw">glm</span>(<span class="dt">formula =</span> path <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>flow, <span class="dt">family =</span> binomial, <span class="dt">data =</span> choice)
+
+Deviance Residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min       1Q   Median       3Q      Max  
+<span class="op">-</span><span class="fl">1.2183</span>  <span class="op">-</span><span class="fl">0.5757</span>  <span class="op">-</span><span class="fl">0.4401</span>  <span class="op">-</span><span class="fl">0.3564</span>   <span class="fl">2.4577</span>  
+
+Coefficients<span class="op">:</span>
+<span class="st">              </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    
+(Intercept) <span class="op">-</span><span class="fl">2.9116243</span>  <span class="fl">0.7981931</span>  <span class="op">-</span><span class="fl">3.648</span> <span class="fl">0.000265</span> <span class="op">**</span><span class="er">*</span>
+year2006    <span class="op">-</span><span class="fl">0.5186319</span>  <span class="fl">0.6237029</span>  <span class="op">-</span><span class="fl">0.832</span> <span class="fl">0.405671</span>    
+year2009     <span class="fl">0.2431939</span>  <span class="fl">0.4615202</span>   <span class="fl">0.527</span> <span class="fl">0.598235</span>    
+year2010    <span class="op">-</span><span class="fl">0.0439789</span>  <span class="fl">0.6525993</span>  <span class="op">-</span><span class="fl">0.067</span> <span class="fl">0.946271</span>    
+year2011    <span class="op">-</span><span class="fl">0.8143343</span>  <span class="fl">0.4029438</span>  <span class="op">-</span><span class="fl">2.021</span> <span class="fl">0.043284</span> <span class="op">*</span><span class="st">  </span>
+year2012    <span class="op">-</span><span class="fl">0.7642890</span>  <span class="fl">0.5137641</span>  <span class="op">-</span><span class="fl">1.488</span> <span class="fl">0.136849</span>    
+flow         <span class="fl">0.0016416</span>  <span class="fl">0.0006195</span>   <span class="fl">2.650</span> <span class="fl">0.008052</span> <span class="op">**</span><span class="st"> </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)
+
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">580.15</span>  on <span class="dv">758</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">551.01</span>  on <span class="dv">752</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">565.01</span>
+
+Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">5</span>
+  <span class="co"># Here we are asking for the rowname of the first row in our model</span>
   <span class="co"># selection table. We have to convert that to a number from a character</span>
   <span class="co"># string to reference the index in the mods list, and then we can</span>
   <span class="co"># summarize the best model. Another way to do this is:</span>
@@ -573,48 +561,48 @@ flow:     Discharge recorded at the USGS gauge in the headpond of the dam
       best =<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">rownames</span>(table[<span class="dv">1</span>, ]))
 
   <span class="co"># Now, get the summary for the model in mods that was the best</span>
-    <span class="kw">summary</span>( mods[[best]] )</code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = path ~ year + flow, family = binomial, data = choice)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.2183  -0.5757  -0.4401  -0.3564   2.4577  
-## 
-## Coefficients:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -2.9116243  0.7981931  -3.648 0.000265 ***
-## year2006    -0.5186319  0.6237029  -0.832 0.405671    
-## year2009     0.2431939  0.4615202   0.527 0.598235    
-## year2010    -0.0439789  0.6525993  -0.067 0.946271    
-## year2011    -0.8143343  0.4029438  -2.021 0.043284 *  
-## year2012    -0.7642890  0.5137641  -1.488 0.136849    
-## flow         0.0016416  0.0006195   2.650 0.008052 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 580.15  on 758  degrees of freedom
-## Residual deviance: 551.01  on 752  degrees of freedom
-## AIC: 565.01
-## 
-## Number of Fisher Scoring iterations: 5</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Since this is really THE SAME THING AS ANCOVA we can use the Anova</span>
+    <span class="kw">summary</span>( mods[[best]] )
+
+Call<span class="op">:</span>
+<span class="kw">glm</span>(<span class="dt">formula =</span> path <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>flow, <span class="dt">family =</span> binomial, <span class="dt">data =</span> choice)
+
+Deviance Residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min       1Q   Median       3Q      Max  
+<span class="op">-</span><span class="fl">1.2183</span>  <span class="op">-</span><span class="fl">0.5757</span>  <span class="op">-</span><span class="fl">0.4401</span>  <span class="op">-</span><span class="fl">0.3564</span>   <span class="fl">2.4577</span>  
+
+Coefficients<span class="op">:</span>
+<span class="st">              </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    
+(Intercept) <span class="op">-</span><span class="fl">2.9116243</span>  <span class="fl">0.7981931</span>  <span class="op">-</span><span class="fl">3.648</span> <span class="fl">0.000265</span> <span class="op">**</span><span class="er">*</span>
+year2006    <span class="op">-</span><span class="fl">0.5186319</span>  <span class="fl">0.6237029</span>  <span class="op">-</span><span class="fl">0.832</span> <span class="fl">0.405671</span>    
+year2009     <span class="fl">0.2431939</span>  <span class="fl">0.4615202</span>   <span class="fl">0.527</span> <span class="fl">0.598235</span>    
+year2010    <span class="op">-</span><span class="fl">0.0439789</span>  <span class="fl">0.6525993</span>  <span class="op">-</span><span class="fl">0.067</span> <span class="fl">0.946271</span>    
+year2011    <span class="op">-</span><span class="fl">0.8143343</span>  <span class="fl">0.4029438</span>  <span class="op">-</span><span class="fl">2.021</span> <span class="fl">0.043284</span> <span class="op">*</span><span class="st">  </span>
+year2012    <span class="op">-</span><span class="fl">0.7642890</span>  <span class="fl">0.5137641</span>  <span class="op">-</span><span class="fl">1.488</span> <span class="fl">0.136849</span>    
+flow         <span class="fl">0.0016416</span>  <span class="fl">0.0006195</span>   <span class="fl">2.650</span> <span class="fl">0.008052</span> <span class="op">**</span><span class="st"> </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)
+
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">580.15</span>  on <span class="dv">758</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">551.01</span>  on <span class="dv">752</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">565.01</span>
+
+Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">5</span>
+  <span class="co"># Since this is really THE SAME THING AS ANCOVA we can use the Anova</span>
   <span class="co"># function from the &#39;car&#39; library to get an ANCOVA summary for the</span>
   <span class="co"># model to look at significance of our main effects:</span>
       <span class="kw">library</span>(car)
-      <span class="kw">Anova</span>(mods[[best]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
-<pre><code>## Analysis of Deviance Table (Type II tests)
-## 
-## Response: path
-##      LR Chisq Df Pr(&gt;Chisq)   
-## year  12.8043  5   0.025283 * 
-## flow   7.4471  1   0.006354 **
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># Here, we see that there are signigicant effects of both year and</span>
+      <span class="kw">Anova</span>(mods[[best]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)
+Analysis of Deviance <span class="kw">Table</span> (Type II tests)
+
+Response<span class="op">:</span><span class="st"> </span>path
+     LR Chisq Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)   
+year  <span class="fl">12.8043</span>  <span class="dv">5</span>   <span class="fl">0.025283</span> <span class="op">*</span><span class="st"> </span>
+flow   <span class="fl">7.4471</span>  <span class="dv">1</span>   <span class="fl">0.006354</span> <span class="op">**</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+    <span class="co"># Here, we see that there are signigicant effects of both year and</span>
     <span class="co"># flow on our response, path choice.</span></code></pre></div>
 <p><br></p>
 </div>
@@ -627,16 +615,17 @@ flow:     Discharge recorded at the USGS gauge in the headpond of the dam
   c.res =<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(mods[[best]])<span class="op">$</span>coefficients )
 
 <span class="co"># Now we can look at the coefficient estimates</span>
-  c.res</code></pre></div>
-<pre><code>##                 Estimate   Std..Error     z.value     Pr...z..
-## (Intercept) -2.911624325 0.7981931477 -3.64776913 0.0002645272
-## year2006    -0.518631856 0.6237029032 -0.83153670 0.4056705026
-## year2009     0.243193850 0.4615202282  0.52694083 0.5982346820
-## year2010    -0.043978930 0.6525992875 -0.06739041 0.9462709073
-## year2011    -0.814334317 0.4029437518 -2.02096276 0.0432836201
-## year2012    -0.764288967 0.5137640800 -1.48762632 0.1368494687
-## flow         0.001641583 0.0006194926  2.64988401 0.0080519409</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Then, we can make some predictions</span>
+  c.res
+                Estimate   Std..Error     z.value     Pr...z..
+(Intercept) <span class="op">-</span><span class="fl">2.911624325</span> <span class="fl">0.7981931477</span> <span class="op">-</span><span class="fl">3.64776913</span> <span class="fl">0.0002645272</span>
+year2006    <span class="op">-</span><span class="fl">0.518631856</span> <span class="fl">0.6237029032</span> <span class="op">-</span><span class="fl">0.83153670</span> <span class="fl">0.4056705026</span>
+year2009     <span class="fl">0.243193850</span> <span class="fl">0.4615202282</span>  <span class="fl">0.52694083</span> <span class="fl">0.5982346820</span>
+year2010    <span class="op">-</span><span class="fl">0.043978930</span> <span class="fl">0.6525992875</span> <span class="op">-</span><span class="fl">0.06739041</span> <span class="fl">0.9462709073</span>
+year2011    <span class="op">-</span><span class="fl">0.814334317</span> <span class="fl">0.4029437518</span> <span class="op">-</span><span class="fl">2.02096276</span> <span class="fl">0.0432836201</span>
+year2012    <span class="op">-</span><span class="fl">0.764288967</span> <span class="fl">0.5137640800</span> <span class="op">-</span><span class="fl">1.48762632</span> <span class="fl">0.1368494687</span>
+flow         <span class="fl">0.001641583</span> <span class="fl">0.0006194926</span>  <span class="fl">2.64988401</span> <span class="fl">0.0080519409</span>
+
+<span class="co"># Then, we can make some predictions</span>
   <span class="co"># First, let&#39;s just look at the effect of flow. We will do this by hand.</span>
     <span class="co"># Make a new sequence of flow along which we will make our predictions</span>
       newFlow =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(choice<span class="op">$</span>flow), <span class="dt">to =</span> <span class="kw">max</span>(choice<span class="op">$</span>flow), <span class="dt">by =</span> <span class="dv">1</span>)
@@ -655,7 +644,8 @@ flow:     Discharge recorded at the USGS gauge in the headpond of the dam
 <span class="co"># Now, let&#39;s take a look:</span>
   <span class="kw">hist</span>(c.pred)</code></pre></div>
 <p><img src="08_glm_logistic_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># You can see that, in general, there is a relatively low probability of</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># You can see that, in general, there is a relatively low probability of</span>
 <span class="co"># an individual fish using the Stillwater branch, now let&#39;s make a</span>
 <span class="co"># figure that shows how this changes with flow:</span>
   <span class="kw">plot</span>(<span class="dt">x=</span>choice<span class="op">$</span>flow, <span class="dt">y=</span>choice<span class="op">$</span>path,
@@ -829,26 +819,26 @@ flow:     Discharge recorded at the USGS gauge in the headpond of the dam
     <span class="dt">working.directory =</span> <span class="kw">getwd</span>())</code></pre></div>
 <p><br></p>
 <p>And, print the model results.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(choice.model, <span class="dt">digits=</span><span class="dv">2</span>)</code></pre></div>
-<pre><code>## Inference for Bugs model at &quot;choice.txt&quot;, fit using jags,
-##  3 chains, each with 7500 iterations (first 2500 discarded), n.thin = 3
-##  n.sims = 5001 iterations saved
-##          mu.vect sd.vect   2.5%    25%    50%    75%  97.5% Rhat n.eff
-## alpha[1]   -2.90    0.80  -4.50  -3.43  -2.89  -2.36  -1.41    1  5000
-## alpha[2]   -3.46    0.48  -4.43  -3.78  -3.44  -3.13  -2.55    1  5000
-## alpha[3]   -2.66    0.54  -3.73  -3.03  -2.66  -2.29  -1.61    1  5000
-## alpha[4]   -2.96    0.35  -3.67  -3.20  -2.96  -2.73  -2.29    1  5000
-## alpha[5]   -3.71    0.80  -5.32  -4.24  -3.70  -3.17  -2.18    1  3900
-## alpha[6]   -3.70    0.66  -5.05  -4.13  -3.69  -3.26  -2.45    1  5000
-## beta        0.00    0.00   0.00   0.00   0.00   0.00   0.00    1  5000
-## deviance  558.17    4.82 552.74 555.32 557.41 560.15 567.37    1  5000
-## 
-## For each parameter, n.eff is a crude measure of effective sample size,
-## and Rhat is the potential scale reduction factor (at convergence, Rhat=1).
-## 
-## DIC info (using the rule, pD = var(deviance)/2)
-## pD = 11.6 and DIC = 569.8
-## DIC is an estimate of expected predictive error (lower deviance is better).</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(choice.model, <span class="dt">digits=</span><span class="dv">2</span>)
+Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;choice.txt&quot;</span>, fit using jags,
+ <span class="dv">3</span> chains, each with <span class="dv">7500</span> <span class="kw">iterations</span> (first <span class="dv">2500</span> discarded), n.thin =<span class="st"> </span><span class="dv">3</span>
+ n.sims =<span class="st"> </span><span class="dv">5001</span> iterations saved
+         mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>% Rhat n.eff
+alpha[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">2.93</span>    <span class="fl">0.80</span>  <span class="op">-</span><span class="fl">4.57</span>  <span class="op">-</span><span class="fl">3.48</span>  <span class="op">-</span><span class="fl">2.91</span>  <span class="op">-</span><span class="fl">2.37</span>  <span class="op">-</span><span class="fl">1.40</span>    <span class="dv">1</span>  <span class="dv">4000</span>
+alpha[<span class="dv">2</span>]   <span class="op">-</span><span class="fl">3.47</span>    <span class="fl">0.49</span>  <span class="op">-</span><span class="fl">4.46</span>  <span class="op">-</span><span class="fl">3.78</span>  <span class="op">-</span><span class="fl">3.45</span>  <span class="op">-</span><span class="fl">3.14</span>  <span class="op">-</span><span class="fl">2.54</span>    <span class="dv">1</span>  <span class="dv">2100</span>
+alpha[<span class="dv">3</span>]   <span class="op">-</span><span class="fl">2.69</span>    <span class="fl">0.55</span>  <span class="op">-</span><span class="fl">3.78</span>  <span class="op">-</span><span class="fl">3.06</span>  <span class="op">-</span><span class="fl">2.68</span>  <span class="op">-</span><span class="fl">2.31</span>  <span class="op">-</span><span class="fl">1.62</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">4</span>]   <span class="op">-</span><span class="fl">2.98</span>    <span class="fl">0.35</span>  <span class="op">-</span><span class="fl">3.68</span>  <span class="op">-</span><span class="fl">3.21</span>  <span class="op">-</span><span class="fl">2.98</span>  <span class="op">-</span><span class="fl">2.75</span>  <span class="op">-</span><span class="fl">2.31</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">5</span>]   <span class="op">-</span><span class="fl">3.74</span>    <span class="fl">0.80</span>  <span class="op">-</span><span class="fl">5.33</span>  <span class="op">-</span><span class="fl">4.27</span>  <span class="op">-</span><span class="fl">3.72</span>  <span class="op">-</span><span class="fl">3.20</span>  <span class="op">-</span><span class="fl">2.22</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">6</span>]   <span class="op">-</span><span class="fl">3.72</span>    <span class="fl">0.66</span>  <span class="op">-</span><span class="fl">5.06</span>  <span class="op">-</span><span class="fl">4.16</span>  <span class="op">-</span><span class="fl">3.71</span>  <span class="op">-</span><span class="fl">3.26</span>  <span class="op">-</span><span class="fl">2.45</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta        <span class="fl">0.00</span>    <span class="fl">0.00</span>   <span class="fl">0.00</span>   <span class="fl">0.00</span>   <span class="fl">0.00</span>   <span class="fl">0.00</span>   <span class="fl">0.00</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+deviance  <span class="fl">558.09</span>    <span class="fl">5.03</span> <span class="fl">552.69</span> <span class="fl">555.23</span> <span class="fl">557.32</span> <span class="fl">560.11</span> <span class="fl">567.00</span>    <span class="dv">1</span>  <span class="dv">1900</span>
+
+For each parameter, n.eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).
+
+DIC <span class="kw">info</span> (using the rule, <span class="dt">pD =</span> <span class="kw">var</span>(deviance)<span class="op">/</span><span class="dv">2</span>)
+pD =<span class="st"> </span><span class="fl">12.7</span> and DIC =<span class="st"> </span><span class="fl">570.8</span>
+DIC is an estimate of expected predictive <span class="kw">error</span> (lower deviance is better).</code></pre></div>
 <p><br></p>
 <p>This week in lab, you will explore tools for model diagnostics similar to those we did for general linear models. For now, we will just skip to the good stuff that’s not in your textbook this week!</p>
 <p>First, let’s plot a histogram for our flow parameter to see if the 95% CRI contains zero.</p>

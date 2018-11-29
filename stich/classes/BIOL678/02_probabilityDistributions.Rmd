@@ -1,13 +1,9 @@
-```{r child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
-
-<br>
 
 # Working with probability distributions
 
-<br>
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=2.5, fig.width=5,fig.align='left'}    
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=3, fig.width=5, fig.align='left'}    
 # Plot the density fucntion for a lognormal
 # distribution that has a mean of zero and
 # a standard deviation of 1.
@@ -19,7 +15,8 @@
     yaxt='n')
   axis(side=2, las=2)
 
-# Now, we can change the parameters to change the location and spread
+# Now, we can change the parameters
+# to change the location and spread
   lines(density(
     rlnorm(n=1e4, mean=1, sd=1)),
     lwd=2, col = 'blue') 
@@ -29,7 +26,7 @@
     lwd=2, col = 'red')  
 ```
 
-<h2 style="margin-top:0px;"> Introduction </h2>
+<h2 id="multi"> Introduction </h2>
 
 This week we are going to talk about **probability** and **probability distributions** as a backdrop for the models that we will be working with during the next several weeks. Probability theory is central to statistical techniques, so it will be important for you to have a pretty firm understanding of this to grab hold of big ideas later on. If you are successful in understanding these concepts, you will have a working body of knowledge that is comparable, or better developed than many leading professionals in our fields.
 
@@ -39,13 +36,11 @@ There was a time when biologists were largely restricted to using models that re
 
 We are going to use this tutorial for our discussions about probability and probability distributions throughout the week. Next week, we will use this new information to talk about how we calculate **distributional statistics** from samples and how those can be used for statistical inference before we begin talking about statistical analyses for the remainder of the course. Hopefully the order of things is starting to make some sense now!
 
-
 ## Probability distributions in R
 
 R has a number of built-in distribution types, and there are random-number generators associated with most or all of these that will allow us to take random samples from a distribution. This is useful for data simulation, but is also helpful for us to learn about probability distributions and how their parameters affect the **shape**, **spread**, **scale**, **location**, etc. of those distributions. We will briefly discuss concepts like **skew** because of how they can help us think about the assumptions that we are making (or breaking!) in the models that we use.
 
 For this class, we will focus on one major family of distributions and then zero in on a few distributions within this family that you are guaranteed to encounter in analyses throughout your career.
-
 
 ### Exponential family of distributions
 
@@ -61,14 +56,16 @@ Take a look at the table at the bottom of this Wikipedia page just to get an ide
     + Normal (Gaussian)
     + Lognormal
     + Beta
-    + NOTE: We'll talk about the 'uniform' distribution in the last two weeks
-
+    + Uniform\*
+  <br>
   2. Discrete distributions
     + Bernouli
     + Binomial
     + Multinomial
     + Poisson
     + Negative binomial
+    
+\* We'll talk about this one more during the second half of the semester.
 
 ### Continuous probability distributions
 
@@ -137,7 +134,6 @@ legend(x=1, # x-coordinate for legend
 ) # Close call to legend
 ```
 
-
 > The lognormal distribution
 
 The **lognormal distribution** is a probability distribution that assumes our
@@ -174,7 +170,6 @@ Let's take a look at how changes to the mean change the location of this distrib
          lty=1, lwd=2, bg='n', bty='n')
 ```
 
-
 > The beta distribution
 
 The **beta distribution** is a probability distribution that is constrained to the interval (0, 1). But, it is incredibly flexible in its parameterization, and as a result is very useful for stochastic simulation of variables on the probability scale, such as survival.
@@ -196,7 +191,6 @@ Let's take a look:
          col=c('black', 'blue', 'red'), lty=1, lwd=2, bg='n', bty='n')      
 ```
 
-
 ### Discrete probability distributions
 
 **Discrete** probability distributions are useful for situations in which our random variable of interest can only take specific values within the interval of interest. For example, this might include age, counts, pass/fail, or any number of conceivable categories. As a result, these require a slightly different treatment of probability as a discrete, rather than continuous phenomenon.
@@ -216,14 +210,19 @@ rbinom(n=1, size=1, prob=.5)
 But now, there is a function in the `Rlab` package that simplifies this for the specific case of a Bernoulli.
 
 ```{r}
-  # First, install the necessary package
-    #install.packages('Rlab') # Uncomment to install
-    library(Rlab)
-  # Now we can take a random sample from a Bernouli
-    # Flip the coin once
-      rbern(n=1, prob=.5)
-    # Flip the coin 100 times
-      rbern(n=100, prob=.5)
+# First, install the necessary package
+# Uncomment to install
+# install.packages('Rlab') 
+library(Rlab)
+
+# Now we can take a random
+# sample from a Bernoulli
+
+# Flip the coin once
+rbern(n=1, prob=.5)
+
+# Flip the coin 100 times
+rbern(n=100, prob=.5)
 ```
 
 > The binomial distribution
@@ -238,7 +237,6 @@ To sample data from a binomial distribution, we can use `rbinom`. In this exampl
 rbinom(n=10, size=10, prob=0.5)
 ```
 
- 
 > The multinomial distribution
 
 The **multinomial distribution** is a further generalization of the Binomial and Bernoulli distribution. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually **but all of them must sum to one**. The categories are, in this case, assumed to be a **mutually exclusive** and **exhaustive** set of possible outcomes.
@@ -254,16 +252,12 @@ We can use the multinomial distribution to randomly sample from categories (imag
   probs      
 ```
 
-<br>
- 
 Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 8 probabilities above.
 
 ```{r}
 rmultinom(n=5, size=1, prob=probs)
 ```
 
-<br>
- 
 **WHOA** a matrix??!!! HOLY CRAP, WHAT DOES IT ALL MEAN?
 
 Take a step back, breath, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:
@@ -273,35 +267,25 @@ Take a step back, breath, and think about this. The rows in this matrix are you 
   rmultinom(n=1, size=1, prob=probs)
 ```        
 
-
-<br>
- 
 Here, we pulled a single sample from the distribution, and probability of sampling a given individual was `r round(1/length(name), 2)` (1/`r length(name)`). If it makes it easier, we can put your names next to it:
 
 ```{r}
 cbind(name, rmultinom(n=1, size=1, prob=probs))
 ```  
 
-<br>
- 
 Now, if I was calling on you randomly in class, after 10 questions, the spread of people who have participated in class might look like this:
 
 ```{r}
 cbind(name, rmultinom(n=10, size=1, prob=probs))
 ```  
 
-<br>
- 
 Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are **awesome**!) matrices:
 
 ```{r}
   name[which(rmultinom(n=1, size=1, prob=probs)>0)]
 ```  
 
-<br>
- 
 And now we have a way to randomly select an individual based on a multinomial distribution!
-
 
 > The Poisson distribution
 
@@ -314,7 +298,6 @@ hist(rpois(n=1e4, lambda=100), main='')
 hist(rpois(n=1e4, lambda=1000), main='')    
 hist(rpois(n=1e4, lambda=10000), main='')  
 ```
-
 
 > The negative binomial distribution
 
@@ -341,7 +324,7 @@ hist(rnbinom(1e4, size=1, prob=.25))
 And, if we increase the number of successes that we use for our criterion, or target, then it spreads the distribution out even further.
 
 ```{r}  
-    hist(rnbinom(1e4, size=10, prob=.25))        
+hist(rnbinom(1e4, size=10, prob=.25))        
 ```    
     
 Now, because of it's properties, the negative binomial is also useful for number of other applications. Specifically, it has been widely used to  represent Poisson-like processes in which the mean and variance are not equal (e.g., **overdispersion**). This has seen a lot of application in the field of ecology, especially for overdispersed count data.
@@ -349,16 +332,16 @@ Now, because of it's properties, the negative binomial is also useful for number
 Here, we draw 10,000 random samples from a distribution with a mean of 10 and an overdispersion parameter of 1. The overdispersion parameter is called 'size' because this is an alternative parameterization that is just making use of the relationships between existing parameters of the negative binomial. It's easy to grasp how the mean changes the location of the distribution.
  
 ```{r} 
-    hist(rnbinom(1e4, mu=10, size=1))
+hist(rnbinom(1e4, mu=10, size=1))
 ```    
 
 But, note how the overdispersion parameter changes things:
  
 ```{r}   
-    hist(rnbinom(1e4, mu=10, size=.1))      
-    hist(rnbinom(1e4, mu=10, size=10))
-    hist(rnbinom(1e4, mu=10, size=100))      
-    hist(rnbinom(1e4, mu=10, size=1000))  
+hist(rnbinom(1e4, mu=10, size=.1))      
+hist(rnbinom(1e4, mu=10, size=10))
+hist(rnbinom(1e4, mu=10, size=100))      
+hist(rnbinom(1e4, mu=10, size=1000))  
 ```    
 
 A more intuitive way to work with the negative binomial in R is by using
@@ -376,11 +359,9 @@ dispersion parameter explicitly so it makes more sense:
  
 **NOTE** that the results are pretty much identical.    
   
-
 ## Calculating sample statistics and distributional parameters in R  
 
 In this section, we will learn how to derive the parameters of the **normal distribution** using a few different methods in R. We will use this opportunity to re-introduce the parameters as **moments** of the distribution so we can talk about what we mean by **confidence intervals**. We also will introduce a couple of different methods for calculating moments of a distribution. Specifically, we will look at how to derive...
-
 
 ### Moments about the mean
 
@@ -392,8 +373,8 @@ Sounds fancy, huh?
     + The mean
     + We will look at a few ways to calculate this
 3. Second moment
-    +The variance
-    +As with the mean, we will examine a couple of options for calculating
+    + The variance
+    + As with the mean, we will examine a couple of options for calculating
 4. Third moment
     + Skew
     + We won't calculate for this class, but we have discussed, and this
@@ -404,7 +385,6 @@ Sounds fancy, huh?
     + Similarly, we won't cover the calculation, but this is another moment
     that we have discussed with respect to departure from a z distribution
     in the normal
-
 
 ### Estimating parameters of the normal distribution from a sample
 
@@ -419,20 +399,22 @@ First, we'll estimate it by making our own function:
  
 ```{r}    
 # Make up a vector of data to test this on
-  test_norm = rnorm(1e3, 0, 1)
+test_norm = rnorm(1e3, 0, 1)
   
 # Write the function
-  norm.mom = function(x){                     # Define a function by name
-    x_bar = (1/length(x)) * sum(x)            # Calculate mean
-    sigma2 = (1/length(x)) * sum((x-x_bar)^2) # Calculate variance
-    return(c(x_bar, sigma2))                  # Return the calculations
-  }
+# First, define a function by name
+norm.mom = function(x){      
+  # Calculate mean
+  x_bar = (1/length(x)) * sum(x) 
+  # Calculate variance
+  sigma2 = (1/length(x)) * sum((x-x_bar)^2)
+  # Return the calculations
+  return(c(x_bar, sigma2))                  
+}
 # Test the function
-  norm.mom(test_norm)
+norm.mom(test_norm)
 ```        
 
-<br>
- 
 Because this one is so common, R has built-in estimators that rely on
 the exact solution provided by the formulas for the first two moments
 of the normal distribution:
@@ -442,7 +424,7 @@ of the normal distribution:
   var(test_norm)
 ```        
 
-<br>
+
  
 How do these compare to the answers returned by our function?    
 
@@ -455,8 +437,6 @@ library(MASS)
 fitdistr(test_norm, 'normal')
 ```
 
-<br>
- 
 Only one problem here: R doesn't report the second moment! It reports
 the square root of the second moment: the **standard deviation**!
     
@@ -465,22 +445,24 @@ Finally, let's write our own function and maximize the likelihood with the `opti
 ```{r}
 # Define the function
   normal.lik = function(theta, y){
-    # The starting value for mu that we provide
+    # The starting value for
+    # mu that we provide
     mu = theta[1]
-    # The starting value for sigma2 that we provide
+    # The starting value for
+    # sigma2 that we provide
     sigma2 = theta[2]
     # Number of observations in the data
     n = nrow(y)
-    # Compute the log likelihood of the data (y) using the likelihood
-    # function for the normal distribution given the starting values for our
+    # Compute the log likelihood of the
+    # data (y) using the likelihood
+    # function for the normal distribution
+    # given the starting values for our
     # parameters (contained in the vector 'theta')
     logl = -.5*n*log(2*pi) -.5*n*log(sigma2)-(1/(2*sigma2))*sum((y-mu)**2)
     return(-logl)
   }
 ```  
 
-<br>
- 
 Now, we use the `optim` function to maximize the likelihood of the data
 (technically by minimizing the -log likehood) given different values of
 our parameters (`mu` and `sigma2`).
@@ -489,38 +471,53 @@ our parameters (`mu` and `sigma2`).
   optim(c(0, 1), normal.lik, y=data.frame(test_norm))
 ```  
 
-<br>
- 
 We can also make this into an object and call the parts by name:
 
 ```{r} 
 # Make it into an object
-  est = optim(c(0, 1), normal.lik, y=data.frame(test_norm))        
+  est = optim(c(0, 1),
+              normal.lik,
+              y=data.frame(test_norm)
+              ) 
+
 # Look at the structure 
-  str(est)   # I'll be damned, it's a list! Hey, we learned about those!
-  est$par    # Here are the estimates
-  est$par[1] # The mean
-  est$par[2] # The variance
+# I'll be damned, it's a list!
+# Hey, we learned about those!
+  str(est)   
+
+# Here are the estimates    
+  est$par 
+  
+# The mean  
+  est$par[1]
+  
+# The variance  
+  est$par[2] 
 ```    
 
-<br>
-     
 That's better:  an exact solution!
-Just in case you'd like to know exactly what `optim` is doing:
+
+Just in case you'd like to know exactly what `optim` is doing, you can find out like this:
 
 ```{r, eval=FALSE}
   ?optim
 ```
-
 
 > Quantiles and other descriptive statistics
 
 There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.
 
 ```{r} 
-    median(test_norm) # Here is the median, or 50th percentile
-    quantile(test_norm, probs = c(0.025, 0.975)) # The 95% confidence limits
-    quantile(test_norm, probs = c(0.25, 0.75))   # Inner quartile range 
-    range(test_norm)                             # Range of sample
+# Here is the median, or 50th percentile
+median(test_norm) 
+
+# The 95% confidence limits
+quantile(test_norm, probs = c(0.025, 0.975)) 
+
+# Inner quartile range
+quantile(test_norm, probs = c(0.25, 0.75))    
+
+# Range of sample
+range(test_norm)                             
 ```        
 

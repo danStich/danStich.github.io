@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="probability-distributions" class="section level1">
 <h1>Probability distributions</h1>
@@ -313,8 +301,8 @@ The normal distribution
 <span class="co"># the correct directory):</span>
   dbp =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dbp.txt&#39;</span>) 
   <span class="kw">str</span>(dbp)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    205 obs. of  1 variable:
-##  $ x: int  167 166 87 63 76 77 71 70 69 75 ...</code></pre>
+<pre><code>&#39;data.frame&#39;:   205 obs. of  1 variable:
+ $ x: int  167 166 87 63 76 77 71 70 69 75 ...</code></pre>
 <p><br></p>
 <p><strong>Question 2.</strong> Calculate the mean and <em>variance</em> of this distribution using the method of moments. Note that you can write your own function (as in the reference script), or you can use the built-in R functions that we talked about in class this week (see reference script). What are the mean and sd using this method?</p>
 <p><strong>Quesiton 3.</strong> Now calculate the <em>mean</em> and the <em>variance</em> of this sampling distribution using maximum likelihood estimation. Recall that you can estimate the parameters using <code>optim()</code> and by writing out the likelihood inside of a function, or you can use in the built-in <code>fitdistr</code> function in R. If you do the latter, remember to pay attention to the answers that R gives you.</p>
@@ -359,16 +347,16 @@ bern.sample =<span class="st"> </span><span class="kw">rbern</span>(<span class=
 <div id="the-binomial-distribution" class="section level3">
 <h3>The binomial distribution</h3>
 <p>Remember the binomial distribution is like the Bernoulli, but instead of flipping one coin at a time, we are flipping <span class="math inline">\(N\)</span> number of coins (<code>size</code>) per trial:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)</code></pre></div>
-<pre><code>##  [1] 3 4 5 7 6 6 2 5 4 8</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)
+ [<span class="dv">1</span>] <span class="dv">6</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">7</span> <span class="dv">7</span> <span class="dv">6</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">3</span></code></pre></div>
 <p><br></p>
 <p><strong>Question 8.</strong> Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (<code>size</code>) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (<code>n</code>) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise).</p>
 </div>
 <div id="the-poisson-distribution" class="section level3">
 <h3>The Poisson distribution</h3>
 <p>Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example):</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">10</span>)</code></pre></div>
-<pre><code>##  [1]  5  6  7  4 12  9  9  8  7  9</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpois</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">10</span>)
+ [<span class="dv">1</span>] <span class="dv">14</span> <span class="dv">10</span>  <span class="dv">6</span> <span class="dv">10</span> <span class="dv">10</span> <span class="dv">10</span>  <span class="dv">6</span>  <span class="dv">8</span>  <span class="dv">7</span>  <span class="dv">8</span></code></pre></div>
 <p><br></p>
 <p>The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.</p>
 <p>Suppose that we are interested in describing the distribution of the genus <em>Photinus</em> in Upstate New York. We collected as many speciments as we could in jars (at this point if you’re really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of <em>Photinus</em> we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.</p>

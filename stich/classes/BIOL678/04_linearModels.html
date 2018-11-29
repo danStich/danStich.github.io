@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="linear-models" class="section level1">
 <h1>Linear models</h1>
@@ -298,10 +286,10 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">data</span>(PlantGrowth)</code></pre></div>
 <p><br></p>
 <p>Here, we see that we have a dataframe with 30 observations of two variables. The first variable describes plant growth (in units of mass), and the second variable describes control and treatment groups for individual plants.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(PlantGrowth)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    30 obs. of  2 variables:
-##  $ weight: num  4.17 5.58 5.18 6.11 4.5 4.61 5.17 4.53 5.33 5.14 ...
-##  $ group : Factor w/ 3 levels &quot;ctrl&quot;,&quot;trt1&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">str</span>(PlantGrowth)
+<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">30</span> obs. of  <span class="dv">2</span> variables<span class="op">:</span>
+<span class="st"> </span><span class="er">$</span><span class="st"> </span>weight<span class="op">:</span><span class="st"> </span>num  <span class="fl">4.17</span> <span class="fl">5.58</span> <span class="fl">5.18</span> <span class="fl">6.11</span> <span class="fl">4.5</span> <span class="fl">4.61</span> <span class="fl">5.17</span> <span class="fl">4.53</span> <span class="fl">5.33</span> <span class="fl">5.14</span> ...
+ <span class="op">$</span><span class="st"> </span>group <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;ctrl&quot;</span>,<span class="st">&quot;trt1&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</code></pre></div>
 <p><br></p>
 <p>Let’s begin by fitting a simple one-way ANOVA to the plant data. In practice, this is <em>very</em> easy. First of all though, we would report our <strong>methods</strong> like this:</p>
 <blockquote>
@@ -310,52 +298,52 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
   model =<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth)
 <span class="co"># Print the model object to the console</span>
-  model</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = weight ~ group, data = PlantGrowth)
-## 
-## Coefficients:
-## (Intercept)    grouptrt1    grouptrt2  
-##       5.032       -0.371        0.494</code></pre>
+  model
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)
+
+Coefficients<span class="op">:</span>
+(Intercept)    grouptrt1    grouptrt2  
+      <span class="fl">5.032</span>       <span class="op">-</span><span class="fl">0.371</span>        <span class="fl">0.494</span>  </code></pre></div>
 <p><br></p>
 <p>Easy to do, but not very useful for getting the information that we need. What we get here is essentially just one part of the information that we would like to (read ‘should’) report.</p>
 <p>If we look at the summary of the output, we can get more of what we need:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at a summary of the model object</span>
-  <span class="kw">summary</span>(model)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = weight ~ group, data = PlantGrowth)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -1.0710 -0.4180 -0.0060  0.2627  1.3690 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)   5.0320     0.1971  25.527   &lt;2e-16 ***
-## grouptrt1    -0.3710     0.2788  -1.331   0.1944    
-## grouptrt2     0.4940     0.2788   1.772   0.0877 .  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 0.6234 on 27 degrees of freedom
-## Multiple R-squared:  0.2641, Adjusted R-squared:  0.2096 
-## F-statistic: 4.846 on 2 and 27 DF,  p-value: 0.01591</code></pre>
+  <span class="kw">summary</span>(model)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">1.0710</span> <span class="op">-</span><span class="fl">0.4180</span> <span class="op">-</span><span class="fl">0.0060</span>  <span class="fl">0.2627</span>  <span class="fl">1.3690</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)   <span class="fl">5.0320</span>     <span class="fl">0.1971</span>  <span class="fl">25.527</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+grouptrt1    <span class="op">-</span><span class="fl">0.3710</span>     <span class="fl">0.2788</span>  <span class="op">-</span><span class="fl">1.331</span>   <span class="fl">0.1944</span>    
+grouptrt2     <span class="fl">0.4940</span>     <span class="fl">0.2788</span>   <span class="fl">1.772</span>   <span class="fl">0.0877</span> .  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.6234</span> on <span class="dv">27</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2641</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2096</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">4.846</span> on <span class="dv">2</span> and <span class="dv">27</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.01591</span></code></pre></div>
 <p><br></p>
 <p>That’s better, and we get some useful information here. First of all, we get the value of the test statistic, the df, and the p-value for the model. We also get the <span class="math inline">\(R^2\)</span> for the model: 0.26. This statistic tells us roughly what percentage of the total variance in the data is explained by the model we fit. Another way of thinking of this is as a signal-to-noise ratio. More formally, it is the sum of squares between groups divided by the sum of squares total:</p>
 <p><span class="math display">\[R^2 = \frac{SSB}{SST}\]</span></p>
 <p>Let’s use the <code>anova</code> function to summarize the object a little further.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get an ANOVA table for the model</span>
-  <span class="kw">anova</span>(model)</code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Response: weight
-##           Df  Sum Sq Mean Sq F value  Pr(&gt;F)  
-## group      2  3.7663  1.8832  4.8461 0.01591 *
-## Residuals 27 10.4921  0.3886                  
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+  <span class="kw">anova</span>(model)
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>weight
+          Df  Sum Sq Mean Sq F value  <span class="kw">Pr</span>(<span class="op">&gt;</span>F)  
+group      <span class="dv">2</span>  <span class="fl">3.7663</span>  <span class="fl">1.8832</span>  <span class="fl">4.8461</span> <span class="fl">0.01591</span> <span class="op">*</span>
+Residuals <span class="dv">27</span> <span class="fl">10.4921</span>  <span class="fl">0.3886</span>                  
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p><br></p>
 <p>Okay, this is really what we needed: an ANOVA table with a break down of the residuals, mean squared errors, etc. And, we can now say:</p>
 <blockquote>
@@ -373,17 +361,17 @@ pre code, pre, code {
     <span class="kw">aov</span>(       <span class="co"># A wrapper for lm objects</span>
       model    <span class="co"># The model that we ran above</span>
       )
-    )</code></pre></div>
-<pre><code>##   Tukey multiple comparisons of means
-##     95% family-wise confidence level
-## 
-## Fit: aov(formula = model)
-## 
-## $group
-##             diff        lwr       upr     p adj
-## trt1-ctrl -0.371 -1.0622161 0.3202161 0.3908711
-## trt2-ctrl  0.494 -0.1972161 1.1852161 0.1979960
-## trt2-trt1  0.865  0.1737839 1.5562161 0.0120064</code></pre>
+    )
+  Tukey multiple comparisons of means
+    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level
+
+Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> model)
+
+<span class="op">$</span>group
+            diff        lwr       upr     p adj
+trt1<span class="op">-</span>ctrl <span class="op">-</span><span class="fl">0.371</span> <span class="op">-</span><span class="fl">1.0622161</span> <span class="fl">0.3202161</span> <span class="fl">0.3908711</span>
+trt2<span class="op">-</span>ctrl  <span class="fl">0.494</span> <span class="op">-</span><span class="fl">0.1972161</span> <span class="fl">1.1852161</span> <span class="fl">0.1979960</span>
+trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="fl">0.1737839</span> <span class="fl">1.5562161</span> <span class="fl">0.0120064</span></code></pre></div>
 <p><br></p>
 <p>This report shows us exactly how the response differs with respect to the treatment groups. Here, we see that the only significant difference occurs between <code>trt2</code> and <code>trt1</code>. How do we know this? based on the p-values…</p>
 <p>For the readers, and for us, it may be easier to see this information displayed graphically:</p>
@@ -417,38 +405,38 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and save it to an object</span>
   lint.model =<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
 <span class="co"># Look at the summary of the model fit</span>
-  <span class="kw">summary</span>(lint.model)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = lintmass ~ species + gender, data = lint)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -2.5792 -0.9021  0.0875  0.8448  2.3917 
-## 
-## Coefficients:
-##                  Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)       15.5458     0.6133  25.346  &lt; 2e-16 ***
-## speciesSpecies 2  -3.4375     0.7512  -4.576 0.000183 ***
-## speciesSpecies 3  -1.8750     0.7512  -2.496 0.021414 *  
-## genderMale         4.9083     0.6133   8.003 1.16e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.502 on 20 degrees of freedom
-## Multiple R-squared:  0.8096, Adjusted R-squared:  0.781 
-## F-statistic: 28.35 on 3 and 20 DF,  p-value: 2.107e-07</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the anova table</span>
-  <span class="kw">anova</span>(lint.model)</code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Response: lintmass
-##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-## species    2  47.396  23.698  10.499 0.0007633 ***
-## gender     1 144.550 144.550  64.041  1.16e-07 ***
-## Residuals 20  45.143   2.257                      
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+  <span class="kw">summary</span>(lint.model)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">2.5792</span> <span class="op">-</span><span class="fl">0.9021</span>  <span class="fl">0.0875</span>  <span class="fl">0.8448</span>  <span class="fl">2.3917</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">                 </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)       <span class="fl">15.5458</span>     <span class="fl">0.6133</span>  <span class="fl">25.346</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+speciesSpecies <span class="dv">2</span>  <span class="op">-</span><span class="fl">3.4375</span>     <span class="fl">0.7512</span>  <span class="op">-</span><span class="fl">4.576</span> <span class="fl">0.000183</span> <span class="op">**</span><span class="er">*</span>
+speciesSpecies <span class="dv">3</span>  <span class="op">-</span><span class="fl">1.8750</span>     <span class="fl">0.7512</span>  <span class="op">-</span><span class="fl">2.496</span> <span class="fl">0.021414</span> <span class="op">*</span><span class="st">  </span>
+genderMale         <span class="fl">4.9083</span>     <span class="fl">0.6133</span>   <span class="fl">8.003</span> <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.502</span> on <span class="dv">20</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8096</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.781</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">28.35</span> on <span class="dv">3</span> and <span class="dv">20</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.107e-07</span>
+<span class="co"># Print the anova table</span>
+  <span class="kw">anova</span>(lint.model)
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>lintmass
+          Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+species    <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span>  <span class="fl">10.499</span> <span class="fl">0.0007633</span> <span class="op">**</span><span class="er">*</span>
+gender     <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span>  <span class="fl">64.041</span>  <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span>
+Residuals <span class="dv">20</span>  <span class="fl">45.143</span>   <span class="fl">2.257</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p><br></p>
 <p>As you can see, the output for the model is much the same as for the one- way ANOVA. The only real difference is that we have more than one grouping variable here.</p>
 <p>We could look at the data all at once, but this gets a bit messy:</p>
@@ -494,40 +482,40 @@ pre code, pre, code {
 <p>Perhaps we hypothesize that lint accumulation in the belly buttons of females differs in pattern from males due to social grooming patterns and sex-specific behavioral patterns favoring females. As a result, we might expect that sex and species could have some kind of non-additive effect on lint mass in these apes. To test this, we would use the following:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a new model that includes an interaction, signified by &#39;*&#39;</span>
   lint.modeli =<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
-  <span class="kw">summary</span>(lint.modeli)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = lintmass ~ species * gender, data = lint)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -2.525 -0.750  0.050  1.019  1.875 
-## 
-## Coefficients:
-##                             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)                  14.9250     0.7404  20.159 8.40e-14 ***
-## speciesSpecies 2             -2.2500     1.0471  -2.149   0.0455 *  
-## speciesSpecies 3             -1.2000     1.0471  -1.146   0.2668    
-## genderMale                    6.1500     1.0471   5.874 1.46e-05 ***
-## speciesSpecies 2:genderMale  -2.3750     1.4808  -1.604   0.1261    
-## speciesSpecies 3:genderMale  -1.3500     1.4808  -0.912   0.3740    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.481 on 18 degrees of freedom
-## Multiple R-squared:  0.8335, Adjusted R-squared:  0.7873 
-## F-statistic: 18.03 on 5 and 18 DF,  p-value: 1.898e-06</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">anova</span>(lint.modeli)</code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Response: lintmass
-##                Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-## species         2  47.396  23.698 10.8079 0.0008253 ***
-## gender          1 144.550 144.550 65.9253 1.983e-07 ***
-## species:gender  2   5.676   2.838  1.2943 0.2984104    
-## Residuals      18  39.468   2.193                      
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
+  <span class="kw">summary</span>(lint.modeli)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)
+
+Residuals<span class="op">:</span>
+<span class="st">   </span>Min     1Q Median     3Q    Max 
+<span class="op">-</span><span class="fl">2.525</span> <span class="op">-</span><span class="fl">0.750</span>  <span class="fl">0.050</span>  <span class="fl">1.019</span>  <span class="fl">1.875</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">                            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)                  <span class="fl">14.9250</span>     <span class="fl">0.7404</span>  <span class="fl">20.159</span> <span class="fl">8.40e-14</span> <span class="op">**</span><span class="er">*</span>
+speciesSpecies <span class="dv">2</span>             <span class="op">-</span><span class="fl">2.2500</span>     <span class="fl">1.0471</span>  <span class="op">-</span><span class="fl">2.149</span>   <span class="fl">0.0455</span> <span class="op">*</span><span class="st">  </span>
+speciesSpecies <span class="dv">3</span>             <span class="op">-</span><span class="fl">1.2000</span>     <span class="fl">1.0471</span>  <span class="op">-</span><span class="fl">1.146</span>   <span class="fl">0.2668</span>    
+genderMale                    <span class="fl">6.1500</span>     <span class="fl">1.0471</span>   <span class="fl">5.874</span> <span class="fl">1.46e-05</span> <span class="op">**</span><span class="er">*</span>
+speciesSpecies <span class="dv">2</span><span class="op">:</span>genderMale  <span class="op">-</span><span class="fl">2.3750</span>     <span class="fl">1.4808</span>  <span class="op">-</span><span class="fl">1.604</span>   <span class="fl">0.1261</span>    
+speciesSpecies <span class="dv">3</span><span class="op">:</span>genderMale  <span class="op">-</span><span class="fl">1.3500</span>     <span class="fl">1.4808</span>  <span class="op">-</span><span class="fl">0.912</span>   <span class="fl">0.3740</span>    
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.481</span> on <span class="dv">18</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8335</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7873</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">18.03</span> on <span class="dv">5</span> and <span class="dv">18</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.898e-06</span>
+  <span class="kw">anova</span>(lint.modeli)
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>lintmass
+               Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+species         <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span> <span class="fl">10.8079</span> <span class="fl">0.0008253</span> <span class="op">**</span><span class="er">*</span>
+gender          <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span> <span class="fl">65.9253</span> <span class="fl">1.983e-07</span> <span class="op">**</span><span class="er">*</span>
+species<span class="op">:</span>gender  <span class="dv">2</span>   <span class="fl">5.676</span>   <span class="fl">2.838</span>  <span class="fl">1.2943</span> <span class="fl">0.2984104</span>    
+Residuals      <span class="dv">18</span>  <span class="fl">39.468</span>   <span class="fl">2.193</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p><br></p>
 <p>Alas, in the case of the lint model, this interaction is not significant, so we now have some evidence to suggest that either our hypothesis or our experimental design (or both) were flawed.</p>
 <p>Note that the n-way ANOVA is also the framework within which the randomized block design is implemented. We will not cover that in this course as the implementation is identical to that above and virtually none of you will ever have any occasion to actually use a randomized block design.</p>
@@ -544,12 +532,12 @@ pre code, pre, code {
 <span class="co"># Now test for test for differences in Ozone levels between months in the</span>
 <span class="co"># data set.</span>
   air.test =<span class="st"> </span><span class="kw">kruskal.test</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)
-  air.test</code></pre></div>
-<pre><code>## 
-##  Kruskal-Wallis rank sum test
-## 
-## data:  Ozone by Month
-## Kruskal-Wallis chi-squared = 29.267, df = 4, p-value = 6.901e-06</code></pre>
+  air.test
+
+    Kruskal<span class="op">-</span>Wallis rank sum test
+
+data<span class="op">:</span><span class="st">  </span>Ozone by Month
+Kruskal<span class="op">-</span>Wallis chi<span class="op">-</span>squared =<span class="st"> </span><span class="fl">29.267</span>, df =<span class="st"> </span><span class="dv">4</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.901e-06</span></code></pre></div>
 <p><br></p>
 <p>We find that there are signigicant shifts in median <code>Ozone</code> between <code>months</code>. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">boxplot</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Ozone&#39;</span>,
@@ -581,25 +569,25 @@ pre code, pre, code {
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and assign it to a named object</span>
   fert.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)
 <span class="co"># Summarize the model</span>
-  <span class="kw">summary</span>(fert.mod)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Education, data = swiss)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -17.036  -6.711  -1.011   9.526  19.689 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  79.6101     2.1041  37.836  &lt; 2e-16 ***
-## Education    -0.8624     0.1448  -5.954 3.66e-07 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 9.446 on 45 degrees of freedom
-## Multiple R-squared:  0.4406, Adjusted R-squared:  0.4282 
-## F-statistic: 35.45 on 1 and 45 DF,  p-value: 3.659e-07</code></pre>
+  <span class="kw">summary</span>(fert.mod)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">data =</span> swiss)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">17.036</span>  <span class="op">-</span><span class="fl">6.711</span>  <span class="op">-</span><span class="fl">1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)  <span class="fl">79.6101</span>     <span class="fl">2.1041</span>  <span class="fl">37.836</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Education    <span class="op">-</span><span class="fl">0.8624</span>     <span class="fl">0.1448</span>  <span class="op">-</span><span class="fl">5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></code></pre></div>
 <p><br></p>
 <p>We see that there is a significant negative relation between <code>Education</code> level and <code>fertility</code>. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.</p>
 <p>We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the <span class="math inline">\(R^2\)</span> value that is returned.</p>
@@ -627,52 +615,52 @@ pre code, pre, code {
 <p>We can, of course, extend this to include multiple continuous explanatory variables of interest. <strong>Example:</strong></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Effects of Education and % Catholic on fertility</span>
   multiple.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">+</span>Catholic, <span class="dt">data=</span>swiss)
-  <span class="kw">summary</span>(multiple.mod)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Education + Catholic, data = swiss)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -15.042  -6.578  -1.431   6.122  14.322 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 74.23369    2.35197  31.562  &lt; 2e-16 ***
-## Education   -0.78833    0.12929  -6.097 2.43e-07 ***
-## Catholic     0.11092    0.02981   3.721  0.00056 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 8.331 on 44 degrees of freedom
-## Multiple R-squared:  0.5745, Adjusted R-squared:  0.5552 
-## F-statistic:  29.7 on 2 and 44 DF,  p-value: 6.849e-09</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Or if we want to get really crazy:</span>
+  <span class="kw">summary</span>(multiple.mod)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic, <span class="dt">data =</span> swiss)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">15.042</span>  <span class="op">-</span><span class="fl">6.578</span>  <span class="op">-</span><span class="fl">1.431</span>   <span class="fl">6.122</span>  <span class="fl">14.322</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">74.23369</span>    <span class="fl">2.35197</span>  <span class="fl">31.562</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Education   <span class="op">-</span><span class="fl">0.78833</span>    <span class="fl">0.12929</span>  <span class="op">-</span><span class="fl">6.097</span> <span class="fl">2.43e-07</span> <span class="op">**</span><span class="er">*</span>
+Catholic     <span class="fl">0.11092</span>    <span class="fl">0.02981</span>   <span class="fl">3.721</span>  <span class="fl">0.00056</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">8.331</span> on <span class="dv">44</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5745</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5552</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="fl">29.7</span> on <span class="dv">2</span> and <span class="dv">44</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">6.849e-09</span>
+<span class="co"># Or if we want to get really crazy:</span>
   full.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Agriculture<span class="op">+</span>Examination<span class="op">+</span>Education<span class="op">+</span>Catholic,
     <span class="dt">data=</span>swiss)
-  <span class="kw">summary</span>(full.mod)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Fertility ~ Agriculture + Examination + Education + 
-##     Catholic, data = swiss)
-## 
-## Residuals:
-##      Min       1Q   Median       3Q      Max 
-## -15.7813  -6.3308   0.8113   5.7205  15.5569 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 91.05542    6.94881  13.104  &lt; 2e-16 ***
-## Agriculture -0.22065    0.07360  -2.998  0.00455 ** 
-## Examination -0.26058    0.27411  -0.951  0.34722    
-## Education   -0.96161    0.19455  -4.943 1.28e-05 ***
-## Catholic     0.12442    0.03727   3.339  0.00177 ** 
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 7.736 on 42 degrees of freedom
-## Multiple R-squared:  0.6498, Adjusted R-squared:  0.6164 
-## F-statistic: 19.48 on 4 and 42 DF,  p-value: 3.95e-09</code></pre>
+  <span class="kw">summary</span>(full.mod)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>
+<span class="st">    </span>Catholic, <span class="dt">data =</span> swiss)
+
+Residuals<span class="op">:</span>
+<span class="st">     </span>Min       1Q   Median       3Q      Max 
+<span class="op">-</span><span class="fl">15.7813</span>  <span class="op">-</span><span class="fl">6.3308</span>   <span class="fl">0.8113</span>   <span class="fl">5.7205</span>  <span class="fl">15.5569</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">91.05542</span>    <span class="fl">6.94881</span>  <span class="fl">13.104</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Agriculture <span class="op">-</span><span class="fl">0.22065</span>    <span class="fl">0.07360</span>  <span class="op">-</span><span class="fl">2.998</span>  <span class="fl">0.00455</span> <span class="op">**</span><span class="st"> </span>
+Examination <span class="op">-</span><span class="fl">0.26058</span>    <span class="fl">0.27411</span>  <span class="op">-</span><span class="fl">0.951</span>  <span class="fl">0.34722</span>    
+Education   <span class="op">-</span><span class="fl">0.96161</span>    <span class="fl">0.19455</span>  <span class="op">-</span><span class="fl">4.943</span> <span class="fl">1.28e-05</span> <span class="op">**</span><span class="er">*</span>
+Catholic     <span class="fl">0.12442</span>    <span class="fl">0.03727</span>   <span class="fl">3.339</span>  <span class="fl">0.00177</span> <span class="op">**</span><span class="st"> </span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">7.736</span> on <span class="dv">42</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6498</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6164</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">19.48</span> on <span class="dv">4</span> and <span class="dv">42</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.95e-09</span></code></pre></div>
 <p><br></p>
 <p>During the next couple of weeks, we’ll try to figure out a way to deal with this rat’s nest of different explanatory variables.</p>
 <p><br></p>
@@ -689,14 +677,14 @@ pre code, pre, code {
   crickets =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/crickets.txt&#39;</span>)
 
 <span class="co"># Have a look</span>
-  <span class="kw">head</span>(crickets)</code></pre></div>
-<pre><code>##   Species Temp Pulse
-## 1      ex 20.8  67.9
-## 2      ex 20.8  65.1
-## 3      ex 24.0  77.3
-## 4      ex 24.0  78.7
-## 5      ex 24.0  79.4
-## 6      ex 24.0  80.4</code></pre>
+  <span class="kw">head</span>(crickets)
+  Species Temp Pulse
+<span class="dv">1</span>      ex <span class="fl">20.8</span>  <span class="fl">67.9</span>
+<span class="dv">2</span>      ex <span class="fl">20.8</span>  <span class="fl">65.1</span>
+<span class="dv">3</span>      ex <span class="fl">24.0</span>  <span class="fl">77.3</span>
+<span class="dv">4</span>      ex <span class="fl">24.0</span>  <span class="fl">78.7</span>
+<span class="dv">5</span>      ex <span class="fl">24.0</span>  <span class="fl">79.4</span>
+<span class="dv">6</span>      ex <span class="fl">24.0</span>  <span class="fl">80.4</span></code></pre></div>
 <p><br></p>
 <p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># Fit the model</span>
@@ -705,39 +693,47 @@ pre code, pre, code {
 <p>Install the car package. We need a function from this library for summary.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="co"># install.packages(&#39;car&#39;) # Uncomment front of line to install</span>
     <span class="kw">library</span>(car)
+Warning<span class="op">:</span><span class="st"> </span>package <span class="st">&#39;car&#39;</span> was built under R version <span class="fl">3.4</span>.<span class="dv">4</span>
+Loading required package<span class="op">:</span><span class="st"> </span>carData
+Warning<span class="op">:</span><span class="st"> </span>package <span class="st">&#39;carData&#39;</span> was built under R version <span class="fl">3.4</span>.<span class="dv">4</span>
+
+Attaching package<span class="op">:</span><span class="st"> &#39;car&#39;</span>
+The following object is masked from <span class="st">&#39;package:FSA&#39;</span><span class="op">:</span>
+
+<span class="st">    </span>bootCase
   <span class="co"># Now we create the anova table for our ancova model</span>
-    <span class="kw">Anova</span>(cricket.mod, <span class="dt">type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
-<pre><code>## Anova Table (Type III tests)
-## 
-## Response: Pulse
-##             Sum Sq Df   F value    Pr(&gt;F)    
-## (Intercept)   25.5  1    7.9906  0.008582 ** 
-## Species      598.0  1  187.3994 6.272e-14 ***
-## Temp        4376.1  1 1371.3541 &lt; 2.2e-16 ***
-## Residuals     89.3 28                        
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="co"># And we can look at the summary of the linear model</span>
-    <span class="kw">summary</span>(cricket.mod)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = Pulse ~ Species + Temp, data = crickets)
-## 
-## Residuals:
-##     Min      1Q  Median      3Q     Max 
-## -3.0128 -1.1296 -0.3912  0.9650  3.7800 
-## 
-## Coefficients:
-##              Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept)  -7.21091    2.55094  -2.827  0.00858 ** 
-## Speciesniv  -10.06529    0.73526 -13.689 6.27e-14 ***
-## Temp          3.60275    0.09729  37.032  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 1.786 on 28 degrees of freedom
-## Multiple R-squared:  0.9896, Adjusted R-squared:  0.9888 
-## F-statistic:  1331 on 2 and 28 DF,  p-value: &lt; 2.2e-16</code></pre>
+    <span class="kw">Anova</span>(cricket.mod, <span class="dt">type=</span><span class="st">&#39;III&#39;</span>)
+Anova <span class="kw">Table</span> (Type III tests)
+
+Response<span class="op">:</span><span class="st"> </span>Pulse
+            Sum Sq Df   F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+(Intercept)   <span class="fl">25.5</span>  <span class="dv">1</span>    <span class="fl">7.9906</span>  <span class="fl">0.008582</span> <span class="op">**</span><span class="st"> </span>
+Species      <span class="fl">598.0</span>  <span class="dv">1</span>  <span class="fl">187.3994</span> <span class="fl">6.272e-14</span> <span class="op">**</span><span class="er">*</span>
+Temp        <span class="fl">4376.1</span>  <span class="dv">1</span> <span class="fl">1371.3541</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+Residuals     <span class="fl">89.3</span> <span class="dv">28</span>                        
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+  <span class="co"># And we can look at the summary of the linear model</span>
+    <span class="kw">summary</span>(cricket.mod)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> Pulse <span class="op">~</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data =</span> crickets)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">3.0128</span> <span class="op">-</span><span class="fl">1.1296</span> <span class="op">-</span><span class="fl">0.3912</span>  <span class="fl">0.9650</span>  <span class="fl">3.7800</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)  <span class="op">-</span><span class="fl">7.21091</span>    <span class="fl">2.55094</span>  <span class="op">-</span><span class="fl">2.827</span>  <span class="fl">0.00858</span> <span class="op">**</span><span class="st"> </span>
+Speciesniv  <span class="op">-</span><span class="fl">10.06529</span>    <span class="fl">0.73526</span> <span class="op">-</span><span class="fl">13.689</span> <span class="fl">6.27e-14</span> <span class="op">**</span><span class="er">*</span>
+Temp          <span class="fl">3.60275</span>    <span class="fl">0.09729</span>  <span class="fl">37.032</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.786</span> on <span class="dv">28</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9896</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9888</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">1331</span> on <span class="dv">2</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></code></pre></div>
 <p><br></p>
 <p>We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.</p>
 <p><br></p>

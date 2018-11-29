@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,47 +263,23 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="introduction-to-the-r-programming-language" class="section level1">
 <h1>Introduction to the R programming language</h1>
-<p><img src="/home/god/codeDevelopment/danStich.github.io/stich/images/roh.png" alt=""></p>
+<p><img src="../../images/roh.png" alt=""></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The objective of this assignment is to get you started working in R and help you apply some of the concepts we’ve been discussing so far. We’ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.</p>
-<p>For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesn’t look quite right.</p>
+<p>The objective of this assignment is to get you started working in R and help you apply some of the concepts weâ€™ve been discussing so far. Weâ€™ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.</p>
+<p>For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesnâ€™t look quite right.</p>
 <p>In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in blue below.</p>
-<p>Example: If the instructions say, “Create a vector named <code>myData</code> that contains numbers one through five”, your script should include something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vector of numbers one through five named ‘myData’</span>
+<p>Example: If the instructions say, â€œCreate a vector named <code>myData</code> that contains numbers one through fiveâ€, your script should include something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vector of numbers one through five named â€˜myDataâ€™</span>
 myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
 <p>(Note that this vector could be created many different ways. Unless I ask for something specific, whatever works for you is fine with me).</p>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
-<p>Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., <code>uspop</code>) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use <code>str()</code> to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: <code>data()</code>.</p>
-<p>* Don’t forget to put this and your data load in the script that you will hand in.</p>
+<p>Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, letâ€™s avoid any of the time series data (e.g., <code>uspop</code>) because we havenâ€™t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use <code>str()</code> to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: <code>data()</code>.</p>
+<p>* Donâ€™t forget to put this and your data load in the script that you will hand in.</p>
 <div id="question-1" class="section level4">
 <h4><strong>Question 1</strong></h4>
 <ul>
@@ -315,12 +303,12 @@ myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</s
 </div>
 <div id="question-3" class="section level4">
 <h4><strong>Question 3</strong></h4>
-<p>What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time I’m typing it).</p>
-<p>Use the built-in R functions to produce a table of summary statistics for your dataset. You don’t have to include the table in your answers, it will show up when I run your code if you did it correctly.</p>
+<p>What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time Iâ€™m typing it).</p>
+<p>Use the built-in R functions to produce a table of summary statistics for your dataset. You donâ€™t have to include the table in your answers, it will show up when I run your code if you did it correctly.</p>
 </div>
 <div id="question-4" class="section level4">
 <h4><strong>Question 4</strong></h4>
-<p>What kind of information about your data does this give you? Be descriptive here, there’s not a ‘correct’ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
+<p>What kind of information about your data does this give you? Be descriptive here, thereâ€™s not a â€˜correctâ€™ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
 <p>Now load the iris data that we used in our previous examples. There is one column in the dataset that is a factor class. Change this column to a character variable.</p>
 <p><strong>Note</strong>: We might not have discovered the specific function that does this yet, but we have discussed functions for transforming data classes. When in doubt, Google it! Code development is everywhere on the internet, remember? Some go-to sources are Quick-R and Stack Overflow. If you look for the answer on the internet, one of these sites is likely to be the first hit. Try it.</p>
 </div>
@@ -334,7 +322,7 @@ myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</s
 </div>
 <div id="question-7" class="section level4">
 <h4><strong>Question 7</strong></h4>
-<p>What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (don’t forget the code in your script!!)</p>
+<p>What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (donâ€™t forget the code in your script!!)</p>
 </div>
 <div id="question-8" class="section level4">
 <h4><strong>Question 8</strong></h4>
@@ -346,7 +334,7 @@ myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</s
 </div>
 <div id="question-10" class="section level4">
 <h4><strong>Question 10</strong></h4>
-<p>Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Don’t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
+<p>Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Donâ€™t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
 </div>
 </div>
 </div>

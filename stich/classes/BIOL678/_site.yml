@@ -11,15 +11,15 @@ navbar:
       href: ../../research.html
     - text: "Curriculum vitae"
       href: ../../cv.html
+    - text: "Contact"
+      href: ../../contact.html      
     - text: "Course websites"  
       menu:
         - text: "BIOL 678"
           href: index.html
         - text: "BIOL 217"
           href: ../BIOL217/index.html      
-    - text: "Contact"
-      href: ../../contact.html
-      
+    
 output:
   html_document:
     theme: cosmo

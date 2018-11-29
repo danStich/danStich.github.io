@@ -107,7 +107,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -251,30 +263,6 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <p><br></p>
 <div id="linear-mixed-models-lmm" class="section level1">
 <h1>Linear mixed models (LMM)</h1>
@@ -373,12 +361,13 @@ pop &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dt">n 
 original.length &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">45</span>, <span class="dv">70</span>) 
 mn &lt;-<span class="st"> </span><span class="kw">mean</span>(original.length)
 sd &lt;-<span class="st"> </span><span class="kw">sd</span>(original.length)
-<span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</code></pre></div>
-<pre><code>## Mean and sd used to normalise.original length: 57.62527 7.585453</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
+<span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
+Mean and sd used to normalise.original length<span class="op">:</span><span class="st"> </span><span class="fl">57.29165</span> <span class="fl">7.225148</span> 
+length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
 <span class="kw">hist</span>(length, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Xmat &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span>pop<span class="op">*</span>length<span class="op">-</span><span class="dv">1</span><span class="op">-</span>length)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+Xmat &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span>pop<span class="op">*</span>length<span class="op">-</span><span class="dv">1</span><span class="op">-</span>length)
 
 intercept.mean &lt;-<span class="st"> </span><span class="dv">230</span>           <span class="co"># mu_alpha</span>
 intercept.sd &lt;-<span class="st"> </span><span class="dv">20</span>            <span class="co"># sigma_alpha</span>
@@ -395,13 +384,14 @@ mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class
 
 <span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span></code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)</code></pre></div>
-<pre><code>## 
-## Attaching package: &#39;lattice&#39;</code></pre>
-<pre><code>## The following object is masked from &#39;package:boot&#39;:
-## 
-##     melanoma</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">library</span>(lattice)
+
+Attaching package<span class="op">:</span><span class="st"> &#39;lattice&#39;</span>
+The following object is masked from <span class="st">&#39;package:boot&#39;</span><span class="op">:</span>
+
+<span class="st">    </span>melanoma
+<span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 <p><br></p>
 <p>So, as you can see we have successfully created 56 populations of critters, each of which has some pre-defined relationship between length and mass based on 10 samples from the population. Wow. What a mess. Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation and Bayesian inference. Ultimately, what we want to do here is estimate the relationship between length and mass while accounting for inherent (well, simulated) variability between populations.</p>
@@ -424,30 +414,30 @@ mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class
 lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pop), <span class="dt">REML =</span> <span class="ot">TRUE</span>)
 
 <span class="co"># Have a look</span>
-<span class="kw">summary</span>(lme.fit1)</code></pre></div>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: mass ~ length + (1 | pop)
-## 
-## REML criterion at convergence: 5879.7
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -3.4225 -0.5734  0.0121  0.5985  3.3391 
-## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  pop      (Intercept)  418.8   20.46   
-##  Residual             1925.1   43.88   
-## Number of obs: 560, groups:  pop, 56
-## 
-## Fixed effects:
-##             Estimate Std. Error t value
-## (Intercept)  230.369      3.304   69.72
-## length        56.577      1.938   29.19
-## 
-## Correlation of Fixed Effects:
-##        (Intr)
-## length 0.000</code></pre>
+<span class="kw">summary</span>(lme.fit1)
+Linear mixed model fit by REML [<span class="st">&#39;lmerMod&#39;</span>]
+Formula<span class="op">:</span><span class="st"> </span>mass <span class="op">~</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pop)
+
+REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">5725.6</span>
+
+Scaled residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">2.8802</span> <span class="op">-</span><span class="fl">0.6852</span> <span class="op">-</span><span class="fl">0.0068</span>  <span class="fl">0.6346</span>  <span class="fl">3.4505</span> 
+
+Random effects<span class="op">:</span>
+<span class="st"> </span>Groups   Name        Variance Std.Dev.
+ <span class="kw">pop</span>      (Intercept)  <span class="fl">255.6</span>   <span class="fl">15.99</span>   
+ Residual             <span class="fl">1482.8</span>   <span class="fl">38.51</span>   
+Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">560</span>, groups<span class="op">:</span><span class="st">  </span>pop, <span class="dv">56</span>
+
+Fixed effects<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value
+(Intercept)  <span class="fl">227.647</span>      <span class="fl">2.686</span>   <span class="fl">84.76</span>
+length        <span class="fl">55.097</span>      <span class="fl">1.680</span>   <span class="fl">32.80</span>
+
+Correlation of Fixed Effects<span class="op">:</span>
+<span class="st">       </span>(Intr)
+length <span class="fl">0.000</span> </code></pre></div>
 <p><br></p>
 <p>As we look throught the output, the first thing that you’ll probably notice is that we don’t have a p-value, which is probably already driving some people nuts. This is a bit of a philosophical sticking point, which is why it is not included in the default print method for the summary of these objects. Here, we can do statistical inference based on the overlap with our coefficient estimates with zero. What does this look like?</p>
 <p>Let’s say we want to see if our explanatory variable is significantly related to the response of interest, but we don’t have a p-value. If we still wanted to test significance with respect to some variable (at <span class="math inline">\(\alpha\)</span> = 0.05), we could estimate the 95% CI for the regression coefficient and determine whether or not the 95% CI includes zero, like so:</p>
@@ -464,8 +454,8 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
                )
 
 <span class="co"># Print the CI to the console</span>
-  lengthCI</code></pre></div>
-<pre><code>## [1] 52.77801 60.37506</code></pre>
+  lengthCI
+[<span class="dv">1</span>] <span class="fl">51.80475</span> <span class="fl">58.38945</span></code></pre></div>
 <p><br></p>
 <p>Here, we can see that our 95% CI excludes zero, so we can say that length has a significant effect on mass in this species. If we wanted to show this relationship in a graph, we now have to do the math by hand, which is why I forced you to learn the math involved with this. Here is an example of how one might do this:</p>
 <p><br></p>
@@ -489,14 +479,14 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
   effs =<span class="st"> </span><span class="kw">coef</span>(lme.fit1)
 
 <span class="co"># Have a look at the first few</span>
-  <span class="kw">head</span>(effs<span class="op">$</span>pop)</code></pre></div>
-<pre><code>##   (Intercept)   length
-## 1    234.3450 56.57653
-## 2    253.2502 56.57653
-## 3    194.4473 56.57653
-## 4    222.0062 56.57653
-## 5    227.1267 56.57653
-## 6    225.6550 56.57653</code></pre>
+  <span class="kw">head</span>(effs<span class="op">$</span>pop)
+  (Intercept)  length
+<span class="dv">1</span>    <span class="fl">225.1143</span> <span class="fl">55.0971</span>
+<span class="dv">2</span>    <span class="fl">249.5503</span> <span class="fl">55.0971</span>
+<span class="dv">3</span>    <span class="fl">217.2255</span> <span class="fl">55.0971</span>
+<span class="dv">4</span>    <span class="fl">238.8297</span> <span class="fl">55.0971</span>
+<span class="dv">5</span>    <span class="fl">221.1516</span> <span class="fl">55.0971</span>
+<span class="dv">6</span>    <span class="fl">212.9610</span> <span class="fl">55.0971</span></code></pre></div>
 <p><br></p>
 <p>This gives us the random intercept for each population so we can make predictions about them individually if we want to! It only gives us one value for the length parameter because we specified this as a main effect. If want to plot the results for population 3, for example, our code would look like this:</p>
 <p><br></p>
@@ -642,25 +632,25 @@ nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 
 <span class="co"># Inspect results</span>
   <span class="kw">print</span>(res, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>##             mean     sd    2.5%   97.5%  Rhat n.eff
-## alpha[1] 233.587 11.558 210.986 256.889 1.001  2200
-## alpha[2] 252.702 11.726 230.256 275.233 1.000  2200
-## alpha[3] 193.585 12.052 170.127 216.543 1.000  2200
-## alpha[4] 221.302 11.470 199.030 244.066 1.003   730
-## alpha[5] 226.358 11.662 203.428 248.366 1.002  1200
-## alpha[6] 224.166 11.529 201.303 245.689 1.001  2200</code></pre>
-<pre><code>## 
-##  . 
-##  . 
-##  . 
-## </code></pre>
-<pre><code>##               mean     sd     2.5%    97.5%  Rhat n.eff
-## alpha[56]  248.881 11.938  225.418  271.038 1.001  1800
-## beta        56.417  1.976   52.654   60.272 1.001  2200
-## deviance  5826.045 11.353 5805.863 5849.624 1.001  2200
-## mu.int     227.676  3.477  220.908  234.314 1.002  1500
-## sigma       44.044  1.379   41.347   46.755 1.001  2200
-## sigma.int   21.187  3.250   15.572   28.314 1.002  1300</code></pre>
+<pre><code>            mean    sd    2.5%   97.5%  Rhat n.eff
+alpha[1] 224.478 9.939 204.716 243.807 1.001  2200
+alpha[2] 249.310 9.974 229.782 269.098 1.001  2200
+alpha[3] 216.193 9.904 196.854 235.515 1.004   590
+alpha[4] 238.415 9.679 219.519 257.416 1.001  2200
+alpha[5] 220.983 9.610 202.088 240.249 1.002  2200
+alpha[6] 212.204 9.703 192.212 230.761 1.002  1600
+
+ . 
+ . 
+ . 
+ 
+              mean     sd     2.5%    97.5%  Rhat n.eff
+alpha[56]  228.877  9.876  210.128  247.881 1.001  2000
+beta        54.987  1.718   51.720   58.363 1.001  2200
+deviance  5679.963 11.804 5658.944 5705.573 1.001  2200
+mu.int     225.880  2.750  220.320  231.107 1.002  1400
+sigma       38.663  1.218   36.419   41.166 1.001  2200
+sigma.int   16.515  2.661   11.740   22.118 1.001  2200</code></pre>
 <p><br></p>
 <p>Judging by our diagnostics, it looks like our estimates have converged nicely, and we see that we have sufficiently sampled posteriors for all 60(!) parameters of interest.</p>
 <p>Finally, we can look at the results for the linear predictions. This week, we’ll take a look at how to present results for linear predictors. We will use the same example as we did for the model we fit in <code>lme4</code>.</p>
