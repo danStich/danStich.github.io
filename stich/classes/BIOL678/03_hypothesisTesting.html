@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">danStich</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="../../index.html">Home</a>
+</li>
+<li>
+  <a href="../../teaching.html">Teaching</a>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../cv.html">Curriculum vitae</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="../BIOL217/index.html">BIOL 217</a>
+    </li>
+  </ul>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="inferential-statistics" class="section level1">
+<h1>Inferential statistics</h1>
+<h2 id="multi">
+Introduction
+</h2>
+<p>This week we will begin conducting our first statistical tests! We are going to start small and simple, and we will build complexity during the remainder of the semester. We will also start to make more use of some of the programming techniques that you have been developing, and we will build a foundation for moving into regression models in coming weeks.</p>
+<p>We’ll start with some simple methods for testing hypotheses about sampling distributions this week. Although relatively limited in scope within the fields of biology and ecology, these tend to be fairly robust tests, and can be powerful tools if studies are designed thoughtfully. For this week, we will focus on implementation of one-sample t-tests, two-sample t-tests, Wilcox tests, and frequency analysis using Pearson’s chi-squared test. Within the context of the assumptions of these tests we will also discuss the F-test and the Shapiro-Wilk test of normality.</p>
+<div id="one-sample-tests" class="section level2">
+<h2>One-sample tests</h2>
+<p>Sometimes, we are interested in simply knowing whether or not the measurements we’ve obtained from an individual or a group are representative of a larger population. For example, we may have a ‘control’ group in an experiment and we want to know if the group is truly representative of the population average.</p>
+<div id="one-sample-t-test" class="section level3">
+<h3>One sample t-test</h3>
+<p>Let’s start with a simple example of how we might do this, and what the results actually mean. We’ll use some data from the <strong>best</strong> fish, American Shad <em>Alosa sapidissima</em> in the Connecticut River, USA for this example.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  shad =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;shad.txt&#39;</span>)</code></pre></div>
+<p>To start with, we will check to see if the length of age-7 females is the same as the population mean for the Connecticut River population.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  our_test =<span class="st"> </span><span class="kw">t.test</span>(
+    shad<span class="op">$</span>Length[shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>],
+    <span class="dt">alternative=</span><span class="st">&#39;two.sided&#39;</span>,
+    <span class="dt">mu=</span><span class="kw">mean</span>(shad<span class="op">$</span>Length),
+    <span class="dt">paired =</span> <span class="ot">FALSE</span>,
+    <span class="dt">var.equal =</span> <span class="ot">FALSE</span>,
+    <span class="dt">conf.level =</span> <span class="fl">0.95</span>
+  )
+  <span class="kw">print</span>(our_test)
+
+    One Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>]
+t =<span class="st"> </span><span class="fl">10.727</span>, df =<span class="st"> </span><span class="dv">13</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.919e-08</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="fl">43.02295</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">47.79631</span> <span class="fl">50.20369</span>
+sample estimates<span class="op">:</span>
+mean of x 
+       <span class="dv">49</span> </code></pre></div>
+<p>Okay, so what does that mean???</p>
+<blockquote>
+<p>First, let’s look at what we’ve done here.</p>
+</blockquote>
+<p>We’ve conducted a one-sample t-test.</p>
+<p>The null hypothesis (H<sub>0</sub>) was that the sample (age-7 roes) did not differ in <code>length</code> from the mean of the population. This is because we stated no specific alternative hypothesis when we executed the t-test above. If we had used a different alternative hypothesis (i.e. <code>greater</code> or <code>less</code> in the argument <code>alternative</code>) then our null would be formalized as:</p>
+<blockquote>
+<p>H<sub>0</sub>: ‘The length of age-7 roes is not significantly greater (or less) than the population mean’.</p>
+</blockquote>
+<p>We specify <code>paired = FALSE</code> because this is a one-sample test (R knows anyway based on the next argument), but also because we don’t have matching cases that we specifically want to compare. We tell R that we are not assuming that the variances are equal because it is a one-sample test and the population variance is not specified. Finally, we specify the confidence level. Here, we are telling R that we want to know the result with a confidence level of 95% (0.95). This corresponds to a Type-I error rate (<span class="math inline">\(\alpha\)</span>) of 0.05. This means we are looking for <em>p</em> &lt; 0.05 to conclude that the sample is in fact different from the population mean.</p>
+<div id="output" class="section level4">
+<h4>Output</h4>
+<p>R stores the output of this statistical test as an object, and you can reference any part of that object by name or index, like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Like so many other models objects, this is stored as a list:</span>
+  <span class="kw">str</span>(our_test)
+List of <span class="dv">9</span>
+ <span class="op">$</span><span class="st"> </span>statistic  <span class="op">:</span><span class="st"> </span>Named num <span class="fl">10.7</span>
+  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr <span class="st">&quot;t&quot;</span>
+ <span class="op">$</span><span class="st"> </span>parameter  <span class="op">:</span><span class="st"> </span>Named num <span class="dv">13</span>
+  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr <span class="st">&quot;df&quot;</span>
+ <span class="op">$</span><span class="st"> </span>p.value    <span class="op">:</span><span class="st"> </span>num <span class="fl">7.92e-08</span>
+ <span class="op">$</span><span class="st"> </span>conf.int   <span class="op">:</span><span class="st"> </span>atomic [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="fl">47.8</span> <span class="fl">50.2</span>
+  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;conf.level&quot;</span>)=<span class="st"> </span>num <span class="fl">0.95</span>
+ <span class="op">$</span><span class="st"> </span>estimate   <span class="op">:</span><span class="st"> </span>Named num <span class="dv">49</span>
+  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr <span class="st">&quot;mean of x&quot;</span>
+ <span class="op">$</span><span class="st"> </span>null.value <span class="op">:</span><span class="st"> </span>Named num <span class="dv">43</span>
+  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr <span class="st">&quot;mean&quot;</span>
+ <span class="op">$</span><span class="st"> </span>alternative<span class="op">:</span><span class="st"> </span>chr <span class="st">&quot;two.sided&quot;</span>
+ <span class="op">$</span><span class="st"> </span>method     <span class="op">:</span><span class="st"> </span>chr <span class="st">&quot;One Sample t-test&quot;</span>
+ <span class="op">$</span><span class="st"> </span>data.name  <span class="op">:</span><span class="st"> </span>chr <span class="st">&quot;shad$Length[shad$Age == 7 &amp; shad$Sex == </span><span class="ch">\&quot;</span><span class="st">R</span><span class="ch">\&quot;</span><span class="st">]&quot;</span>
+ <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;class&quot;</span>)=<span class="st"> </span>chr <span class="st">&quot;htest&quot;</span></code></pre></div>
+<p>We can just look at the names if there are specific pieces in which we are interested. For example, if we were using boot-strapping methods to construct a confidence interval on the p-value, we could extract the p-value for each run of a simulation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Shows us the names of the things inside the model list</span>
+  <span class="kw">names</span>(our_test) 
+[<span class="dv">1</span>] <span class="st">&quot;statistic&quot;</span>   <span class="st">&quot;parameter&quot;</span>   <span class="st">&quot;p.value&quot;</span>     <span class="st">&quot;conf.int&quot;</span>    <span class="st">&quot;estimate&quot;</span>   
+[<span class="dv">6</span>] <span class="st">&quot;null.value&quot;</span>  <span class="st">&quot;alternative&quot;</span> <span class="st">&quot;method&quot;</span>      <span class="st">&quot;data.name&quot;</span>  
+<span class="co"># This stores our p-value to an object for use</span>
+  p_out =<span class="st"> </span>our_test<span class="op">$</span>p.value 
+<span class="co"># And of course we can look at it</span>
+  <span class="kw">print</span>(p_out)             
+[<span class="dv">1</span>] <span class="fl">7.918926e-08</span></code></pre></div>
+<p>Now we can go through the output as it is displayed by:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print a summary of the test</span>
+  <span class="kw">print</span>(our_test)
+
+    One Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>]
+t =<span class="st"> </span><span class="fl">10.727</span>, df =<span class="st"> </span><span class="dv">13</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.919e-08</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true mean is not equal to <span class="fl">43.02295</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">47.79631</span> <span class="fl">50.20369</span>
+sample estimates<span class="op">:</span>
+mean of x 
+       <span class="dv">49</span> 
+<span class="co"># Or we can look at the names of the things inside the object:</span>
+  <span class="kw">names</span>(our_test)
+[<span class="dv">1</span>] <span class="st">&quot;statistic&quot;</span>   <span class="st">&quot;parameter&quot;</span>   <span class="st">&quot;p.value&quot;</span>     <span class="st">&quot;conf.int&quot;</span>    <span class="st">&quot;estimate&quot;</span>   
+[<span class="dv">6</span>] <span class="st">&quot;null.value&quot;</span>  <span class="st">&quot;alternative&quot;</span> <span class="st">&quot;method&quot;</span>      <span class="st">&quot;data.name&quot;</span>  </code></pre></div>
+</div>
+<div id="interpreting-test-results" class="section level4">
+<h4>Interpreting test results</h4>
+<p>The first line of the output gives us the actual data that with which we are working- nothing of interest here other than a quick sanity check until later on in the course.</p>
+<p>The second line shows the ‘statistics’ that we are interested in: <code>t</code>, the test statistic for the t-test.</p>
+<p>The <code>df</code>, or degrees of freedom, is the number of observations in the sample, minus the number of parameters that we are estimating (in this case, just one: the mean).</p>
+<p>Our <code>p-value</code> is the probability of observing data that are more extreme than what we observed if the null hypothesis is in fact true (i.e. the probability that rejection of the null is inappropriate).</p>
+<p><code>Alternative hypothesis</code>: sample mean is not equal to population mean</p>
+<p><code>95% CI</code> for the estimated parameter (the mean difference).</p>
+<p>The parameter estimate. In this case, the mean length of age-7 roes.</p>
+</div>
+<div id="assumptions" class="section level4">
+<h4>Assumptions</h4>
+<p>It’s always important for us to think about the assumptions that we are making when conducting a statistical test. First, there are implicit assumptions that we make: e.g., the data are representative and were collected in a random manner in this case. Then, there are explicit assumptions that we make in specific tests.</p>
+<p>For the one-sample t-test, the assumption that we really care about is:</p>
+<ol style="list-style-type: decimal">
+<li>The data are normally distributed</li>
+</ol>
+<p>The t-test is generally robust to violations of this assumption provided that sample sizes are large enough. But, it is always good to check. In particular, when we are working with small sample sizes like this example (n = 14), we should really make sure that things look okay.</p>
+</div>
+<div id="checking-assumptions" class="section level4">
+<h4>Checking assumptions</h4>
+<h5 id="multi">
+Visual check for normality
+</h5>
+<p>One simple way to gauge assumptions of normality is to look at a plot of the data. As you will see later, we are usually concerned with the <em>residuals</em>, but we can look at the actual data here because we have only two groups and no continuous covariates.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>],
+     <span class="dt">col=</span><span class="st">&#39;yellow&#39;</span>,
+     <span class="dt">border=</span><span class="st">&#39;orange&#39;</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>,
+     <span class="dt">xlab=</span><span class="st">&#39;Length (mm) of age-7 roes&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
+<p><img src="03_hypothesisTesting_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="co"># Hmmm...looks totally normal, but let&#39;s make sure</span></code></pre></div>
+<div id="statistical-test-of-normality-shapiro-wilk" class="section level5">
+<h5>Statistical test of normality (Shapiro-Wilk)</h5>
+<p>The Shapiro-Wilk test is commonly used to test normality of a distribution as a check of assumptions. We can use this to test whether our data deviate from normal in the following manner:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>])
+
+    Shapiro<span class="op">-</span>Wilk normality test
+
+data<span class="op">:</span><span class="st">  </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>]
+W =<span class="st"> </span><span class="fl">0.98014</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.9756</span></code></pre></div>
+<p>Okay, we have a couple things going on here:</p>
+<p>First, note that the test statistic is the <code>W</code> statistic.</p>
+<p>Second, we have a p-value of 0.9756. Oh, no! Wait, what does that mean? For this test, we actually don’t want p &lt; 0.05 if we are relying on assumptions of normality, so this is a ‘good’ thing. But, it doesn’t necessarily mean that the length of age-7 roes is normally distributed. Rather, it means that the sample we have collected is normal enough for a t-test!</p>
+<p>What if our data were not normal, but we still had continuous data? Are we up that proverbial creek without a paddle, or can we salvage the mess and move on with life? Don’t worry, there’s an app for that…</p>
+</div>
+</div>
+</div>
+<div id="wilcox-test" class="section level3">
+<h3>Wilcox test</h3>
+<p>You can think of the Wilcox test as a non-parametric version of the t-test. Here, we are checking for shifts in the median (not the mean) of one or more samples.</p>
+<p>Why is this? Think back to our example of the negative binomial distribution during discussions of probability distributions…The mean of a non-normal distribution is not always a useful descriptor of the probability mass under a distribution (it still describes ‘central tendancy’ but does not necessarily describe the place where ‘most of the data are’). But, the median always (as in always, always, always) describes central tendency of the data, so we can pretty much use if for describing any probability distribution. This is because the median is defined as the “middle” value. That is, half of the data should fall on either side of the median.</p>
+<p>…back to the Wilcox test.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, do this and have a quick read:</span>
+  ?wilcox.test</code></pre></div>
+<p>Now we can actually run a test to see if the median length of age-7 roes is statistically different from the median value of length in the Connecticut River population of American Shad.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">wilcox.test</span>(
+      shad<span class="op">$</span>Length[shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>],
+      <span class="dt">mu=</span><span class="kw">median</span>(shad<span class="op">$</span>Length),
+      <span class="dt">alternative =</span> <span class="st">&#39;greater&#39;</span>, <span class="co"># Note that I use a different alternative here!</span>
+      <span class="dt">exact =</span> <span class="ot">FALSE</span>           <span class="co"># Not much data, so exact not really appropriate</span>
+    )
+
+    Wilcoxon signed rank test with continuity correction
+
+data<span class="op">:</span><span class="st">  </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Age <span class="op">==</span><span class="st"> </span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>]
+V =<span class="st"> </span><span class="dv">105</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0005439</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true location is greater than <span class="dv">43</span></code></pre></div>
+<p>Interpretting the results is essentially the same as for the t-test, but without the degrees of freedom, so we won’t belabor this. Importantly, the test, being robust to any distributional assumptions, should also (and does) tell us that the length of age-7 roes is significantly larger than the population mean (or median- whichever we choose to use).</p>
+</div>
+</div>
+<div id="two-sample-tests" class="section level2">
+<h2>Two-sample tests</h2>
+<p>Okay, with that out of the way, now we can compare two groups to see if they are from different statistical (if not biological) populations.</p>
+<div id="the-two-sample-t-test" class="section level3">
+<h3>The two-sample t-test</h3>
+<p>Let’s keep working with the shad data for now for the sake of consistency. But, now we want to know if there is a difference in mean length of males (‘bucks’) and females (‘roes’). This is a common type of boring question that we might ask with these tests (I didn’t say that).</p>
+<p>The syntax is relatively straightforward, and is similar to what we used above, except that now we have two groups so we will replace <code>mu</code> and change some of the options.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    our_paired_test =<span class="st"> </span><span class="kw">t.test</span>(
+      <span class="dt">x =</span> shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>],  <span class="co"># Group 1</span>
+      <span class="dt">y =</span> shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;B&#39;</span>],  <span class="co"># Group 2</span>
+      <span class="dt">alternative=</span><span class="st">&#39;two.sided&#39;</span>,         <span class="co"># Let&#39;s say we know nothing</span>
+      <span class="dt">paired =</span> <span class="ot">FALSE</span>,                  <span class="co"># </span><span class="al">NOTE</span><span class="co">: 2-sample test, not &quot;paired&quot;</span>
+      <span class="dt">var.equal =</span> <span class="ot">FALSE</span>,               <span class="co"># We make no variance assumption</span>
+      <span class="dt">conf.level =</span> <span class="fl">0.95</span>                <span class="co"># Alpha = 0.05</span>
+    )
+    <span class="kw">print</span>(our_paired_test)
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;R&quot;</span>] and shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex <span class="op">==</span><span class="st"> &quot;B&quot;</span>]
+t =<span class="st"> </span><span class="fl">53.314</span>, df =<span class="st"> </span><span class="fl">2866.3</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">5.177349</span> <span class="fl">5.572715</span>
+sample estimates<span class="op">:</span>
+mean of x mean of y 
+ <span class="fl">46.18691</span>  <span class="fl">40.81188</span> </code></pre></div>
+<p>The interpretation of the results is much the same as with the one-sample t-test, except that we are now looking at the null hypothesis that there is no difference between groups.</p>
+<p>We have found that the two groups are ‘significantly different’. Who cares? Which one is bigger for cyrin’ out loud?</p>
+<p>This is why it’s good to specify the arguments by name in the call to the function, like we did above:</p>
+<p><code>x</code> is roes</p>
+<p><code>y</code> is bucks</p>
+<p>Roes are significantly larger than bucks and that the probability of our being wrong about this is very low.</p>
+<div id="assumptions-1" class="section level4">
+<h4>Assumptions</h4>
+<h5 id="multi">
+Equal variance
+<h5>
+<p>Now that we are using two samples, we should be cognizant that this test assumes equal variances unless we explicitly account for it as we did above.</p>
+<p>Let’s test it:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We&#39;ll make our variables into objects so</span>
+<span class="co"># we don&#39;t have to type as much</span>
+  x =<span class="st"> </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>]  <span class="co"># Group 1</span>
+  y =<span class="st"> </span>shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;B&#39;</span>]  <span class="co"># Group 2</span>
+  
+<span class="co"># Now we will test the null hypothesis that </span>
+<span class="co"># there is no difference in variance between</span>
+<span class="co"># groups using an F test. To do this, the F test takes</span>
+<span class="co"># the ratio of variances (this is basically an ANOVA!)</span>
+  <span class="kw">var.test</span>(<span class="dt">x=</span>x, <span class="dt">y=</span>y)
+
+    F test to compare two variances
+
+data<span class="op">:</span><span class="st">  </span>x and y
+F =<span class="st"> </span><span class="fl">0.80019</span>, num df =<span class="st"> </span><span class="dv">1252</span>, denom df =<span class="st"> </span><span class="dv">1792</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">2.203e-05</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true ratio of variances is not equal to <span class="dv">1</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">0.7228317</span> <span class="fl">0.8866513</span>
+sample estimates<span class="op">:</span>
+ratio of variances 
+         <span class="fl">0.8001867</span> </code></pre></div>
+<p>Wow, this is way to easy. I hope that you are beginning to understand the <strong>GLORY OF R</strong>. This test could be a real pain in other software programs, and may not even be an option in many.</p>
+<p>Back on topic…Our variance test shows that the variances are different. More formally:</p>
+<blockquote>
+<p>“The value of the F statistic is sufficiently large for us to reject the null hypothesis that there is no difference in the variances between groups”</p>
+</blockquote>
+<p>That just sounds cooler, doesn’t it?</p>
+<p>Sooo…it’s a good thing we assumed that the variances were unequal!</p>
+<div id="normality" class="section level5">
+<h5>Normality</h5>
+<p>Yes, we are still worried about this one because of the reasons given in the previous section. We can check this the same way as before. End of section.</p>
+</div>
+</div>
+</div>
+<div id="two-sample-wilcox-test" class="section level3">
+<h3>Two-sample Wilcox test</h3>
+<p>If we were in violation of normality, we would use the Wilcox test to test for shifts in the central tendancy here. I will not go through the whole thing again here, but I will note that the syntax is very much the same to that of the t-test now:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here, I am using the variables we</span>
+<span class="co"># created previously for simplicity</span>
+  <span class="kw">wilcox.test</span>(x, y)
+
+    Wilcoxon rank sum test with continuity correction
+
+data<span class="op">:</span><span class="st">  </span>x and y
+W =<span class="st"> </span><span class="dv">2061200</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true location shift is not equal to <span class="dv">0</span></code></pre></div>
+<p>As expected, this test also shows that the two samples differ significantly with respect to their central tendancies.</p>
+<p><em>Note: because we do not have paired samples, this is actually a special case of the Wilcoxon rank-sum test and defaults to the more general ‘Mann-Whitney’ test.</em></p>
+</div>
+<div id="presenting-your-results" class="section level3">
+<h3>Presenting your results</h3>
+<p>While it is important to report the test statistics, df, etc., it can be just as meaningful to give the sample means (reported in the <code>t.test</code>) and show a graph. <em><strong>Remember</strong></em>: don’t make crappy graphs. Be proud of your results.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the margins for the plotting window</span>
+  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))
+<span class="co"># Make a histogram of x with transparent grey-scale colors</span>
+  <span class="kw">hist</span>(x, <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">25</span>,<span class="dv">55</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">600</span>),
+    <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="kw">expression</span>(L[f]), <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>)
+<span class="co"># Add the histogram for y</span>
+  <span class="kw">hist</span>(y, <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.5</span>), <span class="dt">add=</span><span class="ot">TRUE</span>)
+<span class="co"># Add the x-axis and make it cross the y at zero, cex is text increase</span>
+  <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)
+<span class="co"># Add the y-axis crossing the x at 25, with rotated labels</span>
+  <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">25</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)
+<span class="co"># add a vertical line showing the mean for roes</span>
+  <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(x), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+<span class="co"># add a vertical line showing the mean for roes</span>
+  <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(y), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
+<span class="co"># Add the mean for each sex to the grapch.</span>
+  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(x), <span class="dt">y=</span><span class="dv">550</span>, <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;roes&#39;</span>])), <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)
+  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(y), <span class="dt">y=</span><span class="dv">550</span>, <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;bucks&#39;</span>])), <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)
+<span class="co"># Add a legend to the chart</span>
+  <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">50</span>, <span class="dt">y=</span><span class="dv">600</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;Roes&#39;</span>, <span class="st">&#39;Bucks&#39;</span>), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;gray87&#39;</span>),
+    <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="03_hypothesisTesting_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+</div>
+</div>
+<div id="frequency-analysis" class="section level2">
+<h2>Frequency analysis</h2>
+<p>Now, what if we didn’t collect very good data, or we binned our data into low-resolution categories for the sake of ease in our study design? Often, and for a variety of reasons other than crappy data collection, we want to compare frequencies of events between two (or more) groups. We may even design studies specifically to test these kinds of hypotheses when we think about rates, for example.</p>
+<p>The simplest way to test for differences in the frequency of a response between two groups is (some would argue) the chi-squared test.</p>
+<div id="worked-example" class="section level3">
+<h3>Worked example</h3>
+<p>Let’s say we want to know if there are differences in age strucures between bucks and roes in our <code>shad</code> data. More formally: does the frequency of fish in each age class vary by sex?</p>
+<p>This is a straightforward test:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Run the test</span>
+chi_test =<span class="st"> </span><span class="kw">chisq.test</span>(shad<span class="op">$</span>Sex, shad<span class="op">$</span>Age)
+
+<span class="co"># And, bam! We see that their is a difference in the frequency of fish</span>
+<span class="co"># in each age class between sexes.</span>
+chi_test
+
+    Pearson<span class="st">&#39;s Chi-squared test</span>
+
+<span class="st">data:  shad$Sex and shad$Age</span>
+<span class="st">X-squared = 419.01, df = 4, p-value &lt; 2.2e-16</span>
+
+<span class="st"># How to show the differences?</span>
+<span class="st"># The table of observed values can be helpful</span>
+<span class="st"># Remember, all models are objects in R</span>
+<span class="st">names(chi_test)    </span>
+<span class="st">[1] &quot;statistic&quot; &quot;parameter&quot; &quot;p.value&quot;   &quot;method&quot;    &quot;data.name&quot; &quot;observed&quot; </span>
+<span class="st">[7] &quot;expected&quot;  &quot;residuals&quot; &quot;stdres&quot;   </span>
+
+<span class="st"># Prints the cross-tab for number at age by sex</span>
+<span class="st">chi_test$observed  </span>
+<span class="st">        shad$Age</span>
+<span class="st">shad$Sex   3   4   5   6   7</span>
+<span class="st">       B 255 848 579 108   3</span>
+<span class="st">       R   0 361 658 220  14</span>
+
+<span class="st"># You can compare this to the expected frequencies:</span>
+<span class="st">chi_test$expected</span>
+<span class="st">        shad$Age</span>
+<span class="st">shad$Sex        3        4        5        6         7</span>
+<span class="st">       B 150.1034 711.6668 728.1487 193.0742 10.006894</span>
+<span class="st">       R 104.8966 497.3332 508.8513 134.9258  6.993106</span></code></pre></div>
+<p><strong>Note</strong>: <em>without knowing how fish were sampled (randomly, stratified, etc.), we would not be able to conduct this analysis because it may be possible that the design intentionally sampled different frequencies of individuals of each sex in each age class. Here, we will assume that the sample is representative of the population.</em></p>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

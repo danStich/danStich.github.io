@@ -1,11 +1,7 @@
 ```{r, child="../../_styles.Rmd"}
 ```
 
-<br>
-
 # Probability distributions  
-
-<br>
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=2.5, fig.width=5,fig.align='left'}    
 # Plot the density fucntion for a lognormal
@@ -31,24 +27,21 @@
 ```
 
 
-## Introduction  
+<h2 id="multi"> Introduction </h2>  
  
-The objective of this assignment is to apply what you have been learning in R in order to start learning about more about sampling distributions and how they apply to designing your thesis research. We have discussed a number of probability distributions in the exponential family of distributions, and now it is time to put that talk into action.
+The objective of this assignment is to apply what you have been learning in R in order to start learning about more about sampling distributions and how they apply to designing research questions. We have discussed a number of probability distributions in the exponential family of distributions, and now it is time to put that talk into action.
 
-By the end of this lab, you should be able to 1) simulate data from a wide variety of probability distributions in the exponential family, 2) calculate summary statistics for any sampling distribution that you come across, and 3) estimate the parameters of some probability distributions using the method of moments and/or maximum likelihood estimation.
-
+By the end of this lab, you should be able to 1) simulate data from a wide variety of probability distributions in the exponential family, 2) calculate summary statistics for sampling distributions, and 3) estimate the parameters of some probability distributions using the method of moments and/or maximum likelihood estimation.
 
 ## Exercises
 
-<h3>The normal distribution</h3>
+<h3 id="multi">The normal distribution</h3>
 
 Let's start with the normal distribution to knock the rust off and get ourselves thinking about probability distributions again. Recall that we can simulate data from the normal using something like this: 
 
 ```{r}
 ndata = rnorm(n=30, mean=0, sd=1)
 ```
-
-<br>
 
 In this example, we have drawn **30** random samples from a normal distribution with a *mean* of 0 and a *standard deviation* of 1. Also recall that we can plot these data as samples from a **continuous distribution** using a curved line in R to see if it looks like it should:
 
@@ -81,29 +74,25 @@ Now let's take a look at another way to do this. This time, instead of handing y
 # this (just make sure it is in
 # the correct directory):
   dbp = read.csv('dbp.txt') 
-  str(dbp)
 ``` 
  
 ```{r, echo=FALSE}
 # I'll simulate the data for you in another file and you can read in the data
 # from a text file like this (just make sure it is in the correct directory):
   dbp = read.csv('../../data/dbp.txt') 
-  str(dbp)
 ```
 
-<br>
-
-**Question 2.** Calculate the mean and *variance* of this distribution using the method of moments. Note that you can write your own function (as in the reference script), or you can use the built-in R functions that we talked about in class this week (see reference script). What are the mean and sd using this method?  
+**Question 2.** Calculate the *mean* and *variance* of this distribution using the method of moments. Note that you can write your own function (as in the lecture tutorial), or you can use the built-in R functions that we talked about in class this week (see lecture tutorial). What are the *mean* and *sd* using this method?  
 
 **Quesiton 3.** Now calculate the *mean* and the *variance* of this sampling
-distribution using maximum likelihood estimation. Recall that you can estimate the parameters using `optim()` and by writing out the likelihood inside of a function, or you can use in the built-in `fitdistr` function in R. If you do the latter, remember to pay attention to the answers that R gives you.  
+distribution using maximum likelihood estimation. Recall that you can estimate the parameters using `optim` and by writing out the likelihood inside of a function, or you can use in the built-in `fitdistr` function in R. If you do the latter, remember to pay attention to the answers that R gives you.  
 
 **Question 4.** Calculate the 95% confidence limits for this distribution using the `quantile` function. Remember to think carefully about what probabilities you need to use for the 95% CI.  
 
 ### The beta distribution
 We talked about this distribution in class this week, and about how useful it can be due to its flexibility. However, given that the Beta is controlled by two shape parameters, it can be tough to wrap your head around. Let's play.  
 
-Simulate **10,000** random draws with parameters $\alpha$ **(`shape1` in R) = 30** and $\beta$ **(`shape2` in R) = 12** and plot a histogram of the draws:
+Simulate **10,000** random samples from a beta distribution with parameters $\alpha$ **(`shape1` in R) = 30** and $\beta$ **(`shape2` in R) = 12** and plot a histogram of the sampling distribution:
 
 ```{r, fig.align='center', fig.width=6, fig.height=4}
 # Get a random sample from the beta
@@ -120,27 +109,26 @@ hist(beta.sample, main='', col='gray')
 a. What happens when you make the numbers approximately equal?  
 b. What happens to the histogram when `shape1` is much larger than `shape2`?  
 c. What happents to the histogram when `shape2` is much larger?  
-d. Set both parameters to 500. What happens to the variance of the distribution?
+d. Set both parameters to 500. What happens to the spread of the distribution?
 e. Now set both parameters to 2. How does this compare to the previous?  
 f. Set both parameters to 1. Now what does the histogram look like?  
 g. What happens to the histogram if you set both parameters to 0.65?  
-
 
 ### The Bernoulli distribution 
 
 Take a random draw from a Bernoulli distribution. Remember, this distribution is the one that is like flipping a coin one time and the only parameter that controls the distribution is the probability of success:  
 
 ```{r, eval = FALSE}
-library(Rlab)                      # Load the package
-bern.sample = rbern(n=1, prob=.5)  # Take a random sample from the Bernoulli
+# Load the package
+library(Rlab)            
+
+# Take a random sample from the Bernoulli
+bern.sample = rbern(n=1, prob=.5) 
 ```
 
-<br>
-
-**Question 6.** If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a '1')? Use the built in R functions to figure this out, don't try to count all 2,500 elements in the vector.  
+**Question 6.** If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a '1')? Use the built in R functions to figure this out, don't try to count all 2,500 elements in the vector. There are a few different ways to do this one.
 
 **Question 7.** How does this compare to what you expected?  
-
 
 ### The binomial distribution  
 
@@ -150,10 +138,7 @@ Remember the binomial distribution is like the Bernoulli, but instead of flippin
 rbinom(n=10, size=10, prob=0.5)
 ```
 
-<br>
-
-**Question 8.** Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (`size`) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (`n`) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise).  
-
+**Question 8.** Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (`size`) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (`n`) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise). 
 
 ### The Poisson distribution  
 
@@ -163,11 +148,9 @@ Recall that the Poisson distribution was created to explain the number of events
 rpois(n = 10, lambda = 10)
 ```
 
-<br>
-
 The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.  
 
-Suppose that we are interested in describing the distribution of the genus _Photinus_ in Upstate New York. We collected as many speciments as we could in jars (at this point if you're really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of _Photinus_ we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.  
+Suppose that we are interested in describing the distribution of the genus _Photinus_ in Upstate New York. We collected as many speciments as we could in jars (at this point if you're really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of _Photinus_ we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.
 
 **Question 9.**
 Using the data in the file `counts.txt` (you have to read it in first), estimate the mean and variance for the number of Photinus per night using any method appropriate for these data (see above or below for data read: **I want you to adapt this code**). 
@@ -181,8 +164,6 @@ counts2 = read.csv('counts2.txt')
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 counts2 = read.csv('../../data/counts2.txt')
 ```
-
-<br>
  
 **Question 10.**  
 

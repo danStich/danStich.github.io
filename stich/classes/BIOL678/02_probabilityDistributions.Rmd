@@ -82,6 +82,9 @@ The **normal distribution** is defined by two parameters:
 Let's take a look at what the normal distribution looks like. We'll start with the standard normal (or *z*) distribution. The standard normal is a normal distribution with a mean of zero and a variance of 1.
 
 ```{r}
+# Plot a density curve as for 10k
+# samples from a normal distribution
+# as a thick, black line
 plot(density(
   rnorm(n=1e4, mean=0, sd=1)),
   main='', lwd=2, col='black',
@@ -91,8 +94,21 @@ plot(density(
 We can change the parameters of the standard normal to increase or decrease the degree of **kurtosis** or peakedness in our distribution. The blue line shows a distribution with lower kurtosis than the z distribution (this one is called a **t-distribution**). The red line shows a distribution with greater kurtosis than the z distribution.
 
 For line drawings like these, we can just add them to the existing plot to keep the same x and y scales and axes by using the `lines` function:
+```{r, eval=FALSE}
+# Add thick, blue line to the
+# plot for mu=0, sigma=2
+lines(density(
+  rnorm(n=1e4, mean=0, sd=2)),
+  lwd=2, col = 'blue')
 
-```{r}
+# Add thick, red line to the
+# plot for mu=0, sigma=0.5
+lines(density(
+  rnorm(n=1e4, mean=0, sd=.5)),
+  lwd=2, col = 'red')  
+```
+
+```{r, echo=FALSE}
 plot(density(
   rnorm(n=1e4, mean=0, sd=1)),
   main='', lwd=2, col='black',
@@ -108,8 +124,19 @@ lines(density(
 ```
 
 We can add a legend to clarify:
+```{r, eval=FALSE}
+legend(x=1,    # x-coordinate for legend
+       y=.9,   # Y-coordinate for legend
+       legend=c('mu=0, sd=1', 'mu=0, sd=2', 'mu=0, sd=.5'), # Names
+       col=c('black', 'blue', 'red'), # Colors
+       lty=1,  # Line type for legend symbols
+       lwd=2,  # Line width for legend symbols
+       bg='n', # Legend fill: none
+       bty='n' # Box type for legend: none
+) # Close call to legend
+```
 
-```{r}
+```{r, echo=FALSE}
 plot(density(
   rnorm(n=1e4, mean=0, sd=1)),
   main='', lwd=2, col='black',
@@ -123,8 +150,8 @@ lines(density(
   rnorm(n=1e4, mean=0, sd=.5)),
   lwd=2, col = 'red')  
 
-legend(x=1, # x-coordinate for legend
-       y=.9,# Y-coordinate for legend
+legend(x=1,    # x-coordinate for legend
+       y=.9,   # Y-coordinate for legend
        legend=c('mu=0, sd=1', 'mu=0, sd=2', 'mu=0, sd=.5'), # Names
        col=c('black', 'blue', 'red'), # Colors
        lty=1,  # Line type for legend symbols
@@ -149,46 +176,54 @@ Let's take a look at how changes to the mean change the location of this distrib
 # Plot the density fucntion for a lognormal
 # distribution that has a mean of zero and
 # a standard deviation of 1.
-  plot(density(
-    rlnorm(n=1e4, mean=0, sd=1)),
-    main='', lwd=2, col='black', 
-    xlab=expression(theta), ylim=c(0,1))
+plot(density(
+  rlnorm(n=1e4, mean=0, sd=1)),
+  main='', lwd=2, col='black', 
+  xlab=expression(theta), ylim=c(0,1))
 
 # Now, we can change the parameters to change the location and spread
-  lines(density(
-    rlnorm(n=1e4, mean=1, sd=1)),
-    lwd=2, col = 'blue') 
-  
-  lines(density(
-    rlnorm(n=1e4, mean=2, sd=1)),
-    lwd=2, col = 'red')  
+lines(density(
+  rlnorm(n=1e4, mean=1, sd=1)),
+  lwd=2, col = 'blue') 
+
+lines(density(
+  rlnorm(n=1e4, mean=2, sd=1)),
+  lwd=2, col = 'red')  
 
 # Add a legend to the plot
-  legend(x=20, y=.9,
-         legend=c('mu=0, sd=1', 'mu=1, sd=1', 'mu=2, sd=1'), 
-         col=c('black', 'blue', 'red'),
-         lty=1, lwd=2, bg='n', bty='n')
+legend(x=20, y=.9,
+       legend=c('mu=0, sd=1', 'mu=1, sd=1', 'mu=2, sd=1'), 
+       col=c('black', 'blue', 'red'),
+       lty=1, lwd=2, bg='n', bty='n')
 ```
 
 > The beta distribution
 
 The **beta distribution** is a probability distribution that is constrained to the interval (0, 1). But, it is incredibly flexible in its parameterization, and as a result is very useful for stochastic simulation of variables on the probability scale, such as survival.
 
-The parameters of the beta distribution are $\alpha$ and $\beta$, or commonly `a` and `b` or `shape 1` and `shape 2`. Within this distribution, $\alpha$ pushes the distribution to the  right (toward 1), and $\beta$ pushes the distribution to the left (toward 0). The relative magnitude of $\alpha$ and $\beta$ determine the location, shape, and spread of the probability distribution for our random variable. When $\alpha$ and $\beta$ are equal, the beta distribution is a t-distribution within the interval (0, 1).
+The parameters of the beta distribution are $\alpha$ and $\beta$, or commonly `a` and `b` or `shape 1` and `shape 2`. Within this distribution, $\alpha$ pushes the distribution to the  right (toward 1), and $\beta$ pushes the distribution to the left (toward 0). The relative magnitude of $\alpha$ and $\beta$ determine the location, shape, and spread of the probability distribution for our random variable. When $\alpha$ and $\beta$ are equal, and greater than 1, the beta distribution is a t-distribution within the interval (0, 1).
 
 Let's take a look:
 
 ```{r}      
-# Within the rbeta function in R, 'a' is called 'shape1' and 'b' is called
-# 'shape2'
-  plot(density(rbeta(n=1e4, shape1=50, shape2=50)), main='', lwd=2,
-    col='black', xlab=expression(theta), ylim=c(0,50), xlim=c(0,1))
-# Now, we can change the parameters to change the location and spread
-  lines(density(rbeta(n=1e4, shape1=50, shape2=100)), lwd=2, col = 'blue')      
-  lines(density(rbeta(n=1e4, shape1=500, shape2=250)), lwd=2, col = 'red')  
+# Within the rbeta function in R,
+# 'a' is called 'shape1' and 'b'
+# is called 'shape2'
+plot(density(rbeta(n=1e4, shape1=50, shape2=50)),
+     main='', lwd=2, col='black',
+     xlab=expression(theta),
+     ylim=c(0,50), xlim=c(0,1))
+
+# Now, we can change the parameters
+# to change the location and spread
+lines(density(rbeta(n=1e4, shape1=50, shape2=100)), lwd=2, col = 'blue')      
+lines(density(rbeta(n=1e4, shape1=500, shape2=250)), lwd=2, col = 'red')  
+
 # Add a legend to the plot
-  legend(x=.65, y=50, legend=c('a=50, b=50', 'a=50, b=100', 'a=500, b=250'), 
-         col=c('black', 'blue', 'red'), lty=1, lwd=2, bg='n', bty='n')      
+legend(x=.65, y=50,
+       legend=c('a=50, b=50', 'a=50, b=100', 'a=500, b=250'), 
+       col=c('black', 'blue', 'red'),
+       lty=1, lwd=2, bg='n', bty='n')      
 ```
 
 ### Discrete probability distributions
@@ -221,8 +256,8 @@ library(Rlab)
 # Flip the coin once
 rbern(n=1, prob=.5)
 
-# Flip the coin 100 times
-rbern(n=100, prob=.5)
+# Flip the coin 10 times
+rbern(n=10, prob=.5)
 ```
 
 > The binomial distribution
@@ -232,27 +267,31 @@ The **binomial distribution** is pretty similar to the Bernoulli distribution ex
 To sample data from a binomial distribution, we can use `rbinom`. In this example we tell R that we want 10 samples (`n`) from a binomial distribution that has 10 trials (`size`) and a probability of success (`prob`) of 0.5. This is like having 10 people flip the coin 10 times instead of just one person flipping the coin 100 times.
 
 ```{r}
-# Take a random draw of 10 samples from a binomial distribution with 10 trials
+# Take a random draw of 10 samples
+# from a binomial distribution with 10 trials
 # and probability of success equal to 0.50
 rbinom(n=10, size=10, prob=0.5)
 ```
 
 > The multinomial distribution
 
-The **multinomial distribution** is a further generalization of the Binomial and Bernoulli distribution. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually **but all of them must sum to one**. The categories are, in this case, assumed to be a **mutually exclusive** and **exhaustive** set of possible outcomes.
+The **multinomial distribution** is a further generalization of the Binomial and Bernoulli distributions. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually **but all of them must sum to one**. The categories are, in this case, assumed to be a **mutually exclusive** and **exhaustive** set of possible outcomes.
     
 We can use the multinomial distribution to randomly sample from categories (imagine our response variable is a categorical variable, like the names of the students in this class). To do this:
 
 ```{r}
 # First, we make a vector of names:
-  name = c('Amanda', 'Chris', 'Kendra', 'Luis', 'Sarah', 'Steve', 'Zach')
-# Then, we assign a uniform probability of drawing any given name if they
-# can all be drawn with equal frequency:
-  probs = rep(x=1/length(name), times=length(name))      
-  probs      
+name = c('Amanda', 'Chris', 'Kendra',
+         'Luis', 'Sarah', 'Steve', 'Zach')
+
+# Then, we assign a uniform probability of
+# drawing any given name if they can all
+# be drawn with equal frequency:
+probs = rep(x=1/length(name), times=length(name))      
+probs      
 ```
 
-Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 8 probabilities above.
+Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the `r length(name)` probabilities above.
 
 ```{r}
 rmultinom(n=5, size=1, prob=probs)
@@ -263,8 +302,9 @@ rmultinom(n=5, size=1, prob=probs)
 Take a step back, breath, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:
       
 ```{r} 
-# Take a single sample from the list of student names    
-  rmultinom(n=1, size=1, prob=probs)
+# Take a single sample from
+# the list of student names    
+rmultinom(n=1, size=1, prob=probs)
 ```        
 
 Here, we pulled a single sample from the distribution, and probability of sampling a given individual was `r round(1/length(name), 2)` (1/`r length(name)`). If it makes it easier, we can put your names next to it:
@@ -282,7 +322,7 @@ cbind(name, rmultinom(n=10, size=1, prob=probs))
 Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are **awesome**!) matrices:
 
 ```{r}
-  name[which(rmultinom(n=1, size=1, prob=probs)>0)]
+name[which(rmultinom(n=1, size=1, prob=probs)>0)]
 ```  
 
 And now we have a way to randomly select an individual based on a multinomial distribution!
@@ -350,11 +390,11 @@ dispersion parameter explicitly so it makes more sense:
  
 ```{r} 
 # MASS comes pre-installed as part of base software
-  library(MASS)
-  hist(rnegbin(1e4, mu=10, theta = .1))  
-  hist(rnegbin(1e4, mu=10, theta = 10))       
-  hist(rnegbin(1e4, mu=10, theta = 100))       
-  hist(rnegbin(1e4, mu=10, theta = 1000)) 
+library(MASS)
+hist(rnegbin(1e4, mu=10, theta = .1))  
+hist(rnegbin(1e4, mu=10, theta = 10))       
+hist(rnegbin(1e4, mu=10, theta = 100))       
+hist(rnegbin(1e4, mu=10, theta = 1000)) 
 ```
  
 **NOTE** that the results are pretty much identical.    
@@ -420,11 +460,9 @@ the exact solution provided by the formulas for the first two moments
 of the normal distribution:
  
 ```{r}      
-  mean(test_norm)
-  var(test_norm)
+mean(test_norm)
+var(test_norm)
 ```        
-
-
  
 How do these compare to the answers returned by our function?    
 
@@ -444,23 +482,23 @@ Finally, let's write our own function and maximize the likelihood with the `opti
 
 ```{r}
 # Define the function
-  normal.lik = function(theta, y){
-    # The starting value for
-    # mu that we provide
-    mu = theta[1]
-    # The starting value for
-    # sigma2 that we provide
-    sigma2 = theta[2]
-    # Number of observations in the data
-    n = nrow(y)
-    # Compute the log likelihood of the
-    # data (y) using the likelihood
-    # function for the normal distribution
-    # given the starting values for our
-    # parameters (contained in the vector 'theta')
-    logl = -.5*n*log(2*pi) -.5*n*log(sigma2)-(1/(2*sigma2))*sum((y-mu)**2)
-    return(-logl)
-  }
+normal.lik = function(theta, y){
+  # The starting value for
+  # mu that we provide
+  mu = theta[1]
+  # The starting value for
+  # sigma2 that we provide
+  sigma2 = theta[2]
+  # Number of observations in the data
+  n = nrow(y)
+  # Compute the log likelihood of the
+  # data (y) using the likelihood
+  # function for the normal distribution
+  # given the starting values for our
+  # parameters (contained in the vector 'theta')
+  logl = -.5*n*log(2*pi) -.5*n*log(sigma2)-(1/(2*sigma2))*sum((y-mu)**2)
+  return(-logl)
+}
 ```  
 
 Now, we use the `optim` function to maximize the likelihood of the data
@@ -468,31 +506,31 @@ Now, we use the `optim` function to maximize the likelihood of the data
 our parameters (`mu` and `sigma2`).
 
 ```{r} 
-  optim(c(0, 1), normal.lik, y=data.frame(test_norm))
+optim(c(0, 1), normal.lik, y=data.frame(test_norm))
 ```  
 
 We can also make this into an object and call the parts by name:
 
 ```{r} 
 # Make it into an object
-  est = optim(c(0, 1),
-              normal.lik,
-              y=data.frame(test_norm)
-              ) 
+est = optim(c(0, 1),
+            normal.lik,
+            y=data.frame(test_norm)
+            ) 
 
 # Look at the structure 
 # I'll be damned, it's a list!
 # Hey, we learned about those!
-  str(est)   
+str(est)   
 
 # Here are the estimates    
-  est$par 
+est$par 
   
 # The mean  
-  est$par[1]
-  
+est$par[1]
+
 # The variance  
-  est$par[2] 
+est$par[2] 
 ```    
 
 That's better:  an exact solution!
@@ -500,7 +538,7 @@ That's better:  an exact solution!
 Just in case you'd like to know exactly what `optim` is doing, you can find out like this:
 
 ```{r, eval=FALSE}
-  ?optim
+?optim
 ```
 
 > Quantiles and other descriptive statistics

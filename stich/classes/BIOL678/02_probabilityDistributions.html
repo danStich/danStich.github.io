@@ -316,42 +316,31 @@ Introduction
 <li><p>The variance (<span class="math inline">\(\sigma^2\)</span>)</p></li>
 </ol>
 <p>Let’s take a look at what the normal distribution looks like. We’ll start with the standard normal (or <em>z</em>) distribution. The standard normal is a normal distribution with a mean of zero and a variance of 1.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot a density curve as for 10k</span>
+<span class="co"># samples from a normal distribution</span>
+<span class="co"># as a thick, black line</span>
+<span class="kw">plot</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
   <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>,
   <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))</code></pre></div>
 <p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>We can change the parameters of the standard normal to increase or decrease the degree of <strong>kurtosis</strong> or peakedness in our distribution. The blue line shows a distribution with lower kurtosis than the z distribution (this one is called a <strong>t-distribution</strong>). The red line shows a distribution with greater kurtosis than the z distribution.</p>
 <p>For line drawings like these, we can just add them to the existing plot to keep the same x and y scales and axes by using the <code>lines</code> function:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
-  <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
-  <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>,
-  <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
-
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Add thick, blue line to the</span>
+<span class="co"># plot for mu=0, sigma=2</span>
 <span class="kw">lines</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">2</span>)),
   <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)
 
+<span class="co"># Add thick, red line to the</span>
+<span class="co"># plot for mu=0, sigma=0.5</span>
 <span class="kw">lines</span>(<span class="kw">density</span>(
   <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span>.<span class="dv">5</span>)),
   <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>We can add a legend to clarify:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">density</span>(
-  <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
-  <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>,
-  <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
-
-<span class="kw">lines</span>(<span class="kw">density</span>(
-  <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">2</span>)),
-  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)
-
-<span class="kw">lines</span>(<span class="kw">density</span>(
-  <span class="kw">rnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span>.<span class="dv">5</span>)),
-  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  
-
-<span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="co"># x-coordinate for legend</span>
-       <span class="dt">y=</span>.<span class="dv">9</span>,<span class="co"># Y-coordinate for legend</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>,    <span class="co"># x-coordinate for legend</span>
+       <span class="dt">y=</span>.<span class="dv">9</span>,   <span class="co"># Y-coordinate for legend</span>
        <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;mu=0, sd=1&#39;</span>, <span class="st">&#39;mu=0, sd=2&#39;</span>, <span class="st">&#39;mu=0, sd=.5&#39;</span>), <span class="co"># Names</span>
        <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="co"># Colors</span>
        <span class="dt">lty=</span><span class="dv">1</span>,  <span class="co"># Line type for legend symbols</span>
@@ -359,7 +348,7 @@ Introduction
        <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="co"># Legend fill: none</span>
        <span class="dt">bty=</span><span class="st">&#39;n&#39;</span> <span class="co"># Box type for legend: none</span>
 ) <span class="co"># Close call to legend</span></code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <blockquote>
 <p>The lognormal distribution</p>
 </blockquote>
@@ -368,43 +357,51 @@ Introduction
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the density fucntion for a lognormal</span>
 <span class="co"># distribution that has a mean of zero and</span>
 <span class="co"># a standard deviation of 1.</span>
-  <span class="kw">plot</span>(<span class="kw">density</span>(
-    <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
-    <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, 
-    <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
+<span class="kw">plot</span>(<span class="kw">density</span>(
+  <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
+  <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, 
+  <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
 
 <span class="co"># Now, we can change the parameters to change the location and spread</span>
-  <span class="kw">lines</span>(<span class="kw">density</span>(
-    <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">1</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
-    <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>) 
-  
-  <span class="kw">lines</span>(<span class="kw">density</span>(
-    <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">2</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
-    <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  
+<span class="kw">lines</span>(<span class="kw">density</span>(
+  <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">1</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
+  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>) 
+
+<span class="kw">lines</span>(<span class="kw">density</span>(
+  <span class="kw">rlnorm</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">mean=</span><span class="dv">2</span>, <span class="dt">sd=</span><span class="dv">1</span>)),
+  <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  
 
 <span class="co"># Add a legend to the plot</span>
-  <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">20</span>, <span class="dt">y=</span>.<span class="dv">9</span>,
-         <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;mu=0, sd=1&#39;</span>, <span class="st">&#39;mu=1, sd=1&#39;</span>, <span class="st">&#39;mu=2, sd=1&#39;</span>), 
-         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>),
-         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">20</span>, <span class="dt">y=</span>.<span class="dv">9</span>,
+       <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;mu=0, sd=1&#39;</span>, <span class="st">&#39;mu=1, sd=1&#39;</span>, <span class="st">&#39;mu=2, sd=1&#39;</span>), 
+       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>),
+       <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <blockquote>
 <p>The beta distribution</p>
 </blockquote>
 <p>The <strong>beta distribution</strong> is a probability distribution that is constrained to the interval (0, 1). But, it is incredibly flexible in its parameterization, and as a result is very useful for stochastic simulation of variables on the probability scale, such as survival.</p>
-<p>The parameters of the beta distribution are <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, or commonly <code>a</code> and <code>b</code> or <code>shape 1</code> and <code>shape 2</code>. Within this distribution, <span class="math inline">\(\alpha\)</span> pushes the distribution to the right (toward 1), and <span class="math inline">\(\beta\)</span> pushes the distribution to the left (toward 0). The relative magnitude of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> determine the location, shape, and spread of the probability distribution for our random variable. When <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are equal, the beta distribution is a t-distribution within the interval (0, 1).</p>
+<p>The parameters of the beta distribution are <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span>, or commonly <code>a</code> and <code>b</code> or <code>shape 1</code> and <code>shape 2</code>. Within this distribution, <span class="math inline">\(\alpha\)</span> pushes the distribution to the right (toward 1), and <span class="math inline">\(\beta\)</span> pushes the distribution to the left (toward 0). The relative magnitude of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> determine the location, shape, and spread of the probability distribution for our random variable. When <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\beta\)</span> are equal, and greater than 1, the beta distribution is a t-distribution within the interval (0, 1).</p>
 <p>Let’s take a look:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Within the rbeta function in R, &#39;a&#39; is called &#39;shape1&#39; and &#39;b&#39; is called</span>
-<span class="co"># &#39;shape2&#39;</span>
-  <span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">50</span>, <span class="dt">shape2=</span><span class="dv">50</span>)), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>,
-    <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">xlab=</span><span class="kw">expression</span>(theta), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
-<span class="co"># Now, we can change the parameters to change the location and spread</span>
-  <span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">50</span>, <span class="dt">shape2=</span><span class="dv">100</span>)), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)      
-  <span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">500</span>, <span class="dt">shape2=</span><span class="dv">250</span>)), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Within the rbeta function in R,</span>
+<span class="co"># &#39;a&#39; is called &#39;shape1&#39; and &#39;b&#39;</span>
+<span class="co"># is called &#39;shape2&#39;</span>
+<span class="kw">plot</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">50</span>, <span class="dt">shape2=</span><span class="dv">50</span>)),
+     <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>,
+     <span class="dt">xlab=</span><span class="kw">expression</span>(theta),
+     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">1</span>))
+
+<span class="co"># Now, we can change the parameters</span>
+<span class="co"># to change the location and spread</span>
+<span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">50</span>, <span class="dt">shape2=</span><span class="dv">100</span>)), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)      
+<span class="kw">lines</span>(<span class="kw">density</span>(<span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">shape1=</span><span class="dv">500</span>, <span class="dt">shape2=</span><span class="dv">250</span>)), <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>)  
+
 <span class="co"># Add a legend to the plot</span>
-  <span class="kw">legend</span>(<span class="dt">x=</span>.<span class="dv">65</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;a=50, b=50&#39;</span>, <span class="st">&#39;a=50, b=100&#39;</span>, <span class="st">&#39;a=500, b=250&#39;</span>), 
-         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<span class="kw">legend</span>(<span class="dt">x=</span>.<span class="dv">65</span>, <span class="dt">y=</span><span class="dv">50</span>,
+       <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;a=50, b=50&#39;</span>, <span class="st">&#39;a=50, b=100&#39;</span>, <span class="st">&#39;a=500, b=250&#39;</span>), 
+       <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>, <span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>),
+       <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">bg=</span><span class="st">&#39;n&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)      </code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 </div>
 <div id="discrete-probability-distributions" class="section level3">
 <h3>Discrete probability distributions</h3>
@@ -416,7 +413,7 @@ Introduction
 <p>We can simulate data from a Bernoulli distribution in one of two ways in R</p>
 <p>The “old-school” way of doing this was to draw from a binomial with a single <strong>trial</strong>. Here we randomly draw a single sample from a binomial with a single trial, and a probability of success of 50%. This can be likened to flipping a fair coin.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)
-[<span class="dv">1</span>] <span class="dv">0</span></code></pre></div>
+[<span class="dv">1</span>] <span class="dv">1</span></code></pre></div>
 <p>But now, there is a function in the <code>Rlab</code> package that simplifies this for the specific case of a Bernoulli.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, install the necessary package</span>
 <span class="co"># Uncomment to install</span>
@@ -428,47 +425,51 @@ Introduction
 
 <span class="co"># Flip the coin once</span>
 <span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)
-[<span class="dv">1</span>] <span class="dv">0</span>
+[<span class="dv">1</span>] <span class="dv">1</span>
 
-<span class="co"># Flip the coin 100 times</span>
-<span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">100</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)
-  [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span>
- [<span class="dv">98</span>] <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span></code></pre></div>
+<span class="co"># Flip the coin 10 times</span>
+<span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)
+ [<span class="dv">1</span>] <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span></code></pre></div>
 <blockquote>
 <p>The binomial distribution</p>
 </blockquote>
 <p>The <strong>binomial distribution</strong> is pretty similar to the Bernoulli distribution except that it also includes a parameter called <span class="math inline">\(N\)</span> (<code>size</code> in R) which corresponds to a number of trials. In most cases in biology, it will suffice to use the Bernoulli, but for modeling we will want to understand the binomial for things like random stratified designs and nested models that rely on the use of binomial distribution</p>
 <p>To sample data from a binomial distribution, we can use <code>rbinom</code>. In this example we tell R that we want 10 samples (<code>n</code>) from a binomial distribution that has 10 trials (<code>size</code>) and a probability of success (<code>prob</code>) of 0.5. This is like having 10 people flip the coin 10 times instead of just one person flipping the coin 100 times.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a random draw of 10 samples from a binomial distribution with 10 trials</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a random draw of 10 samples</span>
+<span class="co"># from a binomial distribution with 10 trials</span>
 <span class="co"># and probability of success equal to 0.50</span>
 <span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)
- [<span class="dv">1</span>] <span class="dv">5</span> <span class="dv">6</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">5</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span></code></pre></div>
+ [<span class="dv">1</span>] <span class="dv">3</span> <span class="dv">5</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">6</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">7</span> <span class="dv">1</span> <span class="dv">7</span></code></pre></div>
 <blockquote>
 <p>The multinomial distribution</p>
 </blockquote>
-<p>The <strong>multinomial distribution</strong> is a further generalization of the Binomial and Bernoulli distribution. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually <strong>but all of them must sum to one</strong>. The categories are, in this case, assumed to be a <strong>mutually exclusive</strong> and <strong>exhaustive</strong> set of possible outcomes.</p>
+<p>The <strong>multinomial distribution</strong> is a further generalization of the Binomial and Bernoulli distributions. Here, there are one or more possible categorical outcomes, and the probability of each one occuring is specified individually <strong>but all of them must sum to one</strong>. The categories are, in this case, assumed to be a <strong>mutually exclusive</strong> and <strong>exhaustive</strong> set of possible outcomes.</p>
 <p>We can use the multinomial distribution to randomly sample from categories (imagine our response variable is a categorical variable, like the names of the students in this class). To do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, we make a vector of names:</span>
-  name =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Amanda&#39;</span>, <span class="st">&#39;Chris&#39;</span>, <span class="st">&#39;Kendra&#39;</span>, <span class="st">&#39;Luis&#39;</span>, <span class="st">&#39;Sarah&#39;</span>, <span class="st">&#39;Steve&#39;</span>, <span class="st">&#39;Zach&#39;</span>)
-<span class="co"># Then, we assign a uniform probability of drawing any given name if they</span>
-<span class="co"># can all be drawn with equal frequency:</span>
-  probs =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">/</span><span class="kw">length</span>(name), <span class="dt">times=</span><span class="kw">length</span>(name))      
-  probs      
+name =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Amanda&#39;</span>, <span class="st">&#39;Chris&#39;</span>, <span class="st">&#39;Kendra&#39;</span>,
+         <span class="st">&#39;Luis&#39;</span>, <span class="st">&#39;Sarah&#39;</span>, <span class="st">&#39;Steve&#39;</span>, <span class="st">&#39;Zach&#39;</span>)
+
+<span class="co"># Then, we assign a uniform probability of</span>
+<span class="co"># drawing any given name if they can all</span>
+<span class="co"># be drawn with equal frequency:</span>
+probs =<span class="st"> </span><span class="kw">rep</span>(<span class="dt">x=</span><span class="dv">1</span><span class="op">/</span><span class="kw">length</span>(name), <span class="dt">times=</span><span class="kw">length</span>(name))      
+probs      
 [<span class="dv">1</span>] <span class="fl">0.1428571</span> <span class="fl">0.1428571</span> <span class="fl">0.1428571</span> <span class="fl">0.1428571</span> <span class="fl">0.1428571</span> <span class="fl">0.1428571</span> <span class="fl">0.1428571</span></code></pre></div>
-<p>Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 8 probabilities above.</p>
+<p>Now, we can sample from a multinomial distribution using our objects. Here we are taking 5 samples from the distribution, each time we sample there is only one trial, and we are sampling the 7 probabilities above.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)
      [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>] [,<span class="dv">4</span>] [,<span class="dv">5</span>]
 [<span class="dv">1</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
-[<span class="dv">2</span>,]    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
+[<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
 [<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
-[<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
-[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>
-[<span class="dv">6</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>
-[<span class="dv">7</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span></code></pre></div>
+[<span class="dv">4</span>,]    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>
+[<span class="dv">5</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
+[<span class="dv">6</span>,]    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
+[<span class="dv">7</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span>    <span class="dv">0</span></code></pre></div>
 <p><strong>WHOA</strong> a matrix??!!! HOLY CRAP, WHAT DOES IT ALL MEAN?</p>
 <p>Take a step back, breath, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a single sample from the list of student names    </span>
-  <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a single sample from</span>
+<span class="co"># the list of student names    </span>
+<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)
      [,<span class="dv">1</span>]
 [<span class="dv">1</span>,]    <span class="dv">0</span>
 [<span class="dv">2</span>,]    <span class="dv">0</span>
@@ -481,25 +482,25 @@ Introduction
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))
      name        
 [<span class="dv">1</span>,] <span class="st">&quot;Amanda&quot;</span> <span class="st">&quot;0&quot;</span>
-[<span class="dv">2</span>,] <span class="st">&quot;Chris&quot;</span>  <span class="st">&quot;0&quot;</span>
+[<span class="dv">2</span>,] <span class="st">&quot;Chris&quot;</span>  <span class="st">&quot;1&quot;</span>
 [<span class="dv">3</span>,] <span class="st">&quot;Kendra&quot;</span> <span class="st">&quot;0&quot;</span>
 [<span class="dv">4</span>,] <span class="st">&quot;Luis&quot;</span>   <span class="st">&quot;0&quot;</span>
 [<span class="dv">5</span>,] <span class="st">&quot;Sarah&quot;</span>  <span class="st">&quot;0&quot;</span>
-[<span class="dv">6</span>,] <span class="st">&quot;Steve&quot;</span>  <span class="st">&quot;1&quot;</span>
+[<span class="dv">6</span>,] <span class="st">&quot;Steve&quot;</span>  <span class="st">&quot;0&quot;</span>
 [<span class="dv">7</span>,] <span class="st">&quot;Zach&quot;</span>   <span class="st">&quot;0&quot;</span></code></pre></div>
 <p>Now, if I was calling on you randomly in class, after 10 questions, the spread of people who have participated in class might look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))
      name                                            
-[<span class="dv">1</span>,] <span class="st">&quot;Amanda&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
+[<span class="dv">1</span>,] <span class="st">&quot;Amanda&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span>
 [<span class="dv">2</span>,] <span class="st">&quot;Chris&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
-[<span class="dv">3</span>,] <span class="st">&quot;Kendra&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
-[<span class="dv">4</span>,] <span class="st">&quot;Luis&quot;</span>   <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span>
-[<span class="dv">5</span>,] <span class="st">&quot;Sarah&quot;</span>  <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
-[<span class="dv">6</span>,] <span class="st">&quot;Steve&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span>
-[<span class="dv">7</span>,] <span class="st">&quot;Zach&quot;</span>   <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></code></pre></div>
+[<span class="dv">3</span>,] <span class="st">&quot;Kendra&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
+[<span class="dv">4</span>,] <span class="st">&quot;Luis&quot;</span>   <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span>
+[<span class="dv">5</span>,] <span class="st">&quot;Sarah&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
+[<span class="dv">6</span>,] <span class="st">&quot;Steve&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span>
+[<span class="dv">7</span>,] <span class="st">&quot;Zach&quot;</span>   <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></code></pre></div>
 <p>Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are <strong>awesome</strong>!) matrices:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  name[<span class="kw">which</span>(<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)<span class="op">&gt;</span><span class="dv">0</span>)]
-[<span class="dv">1</span>] <span class="st">&quot;Sarah&quot;</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">name[<span class="kw">which</span>(<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)<span class="op">&gt;</span><span class="dv">0</span>)]
+[<span class="dv">1</span>] <span class="st">&quot;Kendra&quot;</span></code></pre></div>
 <p>And now we have a way to randomly select an individual based on a multinomial distribution!</p>
 <blockquote>
 <p>The Poisson distribution</p>
@@ -507,11 +508,11 @@ Introduction
 <p>The <strong>Poisson distribution</strong> is used for counts or other integer data. This distribution is widely used (and just as widely misused!) for its ability to account for a large number of biological and ecological processes in the models that we will discuss this semester. The Poisson distribution has a single parameter, <span class="math inline">\(\lambda\)</span>, which is both the mean and the variance of the distribution. So, despite its utility, the distribution is relatively inflexible with respect to shape and spread. <strong>Fun fact</strong>: this distribution was originally worked out by a French mathematician to predict the number of soldiers who were accidentally killed from being kicked by horses.</p>
 <p>Take a look at how the distribution changes when we change <span class="math inline">\(\lambda\)</span>, and you will get an idea of how this one works.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">100</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">1000</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)    </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rpois</span>(<span class="dt">n=</span><span class="fl">1e4</span>, <span class="dt">lambda=</span><span class="dv">10000</span>), <span class="dt">main=</span><span class="st">&#39;&#39;</span>)  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-17-3.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-3.png" width="672" /></p>
 <blockquote>
 <p>The negative binomial distribution</p>
 </blockquote>
@@ -521,37 +522,37 @@ Introduction
 <p>We will start with looking at how many failures are observed before one success in a sequence of Bernoulli trials.</p>
 <p>With probability of succes equal to 0.95, it doesn’t take long and most of the probability mass is on zero, with a couple of stragglers further out.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">95</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>If we decrease probability of success in each trial to 0.25, we see more failures on average before we reach success. Most of the time, it still takes less than 5 trials to reach a success, but some times it takes much longer.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">25</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>And, if we increase the number of successes that we use for our criterion, or target, then it spreads the distribution out even further.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span>.<span class="dv">25</span>))        </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
 <p>Now, because of it’s properties, the negative binomial is also useful for number of other applications. Specifically, it has been widely used to represent Poisson-like processes in which the mean and variance are not equal (e.g., <strong>overdispersion</strong>). This has seen a lot of application in the field of ecology, especially for overdispersed count data.</p>
 <p>Here, we draw 10,000 random samples from a distribution with a mean of 10 and an overdispersion parameter of 1. The overdispersion parameter is called ‘size’ because this is an alternative parameterization that is just making use of the relationships between existing parameters of the negative binomial. It’s easy to grasp how the mean changes the location of the distribution.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>But, note how the overdispersion parameter changes things:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span>.<span class="dv">1</span>))      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>))</code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-2.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">100</span>))      </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-3.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnbinom</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1000</span>))  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-22-4.png" width="672" /></p>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-24-4.png" width="672" /></p>
 <p>A more intuitive way to work with the negative binomial in R is by using the <code>MASS</code> package. In this parameterization, we use the mean and the dispersion parameter explicitly so it makes more sense:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MASS comes pre-installed as part of base software</span>
-  <span class="kw">library</span>(MASS)
-  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> .<span class="dv">1</span>))  </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">10</span>))       </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">100</span>))       </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-3.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">1000</span>)) </code></pre></div>
-<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-23-4.png" width="672" /></p>
+<span class="kw">library</span>(MASS)
+<span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> .<span class="dv">1</span>))  </code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">10</span>))       </code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-25-2.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">100</span>))       </code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-25-3.png" width="672" /></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(<span class="kw">rnegbin</span>(<span class="fl">1e4</span>, <span class="dt">mu=</span><span class="dv">10</span>, <span class="dt">theta =</span> <span class="dv">1000</span>)) </code></pre></div>
+<p><img src="02_probabilityDistributions_files/figure-html/unnamed-chunk-25-4.png" width="672" /></p>
 <p><strong>NOTE</strong> that the results are pretty much identical.</p>
 </div>
 </div>
@@ -611,12 +612,12 @@ norm.mom =<span class="st"> </span><span class="cf">function</span>(x){
 }
 <span class="co"># Test the function</span>
 <span class="kw">norm.mom</span>(test_norm)
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.03512368</span>  <span class="fl">0.99777865</span></code></pre></div>
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.01014746</span>  <span class="fl">1.01067409</span></code></pre></div>
 <p>Because this one is so common, R has built-in estimators that rely on the exact solution provided by the formulas for the first two moments of the normal distribution:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">mean</span>(test_norm)
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.03512368</span>
-  <span class="kw">var</span>(test_norm)
-[<span class="dv">1</span>] <span class="fl">0.9987774</span></code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">mean</span>(test_norm)
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.01014746</span>
+<span class="kw">var</span>(test_norm)
+[<span class="dv">1</span>] <span class="fl">1.011686</span></code></pre></div>
 <p>How do these compare to the answers returned by our function?</p>
 <blockquote>
 <p>Maximum likelihood estimator</p>
@@ -625,39 +626,39 @@ norm.mom =<span class="st"> </span><span class="cf">function</span>(x){
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(MASS)
 <span class="kw">fitdistr</span>(test_norm, <span class="st">&#39;normal&#39;</span>)
       mean           sd     
-  <span class="op">-</span><span class="fl">0.03512368</span>    <span class="fl">0.99888871</span> 
- ( <span class="fl">0.03158763</span>) ( <span class="fl">0.02233583</span>)</code></pre></div>
+  <span class="op">-</span><span class="fl">0.01014746</span>    <span class="fl">1.00532288</span> 
+ ( <span class="fl">0.03179110</span>) ( <span class="fl">0.02247970</span>)</code></pre></div>
 <p>Only one problem here: R doesn’t report the second moment! It reports the square root of the second moment: the <strong>standard deviation</strong>!</p>
 <p>Finally, let’s write our own function and maximize the likelihood with the <code>optim()</code> function in R.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Define the function</span>
-  normal.lik =<span class="st"> </span><span class="cf">function</span>(theta, y){
-    <span class="co"># The starting value for</span>
-    <span class="co"># mu that we provide</span>
-    mu =<span class="st"> </span>theta[<span class="dv">1</span>]
-    <span class="co"># The starting value for</span>
-    <span class="co"># sigma2 that we provide</span>
-    sigma2 =<span class="st"> </span>theta[<span class="dv">2</span>]
-    <span class="co"># Number of observations in the data</span>
-    n =<span class="st"> </span><span class="kw">nrow</span>(y)
-    <span class="co"># Compute the log likelihood of the</span>
-    <span class="co"># data (y) using the likelihood</span>
-    <span class="co"># function for the normal distribution</span>
-    <span class="co"># given the starting values for our</span>
-    <span class="co"># parameters (contained in the vector &#39;theta&#39;)</span>
-    logl =<span class="st"> </span><span class="op">-</span>.<span class="dv">5</span><span class="op">*</span>n<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi) <span class="op">-</span>.<span class="dv">5</span><span class="op">*</span>n<span class="op">*</span><span class="kw">log</span>(sigma2)<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>sigma2))<span class="op">*</span><span class="kw">sum</span>((y<span class="op">-</span>mu)<span class="op">**</span><span class="dv">2</span>)
-    <span class="kw">return</span>(<span class="op">-</span>logl)
-  }</code></pre></div>
+normal.lik =<span class="st"> </span><span class="cf">function</span>(theta, y){
+  <span class="co"># The starting value for</span>
+  <span class="co"># mu that we provide</span>
+  mu =<span class="st"> </span>theta[<span class="dv">1</span>]
+  <span class="co"># The starting value for</span>
+  <span class="co"># sigma2 that we provide</span>
+  sigma2 =<span class="st"> </span>theta[<span class="dv">2</span>]
+  <span class="co"># Number of observations in the data</span>
+  n =<span class="st"> </span><span class="kw">nrow</span>(y)
+  <span class="co"># Compute the log likelihood of the</span>
+  <span class="co"># data (y) using the likelihood</span>
+  <span class="co"># function for the normal distribution</span>
+  <span class="co"># given the starting values for our</span>
+  <span class="co"># parameters (contained in the vector &#39;theta&#39;)</span>
+  logl =<span class="st"> </span><span class="op">-</span>.<span class="dv">5</span><span class="op">*</span>n<span class="op">*</span><span class="kw">log</span>(<span class="dv">2</span><span class="op">*</span>pi) <span class="op">-</span>.<span class="dv">5</span><span class="op">*</span>n<span class="op">*</span><span class="kw">log</span>(sigma2)<span class="op">-</span>(<span class="dv">1</span><span class="op">/</span>(<span class="dv">2</span><span class="op">*</span>sigma2))<span class="op">*</span><span class="kw">sum</span>((y<span class="op">-</span>mu)<span class="op">**</span><span class="dv">2</span>)
+  <span class="kw">return</span>(<span class="op">-</span>logl)
+}</code></pre></div>
 <p>Now, we use the <code>optim</code> function to maximize the likelihood of the data (technically by minimizing the -log likehood) given different values of our parameters (<code>mu</code> and <code>sigma2</code>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))
 <span class="op">$</span>par
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.03520822</span>  <span class="fl">0.99776965</span>
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.009897017</span>  <span class="fl">1.010310137</span>
 
 <span class="op">$</span>value
-[<span class="dv">1</span>] <span class="fl">1417.827</span>
+[<span class="dv">1</span>] <span class="fl">1424.247</span>
 
 <span class="op">$</span>counts
 <span class="cf">function</span> gradient 
-      <span class="dv">41</span>       <span class="ot">NA</span> 
+      <span class="dv">35</span>       <span class="ot">NA</span> 
 
 <span class="op">$</span>convergence
 [<span class="dv">1</span>] <span class="dv">0</span>
@@ -666,58 +667,58 @@ norm.mom =<span class="st"> </span><span class="cf">function</span>(x){
 <span class="ot">NULL</span></code></pre></div>
 <p>We can also make this into an object and call the parts by name:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make it into an object</span>
-  est =<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-              normal.lik,
-              <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm)
-              ) 
+est =<span class="st"> </span><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
+            normal.lik,
+            <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm)
+            ) 
 
 <span class="co"># Look at the structure </span>
 <span class="co"># I&#39;ll be damned, it&#39;s a list!</span>
 <span class="co"># Hey, we learned about those!</span>
-  <span class="kw">str</span>(est)   
+<span class="kw">str</span>(est)   
 List of <span class="dv">5</span>
- <span class="op">$</span><span class="st"> </span>par        <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">-</span><span class="fl">0.0352</span> <span class="fl">0.9978</span>
- <span class="op">$</span><span class="st"> </span>value      <span class="op">:</span><span class="st"> </span>num <span class="dv">1418</span>
- <span class="op">$</span><span class="st"> </span>counts     <span class="op">:</span><span class="st"> </span>Named int [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="dv">41</span> <span class="ot">NA</span>
+ <span class="op">$</span><span class="st"> </span>par        <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="op">-</span><span class="fl">0.0099</span> <span class="fl">1.0103</span>
+ <span class="op">$</span><span class="st"> </span>value      <span class="op">:</span><span class="st"> </span>num <span class="dv">1424</span>
+ <span class="op">$</span><span class="st"> </span>counts     <span class="op">:</span><span class="st"> </span>Named int [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="dv">35</span> <span class="ot">NA</span>
   ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="st">&quot;function&quot;</span> <span class="st">&quot;gradient&quot;</span>
  <span class="op">$</span><span class="st"> </span>convergence<span class="op">:</span><span class="st"> </span>int <span class="dv">0</span>
  <span class="op">$</span><span class="st"> </span>message    <span class="op">:</span><span class="st"> </span><span class="ot">NULL</span>
 
 <span class="co"># Here are the estimates    </span>
-  est<span class="op">$</span>par 
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.03520822</span>  <span class="fl">0.99776965</span>
+est<span class="op">$</span>par 
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.009897017</span>  <span class="fl">1.010310137</span>
   
 <span class="co"># The mean  </span>
-  est<span class="op">$</span>par[<span class="dv">1</span>]
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.03520822</span>
-  
+est<span class="op">$</span>par[<span class="dv">1</span>]
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.009897017</span>
+
 <span class="co"># The variance  </span>
-  est<span class="op">$</span>par[<span class="dv">2</span>] 
-[<span class="dv">1</span>] <span class="fl">0.9977696</span></code></pre></div>
+est<span class="op">$</span>par[<span class="dv">2</span>] 
+[<span class="dv">1</span>] <span class="fl">1.01031</span></code></pre></div>
 <p>That’s better: an exact solution!</p>
 <p>Just in case you’d like to know exactly what <code>optim</code> is doing, you can find out like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ?optim</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?optim</code></pre></div>
 <blockquote>
 <p>Quantiles and other descriptive statistics</p>
 </blockquote>
 <p>There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here is the median, or 50th percentile</span>
 <span class="kw">median</span>(test_norm) 
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.04736017</span>
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">0.04736136</span>
 
 <span class="co"># The 95% confidence limits</span>
 <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) 
      <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span>
-<span class="op">-</span><span class="fl">2.050822</span>  <span class="fl">1.805266</span> 
+<span class="op">-</span><span class="fl">2.021580</span>  <span class="fl">2.125127</span> 
 
 <span class="co"># Inner quartile range</span>
 <span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))    
        <span class="dv">25</span><span class="op">%        75%</span><span class="st"> </span>
-<span class="op">-</span><span class="fl">0.6952305</span>  <span class="fl">0.6907788</span> 
+<span class="op">-</span><span class="fl">0.6780654</span>  <span class="fl">0.6574049</span> 
 
 <span class="co"># Range of sample</span>
 <span class="kw">range</span>(test_norm)                             
-[<span class="dv">1</span>] <span class="op">-</span><span class="fl">3.124398</span>  <span class="fl">2.864205</span></code></pre></div>
+[<span class="dv">1</span>] <span class="op">-</span><span class="fl">3.028642</span>  <span class="fl">3.151440</span></code></pre></div>
 </div>
 </div>
 </div>
