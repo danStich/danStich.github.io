@@ -274,18 +274,14 @@ $(document).ready(function () {
 <p>In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in blue below.</p>
 <p>Example: If the instructions say, “Create a vector named <code>myData</code> that contains numbers one through five”, your script should include something like:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vector of numbers one through five named ‘myData’</span>
-myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
+myData &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
 <p>(Note that this vector could be created many different ways. Unless I ask for something specific, whatever works for you is fine with me).</p>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
 <p>Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., <code>uspop</code>) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use <code>str()</code> to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: <code>data()</code>.</p>
 <p>* Don’t forget to put this and your data load in the script that you will hand in.</p>
-<div id="question-1" class="section level4">
-<h4><strong>Question 1</strong></h4>
+<p><strong>Question 1</strong> * a. What is the name of the dataset you chose?</p>
 <ul>
-<li><ol style="list-style-type: lower-alpha">
-<li>What is the name of the dataset you chose?</li>
-</ol></li>
 <li><ol start="2" style="list-style-type: lower-alpha">
 <li>How many columns are in the data?</li>
 </ol></li>
@@ -296,46 +292,18 @@ myData =<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</s
 <li>Show the code in your script.</li>
 </ol></li>
 </ul>
-</div>
-<div id="question-2" class="section level4">
-<h4><strong>Question 2</strong></h4>
-<p>What kind of object is this dataset (e.g., vector, matrix, dataframe, list)? Show the code in your script.</p>
-</div>
-<div id="question-3" class="section level4">
-<h4><strong>Question 3</strong></h4>
-<p>What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time I’m typing it).</p>
+<p><strong>Question 2</strong>. What kind of object is this dataset (e.g., vector, matrix, dataframe, list)? Show the code in your script.</p>
+<p><strong>Question 3</strong>. What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time I’m typing it).</p>
 <p>Use the built-in R functions to produce a table of summary statistics for your dataset. You don’t have to include the table in your answers, it will show up when I run your code if you did it correctly.</p>
-</div>
-<div id="question-4" class="section level4">
-<h4><strong>Question 4</strong></h4>
-<p>What kind of information about your data does this give you? Be descriptive here, there’s not a ‘correct’ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
+<p><strong>Question 4</strong>. What kind of information about your data does this give you? Be descriptive here, there’s not a ‘correct’ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
 <p>Now load the iris data that we used in our previous examples. There is one column in the dataset that is a factor class. Change this column to a character variable.</p>
 <p><strong>Note</strong>: We might not have discovered the specific function that does this yet, but we have discussed functions for transforming data classes. When in doubt, Google it! Code development is everywhere on the internet, remember? Some go-to sources are Quick-R and Stack Overflow. If you look for the answer on the internet, one of these sites is likely to be the first hit. Try it.</p>
-</div>
-<div id="question-5" class="section level4">
-<h4><strong>Question 5</strong></h4>
-<p>What is the function you used to transform the factor variable to character class?</p>
-</div>
-<div id="question-6" class="section level4">
-<h4><strong>Question 6</strong></h4>
-<p>What was the name of the variable?</p>
-</div>
-<div id="question-7" class="section level4">
-<h4><strong>Question 7</strong></h4>
-<p>What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (don’t forget the code in your script!!)</p>
-</div>
-<div id="question-8" class="section level4">
-<h4><strong>Question 8</strong></h4>
-<p>What <code>Species</code> is this measurement for (multiple ways to find this).</p>
-</div>
-<div id="question-9" class="section level4">
-<h4><strong>Question 9</strong></h4>
-<p>To which <code>Species</code> of <code>iris</code> does the minimum value for <code>Petal.Width</code> correspond?</p>
-</div>
-<div id="question-10" class="section level4">
-<h4><strong>Question 10</strong></h4>
-<p>Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Don’t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
-</div>
+<p><strong>Question 5</strong>. What is the function you used to transform the factor variable to character class?</p>
+<p><strong>Question 6</strong>. What was the name of the variable?</p>
+<p><strong>Question 7</strong>. What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (Don’t forget the code in your script!!)</p>
+<p><strong>Question 8</strong>. What <code>Species</code> is this measurement for (multiple ways to find this)?</p>
+<p><strong>Question 9</strong>. To which <code>Species</code> of <code>iris</code> does the minimum value for <code>Petal.Width</code> correspond?</p>
+<p><strong>Question 10</strong>. Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Don’t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
 </div>
 </div>
 </div>

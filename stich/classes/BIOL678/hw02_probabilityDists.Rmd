@@ -40,7 +40,7 @@ By the end of this lab, you should be able to 1) simulate data from a wide varie
 Let's start with the normal distribution to knock the rust off and get ourselves thinking about probability distributions again. Recall that we can simulate data from the normal using something like this: 
 
 ```{r}
-ndata = rnorm(n=30, mean=0, sd=1)
+ndata <- rnorm(n=30, mean=0, sd=1)
 ```
 
 In this example, we have drawn **30** random samples from a normal distribution with a *mean* of 0 and a *standard deviation* of 1. Also recall that we can plot these data as samples from a **continuous distribution** using a curved line in R to see if it looks like it should:
@@ -73,13 +73,13 @@ Now let's take a look at another way to do this. This time, instead of handing y
 # in the data from a text file like
 # this (just make sure it is in
 # the correct directory):
-  dbp = read.csv('dbp.txt') 
+  dbp <- read.csv('dbp.txt') 
 ``` 
  
 ```{r, echo=FALSE}
 # I'll simulate the data for you in another file and you can read in the data
 # from a text file like this (just make sure it is in the correct directory):
-  dbp = read.csv('../../data/dbp.txt') 
+  dbp <- read.csv('../../data/dbp.txt') 
 ```
 
 **Question 2.** Calculate the *mean* and *variance* of this distribution using the method of moments. Note that you can write your own function (as in the lecture tutorial), or you can use the built-in R functions that we talked about in class this week (see lecture tutorial). What are the *mean* and *sd* using this method?  
@@ -96,9 +96,9 @@ Simulate **10,000** random samples from a beta distribution with parameters $\al
 
 ```{r, fig.align='center', fig.width=6, fig.height=4}
 # Get a random sample from the beta
-beta.sample = rbeta(n=1e4,
-                    shape1=30,
-                    shape2=12)
+beta.sample <- rbeta(n=1e4,
+                     shape1=30,
+                     shape2=12)
 
 # Plot a histogram
 hist(beta.sample, main='', col='gray')
@@ -123,7 +123,7 @@ Take a random draw from a Bernoulli distribution. Remember, this distribution is
 library(Rlab)            
 
 # Take a random sample from the Bernoulli
-bern.sample = rbern(n=1, prob=.5) 
+bern.sample <- rbern(n=1, prob=.5) 
 ```
 
 **Question 6.** If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a '1')? Use the built in R functions to figure this out, don't try to count all 2,500 elements in the vector. There are a few different ways to do this one.
@@ -145,7 +145,7 @@ rbinom(n=10, size=10, prob=0.5)
 Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example): 
 
 ```{r}
-rpois(n = 10, lambda = 10)
+rpois(n <- 10, lambda = 10)
 ```
 
 The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.  
@@ -158,11 +158,11 @@ Using the data in the file `counts.txt` (you have to read it in first), estimate
 Suppose that the data in question 9 looked more like those contained in this file:  
 
 ```{r, eval=FALSE}
-counts2 = read.csv('counts2.txt')
+counts2 <- read.csv('counts2.txt')
 ```
  
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-counts2 = read.csv('../../data/counts2.txt')
+counts2 <- read.csv('../../data/counts2.txt')
 ```
  
 **Question 10.**  

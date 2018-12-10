@@ -337,7 +337,7 @@ log10(a) # Log base 10
 If we change b to `character`, we can do string manipulation, too!
 ```{r}
 # Convert b to character
-b = as.character(b)
+b <- as.character(b)
 ```
 
 We can append text. Remember, these ones are just printing the result. We would have to overwrite `b` or save it to a new object if we wanted to be able to use the result somewhere else later.
@@ -355,7 +355,7 @@ paste('AAAA', b, sep='--')
 gsub(pattern='c', replacement='AAAA', b) 
 
 # Make a new object
-e = paste('AAAA', b, sep='') 
+e <- paste('AAAA', b, sep='') 
 
 # Print to console
 e               
@@ -392,7 +392,7 @@ matrix(0, nrow=3, ncol=4)
  
 Or we can make one from scratch.
 ```{r}
-mat = matrix(seq(1, 12), ncol=3, nrow=4)
+mat <- matrix(seq(1, 12), ncol=3, nrow=4)
 ```
 
 We can do all of the things we did with vectors to matrices, but now we have more than one column, and official 'rows' that we can also use to these ends:
@@ -436,17 +436,17 @@ This is probably the data structure that we will use most here, along with atomi
 Let's make a dataframe to see how it works.
 ```{r}
 # Make a new object 'a' from a sequence  
-a = seq(from=.5, to=10, by = .5)  
+a <- seq(from=.5, to=10, by = .5)  
   
 # Vector math: raise each 'a' to power of 2
-b = a^2                           
+b <- a^2                           
 
 # Replicates values in object a # of times  
-c = rep(c('a','b','c','d'), 5)    
+c <- rep(c('a','b','c','d'), 5)    
 
 # Note, we don't use quotes for objects,
 # but we do for character variables
-d = data.frame(a, b, c)           
+d <- data.frame(a, b, c)           
 ```
 
 Now we can look at it:
@@ -482,7 +482,7 @@ names(d)
 
 We can also rename the entire dataframe.
 ```{r}
-e = d 
+e <- d 
 ```
 
 Have a look:
@@ -496,16 +496,14 @@ head(e)
 head(e, 10)   
 ```
 
-
 We can make new columns in data frames like this!
 ```{r}
 # Make a new column with the
 # square root of our increment
 # column
-e$Sqrt = sqrt(e$Increment)
+e$Sqrt <- sqrt(e$Increment)
 e 
 ```
-
 
 Looking at specific elements of a dataframe is similar to a matrix, with some added capabilities. We'll do this with some real data so it's more fun. Most of the packages in R have built in data sets that we can use for examples. Let's start by looking at the Iris data.
 ```{r}
@@ -562,13 +560,13 @@ A couple of new things going on here:
 #    "Show me the mean of the column
 #    Sepal.Length in the dataframe iris
 #    where the species name is setosa"
-  mean(iris$Sepal.Length[iris$Species=='setosa'])
+mean(iris$Sepal.Length[iris$Species=='setosa'])
 ```
 
 We can write this out longhand to make sure it's correct (it is).
 ```{r}
-logicalCheck = iris$Species == 'setosa'
-lengthCheck = iris$Sepal.Length[iris$Species=='setosa']
+logicalCheck <- iris$Species == 'setosa'
+lengthCheck <- iris$Sepal.Length[iris$Species=='setosa']
 ```
 
 
@@ -578,7 +576,7 @@ We can also look at the whole dataframe just for setosa.
 # is preserved as a factor with three
 # levels even though setosa is the
 # only species name in the new df
-setosaData = iris[iris$Species=='setosa' , ]
+setosaData <- iris[iris$Species=='setosa' , ]
 
 str(setosaData)
 ```
@@ -609,18 +607,18 @@ Lists are the ultimate data type in R. They are actually a vector that can hold 
 
 The real, filthy R programming relies heavily on lists. We will have to work with them at some point in this class, but we won't take a ton of time on them here.
 
-Let's make a list- just to see how they work
+Let's make a list- just to see how they work.
 
 ```{r}
 # Create an empty list with four elements
-  myList = vector(mode='list', length=4)
+  myList <- vector(mode='list', length=4)
 
 # Assign some of our previously
 # created objects to the elements
-  myList[[1]] = a
-  myList[[2]] = c
-  myList[[3]] = mat
-  myList[[4]] = d
+  myList[[1]] <- a
+  myList[[2]] <- c
+  myList[[3]] <- mat
+  myList[[4]] <- d
 
 # Print it
 # Cool, huh?
@@ -631,7 +629,7 @@ Let's make a list- just to see how they work
   
 # Give it names like we did with
 # a dataframe  
-  names(myList) = c('a', 'c', 'mat', 'd')
+  names(myList) <- c('a', 'c', 'mat', 'd')
   
 # See how the names work now?  
   myList    

@@ -1,9 +1,8 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-## Assistant Professor
-Biology Department and Biological Field Station<br>
-State University of New York College at Oneonta
+<h1 id="multi"> Assistant Professor </h1>
+Biology Department and Biological Field Station, State University of New York College at Oneonta
 
 <img src="./images/logo.png" alt="">
 

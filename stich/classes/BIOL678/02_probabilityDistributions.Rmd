@@ -281,13 +281,13 @@ We can use the multinomial distribution to randomly sample from categories (imag
 
 ```{r}
 # First, we make a vector of names:
-name = c('Amanda', 'Chris', 'Kendra',
+name <- c('Amanda', 'Chris', 'Kendra',
          'Luis', 'Sarah', 'Steve', 'Zach')
 
 # Then, we assign a uniform probability of
 # drawing any given name if they can all
 # be drawn with equal frequency:
-probs = rep(x=1/length(name), times=length(name))      
+probs <- rep(x=1/length(name), times=length(name))      
 probs      
 ```
 
@@ -331,12 +331,10 @@ And now we have a way to randomly select an individual based on a multinomial di
 
 The **Poisson distribution** is used for counts or other integer data. This distribution is widely used (and just as widely misused!) for its ability to account for a large number of biological and ecological processes in the  models that we will discuss this semester. The Poisson distribution has a single parameter, $\lambda$, which is both the mean and the variance of the  distribution. So, despite its utility, the distribution is relatively  inflexible with respect to shape and spread. **Fun fact**: this distribution was originally worked out by a French mathematician to predict the number of soldiers who were accidentally killed from being kicked by horses.
 
-Take a look at how the distribution changes when we change $\lambda$, and you will get an idea of how this one works.
+Take a look at how the distribution changes when you change $\lambda$, and you will get an idea of how this one works.
 
 ```{r}
 hist(rpois(n=1e4, lambda=100), main='')
-hist(rpois(n=1e4, lambda=1000), main='')    
-hist(rpois(n=1e4, lambda=10000), main='')  
 ```
 
 > The negative binomial distribution
@@ -375,9 +373,9 @@ Here, we draw 10,000 random samples from a distribution with a mean of 10 and an
 hist(rnbinom(1e4, mu=10, size=1))
 ```    
 
-But, note how the overdispersion parameter changes things:
+But, note how the overdispersion parameter changes things if you run the following code:
  
-```{r}   
+```{r} 
 hist(rnbinom(1e4, mu=10, size=.1))      
 hist(rnbinom(1e4, mu=10, size=10))
 hist(rnbinom(1e4, mu=10, size=100))      
@@ -388,7 +386,7 @@ A more intuitive way to work with the negative binomial in R is by using
 the `MASS` package. In this parameterization, we use the mean and the 
 dispersion parameter explicitly so it makes more sense:
  
-```{r} 
+```{r, eval=FALSE} 
 # MASS comes pre-installed as part of base software
 library(MASS)
 hist(rnegbin(1e4, mu=10, theta = .1))  

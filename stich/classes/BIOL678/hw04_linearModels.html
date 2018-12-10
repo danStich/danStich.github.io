@@ -263,102 +263,76 @@ $(document).ready(function () {
 </div>
 
 
-<p><br></p>
 <div id="linear-models" class="section level1">
 <h1>Linear models</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>The objective of this assignment is to move beyond simple null hypothesis significance tests and get you thinking about how you can approach real-world problems mathematically. To do this, we will introduce a class of tools known as linear models. The simplest of these tools are the linear regression model, and the analysis of variance (ANOVA).</p>
-<p><br></p>
 <p>In addition to introducing the concepts of linear models, we also will begin to build your statistical vocabulary and start using the kind of language that you see in peer-reviewed journal articles for framing the analysis in the methods section and reporting the results of statistical tests. We will ease into some of the more common vernacular this week and continue to develop this skill for the rest of the semester.</p>
-<p><br></p>
 <p>By the end of this lab, you should be comfortable running and interpretting 1) parametric linear models (regression, ANOVA, ANCOVA), and 2) non-parametric alternatives to these models.</p>
-<p><br></p>
-</div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p><br></p>
-<div id="analysis-of-variance-anova" class="section level3">
-<h3>Analysis of variance (ANOVA)</h3>
-<p><br></p>
+<h3 id="multi">
+Analysis of variance (ANOVA)
+</h3>
 <p>We’ll start this week with analysis of variance (ANOVA). ANOVA is an extension of the t-tests we worked with last week. Last week, we tested hypotheses about differences in the mean of some response between two groups. ANOVA let’s us extend that to include cases in which we might want to test for differences in more than two groups. As we will see, this allows for comparisons not only between more than two groups (e.g. through one-way ANOVA), but also allows us to look across multiple grouping factors in a single test (e.g. two-way ANOVA).</p>
 <p>We will use the simple case of the one-way ANOVA to practice our newly acquired skills in n-way ANOVA. Begin by reading in the smolt data from last week:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the smolt data</span>
-smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/smolts.txt&#39;</span>)
+smolts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;smolts.txt&#39;</span>)
 
 <span class="co"># Look at the first few lines for a sanity check</span>
-<span class="kw">head</span>(smolts)
-     ID     stage  fl  mass   nka osmolality      pref max n.switch
-<span class="dv">1</span> 31B1F     Smolt <span class="dv">216</span>  <span class="fl">97.5</span> <span class="fl">6.667</span>        <span class="dv">318</span> <span class="fl">0.3638229</span>  <span class="dv">83</span>       <span class="dv">93</span>
-<span class="dv">2</span> 31B20     Smolt <span class="dv">184</span>  <span class="fl">63.0</span> <span class="fl">4.444</span>        <span class="dv">306</span> <span class="fl">0.3922490</span>  <span class="dv">47</span>      <span class="dv">107</span>
-<span class="dv">3</span> 31B27  Presmolt <span class="dv">183</span>  <span class="fl">61.1</span> <span class="fl">1.429</span>        <span class="dv">418</span> <span class="fl">0.3378025</span>  <span class="dv">45</span>       <span class="dv">80</span>
-<span class="dv">4</span> 31B29 Postsmolt <span class="dv">204</span>  <span class="fl">76.4</span> <span class="fl">3.899</span>        <span class="dv">356</span> <span class="fl">0.4551466</span>  <span class="dv">76</span>      <span class="dv">123</span>
-<span class="dv">5</span> 31B2A  Presmolt <span class="dv">218</span> <span class="fl">117.0</span> <span class="fl">3.623</span>        <span class="dv">419</span> <span class="fl">0.4337464</span>  <span class="dv">62</span>      <span class="dv">107</span>
-<span class="dv">6</span> 31B2E Postsmolt <span class="dv">199</span>  <span class="fl">70.8</span> <span class="fl">2.151</span>        <span class="dv">355</span> <span class="fl">0.4828588</span>  <span class="dv">59</span>      <span class="dv">100</span></code></pre></div>
-<p><br></p>
+<span class="kw">head</span>(smolts)</code></pre></div>
+<pre><code>     ID     stage  fl  mass   nka osmolality      pref max n.switch
+1 31B1F     Smolt 216  97.5 6.667        318 0.3638229  83       93
+2 31B20     Smolt 184  63.0 4.444        306 0.3922490  47      107
+3 31B27  Presmolt 183  61.1 1.429        418 0.3378025  45       80
+4 31B29 Postsmolt 204  76.4 3.899        356 0.4551466  76      123
+5 31B2A  Presmolt 218 117.0 3.623        419 0.4337464  62      107
+6 31B2E Postsmolt 199  70.8 2.151        355 0.4828588  59      100</code></pre>
 <p><em>Reminder</em>: if you have forgotten what these data mean, they are described in detail in the lab exercise from last week.</p>
 <p>Use a one-way ANOVA to investigate differences in gill NKA activity among all stages of smolts in the dataset.</p>
-<p><br></p>
 <p><strong>Question 1.</strong> State the purpose of the analysis (i.e. to detect the effects of “blank” on “other blank”), and formally state the null hypothesis for this analysis.</p>
-<p><br></p>
 <p><strong>Question 2.</strong> Explain the results of the test in sentence format, being sure to include the test statistic, the numerator and denominator degrees of freedom, and the p-value along with the test that you used. Also report the R<sup>2</sup> value for this model (recall you can get this multiple ways): see the reference script <code>LinearModels.html</code> or the ANOVA example (<code>anova.html</code>) on the course website. You should be able to do this in 1-2 sentences. See the ANOVA example for help putting this into words, but give it your own flare.</p>
-<p><br></p>
 <p>Now, use a Tukey HSD test to determine factor-level differences in gill NKA activity between presmolts, smolts, and postsmolts. After you run the test, make a boxplot of nka by stage to help visualize the results. Be sure to label your axes!</p>
 <p><em>Reminder</em>: if you have forgotten how to conduct the Tukey HSD for pairwise comparisons of factor-level means, you can find this in the reference script for this week.</p>
 <p>See also:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?TukeyHSD</code></pre></div>
-<p><br></p>
 <p><strong>Question 3.</strong> Report the results of the Tukey test, being sure to include mean and sd for each factor level, in addition to p-values for tests of differences between factor levels. Use complete sentences. See the anova example on the course website for help.</p>
-<p><br></p>
-</div>
 <div id="kruskal-wallis-rank-sum-test" class="section level3">
 <h3>Kruskal-Wallis rank sum test</h3>
-<p><br></p>
 <p>Now let’s move on to the case in which we can’t meet assumptions of normality in the residuals for our groups (assumption #2 from the reference script). Here, we need to use the Kruskal-Wallis test as a ‘non-parametric’ alternative. Recall that we fit this model using the <code>kruskal.test</code> function in R. We will use the same example that we used last week for the Wilcoxon test, smolt osmolality vs stage, but this time we will use all three stages: <code>Presmolt</code>, <code>Smolt</code>, and <code>Postsmolt</code> to examine differences in osmolality.</p>
-<p><br></p>
 <p>Remember that last week we showed the response variable, osmolality, was not normally distributed among these ontogenetic stages of smolt development:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>])
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>])
 
     Shapiro<span class="op">-</span>Wilk normality test
 
 data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Smolt&quot;</span>]
 W =<span class="st"> </span><span class="fl">0.8623</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.167e-06</span>
-  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>])
+<span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>])
 
     Shapiro<span class="op">-</span>Wilk normality test
 
 data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Presmolt&quot;</span>]
 W =<span class="st"> </span><span class="fl">0.95214</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.03329</span>
-  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Postsmolt&#39;</span>])
+<span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Postsmolt&#39;</span>])
 
     Shapiro<span class="op">-</span>Wilk normality test
 
 data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Postsmolt&quot;</span>]
 W =<span class="st"> </span><span class="fl">0.96926</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.1626</span></code></pre></div>
-<p><br></p>
 <p>It actually is for Postsmolts, but we need the sampling distribution within each of these levels to be normal to meet the assumptions of ANOVA. This is the same as saying that the residuals are normally distributed. We can look at those assumptions like this:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">lm</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts))</code></pre></div>
-<p><br></p>
 <p>I have omitted the plots here because we will discuss them in detail next week. But, if you run the code, you will see that the Q-Q plot shows a little bit of a weird pattern with a bend toward the middle of the line. Honestly, none of these diagnostics would really preclude use of an ANOVA in this particular case, but let’s continue with our example as though we are super conservative with the call.</p>
 <p>So, we move on with a non-parametric analysis for now. Use what you learned this week to test the null hypothesis that there is no difference in osmolality between groups using the <code>kruskal.test</code> function, realizing that the alternative hypothesis for this test is that at least one mean is different from the others.</p>
-<p><br></p>
 <p><strong>Question 4.</strong> Did you reject the null hypothesis or fail to reject? State your answer in sentence form, and be sure to report the test statistic, degrees of freedom, and p-value in your answer.</p>
-<p><br></p>
 <p><strong>Question 5.</strong> Which levels are different from one another? Can you tell from this test alone? How could you find out which levels differ?</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;PMCMR&#39;</span>)</code></pre></div>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here&#39;s one option: </span>
-  <span class="kw">library</span>(PMCMR)
+<span class="kw">library</span>(PMCMR)
 
 <span class="co"># WORST NAME EVER FOR A FUNCTION!!!!</span>
-  <span class="kw">posthoc.kruskal.nemenyi.test</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts, <span class="dt">dist=</span><span class="st">&#39;Chisquare&#39;</span>)
+<span class="kw">posthoc.kruskal.nemenyi.test</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts, <span class="dt">dist=</span><span class="st">&#39;Chisquare&#39;</span>)
 
     Pairwise comparisons using Nemenyi<span class="op">-</span>test with Chi<span class="op">-</span>squared    
                        approximation <span class="cf">for</span> independent samples 
@@ -370,54 +344,38 @@ Presmolt <span class="fl">0.018</span>     <span class="op">-</span><span class=
 Smolt    <span class="fl">4.4e-06</span>   <span class="fl">7.0e-14</span> 
 
 P value adjustment method<span class="op">:</span><span class="st"> </span>none </code></pre></div>
-<p><br></p>
 <p>There are actually a whole bunch of different functions in the <code>PMCMR</code> package with which we conduct post-hoc tests to do pair-wise comparisons. The function above compares the response for each one of our grouping values, while correcting for inflated Type-I error rates.</p>
-<p><br></p>
 <p><strong>Question 6.</strong> So now which stages differ in the response, <code>osmolality</code> according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="05_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the <code>caroline</code> package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;caroline&#39;</span>)
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># install.packages(&#39;caroline&#39;)</span>
 <span class="kw">library</span>(caroline)</code></pre></div>
-<p><br></p>
 </div>
 <div id="linear-regression" class="section level3">
 <h3>Linear regression</h3>
-<p><br></p>
 <p>Moving on…Now let’s move on to the case for which we have a continuous response variable <em>and</em> a continuous explanatory variable. What are we supposed to do here? Everything we have talked about to this point has been focused on detecting differences in continous responses between groups. Thank goodness for linear regression!!</p>
 <p>Remember, to use linear regression in R, we are still going to work with the <code>lm</code> function <strong>because ANOVA and linear regression are the same thing here</strong>, and they are both <em>linear models</em> of the form: <span class="math inline">\(Y_i = \beta_0 + \beta_i*X_i + \varepsilon_i\)</span> for which we are (for now) assuming that <span class="math inline">\(\varepsilon_i\)</span> is normally distributed with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma^2 = 1\)</span>.</p>
 <p>Let’s look at the relationship between gill NKA activity and plasma osmolality of the fish used in this study. Use the <code>lm</code> function to test the effects of gill nka on plasma osmolality following exposure to salt water.</p>
-<p><br></p>
 <p><strong>Question 7.</strong> <strong>i)</strong> Is there a significant effect of gill NKA activity on plasma osmolality following exposure to saltwater? Remember, you need to use the <code>summary</code> function to answer this question. <strong>ii)</strong> What is the direction of this relationship (positive or negative), and what response in plasma osmolality would you expect to see with increasing gill NKA activity?</p>
-<p><br></p>
 <p><strong>Question 8.</strong> How much of the variability in plasma osmolality does gill NKA activity explain (think R<sup>2</sup>)?</p>
-<p><br></p>
 </div>
 <div id="ancova" class="section level3">
 <h3>ANCOVA</h3>
-<p><br></p>
 <p>Putting it all together now. Let us imagine a world in which we are not only interested in the effects of categorical OR continuous variables on our response, but rather the <em>additive</em> or <em>combined</em> effects of these variables on our response. Now we’re talking about useful stuff! To do this we will use the analysis of covariance (ANCOVA).</p>
 <p>Remember, to use ANCOVA in R, we are still going to work with the <code>lm</code> function <strong>because ANOVA and linear regression and ANCOVA are the same thing here</strong>, and they are ALL <em>linear models</em> of the form: <span class="math inline">\(Y_i = \beta_0 + \beta_i*X_i + \varepsilon_i\)</span> in which we are (for now) assuming that <span class="math inline">\(\varepsilon_i\)</span> is normally distributed with <span class="math inline">\(\mu = 0\)</span> and <span class="math inline">\(\sigma^2 = 1\)</span>.</p>
-<p><br></p>
 <blockquote>
 <p>Awesome sauce.</p>
 </blockquote>
-<p><br></p>
 <p>With the <code>lm</code> function in R, use ANCOVA to test the <em>additive</em> effects of stage and gill NKA activity on plasma osmolality.</p>
 <p>Now look at the results. <strong>Remember</strong> there are two different methods we need to use to understand the results of the ANCOVA because now we have both groups and continuous explanatory variables. Remember that the <code>summary</code> function gives us the regression coefficients and an overall R<sup>2</sup> for the model, and the <code>Anova</code> function will give us the anova table for the model that we can use to determine whether or not <code>stage</code> had a significant effect overall, but we need to specify the argument <code>type = 'III'</code> in the call. In order to use the <code>Anova</code> function, you will need to install and load the <code>car</code> library:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install package</span>
-  <span class="co"># install.packages(&#39;car&#39;)</span>
+<span class="co"># install.packages(&#39;car&#39;)</span>
 
 <span class="co"># Load it</span>
-  <span class="kw">library</span>(car)
+<span class="kw">library</span>(car)
 
 <span class="co"># Check out the Anova function</span>
-  ?Anova</code></pre></div>
-<p><br></p>
+?Anova</code></pre></div>
 <p><strong>Question 9.</strong> What can you conclude about the effects of <code>stage</code> and <code>nka</code> on osmolality? Report this in sentence format as you did above, this time being sure to include the test name, test statistic, p-value, R<sup>2</sup> for the model. This may need a few sentences because we now have to report the results of the ANOVA-style component of the analysis.</p>
-<p><br></p>
 <p><strong>Question 10.</strong> Describe how osmolality varied between stages (reporting mean and sd of osmolality for each stage in addition to differences between levels). Then, describe how osmolality changed with gill NKA activity in addition to stage (be sure to indicate the direction of the relationship using your regression coefficients).</p>
-<p><br></p>
-<p><br></p>
 </div>
 </div>
 </div>

@@ -551,7 +551,7 @@ a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>   
 <span class="kw">log10</span>(a) <span class="co"># Log base 10</span></code></pre></div>
 <p>If we change b to <code>character</code>, we can do string manipulation, too!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert b to character</span>
-b =<span class="st"> </span><span class="kw">as.character</span>(b)</code></pre></div>
+b &lt;-<span class="st"> </span><span class="kw">as.character</span>(b)</code></pre></div>
 <p>We can append text. Remember, these ones are just printing the result. We would have to overwrite <code>b</code> or save it to a new object if we wanted to be able to use the result somewhere else later.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Paste an arbitrary string on to b</span>
 <span class="kw">paste</span>(b, <span class="st">&#39;AAAA&#39;</span>, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) 
@@ -570,7 +570,7 @@ b =<span class="st"> </span><span class="kw">as.character</span>(b)</code></pre>
 [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>    <span class="st">&quot;b&quot;</span>    <span class="st">&quot;AAAA&quot;</span> <span class="st">&quot;d&quot;</span>    <span class="st">&quot;e&quot;</span>   
 
 <span class="co"># Make a new object</span>
-e =<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) 
+e &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) 
 
 <span class="co"># Print to console</span>
 e               
@@ -609,7 +609,7 @@ a
 [<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>
 [<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></code></pre></div>
 <p>Or we can make one from scratch.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat =<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</code></pre></div>
 <p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span>
 <span class="kw">nrow</span>(mat)   <span class="co"># Number of rows</span>
@@ -648,17 +648,17 @@ matrix     <span class="dv">8</span>     <span class="dv">16</span>    <span cla
 <p>This is probably the data structure that we will use most here, along with atomic vectors.</p>
 <p>Let’s make a dataframe to see how it works.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new object &#39;a&#39; from a sequence  </span>
-a =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
+a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> .<span class="dv">5</span>)  
   
 <span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span>
-b =<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
+b &lt;-<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           
 
 <span class="co"># Replicates values in object a # of times  </span>
-c =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
+c &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    
 
 <span class="co"># Note, we don&#39;t use quotes for objects,</span>
 <span class="co"># but we do for character variables</span>
-d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </code></pre></div>
+d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </code></pre></div>
 <p>Now we can look at it:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">d <span class="co"># Print the dataframe</span>
       a      b c
@@ -706,7 +706,7 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 <span class="kw">names</span>(d)   
 [<span class="dv">1</span>] <span class="st">&quot;Increment&quot;</span> <span class="st">&quot;Squared&quot;</span>   <span class="st">&quot;Letter&quot;</span>   </code></pre></div>
 <p>We can also rename the entire dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e =<span class="st"> </span>d </code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">e &lt;-<span class="st"> </span>d </code></pre></div>
 <p>Have a look:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># head shows first six </span>
 <span class="co"># rows by default</span>
@@ -737,7 +737,7 @@ d =<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)         
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a new column with the</span>
 <span class="co"># square root of our increment</span>
 <span class="co"># column</span>
-e<span class="op">$</span>Sqrt =<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
+e<span class="op">$</span>Sqrt &lt;-<span class="st"> </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment)
 e 
    Increment Squared Letter      Sqrt
 <span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a <span class="fl">0.7071068</span>
@@ -831,17 +831,17 @@ iris[<span class="dv">12</span>, <span class="dv">4</span>]
 <span class="co">#    &quot;Show me the mean of the column</span>
 <span class="co">#    Sepal.Length in the dataframe iris</span>
 <span class="co">#    where the species name is setosa&quot;</span>
-  <span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>])
+<span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>])
 [<span class="dv">1</span>] <span class="fl">5.006</span></code></pre></div>
 <p>We can write this out longhand to make sure it’s correct (it is).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logicalCheck =<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>
-lengthCheck =<span class="st"> </span>iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>]</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">logicalCheck &lt;-<span class="st"> </span>iris<span class="op">$</span>Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>
+lengthCheck &lt;-<span class="st"> </span>iris<span class="op">$</span>Sepal.Length[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span>]</code></pre></div>
 <p>We can also look at the whole dataframe just for setosa.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note that the structure of species</span>
 <span class="co"># is preserved as a factor with three</span>
 <span class="co"># levels even though setosa is the</span>
 <span class="co"># only species name in the new df</span>
-setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span> , ]
+setosaData &lt;-<span class="st"> </span>iris[iris<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;setosa&#39;</span> , ]
 
 <span class="kw">str</span>(setosaData)
 <span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">50</span> obs. of  <span class="dv">5</span> variables<span class="op">:</span>
@@ -874,16 +874,16 @@ setosaData =<span class="st"> </span>iris[iris<span class="op">$</span>Species<s
 <h3>Lists</h3>
 <p>Lists are the ultimate data type in R. They are actually a vector that can hold different classes of data. Each element of a list can be any kind of object (an atomic vector, a matrix, a dataframe, or even another list!!).</p>
 <p>The real, filthy R programming relies heavily on lists. We will have to work with them at some point in this class, but we won’t take a ton of time on them here.</p>
-<p>Let’s make a list- just to see how they work</p>
+<p>Let’s make a list- just to see how they work.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Create an empty list with four elements</span>
-  myList =<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&#39;list&#39;</span>, <span class="dt">length=</span><span class="dv">4</span>)
+  myList &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&#39;list&#39;</span>, <span class="dt">length=</span><span class="dv">4</span>)
 
 <span class="co"># Assign some of our previously</span>
 <span class="co"># created objects to the elements</span>
-  myList[[<span class="dv">1</span>]] =<span class="st"> </span>a
-  myList[[<span class="dv">2</span>]] =<span class="st"> </span>c
-  myList[[<span class="dv">3</span>]] =<span class="st"> </span>mat
-  myList[[<span class="dv">4</span>]] =<span class="st"> </span>d
+  myList[[<span class="dv">1</span>]] &lt;-<span class="st"> </span>a
+  myList[[<span class="dv">2</span>]] &lt;-<span class="st"> </span>c
+  myList[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>mat
+  myList[[<span class="dv">4</span>]] &lt;-<span class="st"> </span>d
 
 <span class="co"># Print it</span>
 <span class="co"># Cool, huh?</span>
@@ -930,7 +930,7 @@ matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span cla
   
 <span class="co"># Give it names like we did with</span>
 <span class="co"># a dataframe  </span>
-  <span class="kw">names</span>(myList) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;mat&#39;</span>, <span class="st">&#39;d&#39;</span>)
+  <span class="kw">names</span>(myList) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;mat&#39;</span>, <span class="st">&#39;d&#39;</span>)
   
 <span class="co"># See how the names work now?  </span>
   myList    
