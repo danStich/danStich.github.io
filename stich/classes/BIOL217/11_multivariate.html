@@ -230,10 +230,22 @@ $(document).ready(function () {
   <a href="../../cv.html">Curriculum vitae</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Course websites
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../BIOL678/index.html">BIOL 678</a>
+    </li>
+    <li>
+      <a href="index.html">BIOL 217</a>
+    </li>
+  </ul>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -373,7 +385,7 @@ pre code, pre, code {
   <span class="co">#install.package(&#39;devtools&#39;)</span>
   <span class="kw">library</span>(devtools)
 <span class="co"># ggbiplot and vqv packages from a git hub repository</span>
-  <span class="co">#install_github(&quot;ggbiplot&quot;, &quot;vqv&quot;)</span>
+  <span class="co">#install_github(&quot;vqv/ggbiplot&quot;)</span>
   <span class="kw">library</span>(ggbiplot)</code></pre></div>
 <p><br></p>
 <p>The ggbiplot package makes some pretty nice biplots, but the syntax for these plots (and other <code>ggplot</code>* packages) is quite different from what we have been working with in the base graphics.</p>
@@ -687,7 +699,12 @@ pre code, pre, code {
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 

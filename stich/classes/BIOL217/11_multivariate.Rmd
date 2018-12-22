@@ -118,7 +118,7 @@ For the "prettier" option, you will need to install a couple of packages Note th
   #install.package('devtools')
   library(devtools)
 # ggbiplot and vqv packages from a git hub repository
-  #install_github("ggbiplot", "vqv")
+  #install_github("vqv/ggbiplot")
   library(ggbiplot)
 ```
 
