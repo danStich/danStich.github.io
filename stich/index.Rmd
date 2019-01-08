@@ -2,9 +2,10 @@
 ```
 
 <h1 id="multi"> Assistant Professor </h1>
+<span style="font-size:16pt;">
 Biology Department and Biological Field Station<br>
 State University of New York College at Oneonta
-
+</span>
 <img id="multi" src="./images/logo.png" alt="Grass carp">
 
 I am a fishery biologist by training, and I have been with the Biology Department and Biological Field Station at SUNY Oneonta since Fall 2015. 

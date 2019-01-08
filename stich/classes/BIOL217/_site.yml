@@ -23,7 +23,9 @@ navbar:
       href: ../../studentProjects.html      
     - text: "Contact"
       href: ../../contact.html      
-
+    - icon: fa-github
+      href: https://github.com/danStich
+      
 output:
   html_document:
     theme: cosmo
