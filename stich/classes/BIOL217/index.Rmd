@@ -1,9 +1,9 @@
-```{r, child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
 
-<br>
-
 ## Quantitative Biology (BIOL 217) Course Website
+
+<br>
 
 This site is intended to serve as a permanent link to course content so students can access online learning modules, data sets and code used for the class. This site is not intended for submission of class assignments, accessing reading materials, tracking grades, or viewing the syllabus. For all of those materials, please refer to the course blackboard site, accessible through: <a href="https://blackboard.oneonta.edu"> https://blackboard.oneonta.edu </a>.
 

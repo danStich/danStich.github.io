@@ -761,10 +761,10 @@ ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</s
 }</code></pre></div>
 <p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)
-[<span class="dv">1</span>] <span class="fl">0.457352</span>
+[<span class="dv">1</span>] <span class="fl">0.4575261</span>
       <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
      <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span>
-<span class="fl">0.1120616</span> <span class="fl">0.6193052</span> </code></pre></div>
+<span class="fl">0.1151764</span> <span class="fl">0.6206894</span> </code></pre></div>
 <p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the histogram</span>
   <span class="kw">hist</span>(p.Rsquare, <span class="dt">breaks=</span><span class="dv">100</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,

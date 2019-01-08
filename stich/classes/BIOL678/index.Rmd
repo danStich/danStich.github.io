@@ -1,7 +1,5 @@
-```{r, child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
-
-<br>
 
 # Advanced Quantitative Biology (BIOL 678)
 
