@@ -1,8 +1,9 @@
 name: "danStich"
 output_dir: "."
 navbar:
+  title: "danStich"
   left:
-    - text: "danStich"
+    - text: "Home"
       href: index.html
     - text: "Teaching"
       menu:
