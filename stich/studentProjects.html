@@ -4,23 +4,15 @@
 
 <head>
 
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<link rel="manifest" href="./favicon/site.webmanifest">
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-  
-<meta charset="utf-8">
+<meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 
-<title>danStich</title>
- 
+
+
+
+<title></title>
+
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
@@ -28,6 +20,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 
@@ -120,6 +125,7 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
+
 </style>
 
 <script>
@@ -165,21 +171,42 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html"></a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="index.html">Home</a>
+  <a href="index.html">danStich</a>
 </li>
-<li>
-  <a href="teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="research.html">Research</a>
 </li>
 <li>
-  <a href="cv.html">Curriculum vitae</a>
+  <a href="publications.html">Publications</a>
+</li>
+<li>
+  <a href="cv.html">CV</a>
+</li>
+<li>
+  <a href="studentProjects.html">Current Students</a>
 </li>
 <li>
   <a href="contact.html">Contact</a>
@@ -195,38 +222,18 @@ $(document).ready(function () {
 <div class="fluid-row" id="header">
 
 
-
-
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
 
-.column {
-    float: left;
-    padding: 15px;
-}
 
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
 
-.content {
-    width: 75%;
-}
 
-</style>
+
+
 <p><br></p>
 <div id="current-graduate-students" class="section level2">
-<h2>Current graduate students</h2>
+<h2 id="multi">Current graduate students</h2>
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -235,17 +242,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>David Andrews</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: State of the lake and comprehensive lake management plan for Butterfield Lake, NY.
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -254,36 +260,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Samantha Carey</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: State of the lake and comprehensive management plan for Forest and Allure lakes in NY.
 </p>
 </div>
 </div>
-<p><br></p>
-<div class="clearfix">
-<div>
-<p style="float: left;">
-<img width="150" height="150" src="./images/ben.jpg">
-</p>
-</div>
-<div>
-<h4>
-<b>Joseph (Ben) Casscles</b>
-</h4>
-<p>
-<b>Program</b>: MS Lake Management, Professional Science Master's
-</p>
-<p>
-<b>Project description</b>: My research interests include aquatic plant communities, adaptive management strategies, and applied fisheries management.
-</p>
-</div>
-</div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -292,17 +278,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Stradder Caves</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: State of the lake and comprehensive lake management plan for Crooked, Song, and Tully lakes in NY
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -311,17 +296,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Hayley Dower</b>
 </h4>
 <p>
-<b>Program</b>: MS Biology
-</p>
-<p>
+<b>Program</b>: MS Biology<br>
 <b>Project description</b>: I am currently studying population dynamics and behavior of spawning walleye in Otsego Lake, NY. I am attempting to characterize the timing and duration of spawning, and I am using mark and recapture of tagged walleye to estimate growth, survival, and abundance.
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -330,17 +314,36 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Ryan Elliott</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: My thesis research is focused on Lake of the Woods located in northern New York State. The Lake of the Woods Association and Indian River Lakes Conservancy have enlisted my help to investigate the current state of Lake of the Woods and to write a management plan that will help guide future management strategies. Current concerns among stakeholders on Lake of the Woods include the introduction of invasive species, harmful algal blooms, and the growth of invasive Eurasian watermilfoil, which is already well established in the lake.
 </p>
 </div>
 </div>
+
+
+<p><br></p>
+<div class="clearfix">
+<div>
+<p style="float: left;">
+<img width="150" height="150" src="./images/blankPhoto.jpg">
+</p>
+</div>
+<div>
+<h4 id="multi">
+<b>Erin Gilligan</b>
+</h4>
+<p>
+<b>Program</b>: MS Biology <br>
+<b>Project description</b>: American shad population dynamics and growth modeling in the northeastern US.
+</p>
+</div>
+</div>
+
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -349,20 +352,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Justin Hulbert</b>
 </h4>
 <p>
-<b>Program</b>: MS Biology
-</p>
-<p>
+<b>Program</b>: MS Biology<br>
 <b>Project description</b>: I am investigating drivers of patterns in regional and state-wide growth and population size structure of walleye and yellow perch, popular sport fish in North America. This work is being conducted in collaboration with the New York State Department of Environmental Conservation (NYSDEC), and includes a variety of stakeholders.
 </p>
-<p>
-<b>Contact:</b> <a href="mailto:hulbjr82@oneonta.edu">hulbjr82@oneonta.edu</a>
-</P>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -371,17 +370,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Joey O’Reilly</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: My thesis work is focused on the Cassadaga Lakes system in Chautauqua County, New York. A science based state of the lake report and comprehensive management plan is being developed for the Cassadaga Lakes Association. Additionally, I am working to determine whether the different basins in Cassadaga Lakes differ from each other with respect to important lake parameters such as dissolved oxygen, temperature profiles, etc., to inform future sampling.
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -390,17 +388,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>David Pfuhler</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: State of the lake and comprehensive lake management plan for Crumhorn Lake, NY.
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -409,17 +406,16 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>George Smith</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: My thesis work is concentrated on the construction of a state of a lake report and a comprehensive management plan for Big Bowman Pond, which is a small 30 acre lake located within Rensselaer County, NY. I work with the local lake association and home owners around the lake to establish their management goals. The primary management issue on the lake is excessive vegetation (bladderworts) that restricts access to the lake for some. Overall, the goal of this study will provide high-quality information on the lake and determine the best method to solve the issue of vegetation.
 </p>
 </div>
 </div>
+
 <p><br></p>
 <div class="clearfix">
 <div>
@@ -428,83 +424,33 @@ pre code, pre, code {
 </p>
 </div>
 <div>
-<h4>
+<h4 id="multi">
 <b>Alexa Tumbarello</b>
 </h4>
 <p>
-<b>Program</b>: MS Lake Management
-</p>
-<p>
+<b>Program</b>: MS Lake Management<br>
 <b>Project description</b>: Paradox Lake is a dual-basin lake in Essex County, NY. The biggest concerns among stakeholders include invasive macrophytes, water clarity, and long-term sustainability. For my thesis, I am developing a state of the lake report and comprehensive management plan for the Paradox Lake Association that addresses stakeholder-identified issues and guidance for sustainable management.
 </p>
 </div>
 </div>
-<p><br></p>
-</div>
-<div id="former-students" class="section level2">
-<h2>Former students</h2>
-<p><br></p>
-<div class="clearfix">
-<div>
-<p style="float: left;">
-<img width="150" height="150" src="./images/ed.jpg">
-</p>
-</div>
-<div>
-<h4>
-<b>Ed Kwietniewski</b>
-</h4>
+
+<h2 id="multi">Former graduate students</h2>
 <p>
-<b>Program</b>: MS Lake Management (2017)
+<b>J. Ben Casscles</b>: MS Lake Management (2018)<br>
+<b>Ed Kwietniewski</b>: MS Lake Management (2017)<br>
+<b>Christian Jenne</b>: MS Lake Management (2017)<br>
+<b>Alejandro (AJ) Reyes</b>: MS Lake Mangement (2016)
 </p>
-<p>
-<b>Current</b>: Aqua Doc
-</p>
-</div>
-</div>
-<p><br></p>
-<div class="clearfix">
-<div>
-<p style="float: left;">
-<img width="150" height="150" src="./images/blankPhoto.jpg">
-</p>
-</div>
-<div>
-<h4>
-<b>Christian Jenne</b>
-</h4>
-<p>
-<b>Program</b>: MS Lake Management (2017)
-</p>
-<p>
-<b>Project description</b>: Education program, SUNY Oneonta
-</p>
-</div>
-</div>
-<p><br></p>
-<div class="clearfix">
-<div>
-<p style="float: left;">
-<img width="150" height="150"    src="./images/blankPhoto.jpg">
-</p>
-</div>
-<div>
-<h4>
-<b>Alejandro (AJ) Reyes </b>
-</h4>
-<p>
-<b>Program</b>: MS Lake Management (2016)
-</p>
-<p>
-<b>Current</b>: Aquatic ecologist, Northeas Aquatic Research
-</p>
-</div>
-</div>
-<p><br></p>
-</div>
 
 
-<p>Copyright &copy; 2018 Dan Stich. All rights reserved.</p>
+</div>
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
 
 
 
@@ -528,7 +474,7 @@ $(document).ready(function () {
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
-    script.src  = "https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
 </script>

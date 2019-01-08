@@ -5,7 +5,7 @@
 Biology Department and Biological Field Station<br>
 State University of New York College at Oneonta
 
-<img src="./images/logo.png" alt="">
+<img id="multi" src="./images/logo.png" alt="Grass carp">
 
 I am a fishery biologist by training, and I have been with the Biology Department and Biological Field Station at SUNY Oneonta since Fall 2015. 
 
