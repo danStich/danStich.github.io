@@ -3,6 +3,7 @@
 
 # Linear models
 <h2 id="multi"> Introduction </h2>
+
 This week, we will introduce a class of statistical tools known collectively as linear models. This class of tools includes such examples as one-way ANOVA, linear regression and correlation, and by extension includes all other n-way ANOVAs, multiple linear regression, and analysis of covariance (ANCOVA). Later this semester, we will see that these models be extended even further to include generalized linear models, generalized linear mixed models, and a number of multivariate techniques for complex data analysis.
 
 So, that said, this week is the gateway into the rest of the world of parametric and semi-parametric statistics. As a result, we will focus primarily on parametric applications this week and next, although we will discuss the simple case of the Kruskal-Wallis test as an alternative to the parametric ANOVA. In two weeks you will know why you will almost never need this test again! The over-arching theme for this week is that any of these methods can be expressed as the formula for a line, which is how they got their names. We will start with ANOVA because it is analagous to many of the methods that we've already discussed. However, it is important to recognize that this is just a special case of linear models. We will show this during our discussions this week.
