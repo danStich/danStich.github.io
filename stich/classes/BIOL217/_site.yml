@@ -3,28 +3,29 @@ output_dir: "."
 navbar:
   title: "BIOL 217"
   left:
-    - text: "Home"
-      href: ../../index.html
-    - text: "Teaching"
-      menu:
-        - text: "Teaching home"
-          href: ../../teaching.html
-        - text: "BIOL 217"
-          href: ../../classes/BIOL217/index.html          
-        - text: "BIOL 678"
-          href: ../../classes/BIOL678/index.html
-    - text: "Research"
-      href: ../../research.html
-    - text: "Publications"
-      href: ../../publications.html
-    - text: "CV"
-      href: ../../cv.html
-    - text: "Current Students"
-      href: ../../studentProjects.html      
-    - text: "Contact"
-      href: ../../contact.html      
-    - icon: fa-github
-      href: https://github.com/danStich
+  - icon: fa-home
+    href: index.html
+  - text: Teaching
+    menu:
+    - text: Teaching home
+      href: ../../teaching.html
+    - text: BIOL 217
+      href: ../../classes/BIOL217/index.html
+    - text: BIOL 678
+      href: ../../classes/BIOL678/index.html
+  - text: Research
+    href: ../../research.html
+  - text: Current Students
+    href: ../../studentProjects.html
+  - text: Publications
+    href: ../../publications.html
+  - text: CV
+    href: ../../cv.html
+  - text: Contact
+    href: ../../contact.html
+  right:
+  - icon: fa-github
+    href: https://github.com/danStich
       
 output:
   html_document:

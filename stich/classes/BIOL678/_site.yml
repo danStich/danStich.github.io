@@ -34,7 +34,7 @@ output:
     smooth_scroll: yes
     fontsize: 12
     includes:
-      before_body: ../../_header.html
+      in_header: ../../_header.html
       after_body: ../../footer.html
     css: ../../styles.css
     lib_dir: site_libs
