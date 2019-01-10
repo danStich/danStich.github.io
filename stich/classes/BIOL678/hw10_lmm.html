@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -318,20 +318,13 @@ Introduction
  $ NYTME    : num  6583 6583 6583 6583 6583 ...
  $ NYTMN    : num  45211 45211 45211 45211 45211 ...
  $ Altitude : num  55 55 55 55 55 55 55 55 55 55 ...
-            Water  County Region             Date GearCd      IF_Key
-1 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1467469506
-2 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191    17576464
-3 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1806054190
-4 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  -658875809
-5 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1027593693
-6 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1548594411
-  Length Weight SpeciesCd    Name Age       IF_ID NYTME NYTMN Altitude
-1    611   2268       626 Walleye   7  1467469506  6583 45211       55
-2    260    133       626 Walleye   1    17576464  6583 45211       55
-3    281    168       626 Walleye   1 -1806054190  6583 45211       55
-4    423    693       626 Walleye   3  -658875809  6583 45211       55
-5    492   1076       626 Walleye   5 -1027593693  6583 45211       55
-6    264    141       626 Walleye   1  1548594411  6583 45211       55</code></pre>
+            Water  County Region             Date GearCd      IF_Key Length Weight SpeciesCd    Name Age       IF_ID NYTME NYTMN Altitude
+1 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1467469506    611   2268       626 Walleye   7  1467469506  6583 45211       55
+2 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191    17576464    260    133       626 Walleye   1    17576464  6583 45211       55
+3 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1806054190    281    168       626 Walleye   1 -1806054190  6583 45211       55
+4 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  -658875809    423    693       626 Walleye   3  -658875809  6583 45211       55
+5 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191 -1027593693    492   1076       626 Walleye   5 -1027593693  6583 45211       55
+6 Lake Ronkonkoma Suffolk      1 9/8/2004 0:00:00 1G0191  1548594411    264    141       626 Walleye   1  1548594411  6583 45211       55</code></pre>
 <p>As you can see, there are a <em>ton</em> of lakes in this dataset, and it contains information for both yellow perch (<em>Perca flavescens</em>) and walleye (<em>Sander vitreus</em>). We only want to work with lakes in Region 4, but the lakes are scattered throughout NY. So, before we can start working with the data we want, we need to get them out of this mess.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Remove observations for which we lack mass</span>
   fish =<span class="st"> </span>fish[fish<span class="op">$</span>Name<span class="op">==</span><span class="st">&#39;Yellow Perch&#39;</span> <span class="op">&amp;</span><span class="st"> </span>fish<span class="op">$</span>Region<span class="op">==</span><span class="dv">4</span>, ]
@@ -350,13 +343,8 @@ Introduction
 <p>We see that we have thirteen waters left in the data that actually contain yellow perch and are in Region 4. Let’s also make ourselves a variable to store the number of lakes we have to make the programming below a little easier.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># How many unique lakes do we have left?</span>
   <span class="kw">sort</span>(<span class="kw">unique</span>(fish<span class="op">$</span>Water))
- [<span class="dv">1</span>] <span class="st">&quot;Blenheim Gilboa Reservoir&quot;</span> <span class="st">&quot;Burden Lake&quot;</span>              
- [<span class="dv">3</span>] <span class="st">&quot;Canadarago Lake&quot;</span>           <span class="st">&quot;Dunham Reservoir&quot;</span>         
- [<span class="dv">5</span>] <span class="st">&quot;Dyking Pond&quot;</span>               <span class="st">&quot;Goodyear Lake&quot;</span>            
- [<span class="dv">7</span>] <span class="st">&quot;Kinderhook Lake&quot;</span>           <span class="st">&quot;Mariaville Lake&quot;</span>          
- [<span class="dv">9</span>] <span class="st">&quot;Rossman Pond&quot;</span>              <span class="st">&quot;Schenevus Lake&quot;</span>           
-[<span class="dv">11</span>] <span class="st">&quot;Schoharie Reservoir&quot;</span>       <span class="st">&quot;Tomhannock Reservoir&quot;</span>     
-[<span class="dv">13</span>] <span class="st">&quot;Unnamed Water&quot;</span>            
+ [<span class="dv">1</span>] <span class="st">&quot;Blenheim Gilboa Reservoir&quot;</span> <span class="st">&quot;Burden Lake&quot;</span>               <span class="st">&quot;Canadarago Lake&quot;</span>           <span class="st">&quot;Dunham Reservoir&quot;</span>          <span class="st">&quot;Dyking Pond&quot;</span>               <span class="st">&quot;Goodyear Lake&quot;</span>             <span class="st">&quot;Kinderhook Lake&quot;</span>          
+ [<span class="dv">8</span>] <span class="st">&quot;Mariaville Lake&quot;</span>           <span class="st">&quot;Rossman Pond&quot;</span>              <span class="st">&quot;Schenevus Lake&quot;</span>            <span class="st">&quot;Schoharie Reservoir&quot;</span>       <span class="st">&quot;Tomhannock Reservoir&quot;</span>      <span class="st">&quot;Unnamed Water&quot;</span>            
 
 <span class="co"># Count the number of unique values and store it in an object</span>
   nwaters =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(fish<span class="op">$</span>Water))  </code></pre></div>

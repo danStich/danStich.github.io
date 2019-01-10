@@ -20,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -64,7 +65,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -170,31 +171,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -208,36 +235,9 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
-<p><br></p>
 <div id="lab-homework-rubric" class="section level1">
 <h1>Lab homework rubric</h1>
-<p><br></p>
 <p>The purpose of this document is to help us organize the laboratory exercises for this course in a way that will facilitate clear communication, and will improve my ability to evaluate your work more fairly and efficiently.</p>
-<p><br></p>
 <blockquote>
 <p><strong>Each lab exercise in this course has two components</strong>:</p>
 </blockquote>
@@ -245,7 +245,6 @@ pre code, pre, code {
 <li><p>There are activities that will require you to write code or use the RStudio IDE in some other (e.g., interactive) way.</p></li>
 <li><p>Specific questions that will require you to execute commands and provide answers as text.</p></li>
 </ol>
-<p><br></p>
 <blockquote>
 <p><strong>Each lab will require the submission of two separate pieces of work for evaluation of learning</strong>:</p>
 </blockquote>
@@ -253,7 +252,6 @@ pre code, pre, code {
 <li><p><strong>Computer code</strong>: You will need to write some R code to complete each lab. This code will be necessary for the completion of both 1 and 2 above and must be submitted upon completion of the lab. Please keep this code in a source file (script) while you work and save it frequently. In addition to writing the code necessary to complete the lab, you will need to comment your script to explain what it does. This is to reinforce your understanding and engagement with the technical skills and tools that are necessary to be successful in this course (and quantitative applications more generally), and is a required component of the exercise.</p></li>
 <li><p><strong>Answers to questions</strong>: Please answer all questions from the lab handout in order (and numbered) at the very bottom of your script, not in line with the rest of the code to make it easier to read and evaluate your answers to the questions. Please use start-of-line hashtags (a.k.a. octothorpe, pound sign, whatever) to comment the answers to questions. You can do this all at once when you are done by highlighting your answers and pressing &lt;<code>Ctrl</code> + <code>Shift</code> + <code>C</code>&gt;.</p></li>
 </ol>
-<p><br></p>
 <blockquote>
 <p><strong>Each lab will be evaluated as follows</strong>:</p>
 </blockquote>
@@ -261,15 +259,13 @@ pre code, pre, code {
 <li><strong>Working script</strong> with commented code (10 pts)</li>
 <li><strong>Answers to questions</strong> at the bottom of the same file (10 pts)</li>
 </ol>
-<p><br></p>
 <blockquote>
 <p>An <strong>example of a completed lab</strong> is below:</p>
 </blockquote>
-<p><br></p>
 <pre><code># Script for completion of lab 2 exercises -----
 
 # Read in the data for the lab
-  some_data = read.csv(file = â€someFile.csvâ€, header = TRUE)
+  some_data = read.csv(file = ”someFile.csv”, header = TRUE)
 
 # Examine the structure of the data
   str(some_data)
@@ -310,7 +306,12 @@ pre code, pre, code {
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

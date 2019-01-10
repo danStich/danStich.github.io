@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -429,20 +429,20 @@ Introduction
 
 <span class="co"># Print the model summary</span>
   <span class="kw">print</span>(modSummary, <span class="dt">digits=</span><span class="dv">2</span>)
-            mean    sd    <span class="fl">2.5</span><span class="op">%   97.5%</span><span class="st"> </span>Rhat n.eff
-alpha[<span class="dv">1</span>]   <span class="fl">1.914</span>  <span class="fl">1.01</span>  <span class="op">-</span><span class="fl">0.046</span>   <span class="fl">3.898</span>  <span class="fl">1.0</span>  <span class="dv">5000</span>
-alpha[<span class="dv">2</span>]  <span class="op">-</span><span class="fl">0.049</span>  <span class="fl">0.22</span>  <span class="op">-</span><span class="fl">0.482</span>   <span class="fl">0.385</span>  <span class="fl">1.0</span>  <span class="dv">1700</span>
-alpha[<span class="dv">3</span>]  <span class="op">-</span><span class="fl">1.293</span>  <span class="fl">0.45</span>  <span class="op">-</span><span class="fl">2.184</span>  <span class="op">-</span><span class="fl">0.432</span>  <span class="fl">1.0</span>   <span class="dv">690</span>
-alpha[<span class="dv">4</span>]  <span class="op">-</span><span class="fl">1.477</span>  <span class="fl">0.74</span>  <span class="op">-</span><span class="fl">2.948</span>  <span class="op">-</span><span class="fl">0.029</span>  <span class="fl">1.0</span>   <span class="dv">480</span>
-beta[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">0.203</span>  <span class="fl">0.38</span>  <span class="op">-</span><span class="fl">0.975</span>   <span class="fl">0.516</span>  <span class="fl">1.0</span>  <span class="dv">5000</span>
-beta[<span class="dv">2</span>]    <span class="fl">0.474</span>  <span class="fl">0.08</span>   <span class="fl">0.316</span>   <span class="fl">0.622</span>  <span class="fl">1.0</span>  <span class="dv">1500</span>
-beta[<span class="dv">3</span>]    <span class="fl">0.870</span>  <span class="fl">0.17</span>   <span class="fl">0.529</span>   <span class="fl">1.208</span>  <span class="fl">1.0</span>   <span class="dv">800</span>
-beta[<span class="dv">4</span>]    <span class="fl">0.964</span>  <span class="fl">0.30</span>   <span class="fl">0.366</span>   <span class="fl">1.548</span>  <span class="fl">1.0</span>   <span class="dv">600</span>
-deviance <span class="fl">904.959</span> <span class="fl">29.31</span> <span class="fl">898.521</span> <span class="fl">913.796</span>  <span class="fl">1.1</span>  <span class="dv">5000</span></code></pre></div>
+            mean    sd   <span class="fl">2.5</span><span class="op">%   97.5%</span><span class="st"> </span>Rhat n.eff
+alpha[<span class="dv">1</span>]   <span class="fl">1.885</span>  <span class="fl">1.01</span>  <span class="op">-</span><span class="fl">0.14</span>   <span class="fl">3.854</span>    <span class="dv">1</span>   <span class="dv">410</span>
+alpha[<span class="dv">2</span>]  <span class="op">-</span><span class="fl">0.057</span>  <span class="fl">0.23</span>  <span class="op">-</span><span class="fl">0.51</span>   <span class="fl">0.370</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">3</span>]  <span class="op">-</span><span class="fl">1.327</span>  <span class="fl">0.45</span>  <span class="op">-</span><span class="fl">2.24</span>  <span class="op">-</span><span class="fl">0.438</span>    <span class="dv">1</span>  <span class="dv">3500</span>
+alpha[<span class="dv">4</span>]  <span class="op">-</span><span class="fl">1.468</span>  <span class="fl">0.74</span>  <span class="op">-</span><span class="fl">2.90</span>  <span class="op">-</span><span class="fl">0.051</span>    <span class="dv">1</span>  <span class="dv">2000</span>
+beta[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">0.190</span>  <span class="fl">0.38</span>  <span class="op">-</span><span class="fl">0.95</span>   <span class="fl">0.556</span>    <span class="dv">1</span>   <span class="dv">410</span>
+beta[<span class="dv">2</span>]    <span class="fl">0.477</span>  <span class="fl">0.08</span>   <span class="fl">0.32</span>   <span class="fl">0.637</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta[<span class="dv">3</span>]    <span class="fl">0.879</span>  <span class="fl">0.18</span>   <span class="fl">0.53</span>   <span class="fl">1.219</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta[<span class="dv">4</span>]    <span class="fl">0.960</span>  <span class="fl">0.31</span>   <span class="fl">0.36</span>   <span class="fl">1.550</span>    <span class="dv">1</span>  <span class="dv">1500</span>
+deviance <span class="fl">904.750</span> <span class="fl">21.26</span> <span class="fl">898.47</span> <span class="fl">913.339</span>    <span class="dv">1</span>  <span class="dv">5000</span></code></pre></div>
 <p>And, if we need it, we can also get the DIC like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print out DIC value</span>
   crabs.model<span class="op">$</span>BUGSoutput<span class="op">$</span>DIC
-[<span class="dv">1</span>] <span class="fl">1334.578</span></code></pre></div>
+[<span class="dv">1</span>] <span class="fl">1130.744</span></code></pre></div>
 <blockquote>
 <p>Model diagnostics</p>
 </blockquote>
@@ -549,18 +549,18 @@ Initializing model
 <span class="co"># Print the model summary</span>
   <span class="kw">print</span>(modSummary, <span class="dt">digits=</span><span class="dv">2</span>) 
            mean    sd   <span class="fl">2.5</span><span class="op">%   97.5%</span><span class="st"> </span>Rhat n.eff
-alpha[<span class="dv">1</span>]   <span class="fl">1.34</span>  <span class="fl">2.51</span>  <span class="op">-</span><span class="fl">3.65</span>   <span class="fl">6.219</span>    <span class="dv">1</span>   <span class="dv">650</span>
-alpha[<span class="dv">2</span>]  <span class="op">-</span><span class="fl">1.15</span>  <span class="fl">0.60</span>  <span class="op">-</span><span class="fl">2.36</span>  <span class="op">-</span><span class="fl">0.019</span>    <span class="dv">1</span>  <span class="dv">1300</span>
-alpha[<span class="dv">3</span>]  <span class="op">-</span><span class="fl">3.36</span>  <span class="fl">1.06</span>  <span class="op">-</span><span class="fl">5.50</span>  <span class="op">-</span><span class="fl">1.387</span>    <span class="dv">1</span>   <span class="dv">410</span>
-alpha[<span class="dv">4</span>]  <span class="op">-</span><span class="fl">1.69</span>  <span class="fl">1.57</span>  <span class="op">-</span><span class="fl">4.81</span>   <span class="fl">1.296</span>    <span class="dv">1</span>  <span class="dv">2000</span>
-beta[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">0.10</span>  <span class="fl">0.94</span>  <span class="op">-</span><span class="fl">1.94</span>   <span class="fl">1.775</span>    <span class="dv">1</span>   <span class="dv">690</span>
-beta[<span class="dv">2</span>]    <span class="fl">0.73</span>  <span class="fl">0.22</span>   <span class="fl">0.31</span>   <span class="fl">1.175</span>    <span class="dv">1</span>  <span class="dv">1500</span>
-beta[<span class="dv">3</span>]    <span class="fl">1.51</span>  <span class="fl">0.42</span>   <span class="fl">0.72</span>   <span class="fl">2.346</span>    <span class="dv">1</span>   <span class="dv">580</span>
-beta[<span class="dv">4</span>]    <span class="fl">0.70</span>  <span class="fl">0.69</span>  <span class="op">-</span><span class="fl">0.66</span>   <span class="fl">2.073</span>    <span class="dv">1</span>  <span class="dv">2300</span>
-deviance <span class="fl">551.27</span> <span class="fl">20.32</span> <span class="fl">513.77</span> <span class="fl">593.148</span>    <span class="dv">1</span>   <span class="dv">270</span></code></pre></div>
+alpha[<span class="dv">1</span>]   <span class="fl">1.38</span>  <span class="fl">2.51</span>  <span class="op">-</span><span class="fl">3.52</span>   <span class="fl">6.228</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">2</span>]  <span class="op">-</span><span class="fl">1.20</span>  <span class="fl">0.61</span>  <span class="op">-</span><span class="fl">2.40</span>  <span class="op">-</span><span class="fl">0.015</span>    <span class="dv">1</span>  <span class="dv">3000</span>
+alpha[<span class="dv">3</span>]  <span class="op">-</span><span class="fl">3.30</span>  <span class="fl">1.09</span>  <span class="op">-</span><span class="fl">5.54</span>  <span class="op">-</span><span class="fl">1.319</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+alpha[<span class="dv">4</span>]  <span class="op">-</span><span class="fl">1.68</span>  <span class="fl">1.59</span>  <span class="op">-</span><span class="fl">4.90</span>   <span class="fl">1.294</span>    <span class="dv">1</span>   <span class="dv">340</span>
+beta[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">0.13</span>  <span class="fl">0.94</span>  <span class="op">-</span><span class="fl">1.96</span>   <span class="fl">1.699</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta[<span class="dv">2</span>]    <span class="fl">0.75</span>  <span class="fl">0.22</span>   <span class="fl">0.31</span>   <span class="fl">1.207</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta[<span class="dv">3</span>]    <span class="fl">1.49</span>  <span class="fl">0.43</span>   <span class="fl">0.69</span>   <span class="fl">2.345</span>    <span class="dv">1</span>  <span class="dv">5000</span>
+beta[<span class="dv">4</span>]    <span class="fl">0.69</span>  <span class="fl">0.70</span>  <span class="op">-</span><span class="fl">0.65</span>   <span class="fl">2.104</span>    <span class="dv">1</span>   <span class="dv">350</span>
+deviance <span class="fl">551.68</span> <span class="fl">20.38</span> <span class="fl">513.76</span> <span class="fl">594.245</span>    <span class="dv">1</span>   <span class="dv">660</span></code></pre></div>
 <p>We can see that our values of our parameter estimates have changed a bit here, but how does that translate to model fit?</p>
 <p>Go ahead and calculate the Bayesian p-value again. It looks like it is a little closer to 0.50, but maybe not good enough to pass the straight-face test…</p>
-<pre><code>[1] 0.2105579</code></pre>
+<pre><code>[1] 0.2057588</code></pre>
 <p>So, why is this? It’s because we don’t just have a little overdispersion…we have quite a bit. Let’s have a look at our predictions versus observed number of satellites for each color. From these plots, we can see that our measure of central tendancy is still ballpark, it’s just that our variance is still grossly under-estimated.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))
 <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>){
@@ -640,25 +640,25 @@ Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;crabs
  <span class="dv">3</span> chains, each with <span class="dv">4500</span> <span class="kw">iterations</span> (first <span class="dv">500</span> discarded), n.thin =<span class="st"> </span><span class="dv">10</span>
  n.sims =<span class="st"> </span><span class="dv">1200</span> iterations saved
          mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>% Rhat n.eff
-alpha[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">1.94</span>    <span class="fl">2.44</span>  <span class="op">-</span><span class="fl">7.02</span>  <span class="op">-</span><span class="fl">3.45</span>  <span class="op">-</span><span class="fl">1.85</span>  <span class="op">-</span><span class="fl">0.24</span>   <span class="fl">2.49</span> <span class="fl">1.06</span>    <span class="dv">43</span>
-alpha[<span class="dv">2</span>]    <span class="fl">0.67</span>    <span class="fl">0.60</span>  <span class="op">-</span><span class="fl">0.56</span>   <span class="fl">0.28</span>   <span class="fl">0.67</span>   <span class="fl">1.06</span>   <span class="fl">1.84</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
-alpha[<span class="dv">3</span>]    <span class="fl">1.75</span>    <span class="fl">0.93</span>  <span class="op">-</span><span class="fl">0.09</span>   <span class="fl">1.16</span>   <span class="fl">1.75</span>   <span class="fl">2.37</span>   <span class="fl">3.52</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
-alpha[<span class="dv">4</span>]   <span class="op">-</span><span class="fl">0.73</span>    <span class="fl">3.36</span>  <span class="op">-</span><span class="fl">7.41</span>  <span class="op">-</span><span class="fl">2.56</span>  <span class="op">-</span><span class="fl">0.67</span>   <span class="fl">1.33</span>   <span class="fl">5.67</span> <span class="fl">1.03</span>   <span class="dv">110</span>
-beta[<span class="dv">1</span>]     <span class="fl">0.20</span>    <span class="fl">0.89</span>  <span class="op">-</span><span class="fl">1.56</span>  <span class="op">-</span><span class="fl">0.38</span>   <span class="fl">0.21</span>   <span class="fl">0.77</span>   <span class="fl">1.90</span> <span class="fl">1.06</span>    <span class="dv">41</span>
-beta[<span class="dv">2</span>]    <span class="op">-</span><span class="fl">0.62</span>    <span class="fl">0.21</span>  <span class="op">-</span><span class="fl">1.05</span>  <span class="op">-</span><span class="fl">0.75</span>  <span class="op">-</span><span class="fl">0.61</span>  <span class="op">-</span><span class="fl">0.49</span>  <span class="op">-</span><span class="fl">0.23</span> <span class="fl">1.01</span>  <span class="dv">1200</span>
-beta[<span class="dv">3</span>]    <span class="op">-</span><span class="fl">1.07</span>    <span class="fl">0.37</span>  <span class="op">-</span><span class="fl">1.82</span>  <span class="op">-</span><span class="fl">1.30</span>  <span class="op">-</span><span class="fl">1.07</span>  <span class="op">-</span><span class="fl">0.83</span>  <span class="op">-</span><span class="fl">0.39</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
-beta[<span class="dv">4</span>]    <span class="op">-</span><span class="fl">1.11</span>    <span class="fl">1.47</span>  <span class="op">-</span><span class="fl">4.44</span>  <span class="op">-</span><span class="fl">1.95</span>  <span class="op">-</span><span class="fl">0.94</span>  <span class="op">-</span><span class="fl">0.22</span>   <span class="fl">1.41</span> <span class="fl">1.03</span>   <span class="dv">110</span>
-r[<span class="dv">1</span>]        <span class="fl">1.24</span>    <span class="fl">0.67</span>   <span class="fl">0.31</span>   <span class="fl">0.71</span>   <span class="fl">1.09</span>   <span class="fl">1.66</span>   <span class="fl">2.75</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
-r[<span class="dv">2</span>]        <span class="fl">1.32</span>    <span class="fl">0.35</span>   <span class="fl">0.80</span>   <span class="fl">1.07</span>   <span class="fl">1.27</span>   <span class="fl">1.52</span>   <span class="fl">2.15</span> <span class="fl">1.00</span>   <span class="dv">910</span>
-r[<span class="dv">3</span>]        <span class="fl">1.04</span>    <span class="fl">0.41</span>   <span class="fl">0.45</span>   <span class="fl">0.75</span>   <span class="fl">0.95</span>   <span class="fl">1.26</span>   <span class="fl">2.07</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
-r[<span class="dv">4</span>]        <span class="fl">0.15</span>    <span class="fl">0.08</span>   <span class="fl">0.04</span>   <span class="fl">0.09</span>   <span class="fl">0.13</span>   <span class="fl">0.19</span>   <span class="fl">0.34</span> <span class="fl">1.00</span>   <span class="dv">710</span>
-deviance  <span class="fl">741.95</span>    <span class="fl">5.26</span> <span class="fl">733.94</span> <span class="fl">738.13</span> <span class="fl">741.14</span> <span class="fl">745.18</span> <span class="fl">754.20</span> <span class="fl">1.01</span>   <span class="dv">220</span>
+alpha[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">2.38</span>    <span class="fl">2.46</span>  <span class="op">-</span><span class="fl">7.77</span>  <span class="op">-</span><span class="fl">3.86</span>  <span class="op">-</span><span class="fl">2.04</span>  <span class="op">-</span><span class="fl">0.71</span>   <span class="fl">1.60</span> <span class="fl">1.02</span>   <span class="dv">130</span>
+alpha[<span class="dv">2</span>]    <span class="fl">0.67</span>    <span class="fl">0.60</span>  <span class="op">-</span><span class="fl">0.54</span>   <span class="fl">0.26</span>   <span class="fl">0.71</span>   <span class="fl">1.09</span>   <span class="fl">1.74</span> <span class="fl">1.01</span>  <span class="dv">1000</span>
+alpha[<span class="dv">3</span>]    <span class="fl">1.80</span>    <span class="fl">1.05</span>  <span class="op">-</span><span class="fl">0.22</span>   <span class="fl">1.10</span>   <span class="fl">1.80</span>   <span class="fl">2.52</span>   <span class="fl">3.81</span> <span class="fl">1.01</span>   <span class="dv">200</span>
+alpha[<span class="dv">4</span>]   <span class="op">-</span><span class="fl">0.77</span>    <span class="fl">3.70</span>  <span class="op">-</span><span class="fl">9.38</span>  <span class="op">-</span><span class="fl">2.96</span>  <span class="op">-</span><span class="fl">0.65</span>   <span class="fl">1.64</span>   <span class="fl">5.89</span> <span class="fl">1.03</span>    <span class="dv">99</span>
+beta[<span class="dv">1</span>]     <span class="fl">0.38</span>    <span class="fl">0.88</span>  <span class="op">-</span><span class="fl">1.12</span>  <span class="op">-</span><span class="fl">0.21</span>   <span class="fl">0.33</span>   <span class="fl">0.96</span>   <span class="fl">2.17</span> <span class="fl">1.01</span>   <span class="dv">160</span>
+beta[<span class="dv">2</span>]    <span class="op">-</span><span class="fl">0.61</span>    <span class="fl">0.21</span>  <span class="op">-</span><span class="fl">1.00</span>  <span class="op">-</span><span class="fl">0.76</span>  <span class="op">-</span><span class="fl">0.62</span>  <span class="op">-</span><span class="fl">0.47</span>  <span class="op">-</span><span class="fl">0.20</span> <span class="fl">1.01</span>   <span class="dv">770</span>
+beta[<span class="dv">3</span>]    <span class="op">-</span><span class="fl">1.09</span>    <span class="fl">0.42</span>  <span class="op">-</span><span class="fl">1.97</span>  <span class="op">-</span><span class="fl">1.35</span>  <span class="op">-</span><span class="fl">1.08</span>  <span class="op">-</span><span class="fl">0.80</span>  <span class="op">-</span><span class="fl">0.37</span> <span class="fl">1.01</span>   <span class="dv">160</span>
+beta[<span class="dv">4</span>]    <span class="op">-</span><span class="fl">1.13</span>    <span class="fl">1.64</span>  <span class="op">-</span><span class="fl">5.05</span>  <span class="op">-</span><span class="fl">2.06</span>  <span class="op">-</span><span class="fl">1.02</span>  <span class="op">-</span><span class="fl">0.08</span>   <span class="fl">1.78</span> <span class="fl">1.02</span>   <span class="dv">100</span>
+r[<span class="dv">1</span>]        <span class="fl">1.28</span>    <span class="fl">0.69</span>   <span class="fl">0.29</span>   <span class="fl">0.73</span>   <span class="fl">1.13</span>   <span class="fl">1.73</span>   <span class="fl">2.78</span> <span class="fl">1.01</span>   <span class="dv">380</span>
+r[<span class="dv">2</span>]        <span class="fl">1.33</span>    <span class="fl">0.34</span>   <span class="fl">0.80</span>   <span class="fl">1.10</span>   <span class="fl">1.29</span>   <span class="fl">1.51</span>   <span class="fl">2.09</span> <span class="fl">1.00</span>   <span class="dv">630</span>
+r[<span class="dv">3</span>]        <span class="fl">1.04</span>    <span class="fl">0.45</span>   <span class="fl">0.44</span>   <span class="fl">0.73</span>   <span class="fl">0.93</span>   <span class="fl">1.26</span>   <span class="fl">2.23</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
+r[<span class="dv">4</span>]        <span class="fl">0.14</span>    <span class="fl">0.07</span>   <span class="fl">0.04</span>   <span class="fl">0.08</span>   <span class="fl">0.12</span>   <span class="fl">0.17</span>   <span class="fl">0.33</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
+deviance  <span class="fl">742.47</span>    <span class="fl">5.36</span> <span class="fl">734.26</span> <span class="fl">738.41</span> <span class="fl">741.86</span> <span class="fl">745.69</span> <span class="fl">754.86</span> <span class="fl">1.00</span>  <span class="dv">1200</span>
 
 For each parameter, n.eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).
 
 DIC <span class="kw">info</span> (using the rule, <span class="dt">pD =</span> <span class="kw">var</span>(deviance)<span class="op">/</span><span class="dv">2</span>)
-pD =<span class="st"> </span><span class="fl">13.8</span> and DIC =<span class="st"> </span><span class="fl">755.7</span>
+pD =<span class="st"> </span><span class="fl">14.4</span> and DIC =<span class="st"> </span><span class="fl">756.8</span>
 DIC is an estimate of expected predictive <span class="kw">error</span> (lower deviance is better).</code></pre></div>
 <p>If we want to see how the estimates from this model compare to the observed data, we can plot the posterior densities for r over the top of histograms for each color. All in all this is looking pretty darn good.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))  

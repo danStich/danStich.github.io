@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -322,13 +322,13 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
     Welch Two Sample t<span class="op">-</span>test
 
 data<span class="op">:</span><span class="st">  </span>y by x
-t =<span class="st"> </span><span class="fl">48.103</span>, df =<span class="st"> </span><span class="fl">96.302</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+t =<span class="st"> </span><span class="fl">47.008</span>, df =<span class="st"> </span><span class="fl">76.143</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
 alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
 <span class="dv">95</span> percent confidence interval<span class="op">:</span>
-<span class="st"> </span><span class="fl">26.18071</span> <span class="fl">28.43434</span>
+<span class="st"> </span><span class="fl">25.64805</span> <span class="fl">27.91750</span>
 sample estimates<span class="op">:</span>
 mean <span class="cf">in</span> group <span class="dv">1</span> mean <span class="cf">in</span> group <span class="dv">2</span> 
-      <span class="fl">105.20170</span>        <span class="fl">77.89417</span> </code></pre></div>
+      <span class="fl">105.37949</span>        <span class="fl">78.59672</span> </code></pre></div>
 <p>Here, we reject the null hypothesis at <span class="math inline">\(\alpha\)</span> = 0.05. We can see that the 95% CI on the estimated difference in wingspan between sexes is 26-28 cm.</p>
 </div>
 <div id="anova" class="section level4">
@@ -340,8 +340,8 @@ mean <span class="cf">in</span> group <span class="dv">1</span> mean <span class
 <span class="co"># Summarize the model</span>
   <span class="kw">summary</span>(mod.anova)
             Df Sum Sq Mean Sq F value <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-x            <span class="dv">1</span>  <span class="dv">17897</span>   <span class="dv">17897</span>    <span class="dv">2075</span> <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-Residuals   <span class="dv">98</span>    <span class="dv">845</span>       <span class="dv">9</span>                   
+x            <span class="dv">1</span>  <span class="dv">17216</span>   <span class="dv">17216</span>    <span class="dv">2328</span> <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Residuals   <span class="dv">98</span>    <span class="dv">725</span>       <span class="dv">7</span>                   
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Here, we see that the results are essentially identical to our t-test. No surprises there if you have been following along. Finally, we can fit the model as a linear regression and we <em>should</em> obtain the same results because we now know that all of these tests are essentially the same thing.</p>
@@ -356,18 +356,18 @@ Call<span class="op">:</span>
 
 Residuals<span class="op">:</span>
 <span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">6.8749</span> <span class="op">-</span><span class="fl">1.9162</span>  <span class="fl">0.1385</span>  <span class="fl">1.9233</span>  <span class="fl">6.6149</span> 
+<span class="op">-</span><span class="fl">7.4855</span> <span class="op">-</span><span class="fl">1.3130</span>  <span class="fl">0.1413</span>  <span class="fl">1.6973</span>  <span class="fl">7.5753</span> 
 
 Coefficients<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept) <span class="fl">132.5092</span>     <span class="fl">0.8893</span>  <span class="fl">149.01</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-x           <span class="op">-</span><span class="fl">27.3075</span>     <span class="fl">0.5995</span>  <span class="op">-</span><span class="fl">45.55</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+(Intercept) <span class="fl">132.1623</span>     <span class="fl">0.8234</span>  <span class="fl">160.51</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+x           <span class="op">-</span><span class="fl">26.7828</span>     <span class="fl">0.5551</span>  <span class="op">-</span><span class="fl">48.25</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
 
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.937</span> on <span class="dv">98</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9549</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9544</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">2075</span> on <span class="dv">1</span> and <span class="dv">98</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.72</span> on <span class="dv">98</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9596</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9592</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">2328</span> on <span class="dv">1</span> and <span class="dv">98</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
   
 <span class="co"># Get an ANOVA table for the linear regression model</span>
   <span class="kw">anova</span>(mod.reg)
@@ -375,8 +375,8 @@ Analysis of Variance Table
 
 Response<span class="op">:</span><span class="st"> </span>y
           Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-x          <span class="dv">1</span> <span class="fl">17896.8</span> <span class="fl">17896.8</span>  <span class="fl">2074.5</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
-Residuals <span class="dv">98</span>   <span class="fl">845.4</span>     <span class="fl">8.6</span>                      
+x          <span class="dv">1</span> <span class="fl">17215.6</span> <span class="fl">17215.6</span>  <span class="fl">2327.7</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+Residuals <span class="dv">98</span>   <span class="fl">724.8</span>     <span class="fl">7.4</span>                      
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Once again, we see that the results are essentially identical between the t-test, the ANOVA, and the linear regression. Now, we will show that the results are also the same if we test the effect of sex on wingspan using a GLM.</p>
@@ -399,20 +399,20 @@ Call<span class="op">:</span>
 
 Deviance Residuals<span class="op">:</span><span class="st"> </span>
 <span class="st">    </span>Min       1Q   Median       3Q      Max  
-<span class="op">-</span><span class="fl">6.8749</span>  <span class="op">-</span><span class="fl">1.9162</span>   <span class="fl">0.1385</span>   <span class="fl">1.9233</span>   <span class="fl">6.6149</span>  
+<span class="op">-</span><span class="fl">7.4855</span>  <span class="op">-</span><span class="fl">1.3130</span>   <span class="fl">0.1413</span>   <span class="fl">1.6973</span>   <span class="fl">7.5753</span>  
 
 Coefficients<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept) <span class="fl">132.5092</span>     <span class="fl">0.8893</span>  <span class="fl">149.01</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-x           <span class="op">-</span><span class="fl">27.3075</span>     <span class="fl">0.5995</span>  <span class="op">-</span><span class="fl">45.55</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+(Intercept) <span class="fl">132.1623</span>     <span class="fl">0.8234</span>  <span class="fl">160.51</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+x           <span class="op">-</span><span class="fl">26.7828</span>     <span class="fl">0.5551</span>  <span class="op">-</span><span class="fl">48.25</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
 
-(Dispersion parameter <span class="cf">for</span> gaussian family taken to be <span class="fl">8.626942</span>)
+(Dispersion parameter <span class="cf">for</span> gaussian family taken to be <span class="fl">7.395924</span>)
 
-    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">18742.27</span>  on <span class="dv">99</span>  degrees of freedom
-Residual deviance<span class="op">:</span><span class="st">   </span><span class="fl">845.44</span>  on <span class="dv">98</span>  degrees of freedom
-AIC<span class="op">:</span><span class="st"> </span><span class="fl">503.26</span>
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">17940.4</span>  on <span class="dv">99</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st">   </span><span class="fl">724.8</span>  on <span class="dv">98</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">487.86</span>
 
 Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
 <p>The results are identical to what we got above from our t-test, ANOVA, and our linear regression model!</p>
@@ -520,23 +520,23 @@ Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </
 <blockquote>
 <p>Print the model results &amp; assess convergence</p>
 </blockquote>
-<p>When we print our results, we get a table of model coefficient estimates, along with the uncertainty associated with those estimates and a couple of pieces of information about convergence diagnostics. From this table, we can see that the mean <span class="math inline">\(\pm\)</span> SD wingspan of female peregrin falcons (alpha[1]) is about 105 <span class="math inline">\(\pm\)</span> 0 cm and the mean wingspan of male peregrin falcons is about 78 <span class="math inline">\(\pm\)</span> 0 cm. The mean estimated difference in wingspans between males and females is about 27, and the 95% CRI is 26 - 29 cm. We know that this difference is statistically significant at <span class="math inline">\(\alpha\)</span> = 0.05 because the 95% CRI does not include zero.</p>
+<p>When we print our results, we get a table of model coefficient estimates, along with the uncertainty associated with those estimates and a couple of pieces of information about convergence diagnostics. From this table, we can see that the mean <span class="math inline">\(\pm\)</span> SD wingspan of female peregrin falcons (alpha[1]) is about 105 <span class="math inline">\(\pm\)</span> 0 cm and the mean wingspan of male peregrin falcons is about 79 <span class="math inline">\(\pm\)</span> 0 cm. The mean estimated difference in wingspans between males and females is about 27, and the 95% CRI is 26 - 28 cm. We know that this difference is statistically significant at <span class="math inline">\(\alpha\)</span> = 0.05 because the 95% CRI does not include zero.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">print</span>(falco.model, <span class="dt">digits =</span> <span class="dv">2</span>)
 Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;falcomodel.txt&quot;</span>, fit using jags,
  <span class="dv">3</span> chains, each with <span class="dv">15000</span> <span class="kw">iterations</span> (first <span class="dv">5000</span> discarded), n.thin =<span class="st"> </span><span class="dv">5</span>
  n.sims =<span class="st"> </span><span class="dv">6000</span> iterations saved
          mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>% Rhat n.eff
-alpha[<span class="dv">1</span>]  <span class="fl">105.19</span>    <span class="fl">0.39</span> <span class="fl">104.43</span> <span class="fl">104.92</span> <span class="fl">105.18</span> <span class="fl">105.44</span> <span class="fl">105.95</span>    <span class="dv">1</span>  <span class="dv">6000</span>
-alpha[<span class="dv">2</span>]   <span class="fl">77.87</span>    <span class="fl">0.48</span>  <span class="fl">76.94</span>  <span class="fl">77.54</span>  <span class="fl">77.87</span>  <span class="fl">78.19</span>  <span class="fl">78.80</span>    <span class="dv">1</span>  <span class="dv">6000</span>
-effect     <span class="fl">27.32</span>    <span class="fl">0.61</span>  <span class="fl">26.12</span>  <span class="fl">26.90</span>  <span class="fl">27.32</span>  <span class="fl">27.73</span>  <span class="fl">28.53</span>    <span class="dv">1</span>  <span class="dv">6000</span>
-sigma       <span class="fl">8.96</span>    <span class="fl">1.30</span>   <span class="fl">6.77</span>   <span class="fl">8.05</span>   <span class="fl">8.85</span>   <span class="fl">9.76</span>  <span class="fl">11.85</span>    <span class="dv">1</span>  <span class="dv">1900</span>
-deviance  <span class="fl">500.39</span>    <span class="fl">2.53</span> <span class="fl">497.48</span> <span class="fl">498.56</span> <span class="fl">499.76</span> <span class="fl">501.50</span> <span class="fl">506.86</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+alpha[<span class="dv">1</span>]  <span class="fl">105.37</span>    <span class="fl">0.36</span> <span class="fl">104.66</span> <span class="fl">105.13</span> <span class="fl">105.37</span> <span class="fl">105.62</span> <span class="fl">106.08</span>    <span class="dv">1</span>  <span class="dv">1500</span>
+alpha[<span class="dv">2</span>]   <span class="fl">78.58</span>    <span class="fl">0.44</span>  <span class="fl">77.72</span>  <span class="fl">78.28</span>  <span class="fl">78.58</span>  <span class="fl">78.87</span>  <span class="fl">79.45</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+effect     <span class="fl">26.79</span>    <span class="fl">0.57</span>  <span class="fl">25.67</span>  <span class="fl">26.41</span>  <span class="fl">26.79</span>  <span class="fl">27.19</span>  <span class="fl">27.89</span>    <span class="dv">1</span>  <span class="dv">2500</span>
+sigma       <span class="fl">7.72</span>    <span class="fl">1.12</span>   <span class="fl">5.80</span>   <span class="fl">6.93</span>   <span class="fl">7.62</span>   <span class="fl">8.41</span>  <span class="fl">10.20</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+deviance  <span class="fl">484.97</span>    <span class="fl">2.52</span> <span class="fl">482.10</span> <span class="fl">483.14</span> <span class="fl">484.32</span> <span class="fl">486.10</span> <span class="fl">491.55</span>    <span class="dv">1</span>  <span class="dv">6000</span>
 
 For each parameter, n.eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).
 
 DIC <span class="kw">info</span> (using the rule, <span class="dt">pD =</span> <span class="kw">var</span>(deviance)<span class="op">/</span><span class="dv">2</span>)
-pD =<span class="st"> </span><span class="fl">3.2</span> and DIC =<span class="st"> </span><span class="fl">503.6</span>
+pD =<span class="st"> </span><span class="fl">3.2</span> and DIC =<span class="st"> </span><span class="fl">488.1</span>
 DIC is an estimate of expected predictive <span class="kw">error</span> (lower deviance is better).</code></pre></div>
 <blockquote>
 <p>Assess convergence</p>
