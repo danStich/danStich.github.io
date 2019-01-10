@@ -1,7 +1,10 @@
 ```{r child="_styles.Rmd"}
 ```
 
-# Linear models
+<h1 id="multi">Linear models </h1>
+
+<img src="../../images/graphs.png">
+
 <h2 id="multi"> Introduction </h2>  
 
 The objective of this assignment is to move beyond simple null hypothesis significance tests and get you thinking about how you can approach real-world problems mathematically. To do this, we will introduce a class of tools known as linear models. The simplest of these tools are the linear regression model, and the analysis of variance (ANOVA).  

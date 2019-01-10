@@ -1,8 +1,6 @@
 ```{r, child="../../_styles.Rmd"}
 ```
 
-<br>
-
 # Advanced Quantitative Biology (BIOL 678)
 
 <img src="../../images/matrixSmolt.jpg" alt="">
@@ -13,76 +11,67 @@ To access the content from a given topic, please click on the corresponding link
 
 ### Introduction to programming in R
 
-<a href="./01_introToR.html"> Lecture tutorial </a> 
-
+<a href="./01_introToR.html"> Lecture tutorial </a><br> 
 <a href="./hw01_introToR.html"> Homework assignment </a>
 
 ### Probability distributions
 
-<a href="./02_probabilityDistributions.html"> Lecture tutorial </a>
-
+<a href="./02_probabilityDistributions.html"> Lecture tutorial </a><br> 
 <a href="./hw02_probabilityDists.html"> Homework assignment </a>
+
 
 ### Introduction to inferential statistics
 
-<a href="./03_hypothesisTesting.html"> Lecture tutorial</a>
-
+<a href="./03_hypothesisTesting.html"> Lecture tutorial</a><br> 
 <a href="./hw03_inferentialStats.html"> Homework assignment </a>
+
 
 ### Linear models
 
-<a href="./04_linearModels.html"> Lecture tutorial </a>
-
+<a href="./04_linearModels.html"> Lecture tutorial </a><br> 
 <a href="./hw04_linearModels.html"> Homework assignment </a>
 
-
-<a href="./04_anova.html"> ANOVA worked example </a>
-
+<a href="./04_anova.html"> ANOVA worked example </a><br> 
 <a href="./04_violinPlotsInR.html"> Violin plots in R </a>
 
 
 ### Diagnostics and effect sizes
 
-<a href="./05_diagnosticsAndEffects.html"> Lecture tutorial </a>
-
+<a href="./05_diagnosticsAndEffects.html"> Lecture tutorial </a><br> 
 <a href="./hw05_diagnosticsAndEffects.html"> Homework assignment  </a>
 
 
 ### Model selection
 
-<a href="./06_modelSelection.html"> Lecture tutorial </a>
-
+<a href="./06_modelSelection.html"> Lecture tutorial </a><br> 
 <a href="./hw06_modelSelection.html"> Homework assignment </a>
 
 
 ### Intro to Bayesian inference
 
-<a href="./07_introToBayes.html"> Lecture tutorial </a>
-
+<a href="./07_introToBayes.html"> Lecture tutorial </a><br> 
 <a href="./hw07_introToBayes.html"> Homework assignment </a>
+
 
 ### GLM: logistic regression
 
-<a href="./08_glm_logistic.html"> Lecture tutorial </a>
-
+<a href="./08_glm_logistic.html"> Lecture tutorial </a><br> 
 <a href="./hw08_glm_logistic.html"> Homework </a>
+
 
 ### GLM: count models
 
-<a href="./09_glm_countModels.html"> Lecture tutorial </a>
-
+<a href="./09_glm_countModels.html"> Lecture tutorial </a><br> 
 <a href="./hw09_glm_counts.html"> Homework assignment </a>
+
 
 ### Linear mixed models
 
-<a href="./10_lmm.html"> Lecture tutorial </a>
-
+<a href="./10_lmm.html"> Lecture tutorial </a><br> 
 <a href="./hw10_lmm.html"> Homework assignment </a>
+
 
 ### Generalized linear mixed models
 
-<a href="./11_glmm.html"> Lecture tutorial </a>
-
+<a href="./11_glmm.html"> Lecture tutorial </a><br> 
 <a href="./hw11_glmm.html"> Homework assignment </a>
-
-<br>

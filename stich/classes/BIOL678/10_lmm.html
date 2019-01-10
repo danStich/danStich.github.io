@@ -20,19 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -213,47 +201,74 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="../BIOL217/index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 <div class="fluid-row" id="header">
 
@@ -263,23 +278,19 @@ $(document).ready(function () {
 </div>
 
 
-<p><br></p>
-<div id="linear-mixed-models-lmm" class="section level1">
-<h1>Linear mixed models (LMM)</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
+<h1 id="multi">
+Linear mixed models (LMM)
+<h1>
+<p><img src="../../images/yp.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>This week we will talk about extending linear models and generalized linear models to include “random effects” in the model, thus resulting in the “generalized linear mixed model” or GLMM. The GLMM is actually the most generalized formulation of our linear models that we have been discussing now for the past several weeks. All linear models (ANOVA, regression, t-tests, etc.) are simply special cases of the GLMM. As such, we can think of the GLMM as the framework within which we have been working for weeks now! For this week, we will start with examples of the linear mixed model.</p>
-<p><br></p>
-</div>
 <div id="assumptions-of-linear-models" class="section level2">
 <h2>Assumptions of linear models</h2>
-<p><br></p>
 <p>OMG, why is this guy always talking about assumptions of linear models no matter what we do?!</p>
 <p>Just as we discussed last week, linear models are just a special case of the GLMM. That is, the linear model assumes a certain error distribution (the normal) that helps things work smoothly and correctly. During the last two weeks, we discussed how we can use link functions to relax the assumption of linear models with respect to normality of residuals and homogeneity of variances, as well as assumptions about the linearity of relationships between explanatory variables and responses of interest by using data transformation. This week, we continue to relax the underlying assumptions of linear models to unleash the true power of estimation in mixed effects models. This is essentially as far as the basic framework for linear modeling goes (with the exception of multivariate techniques), and all other cases (e.g. spatial and temporal autocorrelation regressions) are simply specialized instances of these models.</p>
 <p>Let’s take another look at the assumptions of linear models. Here, we will repeat the mantra from the past few weeks. Here are the three assumptions that we explicitly use when we use linear models, just in case you’ve forgotten them:</p>
-<p><br></p>
 
 <ol style="list-style-type: decimal">
 <li>Residuals are normally distributed with a mean of zero</li>
@@ -300,58 +311,40 @@ $(document).ready(function () {
 <ol start="4" style="list-style-type: decimal">
 <li>Linear relationship between X and Y</li>
 </ol>
-<p><br></p>
 <div id="assumption-1-normality-of-residuals" class="section level3">
 <h3>Assumption 1: Normality of residuals</h3>
-<p><br></p>
 <p>We’ve seen these before, but let’s recap. For assumption 1, we are assuming a couple of implicit things: 1. The variable is <em>continuous</em> (and it must be if it’s error structure is normal), and 2. The error in our model is normally distributed. In reality, this is probably the least important assumption of linear models, and really only matters if we are trying to make predictions from the models that we make. Of course, we are often concerned with making predictions from the models that we make, so we can see why this might be important. However, more often we are in extreme violation of this assumption in some combination with assumption 4 above to such a degree that it actually does matter. For example, a response variable that is binomial (1 or zero) or multinomial in nature cannot possibly have normally distributed errors with respect to x unless there is absolutely no relationship between X and Y, right? So, if we wanted to predict the probability of patients dying from some medical treatment, or the presence/absence of species across a landscape then we can’t use linear models. This is where the link functions that we have been discussing really come into play. The purpose of the link function is to place our decidedly non-normal error structures into an asymptotically normal probability space. The other key characteristic of the link function is that it must be invertible, that way we can get back to the parameter scale that we want to use for making predictions and visualizing the results of our models.</p>
-<p><br></p>
 </div>
 <div id="assumption-2-independence-of-observations" class="section level3">
 <h3>Assumption 2: Independence of observations</h3>
-<p><br></p>
 <p>This time we’ve broken assumption 2 in two components: Colinearity and autocorrelation of errors. Remember that the manifestation of these problems is in the precision of our coefficient estimates, and have the potential to change the Type-I/II error rates in our models, causing us to draw false conclusions about which variables are important. As we discussed earlier in the course we expect to see some colinearity between observations, and we can deal with balancing this in our modeling through the use of model selection techniques to reduce Type-I and Type-II error. The past couple of weeks, we examined tools that help us determine whether or not colinearity is actually causing problems in our models that go beyond minor nuisances. As for the second part, autocorrelation, we looked at formulations of the GLM that used ‘generalized least squares’ to include auto-regressive correlation matrices in our analysis that will allowed us to relax this assumption of linear models and improve the precision of our parameter estimates. This week, we will further extend this to include random effects to account for non-independence in the observations, and correlation in the residual errors of explanatory variables that could otherwise cause issues with accuracy and precision of our estimates. We will continue to use model selection as a method for determining tradeoffs between information gain and parameter redundancy that results from colinearity between explanatory variables, as well as for hypothesis testing.</p>
-<p><br></p>
 </div>
 <div id="assumption-3-homogeneity-of-variances" class="section level3">
 <h3>Assumption 3: Homogeneity of variances</h3>
-<p><br></p>
 <p>In past weeks, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. Last week, we noted that this could be further mitigated through the use of weighted least squares and MLE within the GLM framework, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs. This week we will examine how we can use various formulations of the GLMM to account for heteroscedasticity in residual errors directly by including the appropriate error terms in our models. This essentially means that we can start to account for things like repeated measures, nested effects, and various other violations through the use of one tool- nifty!!</p>
-<p><br></p>
 </div>
 <div id="assumption-4-linearity-and-additivity" class="section level3">
 <h3>Assumption 4: Linearity and additivity</h3>
-<p><br></p>
 <p>We’ve already looked at a couple of ways to deal with violations of these assumptions such as data transformation and/or polynomial formulations of the linear model. We will continue to apply these concepts this week as we begin to investigate the GLMM as robust framework for analysis.</p>
-<p><br></p>
 </div>
 </div>
 <div id="introducing-the-glmm" class="section level2">
 <h2>Introducing the GLMM</h2>
-<p><br></p>
 <p>The first thing you should understand about GLMMs is that they are useful for analyzing data from a large number of statistical probability distributions (basically, you can use them for any underlying error structure). But, when we use specific error structures, or make certain assumptions about the manner in which the heterogeneity of variances is structured with respect to specific factors, this model is often given specific names. For example, repeated measures ANOVA (or ANCOVA), nested ANOVA(or ANCOVA), factorial ANOVA (or ANCOVA), linear mixed models, linear mixed effects models, and generalized linear mixed effects models are all just different formulations of the GLMM with different names. It sounds confusing, but just remember this: any linear model with combinations of fixed and random effects is, at it’s core, just another GLMM! If you can convince yourself of this, you will improve your ability to understand a wide range of experimental designs and accompanying statistical models by understanding this one model type.</p>
-<p><br></p>
 <p>The second thing you should understand to “get” GLMMs is what exactly is meant by a “random effect”. So far in this course we have only dealt with “fixed” group effects. The fixed effect is a categorical variable that is used to explain some variation in our response of interest. When we use a fixed effect in a statistical model, we are making the assumption that the categories for this effect are “fixed”. In other words, we have assigned the the levels, or categories, based on some <em>a priori</em> knowledge that the levels themselves represent all possible groups that can be used to describe the data. Because of this definition, fixed effects are usually 1) things that we manipulate directly (like dosage or some other treatment), or 2) relatively simple grouping variables such as sex. By contrast, a “random effect” is an effect that we do not generally set ahead of time or manipulate, but rather one which is considered to be a sample from a population of potential categories that we cannot census or (often) control. Please note that there is not a single, widely accepted definition for either of these things in applied statistics and the definition can be context-specific. Don’t take it from me, though, ask Andrew Gelman, globally recognized as one of the world’s leading experts on applied statistics, including the development of many modern approaches <a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">here</a>.</p>
-<p><br></p>
 </div>
 <div id="linear-mixed-models" class="section level2">
 <h2>Linear mixed models</h2>
-<p><br></p>
 <p>We will start our explorations into GLMM by looking at the somewhat familiar case of normal data. As with the relationship between ANOVA and GLM, we can say that the linear mixed model (LMM) is just a special case of the GLMM (hence the name).</p>
 <p>So, what is a mixed model? This is a model that assumes some parameter of interest is drawn from a random sample from a distribution of possible samples. We usually use these when we are dealing with repeated samples for some group or individual, or if we wish to account for some latent variable beyond our control (e.g. lake). Essentially, the use of random effects allows us to remove extraneous noise (variance) from the study system by accounting for it directly. This can improve both the accuracy and the precision of estimates to make hypothesis testing more robust. It also allows us to generalize our conclusions to a broader scope (e.g. any lake instead of lakes X, Y, and Z). Finally, the approach allows for a great deal of flexibility in assumptions we make about the effects and associated errors in our model. We might assume within our model that effects are randomized by assigning random intercepts, random slopes and intercepts that are independent, or random slopes or intercepts that are correlated across our random variable. There are even rare cases when we might wish to examine random slopes with shared intercepts. Generally speaking, we want our random variable to contain a relatively large number of potential levels (usually &gt; 5) as this tends to result in more accurate, and more precise parameter estimates.</p>
 <p>As with so many things, these tools are often best investigated through the use of a worked example. For this section, we will use the data presented in Chapter 12 of Kery (2010), and we’ll walk through both frequentist and Bayesian implementations of the LMM.</p>
-<p><br></p>
 </div>
 <div id="worked-example" class="section level2">
 <h2>Worked example</h2>
-<p><br></p>
 <p>We will start by generating the data used in the book chapter. These data are for the viper asps from Chapter 9, with a new twist. Here, we simulate length and mass data for 10 vipers from each of 56 different populations. I will not cover the following in detail here, but I encourage you to delve into it as you work through your text book.</p>
-<p><br></p>
 <div id="data-generation" class="section level3">
 <h3>Data generation</h3>
-<p><br></p>
-<p>Here is the code, shamelessly copy-and-pasted from Chapter 12</p>
-<p><br></p>
+<p>Here is the code, shamelessly copy-and-pasted from Chapter 12 of Kery and Schaub (2010)</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n.groups &lt;-<span class="st"> </span><span class="dv">56</span>              <span class="co"># Number of populations</span>
 n.sample &lt;-<span class="st"> </span><span class="dv">10</span>              <span class="co"># Number of vipers in each pop</span>
 n &lt;-<span class="st"> </span>n.groups <span class="op">*</span><span class="st"> </span>n.sample        <span class="co"># Total number of data points</span>
@@ -362,7 +355,7 @@ original.length &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <
 mn &lt;-<span class="st"> </span><span class="kw">mean</span>(original.length)
 sd &lt;-<span class="st"> </span><span class="kw">sd</span>(original.length)
 <span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-Mean and sd used to normalise.original length<span class="op">:</span><span class="st"> </span><span class="fl">57.29165</span> <span class="fl">7.225148</span> 
+Mean and sd used to normalise.original length<span class="op">:</span><span class="st"> </span><span class="fl">57.58807</span> <span class="fl">7.681806</span> 
 length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
 <span class="kw">hist</span>(length, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
@@ -382,31 +375,20 @@ lin.pred &lt;-<span class="st"> </span>Xmat[,] <span class="op">%*%</span><span 
 eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">30</span>)  <span class="co"># residuals </span>
 mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class="st"> </span>eps                      <span class="co"># response = lin.pred + residual</span>
 
-<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span></code></pre></div>
+<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span>
+
+<span class="kw">library</span>(lattice)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="kw">library</span>(lattice)
-
-Attaching package<span class="op">:</span><span class="st"> &#39;lattice&#39;</span>
-The following object is masked from <span class="st">&#39;package:boot&#39;</span><span class="op">:</span>
-
-<span class="st">    </span>melanoma
-<span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
-<p><br></p>
 <p>So, as you can see we have successfully created 56 populations of critters, each of which has some pre-defined relationship between length and mass based on 10 samples from the population. Wow. What a mess. Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation and Bayesian inference. Ultimately, what we want to do here is estimate the relationship between length and mass while accounting for inherent (well, simulated) variability between populations.</p>
-<p><br></p>
 </div>
 <div id="random-intercepts-model" class="section level3">
 <h3>Random-intercepts model</h3>
-<p><br></p>
 <p>First, we will analyze the data assuming that the intercepts for our linear model can vary between populations, but the relationship between length and mass is the same across all populations. This is a very common approach in many ecological and biological applications, as it often is the case that we are just trying to account for sampling design when we do this kind of analysis.</p>
-<p><br></p>
 <div id="reml-estimation" class="section level4">
 <h4>REML estimation</h4>
-<p><br></p>
 <p>This is really straightforward to do in R. First, we will load the <code>lme4</code> package that we will use for all LMM and GLMM implementation in this class. Then, we fit the model and print the output.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the lme4 library</span>
 <span class="kw">library</span>(lme4)
 
@@ -418,30 +400,28 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
 Linear mixed model fit by REML [<span class="st">&#39;lmerMod&#39;</span>]
 Formula<span class="op">:</span><span class="st"> </span>mass <span class="op">~</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pop)
 
-REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">5725.6</span>
+REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">5751.9</span>
 
 Scaled residuals<span class="op">:</span><span class="st"> </span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">2.8802</span> <span class="op">-</span><span class="fl">0.6852</span> <span class="op">-</span><span class="fl">0.0068</span>  <span class="fl">0.6346</span>  <span class="fl">3.4505</span> 
+<span class="st">     </span>Min       1Q   Median       3Q      Max 
+<span class="op">-</span><span class="fl">2.85202</span> <span class="op">-</span><span class="fl">0.59853</span> <span class="op">-</span><span class="fl">0.00276</span>  <span class="fl">0.66469</span>  <span class="fl">2.89068</span> 
 
 Random effects<span class="op">:</span>
 <span class="st"> </span>Groups   Name        Variance Std.Dev.
- <span class="kw">pop</span>      (Intercept)  <span class="fl">255.6</span>   <span class="fl">15.99</span>   
- Residual             <span class="fl">1482.8</span>   <span class="fl">38.51</span>   
+ <span class="kw">pop</span>      (Intercept)  <span class="fl">313.6</span>   <span class="fl">17.71</span>   
+ Residual             <span class="fl">1537.9</span>   <span class="fl">39.22</span>   
 Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">560</span>, groups<span class="op">:</span><span class="st">  </span>pop, <span class="dv">56</span>
 
 Fixed effects<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value
-(Intercept)  <span class="fl">227.647</span>      <span class="fl">2.686</span>   <span class="fl">84.76</span>
-length        <span class="fl">55.097</span>      <span class="fl">1.680</span>   <span class="fl">32.80</span>
+(Intercept)  <span class="fl">228.764</span>      <span class="fl">2.889</span>   <span class="fl">79.19</span>
+length        <span class="fl">54.525</span>      <span class="fl">1.737</span>   <span class="fl">31.39</span>
 
 Correlation of Fixed Effects<span class="op">:</span>
 <span class="st">       </span>(Intr)
 length <span class="fl">0.000</span> </code></pre></div>
-<p><br></p>
 <p>As we look throught the output, the first thing that you’ll probably notice is that we don’t have a p-value, which is probably already driving some people nuts. This is a bit of a philosophical sticking point, which is why it is not included in the default print method for the summary of these objects. Here, we can do statistical inference based on the overlap with our coefficient estimates with zero. What does this look like?</p>
 <p>Let’s say we want to see if our explanatory variable is significantly related to the response of interest, but we don’t have a p-value. If we still wanted to test significance with respect to some variable (at <span class="math inline">\(\alpha\)</span> = 0.05), we could estimate the 95% CI for the regression coefficient and determine whether or not the 95% CI includes zero, like so:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get the coefficients from the model</span>
   coefs =<span class="st"> </span><span class="kw">summary</span>(lme.fit1)<span class="op">$</span>coefficients
 
@@ -455,10 +435,8 @@ length <span class="fl">0.000</span> </code></pre></div>
 
 <span class="co"># Print the CI to the console</span>
   lengthCI
-[<span class="dv">1</span>] <span class="fl">51.80475</span> <span class="fl">58.38945</span></code></pre></div>
-<p><br></p>
+[<span class="dv">1</span>] <span class="fl">51.12042</span> <span class="fl">57.93031</span></code></pre></div>
 <p>Here, we can see that our 95% CI excludes zero, so we can say that length has a significant effect on mass in this species. If we wanted to show this relationship in a graph, we now have to do the math by hand, which is why I forced you to learn the math involved with this. Here is an example of how one might do this:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
   <span class="kw">plot</span>(length, mass)
 
@@ -472,24 +450,20 @@ length <span class="fl">0.000</span> </code></pre></div>
 <span class="co"># Add lines to the plot</span>
   <span class="kw">lines</span>(lens, masses, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><br></p>
 <p>This gives us the overall estimate for the relationship between length and mass. What it does not get us are individual estimates of the intercepts like we might want. We can, however, get these out if we use the <code>coef</code> function:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get random intercepts and fixed sloppes</span>
   effs =<span class="st"> </span><span class="kw">coef</span>(lme.fit1)
 
 <span class="co"># Have a look at the first few</span>
   <span class="kw">head</span>(effs<span class="op">$</span>pop)
-  (Intercept)  length
-<span class="dv">1</span>    <span class="fl">225.1143</span> <span class="fl">55.0971</span>
-<span class="dv">2</span>    <span class="fl">249.5503</span> <span class="fl">55.0971</span>
-<span class="dv">3</span>    <span class="fl">217.2255</span> <span class="fl">55.0971</span>
-<span class="dv">4</span>    <span class="fl">238.8297</span> <span class="fl">55.0971</span>
-<span class="dv">5</span>    <span class="fl">221.1516</span> <span class="fl">55.0971</span>
-<span class="dv">6</span>    <span class="fl">212.9610</span> <span class="fl">55.0971</span></code></pre></div>
-<p><br></p>
+  (Intercept)   length
+<span class="dv">1</span>    <span class="fl">237.7858</span> <span class="fl">54.52537</span>
+<span class="dv">2</span>    <span class="fl">255.7753</span> <span class="fl">54.52537</span>
+<span class="dv">3</span>    <span class="fl">185.3532</span> <span class="fl">54.52537</span>
+<span class="dv">4</span>    <span class="fl">228.7119</span> <span class="fl">54.52537</span>
+<span class="dv">5</span>    <span class="fl">230.3067</span> <span class="fl">54.52537</span>
+<span class="dv">6</span>    <span class="fl">233.4669</span> <span class="fl">54.52537</span></code></pre></div>
 <p>This gives us the random intercept for each population so we can make predictions about them individually if we want to! It only gives us one value for the length parameter because we specified this as a main effect. If want to plot the results for population 3, for example, our code would look like this:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
   <span class="kw">plot</span>(length[pop<span class="op">==</span><span class="dv">3</span>], mass[pop<span class="op">==</span><span class="dv">3</span>],
        <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">500</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray87&#39;</span>,
@@ -502,10 +476,8 @@ length <span class="fl">0.000</span> </code></pre></div>
 <span class="co"># Add lines to the plot</span>
   <span class="kw">lines</span>(lens, masses, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><br></p>
 <p>But, we still don’t really have a great way of looking at differences between groups if we are interested in those. Why is this? We do not have the technology. Basically, computing group-specific variances is too far ahead of our programming algorithms. But, we can use some simulation methods to do this.</p>
 <p>The follwoing method was released in December 2016 to meet the growing need for characterizing uncertainty in group-level predictions from mixed models. Let’s take a look at how to use some of these tools.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(merTools)
 
 <span class="co"># Tell r which population we are </span>
@@ -549,19 +521,15 @@ length <span class="fl">0.000</span> </code></pre></div>
   <span class="kw">lines</span>(newd<span class="op">$</span>length, PI<span class="op">$</span>upr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Upper CI</span>
   <span class="kw">lines</span>(newd<span class="op">$</span>length, PI<span class="op">$</span>lwr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Lower CI</span></code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><br></p>
 <p>We could go through and do this for each population (56 total), and we would have a pretty nice (albeit slightly unwieldy) set of figures describing the relationship between length and mass. Alternatively, we could use the model coefficients to estimate the relationship across all populations, and to make predictions about unknown populations.</p>
-<p><br></p>
 </div>
 <div id="bayesian-analysis-using-jags" class="section level4">
 <h4>Bayesian analysis using JAGS</h4>
-<p><br></p>
 <p>Next, we will demonstrate how to implement the same model in JAGS. In principle, we are doing essentially the same thing here, but the approach is slightly more explicit.</p>
 <blockquote>
 <p>Write the model</p>
 </blockquote>
 <p>We start by specifying the model. The likelihood for the model is unchanged relative to what we would write for the fixed effects models with which we have worked previously. The only thing that changes is that instead of specifying priors on <span class="math inline">\(\alpha\)</span> for each population using <code>dnorm(0, 0.001)</code>, we specify each prior to using a mean of <code>mu.int</code> and a precision of <code>tau.int</code>. Here, <code>mu.int</code> and <code>tau.int</code> are <em>hyperparameters</em>, meaning that they govern the distribution from which our population-level parameters are drawn. Therefore, we need to specify <em>hyperpriors</em> for each of these parameters that can be used to estimate an overall (grand) mean effect. In the example below, we specify these using <code>dnorm(0, 0.001)</code> for <code>mu.int</code> and <code>dunif(0, 100)</code> for our variance (<code>sigma.int</code>).</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Write model</span>
 modelstring=<span class="st">&quot;</span>
 <span class="st">model {</span>
@@ -626,32 +594,30 @@ nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 <p>Now have a look at the results</p>
 </blockquote>
 <p>First, we can take a look at the model coefficients and diagnostics. Here, I am just going to print the model results for mean, sd, 95% CRI, and N<sub>eff</sub>.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get parameter estimates all by themselves</span>
   res =<span class="st"> </span>out<span class="op">$</span>BUGSoutput<span class="op">$</span>summary[, <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">7</span>,<span class="dv">8</span>,<span class="dv">9</span>)]
 
 <span class="co"># Inspect results</span>
   <span class="kw">print</span>(res, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>            mean    sd    2.5%   97.5%  Rhat n.eff
-alpha[1] 224.478 9.939 204.716 243.807 1.001  2200
-alpha[2] 249.310 9.974 229.782 269.098 1.001  2200
-alpha[3] 216.193 9.904 196.854 235.515 1.004   590
-alpha[4] 238.415 9.679 219.519 257.416 1.001  2200
-alpha[5] 220.983 9.610 202.088 240.249 1.002  2200
-alpha[6] 212.204 9.703 192.212 230.761 1.002  1600
+<pre><code>            mean     sd    2.5%   97.5%  Rhat n.eff
+alpha[1] 237.064 10.274 217.308 256.709 1.002  1100
+alpha[2] 255.005 10.625 234.453 275.650 1.002  1300
+alpha[3] 184.913 10.868 162.962 206.164 1.003   890
+alpha[4] 228.351 10.313 206.880 247.966 1.000  2200
+alpha[5] 229.264  9.867 209.512 248.299 1.001  2200
+alpha[6] 232.916 10.495 212.303 254.118 1.003   800
 
  . 
  . 
  . 
  
               mean     sd     2.5%    97.5%  Rhat n.eff
-alpha[56]  228.877  9.876  210.128  247.881 1.001  2000
-beta        54.987  1.718   51.720   58.363 1.001  2200
-deviance  5679.963 11.804 5658.944 5705.573 1.001  2200
-mu.int     225.880  2.750  220.320  231.107 1.002  1400
-sigma       38.663  1.218   36.419   41.166 1.001  2200
-sigma.int   16.515  2.661   11.740   22.118 1.001  2200</code></pre>
-<p><br></p>
+alpha[56]  216.202 10.377  196.632  236.834 1.000  2200
+beta        54.328  1.749   50.893   57.693 1.000  2200
+deviance  5700.834 11.256 5680.828 5723.936 1.002   970
+mu.int     226.835  3.024  220.841  232.563 1.001  2200
+sigma       39.427  1.206   37.110   41.856 1.001  2200
+sigma.int   18.043  2.595   13.443   23.373 1.003   760</code></pre>
 <p>Judging by our diagnostics, it looks like our estimates have converged nicely, and we see that we have sufficiently sampled posteriors for all 60(!) parameters of interest.</p>
 <p>Finally, we can look at the results for the linear predictions. This week, we’ll take a look at how to present results for linear predictors. We will use the same example as we did for the model we fit in <code>lme4</code>.</p>
 <blockquote>
@@ -698,13 +664,9 @@ sigma.int   16.515  2.661   11.740   22.118 1.001  2200</code></pre>
   <span class="kw">lines</span>(lens, upPred, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)
   <span class="kw">lines</span>(lens, lowPred, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p><br></p>
 <p>As you can see, the mean prediction here is pretty much spot on with the REML approach to fitting the model. The big difference is that the precision is much tighter around the mean prediction for the Bayesian model. This is not because we did not specify the model correctly, or because we represented the uncertainty incorrectly. This is a phenomenon known as <strong>shrinkage</strong>, and it is a direct result of how the hierarchical modeling approach works in Bayesian inference. The reason for this shrinkage is that we are sharing information across populations in the Bayesian mode of inference based on how we specify our priors and how those feed into the likelihood.</p>
 <p>What we have done with the intercept here is readily extended to include random effects on the estimates of beta. This will be one focus of our work in lab this week.</p>
 <p>Of course, the methods covered this week are just for variables that assume normality. As you might expect by now, this framework is easily extended in both REML and Bayesian approaches to include a wide variety of error distributions. This will be the focus of our study next week, when we discussion generalized linear mixed models (GLMM).</p>
-<p><br></p>
-<p><br></p>
-</div>
 </div>
 </div>
 </div>
@@ -715,7 +677,7 @@ sigma.int   16.515  2.661   11.740   22.118 1.001  2200</code></pre>
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

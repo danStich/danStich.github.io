@@ -1,31 +1,22 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
-# GLM: count models
-
-<br>
-  
 ```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 # Load the R2jags library
   library(R2jags)
 ```
 
-## Introduction
+<h1 id="multi"> GLM: Count models </h1>
 
-<br>
- 
+<img src="../../images/crabs.jpg" alt="">
+
+<h2 id="multi"> Introduction </h2>
+
 This week in class, we introduced GLM formulations of count models using either Poisson or negative binomial error distributions. Along with these ideas, we discussed concepts relating to transformations for exploratory variables and some basic model diagnostics for the GLM in these situations. During lab this week, we will continue to expand on these ideas, and we will reinforce concepts related to model selection and validation that we have talked about in other sections.
 
 For our purposes this week, we will continue to delve further into count models that use Poisson and negative binomial error distributions. We will make predictions from these models, talk about standardized effects, and continue to learn more about writing methods and results for these approaches. We will work with the same models we formulated under the frequentist mode of interest earlier this week, but now we will cast these analyses in a Bayesian framework.
-
-<br>
  
 ## The data
-
-<br>
- 
 We are going to continue working with the crabs data this week in lab. In case you need a refresher on those data, here it is:
 
 These data represent the number of satellite male crabs per female (rows) horseshoe crab in relation to a number of characteristics of the females, including their color, spine condition, carapace width, and mass (g).
@@ -35,45 +26,37 @@ H. J. Brockmann. 1996. Satellite male groups in horseshoe crabs, *Limulus polyph
 
 Read in the data, and recall that we want to be working with `color`, and `spine` as categorical variables since these are both classification schemes and not actually numeric data.
 
-<br>
- 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 # Read in the data
-  crabs = read.csv('http://employees.oneonta.edu/stichds/data/crabs.csv', header = TRUE)
+  crabs = read.csv('../../data/crabs.csv', header = TRUE)
 
 # Take a look at the first few rows of the dataframe
   head(crabs, 10)
 ```
 
-<br>
- 
-Did you make sure that the variables `color` and `spine` were stored as either factors or character variables? If not, go ahead and change their data type now.
+```{r, echo=FALSE}
+# Read in the data
+  crabs = read.csv('../../data/crabs.csv', header = TRUE)
 
-<br>
- 
+# Take a look at the first few rows of the dataframe
+  head(crabs, 10)
+```
+
+Did you make sure that the variables `color` and `spine` were stored as either factors or character variables? If not, go ahead and change their data type now.
 ```{r, echo=FALSE, results='hide'}
 # Change color and spine to factors
   crabs$color = as.factor(crabs$color)
   crabs$spine = as.factor(crabs$spine)
 ```
 
-<br>
- 
 Don't forget to make sure you did it correctly:
-
-<br>
- 
 ```{r}
 # Have a look at the data structure
   str(crabs)
 ```
 
-<br>
- 
-## A worked example
 
-<br>
- 
+## A worked example
 Let's get started! Our first challenge here is to fit a count model describing the variability in satellite males as some function of female characteristics. Let's start by building a model that uses only `color` as an explanatory variable. We can liken this to doing and ANOVA to test the effects of `color` on `satellites`. So, if you are following along in your text book, we are somewhere between the models presented in chapters 13 and those presented in chapter 15.
 
 We can formulate this model in a pretty straightforward way by using the same conventions that we have used during the past couple of weeks for Bayesian models written in the BUGS language. Here, we will estimate separate intercepts for each of the color variants in the data set:
@@ -92,14 +75,14 @@ And, finally, we assume that the i^th^ value of is drawn from a normal distribut
 
 $$\alpha_{j} = Normal(0, 0.01)$$
 
-> Specify* the model for JAGS
+> Specify the model for JAGS
+
+Model *specification* is the declaration of the mathematical formula that we use to relate our expalanatory variables to the response.
 
 Here, we add in a few calculations so we can assess model fit (see Chapter 13.5-13.5.1 in Kery [2010] for explanations). Essentially, what we are going to do here is calculate the predicted and fitted residuals so we can make (1) a residual plot and (2) a predicted vs fitted plot of sorts.
 
 Note that we put this code inside the same loop as the likelihood because it is also looping over each observation in the data. This decision has nothing to do with statistics and everything to do with programming. A sinlge, loop containing multiple tasks in JAGS is evaluated faster than multiple smaller loops containing only a single task. We could just as easily write the code for fit assessment in a separate loop that iterates over operations. It would just be a little slower to run.
 
-<br>
- 
 ```{r}
 modelstring="                 
   model {                       
@@ -143,11 +126,7 @@ writeLines(modelstring,con="crabsModel.txt")
 
 ```
 
-<br>
- 
-Model *specification* is the declaration of the mathematical formula that we use to relate our expalanatory variables to the response.
-
-> Create a list to hold the data for the model
+> Create a list to hold the data for the model.
 
 ```{r}
 # Package the data in a list
@@ -160,14 +139,15 @@ Model *specification* is the declaration of the mathematical formula that we use
   )
 ```
 
-> Tell JAGS which parameters we wish to monitor
+> Tell JAGS which parameters we wish to monitor.
 
 ```{r}
 # Parameters monitored
   parameters <- c('alpha', 'beta', 'pResid', 'fitted', 'predicted')
 ```
 
-> Define a function that creates a list of initial values for each parameter
+> Define a function that creates a list of initial
+values for each parameter.
 
 ```{r}
 # Initial values
@@ -187,9 +167,7 @@ Model *specification* is the declaration of the mathematical formula that we use
   nc <- 3          # Number of chains
 ```  
 
-> Fit (calibrate) the model using JAGS
-
-*Calibration* is fitting the model to actual data
+> Fit (calibrate) the model using JAGS.
 
 ```{r, results='hide', warning=FALSE, message=FALSE}
 # Call jags and run the model
@@ -208,8 +186,6 @@ Model *specification* is the declaration of the mathematical formula that we use
 > Making sense of the results
 
 Unfortunately, storing the residuals also means that we get the print out of the estimates in the model summary...But, we can summarize the model nicely by just printing out the components we really care about. Here, I select only the columns for mean, sd, 95% CRI, Rhat, and n.eff (columns 1-3, and 7-9 in the summary table) for our $\alpha$ parameters and the deviance estimate (rows 1-5 of the summary table). 
-
-<br>
  
 ```{r}
 # Get the relevant information from the model summary
@@ -219,12 +195,8 @@ Unfortunately, storing the residuals also means that we get the print out of the
   print(modSummary, digits=2)
 ```
 
-<br>
- 
 And, if we need it, we can also get the DIC like this:
 
-<br>
- 
 ```{r}
 # Print out DIC value
   crabs.model$BUGSoutput$DIC
@@ -237,22 +209,15 @@ At a quick glance, the summary table seems to indicate that our chains converged
 Now that we have our wits back about us, let's actually take a look at some residual plots!
 
 Make a plot of the residuals.
-
-<br>
- 
 ```{r}
 plot(crabs.model$BUGSoutput$mean$pResid, las=1, ylab='Pearson residuals', xlab = 'Observation', pch=21, bg='gray87')
 abline(h=0, col='red', lty=2, lwd=1)
 ```
 
-<br>
- 
 Uh, oh...this isn't looking good! As you can see, most of our residuals are above the zero line here, and even though we are not working with a normally distributed response, the residuals should still have a mean of zero and an approximately normal distribution because we are using a link function that *should* make them normal.
 
 We can keep plowing through this and take a look at our discrepancy measure to see whether or not the model provides an adequate fit:
 
-<br>
- 
 ```{r}
 plot(crabs.model$BUGSoutput$sims.list$fitted,
      crabs.model$BUGSoutput$sims.list$predicted,
@@ -261,33 +226,20 @@ plot(crabs.model$BUGSoutput$sims.list$fitted,
 abline(0,1,lwd=2,col='black')
 ```
 
-<br>
- 
 Also not looking great (see Ch. 13.5.1 for explanation). We can find out pretty quickly, but the key here is that we are looking for a [Bayesian p-] value of about 0.50 (see Ch. 8.4.2 in Kery [2010]).
-
-<br>
- 
 ```{r}
 mean(crabs.model$BUGSoutput$sims.list$fitted>
      crabs.model$BUGSoutput$sims.list$predicted)
 ```
 
-<br>
- 
 Crap. We are in big trouble here.
 
 Okay, well it's actually not that bad...We just need to look at the assumptions that we've made (and that we would have known were erroneous if we'd done our exploratory analysis!). The fact is, our data are over-dispersed (the variance is bigger than the mean), so these data are not actually Poisson. 
 
-<br>
  
 ## Accounting for overdispersion
-
-<br>
- 
 We basically have two options here. We could go full-on negative binomial, or we could just address the overdispersion directly by adding a parameter to the model! Let's do the latter. Basically, the only change here is that we are going to add a parameter, called $\epsilon$ to our model so we can incorporate the overdispersion directly.
 
-<br>
- 
 ```{r}
 modelstring="                 
   model {                       
@@ -361,25 +313,15 @@ writeLines(modelstring,con="crabsMod2.txt")
   print(modSummary, digits=2) 
 ```
 
-<br>
- 
 We can see that our values of our parameter estimates have changed a bit here, but how does that translate to model fit?
 
 Go ahead and calculate the Bayesian p-value again. It looks like it is a little closer to 0.50, but maybe not good enough to pass the straight-face test...
-
-<br>
- 
 ```{r, echo=FALSE}
 mean(crabs.model2$BUGSoutput$sims.list$fitted>
      crabs.model2$BUGSoutput$sims.list$predicted)
 ```     
  
-<br>
-     
 So, why is this? It's because we don't just have a little overdispersion...we have quite a bit. Let's have a look at our predictions versus observed number of satellites for each color. From these plots, we can see that our measure of central tendancy is still ballpark, it's just that our variance is still grossly under-estimated.
-
-<br>
- 
 ```{r}
 par(mfrow=c(2,2))
 for(i in 1:4){
@@ -393,16 +335,10 @@ plot(density(exp(crabs.model2$BUGSoutput$sims.list$alpha[,i] +
 }
 ```
 
-<br>
- 
-## Shifting gears
 
-<br>
- 
+## Shifting gears
 This example is probably a good case for switching over to the negative binomial distribution. The code to demonstrate this is below. This is the formulation you will work with for the rest of lab.
 
-<br>
- 
 ```{r}
 modelstring="                 
   model {                       
@@ -456,12 +392,7 @@ writeLines(modelstring,con="crabsMod3.txt")
   print(crabs.model3, digits=2) 
 ```
 
-<br>
- 
 If we want to see how the estimates from this model compare to the observed data, we can plot the posterior densities for r over the top of histograms for each color. All in all this is looking pretty darn good.
-
-<br>
- 
 ```{r}  
 par(mfrow=c(2,2))  
 for(i in 1:length(unique(crabs$color))){  
@@ -473,12 +404,8 @@ plot(density(exp(crabs.model3$BUGSoutput$sims.list$r[ ,i])),
 }
 ```
 
-<br>
- 
-## Your mission
 
-<br>
- 
+## Your mission
 Just as in the past couple of weeks, your assignment for this lab is to write a *brief* methods section and a *brief* results section for the exercises you have been working on. **You may use either the maximum likelihood estimation procedure** covered in lecture this week, **or the Bayesian approach** detailed in the lab exercise. Just make sure you pick one or the other and stick to it in your analysis and your writing.
 
 In addition to these tasks, I would like you to **add one additional explanatory variable** to the model. I would like you to add `width` as a continuous covariate. 
@@ -491,26 +418,22 @@ Remember that this is the same as calculating a whole bunch of z-scores. You can
   crabs$smass = as.vector(scale(crabs$mass))
 ```
 
-<br>
-
 For your results, you can present covariates on the standardized scale, and back-transform based on our discussions earlier this week to show effects on the real scale of the variable.
 
-<br>
- 
 ```{r, eval=FALSE, echo=FALSE}
 # My code for the answer key to lab 09
 
-# Front-end needs -------------------------------------------------------------
+# Front-end needs -----------------
   library(R2jags)
 
-# Data manipulation -----------------------------------------------------------
+# Data manipulation --------------------
 # Read in the data
   crabs = read.csv('crabs.csv', header = TRUE)
 # Have a look-see
   head(crabs)
   str(crabs)
 
-# Model specification --------------------------------------------------------
+# Model specification ----------------------------------
 modelstring="                 
   model {                       
     # Likelihood
@@ -529,7 +452,7 @@ modelstring="
 "                               
 writeLines(modelstring,con="crabsMod.txt")
 
-# Model settings and calibration ---------------------------------------------
+# Model settings and calibration --------------------------
 # Package the data in a list
   crabs.data = list(
     nobs = nrow(crabs),
@@ -564,7 +487,7 @@ writeLines(modelstring,con="crabsMod.txt")
   print(crabs.model, digits = 3)  
 ```  
 
-<br>
+
    
-<br>
+
    

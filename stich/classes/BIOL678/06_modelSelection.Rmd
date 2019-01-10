@@ -1,9 +1,11 @@
 ```{r child="../../_styles.Rmd"}
 ```
 
-# Model selection and validation 
+<h1 id="multi"> Model selection </h1>
 
-<h2 id="multi"> Introduction </h2>
+<img src="../../images/glass.jpg">
+
+<h2 id="multi"> Introduction </h2>  
 
 As we have learned in the past couple weeks, we often encounter situations for which there are mulitiple, competing hypotheses about what factors, or combinations of factors, best explain the observed patterns in our response of interest. This uncertainty can arise for one of two primary reasons:
 

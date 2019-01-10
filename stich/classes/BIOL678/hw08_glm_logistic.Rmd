@@ -1,95 +1,61 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
 # Generalized linear models: logistic regression
 
-<br>
- 
-## Introduction
+<img src="../../images/veligers.jpg" alt="">
 
-<br>
- 
+<h2 id="multi"> Introduction </h2>
+
 This week in lab, we will start to take a closer look at generalized linear models (GLM) through the lens of logisitic regression. This is an family that includes multiple types of analyses depending on the data. For example, we might have binary data (0, 1), binomial data (number of success per some number of trials), or multinomial data (group membership as a response). We will look at the simplest of these cases, binary logistic regression, this week.
 
-<br>
- 
 ## The data
-
-<br>
- 
 For our exercise this week, we will work with a data set from a Biological Field Station intern project. The purpose of the project was to test the efficacy of Virkon as a molluscicide for dissinfecting equipment following exposure to zebra mussels *Dreissena polymorpha*. The study examined the effects of exposure time and concentration on mortality. The response in this data set is `dead`, a 1/0 variable indicating whether or not a zebra mussel was dead. Usually, with this kind of data, we use a '1' to indicate survival, but it seemed like too much fun to pass up the opportunity to model mortality as a success. So, for this data set a '1' indicates dead.
 
 Start by reading in the data.
 
-```{r}
-vd = read.csv('http://employees.oneonta.edu/stichds/data/veligers.csv')
+```{r, eval=FALSE, echo=TRUE}
+vd = read.csv('veligers.csv')
 ```
 
-<br>
- 
-This data set contains a *pile* of variables, which of course makes it very fun to play with. We will work with some, but not all, of these variable this week for lab, and then you will make some additional choices about which of them you will work with for your homework, using `dead` as our response of interest throughout. Explanations of variables are as follows:
-
-```
-Date: calendar date for start of each lab test
-Location: the location in Otsego Lake, NY from which mussels were collected
-SolnAge: the age of the Virkon solution
-Concentration: concentration of Virkon in solution
-Time: exposure time
+```{r, eval=TRUE, echo=FALSE}
+vd = read.csv('../../data/veligers.csv')
 ```
 
-<br>
- 
+This data set contains a *pile* of variables, which of course makes it very fun to play with. We will work with some, but not all, of these variable this week for lab, and then you will make some additional choices about which of them you will work with for your homework, using `dead` as our response of interest throughout. 
+
+Explanations of variables are as follows:
+
+`Date`: calendar date for start of each lab test
+`Location`: the location in Otsego Lake, NY from which mussels were collected
+`SolnAge`: the age of the Virkon solution
+`Concentration`: concentration of Virkon in solution
+`Time`: exposure time
+
 We will treat concentration as a categorical variable because we only have a few different concentrations, although the argument could be made either way.
-
-<br>
- 
 ```{r}
 vd$Concentration = as.factor(vd$Concentration)
 ```
 
-<br>
-  
 The remaining variables are physical and chemical parameters of water measured either in Otsego Lake, or in the Virkon solution. We will come back to these.
  
-<br>
- 
 ## Exercises
-
-<br>
- 
-### A worked example
-
-<br>
- 
+<h3 id="multi"> A worked example </h3>
 Let's start with a simple example to get you moving along. First, we are interested in determining the effects of `Concentration` and `Time` on the probability of zebra mussel death (`dead`) following exposure. If you have been following closely during the past few weeks, you will recognize that with a categorical variable (`Concentration`) and a continuous variable (`Time`) we are looking at something that should resemble an analysis of covariance. **But**, our response, `dead`, can only take on values of 0 and 1, so we know that we need to use a GLM to accommodate this.
 
-<br>
  
 #### Analysis
-
-<br>
- 
 To fit this model we will use the `glm` function in R, being sure to specify `family = 'binomial'` in our call:
-
 ```{r}
 # Fit the model
   v.mod = glm(dead~Concentration+Time, family='binomial', data=vd)
 ```
 
-<br>
- 
 Cool, that was easy! 
 
-<br>
- 
+
 #### Results
-
-<br>
- 
 Let's have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the `Anova()` function in the `car` package to use the correct calculations because we have continuous and categorical variables. The only difference is that we are now using an analysis of deviance to summarize significance, which requires the use of a Type-II test instead of a Type-III test.
-
 ```{r, message=FALSE, warning=FALSE}
 # Load the car library so we can get a meaningful ANOVA table for our model
   library(car)
@@ -98,57 +64,33 @@ Let's have a look at what the model tells us about our biological questions of i
   Anova(v.mod, Type='II')
 ```
 
-<br>
- 
 At our default confidence level ($\alpha$ = 0.05), we reject the null hypothesis that there is no difference between concentrations (p < 0.05), and we  reject the null hypothesis that there is no effect of exposure time on the probability of mortality.
 
-<br>
- 
 Just as with all of our other models, we can use the `summary()` function to get the output from R.
-
-<br>
- 
 ```{r}
 # Print the summary of the model
   summary(v.mod)
 ```
 
-<br>
- 
 The summary of the model gives us the estimated coefficients **on the logit scale**, along with our usual significance codes and an AIC score (now in the default output because we are using maximum likelihood estimation).
 
 Even though these parameters are on the logit scale, we can still make limited inference about the directionality of relationships as we would with linear models used earlier in the semester. 
 
 Here, we see that the coefficient for `Time` is positive (`r round(v.mod$coefficients[7], 3)`), meaning that we would predict probability of `dead` to be directly proportional to `Time` (higher probability of death following increased exposure time). This, of course, seems perfectly reasonable.
 
-<br>
- 
 One thing that you'll notice is missing from this output is the R^2^ value that we have become familiar with during the past several weeks while working with linear models. There is no R^2^ value because we are no longer estimating these models using ordinary least squares, but rather maximum likelihood estimation. If we wanted to get an analagous metric of variance explained by our model, we could estimate a *pseudo-R^2^*. There are many of these available depending on the model and nature of our data. The simplest, and arguably most common is the **McFadden R^2^**. To estimate this one, we compare the deviance of our model to the deviance of an intercept-only (i.e. "null") model using the output from the `summary` function above:
 
-<br>
- 
-  $$McFadden R^2 = 1 - \frac{Deviance_{residual}}{Deviance_{null}}$$
+$$McFadden R^2 = 1 - \frac{Deviance_{residual}}{Deviance_{null}}$$
 
-<br>
- 
 Here, we can see that the model only explains about `r round(1-(v.mod$deviance/v.mod$null.deviance), 2)*100`% of the variation in the response of interest:
-
-<br>
  
 $$R^2 = 1 - \frac{`r round(v.mod$deviance, 3)`}{`r round(v.mod$null.deviance, 3)`} = `r round(1-(v.mod$deviance/v.mod$null.deviance), 2)`$$
 
-<br>
- 
 Now that we have a feel for just how much variability this model explains, the next step in reporting our results here is to extract some information about how `dead` changes with `Time` beyond simply stating that it was either "inversely" or "proportionally" related to `dead`. We will include `Concentration` in our predictions to account for changes between doses.
  
 Recall that we can make predictions from our model either by hand or by using the `predict` function in R. **Note** that if we use the `predict` function for `glm` objects in R, we no longer have the ability to set the `interval` argument as we did for objects resulting from the `lm()` function (well, we can- it will just be ignored). Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).
  
-<br>
- 
 Start by making some new data that we can use for predictions.
-
-<br>
- 
 ```{r}
 # Start with Time by making a sequence from the minimum
 # observed Time to the maximum observed Time in equal
@@ -164,16 +106,10 @@ Start by making some new data that we can use for predictions.
   
 # Put it all together in a dataframe
   newD = data.frame(Concentration, Time)
-  
   newD = newD[with(newD, order(Concentration, Time)), ]
 ```
 
-<br>
-
 Now that we have new data for making predictions, let's go ahead and do it!
-
-<br>
- 
 ```{r}
 # Calculate mean predicted value and SE for the predictions
 # on the link scale
@@ -186,24 +122,14 @@ Now that we have new data for making predictions, let's go ahead and do it!
   preds$upr = preds$fit + preds$se.fit*qnorm(0.975)
 ```
 
-<br>
- 
 Now, we need to define a function to invert the logit
-
-<br>
- 
 ```{r}
 inv.logit = function(x){
   exp(x)/(1+exp(x))
 }
 ```
 
-<br>
- 
 We can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our `preds` dataframe using the `apply` function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.
-
-<br>
- 
 ```{r}  
 # Convert the predictions to the probability scale
   preds[ , c(1,3,4)] = apply(X=preds[ , c(1,3,4)],
@@ -214,12 +140,7 @@ We can convert our predictions to the probability scale. Here, we loop over colu
   preds = data.frame(preds, newD)
 ```
 
-<br>
- 
 Finally, let's plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice. We could go through and plot these one at a time (see lecture content), but here I will demonstrate how one might do this using a loop, followed by a number of conditionals for axis labeling. All in the name of gross overkill (oh, wait, I mean responsive programming).
-
-<br>
- 
 ```{r}
 # Plot the predictions
 # Set graphical parameters
@@ -273,44 +194,35 @@ for(i in 1:length(unique(preds$Concentration))){
 }
 
 # Add x and y-axis labels to the plot    
-  mtext(text="Probability of mortality", side=2, line=2.75, cex=1, adj=.5, outer=TRUE)
-  mtext(text="Time (h)", side=1, line=2, cex=1, adj=.5, outer=TRUE)
+mtext(text="Probability of mortality",
+      side=2, line=2.75, cex=1,
+      adj=.5, outer=TRUE
+      )
+mtext(text="Time (h)",
+      side=1, line=2, cex=1,
+      adj=.5, outer=TRUE)
 ```
 
-<br>
- 
 Using either the graph or the estimates in the `fit` column of `preds`, we can estimate about how much `dead` changes across the range of `Time` observed. We can report this by `Time` to convey more information. 
 
 If you have been paying close attention this semester, you may be wondering why we don't fit an interaction that would allow the effect of exposure time to vary across `Concentration`, and indeed that is a fair question. Unfortunately, the degree of mortality that results after short exposure to the higher concentrations is so high that variance estimation in the model becomes unstable and we predict confidence intervals from zero to one (despite increasing the R^2^ to 0.94 and producing much more intuitive curves).
 
-<br>
- 
-## Your turn
 
-<br>
- 
+## Your turn
 Next, I want you to strike out on your own and make a couple of models. To start, please **choose at least one addtional continuous variable** to add to one of the models above.
 
 Fit a model using your new variable(s) in addition to `Time` and `Concentration`, and save it to a named object.
 
 Create a third model that represents the null model. If you have forgotten since last week how to specify this, remember that we can use the following notation to specify the null model:
-
-<br>
- 
 ```{r}
 null = glm(dead~1, family=binomial, data=vd)
 ```
 
-<br>
- 
 Compare the null model to your previous model and the one we created above using AIC for model comparison. 
 
 Finally, make predictions from your model using the same procedure that we used above to determined how much `dead` varied between `Concentration` and by `Time` (but include *your* variables). 
 
 This time, we need to recognize that there may be relationships between `Time` and your new variable (i.e., colinearity), so you will need to use `vd` for the new data argument in the `predict` function, like this:
-
-<br>
- 
 ```{r, eval=FALSE}
 # Calculate mean predicted value and SE for the predictions
 # on the link scale
@@ -326,29 +238,20 @@ This time, we need to recognize that there may be relationships between `Time` a
   preds = data.frame(preds, vd)
 ```
 
-<br>
- 
 Then, you can summarize the resulting dataframe using the ddply function from the `plyr` package so that you only get one prediction for each combination of `Concentration`, `Time`, and your `new variable`.
 
 Like this:
-
-<br>
- 
 ```{r, eval=FALSE}
 # Summarize predictions by factor combinations. Take time
 # out and replace it with the new variable of your choosing
-newpreds= ddply(preds, c('Concentration', 'new variable'),
-            summarize, fit=mean(fit), se.fit=mean(se.fit),
-            lwr=mean(lwr), upr=mean(upr)
-          )
+  newpreds= ddply(preds, c('Concentration', 'new variable'),
+              summarize, fit=mean(fit), se.fit=mean(se.fit),
+              lwr=mean(lwr), upr=mean(upr)
+            )
 ```
 
-<br>
- 
-### What to turn in
 
-<br>
- 
+### What to turn in
 The drill is the same as for last week, except this time we are working with maximum likelihood estimation for logistic regression.
 
 I would like you to turn in a brief write up of the methods and results for this analysis. 
@@ -357,15 +260,6 @@ Methods should be much shorter than they were last week (a basic description of 
 
 The results section should include your model selection results, and then prose explaining the results from your best model or models (depending on whether or not you identified a "best"" model). This should include comparison to the first model we built and the null with regard to hypothesis testing. Please include the model selection table (do not paste output from the R console into your write up- make the table!), and a table of the coefficients from your best model (regardless of whether or not you identified a single, best model).
 
-<br>
- 
+
 ### Bonus: 2 pts
-
-<br>
- 
 Plot your model predictions for your continuous covariate like we did above, being sure to include estimates for each concentration.
-
-<br>
- 
-<br>
- 

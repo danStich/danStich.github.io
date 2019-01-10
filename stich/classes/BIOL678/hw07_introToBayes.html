@@ -20,19 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -107,7 +95,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -213,35 +201,74 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 <div class="fluid-row" id="header">
 
@@ -251,48 +278,23 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
-<p><br></p>
 <div id="introduction-to-bayesian-inference-and-glm" class="section level1">
-<h1>Introduction to Bayesian inference and GLM</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
+<h1>Introduction to Bayesian inference (and GLM)</h1>
+<p><img id="multi" src="../../images/chickens.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>This week we introduced two new tools. The one that we spent the most time talking about was Bayesian inference. During our lab exercises this week, we will continue to learn about Bayesian methods for analyzing data, but we will turn the spotlight on the generalized linear model (GLM) as a natural extension of linear models. We will dig into exactly what this means with respect to model assumptions next week. For this week, we will practice analyzing the GLM using both Bayesian methods and maximum likelihood estimation (MLE). To do this, we will start out simple by fitting a linear model as a GLM to demonstrate the similarities, and we will finish by fitting a logistic regression model.</p>
 <p>We are going to start changing up the format of lab assignments this week, as well. Instead of asking basic questions about programming or p-values, we are going to start pushing into the realm of reporting our methods and results as you might do in a thesis or a journal article. We will continue to hammer on model diagnostics and communication of effect sizes as we move forward, but it is also important that you start learning how to talk about these models if you are not yet familiar with it.</p>
 <p>The reason why we are starting this now is because most of the tools that we have used thus far are ‘standard’ statistical analyses. These tools are relatively rigid in their structure and their application, and they have been used widely for a long time (with the exception of the model diagnostics and model selection tools you have been learning). Very often all that is required for reporting the methods for those tools is a simple declaration of their use, and the reporting of appropriate results. The GLM, and in a couple of weeks the GLMM, constitutes a broad class of models. It includes everything from the t-test, ANOVA, linear regression, and ANCOVA to extensions that allow the use of a large number of probability distributions. Because of this flexibility, it is important that we be able to clearly communicate the methods we use. Furthermore, the use of GLM often relies on the use of <em>link funcitons</em>. This can make it difficult for the average reader to interpret model coefficients, and will make it even more important for you to clearly communicate effect sizes.</p>
-<p><br></p>
-</div>
 <div id="introduction-to-the-glm" class="section level2">
 <h2>Introduction to the GLM</h2>
 <div id="a-stroll-down-memory-lane" class="section level3">
 <h3>A stroll down memory lane</h3>
 <p>We will start by introducing the GLM as an extension of the linear model. This means we are going to work with a continuous response that has a normal error distribution for our first example. We will demonstrate the relationships between other methods we have discussed and the GLM.</p>
 <p>We start by simulating data about wingspans (in cm) of male and female peregrine falcons with different means and standard deviations for each sex. In the simulated data, males have a smaller wingspan and smaller variance for the measurement than females. The data that we will use are stored in the objects <code>y</code> (simulated wingspan), and <code>x</code> (sex, where 2 = male). For more detail, have a read through chapter 7.2.2 of your text book (have a read through it anyway!).</p>
-<p><br> <!-- DON'T CHANGE THE SPACING!! --> <!-- The comments look weird but they line up in html --></p>
+<!-- DON'T CHANGE THE SPACING!! -->
+<!-- The comments look weird but they line up in html -->
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n1 &lt;-<span class="st"> </span><span class="dv">60</span>                                <span class="co"># Number of females</span>
 n2 &lt;-<span class="st"> </span><span class="dv">40</span>                                <span class="co"># Number of males</span>
 mu1 &lt;-<span class="st"> </span><span class="dv">105</span>                              <span class="co"># Population mean for females</span>
@@ -311,122 +313,110 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
         <span class="dt">ylab =</span> <span class="st">&quot;Wingspan (cm)&quot;</span>,
         <span class="dt">las =</span> <span class="dv">1</span>)</code></pre></div>
 <p><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<p><br></p>
 <div id="t-test" class="section level4">
 <h4>t-test</h4>
 <p>First, we will use a t-test to test for differences in wingspan between males and females. Because we have only two groups and a single, continuous response variable, this test would be our default in this situation.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Run the t-test</span>
-<span class="kw">t.test</span>(y<span class="op">~</span>x)</code></pre></div>
-<pre><code>## 
-##  Welch Two Sample t-test
-## 
-## data:  y by x
-## t = 49.121, df = 86.175, p-value &lt; 2.2e-16
-## alternative hypothesis: true difference in means is not equal to 0
-## 95 percent confidence interval:
-##  26.82979 29.09291
-## sample estimates:
-## mean in group 1 mean in group 2 
-##       105.26708        77.30573</code></pre>
-<p><br></p>
+<span class="kw">t.test</span>(y<span class="op">~</span>x)
+
+    Welch Two Sample t<span class="op">-</span>test
+
+data<span class="op">:</span><span class="st">  </span>y by x
+t =<span class="st"> </span><span class="fl">48.103</span>, df =<span class="st"> </span><span class="fl">96.302</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span>
+<span class="dv">95</span> percent confidence interval<span class="op">:</span>
+<span class="st"> </span><span class="fl">26.18071</span> <span class="fl">28.43434</span>
+sample estimates<span class="op">:</span>
+mean <span class="cf">in</span> group <span class="dv">1</span> mean <span class="cf">in</span> group <span class="dv">2</span> 
+      <span class="fl">105.20170</span>        <span class="fl">77.89417</span> </code></pre></div>
 <p>Here, we reject the null hypothesis at <span class="math inline">\(\alpha\)</span> = 0.05. We can see that the 95% CI on the estimated difference in wingspan between sexes is 26-28 cm.</p>
-<p><br></p>
 </div>
 <div id="anova" class="section level4">
 <h4>ANOVA</h4>
 <p>We could also analyze the effect of sex on wingspan using ANOVA even though we only have two groups in our explanatory variables. This should be familiar territory, but let’s go ahead and fit the model:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit an ANOVA to test effect of sex on wingspan</span>
   mod.anova =<span class="st"> </span><span class="kw">aov</span>(y<span class="op">~</span>x)
 
 <span class="co"># Summarize the model</span>
-  <span class="kw">summary</span>(mod.anova)</code></pre></div>
-<pre><code>##             Df Sum Sq Mean Sq F value Pr(&gt;F)    
-## x            1  18764   18764    2372 &lt;2e-16 ***
-## Residuals   98    775       8                   
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><br></p>
+  <span class="kw">summary</span>(mod.anova)
+            Df Sum Sq Mean Sq F value <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+x            <span class="dv">1</span>  <span class="dv">17897</span>   <span class="dv">17897</span>    <span class="dv">2075</span> <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+Residuals   <span class="dv">98</span>    <span class="dv">845</span>       <span class="dv">9</span>                   
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Here, we see that the results are essentially identical to our t-test. No surprises there if you have been following along. Finally, we can fit the model as a linear regression and we <em>should</em> obtain the same results because we now know that all of these tests are essentially the same thing.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a linear regression to test effect of sex on wingspan</span>
   mod.reg =<span class="st"> </span><span class="kw">lm</span>(y<span class="op">~</span>x)
 
 <span class="co"># Summarize the model</span>
-  <span class="kw">summary</span>(mod.reg)</code></pre></div>
-<pre><code>## 
-## Call:
-## lm(formula = y ~ x)
-## 
-## Residuals:
-##    Min     1Q Median     3Q    Max 
-## -6.628 -2.263 -0.055  2.285  6.614 
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 133.2284     0.8516   156.4   &lt;2e-16 ***
-## x           -27.9614     0.5742   -48.7   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Residual standard error: 2.813 on 98 degrees of freedom
-## Multiple R-squared:  0.9603, Adjusted R-squared:  0.9599 
-## F-statistic:  2372 on 1 and 98 DF,  p-value: &lt; 2.2e-16</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get an ANOVA table for the linear regression model</span>
-  <span class="kw">anova</span>(mod.reg)</code></pre></div>
-<pre><code>## Analysis of Variance Table
-## 
-## Response: y
-##           Df  Sum Sq Mean Sq F value    Pr(&gt;F)    
-## x          1 18764.1 18764.1  2371.5 &lt; 2.2e-16 ***
-## Residuals 98   775.4     7.9                      
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><br></p>
+  <span class="kw">summary</span>(mod.reg)
+
+Call<span class="op">:</span>
+<span class="kw">lm</span>(<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x)
+
+Residuals<span class="op">:</span>
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">6.8749</span> <span class="op">-</span><span class="fl">1.9162</span>  <span class="fl">0.1385</span>  <span class="fl">1.9233</span>  <span class="fl">6.6149</span> 
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">132.5092</span>     <span class="fl">0.8893</span>  <span class="fl">149.01</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+x           <span class="op">-</span><span class="fl">27.3075</span>     <span class="fl">0.5995</span>  <span class="op">-</span><span class="fl">45.55</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.937</span> on <span class="dv">98</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9549</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9544</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">2075</span> on <span class="dv">1</span> and <span class="dv">98</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span>
+  
+<span class="co"># Get an ANOVA table for the linear regression model</span>
+  <span class="kw">anova</span>(mod.reg)
+Analysis of Variance Table
+
+Response<span class="op">:</span><span class="st"> </span>y
+          Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
+x          <span class="dv">1</span> <span class="fl">17896.8</span> <span class="fl">17896.8</span>  <span class="fl">2074.5</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
+Residuals <span class="dv">98</span>   <span class="fl">845.4</span>     <span class="fl">8.6</span>                      
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
 <p>Once again, we see that the results are essentially identical between the t-test, the ANOVA, and the linear regression. Now, we will show that the results are also the same if we test the effect of sex on wingspan using a GLM.</p>
-<p><br></p>
 </div>
 <div id="glm-as-a-linear-model" class="section level4">
 <h4>GLM as a linear model</h4>
 <p>Here we will demonstrate that the GLM is simply an extension of the linear models with which we have already worked. More appropriately, the linear model is just a special case of the GLM.</p>
-<p><br></p>
 <div id="maximum-likelihood-estimation" class="section level5">
 <h5>Maximum likelihood estimation</h5>
 <p>The syntax in R for using GLM is essentially identical to the syntax for using LM. All we are going to do is add a ‘g’ to the name of the <code>lm</code> function, and we will specify a distributional family for the analysis. Let’s continue on with our falcon model here to demonstrate the similarity. If we assume that the response takes on a normal, or <em>Gaussian</em>, distribution for these models, then the results should be identical to what we got from our linear models above. In fact, the <code>glm</code> function in R even uses the Gaussian as the default value for the argument <code>family</code> just in case you were starting to doubt me.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a GLM to test effects of sex on wingspan,</span>
 <span class="co"># assuming a Gaussian distribution</span>
   mod.glm =<span class="st"> </span><span class="kw">glm</span>(y<span class="op">~</span>x, <span class="dt">family =</span> <span class="st">&#39;gaussian&#39;</span>)
 
 <span class="co"># Summarize the model</span>
-  <span class="kw">summary</span>(mod.glm)</code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = y ~ x, family = &quot;gaussian&quot;)
-## 
-## Deviance Residuals: 
-##    Min      1Q  Median      3Q     Max  
-## -6.628  -2.263  -0.055   2.285   6.614  
-## 
-## Coefficients:
-##             Estimate Std. Error t value Pr(&gt;|t|)    
-## (Intercept) 133.2284     0.8516   156.4   &lt;2e-16 ***
-## x           -27.9614     0.5742   -48.7   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for gaussian family taken to be 7.912231)
-## 
-##     Null deviance: 19539.5  on 99  degrees of freedom
-## Residual deviance:   775.4  on 98  degrees of freedom
-## AIC: 494.61
-## 
-## Number of Fisher Scoring iterations: 2</code></pre>
-<p><br></p>
+  <span class="kw">summary</span>(mod.glm)
+
+Call<span class="op">:</span>
+<span class="kw">glm</span>(<span class="dt">formula =</span> y <span class="op">~</span><span class="st"> </span>x, <span class="dt">family =</span> <span class="st">&quot;gaussian&quot;</span>)
+
+Deviance Residuals<span class="op">:</span><span class="st"> </span>
+<span class="st">    </span>Min       1Q   Median       3Q      Max  
+<span class="op">-</span><span class="fl">6.8749</span>  <span class="op">-</span><span class="fl">1.9162</span>   <span class="fl">0.1385</span>   <span class="fl">1.9233</span>   <span class="fl">6.6149</span>  
+
+Coefficients<span class="op">:</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept) <span class="fl">132.5092</span>     <span class="fl">0.8893</span>  <span class="fl">149.01</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+x           <span class="op">-</span><span class="fl">27.3075</span>     <span class="fl">0.5995</span>  <span class="op">-</span><span class="fl">45.55</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
+<span class="op">---</span>
+Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
+
+(Dispersion parameter <span class="cf">for</span> gaussian family taken to be <span class="fl">8.626942</span>)
+
+    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">18742.27</span>  on <span class="dv">99</span>  degrees of freedom
+Residual deviance<span class="op">:</span><span class="st">   </span><span class="fl">845.44</span>  on <span class="dv">98</span>  degrees of freedom
+AIC<span class="op">:</span><span class="st"> </span><span class="fl">503.26</span>
+
+Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">2</span></code></pre></div>
 <p>The results are identical to what we got above from our t-test, ANOVA, and our linear regression model!</p>
 <p>You’ll note that if you try to use the <code>anova</code> function from base R, or the <code>Anova</code> function from the <code>car</code> package to summarize this model you get some weird output. That is because these tools are actually doing something entirely different for objects that result from <code>glm</code>. The reason for this? We are now fitting our models with maximum likelihood estimation, and we are no longer relying on least squares. Therefore, the default behavior of the <code>anova</code> function is to report on the deviance of the model, and the default behavior of the <code>Anova</code> function is to conduct a likelihood ratio test comparing the model to another model (if specified) or to the null model if no other is specified. This is one tool that we can now use to compare models to see if they are ‘significantly’ different from one another, although I will not cover it much further in this class unless by request (the possibilities are endless).</p>
-<p><br></p>
 </div>
 <div id="bayesian-model" class="section level5">
 <h5>Bayesian model</h5>
@@ -437,7 +427,6 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
 <p>Start by specifying the model</p>
 </blockquote>
 <p>This model specification is slightly different than what is presented in Kery 2010. the reason for this is that the <code>sink()</code> function used in the book can act funny if we are writing to certain directories, file systems, etc, and (really) because your homeworks won’t compile without physically writing the model to a file.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  modelString =<span class="st"> &quot;</span>
 <span class="st">    model {</span>
 
@@ -469,7 +458,6 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
 
 <span class="co"># Write the model to a file</span>
   <span class="kw">writeLines</span>(modelString, <span class="st">&quot;falcomodel.txt&quot;</span>)</code></pre></div>
-<p><br></p>
 <blockquote>
 <p>Bundle the data for JAGS</p>
 </blockquote>
@@ -479,12 +467,10 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
     <span class="dt">x =</span> x,
     <span class="dt">n.sexes =</span> <span class="kw">length</span>(<span class="kw">unique</span>(x))
   )</code></pre></div>
-<p><br></p>
 <blockquote>
 <p>Provide initial values for the Gibbs sampler</p>
 </blockquote>
 <p>We want to give the MCMC sampler some starting values to get the chains running, and we want to make sure that those are randomly sampled from what we think is the reasonably credible parameter space (i.e. our prior).</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Form initial values </span>
   inits =<span class="st"> </span><span class="cf">function</span>(){
     <span class="kw">list</span>(
@@ -492,27 +478,22 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
       <span class="dt">sigma =</span> <span class="kw">runif</span>(<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">100</span>)
     )
   }</code></pre></div>
-<p><br></p>
 <blockquote>
 <p>Parameters to monitor during estimation</p>
 </blockquote>
 <p>Here, we pass a vector of named parameters from our model file that we want to monitor during estimation.</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  params =<span class="st"> </span><span class="kw">c</span>(
     <span class="st">&#39;alpha&#39;</span>,
     <span class="st">&#39;sigma&#39;</span>,
     <span class="st">&#39;effect&#39;</span>
   )</code></pre></div>
-<p><br></p>
 <blockquote>
 <p>MCMC Settings</p>
 </blockquote>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ni =<span class="st"> </span><span class="dv">15000</span> <span class="co"># Number of samples (including burn-in)</span>
   nb =<span class="st"> </span><span class="dv">5000</span>  <span class="co"># Burn-in samples</span>
   nt =<span class="st"> </span><span class="dv">5</span>     <span class="co"># Thinning rate</span>
   nc =<span class="st"> </span><span class="dv">3</span>     <span class="co"># Number of chains</span></code></pre></div>
-<p><br></p>
 <blockquote>
 <p>Run the model</p>
 </blockquote>
@@ -523,7 +504,6 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
 <li><p>we don’t need to specify <code>debug=TRUE</code> like we need to for the <code>bugs</code> function, and</p></li>
 <li><p>we don’t need to specify the bugs directory when we use the <code>jags</code> command.</p></li>
 </ol>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the R2jags library</span>
   <span class="kw">library</span>(R2jags)
 <span class="co"># Run the model</span>
@@ -537,59 +517,51 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
                      <span class="dt">n.chains =</span> nc,
                      <span class="dt">working.directory =</span> <span class="kw">getwd</span>()
                      )</code></pre></div>
-<p><br></p>
 <blockquote>
 <p>Print the model results &amp; assess convergence</p>
 </blockquote>
-<p>When we print our results, we get a table of model coefficient estimates, along with the uncertainty associated with those estimates and a couple of pieces of information about convergence diagnostics. From this table, we can see that the mean <span class="math inline">\(\pm\)</span> SD wingspan of female peregrin falcons (alpha[1]) is about 105 <span class="math inline">\(\pm\)</span> 0 cm and the mean wingspan of male peregrin falcons is about 77 <span class="math inline">\(\pm\)</span> 0 cm. The mean estimated difference in wingspans between males and females is about 28, and the 95% CRI is 27 - 29 cm. We know that this difference is statistically significant at <span class="math inline">\(\alpha\)</span> = 0.05 because the 95% CRI does not include zero.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">print</span>(falco.model, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
-<pre><code>## Inference for Bugs model at &quot;falcomodel.txt&quot;, fit using jags,
-##  3 chains, each with 15000 iterations (first 5000 discarded), n.thin = 5
-##  n.sims = 6000 iterations saved
-##          mu.vect sd.vect   2.5%    25%    50%    75%  97.5% Rhat n.eff
-## alpha[1]  105.25    0.37 104.53 105.01 105.26 105.50 105.97    1  6000
-## alpha[2]   77.29    0.45  76.41  76.98  77.29  77.59  78.16    1  3000
-## effect     27.97    0.57  26.84  27.58  27.97  28.35  29.09    1  6000
-## sigma       8.25    1.24   6.16   7.39   8.12   8.98  11.01    1  6000
-## deviance  491.72    2.56 488.81 489.85 491.04 492.90 498.41    1  4200
-## 
-## For each parameter, n.eff is a crude measure of effective sample size,
-## and Rhat is the potential scale reduction factor (at convergence, Rhat=1).
-## 
-## DIC info (using the rule, pD = var(deviance)/2)
-## pD = 3.3 and DIC = 495.0
-## DIC is an estimate of expected predictive error (lower deviance is better).</code></pre>
-<p><br></p>
+<p>When we print our results, we get a table of model coefficient estimates, along with the uncertainty associated with those estimates and a couple of pieces of information about convergence diagnostics. From this table, we can see that the mean <span class="math inline">\(\pm\)</span> SD wingspan of female peregrin falcons (alpha[1]) is about 105 <span class="math inline">\(\pm\)</span> 0 cm and the mean wingspan of male peregrin falcons is about 78 <span class="math inline">\(\pm\)</span> 0 cm. The mean estimated difference in wingspans between males and females is about 27, and the 95% CRI is 26 - 29 cm. We know that this difference is statistically significant at <span class="math inline">\(\alpha\)</span> = 0.05 because the 95% CRI does not include zero.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">print</span>(falco.model, <span class="dt">digits =</span> <span class="dv">2</span>)
+Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;falcomodel.txt&quot;</span>, fit using jags,
+ <span class="dv">3</span> chains, each with <span class="dv">15000</span> <span class="kw">iterations</span> (first <span class="dv">5000</span> discarded), n.thin =<span class="st"> </span><span class="dv">5</span>
+ n.sims =<span class="st"> </span><span class="dv">6000</span> iterations saved
+         mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>% Rhat n.eff
+alpha[<span class="dv">1</span>]  <span class="fl">105.19</span>    <span class="fl">0.39</span> <span class="fl">104.43</span> <span class="fl">104.92</span> <span class="fl">105.18</span> <span class="fl">105.44</span> <span class="fl">105.95</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+alpha[<span class="dv">2</span>]   <span class="fl">77.87</span>    <span class="fl">0.48</span>  <span class="fl">76.94</span>  <span class="fl">77.54</span>  <span class="fl">77.87</span>  <span class="fl">78.19</span>  <span class="fl">78.80</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+effect     <span class="fl">27.32</span>    <span class="fl">0.61</span>  <span class="fl">26.12</span>  <span class="fl">26.90</span>  <span class="fl">27.32</span>  <span class="fl">27.73</span>  <span class="fl">28.53</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+sigma       <span class="fl">8.96</span>    <span class="fl">1.30</span>   <span class="fl">6.77</span>   <span class="fl">8.05</span>   <span class="fl">8.85</span>   <span class="fl">9.76</span>  <span class="fl">11.85</span>    <span class="dv">1</span>  <span class="dv">1900</span>
+deviance  <span class="fl">500.39</span>    <span class="fl">2.53</span> <span class="fl">497.48</span> <span class="fl">498.56</span> <span class="fl">499.76</span> <span class="fl">501.50</span> <span class="fl">506.86</span>    <span class="dv">1</span>  <span class="dv">6000</span>
+
+For each parameter, n.eff is a crude measure of effective sample size,
+and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).
+
+DIC <span class="kw">info</span> (using the rule, <span class="dt">pD =</span> <span class="kw">var</span>(deviance)<span class="op">/</span><span class="dv">2</span>)
+pD =<span class="st"> </span><span class="fl">3.2</span> and DIC =<span class="st"> </span><span class="fl">503.6</span>
+DIC is an estimate of expected predictive <span class="kw">error</span> (lower deviance is better).</code></pre></div>
 <blockquote>
 <p>Assess convergence</p>
 </blockquote>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">traceplot</span>(falco.model)</code></pre></div>
 <p><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-14-1.png" width="672" /><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-14-2.png" width="672" /><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-14-3.png" width="672" /><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-14-4.png" width="672" /><img src="hw07_introToBayes_files/figure-html/unnamed-chunk-14-5.png" width="672" /></p>
-<p><br></p>
 </div>
 </div>
 </div>
 <div id="more-on-glm-to-come" class="section level3">
 <h3>More on GLM to come</h3>
 <p>In the preceding sections we looked at the GLM as an extension of linear models, and indeed this is the case. We will take an in-depth look at these models during the coming weeks and continue to discuss implementation and interpretation as we move forward. For now, we will get acquainted with a couple of simple formulations of the model to get our feet wet.</p>
-<p><br></p>
 </div>
 </div>
 <div id="your-first-bayesian-model" class="section level2">
 <h2>Your first Bayesian model</h2>
-<p><br></p>
-<div id="binomial-logistic-regresion" class="section level3">
-<h3>Binomial logistic regresion</h3>
-<p>For this week’s assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see <code>IntroToBayes.html</code>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.</p>
+<h3 id="multi">
+Binomial logistic regresion
+</h3>
+<p>For this week’s assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see the <a href="">lecture module</a>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.</p>
 <p>We start by reading in the data:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data and save it to a named object</span>
-  birds =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/farmdata.csv&#39;</span>)</code></pre></div>
-<p><br></p>
+  birds =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;farmdata.csv&#39;</span>)</code></pre></div>
 <p>Earlier in the week, we used this data set to estimate the probability of chick survival to fledge across all species and cohorts. For lab this week, I will ask you to continue analyzing these data and actually attempt to write your first methods section for this stuff.</p>
 <p>Let’s start by running the same model as we did in lecture:</p>
-<p><br></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Specify the model</span>
   modelstring=<span class="st">&quot;                 </span>
 <span class="st">    model {                       </span>
@@ -627,16 +599,19 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
   nc &lt;-<span class="st"> </span><span class="dv">3</span>         <span class="co"># Number of chains</span>
     
 <span class="co"># Call jags and run the model</span>
-  chick.model &lt;-<span class="st"> </span><span class="kw">jags</span>(chick.data, <span class="dt">inits=</span>inits, parameters, <span class="st">&quot;chickSurvival.txt&quot;</span>,
-    <span class="dt">n.chains =</span> nc, <span class="dt">n.thin =</span> nt, <span class="dt">n.iter =</span> ni, <span class="dt">n.burnin =</span> nb,
-    <span class="dt">working.directory =</span> <span class="kw">getwd</span>())    </code></pre></div>
-<p><br></p>
-</div>
+  chick.model &lt;-<span class="st"> </span><span class="kw">jags</span>(chick.data,
+                      <span class="dt">inits=</span>inits,
+                      parameters,
+                      <span class="st">&quot;chickSurvival.txt&quot;</span>,
+                      <span class="dt">n.chains =</span> nc, <span class="dt">n.thin =</span> nt,
+                      <span class="dt">n.iter =</span> ni, <span class="dt">n.burnin =</span> nb,
+                      <span class="dt">working.directory =</span> <span class="kw">getwd</span>()
+                      )    </code></pre></div>
 <div id="your-mission" class="section level3">
 <h3>Your mission</h3>
 <p>Your lab assignment for this week is two-fold.</p>
 <p><strong>First</strong> I want you to modify the model above to allow survival to vary between bird species. You can do this in any number of conceivable ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the <code>falco.model</code> earlier in this tutorial. Don’t forget to change the data and priors that you pass to JAGS, too!</p>
-<p><strong>Second</strong> Write a brief methods and results section for your model. The methods should include a few <em>logically organized</em> sentences about the data (e.g. testing effects of this on that), the model structure (likelihood and priors), diagnostics (<span class="math inline">\(\hat{r}\)</span> and n.eff), and model settings (burn-in, thinning rate, number of chains, and number of samples).</p>
+<p><strong>Second</strong> Write a brief methods and results section for your model. The methods should include a few <em>logically organized</em> sentences about the data (e.g. testing effects of this on that), the model structure (likelihood and priors), diagnostics (<span class="math inline">\(\hat{r}\)</span> and <code>n.eff</code>), and model settings (burn-in, thinning rate, number of chains, and number of samples).</p>
 <p><strong>Third</strong> Write an even briefer results section indicating any significant differences in survival between bird species, with at least one graph of the posterior distributions or a derived parameter showing the difference in estimated surival between them.</p>
 </div>
 <div id="what-to-turn-in" class="section level3">
@@ -684,14 +659,17 @@ x &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</
 <!-- # print the model -->
 <!-- print(chicksurvival.model) -->
 <!-- ```     -->
-<p><br></p>
-<p><br></p>
 </div>
 </div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

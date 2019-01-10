@@ -1,8 +1,11 @@
 ```{r child="_styles.Rmd"}
 ```
 
-# Linear models
-<h2 id="multi"> Introduction </h2>
+<h1 id="multi">Linear models </h1>
+
+<img src="../../images/graphs.png">
+
+<h2 id="multi"> Introduction </h2>  
 
 This week, we will introduce a class of statistical tools known collectively as linear models. This class of tools includes such examples as one-way ANOVA, linear regression and correlation, and by extension includes all other n-way ANOVAs, multiple linear regression, and analysis of covariance (ANCOVA). Later this semester, we will see that these models be extended even further to include generalized linear models, generalized linear mixed models, and a number of multivariate techniques for complex data analysis.
 

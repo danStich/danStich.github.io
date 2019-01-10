@@ -1,7 +1,10 @@
 ```{r child="../../_styles.Rmd"}
 ```
 
-# Intro to inferential statistics
+<h1 id="multi"> Inferential statistics </h1>
+
+<img src="../../images/peppers.jpg" alt="">
+
 <h2 id="multi"> Introduction </h2>
 
 The objective of this assignment is to help you formalize and test some simple hypotheses using basic statistical methods in R. This week we discussed  questions we can ask with null hypothesis significance testing and the strengths and weaknesses of this approach. In this assignment, we will attempt to demonstrate some of those ideas while you become familiar with performing null hypothesis significance tests in R.
@@ -221,8 +224,8 @@ smolts2 <- smolts[smolts$stage!='Postsmolt', ]
 smolts2$stage <- as.character(smolts2$stage)
 ```
 
-### Chi-squared frequency analysis
-Last time we met, we conducted a chi-square frequency analysis by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwile as a tool in your modeling toolbox.  
+### $\chi^2$ frequency analysis
+Last time we met, we conducted a $\chi^2$ frequency analysis by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwile as a tool in your modeling toolbox.  
 
 Create a new column in your dataframe that ranks osmolality as `high` if it  is >= 400 mosm, and `low` if it is < 400 mosm.
 
@@ -232,6 +235,6 @@ smolts2$rank[smolts2$osmolality>=400] <- 'high'
 smolts2$rank[smolts2$osmolality<400] <- 'low'
 ```
 
-Conduct a chi-squared test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the chi-squared test object.
+Conduct a $\chi^2$ test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the $\chi^2$ test object.
 
 **Question 10.** Okay, no surprises that the frequency of high and low  osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.

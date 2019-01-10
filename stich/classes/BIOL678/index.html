@@ -20,19 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 
@@ -64,7 +52,7 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
 </head>
 
@@ -175,7 +163,10 @@ $(document).ready(function () {
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -199,24 +190,42 @@ $(document).ready(function () {
   <a href="../../research.html">Research</a>
 </li>
 <li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
   <a href="../../publications.html">Publications</a>
 </li>
 <li>
   <a href="../../cv.html">CV</a>
 </li>
 <li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 <div class="fluid-row" id="header">
 
@@ -226,7 +235,6 @@ $(document).ready(function () {
 </div>
 
 
-<p><br></p>
 <div id="advanced-quantitative-biology-biol-678" class="section level1">
 <h1>Advanced Quantitative Biology (BIOL 678)</h1>
 <p><img src="../../images/matrixSmolt.jpg" alt=""></p>
@@ -234,61 +242,48 @@ $(document).ready(function () {
 <p>To access the content from a given topic, please click on the corresponding links below. Please review the <a href="rubric.html"> rubric </a> for submitting programming assignments through Blackboard each week prior to submission.</p>
 <div id="introduction-to-programming-in-r" class="section level3">
 <h3>Introduction to programming in R</h3>
-<p><a href="./01_introToR.html"> Lecture tutorial </a></p>
-<p><a href="./hw01_introToR.html"> Homework assignment </a></p>
+<p><a href="./01_introToR.html"> Lecture tutorial </a><br> <a href="./hw01_introToR.html"> Homework assignment </a></p>
 </div>
 <div id="probability-distributions" class="section level3">
 <h3>Probability distributions</h3>
-<p><a href="./02_probabilityDistributions.html"> Lecture tutorial </a></p>
-<p><a href="./hw02_probabilityDists.html"> Homework assignment </a></p>
+<p><a href="./02_probabilityDistributions.html"> Lecture tutorial </a><br> <a href="./hw02_probabilityDists.html"> Homework assignment </a></p>
 </div>
 <div id="introduction-to-inferential-statistics" class="section level3">
 <h3>Introduction to inferential statistics</h3>
-<p><a href="./03_hypothesisTesting.html"> Lecture tutorial</a></p>
-<p><a href="./hw03_inferentialStats.html"> Homework assignment </a></p>
+<p><a href="./03_hypothesisTesting.html"> Lecture tutorial</a><br> <a href="./hw03_inferentialStats.html"> Homework assignment </a></p>
 </div>
 <div id="linear-models" class="section level3">
 <h3>Linear models</h3>
-<p><a href="./04_linearModels.html"> Lecture tutorial </a></p>
-<p><a href="./hw04_linearModels.html"> Homework assignment </a></p>
-<p><a href="./04_anova.html"> ANOVA worked example </a></p>
-<p><a href="./04_violinPlotsInR.html"> Violin plots in R </a></p>
+<p><a href="./04_linearModels.html"> Lecture tutorial </a><br> <a href="./hw04_linearModels.html"> Homework assignment </a></p>
+<p><a href="./04_anova.html"> ANOVA worked example </a><br> <a href="./04_violinPlotsInR.html"> Violin plots in R </a></p>
 </div>
 <div id="diagnostics-and-effect-sizes" class="section level3">
 <h3>Diagnostics and effect sizes</h3>
-<p><a href="./05_diagnosticsAndEffects.html"> Lecture tutorial </a></p>
-<p><a href="./hw05_diagnosticsAndEffects.html"> Homework assignment </a></p>
+<p><a href="./05_diagnosticsAndEffects.html"> Lecture tutorial </a><br> <a href="./hw05_diagnosticsAndEffects.html"> Homework assignment </a></p>
 </div>
 <div id="model-selection" class="section level3">
 <h3>Model selection</h3>
-<p><a href="./06_modelSelection.html"> Lecture tutorial </a></p>
-<p><a href="./hw06_modelSelection.html"> Homework assignment </a></p>
+<p><a href="./06_modelSelection.html"> Lecture tutorial </a><br> <a href="./hw06_modelSelection.html"> Homework assignment </a></p>
 </div>
 <div id="intro-to-bayesian-inference" class="section level3">
 <h3>Intro to Bayesian inference</h3>
-<p><a href="./07_introToBayes.html"> Lecture tutorial </a></p>
-<p><a href="./hw07_introToBayes.html"> Homework assignment </a></p>
+<p><a href="./07_introToBayes.html"> Lecture tutorial </a><br> <a href="./hw07_introToBayes.html"> Homework assignment </a></p>
 </div>
 <div id="glm-logistic-regression" class="section level3">
 <h3>GLM: logistic regression</h3>
-<p><a href="./08_glm_logistic.html"> Lecture tutorial </a></p>
-<p><a href="./hw08_glm_logistic.html"> Homework </a></p>
+<p><a href="./08_glm_logistic.html"> Lecture tutorial </a><br> <a href="./hw08_glm_logistic.html"> Homework </a></p>
 </div>
 <div id="glm-count-models" class="section level3">
 <h3>GLM: count models</h3>
-<p><a href="./09_glm_countModels.html"> Lecture tutorial </a></p>
-<p><a href="./hw09_glm_counts.html"> Homework assignment </a></p>
+<p><a href="./09_glm_countModels.html"> Lecture tutorial </a><br> <a href="./hw09_glm_counts.html"> Homework assignment </a></p>
 </div>
 <div id="linear-mixed-models" class="section level3">
 <h3>Linear mixed models</h3>
-<p><a href="./10_lmm.html"> Lecture tutorial </a></p>
-<p><a href="./hw10_lmm.html"> Homework assignment </a></p>
+<p><a href="./10_lmm.html"> Lecture tutorial </a><br> <a href="./hw10_lmm.html"> Homework assignment </a></p>
 </div>
 <div id="generalized-linear-mixed-models" class="section level3">
 <h3>Generalized linear mixed models</h3>
-<p><a href="./11_glmm.html"> Lecture tutorial </a></p>
-<p><a href="./hw11_glmm.html"> Homework assignment </a></p>
-<p><br></p>
+<p><a href="./11_glmm.html"> Lecture tutorial </a><br> <a href="./hw11_glmm.html"> Homework assignment </a></p>
 </div>
 </div>
 
@@ -298,7 +293,7 @@ $(document).ready(function () {
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

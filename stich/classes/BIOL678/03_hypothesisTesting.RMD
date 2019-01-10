@@ -1,12 +1,15 @@
 ```{r child="_styles.Rmd"}
 ```
 
-# Inferential statistics
+<h1 id="multi"> Inferential statistics </h1>
+
+<img src="../../images/peppers.jpg" alt="">
+
 <h2 id="multi"> Introduction </h2>
 
 This week we will begin conducting our first statistical tests! We are going to start small and simple, and we will build complexity during the remainder of the semester. We will also start to make more use of some of the programming techniques that you have been developing, and we will build a foundation for moving into regression models in coming weeks.
 
-We'll start with some simple methods for testing hypotheses about sampling distributions this week. Although relatively limited in scope within the fields of biology and ecology, these tend to be fairly robust tests, and can be powerful tools if studies are designed thoughtfully. For this week, we will focus on implementation of one-sample t-tests, two-sample t-tests, Wilcox tests, and frequency analysis using Pearson's chi-squared test. Within the context of the assumptions of these tests we will also discuss the F-test and the Shapiro-Wilk test of normality.
+We'll start with some simple methods for testing hypotheses about sampling distributions this week. Although relatively limited in scope within the fields of biology and ecology, these tend to be fairly robust tests, and can be powerful tools if studies are designed thoughtfully. For this week, we will focus on implementation of one-sample t-tests, two-sample t-tests, Wilcox tests, and frequency analysis using Pearson's $\chi^2$ test. Within the context of the assumptions of these tests we will also discuss the F-test and the Shapiro-Wilk test of normality.
     
 ## One-sample tests
 
@@ -280,7 +283,7 @@ While it is important to report the test statistics, df, etc., it can be just as
 
 Now, what if we didn't collect very good data, or we binned our data into low-resolution categories for the sake of ease in our study design? Often, and for a variety of reasons other than crappy data collection, we want to compare frequencies of events between two (or more) groups. We may even design studies specifically to test these kinds of hypotheses when we think about rates, for example.
 
-The simplest way to test for differences in the frequency of a response between two groups is (some would argue) the chi-squared test.
+The simplest way to test for differences in the frequency of a response between two groups is (some would argue) the $\chi^2$ test.
     
 ### Worked example
 

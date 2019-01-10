@@ -20,19 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -213,47 +201,74 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="../BIOL217/index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 <div class="fluid-row" id="header">
 
@@ -263,8 +278,10 @@ $(document).ready(function () {
 </div>
 
 
-<div id="model-selection" class="section level1">
-<h1>Model selection</h1>
+<h1 id="multi">
+Model selection
+</h1>
+<p><img src="../../images/glass.jpg"></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -272,81 +289,75 @@ Introduction
 <p>By the end of this lab, you should 1) be comfortable fitting and interpretting linear models such as ANOVA, linear regression, and ANCOVA, 2) be able to state competing hypotheses represented by different models, and 3) be able to use modern tools to choose between competing hypotheses and make predictions that can be used to test the overall quality of your “best” model.</p>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are stored on the course website on blackboard:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Alternatively, you could install the &#39;faraway&#39; package in R, and you can get</span>
-<span class="co"># the data using data(&quot;gala&quot;):</span>
+<p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are as follows:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the &#39;faraway&#39; package in R,</span>
+<span class="co"># to get the data using data(&quot;gala&quot;):</span>
   <span class="co">#install.packages(&#39;faraway&#39;)</span>
   <span class="kw">library</span>(faraway)
-  <span class="kw">data</span>(gala)
-  
-<span class="co"># The data explanation follows:</span>
-### Species:   number of plant species found on the island
-### Endemics:  number of endemic species
-### Area:      area of the island (km$^2$)
-### Elevation: highest elevation of the island (m)
-### Nearest:   distance from the nearest island (km)
-### Scruz:     distance from Santa Cruz island (km)
-### Adjacent:  area of the adjacent island (square km)
-  
-<span class="co"># The citation for the paper is:   </span>
-  
-## Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The
-##     Galapagos Archipelago revisited. Science 179:893-895.</code></pre></div>
-<p><em><strong>Question 1.</strong></em> Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week….What is the problem with using species counts as a continuous response variable in linear models?</p>
+  <span class="kw">data</span>(gala)</code></pre></div>
+<p>The data explanation follows:</p>
+<p><code>Species</code>: number of plant species found on the island <code>Endemics</code>: number of endemic species <code>Area</code>: area of the island (km<sup>2</sup>) <code>Elevation</code>: highest elevation of the island (m) <code>Nearest</code>: distance from the nearest island (km) <code>Scruz</code>: distance from Santa Cruz island (km) <code>Adjacent</code>: area of the adjacent island (square km)</p>
+<p>The citation for the paper is:</p>
+<blockquote>
+<p>Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.</p>
+</blockquote>
+<p><strong>Question 1.</strong> Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week….What is the problem with using species counts as a continuous response variable in linear models?</p>
 <div id="interpreting-polynomials" class="section level3">
 <h3>Interpreting polynomials</h3>
-<p>The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was “non-linear”. That study used <span class="math inline">\(log_e\)</span> transformation to demonstrate this. We will try to use a polynomial to see if we can show this another way.</p>
-<p><em><strong>Question 2.</strong></em> Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?</p>
+<p>The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was “non-linear”. That study used log<sub><em>e</em></sub> transformation to demonstrate this. We will try to use a polynomial to see if we can show this another way.</p>
+<p><strong>Question 2.</strong> Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?</p>
 <p>Fit a model that includes both linear and quadratic effects of Area on Species.</p>
-<p><em><strong>Question 3.</strong></em> What is the coefficient of determination (R<sup>2</sup>) of this model? How does this compare the the R<sup>2</sup> values reported for the models in Johnson and Raven (1973)?</p>
-<p><em><strong>Question 4.</strong></em> Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you <em>can</em> tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (Google it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.</p>
+<p><strong>Question 3.</strong> What is the coefficient of determination (R<sup>2</sup>) of this model? How does this compare the the R<sup>2</sup> values reported for the models in Johnson and Raven (1973)?</p>
+<p><strong>Question 4.</strong> Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you <em>can</em> tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.</p>
 <p>In any case, it looks like we won’t be refuting any seminal papers about species abundances in the Galapagos Islands this week. Oh, well. At least we can use the paper to guide us through the rest of our lab.</p>
 </div>
-<div id="model-selection-1" class="section level3">
+<div id="model-selection" class="section level3">
 <h3>Model selection</h3>
 <p>Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.</p>
 <p>For a change of pace from previous labs, let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. Let’s have some fun!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The models that Johnson and Raven tested looked like this</span>
+<p>The models that Johnson and Raven tested looked like this</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Note: the results will not be exactly</span>
+<span class="co"># the same because missing data in the paper</span>
+<span class="co"># were fi</span>
 
-  <span class="co"># Note: the results will not be exactly the same because the dill-weed that</span>
-  <span class="co"># wrote the faraway package added data for the missing data in the paper</span>
-
-  <span class="co"># Note Also: we need to fix data point number 25 in Scruz because that is the</span>
-  <span class="co"># island Scruz and we can&#39;t take the log of zero!!!</span>
-    gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span>
+<span class="co"># Note also: we need to fix data point</span>
+<span class="co"># number 25 in Scruz because that is the</span>
+<span class="co"># island Scruz and we can&#39;t take the</span>
+<span class="co"># log of zero!!!</span>
+gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span>
 
 S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)
 lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),
             <span class="dt">data=</span>gala)
 S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)
 lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala          )</code></pre></div>
-<p><em><strong>Question 5.</strong></em> Look at the summaries for each of these models once you fit them. Does the general pattern in the R-squared values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
+<span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala)</code></pre></div>
+<p><strong>Question 5.</strong> Look at the summaries for each of these models once you fit them. Does the general pattern in the R<sup>2</sup> values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
 <p>This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his <a href="http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf">seminal 1974 paper</a> in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before).</p>
 <p>Let’s see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models.</p>
-<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in <span class="math inline">\(R\)</span> for this as well. Using the latter approach, you would have to calculate the sample-size corrected <span class="math inline">\(AICc_i\)</span>, <span class="math inline">\(delta AICc_i\)</span>, and <span class="math inline">\(w_i\)</span> manually.</p>
+<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc<sub>i</sub>, <span class="math inline">\(\Delta\)</span>AICc<sub>i</sub>, and w<sub>i</sub> manually.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install and load the necessary library</span>
   <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)
   <span class="kw">library</span>(AICcmodavg)
 
-<span class="co"># Next, you will need to make a list out of your models</span>
+<span class="co"># Next, you will need to make a</span>
+<span class="co"># list out of your models</span>
   mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)
 <span class="co"># Make sure you give it some names, too</span>
   <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</code></pre></div>
-<p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can Google it, or you can do:</p>
+<p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can <a href="https://www.google.com/">Google</a> it, or you can do:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?aictab</code></pre></div>
-<p><em><strong>Question 6.</strong></em> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(delta AICc\)</span> and the ratio of <span class="math inline">\(w_i\)</span> for the two models (see reference script).</p>
-<p><em><strong>Question 7.</strong></em> How do the results of your AIC model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
-<p><em><strong>Question 8.</strong></em> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the <span class="math inline">\(log_e\)</span> transformation of the response that Johnson and Raven used in order to compare these models with <span class="math inline">\(AICc\)</span>, but you do not need to <span class="math inline">\(log_e\)</span> transform the explanatory variables if you do not wish to.</p>
-<p>First, fit your new models and make a list object containing these two models and lnS1 and lnS2 from above. Don’t forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of lnS1 and lnS2.</p>
-<p><em><strong>Question 9.</strong></em> How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?</p>
+<p><strong>Question 6.</strong> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(\Delta\)</span>AICc and the ratio of w<sub>i</sub> for the two models (see reference script).</p>
+<p><strong>Question 7.</strong> How do the results of your AICc model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
+<p><strong>Question 8.</strong> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log<sup><em>e</em></sup> transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log<sup><em>e</em></sup> transform the explanatory variables if you do not wish to.</p>
+<p>First, fit your new models and make a list object containing these two models and <code>lnS1</code> and <code>lnS2</code> from above. Don’t forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of <code>lnS1</code> and <code>lnS2</code>.</p>
+<p><strong>Question 9.</strong> How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?</p>
 </div>
 <div id="model-validation" class="section level3">
 <h3>Model validation</h3>
 <p>Trucking on…First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># As a reminder, here is the model that you should be working with for this:</span>
-  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),
-            <span class="dt">data=</span>gala)
+  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),<span class="dt">data=</span>gala)
 
   <span class="kw">summary</span>(lnS1)
 
@@ -373,8 +384,7 @@ Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="
 F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.75</span> on <span class="dv">4</span> and <span class="dv">25</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">7.731e-08</span></code></pre></div>
 <p>Use one of the methods from the reference script (<em>leave-one-out cross-validation</em> or <em>bootstrapped predictive</em> R<sup>2</sup>) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the <code>caret</code> package or the <code>DAAG</code> package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. <em>Note</em>: you do not need to make any plots for the above, but it is strongly encouraged.</p>
 <p>Use the same method to do model validation on the best model in your model set from question 9.</p>
-<p><em><strong>Question 10.</strong></em> How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?</p>
-</div>
+<p><strong>Question 10.</strong> How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?</p>
 </div>
 </div>
 
@@ -384,7 +394,7 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

@@ -1,30 +1,22 @@
-
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
-# Generalized linear models (GLM)
+# Generalized linear models: logistic regression
 
-<br>
- 
-## Introduction
+<img src="../../images/veligers.jpg" alt="">
 
-This week we will start to dive into the world of generalized linear models and their implementation and interpretation in R. Before we can do that, we will talk about why we might like to use these methods, and the fact that the GLM actually represents a broad class of models that are highly flexible and incredibly useful. By the end of this week, we want you to be thinking of this as a kind of "go-to" tool for modeling complex, real-world data. Then, we will continue to layer complexity on this framework to extend it further over the next couple of weeks before we leave linearized modeling behind for a while.
+<h2 id="multi"> Introduction </h2>
 
-<br>
- 
+This week we will start to dive into the world of generalized linear models and their implementation and interpretation in R. Before we can do that, we will talk about why we might like to use these methods, and the fact that the GLM actually represents a broad class of models that are highly flexible and incredibly useful. By the end of this week, we want you to be thinking of this as a kind of "go-to" tool for modeling complex, real-world (a.k.a. "messy") data. Then, we will continue to layer complexity on this framework to extend it further over the next couple of weeks before we leave linearized modeling behind for a while.
+
+
 ## Assumptions of linear models
-
 Wait, what? I thought we were talking about GLMs this week? We are. The first thing you need to know is that linear models are just a special case of the GLM. That is, the linear model assumes a certain error distribution (the normal) that helps things work smoothly and correctly. The next few weeks of class are all about relaxing the assumptions of linear models so we can actually use them in the real world.
 
 Let's take another look at the assumptions of linear models:
 
 Here are the basic assumptions that we explicitly make when we use linear models, just in case you've forgotten them:
 
-
-<br>
- 
 \item 1. Residuals are normally distributed with a mean of zero
 
 \item 2. Independence of observations (residuals)
@@ -35,31 +27,25 @@ Here are the basic assumptions that we explicitly make when we use linear models
 
 \item 4. Linear relationship between X and Y
 
-<br>
- 
+
 ### Assumption 1: normality of residuals
 
 We've seen these before, but let's recap. For assumption 1, we are assuming a couple of implicit things: 1. The variable is *continuous* (it must be if it's error structure is normal), and 2. The error in our model is normally distributed. In reality, this is probably the least important assumption of linear models, and really only matters if we are trying to make predictions from the models that we make. Of course, we are often concerned with making predictions from the models that we make, so we can see why this might be important. However, more often we are in extreme violation of this assumption in some combination with assumption 4 above to such a degree that it actually does matter. For example, a response variable that is binomial (1 or zero) or multinomial in nature cannot possibly have normally distributed errors with respect to x unless there is absolutely no relationship between X and Y, right? So, if we wanted to predict the probability of patients dying from some medical treatment, or the presence/absence of species across a landscape then we *can't* use linear models.
 
-<br>
- 
+
 ### Assumption 2: independence of observations
 This time we've broken assumption 2 into two components: colinearity and autocorrelation of errors. Remember that the manifestation of these problems is in the precision of our coefficient estimates, and this has the potential to change the Type-I/II error rates in our models, causing us to draw false conclusions about which variables are important. As we discussed earlier in the course we expect to see some colinearity between observations, and we can deal with balancing this in our modeling through the use of model selection techniques to reduce Type-I and Type-II error. In the next couple of weeks, we will examine tools that will help us determine whether or not colinearity is actually causing problems in our models that go beyond minor nuisances. As for the second part, autocorrelation, we can actually look at formulations of the GLM that use 'generalized least squares' to include auto-regressive correlation matrices in our analysis that will allow us to relax this assumption of linear models and improve the precision of our parameter estimates.
 
-<br>
- 
+
 ### Assumption 3: homoscedasticity
 Previously, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. During the coming weeks, we will look at models that allow us to relax this assumption further through the use of weighted least squares and random effects, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs
 
-<br>
- 
-#### Assumption 4: linearity and additivity
+
+### Assumption 4: linearity and additivity
 We've already looked at a couple of ways to deal with violations of these two assumptions such as data transformation and/or polynomial formulations of the linear model. We will continue to apply these concepts during the next several weeks.
 
-<br>
- 
-## Introducing the GLM
 
+## Introducing the GLM
 There are a number of situations that should just scream "**GLM!!!**" at you. The majority of these are easy to identify because you will know right away that the response variable in which you are interested is clearly not a continuous or normally distributed variable. This is the number one reason for moving into the GLM framework for most people.
 
 The standard GLM consists of three major components:
@@ -77,7 +63,7 @@ $Y_{i,j} = \beta_0 + \beta_j \cdot X_{i,j}$, or $Y = mX + b$, if you prefer
 
 So, this much should be familiar. The major change from the linear models with which we have been working is the addition of this invertible linearizing link function, and it is the component from which the GLM inherits its name. The link function is just a way for us to put the expectation of the response within the context of an asymptotically normal distribution so that we can relax the assumptions of the linear model to accomodate new data types. In essence, it is very similar to the kinds of transformations that we talked about earlier in the semester, but is used during estimation rather than before hand.
 
-To solve for the coefficients (betas) of a GLM, we move fully into the realm of maximum likelihood, with which you are all familiar. A given link function is used for the corresponding distribution that we assume for our data set, and a likelihood for that distribution can be defined such that we can calculate the likelihood of the data given our parameter estimates in a manner similar to the method we used for the standard normal distribution earlier this semester. Within this framework, we input different values (or guesses) about the parameter values that maximize the likelihood of our data one step at a time. Once the change in likelihood becomes sufficiently small, we accept that the algorithm has 'converged' on the optimal estimates for our model parameters (our $\beta_{i,j}$), and the algorithm stops. You do not need to be able to do this by hand (thank goodness for R!), but you do need to understand what is going on so you can troubleshoot when R says that the model failed to converge...
+To solve for the coefficients (betas) of a GLM, we move fully into the realm of maximum likelihood, with which you are all familiar. A given link function is used for the corresponding distribution that we assume for our data set, and a likelihood for that distribution can be defined such that we can calculate the likelihood of the data given our parameter estimates in a manner similar to the method we used for the standard normal distribution earlier this semester. Within this framework, we input different values (or guesses) about the parameter values that maximize the likelihood of our data one step at a time. Once the change in likelihood becomes sufficiently small, we accept that the algorithm has 'converged' on the optimal estimates for our model parameters (our $\beta_{i,j}$), and the algorithm stops. You do not need to be able to do this by hand (thank goodness for R!), but you do need to understand what is going on so you can troubleshoot when R says that the model failed to converge...it will happen.
 
 Let's take a look at a few variable types that we might consider to be common applications for GLM in biology and ecology. We will cover each of these below in detail, here is a list so you know what is coming:
 
@@ -87,34 +73,30 @@ Let's take a look at a few variable types that we might consider to be common ap
 
 \item 3. Overdispersed count data (negative binomial)
 
-<br>
- 
-## Binary (logistic) regression
 
+## Binary (logistic) regression
 Logistic regression generally is reserved for the case in which we have a binary response that, by definition, can take on values of 1 or 0. These values can be expressed as outcoms of individual trials (Bernoulli) or as outcomes of some number of trials (Binomial- last week). These data types are common in biological and ecological data analyses, and thus it is important that you understand how to analyze these data when you encounter them- **linear models will not accommodate this data type**. The easiest way to look at what is going on is to use a worked example.
 
 Let's read in another smolt data set that we have not yet played with
-
-```{r}
-  choice = read.csv('http://employees.oneonta.edu/stichds/data/StillwaterChoiceData.csv')
+```{r, eval=FALSE}
+choice = read.csv('StillwaterChoiceData.csv')
 ```
 
-<br>
- 
+```{r, echo=FALSE}
+choice = read.csv('../../data/StillwaterChoiceData.csv')
+```
+
 Look at the first few rows of data
 
 ```{r}
-  head(choice)
+head(choice)
 ```
-
-<br>
  
 ### Data Explanation
 These data are from a study that examined factors affecting path choice by wild and hatchery-reared endangered Atlantic salmon smolts during seaward migration in the Penobscot River, Maine. State, local, and federal fishery managers were interested in understanding what factors affected migratory routing through the lower river because there were different numbers of dams, with different estimated smolt mortality rates, on either side of a large island hydropower project in this system. If managers could understand factors influencing migratory route, they might be able to manipulate flows, stocking dates, and dam operation to improve survival of these endangered fish. Furthermore, the results of the study were used to predict the effects of dam removal, and hydropower re-allocation in the lower river on population-level consequences for these fish. These data were part of a larger analysis:
 
 Stich, D. S., M. M. Bailey, and J. D. Zydlewski. 2014. Survival of Atlantic salmon (*Salmo salar*) smolts through a hydropower complex. Journal of Fish Biology 85:1074-1096.
 
-<!-- In case you are interested, the paper predicted that the population-level response to dam removal and hydro-power re-allocation would be a net decrease in survival through the lower river. This prediction came true following the implementation of the hydro-system changes, and the results are detailed in a follow-up study published in the Canadian Journal of Fisheries and Aquatic Sciences. Needless to say, this study did not make us any new friends in the NGOs or Hydropower Industry, but the feds loved it. -->
 
 The data consist of the following variables:
 ```
@@ -132,18 +114,12 @@ date:     Ordinal date on which the fish entered the hydrocomplex determined
 flow:     Discharge recorded at the USGS gauge in the headpond of the dam
           several kilometers upstream of the hydropower complex.
 ```
-
-<br>
  
 **NOTE:** the results of this analysis won't look like the results from the paper just yet. We will talk about why in a couple of weeks when we introduce generalized linear mixed models.
 
-<br>
- 
-### Data analysis
 
-<br>
- 
-#### Maximum likelihood estimation
+### Data analysis
+<h4 id="multi"> Maximum likelihood estimation </h4>
 We are going to use the 1/0 binary data to estimate the effects of a number of covariates of interest on the probability that an individual fish used the Stillwater Branch for migration in each year of this study using logistic regression. 
   
 In order to do this, we will use the 'logit' link function, which can be defined as:
@@ -153,8 +129,6 @@ logit = function(x){
 }
 ```
 
-<br>
- 
 The inverse of the logit function is:
 ```{r}
 invlogit = function(x){
@@ -162,14 +136,10 @@ invlogit = function(x){
 }
 ```
 
-<br>
- 
 Since we are interested in the fixed effects of year, and not the linear trend through time, we need to convert year to factor
 ```{r}
 choice$year = as.factor(choice$year)
 ```
-
-<br>
  
 Define a set of models based on *a priori* combinations of explanatory variables.
 
@@ -187,18 +157,14 @@ Define a set of models based on *a priori* combinations of explanatory variables
   mods[[7]]=glm(path~year+hatchery+flow,family=binomial, data=choice)
 ```
 
-<br>
- 
 Give the models some names using the formulas for each of the models. **Remember**: models are stored as list objects in R, and each of those list objects (models) has names. We can reference those names using the `$` notation:
 
 ```{r}
-  for(i in 1: length(mods)){
-    names(mods)[i] = as.character(mods[[i]]$call$formula)[3]
-  }
+for(i in 1: length(mods)){
+  names(mods)[i] = as.character(mods[[i]]$call$formula)[3]
+}
 ```
 
-<br>
- 
 Now, we use the `AICcmodavg` package to make a model selection table like we did last week:  
 
 ```{r, message=FALSE, warning=FALSE}
@@ -209,72 +175,64 @@ Now, we use the `AICcmodavg` package to make a model selection table like we did
   table = aictab( cand.set = mods, modnames = names(mods) )
 ```
 
-<br>
- 
 ##### Interpreting the results
 This pretty much proceeds the same way for GLM as it does for linear models until we get to making predictions of the response based on our best model.
 
 Our model selection table is an object in R (*right*?), and we can reference that object using `$` notation, matrix notation `[ , ]`, or by calling rownames to get the index for each of the models. Let's use this approach to get the best model from our candidate set. Here is a worked example in the code that follows:
-
 ```{r, message=FALSE, warning=FALSE}  
-  # Print the table
-    table
-  # Look at the structure just to show that it is, indeed, an object:
-    str(table)
-  # Look at the rownames of the table. These rownames are the index for each
-  # of our models as they appear in the 'mods' object, and we can use the
-  # index to reference objects inside of the 'mods' list...
-    rownames(table)
-  # This tells us that the rowname for the best model (the one at the top of
-  # the table) is #2. That means that our best model is stored in position
-  # 2 of our model list that we named 'mods'. Let's double check it to make
-  # sure:
-    mods[[2]]
-  # This looks pretty darn good! We could also do a summary of the model to
-  # get the coefficient estimates and the significance codes for the
-  # estimated coefficients:
-    summary(mods[[2]])
-  # Cool!! But, what if we wanted the script to always grab the summary of
-  # the top model in our model selection table no matter what the rowname
-  # was? That is, what if the rowname was subject to change with collection
-  # of further data in the future and we want our code to be flexible? Well,
-  # in that case, we could do this:
-    summary( mods[[ as.numeric(rownames(table[1, ])) ]] )
-  # Here we are asking for the rowname of the first row in our model
-  # selection table. We have to convert that to a number from a character
-  # string to reference the index in the mods list, and then we can
-  # summarize the best model. Another way to do this is:
-    # First, get the number corresponding to the list index for the best
-    # model in the candidate set
-      best = as.numeric(rownames(table[1, ]))
-
-  # Now, get the summary for the model in mods that was the best
-    summary( mods[[best]] )
-  # Since this is really THE SAME THING AS ANCOVA we can use the Anova
-  # function from the 'car' library to get an ANCOVA summary for the
-  # model to look at significance of our main effects:
-      library(car)
-      Anova(mods[[best]], Type='III')
-    # Here, we see that there are signigicant effects of both year and
-    # flow on our response, path choice.
+# Print the table
+  table
+# Look at the structure just to show that it is, indeed, an object:
+  str(table)
 ```
 
-<br>
- 
+Look at the rownames of the table. These rownames are the index for each of our models as they appear in the `mods` object, and we can use the index to reference objects inside of the `mods` list...
+```{r}
+rownames(table)
+```
+
+This tells us that the rowname for the best model (the one at the top of the table) is #2. That means that our best model is stored in position 2 of our model list that we named 'mods'. Let's double check it to make sure:
+
+```{r}
+mods[[2]]
+```
+
+This looks pretty darn good! We could also do a summary of the model to get the coefficient estimates and the significance codes for the estimated coefficients:
+```{r}
+summary(mods[[2]])
+```
+
+Cool!! But, what if we wanted the script to always grab the summary of the top model in our model selection table no matter what the rowname was? That is, what if the rowname was subject to change with collection of further data in the future and we want our code to be flexible? Well, in that case, we could do this:
+
+```{r}
+summary( mods[[ as.numeric(rownames(table[1, ])) ]] )
+```
+
+Here we are asking for the rowname of the first row in our model selection table. We have to convert that to a number from a character string to reference the index in the mods list, and then we can summarize the best model. Another way to do this is:
+
+```{r}
+# First, get the number corresponding to the list index for the best
+# model in the candidate set
+  best = as.numeric(rownames(table[1, ]))
+
+# Now, get the summary for the model in mods that was the best
+  summary( mods[[best]] )
+  
+# Since this is really THE SAME THING AS ANCOVA we can use the Anova
+# function from the 'car' library to get an ANCOVA summary for the
+# model to look at significance of our main effects:
+  library(car)
+  Anova(mods[[best]], Type='III')
+```    
+Here, we see that there are signigicant effects of both year and flow on our response, path choice.
+
+
 ##### Making predictions about the effect of x on y.
-The first thing to remember here is that we have used a link function to
-estimate this model, so we cannot use the same method as before to make
-predictions about our response from the model coefficients.
+The first thing to remember here is that we have used a link function to estimate this model, so we cannot use the same method as before to make predictions about our response from the model coefficients.
 
-The second thing to remember here is that by definition we have used an
-*invertible* link function to estimate this model so the previous statement
-is a lie and we actually can use the same method as before to make
-predictions about our response from the model coefficients. We just need to
-add an extra step so that we can invert our predictions about the expected
-value of Y with respect to X.
+The second thing to remember here is that by definition we have used an *invertible* link function to estimate this model so the previous statement is a lie and we actually can use the same method as before to make predictions about our response from the model coefficients. We just need to\ add an extra step so that we can invert our predictions about the expected value of Y with respect to X.
 
-Confused? Yeah, it's a little confusing. A worked example always goes a long
-way...
+Confused? Yeah, it's a little confusing. A worked example always goes a long way...
 
 ```{r}
 # Let's start by grabbing the summary for our best model
@@ -284,19 +242,21 @@ way...
   c.res
 
 # Then, we can make some predictions
-  # First, let's just look at the effect of flow. We will do this by hand.
-    # Make a new sequence of flow along which we will make our predictions
-      newFlow = seq(from = min(choice$flow), to = max(choice$flow), by = 1)
+# First, let's just look at the effect of flow.
+# We will do this by hand.
+  # Make a new sequence of flow along
+  # which we will make our predictions
+    newFlow = seq(from = min(choice$flow),
+                  to = max(choice$flow),
+                  by = 1)
 
-    # Now make predictions for the year 2005 using flow:
-      c.pred = c.res[1, 1] + c.res[7, 1]*newFlow
+  # Now make predictions for the year 2005 using flow:
+    c.pred = c.res[1, 1] + c.res[7, 1]*newFlow
 
-    # Let's look at these predictions:
-      hist(c.pred)
+  # Let's look at these predictions:
+    hist(c.pred)
 ```
 
-<br>
- 
 Well, this does not look very informative does it? And, actually, it should not. What we *should* take away from this is that these cannot possibly be predictions about the probability of using the Stillwater Branch because there are numbers that are less than zero! Why is this? It is because we need to transform these estimates back on to the probability scale from the logit scale on which we are working. We will use the `invlogit` function that we defined above to put these estimates back on the probability scale.
 
 ```{r}     
@@ -317,8 +277,6 @@ Well, this does not look very informative does it? And, actually, it should not.
   axis(2, las=2)
 ```
 
-<br>
- 
 Now, you can see that there is an increasing probability of using the Stillwater Branch with increasing flow. Looking at the plot of the raw data, you can see 1) why we need models to look at trends like these, and 2) why it is important to provide visual aids to assist with the interpretation of your results.
 
 If we wanted to, we could go on to make predictions like we did with linear models, one for each year with respect to flow, or we could use our fitted data to show trends. We could do this either using the method I have just demonstrated, or...
@@ -346,8 +304,6 @@ We could do this using the `predict` function in R like we did with linear model
                       type='response')
 ```
 
-<br>
- 
 Now, plot the predictions by year:
 ```{r}
 # Add the raw data
@@ -361,6 +317,7 @@ Now, plot the predictions by year:
        col= heat.colors(length(unique(choice$year)))[choice$year]
   )
   axis(2, las=2)
+  
 # Then we could use a loop to go through each year and plot
 # the predictions:
     for(i in 1:length(unique(year))){
@@ -371,8 +328,6 @@ Now, plot the predictions by year:
     }
 ```
 
-<br>
- 
 Alternatively, we could plot these one year at a time so we can show the uncertainty in our estimates, like this: 
 ```{r} 
 # Make predictions from the model and the new data defined above,
@@ -382,10 +337,10 @@ Alternatively, we could plot these one year at a time so we can show the uncerta
                       newdata = newD,
                       type='link',
                       se.fit = TRUE)  
-  
-# The resulting object is a list. Our prediction (fit) and the SE
-# for those predictions are in the first and second elements of
-# that list. We can turn them into a dataframe like this:
+``` 
+
+The resulting object is a list. Our prediction (fit) and the SE for those predictions are in the first and second elements of that list. We can turn them into a dataframe like this:
+```{r}
   preds = data.frame(predicted[1:2])
 
 # Then, using our dataframe, we can calculate Wald 95%
@@ -408,7 +363,8 @@ Alternatively, we could plot these one year at a time so we can show the uncerta
   
   pred05 <- preds[1:nrow(preds[preds$year==2005, ]) , ]
   
-  plot(x=pred05$flow[pred05$year==2005],  y=pred05[,3], type='l',
+  plot(x=pred05$flow[pred05$year==2005],
+       y=pred05[,3], type='l',
        lty=1, col='black', ylim=c(0,1),
        xlab= expression(paste('Flow ( ','m'^'3','\u00b7','s'^'-1',' )')),
        ylab = "p(Stillwater Branch | flow)"
@@ -419,21 +375,17 @@ Alternatively, we could plot these one year at a time so we can show the uncerta
         type='l', lty=2, col='black')
 ```
 
-<br>
- 
+
 #### Bayesian estimation
 We can also fit this logistic regression model using Bayesian estimation methods, and we should be able to obtain similar results. But, in this analytical framework it is easy to start looking at interactions (for example) between year and flow. In this context, we might wish to allow the effect of flow to be the same across years (main effects model), or we may wish to allow the influence of flow to vary between years. We will consider both (interaction).
 
-<br>
- 
+
 ##### Main effects model
 This model is the equivalent of running the following line of code in R:
 ```{r, eval=FALSE} 
 glm(path~year+flow, family='binomial', data=choice)
 ``` 
 
-<br>
- 
 We start by writing down our likelihood and our model. Here, we are saying that the observed successess and failures are drawn from a Bernoulli density with some probability of success (recall that the Bernoulli is just a special case of the binomial). We evaluate the likelihood for each individual observation and some value of $p$, or probability of using the Stillwater Branch. This is the only parameter in the Bernoulli distribution, so our likelihood looks like:
 
 $$C_i = Bernoulli(p_i)$$
@@ -446,8 +398,6 @@ or
 
 $$logit(p_i) = \beta_{0j}\ + \beta_1 \cdot X_1$$
 
-<br>
- 
 Now, we can write the model in BUGS language:
 
 ```{r}
@@ -470,8 +420,6 @@ modelstring="
 writeLines(modelstring,con="choice.txt")
 ```
 
-<br>
- 
 Note that in this case, we have a separate value of alpha for each year, but only a single value of beta. This is akin to the ANCOVA that you have been working with, albeit computationally simpler, and implies that we are only looking at main effects.
 
 Now, we go through our usual steps of packaging the data, specifying initial values, declaring parameters to be monitored, and specifying MCMC settings before we finally run our model:
@@ -496,69 +444,78 @@ Now, we go through our usual steps of packaging the data, specifying initial val
     )}
 
 # MCMC settings
-  ni <- 7500     # Number of draws from posterior (for each chain)
+  ni <- 7500     # Number of draws from posterior
   nt <- 3         # Thinning rate
   nb <- 2500      # Number of draws to discard as burn-in
   nc <- 3         # Number of chains
 ```
 
-<br>
- 
 Finally, we can run the model.
 
 ```{r, results='hide', message=FALSE, warning=FALSE}
 # Load the R2jags package
   library(R2jags)
 
-# Call jags and run the model. Note the use of inits=NULL because JAGS is
+# Call jags and run the model. 
+# Note the use of inits=NULL because JAGS is
 # being really picky and won't take mine.
   choice.model <- jags(choice.data, inits=NULL, parameters, "choice.txt",
     n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb,
     working.directory = getwd())
 ```
 
-<br>
- 
 And, print the model results.
 ```{r}
 print(choice.model, digits=2)
 ```
 
-<br>
- 
 This week in lab, you will explore tools for model diagnostics similar to those we did for general linear models. For now, we will just skip to the good stuff that's not in your textbook this week!
 
 First, let's plot a histogram for our flow parameter to see if the 95% CRI contains zero. 
 
 ```{r}
-# Make a graph of the coefficient of flow for significance testing
+# Make a graph of the coefficient of flow
+# for significance testing
   par(mar=c(5,1,1,1))  
-  hist(choice.model$BUGSoutput$sims.list$beta, col='gray87', yaxt='n',
-       ylab='', xlab=expression(beta), main='')  
-  
+  hist(choice.model$BUGSoutput$sims.list$beta,
+       col='gray87',
+       yaxt='n',
+       ylab='',
+       xlab=expression(beta),
+       main=''
+       )  
+# Add lines for mean and 95% CRI
   abline(v=quantile(choice.model$BUGSoutput$sims.list$beta,
-                    probs=c(0.025,0.5, 0.975)),
-         col=c('red', 'blue', 'red'), lwd=2, lty=c(2,1,2)) 
+                    probs=c(0.025,0.5,0.975)),
+         col=c('red', 'blue', 'red'),
+         lwd=2,
+         lty=c(2,1,2)
+         ) 
 ```
 
-<br>
- 
 We see that the 95% CRI, indicated by the dashed red lines, does not contain zero, so we can conclude that there is a significant effect of flow. Now, let's work on communicating those effect sizes:
 
 ```{r}
 # Make some predictions from the model
   newflow = seq(0,2000,100)
 
-# Collect the posterior estimates. Note that we take the mean of all alphas
+# Collect the posterior estimates. 
+# Note that we take the mean of all alphas
 # so we can get a marginal effect size for flow.
-  alpha = apply(choice.model$BUGSoutput$sims.list$alpha, c(1), mean)
+  alpha = apply(choice.model$BUGSoutput$sims.list$alpha,1, mean)
   beta = choice.model$BUGSoutput$sims.list$beta
   
-# Predict probability of using stillwater given flow across years
+# Predict probability of using
+# Stillwater given flow across years
   # Make a blank matrix to hold the predictions
-  preds = matrix(data = NA, nrow=length(alpha), ncol=length(newflow))
-  # Now make predictions for each new value of flow from each of the
-  # MCMC samples of alpha and beta. These predictions are on the logit scale
+  preds = matrix(data = NA,
+                 nrow=length(alpha),
+                 ncol=length(newflow)
+                 )
+  # Now make predictions for each new
+  # value of flow from each of the
+  # MCMC samples of alpha and beta.
+  # These predictions are on the logit scale
   for(i in 1:length(alpha)){
     for(t in 1:length(newflow)){
       preds[i, t] = alpha[i] + beta[i] * newflow[t]
@@ -574,14 +531,16 @@ We see that the 95% CRI, indicated by the dashed red lines, does not contain zer
 # Plot the predictions
   par(mar=c(5,5,1,1))
   plot(newflow, ppreds[1, ], ylim=c(0, 1),
-       yaxt='n', xlab=expression(paste('Flow (m'^'3','s'^'-1',')')),
+       yaxt='n',
+       xlab=expression(paste('Flow (m'^'3','s'^'-1',')')),
        ylab='p(Stillwater | flow)',
        xlim=c(0,2000), axes = FALSE,
        type='l', col=rgb(.7,.7,.7,.05),
        main='')
 # Plot the posterior predictions
   for(i in 1:length(alpha)){
-    lines(x = newflow, y = ppreds[i, ], col=rgb(.7,.7,.7,.05), lwd=1)
+    lines(x = newflow, y = ppreds[i, ],
+          col=rgb(.7,.7,.7,.05), lwd=1)
   }
 # Calculate the mean and 95% CRIs for posterior predictions
   muPred = apply(ppreds, 2, mean)
@@ -595,238 +554,4 @@ We see that the 95% CRI, indicated by the dashed red lines, does not contain zer
   axis(2, pos=0, las=2)
 ```
 
-<br>
- 
 Hopefully the power of these tools is starting to become evident as we broaden them to include more datatypes. We will continue to explore GLMs next week, and will extend this framework to include models for counts (of stuff or events) and to deal with overdispersed and zero-inflated counts.
-
-<!-- ## Poisson regression -->
-<!-- Poisson regression is useful for any situation in which we have a response that is a count. These are discrete data that cannot be considered continuous because it is impossible for them to take on non-integer or non-negative values. Common examples of these types of responses include species count -->
-<!-- data in ecology, cell counts in biology, and the number of respondents or -->
-<!-- patients reporting a side-effect or symptom of interest in the health care -->
-<!-- profession. -->
-
-<!-- For the Poisson family, the link function that we will use is the 'log' link -->
-<!-- function. This function allows us to work with data that are constrained to -->
-<!-- be non-negative, a desireable property when we are working with count data. -->
-
-<!-- Let's use a crab data set to demonstrate the GLM with Poisson data, we will -->
-<!-- walk through this data set for both the Poisson and negative binomial -->
-<!-- examples, addressing some distributinal assumptions and model fit along the -->
-<!-- way. -->
-
-<!-- ```{r} -->
-<!-- # Read in the data -->
-<!--   crabs = read.csv('crabs.csv', header = TRUE) -->
-<!-- # Have a look-see -->
-<!--   head(crabs) -->
-<!--   str(crabs) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- ### Data explanation -->
-<!-- These data represent the number of satellite male crabs per female (rows) -->
-<!-- horseshoe crab in relation to a number of characteristics of the females, -->
-<!-- including their color, spine condition, carapace width, and mass (g). -->
-
-<!-- The full citation for the paper that this data set is based on: -->
-<!-- H. J. Brockmann. 1996. Satellite male groups in horseshoe crabs, *Limulus polyphemus*. Ethology 102:1-21. doi:10.1111/j.1439-0310.1996.tb01099.x -->
-
-<!-- ```{r} -->
-<!-- # We want to convert color to a factor right off the bat -->
-<!--   crabs$color = as.factor(crabs$color) -->
-
-<!-- # Fit a model -->
-<!--   count.mod = glm(satellites~width+mass+spine+color, data=crabs, -->
-<!--                   family='poisson'(link=log)) -->
-
-<!-- # Right away, we can see that this model is not a very good fit to the data. -->
-<!--   plot(count.mod) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- This brings us to the next important point we need to make about  GLMS... -->
-
-<!-- > Even though we are relaxing the assumptions of linear models, we still need to check to make sure the models we use are valid with respect to our assumptions. -->
-
-<!-- This will become considerably more complicated as we begin to move in to distributions other than the binomial and the Poisson, as our standard methods become less and less applicable and in-depth model validation becomes more and more obscure and more involved. -->
-
-<!-- So, what is going on here? Well, we can see from the first plot that the variance changes with the mean. We can also see that there are some evident issues in our Q-Q plot WRT to the observed vs theoretical values. Finally, we can see that we have some serious outliers in the plot of residuals vs leverage. This is strongly indicative of a skewed distribution in this case given the spread of our leverage points. Outside of the Poisson and Binomial(not the negative binomial!) the interpretability of these plots deteriorates quickly, so we will look at a couple of other methods moving forward. -->
-
-<!-- If we had started by doing data exploration we would have, of course, noticed that even though the data represent counts, they are pretty clearly overdispersed and are indicative of a negative binomial distribution. -->
-
-<!-- For now, we won't bother to take a look at these results because the link function is the same, so we can get the results from the negative binomial regression in the same way. -->
-
-<!-- <br> -->
-
-<!-- ## Negative binomial regression -->
-<!-- Okay, moving on with life, let's take a look at the negative binomial regression model. -->
-
-<!-- We will start this time by actually doing some data exploration before our analysis. -->
-
-<!-- First, look at the distribution of the data. Here, it should be pretty obvious to you by now that these are count data for which the mean is not equal to the variance...right? -->
-
-<!-- ```{r} -->
-<!-- hist(crabs$satellites) -->
-<!-- ```     -->
-
-<!-- If you think back to a couple of weeks ago, you'll remember this is a pretty typical example of the negative binomial distribution -->
-
-<!-- We can take a look at how this shakes out between our groups (color) as well -->
-
-<!-- ```{r} -->
-<!-- boxplot(satellites~color, data=crabs) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- And, you can see here that even within groups the distributions do not look like they have equal means and variances, so we will fit a GLM that assumes the response is drawn from a negative binomial distribution. We will need to load a package for this (yay!): -->
-
-<!-- ```{r, message=FALSE, warning=FALSE} -->
-<!-- library(MASS) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- For this example, we will use a function called `glm.nb`. This function us estimate a GLM for lets us estimate parameters for a GLM that uses the negative binomial error distribution and estimates the "overdispersion parameter" for the negative binomial distribution. You, of course, remember this parameter and know it as `theta` from our discussions about probability distributions. -->
-
-<!-- ```{r, eval=FALSE, message=FALSE, warning=FALSE} -->
-<!-- ?glm.nb -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Let's start by fitting a model. Note that we do not need to specify the distributional family or the link function because the glm.nb function was created specifically for the case of negative binomial regression -->
-
-<!-- ```{r} -->
-<!-- neg.mod = glm.nb(satellites~width+mass+color, data=crabs) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- OR, we could fit it with the GLM function like this: -->
-
-<!-- ```{r, eval=FALSE} -->
-<!-- neg.mod = glm(satellites~width+mass+color, data=crabs, -->
-<!--               family='negative.binomial'(theta = 1)) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Play around with the two formulations above and see if there's a difference. *Clue*: there's not really. Just two different ways to do the same thing. The functionality in the glm() function only came around recently, that's all. -->
-
-<!-- Now, let's take a look at the distribution of the residuals -->
-
-<!-- ```{r} -->
-<!-- res = neg.mod$residuals -->
-<!-- plot(neg.mod) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Our residuals appear to also take on a negative binomial error distribution, but these plots start to become pretty meaningless in the world of GLMs without a few tweaks... -->
-
-<!-- Luckily, there is also a tool for this purpose -->
-
-<!-- ```{r, message=FALSE, warning=FALSE} -->
-<!-- # Load the boot package -->
-<!--   library(boot) -->
-
-<!-- # Run the diagnostic plots for our model -->
-<!--   glm.diag.plots(neg.mod) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Here, we get a pretty clear picture that our model is adequately describing the overdispersion in the count data when we use the negative binomial distribution, but we may have some issues with extreme data points and excess zeroes. -->
-
-<!-- **But**, how does this compare to the Poisson model for count data? We can use model selection to compare the Poisson model to the negative binomial model, since the response is the same in both cases. -->
-
-<!-- ```{r} -->
-<!-- AIC(count.mod, neg.mod) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Clearly the negative binomial model is far superior to the Poisson model here. Now, with a good model in hand we could proceed with data visualization, ..., etc. -->
-
-<!-- Still, this will not be satisfying to the purists out there as the two models are not "nested" in the sense that one is a subset of the other. There are some philosophical issues with an I-T approach in this situation, in which case a full-on model validation test might be necessary to determine which model posesses the best predictive properties. Thinking back to our conversations last week, this process potentially could include some measure of accuracy and precision (like the root mean squared error) for each model based on cross validation methods or boot strapping. -->
-
-<!-- On with life again, and we can finally look at the model output... -->
-
-<!-- ```{r}   -->
-<!-- summary(neg.mod) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- The interpretation of this output is virtually identical to the output for linear models that we have been working with. Here, we see that no variable is significant with a type-I error rate of 0.05, and that only the mass of females has a significant effect on the number of satellite males when we increase our type-I error rate to 0.10. How does this compare to the original findings? Go take a look... -->
-
-<!-- ## Zero inflation  -->
-<!-- The fits of these two models, in reality suggest the need to get into a whole other realm of error distributions that we probably will not get into during this class: the zero inflated count model. Zero inflation (excess zeroes in count data) can arise by one of two mechanisms: process zeros and observational zeros that arrive as a result of imperfect detection). -->
-
-<!-- One approach to dealing with this is to use a 'hurdle' model. The idea is to make two separate models: 1) a logistic regression model to help us determine which factors influence whether or not the phenomenon of interest even occurred (0 or 1), and 2) a count model that will help us determine what factors influence with what frequency this phenomenon occurred given that it did occur. -->
-
-<!-- First, we make a binary indicator variable to represent whether or not the phenomenon occurred using an if-then statement inside a for loop: -->
-<!-- ```{r} -->
-<!-- for(i in 1: nrow(crabs)){ -->
-<!--   if(crabs$satellites[i]==0){ -->
-<!--    crabs$present[i] = 0 -->
-<!--   } else { -->
-<!--     crabs$present[i] =1 -->
-<!--   } -->
-<!-- } -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Now, the first step is to fit a logistic regression model to predict how our response is affected by some combination of explanatory variables -->
-
-<!-- ```{r} -->
-<!-- step1 = glm(present~mass, data=crabs, family='binomial') -->
-<!-- summary(step1) -->
-<!-- ```   -->
-
-<!-- <br> -->
-
-<!-- Here we see that mass has a significant effect on whether or not *any* satellite males are present -->
-
-<!-- Step 2 is to fit the count model to explain the effects of some combination of explanatory variables on the frequency with which the phenomenon occurs given that it ever occurred in the first place. NOTE: This does not have to be the same combination of explanatory variables. In fact, it is always conceivable that different processes influence these two distinct phenomena. -->
-
-<!-- ```{r} -->
-<!-- step2 = glm.nb(satellites~mass, data=crabs[crabs$satellites!=0,]) -->
-<!-- summary(step2) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- From these results, we can see that our count models in the previous sections were really just picking up on the large number of zeroes in our data set. We know this because of the differences in the results between the models `step1` and `step2`.  -->
-
-<!-- Likewise, we can take another look at our model diagnostics for `step2` to see if our diagnostic plots look more reasonable now -->
-
-<!-- ```{r} -->
-<!-- # Make diagnostic plots -->
-<!--   glm.diag.plots(step2) -->
-<!-- ``` -->
-
-<!-- <br> -->
-
-<!-- Here, we can see that our residual plots indicate a pretty drastic improvement in our assumptions. -->
-
-<!-- Of course, there are a number of built-in functions available from different packages that can be used to do the same thing. Here is one example from the `pscl` package: -->
-
-<!-- ```{r, message=FALSE, warning=FALSE} -->
-<!-- # Load the pscl package -->
-<!--   library(pscl) -->
-
-<!-- # Fit a zero-inflated regression model -->
-<!--   neg.mod2 = zeroinfl(satellites~width+mass+color, data=crabs, -->
-<!--                       dist='negbin') -->
-<!-- ``` -->
-
-<br>
- 
-
-<br>
- 

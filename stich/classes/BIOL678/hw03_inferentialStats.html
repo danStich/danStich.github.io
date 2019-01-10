@@ -20,19 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -213,47 +201,74 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="../BIOL217/index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 <div class="fluid-row" id="header">
 
@@ -263,8 +278,10 @@ $(document).ready(function () {
 </div>
 
 
-<div id="intro-to-inferential-statistics" class="section level1">
-<h1>Intro to inferential statistics</h1>
+<h1 id="multi">
+Inferential statistics
+</h1>
+<p><img src="../../images/peppers.jpg" alt=""></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -440,16 +457,15 @@ mean of x mean of y
 <p><strong>Question 9.</strong> Does this make biological sense based on the description of the dataset above? Does this make biological sense based on the results of the two-sample t-test above?</p>
 <p>Make a boxplot of the variable ‘max’ by lifestage only for presmolts and smolts. <strong>NOTE</strong>: it may be helpful to make a seperate dataframe that does not contain postsmolts and then transform the variable ‘stage’ to character using tools we learned in previous labs. Call the dataframe <code>smolts2</code> for ease below.</p>
 </div>
-<div id="chi-squared-frequency-analysis" class="section level3">
-<h3>Chi-squared frequency analysis</h3>
-<p>Last time we met, we conducted a chi-square frequency analysis by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwile as a tool in your modeling toolbox.</p>
+<div id="chi2-frequency-analysis" class="section level3">
+<h3><span class="math inline">\(\chi^2\)</span> frequency analysis</h3>
+<p>Last time we met, we conducted a <span class="math inline">\(\chi^2\)</span> frequency analysis by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwile as a tool in your modeling toolbox.</p>
 <p>Create a new column in your dataframe that ranks osmolality as <code>high</code> if it is &gt;= 400 mosm, and <code>low</code> if it is &lt; 400 mosm.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Like this:</span>
 smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&gt;=</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;high&#39;</span>
 smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&lt;</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;low&#39;</span></code></pre></div>
-<p>Conduct a chi-squared test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the chi-squared test object.</p>
+<p>Conduct a <span class="math inline">\(\chi^2\)</span> test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the <span class="math inline">\(\chi^2\)</span> test object.</p>
 <p><strong>Question 10.</strong> Okay, no surprises that the frequency of high and low osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.</p>
-</div>
 </div>
 </div>
 
@@ -459,7 +475,7 @@ smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

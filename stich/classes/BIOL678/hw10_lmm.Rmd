@@ -1,35 +1,27 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
-# Linear mixed models
+<h1 id="multi"> Linear mixed models (LMM) <h1>
 
-<br>
- 
-## Introduction
+<img src="../../images/yp.jpg" alt="">
 
-<br>
- 
+<h2 id="multi"> Introduction </h2>
+
 We introduced the linear mixed effects model this week, and we looked at examples of how to incorporate random effects in our inference within both frequentist and Bayesian frameworks for analysis. We will continue to probe these tools in our lab exercise this week and build some comfort working with these hierarchical models. By the end of this lab, you should be comfortable 1) specifying random effects in models, 2) running those models using restricted maximum likelihood (REML) estimation and Bayesian hierarchical models, 3) graphically dsiplaying results, and 4) communicating the methods and the results of this work through technical writing.
 
-<br>
- 
 ## The data
 
-<br>
- 
 This week we will play with Yellow Perch data from the New York State Department of Environmental Conservation (NYSDEC) fisheries database. These data were collected by the NYSDEC throughout NY over the past few decades. 
 
 Let's have a look:
 
-<br>
- 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 # Read in the data file
-# We are reading it in with the optional argument because we don't want to deal
-# with code relicts when we start dropping factor levels
-  fish = read.csv("http://employees.oneonta.edu/stichds/data/allwaters.txt", stringsAsFactors = FALSE)
+# We are reading it in with the optional
+# argument because we don't want to deal
+# with code relicts when we start
+# dropping factor levels
+  fish = read.csv("allwaters.txt", stringsAsFactors = FALSE)
 
 # Look at the data structure
   str(fish)
@@ -38,12 +30,23 @@ Let's have a look:
   head(fish)
 ```
 
-<br>
- 
-As you can see, there are a *ton* of lakes in this dataset, and it contains information for both yellow perch (*Perca flavescens*) and walleye (*Sander vitreus*). The lakes are scattered throughout NY. So, before we can start working with the data we want, we need to get them out of this mess.
+```{r, echo=FALSE}
+# Read in the data file
+# We are reading it in with the optional
+# argument because we don't want to deal
+# with code relicts when we start
+# dropping factor levels
+  fish = read.csv("../../data/allwaters.txt", stringsAsFactors = FALSE)
 
-<br>
- 
+# Look at the data structure
+  str(fish)
+  
+# And, have a look at the first few lines of data
+  head(fish)
+```
+
+As you can see, there are a *ton* of lakes in this dataset, and it contains information for both yellow perch (*Perca flavescens*) and walleye (*Sander vitreus*). We only want to work with lakes in Region 4, but the lakes are scattered throughout NY. So, before we can start working with the data we want, we need to get them out of this mess.
+
 ```{r}
 # Remove observations for which we lack mass
   fish = fish[fish$Name=='Yellow Perch' & fish$Region==4, ]
@@ -52,16 +55,10 @@ As you can see, there are a *ton* of lakes in this dataset, and it contains info
   nrow(fish)  
 ```
 
-<br>
- 
-And that's the sad reality. In any case, this is more than enough for what we will do this week. 
-
-<br>
+And the loss of data here is a sad reality. In any case, this is more than enough for what we will do this week. 
  
 ## Exercises
 
-<br>
- 
 Following in the footsteps of the great Kery (2010), we will play around with some length-weight relationships this week. Length-weight regression is a standard tool used in fishery assessment, but also has application to a wide variety of body condition metrics in other species (including people!). And, the methods that we will use to analyze length-weight relationships are more generally just one example of the linear mixed models we might use whenever we have normal or log-normal data that we want to use for inference.
 
 This week, we are going to fit some random effects models in order to investigate relationships between length and mass for fish collected in different lakes. We will start with a random effect on the intercept, and you will push on to fit a model that includes random effects on both the intercepts and slopes.
@@ -72,8 +69,6 @@ We will start by taking a look at the data we have to work with. First, we want 
 
 We see that we have thirteen waters left in the data that actually contain yellow perch and are in Region 4. Let's also make ourselves a variable to store the number of lakes we have to make the programming below a little easier.
 
-<br>
- 
 ```{r}
 # How many unique lakes do we have left?
   sort(unique(fish$Water))
@@ -82,20 +77,12 @@ We see that we have thirteen waters left in the data that actually contain yello
   nwaters = length(unique(fish$Water))  
 ```
 
-<br>
- 
 Okay, now that we know what we are working with here, we can specify our models in much the same way that we did in lecture this week. 
 
-<br>
- 
 ### REML implementation
 
-<br>
- 
 We start by estimating the model with REML. The model converges quickly.
 
-<br>
- 
 ```{r, warning=FALSE, message=FALSE}
 # Load the lme4 library
   library(lme4)
@@ -118,18 +105,12 @@ We start by estimating the model with REML. The model converges quickly.
   summary(ypLME)
 ```
 
-<br>
- 
 We see that we got a nice tight fit to the data in this case. Also notable in this specific model is the negative correlation between the fixed effects. This is a well-known phenomenon, but worth recognizing. If we wanted to go further, we could account for this correlation in our model structures directly.
 
 For reporting, we could make a graph showing the mean of the regional relationship, or we could dig into the random coefficients for each model using the methods detailed in the lecture material from this week.
 
-<br>
- 
 ### Bayesian implementation
 
-<br>
- 
 Next, we will fit the model in JAGS.
 
 Here, we tell JAGS that the response (mass) is a random variable that has a normal distribution with a mean of $\mu$, and a precision of $\tau$. Recall that $\tau$ is precision (the inverse of $\sigma$). Next, we tell JAGS that the mean (expected value) of the response can be described as a linear function of waterbody and length. We specify waterbody-specific priors for the intercept term, $\alpha$, each of which has a mean of $\mu_int$ and a standard deviation of $\sigma_int$. The values of hyperparameters $\mu_int$ and $\sigma_int$ are drawn from hyperpriors on the regional mean and standard deviations for the length-weight relationship. Finally, we specify a single prior for $\beta$ to indicate that the slope (relationship between length and mass) is the same across all water bodies.
@@ -143,23 +124,23 @@ Here, we tell JAGS that the response (mass) is a random variable that has a norm
   
     # Likelihood
      for (i in 1:n) {
-        mass[i] ~ dnorm(mu[i], tau)		             # The random variable
+        mass[i] ~ dnorm(mu[i], tau)	# The random variable
         mu[i] <- alpha[water[i]] + beta* length[i] # Expectation
      }
     
     # Priors
      for (i in 1:nwaters){		
-        alpha[i] ~ dnorm(mu.int, tau.int)	  # Random intercepts
+        alpha[i] ~ dnorm(mu.int, tau.int) # Random intercepts
      }
     
-     mu.int ~ dnorm(0, 0.01)	  	  # Mean hyperparameter for random intercepts
+     mu.int ~ dnorm(0, 0.01)	# Mean hyperparameter for random intercepts
      tau.int <- 1 / (sigma.int * sigma.int)
-     sigma.int ~ dunif(0, 10)		    # SD hyperparameter for random intercepts
+     sigma.int ~ dunif(0, 10)	# SD hyperparameter for random intercepts
     
-     beta ~ dnorm(0, 0.01)	  	    # Slope
+     beta ~ dnorm(0, 0.01) # Slope
      
-     tau <- 1 / ( sigma * sigma)		# Residual precision
-     sigma ~ dunif(0, 10)			      # Residual standard deviation
+     tau <- 1 / ( sigma * sigma) # Residual precision
+     sigma ~ dunif(0, 10)	# Residual standard deviation
 
     }
   "
@@ -231,8 +212,6 @@ nc <- 3
 
 First, we can take a look at the model coefficients and diagnostics. Here, I am just going to print the model results for mean, sd, 95% CRI, and N~eff~.
 
-<br>
- 
 ```{r, eval = FALSE}
 # Get parameter estimates all by themselves
   res = ypModel$BUGSoutput$summary[, c(1,2,3,7,8,9)]
@@ -241,24 +220,14 @@ First, we can take a look at the model coefficients and diagnostics. Here, I am 
   print(res, digits = 3)
 ```
 
-<br>
- 
 After a quick look at the convergence diagnostics, things look more or less a-okay, but we may need to bump up our sampling to get a larger sample size if we ever want to get this sucker published.
 
-<br>
- 
 ### Interpretting the results
 
-<br>
- 
 Usually, we don't get too sucked into the interpretation of results in this class, but the actual parameters of this equation have some pretty cool meaning in and of themselves. For length-weight regressions, the parameter $\beta$ actually is a measure of how fish rotundity changes throughout their life. For cases where $\beta$ > 3, we say that the fish generally gets fatter as it increases in length. At $\beta$ < 3, we assume that fish get skinnier as the grow in length. This can be really useful for monitoring population trends. For these data, it is clear that beta is "significantly" larger than 3 given that the 95% CRI for our estimate does not overlap zero. **But** what if some of these populations had $\beta$ < 3.0 and we are just not picking it up because we only estimated one $\beta$?!
 
-<br>
- 
 ## Your mission
 
-<br>
- 
 Did you see that one coming?
 
 \item 1. Choose REML or Bayesian methods for fitting a model.
@@ -272,7 +241,7 @@ Did you see that one coming?
 \item 5. Write a brief methods and brief results section.
 
 
-<br>
+
  
-<br>
+
  
