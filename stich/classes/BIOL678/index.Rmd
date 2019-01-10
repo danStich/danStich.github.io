@@ -61,7 +61,7 @@ To access the content from a given topic, please click on the corresponding link
 
 ### GLM: count models
 
-<a href="./09_glm_countModels.html"> Lecture tutorial </a><br> 
+<a href="./09_glm_countModels.html"> Lecture tutorial </a><br>
 <a href="./hw09_glm_counts.html"> Homework assignment </a>
 
 

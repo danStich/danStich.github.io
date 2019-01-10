@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -355,7 +355,7 @@ original.length &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <
 mn &lt;-<span class="st"> </span><span class="kw">mean</span>(original.length)
 sd &lt;-<span class="st"> </span><span class="kw">sd</span>(original.length)
 <span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)
-Mean and sd used to normalise.original length<span class="op">:</span><span class="st"> </span><span class="fl">57.58807</span> <span class="fl">7.681806</span> 
+Mean and sd used to normalise.original length<span class="op">:</span><span class="st"> </span><span class="fl">57.53614</span> <span class="fl">7.282029</span> 
 length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
 <span class="kw">hist</span>(length, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
@@ -375,11 +375,11 @@ lin.pred &lt;-<span class="st"> </span>Xmat[,] <span class="op">%*%</span><span 
 eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">30</span>)  <span class="co"># residuals </span>
 mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class="st"> </span>eps                      <span class="co"># response = lin.pred + residual</span>
 
-<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span>
-
-<span class="kw">library</span>(lattice)</code></pre></div>
+<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span></code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
+<span class="kw">library</span>(lattice)
+<span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
 <p><img src="10_lmm_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
 <p>So, as you can see we have successfully created 56 populations of critters, each of which has some pre-defined relationship between length and mass based on 10 samples from the population. Wow. What a mess. Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation and Bayesian inference. Ultimately, what we want to do here is estimate the relationship between length and mass while accounting for inherent (well, simulated) variability between populations.</p>
 </div>
@@ -400,22 +400,22 @@ lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span c
 Linear mixed model fit by REML [<span class="st">&#39;lmerMod&#39;</span>]
 Formula<span class="op">:</span><span class="st"> </span>mass <span class="op">~</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pop)
 
-REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">5751.9</span>
+REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">5779.2</span>
 
 Scaled residuals<span class="op">:</span><span class="st"> </span>
-<span class="st">     </span>Min       1Q   Median       3Q      Max 
-<span class="op">-</span><span class="fl">2.85202</span> <span class="op">-</span><span class="fl">0.59853</span> <span class="op">-</span><span class="fl">0.00276</span>  <span class="fl">0.66469</span>  <span class="fl">2.89068</span> 
+<span class="st">    </span>Min      1Q  Median      3Q     Max 
+<span class="op">-</span><span class="fl">2.8372</span> <span class="op">-</span><span class="fl">0.6727</span> <span class="op">-</span><span class="fl">0.0237</span>  <span class="fl">0.5946</span>  <span class="fl">3.5912</span> 
 
 Random effects<span class="op">:</span>
 <span class="st"> </span>Groups   Name        Variance Std.Dev.
- <span class="kw">pop</span>      (Intercept)  <span class="fl">313.6</span>   <span class="fl">17.71</span>   
- Residual             <span class="fl">1537.9</span>   <span class="fl">39.22</span>   
+ <span class="kw">pop</span>      (Intercept)  <span class="fl">284.1</span>   <span class="fl">16.85</span>   
+ Residual             <span class="fl">1631.2</span>   <span class="fl">40.39</span>   
 Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">560</span>, groups<span class="op">:</span><span class="st">  </span>pop, <span class="dv">56</span>
 
 Fixed effects<span class="op">:</span>
 <span class="st">            </span>Estimate Std. Error t value
-(Intercept)  <span class="fl">228.764</span>      <span class="fl">2.889</span>   <span class="fl">79.19</span>
-length        <span class="fl">54.525</span>      <span class="fl">1.737</span>   <span class="fl">31.39</span>
+(Intercept)  <span class="fl">233.310</span>      <span class="fl">2.826</span>   <span class="fl">82.56</span>
+length        <span class="fl">52.366</span>      <span class="fl">1.764</span>   <span class="fl">29.68</span>
 
 Correlation of Fixed Effects<span class="op">:</span>
 <span class="st">       </span>(Intr)
@@ -435,7 +435,7 @@ length <span class="fl">0.000</span> </code></pre></div>
 
 <span class="co"># Print the CI to the console</span>
   lengthCI
-[<span class="dv">1</span>] <span class="fl">51.12042</span> <span class="fl">57.93031</span></code></pre></div>
+[<span class="dv">1</span>] <span class="fl">48.90756</span> <span class="fl">55.82367</span></code></pre></div>
 <p>Here, we can see that our 95% CI excludes zero, so we can say that length has a significant effect on mass in this species. If we wanted to show this relationship in a graph, we now have to do the math by hand, which is why I forced you to learn the math involved with this. Here is an example of how one might do this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
   <span class="kw">plot</span>(length, mass)
@@ -457,12 +457,12 @@ length <span class="fl">0.000</span> </code></pre></div>
 <span class="co"># Have a look at the first few</span>
   <span class="kw">head</span>(effs<span class="op">$</span>pop)
   (Intercept)   length
-<span class="dv">1</span>    <span class="fl">237.7858</span> <span class="fl">54.52537</span>
-<span class="dv">2</span>    <span class="fl">255.7753</span> <span class="fl">54.52537</span>
-<span class="dv">3</span>    <span class="fl">185.3532</span> <span class="fl">54.52537</span>
-<span class="dv">4</span>    <span class="fl">228.7119</span> <span class="fl">54.52537</span>
-<span class="dv">5</span>    <span class="fl">230.3067</span> <span class="fl">54.52537</span>
-<span class="dv">6</span>    <span class="fl">233.4669</span> <span class="fl">54.52537</span></code></pre></div>
+<span class="dv">1</span>    <span class="fl">218.9050</span> <span class="fl">52.36562</span>
+<span class="dv">2</span>    <span class="fl">243.5720</span> <span class="fl">52.36562</span>
+<span class="dv">3</span>    <span class="fl">223.5611</span> <span class="fl">52.36562</span>
+<span class="dv">4</span>    <span class="fl">210.5893</span> <span class="fl">52.36562</span>
+<span class="dv">5</span>    <span class="fl">211.0770</span> <span class="fl">52.36562</span>
+<span class="dv">6</span>    <span class="fl">255.8230</span> <span class="fl">52.36562</span></code></pre></div>
 <p>This gives us the random intercept for each population so we can make predictions about them individually if we want to! It only gives us one value for the length parameter because we specified this as a main effect. If want to plot the results for population 3, for example, our code would look like this:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
   <span class="kw">plot</span>(length[pop<span class="op">==</span><span class="dv">3</span>], mass[pop<span class="op">==</span><span class="dv">3</span>],
@@ -600,24 +600,24 @@ nc &lt;-<span class="st"> </span><span class="dv">3</span></code></pre></div>
 <span class="co"># Inspect results</span>
   <span class="kw">print</span>(res, <span class="dt">digits =</span> <span class="dv">2</span>)</code></pre></div>
 <pre><code>            mean     sd    2.5%   97.5%  Rhat n.eff
-alpha[1] 237.064 10.274 217.308 256.709 1.002  1100
-alpha[2] 255.005 10.625 234.453 275.650 1.002  1300
-alpha[3] 184.913 10.868 162.962 206.164 1.003   890
-alpha[4] 228.351 10.313 206.880 247.966 1.000  2200
-alpha[5] 229.264  9.867 209.512 248.299 1.001  2200
-alpha[6] 232.916 10.495 212.303 254.118 1.003   800
+alpha[1] 218.018 10.439 196.762 237.444 1.001  2200
+alpha[2] 243.345 10.662 223.181 264.408 1.001  2200
+alpha[3] 222.890 10.591 201.270 243.722 1.002  1400
+alpha[4] 209.879 10.569 188.977 231.014 1.005   480
+alpha[5] 210.364 10.658 189.119 230.940 1.003   680
+alpha[6] 255.335 10.637 234.592 276.759 1.001  2200
 
  . 
  . 
  . 
  
               mean     sd     2.5%    97.5%  Rhat n.eff
-alpha[56]  216.202 10.377  196.632  236.834 1.000  2200
-beta        54.328  1.749   50.893   57.693 1.000  2200
-deviance  5700.834 11.256 5680.828 5723.936 1.002   970
-mu.int     226.835  3.024  220.841  232.563 1.001  2200
-sigma       39.427  1.206   37.110   41.856 1.001  2200
-sigma.int   18.043  2.595   13.443   23.373 1.003   760</code></pre>
+alpha[56]  240.295 10.328  220.591  260.573 1.003   910
+beta        52.171  1.723   48.829   55.473 1.000  2200
+deviance  5733.138 11.511 5712.864 5757.754 1.004   600
+mu.int     231.340  2.984  225.144  237.223 1.001  2200
+sigma       40.494  1.273   38.148   43.106 1.007   330
+sigma.int   17.484  2.778   12.720   23.452 1.005   430</code></pre>
 <p>Judging by our diagnostics, it looks like our estimates have converged nicely, and we see that we have sufficiently sampled posteriors for all 60(!) parameters of interest.</p>
 <p>Finally, we can look at the results for the linear predictions. This week, we’ll take a look at how to present results for linear predictors. We will use the same example as we did for the model we fit in <code>lme4</code>.</p>
 <blockquote>

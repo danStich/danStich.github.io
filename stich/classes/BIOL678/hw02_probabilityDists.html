@@ -20,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -213,43 +214,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="../BIOL217/index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -343,14 +358,14 @@ bern.sample &lt;-<span class="st"> </span><span class="kw">rbern</span>(<span cl
 <h3>The binomial distribution</h3>
 <p>Remember the binomial distribution is like the Bernoulli, but instead of flipping one coin at a time, we are flipping <span class="math inline">\(N\)</span> number of coins (<code>size</code>) per trial:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)
- [<span class="dv">1</span>] <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">6</span> <span class="dv">6</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">3</span> <span class="dv">8</span></code></pre></div>
+ [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">6</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">6</span></code></pre></div>
 <p><strong>Question 8.</strong> Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (<code>size</code>) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (<code>n</code>) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise).</p>
 </div>
 <div id="the-poisson-distribution" class="section level3">
 <h3>The Poisson distribution</h3>
 <p>Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example):</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">rpois</span>(n &lt;-<span class="st"> </span><span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">10</span>)
- [<span class="dv">1</span>] <span class="dv">10</span> <span class="dv">12</span>  <span class="dv">8</span>  <span class="dv">6</span> <span class="dv">13</span> <span class="dv">10</span> <span class="dv">12</span> <span class="dv">10</span> <span class="dv">11</span> <span class="dv">11</span></code></pre></div>
+ [<span class="dv">1</span>] <span class="dv">12</span> <span class="dv">13</span> <span class="dv">13</span>  <span class="dv">7</span>  <span class="dv">9</span>  <span class="dv">5</span> <span class="dv">11</span> <span class="dv">10</span> <span class="dv">14</span> <span class="dv">10</span></code></pre></div>
 <p>The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.</p>
 <p>Suppose that we are interested in describing the distribution of the genus <em>Photinus</em> in Upstate New York. We collected as many speciments as we could in jars (at this point if you’re really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of <em>Photinus</em> we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.</p>
 <p><strong>Question 9.</strong> Using the data in the file <code>counts.txt</code> (you have to read it in first), estimate the mean and variance for the number of Photinus per night using any method appropriate for these data (see above or below for data read: <strong>I want you to adapt this code</strong>).</p>
@@ -374,7 +389,7 @@ bern.sample &lt;-<span class="st"> </span><span class="kw">rbern</span>(<span cl
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 

@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -778,10 +778,10 @@ ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</s
 }</code></pre></div>
 <p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">      <span class="kw">median</span>(p.Rsquare)
-[<span class="dv">1</span>] <span class="fl">0.4578567</span>
+[<span class="dv">1</span>] <span class="fl">0.4593379</span>
       <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
      <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span>
-<span class="fl">0.1161187</span> <span class="fl">0.6209631</span> </code></pre></div>
+<span class="fl">0.1078884</span> <span class="fl">0.6205961</span> </code></pre></div>
 <p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the histogram</span>
   <span class="kw">hist</span>(p.Rsquare, <span class="dt">breaks=</span><span class="dv">100</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,

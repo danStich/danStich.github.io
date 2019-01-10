@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -327,16 +327,16 @@ Introduction
 <span class="co"># that we can describe the distribution</span>
   <span class="co"># Using a mean and standard deviation</span>
     <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.006539243</span>
+[<span class="dv">1</span>] <span class="fl">0.006536706</span>
     <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.0004529351</span>
+[<span class="dv">1</span>] <span class="fl">0.0004576477</span>
   <span class="co"># Quantiles (95% CRI)</span>
   <span class="co"># Note that in Bayesian inference, we are going to call these &#39;credible</span>
   <span class="co"># intervals&#39; (CRI) or &#39;high density intervals&#39; (HDI), but they are </span>
   <span class="co"># functionally the same thing as &#39;confidence intervals&#39;.</span>
     <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
        <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% 
-<span class="fl">0.005678352</span> <span class="fl">0.006528146</span> <span class="fl">0.007445310</span> 
+<span class="fl">0.005673527</span> <span class="fl">0.006526675</span> <span class="fl">0.007446312</span> 
     
 <span class="co"># We can also look at the actual distribution</span>
   <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
@@ -355,13 +355,13 @@ Introduction
 <span class="co"># describe the probability</span>
   <span class="co"># Using a mean and standard deviation</span>
     <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.006931149</span>
+[<span class="dv">1</span>] <span class="fl">0.006892193</span>
     <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.003104714</span>
+[<span class="dv">1</span>] <span class="fl">0.003051983</span>
   <span class="co"># Quantiles (95% CRI)</span>
     <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
        <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% 
-<span class="fl">0.002569467</span> <span class="fl">0.006400719</span> <span class="fl">0.014455932</span> 
+<span class="fl">0.002609822</span> <span class="fl">0.006358937</span> <span class="fl">0.014446008</span> 
     
 <span class="co"># We look at the actual distribution</span>
   <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
@@ -543,8 +543,8 @@ Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;chick
  <span class="dv">3</span> chains, each with <span class="dv">33000</span> <span class="kw">iterations</span> (first <span class="dv">3000</span> discarded), n.thin =<span class="st"> </span><span class="dv">3</span>
  n.sims =<span class="st"> </span><span class="dv">30000</span> iterations saved
          mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>%  Rhat n.eff
-p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">30000</span>
-deviance  <span class="fl">26.796</span>   <span class="fl">1.407</span> <span class="fl">25.797</span> <span class="fl">25.898</span> <span class="fl">26.251</span> <span class="fl">27.135</span> <span class="fl">30.736</span> <span class="fl">1.001</span> <span class="dv">30000</span>
+p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.860</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">22000</span>
+deviance  <span class="fl">26.796</span>   <span class="fl">1.426</span> <span class="fl">25.797</span> <span class="fl">25.901</span> <span class="fl">26.253</span> <span class="fl">27.106</span> <span class="fl">30.839</span> <span class="fl">1.001</span> <span class="dv">24000</span>
 
 For each parameter, n.eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).

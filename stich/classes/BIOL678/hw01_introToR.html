@@ -20,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -213,43 +214,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 678</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="../BIOL217/index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -269,17 +284,17 @@ $(document).ready(function () {
 <p><img src="../../images/roh.png" alt=""></p>
 <div id="introduction" class="section level2">
 <h2>Introduction</h2>
-<p>The objective of this assignment is to get you started working in R and help you apply some of the concepts we’ve been discussing so far. We’ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.</p>
-<p>For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesn’t look quite right.</p>
+<p>The objective of this assignment is to get you started working in R and help you apply some of the concepts weâ€™ve been discussing so far. Weâ€™ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.</p>
+<p>For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesnâ€™t look quite right.</p>
 <p>In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in blue below.</p>
-<p>Example: If the instructions say, “Create a vector named <code>myData</code> that contains numbers one through five”, your script should include something like:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vector of numbers one through five named ‘myData’</span>
+<p>Example: If the instructions say, â€œCreate a vector named <code>myData</code> that contains numbers one through fiveâ€, your script should include something like:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Vector of numbers one through five named â€˜myDataâ€™</span>
 myData &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>)</code></pre></div>
 <p>(Note that this vector could be created many different ways. Unless I ask for something specific, whatever works for you is fine with me).</p>
 <div id="exercises" class="section level3">
 <h3>Exercises</h3>
-<p>Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., <code>uspop</code>) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use <code>str()</code> to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: <code>data()</code>.</p>
-<p>* Don’t forget to put this and your data load in the script that you will hand in.</p>
+<p>Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, letâ€™s avoid any of the time series data (e.g., <code>uspop</code>) because we havenâ€™t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use <code>str()</code> to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: <code>data()</code>.</p>
+<p>* Donâ€™t forget to put this and your data load in the script that you will hand in.</p>
 <p><strong>Question 1</strong> * a. What is the name of the dataset you chose?</p>
 <ul>
 <li><ol start="2" style="list-style-type: lower-alpha">
@@ -293,17 +308,17 @@ myData &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">
 </ol></li>
 </ul>
 <p><strong>Question 2</strong>. What kind of object is this dataset (e.g., vector, matrix, dataframe, list)? Show the code in your script.</p>
-<p><strong>Question 3</strong>. What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time I’m typing it).</p>
-<p>Use the built-in R functions to produce a table of summary statistics for your dataset. You don’t have to include the table in your answers, it will show up when I run your code if you did it correctly.</p>
-<p><strong>Question 4</strong>. What kind of information about your data does this give you? Be descriptive here, there’s not a ‘correct’ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
+<p><strong>Question 3</strong>. What classes of data are included in your dataframe? Remember your friend, the function <code>str()</code>. Show code (this is the last time Iâ€™m typing it).</p>
+<p>Use the built-in R functions to produce a table of summary statistics for your dataset. You donâ€™t have to include the table in your answers, it will show up when I run your code if you did it correctly.</p>
+<p><strong>Question 4</strong>. What kind of information about your data does this give you? Be descriptive here, thereâ€™s not a â€˜correctâ€™ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.</p>
 <p>Now load the iris data that we used in our previous examples. There is one column in the dataset that is a factor class. Change this column to a character variable.</p>
 <p><strong>Note</strong>: We might not have discovered the specific function that does this yet, but we have discussed functions for transforming data classes. When in doubt, Google it! Code development is everywhere on the internet, remember? Some go-to sources are Quick-R and Stack Overflow. If you look for the answer on the internet, one of these sites is likely to be the first hit. Try it.</p>
 <p><strong>Question 5</strong>. What is the function you used to transform the factor variable to character class?</p>
 <p><strong>Question 6</strong>. What was the name of the variable?</p>
-<p><strong>Question 7</strong>. What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (Don’t forget the code in your script!!)</p>
+<p><strong>Question 7</strong>. What is the 15th value of <code>Petal.Length</code> in the <code>iris</code> data? (Donâ€™t forget the code in your script!!)</p>
 <p><strong>Question 8</strong>. What <code>Species</code> is this measurement for (multiple ways to find this)?</p>
 <p><strong>Question 9</strong>. To which <code>Species</code> of <code>iris</code> does the minimum value for <code>Petal.Width</code> correspond?</p>
-<p><strong>Question 10</strong>. Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Don’t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
+<p><strong>Question 10</strong>. Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Donâ€™t be afraid to be wrong here, just trying to get you to start thinking about this stuff.</p>
 </div>
 </div>
 </div>
@@ -314,7 +329,7 @@ myData &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
