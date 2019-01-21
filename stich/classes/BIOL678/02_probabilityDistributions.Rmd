@@ -281,8 +281,10 @@ We can use the multinomial distribution to randomly sample from categories (imag
 
 ```{r}
 # First, we make a vector of names:
-name <- c('Amanda', 'Chris', 'Kendra',
-         'Luis', 'Sarah', 'Steve', 'Zach')
+name <- c('Amanda', 'Chris', 'Constance',
+          'John', 'Kendra','Luis',
+          'Nicole','Sarah', 'Steve',
+          'Zach')
 
 # Then, we assign a uniform probability of
 # drawing any given name if they can all
