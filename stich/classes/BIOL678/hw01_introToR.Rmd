@@ -31,6 +31,7 @@ Load one of the built-in data sets in R related to biology; you choose which one
 \* Don’t forget to put this and your data load in the script that you will hand in.
 
 **Question 1**
+
 * a.  What is the name of the dataset you chose?
 
 * b.	How many columns are in the data? 
