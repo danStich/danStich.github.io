@@ -32,13 +32,11 @@ Load one of the built-in data sets in R related to biology; you choose which one
 
 **Question 1**
 
-* a.  What is the name of the dataset you chose?
-
-* b.	How many columns are in the data? 
-
-* c.	How many rows?
-
-* d.	Show the code in your script.
+a.  What is the name of the dataset you chose?<br>
+b.	How many columns are in the data?<br> 
+c.	How many rows?<br>
+d.	Show the code in your script.<br>
+<br>
 
 **Question 2**. What kind of object is this dataset (e.g., vector, matrix, dataframe, list)? Show the code in your script.
 
