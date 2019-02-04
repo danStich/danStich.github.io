@@ -12,13 +12,13 @@ title: "Publications"
 
 <!-- <b> Stich, D. S. </b>, E. Gilligan, and D. C. Oliver. *In review*. A flexible approach for estimating categorical and continuous effects on individual growth rate for mixed-stock and single population fisheries. Canadian Journal of Fisheries and Aquatic Sciences. -->
 
-George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. *Accepted*. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators.
-
-Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. *In press*. Reproductive phenology of Elliptio complanata in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist.
-
 Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. *In press*. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages XXX-XXX in M. Seipker and J. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. XXX pp.
 
-<b>Stich, D. S.</b>, T. F. Sheehan, and J. D. Zydlewski. 2019. A dam passage performance standard model for American Shad. Canadian Journal of Fisheries and Aquatic Sciences. doi:10.1139/cjfas-2018-0008. <a href="./pubs/Stich_etal_CJFAS_shadia.pdf">[PDF]</a>
+George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101: 661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Available onlie]</a>. Code is available through GitHub <a href="https://github.com/danStich/longtermCommunityMetrics">here</a>.
+
+Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of Elliptio complanata in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="./pubs/Franzem_etal_NENA_elliptio.pdf">[PDF]</a>. Code is available through GitHub <a href="https://github.com/danStich/elliptioPhenology">here</a>.
+
+<b>Stich, D. S.</b>, T. F. Sheehan, and J. D. Zydlewski. 2019. A dam passage performance standard model for American Shad. Canadian Journal of Fisheries and Aquatic Sciences. doi:10.1139/cjfas-2018-0008. <a href="./pubs/Stich_etal_CJFAS_shadia.pdf">[PDF]</a>. The associated R package `shadia` is available for installation through GitHub <a href="https://github.com/danStich/shadia">here</a>.
 
 
 ### 2017
