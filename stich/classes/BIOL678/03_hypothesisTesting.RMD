@@ -58,7 +58,8 @@ We specify `paired = FALSE` because this is a one-sample test (R knows anyway ba
 R stores the output of this statistical test as an object, and you can reference any part of that object by name or index, like this:
 
 ```{r}  
-# Like so many other models objects, this is stored as a list:
+# Like so many other models objects,
+# this is stored as a list:
   str(our_test)
 ```      
 
@@ -67,8 +68,10 @@ We can just look at the names if there are specific pieces in which we are inter
 ```{r}    
 # Shows us the names of the things inside the model list
   names(our_test) 
+
 # This stores our p-value to an object for use
   p_out = our_test$p.value 
+  
 # And of course we can look at it
   print(p_out)             
 ```
@@ -78,7 +81,9 @@ Now we can go through the output as it is displayed by:
 ```{r}
 # Print a summary of the test
   print(our_test)
-# Or we can look at the names of the things inside the object:
+
+# Or we can look at the names
+# of the things inside the object:
   names(our_test)
 ```    
     
@@ -119,7 +124,7 @@ hist(shad$Length[shad$Age == 7 & shad$Sex == "R"],
      border='orange', cex.axis=1.15, cex.lab=1.5,
      xlab='Length (mm) of age-7 roes', main='')
 
-# Hmmm...looks totally normal, but let's make sure
+# Hmmm...looks totally "normal", but let's make sure
 ```  
      
 ##### Statistical test of normality (Shapiro-Wilk)
@@ -158,7 +163,7 @@ Now we can actually run a test to see if the median length of age-7 roes is stat
     wilcox.test(
       shad$Length[shad$Age==7 & shad$Sex=='R'],
       mu=median(shad$Length),
-      alternative = 'greater', # Note that I use a different alternative here!
+      alternative = 'greater', # Note different alternative here!
       exact = FALSE           # Not much data, so exact not really appropriate
     )
 ```
@@ -173,7 +178,7 @@ Okay, with that out of the way, now we can compare two groups to see if they are
     
 ### The two-sample t-test
 
-Let's keep working with the shad data for now for the sake of consistency. But, now we want to know if there is a difference in mean length of males ('bucks') and females ('roes'). This is a common type of boring question that we might ask with these tests (I didn't say that).
+Let's keep working with the shad data for now for the sake of consistency. But, now we want to know if there is a difference in mean length of males (`B` for bucks) and females (`R` for 'roes'). This is a common type of boring question that we might ask with these tests (I didn't say that).
 
 The syntax is relatively straightforward, and is similar to what we used above, except that now we have two groups so we will replace `mu` and change some of the options.
 
@@ -195,11 +200,11 @@ We have found that the two groups are 'significantly different'. Who cares? Whic
   
 This is why it's good to specify the arguments by name in the call to the function, like we did above:
 
-`x` is roes
+`x` is roes.
 
-`y` is bucks
+`y` is bucks.
   
-Roes are significantly larger than bucks and that the probability of our being wrong about this is very low.
+Roes are significantly larger than bucks, and the probability of our being wrong about this is very low.
     
 #### Assumptions
 <h5 id="multi"> Equal variance <h5>
@@ -258,25 +263,46 @@ While it is important to report the test statistics, df, etc., it can be just as
 ```{r}
 # Set the margins for the plotting window
   par(mar=c(4.5, 4.5, 1, 1))
+
 # Make a histogram of x with transparent grey-scale colors
-  hist(x, col=rgb(0.1,0.1,0.1,0.5), xlim = c(25,55), ylim=c(0,600),
-    main='', xlab=expression(L[f]), yaxt='n', xaxt='n', cex.lab=1.5)
+  hist(x, col=rgb(0.1,0.1,0.1,0.5),
+       xlim = c(25,55), ylim=c(0,600),
+       main='', xlab=expression(L[f]),
+       yaxt='n', xaxt='n', cex.lab=1.5
+       )
+  
 # Add the histogram for y
   hist(y, col=rgb(0.8,0.8,0.8,0.5), add=TRUE)
-# Add the x-axis and make it cross the y at zero, cex is text increase
+  
+# Add the x-axis and make it cross
+# the y at zero, cex is text increase
   axis(side=1, pos=0, cex.axis=1.15)
-# Add the y-axis crossing the x at 25, with rotated labels
+  
+# Add the y-axis crossing the x at 25,
+# with rotated labels
   axis(side=2, pos=25, las=2, cex.axis=1.15)
-# add a vertical line showing the mean for roes
+  
+# Add a vertical line showing the mean for roes
   abline(v=mean(x), col='blue', lwd=2)
-# add a vertical line showing the mean for roes
+  
+# Add a vertical line showing the mean for roes
   abline(v=mean(y), col='red', lwd=2)
-# Add the mean for each sex to the grapch.
-  text(x = mean(x), y=550, expression(paste(mu['roes'])), adj=1.25, cex=1.5)
-  text(x = mean(y), y=550, expression(paste(mu['bucks'])), adj=1.25, cex=1.5)
+  
+# Add the mean for each sex to the graph.
+  text(x = mean(x), y=550,
+       expression(paste(mu['roes'])),
+       adj=1.25, cex=1.5
+       )
+  text(x = mean(y), y=550,
+       expression(paste(mu['bucks'])),
+       adj=1.25, cex=1.5
+       )
+  
 # Add a legend to the chart
-  legend(x=50, y=600, legend=c('Roes', 'Bucks'), fill=c('gray40', 'gray87'),
-    col='black', bty='n')
+  legend(x=50, y=600, legend=c('Roes', 'Bucks'),
+         fill=c('gray40', 'gray87'),
+         col='black', bty='n'
+         )
 ```
 
 ## Frequency analysis 
@@ -295,21 +321,26 @@ This is a straightforward test:
 # Run the test
 chi_test = chisq.test(shad$Sex, shad$Age)
 
-# And, bam! We see that their is a difference in the frequency of fish
+# And, bam! We see that there
+# is a difference in the frequency of fish
 # in each age class between sexes.
 chi_test
+```
 
-# How to show the differences?
+How to show the differences?
+```{r}
 # The table of observed values can be helpful
 # Remember, all models are objects in R
 names(chi_test)    
 
-# Prints the cross-tab for number at age by sex
+# Prints the cross-tab for
+# number at age by sex
 chi_test$observed  
 
-# You can compare this to the expected frequencies:
+# You can compare this to
+# the expected frequencies:
 chi_test$expected
 ```
 
-__Note__: _without knowing how fish were sampled (randomly, stratified, etc.), we would not be able to conduct this analysis because it may be possible that the design intentionally sampled different frequencies of individuals of each sex in each age class. Here, we will assume that the sample is representative of the population._
+**Note**: *without knowing how fish were sampled (randomly, stratified, etc.), we would not be able to conduct this analysis because it may be possible that the design intentionally sampled different frequencies of individuals of each sex in each age class. Here, we have assumed that the sample is representative of the population.* The point is that fancy statistics in a gloriously easy-to-use programming language are no replacement for thoughtful design and data collection with a clear endpoint in mind.
 

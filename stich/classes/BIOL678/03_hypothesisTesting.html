@@ -21,6 +21,19 @@
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
 
 
 <style type="text/css">code{white-space: pre;}</style>
@@ -256,19 +269,6 @@ $(document).ready(function () {
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
 </div><!--/.navbar -->
-<!DOCTYPE html>
-<head>
-<!-- Favicon for various operating systems -->
-<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
-<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
-<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
-<link rel="shortcut icon" href="./favicon/favicon.ico">
-<meta name="msapplication-TileColor" content="#603cba">
-<meta name="msapplication-config" content="./favicon/browserconfig.xml">
-<meta name="theme-color" content="#382121">
-</head>
 
 <div class="fluid-row" id="header">
 
@@ -328,7 +328,8 @@ mean of x
 <div id="output" class="section level4">
 <h4>Output</h4>
 <p>R stores the output of this statistical test as an object, and you can reference any part of that object by name or index, like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Like so many other models objects, this is stored as a list:</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Like so many other models objects,</span>
+<span class="co"># this is stored as a list:</span>
   <span class="kw">str</span>(our_test)
 List of <span class="dv">9</span>
  <span class="op">$</span><span class="st"> </span>statistic  <span class="op">:</span><span class="st"> </span>Named num <span class="fl">10.7</span>
@@ -351,8 +352,10 @@ List of <span class="dv">9</span>
   <span class="kw">names</span>(our_test) 
 [<span class="dv">1</span>] <span class="st">&quot;statistic&quot;</span>   <span class="st">&quot;parameter&quot;</span>   <span class="st">&quot;p.value&quot;</span>     <span class="st">&quot;conf.int&quot;</span>    <span class="st">&quot;estimate&quot;</span>   
 [<span class="dv">6</span>] <span class="st">&quot;null.value&quot;</span>  <span class="st">&quot;alternative&quot;</span> <span class="st">&quot;method&quot;</span>      <span class="st">&quot;data.name&quot;</span>  
+
 <span class="co"># This stores our p-value to an object for use</span>
   p_out =<span class="st"> </span>our_test<span class="op">$</span>p.value 
+  
 <span class="co"># And of course we can look at it</span>
   <span class="kw">print</span>(p_out)             
 [<span class="dv">1</span>] <span class="fl">7.918926e-08</span></code></pre></div>
@@ -370,7 +373,9 @@ alternative hypothesis<span class="op">:</span><span class="st"> </span>true mea
 sample estimates<span class="op">:</span>
 mean of x 
        <span class="dv">49</span> 
-<span class="co"># Or we can look at the names of the things inside the object:</span>
+
+<span class="co"># Or we can look at the names</span>
+<span class="co"># of the things inside the object:</span>
   <span class="kw">names</span>(our_test)
 [<span class="dv">1</span>] <span class="st">&quot;statistic&quot;</span>   <span class="st">&quot;parameter&quot;</span>   <span class="st">&quot;p.value&quot;</span>     <span class="st">&quot;conf.int&quot;</span>    <span class="st">&quot;estimate&quot;</span>   
 [<span class="dv">6</span>] <span class="st">&quot;null.value&quot;</span>  <span class="st">&quot;alternative&quot;</span> <span class="st">&quot;method&quot;</span>      <span class="st">&quot;data.name&quot;</span>  </code></pre></div>
@@ -406,7 +411,7 @@ Visual check for normality
      <span class="dt">xlab=</span><span class="st">&#39;Length (mm) of age-7 roes&#39;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</code></pre></div>
 <p><img src="03_hypothesisTesting_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
-<span class="co"># Hmmm...looks totally normal, but let&#39;s make sure</span></code></pre></div>
+<span class="co"># Hmmm...looks totally &quot;normal&quot;, but let&#39;s make sure</span></code></pre></div>
 <div id="statistical-test-of-normality-shapiro-wilk" class="section level5">
 <h5>Statistical test of normality (Shapiro-Wilk)</h5>
 <p>The Shapiro-Wilk test is commonly used to test normality of a distribution as a check of assumptions. We can use this to test whether our data deviate from normal in the following manner:</p>
@@ -434,7 +439,7 @@ W =<span class="st"> </span><span class="fl">0.98014</span>, p<span class="op">-
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    <span class="kw">wilcox.test</span>(
       shad<span class="op">$</span>Length[shad<span class="op">$</span>Age<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>],
       <span class="dt">mu=</span><span class="kw">median</span>(shad<span class="op">$</span>Length),
-      <span class="dt">alternative =</span> <span class="st">&#39;greater&#39;</span>, <span class="co"># Note that I use a different alternative here!</span>
+      <span class="dt">alternative =</span> <span class="st">&#39;greater&#39;</span>, <span class="co"># Note different alternative here!</span>
       <span class="dt">exact =</span> <span class="ot">FALSE</span>           <span class="co"># Not much data, so exact not really appropriate</span>
     )
 
@@ -451,7 +456,7 @@ alternative hypothesis<span class="op">:</span><span class="st"> </span>true loc
 <p>Okay, with that out of the way, now we can compare two groups to see if they are from different statistical (if not biological) populations.</p>
 <div id="the-two-sample-t-test" class="section level3">
 <h3>The two-sample t-test</h3>
-<p>Let’s keep working with the shad data for now for the sake of consistency. But, now we want to know if there is a difference in mean length of males (‘bucks’) and females (‘roes’). This is a common type of boring question that we might ask with these tests (I didn’t say that).</p>
+<p>Let’s keep working with the shad data for now for the sake of consistency. But, now we want to know if there is a difference in mean length of males (<code>B</code> for bucks) and females (<code>R</code> for ‘roes’). This is a common type of boring question that we might ask with these tests (I didn’t say that).</p>
 <p>The syntax is relatively straightforward, and is similar to what we used above, except that now we have two groups so we will replace <code>mu</code> and change some of the options.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    our_paired_test =<span class="st"> </span><span class="kw">t.test</span>(
       <span class="dt">x =</span> shad<span class="op">$</span>Length[shad<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;R&#39;</span>],  <span class="co"># Group 1</span>
@@ -476,9 +481,9 @@ mean of x mean of y
 <p>The interpretation of the results is much the same as with the one-sample t-test, except that we are now looking at the null hypothesis that there is no difference between groups.</p>
 <p>We have found that the two groups are ‘significantly different’. Who cares? Which one is bigger for cyrin’ out loud?</p>
 <p>This is why it’s good to specify the arguments by name in the call to the function, like we did above:</p>
-<p><code>x</code> is roes</p>
-<p><code>y</code> is bucks</p>
-<p>Roes are significantly larger than bucks and that the probability of our being wrong about this is very low.</p>
+<p><code>x</code> is roes.</p>
+<p><code>y</code> is bucks.</p>
+<p>Roes are significantly larger than bucks, and the probability of our being wrong about this is very low.</p>
 <div id="assumptions-1" class="section level4">
 <h4>Assumptions</h4>
 <h5 id="multi">
@@ -540,25 +545,46 @@ alternative hypothesis<span class="op">:</span><span class="st"> </span>true loc
 <p>While it is important to report the test statistics, df, etc., it can be just as meaningful to give the sample means (reported in the <code>t.test</code>) and show a graph. <em><strong>Remember</strong></em>: don’t make crappy graphs. Be proud of your results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the margins for the plotting window</span>
   <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))
+
 <span class="co"># Make a histogram of x with transparent grey-scale colors</span>
-  <span class="kw">hist</span>(x, <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>), <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">25</span>,<span class="dv">55</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">600</span>),
-    <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="kw">expression</span>(L[f]), <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>)
+  <span class="kw">hist</span>(x, <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.1</span>,<span class="fl">0.5</span>),
+       <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">25</span>,<span class="dv">55</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">600</span>),
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="kw">expression</span>(L[f]),
+       <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>
+       )
+  
 <span class="co"># Add the histogram for y</span>
   <span class="kw">hist</span>(y, <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.5</span>), <span class="dt">add=</span><span class="ot">TRUE</span>)
-<span class="co"># Add the x-axis and make it cross the y at zero, cex is text increase</span>
+  
+<span class="co"># Add the x-axis and make it cross</span>
+<span class="co"># the y at zero, cex is text increase</span>
   <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)
-<span class="co"># Add the y-axis crossing the x at 25, with rotated labels</span>
+  
+<span class="co"># Add the y-axis crossing the x at 25,</span>
+<span class="co"># with rotated labels</span>
   <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">25</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)
-<span class="co"># add a vertical line showing the mean for roes</span>
+  
+<span class="co"># Add a vertical line showing the mean for roes</span>
   <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(x), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
-<span class="co"># add a vertical line showing the mean for roes</span>
+  
+<span class="co"># Add a vertical line showing the mean for roes</span>
   <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(y), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
-<span class="co"># Add the mean for each sex to the grapch.</span>
-  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(x), <span class="dt">y=</span><span class="dv">550</span>, <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;roes&#39;</span>])), <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)
-  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(y), <span class="dt">y=</span><span class="dv">550</span>, <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;bucks&#39;</span>])), <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)
+  
+<span class="co"># Add the mean for each sex to the graph.</span>
+  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(x), <span class="dt">y=</span><span class="dv">550</span>,
+       <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;roes&#39;</span>])),
+       <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>
+       )
+  <span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(y), <span class="dt">y=</span><span class="dv">550</span>,
+       <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;bucks&#39;</span>])),
+       <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>
+       )
+  
 <span class="co"># Add a legend to the chart</span>
-  <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">50</span>, <span class="dt">y=</span><span class="dv">600</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;Roes&#39;</span>, <span class="st">&#39;Bucks&#39;</span>), <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;gray87&#39;</span>),
-    <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</code></pre></div>
+  <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">50</span>, <span class="dt">y=</span><span class="dv">600</span>, <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;Roes&#39;</span>, <span class="st">&#39;Bucks&#39;</span>),
+         <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;gray87&#39;</span>),
+         <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>
+         )</code></pre></div>
 <p><img src="03_hypothesisTesting_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 </div>
 </div>
@@ -573,36 +599,38 @@ alternative hypothesis<span class="op">:</span><span class="st"> </span>true loc
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Run the test</span>
 chi_test =<span class="st"> </span><span class="kw">chisq.test</span>(shad<span class="op">$</span>Sex, shad<span class="op">$</span>Age)
 
-<span class="co"># And, bam! We see that their is a difference in the frequency of fish</span>
+<span class="co"># And, bam! We see that there</span>
+<span class="co"># is a difference in the frequency of fish</span>
 <span class="co"># in each age class between sexes.</span>
 chi_test
 
     Pearson<span class="st">&#39;s Chi-squared test</span>
 
 <span class="st">data:  shad$Sex and shad$Age</span>
-<span class="st">X-squared = 419.01, df = 4, p-value &lt; 2.2e-16</span>
+<span class="st">X-squared = 419.01, df = 4, p-value &lt; 2.2e-16</span></code></pre></div>
+<p>How to show the differences?</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The table of observed values can be helpful</span>
+<span class="co"># Remember, all models are objects in R</span>
+<span class="kw">names</span>(chi_test)    
+[<span class="dv">1</span>] <span class="st">&quot;statistic&quot;</span> <span class="st">&quot;parameter&quot;</span> <span class="st">&quot;p.value&quot;</span>   <span class="st">&quot;method&quot;</span>    <span class="st">&quot;data.name&quot;</span> <span class="st">&quot;observed&quot;</span> 
+[<span class="dv">7</span>] <span class="st">&quot;expected&quot;</span>  <span class="st">&quot;residuals&quot;</span> <span class="st">&quot;stdres&quot;</span>   
 
-<span class="st"># How to show the differences?</span>
-<span class="st"># The table of observed values can be helpful</span>
-<span class="st"># Remember, all models are objects in R</span>
-<span class="st">names(chi_test)    </span>
-<span class="st">[1] &quot;statistic&quot; &quot;parameter&quot; &quot;p.value&quot;   &quot;method&quot;    &quot;data.name&quot; &quot;observed&quot; </span>
-<span class="st">[7] &quot;expected&quot;  &quot;residuals&quot; &quot;stdres&quot;   </span>
+<span class="co"># Prints the cross-tab for</span>
+<span class="co"># number at age by sex</span>
+chi_test<span class="op">$</span>observed  
+        shad<span class="op">$</span>Age
+shad<span class="op">$</span>Sex   <span class="dv">3</span>   <span class="dv">4</span>   <span class="dv">5</span>   <span class="dv">6</span>   <span class="dv">7</span>
+       B <span class="dv">255</span> <span class="dv">848</span> <span class="dv">579</span> <span class="dv">108</span>   <span class="dv">3</span>
+       R   <span class="dv">0</span> <span class="dv">361</span> <span class="dv">658</span> <span class="dv">220</span>  <span class="dv">14</span>
 
-<span class="st"># Prints the cross-tab for number at age by sex</span>
-<span class="st">chi_test$observed  </span>
-<span class="st">        shad$Age</span>
-<span class="st">shad$Sex   3   4   5   6   7</span>
-<span class="st">       B 255 848 579 108   3</span>
-<span class="st">       R   0 361 658 220  14</span>
-
-<span class="st"># You can compare this to the expected frequencies:</span>
-<span class="st">chi_test$expected</span>
-<span class="st">        shad$Age</span>
-<span class="st">shad$Sex        3        4        5        6         7</span>
-<span class="st">       B 150.1034 711.6668 728.1487 193.0742 10.006894</span>
-<span class="st">       R 104.8966 497.3332 508.8513 134.9258  6.993106</span></code></pre></div>
-<p><strong>Note</strong>: <em>without knowing how fish were sampled (randomly, stratified, etc.), we would not be able to conduct this analysis because it may be possible that the design intentionally sampled different frequencies of individuals of each sex in each age class. Here, we will assume that the sample is representative of the population.</em></p>
+<span class="co"># You can compare this to</span>
+<span class="co"># the expected frequencies:</span>
+chi_test<span class="op">$</span>expected
+        shad<span class="op">$</span>Age
+shad<span class="op">$</span>Sex        <span class="dv">3</span>        <span class="dv">4</span>        <span class="dv">5</span>        <span class="dv">6</span>         <span class="dv">7</span>
+       B <span class="fl">150.1034</span> <span class="fl">711.6668</span> <span class="fl">728.1487</span> <span class="fl">193.0742</span> <span class="fl">10.006894</span>
+       R <span class="fl">104.8966</span> <span class="fl">497.3332</span> <span class="fl">508.8513</span> <span class="fl">134.9258</span>  <span class="fl">6.993106</span></code></pre></div>
+<p><strong>Note</strong>: <em>without knowing how fish were sampled (randomly, stratified, etc.), we would not be able to conduct this analysis because it may be possible that the design intentionally sampled different frequencies of individuals of each sex in each age class. Here, we have assumed that the sample is representative of the population.</em> The point is that fancy statistics in a gloriously easy-to-use programming language are no replacement for thoughtful design and data collection with a clear endpoint in mind.</p>
 </div>
 </div>
 
