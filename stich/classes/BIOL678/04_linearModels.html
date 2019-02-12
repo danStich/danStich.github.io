@@ -386,11 +386,12 @@ trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="f
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a boxplot of weight by group</span>
 <span class="co"># using the PlantGrowth data</span>
 <span class="kw">boxplot</span>(
-  weight<span class="op">~</span>group,          <span class="co"># Relationship of interest as formula</span>
-  <span class="dt">data=</span>PlantGrowth,      <span class="co"># Name of the data set</span>
-  <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,            <span class="co"># Fill color for boxes</span>
-  <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,       <span class="co"># Y-axis label</span>
-  <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span> <span class="co"># X-axis label</span>
+  weight<span class="op">~</span>group,           <span class="co"># Relationship of interest as formula</span>
+  <span class="dt">data=</span>PlantGrowth,       <span class="co"># Name of the data set</span>
+  <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,             <span class="co"># Fill color for boxes</span>
+  <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,        <span class="co"># Y-axis label</span>
+  <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>, <span class="co"># X-axis label</span>
+  <span class="dt">boxwex=</span>.<span class="dv">25</span>
   )</code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>In addition to what we wrote before, we can now say something along the lines of:</p>

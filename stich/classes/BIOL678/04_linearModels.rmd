@@ -90,11 +90,12 @@ For the readers, and for us, it may be easier to see this information displayed 
 # Make a boxplot of weight by group
 # using the PlantGrowth data
 boxplot(
-  weight~group,          # Relationship of interest as formula
-  data=PlantGrowth,      # Name of the data set
-  col='gray',            # Fill color for boxes
-  ylab='Mass (g)',       # Y-axis label
-  xlab='Treatment group' # X-axis label
+  weight~group,           # Relationship of interest as formula
+  data=PlantGrowth,       # Name of the data set
+  col='gray',             # Fill color for boxes
+  ylab='Mass (g)',        # Y-axis label
+  xlab='Treatment group', # X-axis label
+  boxwex=.25
   )
 ```
 
