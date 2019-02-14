@@ -680,7 +680,7 @@ mus = ddply(dental, c('lights', 'resin'), summarize, mean=mean(mpa))
 resin= as.numeric(dental$resin)
 
 # Set graphical parameters
-par(mfrow=c(1,2), mar=c(5,5,1,1))
+par(mfrow=c(1,1), mar=c(5,5,1,1))
 
 # Plot the raw data by resin type
 # and color code for lights on the second

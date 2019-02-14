@@ -237,7 +237,7 @@ or more appropriately:
 
 $$Y_i = \beta_0 + \beta_i X_i$$
 
-We will discuss this and other ideas related to linear models in class. In most cases, though, we will be estimating a parameter for the intercept and one parameter for each eplanatory variable of interest.
+We will discuss this and other ideas related to linear models in class. For the casual reader, we are ignoring an important part of these statistical models for now. In most cases, though, we will be estimating a parameter for the intercept and one parameter for each explanatory variable of interest.
 
 > Data!
 
