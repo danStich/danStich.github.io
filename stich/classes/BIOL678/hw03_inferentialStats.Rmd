@@ -209,7 +209,7 @@ Plot a histogram of the distributions. Can't remember how to do this?
 
 $p(in the lecture module = 1.00)$
  
-Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can't remember how to do it? Don't make me show the picture again.  
+Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can't remember how to do it? See the <a "03_hypothesisTesting.html">lecture module</a>.
 
 **Question 7.** Formally state the null hypothesis and the alternative that you chose. Justify your choice.  
 
