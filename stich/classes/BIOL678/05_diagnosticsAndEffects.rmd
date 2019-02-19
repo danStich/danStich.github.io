@@ -70,7 +70,7 @@ This assumption basically means that each row of your data was collected indepen
 
 Note that we can relax this assumption by explicitly including variables and constructs within the models that actually account for these kinds of relationships.
 
-For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups
+For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups.
 
 This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.
 
