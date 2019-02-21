@@ -297,7 +297,8 @@ Introduction
 <p><strong>3.</strong> Homogeneity of variances (i.e. homoscedasticity)</p>
 <p>We will discuss what each of these means in class this week, and during the next several weeks we will discuss methods for verifying these assumptions or relaxing the assumptions to meet our needs through specific techniques.</p>
 <p>Let’s get some data to demonstrate these assumptions.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the turtles data, it&#39;s a bit messy, so we will read it</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the turtles data,</span>
+<span class="co"># it&#39;s a bit messy, so we will read it</span>
 <span class="co"># in with an extra option to strip white spaces.</span>
 turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;turtles.txt&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">strip.white =</span> <span class="ot">TRUE</span>)</code></pre></div>
 <p>These are data that were collected 2013-2015 for Kemp’s Ridley sea turtles incidentally caught by anglers in the Gulf of Mexico. After being caught, the turtles were taken to a wildlife rehabilitation center so they could have fishing hooks removed and recover.</p>
@@ -482,7 +483,7 @@ Interpretting group effects
 [<span class="dv">1</span>] <span class="st">&quot;weight&quot;</span> <span class="st">&quot;group&quot;</span> 
 
 <span class="co"># Fit the model</span>
-mod =<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data =</span> PlantGrowth)
+mod &lt;-<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data =</span> PlantGrowth)
 
 <span class="co"># Do the post-hoc comparisons of means</span>
 <span class="co"># Just a reminder that the only difference is trt2-trt1</span>
@@ -525,24 +526,24 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <span class="kw">names</span>(mod)
  [<span class="dv">1</span>] <span class="st">&quot;coefficients&quot;</span>  <span class="st">&quot;residuals&quot;</span>     <span class="st">&quot;effects&quot;</span>       <span class="st">&quot;rank&quot;</span>          <span class="st">&quot;fitted.values&quot;</span> <span class="st">&quot;assign&quot;</span>        <span class="st">&quot;qr&quot;</span>            <span class="st">&quot;df.residual&quot;</span>   <span class="st">&quot;contrasts&quot;</span>     <span class="st">&quot;xlevels&quot;</span>       <span class="st">&quot;call&quot;</span>          <span class="st">&quot;terms&quot;</span>        
 [<span class="dv">13</span>] <span class="st">&quot;model&quot;</span>        
-coeffs =<span class="st"> </span><span class="kw">data.frame</span>(mod<span class="op">$</span>coefficients)
+coeffs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mod<span class="op">$</span>coefficients)
 
 <span class="co"># From the model, we can estimate:</span>
 <span class="co"># Mean of control</span>
-y_control =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
+y_control &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
 <span class="co"># Mean of trt1</span>
-y_trt1 =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
+y_trt1 &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span>
 <span class="co"># Mean of trt2</span>
-y_trt2 =<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span></code></pre></div>
+y_trt2 &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span></code></pre></div>
 <p>Now, let’s compare our model predictions to the actual means.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Model predictions</span>
-group =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ctrl&#39;</span>, <span class="st">&#39;trt1&#39;</span>, <span class="st">&#39;trt2&#39;</span>)
-mu =<span class="st"> </span><span class="kw">c</span>(y_control, y_trt1, y_trt2)
-preds =<span class="st"> </span><span class="kw">data.frame</span>(group, mu)
+group &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ctrl&#39;</span>, <span class="st">&#39;trt1&#39;</span>, <span class="st">&#39;trt2&#39;</span>)
+mu &lt;-<span class="st"> </span><span class="kw">c</span>(y_control, y_trt1, y_trt2)
+preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(group, mu)
 
 <span class="co"># Observed means</span>
 <span class="kw">library</span>(plyr)
-obs =<span class="st"> </span><span class="kw">ddply</span>(PlantGrowth, <span class="st">&#39;group&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(weight))
+obs &lt;-<span class="st"> </span><span class="kw">ddply</span>(PlantGrowth, <span class="st">&#39;group&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(weight))
 
 <span class="co"># Compare them</span>
 preds
@@ -596,7 +597,7 @@ obs
 [<span class="dv">1</span>] <span class="st">&quot;Fertility&quot;</span>        <span class="st">&quot;Agriculture&quot;</span>      <span class="st">&quot;Examination&quot;</span>      <span class="st">&quot;Education&quot;</span>        <span class="st">&quot;Catholic&quot;</span>         <span class="st">&quot;Infant.Mortality&quot;</span></code></pre></div>
 <p>We’ll make a model to predict the effect of education level on fertility:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the model and save it to a named object called &#39;swiss.mod&#39;</span>
-swiss.mod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)</code></pre></div>
+swiss.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)</code></pre></div>
 <p>Next, we can look at the coefficient estimates for <code>swiss.mod</code>:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize the model</span>
 <span class="kw">summary</span>(swiss.mod)
@@ -620,19 +621,19 @@ Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="
 F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></code></pre></div>
 <p>From this summary, we can see that we have an intercept of…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save intercept to a named object</span>
-intcpt =<span class="st"> </span><span class="fl">79.6101</span></code></pre></div>
+intcpt &lt;-<span class="st"> </span><span class="fl">79.6101</span></code></pre></div>
 <p>…and a ‘slope’ for <code>Education</code> of…</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Save slope to a named object</span>
-slp =<span class="st"> </span><span class="op">-</span><span class="fl">0.8624</span></code></pre></div>
+slp &lt;-<span class="st"> </span><span class="op">-</span><span class="fl">0.8624</span></code></pre></div>
 <p>As with the case of categorical explanatory variables, we are now interested in understanding how the response changes with respect to the variable of interest. But, this time we want to see what the mean (or some other measure) of the response is for all possible values of the explanatory variable from the lowest value to the maximum value, rather than just a few discrete values that we observed. To do this, we first need to formalize our equation. Let’s make a function that will predict the mean fertility for any given value of education level based on our model:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_fert =<span class="st"> </span><span class="cf">function</span>(x){
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">y_fert &lt;-<span class="st"> </span><span class="cf">function</span>(x){
   intcpt <span class="op">+</span><span class="st"> </span>slp <span class="op">*</span><span class="st"> </span>x
 }</code></pre></div>
 <p>Now, we can apply that function to either our observed data, or to newly generated data to make some predictions!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Using our observed data:</span>
 <span class="co"># Calculate new y values using </span>
 <span class="co"># the model parameters and our new data</span>
-obs_fit =<span class="st"> </span><span class="kw">y_fert</span>(swiss<span class="op">$</span>Education)
+obs_fit &lt;-<span class="st"> </span><span class="kw">y_fert</span>(swiss<span class="op">$</span>Education)
 
 <span class="co"># Plot the results</span>
 <span class="kw">plot</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,
@@ -640,19 +641,19 @@ obs_fit =<span class="st"> </span><span class="kw">y_fert</span>(swiss<span clas
 
 <span class="co"># Using new data based on the range of our explanatory variable:</span>
 <span class="co"># Make a sequence of new values based on the range of our data</span>
-newEd =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),
+newEd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),
                        <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education),
                        <span class="dt">by=</span><span class="fl">0.01</span>))
 
 <span class="co"># Give the only column a name that</span>
 <span class="co"># matches the data in the model above</span>
-<span class="kw">names</span>(newEd) =<span class="st"> &#39;Education&#39;</span>
+<span class="kw">names</span>(newEd) &lt;-<span class="st"> &#39;Education&#39;</span>
 
 <span class="co"># Predict changes in fertility</span>
 <span class="co"># based on education using our new values for</span>
 <span class="co"># education level, &#39;newEd&#39;, and </span>
 <span class="co"># our model parameters</span>
-pred_fit =<span class="st"> </span><span class="kw">y_fert</span>(newEd<span class="op">$</span>Education)
+pred_fit &lt;-<span class="st"> </span><span class="kw">y_fert</span>(newEd<span class="op">$</span>Education)
 
 <span class="co"># Plot the changes</span>
 <span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)    <span class="co"># This tells R to add it to the same graph</span>
@@ -678,12 +679,12 @@ pred_fit =<span class="st"> </span><span class="kw">y_fert</span>(newEd<span cla
 <span class="kw">lines</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
 <p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
 <p>What about the uncertainty in our model and our data? We can add this in by using the handy-dandy predict function in R!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  ?predict</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?predict</code></pre></div>
 <p>To get info on how to do this for linear models, scroll down and click on the link to <code>predict.lm</code>. You will see that we need to supply some kind offitted model object, some data from which to make predictions, and the type of interval you would like to show.</p>
 <p><code>object</code>: in this case it is <code>swiss.mod</code></p>
 <p><code>newdata</code>: This needs to be a data frame. It can either be the original, or it can be a new dataframe, but it must contain columns with the same names as the explanatory variables used in the model.</p>
 <p><code>interval</code>: usually, we are interested in the prediction interval, as this tends to be more honest about the uncertainty in our model predictions and our data, but there are other options</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_int =<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>swiss.mod, <span class="dt">newdata=</span>newEd, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pred_int &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>swiss.mod, <span class="dt">newdata=</span>newEd, <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)</code></pre></div>
 <p>So, what does the predict function give us?</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">head</span>(pred_int)
        fit      lwr      upr
@@ -721,10 +722,10 @@ pred_fit =<span class="st"> </span><span class="kw">y_fert</span>(newEd<span cla
 <span class="co"># pulses of 2 species of</span>
 <span class="co"># crickets collected under</span>
 <span class="co"># varying temperatures</span>
-crickets =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crickets.txt&#39;</span>)</code></pre></div>
+crickets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crickets.txt&#39;</span>)</code></pre></div>
 <p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
-cricket.mod =<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)
+cricket.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)
 
 <span class="co"># Install the car package. We need a </span>
 <span class="co"># function from this library for summary.</span>
@@ -780,7 +781,7 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  <
 <span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
 
 <span class="co"># Make predictions from the fitted model object</span>
-preds =<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod, <span class="dt">newdata =</span> crickets,
+preds &lt;-<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod, <span class="dt">newdata =</span> crickets,
   <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))
 
 <span class="co"># Add prediction lines for species &#39;ex&#39;</span>
@@ -812,10 +813,10 @@ preds =<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod,
 <p>The full citation for the paper is:</p>
 <p>Kim, H-Y. 2014. Statistical notes for clinical researchers: Two-way analysis of variance (ANOVA)-exploring possible interaction between factors. Restorative Dentistry and Endodontics 39(2):143-147.</p>
 <p>Here are the data:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dental =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dental &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</code></pre></div>
 <p>Now, fit a model to the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We are looking only at main effects</span>
-dental.mod =<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights <span class="op">+</span><span class="st"> </span>resin, <span class="dt">data=</span>dental)</code></pre></div>
+dental.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights <span class="op">+</span><span class="st"> </span>resin, <span class="dt">data=</span>dental)</code></pre></div>
 <p>If we make an ANOVA table for this two-way ANOVA, we see that there are significant main effects of resin type but not lights used for drying.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">anova</span>(dental.mod)
 Analysis of Variance Table
@@ -855,11 +856,11 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>One reasonable option might be to summarize the data by the means and plot the means.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Summarize the means using ddply</span>
 <span class="kw">library</span>(plyr)
-mus =<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean=</span><span class="kw">mean</span>(mpa))
+mus &lt;-<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean =</span> <span class="kw">mean</span>(mpa))
 
 <span class="co"># Plot the summaries</span>
 <span class="co"># Make resin into a numeric for plotting trick</span>
-resin=<span class="st"> </span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin)
+resin &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin)
 
 <span class="co"># Set graphical parameters</span>
 <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
@@ -904,7 +905,7 @@ resin=<span class="st"> </span><span class="kw">as.numeric</span>(dental<span cl
 <p><img src="05_diagnosticsAndEffects_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
 <p>Another option is to make predictions for each combination of levels. We can do this using the math behind our model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Store the coefficients in their own object</span>
-res =<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(dental.mod)<span class="op">$</span>coefficients )
+res &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(dental.mod)<span class="op">$</span>coefficients )
 res
             Estimate Std..Error    t.value     Pr...t..
 (Intercept) <span class="fl">19.07375</span>   <span class="fl">1.786635</span> <span class="fl">10.6757944</span> <span class="fl">1.044637e-16</span>
@@ -913,7 +914,7 @@ resinB       <span class="fl">3.81500</span>   <span class="fl">2.259935</span> 
 resinC       <span class="fl">6.74000</span>   <span class="fl">2.259935</span>  <span class="fl">2.9823872</span> <span class="fl">3.856472e-03</span>
 resinD      <span class="fl">13.66000</span>   <span class="fl">2.259935</span>  <span class="fl">6.0444226</span> <span class="fl">5.386106e-08</span></code></pre></div>
 <p>Make predictions for Halogen lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hal =<span class="st"> </span><span class="kw">c</span>(
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">hal &lt;-<span class="st"> </span><span class="kw">c</span>(
   res[<span class="dv">1</span>,<span class="dv">1</span>],             <span class="co"># Halogen lights, resin A</span>
   res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">3</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin B</span>
   res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">4</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin C</span>
@@ -975,18 +976,18 @@ resinD      <span class="fl">13.66000</span>   <span class="fl">2.259935</span> 
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get all combinations of the unique</span>
 <span class="co"># values for light and resin types</span>
 <span class="co"># using the &#39;expand.grid&#39; function</span>
-dnew =<span class="st"> </span><span class="kw">data.frame</span>(
+dnew &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))
 )
 
 <span class="co"># Give the new df names</span>
-<span class="kw">names</span>(dnew) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
+<span class="kw">names</span>(dnew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
 
 <span class="co"># Sort the dataframe by lights for ease</span>
-dnew =<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]</code></pre></div>
+dnew &lt;-<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]</code></pre></div>
 <p>Make predictions from these data. Because we are interested in comparing the different levels here, we can look at 95% CIs instead of prediction intervals.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the predictions</span>
-  dpreds =<span class="st"> </span><span class="kw">predict</span>(
+  dpreds &lt;-<span class="st"> </span><span class="kw">predict</span>(
     <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>
   )
 
@@ -1027,7 +1028,7 @@ dnew =<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span cla
 <div id="main-effects-with-two-continuous-covariates" class="section level3">
 <h3>Main effects with two continuous covariates</h3>
 <p>Let’s use the swiss data for this one. We start by fitting a model.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smod =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">*</span>Catholic, <span class="dt">data=</span>swiss)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">smod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">*</span>Catholic, <span class="dt">data=</span>swiss)</code></pre></div>
 <p>Now look at the results.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">summary</span>(smod)
 
@@ -1051,7 +1052,7 @@ Residual standard error<span class="op">:</span><span class="st"> </span><span c
 Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5981</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5701</span> 
 F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.33</span> on <span class="dv">3</span> and <span class="dv">43</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.286e-08</span></code></pre></div>
 <p>Make the coefficients into a dataframe.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sres  =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">summary</span>(smod)<span class="op">$</span>coefficients)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">sres &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">summary</span>(smod)<span class="op">$</span>coefficients)</code></pre></div>
 <p>The thing that’s confusing about multiple continous predictors is how to simulate new data used in predictions if there is any colinearity between the explanatory variables.</p>
 <p>So, we can do one of two things.</p>
 <p><strong>1.</strong> We can make predictions one variable at a time and hold the others constant at their means.</p>
@@ -1060,23 +1061,23 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>Start with <code>Education</code> since we’ve already done it.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make new values of Education across</span>
 <span class="co"># the range of observed values</span>
-  ednew =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),
+  ednew &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),
               <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education),
               <span class="dt">by=</span><span class="fl">0.01</span>)
 
 <span class="co"># Make a column of mean for level of Catholocism</span>
-  cathnew =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Catholic), <span class="kw">length</span>(ednew))
+  cathnew &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Catholic), <span class="kw">length</span>(ednew))
   
 <span class="co"># Combine them into a dataframe</span>
 <span class="co"># for use in predict function and assign names</span>
-  new =<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
+  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
   <span class="kw">names</span>(new) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)
   
 <span class="co"># Use the predict function to predict</span>
 <span class="co"># new values of fertility based on</span>
 <span class="co"># education holding catholic constant</span>
 <span class="co"># at the mean value</span>
-  edpred =<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
+  edpred &lt;-<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
     
 <span class="co"># Plot the raw data</span>
   <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))
@@ -1096,23 +1097,23 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>Second, we can do the same for <code>Catholic</code> holding <code>Education</code> constant at the mean observed value.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make new values of Education</span>
 <span class="co"># across the range of observed values</span>
-  cathnew =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Catholic),
+  cathnew &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Catholic),
                 <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Catholic),
                 <span class="dt">by=</span><span class="fl">0.01</span>)
 
 <span class="co"># Make new column repeating the </span>
 <span class="co"># mean of Education across observations</span>
-  ednew =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Education), <span class="kw">length</span>(cathnew))
+  ednew &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Education), <span class="kw">length</span>(cathnew))
   
 <span class="co"># Combine them into a dataframe for</span>
 <span class="co"># use in predict function and assign names</span>
-  new =<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
-  <span class="kw">names</span>(new) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)
+  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)
+  <span class="kw">names</span>(new) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)
   
 <span class="co"># Use the predict function to predict</span>
 <span class="co"># new values of fertility based on</span>
 <span class="co"># education holding catholic constant at the mean value</span>
-  cathpred =<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
+  cathpred &lt;-<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)
   
 <span class="co"># Plot the raw data</span>
   <span class="kw">plot</span>(swiss<span class="op">$</span>Catholic, swiss<span class="op">$</span>Fertility,
@@ -1129,7 +1130,7 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>This looks a little different.</p>
 <p>Here are some tricks we can use to visualize effects of 2 continuous variables at the same time.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Predictions from original data</span>
-swpred =<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> smod,
+swpred &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> smod,
                  <span class="dt">newdata =</span> swiss,
                  <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)
 
@@ -1199,13 +1200,13 @@ facetcol &lt;-<span class="st"> </span><span class="kw">cut</span>(zfacet, nbcol
 <h4>Two categorical explanatory variables</h4>
 <p>Here are the data:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here are the data:</span>
-dental =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</code></pre></div>
+dental &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</code></pre></div>
 <p>Now, fit a model to the data.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># To fit a model with an interaction,</span>
 <span class="co"># we are going to use a new notation in</span>
 <span class="co"># the model. So, pay attention to</span>
 <span class="co"># what is going on in this call:</span>
-dental.mod =<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights<span class="op">*</span>resin, <span class="dt">data=</span>dental)
+dental.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights<span class="op">*</span>resin, <span class="dt">data=</span>dental)
 
 <span class="co"># If we make an ANOVA table for</span>
 <span class="co"># this two-way ANOVA, we see that there are</span>
@@ -1259,22 +1260,22 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get all combinations of the unique</span>
 <span class="co"># values for light and resin types</span>
 <span class="co"># using the &#39;expand.grid&#39; function</span>
-dnew =<span class="st"> </span><span class="kw">data.frame</span>(
+dnew &lt;-<span class="st"> </span><span class="kw">data.frame</span>(
   <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))
 )
 
 <span class="co"># Give the new df names</span>
-<span class="kw">names</span>(dnew) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
+<span class="kw">names</span>(dnew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)
 
 <span class="co"># Sort the dataframe by lights for ease</span>
-dnew =<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]
+dnew &lt;-<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]
 
 <span class="co"># Make predictions from these data</span>
 <span class="co"># Because we are interested in</span>
 <span class="co"># comparing the different levels here,</span>
 <span class="co"># we can look at 95% CIs instead</span>
 <span class="co"># of prediction intervals.</span>
-dpreds =<span class="st"> </span><span class="kw">predict</span>(
+dpreds &lt;-<span class="st"> </span><span class="kw">predict</span>(
   <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>
 )
 <span class="co"># Get the observed means to go along</span>

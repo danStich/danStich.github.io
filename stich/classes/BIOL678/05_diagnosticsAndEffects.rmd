@@ -31,7 +31,8 @@ We will discuss what each of these means in class this week, and during the next
 
 Let's get some data to demonstrate these assumptions.
 ```{r, eval=FALSE}
-# Read in the turtles data, it's a bit messy, so we will read it
+# Read in the turtles data,
+# it's a bit messy, so we will read it
 # in with an extra option to strip white spaces.
 turtles = read.csv('turtles.txt', header = TRUE, strip.white = TRUE)
 ```
@@ -310,7 +311,7 @@ We'll start here by fitting a one-way anova to test effects of treatment on on p
 names(PlantGrowth)
 
 # Fit the model
-mod = lm(weight~group, data = PlantGrowth)
+mod <- lm(weight~group, data = PlantGrowth)
 
 # Do the post-hoc comparisons of means
 # Just a reminder that the only difference is trt2-trt1
@@ -330,28 +331,28 @@ The summary gives us the predicted means of the response for each factor level b
 ```{r}  
 # We can get the model coefficients like this:
 names(mod)
-coeffs = data.frame(mod$coefficients)
+coeffs <- data.frame(mod$coefficients)
 
 # From the model, we can estimate:
 # Mean of control
-y_control = coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*0
+y_control <- coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*0
 # Mean of trt1
-y_trt1 = coeffs[1,1] + coeffs[2,1]*1 + coeffs[3,1]*0
+y_trt1 <- coeffs[1,1] + coeffs[2,1]*1 + coeffs[3,1]*0
 # Mean of trt2
-y_trt2 = coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*1
+y_trt2 <- coeffs[1,1] + coeffs[2,1]*0 + coeffs[3,1]*1
 ```
 
 Now, let's compare our model predictions to the actual means.
 
 ```{r, warning=FALSE, message=FALSE}
 # Model predictions
-group = c('ctrl', 'trt1', 'trt2')
-mu = c(y_control, y_trt1, y_trt2)
-preds = data.frame(group, mu)
+group <- c('ctrl', 'trt1', 'trt2')
+mu <- c(y_control, y_trt1, y_trt2)
+preds <- data.frame(group, mu)
 
 # Observed means
 library(plyr)
-obs = ddply(PlantGrowth, 'group', summarize, mu=mean(weight))
+obs <- ddply(PlantGrowth, 'group', summarize, mu=mean(weight))
 
 # Compare them
 preds
@@ -405,7 +406,7 @@ We'll make a model to predict the effect of education level on fertility:
 
 ```{r}
 # Make the model and save it to a named object called 'swiss.mod'
-swiss.mod = lm(Fertility~Education, data = swiss)
+swiss.mod <- lm(Fertility~Education, data = swiss)
 ```
 
 Next, we can look at the coefficient estimates for `swiss.mod`:
@@ -419,20 +420,20 @@ From this summary, we can see that we have an intercept of...
 
 ```{r}
 # Save intercept to a named object
-intcpt = 79.6101
+intcpt <- 79.6101
 ```  
 
 ...and a 'slope' for `Education` of...
 
 ```{r}
 # Save slope to a named object
-slp = -0.8624
+slp <- -0.8624
 ```
 
 As with the case of categorical explanatory variables, we are now interested in understanding how the response changes with respect to the variable of interest. But, this time we want to see what the mean (or some other measure) of the response is for all possible values of the explanatory variable from the lowest value to the maximum value, rather than just a few discrete values that we observed. To do this, we first need to formalize our equation. Let's make a function that will predict the mean fertility for any given value of education level based on our model:
 
 ```{r}
-y_fert = function(x){
+y_fert <- function(x){
   intcpt + slp * x
 }
 ```
@@ -443,7 +444,7 @@ Now, we can apply that function to either our observed data, or to newly generat
 # Using our observed data:
 # Calculate new y values using 
 # the model parameters and our new data
-obs_fit = y_fert(swiss$Education)
+obs_fit <- y_fert(swiss$Education)
 
 # Plot the results
 plot(swiss$Education, obs_fit, type='l',
@@ -451,19 +452,19 @@ plot(swiss$Education, obs_fit, type='l',
 
 # Using new data based on the range of our explanatory variable:
 # Make a sequence of new values based on the range of our data
-newEd = data.frame(seq(from=min(swiss$Education),
+newEd <- data.frame(seq(from=min(swiss$Education),
                        to=max(swiss$Education),
                        by=0.01))
 
 # Give the only column a name that
 # matches the data in the model above
-names(newEd) = 'Education'
+names(newEd) <- 'Education'
 
 # Predict changes in fertility
 # based on education using our new values for
 # education level, 'newEd', and 
 # our model parameters
-pred_fit = y_fert(newEd$Education)
+pred_fit <- y_fert(newEd$Education)
 
 # Plot the changes
 par(new=TRUE)    # This tells R to add it to the same graph
@@ -499,7 +500,7 @@ lines(swiss$Education, obs_fit, col='blue', lwd=2)
 What about the uncertainty in our model and our data? We can add this in by using the handy-dandy predict function in R!
 
 ```{r, eval=FALSE}
-  ?predict
+?predict
 ```
 
 To get info on how to do this for linear models, scroll down and click on the link to `predict.lm`. You will see that we need to supply some kind offitted model object, some data from which to make predictions, and the type of interval you would like to show.
@@ -511,7 +512,7 @@ To get info on how to do this for linear models, scroll down and click on the li
 `interval`: usually, we are interested in the prediction interval, as this tends to be more honest about the uncertainty in our model predictions and our data, but there are other options
 
 ```{r}
-pred_int = predict(object=swiss.mod, newdata=newEd, interval='prediction')
+pred_int <- predict(object=swiss.mod, newdata=newEd, interval = 'prediction')
 ```
 
 So, what does the predict function give us?
@@ -554,7 +555,7 @@ One categorical and one continuous explanatory variable- last week:
 # pulses of 2 species of
 # crickets collected under
 # varying temperatures
-crickets = read.csv('crickets.txt')
+crickets <- read.csv('crickets.txt')
 ```
  
 ```{r, echo=FALSE}
@@ -562,14 +563,14 @@ crickets = read.csv('crickets.txt')
 # This data set contains pulses of
 # 2 species of crickets collected under
 # varying temperatures
-  crickets = read.csv('../../data/crickets.txt')
+  crickets <- read.csv('../../data/crickets.txt')
 ```
 
 Here we want to investigate the effects of species and temperature on pulses of individual crickets.
 
 ```{r, warning=FALSE, message=FALSE}
 # Fit the model
-cricket.mod = lm(Pulse~Species + Temp, data=crickets)
+cricket.mod <- lm(Pulse~Species + Temp, data=crickets)
 
 # Install the car package. We need a 
 # function from this library for summary.
@@ -602,7 +603,7 @@ plot(crickets$Temp,
 axis(side=2, las=2)
 
 # Make predictions from the fitted model object
-preds = (predict.lm(cricket.mod, newdata = crickets,
+preds <- (predict.lm(cricket.mod, newdata = crickets,
   interval = 'prediction'))
 
 # Add prediction lines for species 'ex'
@@ -639,18 +640,18 @@ Kim, H-Y. 2014. Statistical notes for clinical researchers: Two-way analysis of 
 Here are the data:
 
 ```{r, eval=FALSE}
-dental = read.csv('dental.csv')
+dental <- read.csv('dental.csv')
 ```
  
 ```{r, echo=FALSE}
-dental = read.csv('../../data/dental.csv')
+dental <- read.csv('../../data/dental.csv')
 ```
 
 Now, fit a model to the data.
 
 ```{r}
 # We are looking only at main effects
-dental.mod = lm(mpa~lights + resin, data=dental)
+dental.mod <- lm(mpa~lights + resin, data=dental)
 ```
 
 If we make an ANOVA table for this two-way ANOVA, we see that there are significant main effects of resin type but not lights used for drying.
@@ -673,11 +674,11 @@ One reasonable option might be to summarize the data by the means and plot the m
 ```{r, warning=FALSE, message=FALSE}
 # Summarize the means using ddply
 library(plyr)
-mus = ddply(dental, c('lights', 'resin'), summarize, mean=mean(mpa))
+mus <- ddply(dental, c('lights', 'resin'), summarize, mean = mean(mpa))
 
 # Plot the summaries
 # Make resin into a numeric for plotting trick
-resin= as.numeric(dental$resin)
+resin <- as.numeric(dental$resin)
 
 # Set graphical parameters
 par(mfrow=c(1,1), mar=c(5,5,1,1))
@@ -725,14 +726,14 @@ Another option is to make predictions for each combination of levels. We can do 
 
 ```{r}
 # Store the coefficients in their own object
-res = data.frame( summary(dental.mod)$coefficients )
+res <- data.frame( summary(dental.mod)$coefficients )
 res
 ```  
 
 Make predictions for Halogen lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term.
 
 ```{r}  
-hal = c(
+hal <- c(
   res[1,1],             # Halogen lights, resin A
   res[1,1] + res[3,1],  # Halogen lights, resin B
   res[1,1] + res[4,1],  # Halogen lights, resin C
@@ -808,22 +809,22 @@ our model:
 # Get all combinations of the unique
 # values for light and resin types
 # using the 'expand.grid' function
-dnew = data.frame(
+dnew <- data.frame(
   expand.grid(unique(dental$lights), unique(dental$resin))
 )
 
 # Give the new df names
-names(dnew) = c('lights', 'resin')
+names(dnew) <- c('lights', 'resin')
 
 # Sort the dataframe by lights for ease
-dnew = dnew[with(dnew, order(lights)), ]
+dnew <- dnew[with(dnew, order(lights)), ]
 ```  
 
 Make predictions from these data. Because we are interested in comparing the different levels here, we can look at 95% CIs instead of prediction intervals.
 
 ```{r} 
 # Make the predictions
-  dpreds = predict(
+  dpreds <- predict(
     object = dental.mod, newdata = dnew, interval = 'confidence'
   )
 
@@ -869,7 +870,7 @@ Two things to note here:
 Let's use the swiss data for this one. We start by fitting a model.
 
 ```{r}
-smod = lm(Fertility~Education*Catholic, data=swiss)
+smod <- lm(Fertility~Education*Catholic, data=swiss)
 ```
 
 Now look at the results.
@@ -881,7 +882,7 @@ summary(smod)
 Make the coefficients into a dataframe.
 
 ```{r}
-sres  = data.frame(summary(smod)$coefficients)
+sres <- data.frame(summary(smod)$coefficients)
 ```      
 
 The thing that's confusing about multiple continous predictors is how to simulate new data used in predictions if there is any colinearity between the explanatory variables. 
@@ -899,23 +900,23 @@ Start with `Education` since we've already done it.
 ```{r}
 # Make new values of Education across
 # the range of observed values
-  ednew = seq(from=min(swiss$Education),
+  ednew <- seq(from=min(swiss$Education),
               to=max(swiss$Education),
               by=0.01)
 
 # Make a column of mean for level of Catholocism
-  cathnew = rep(mean(swiss$Catholic), length(ednew))
+  cathnew <- rep(mean(swiss$Catholic), length(ednew))
   
 # Combine them into a dataframe
 # for use in predict function and assign names
-  new = data.frame(ednew, cathnew)
+  new <- data.frame(ednew, cathnew)
   names(new) = c('Education', 'Catholic')
   
 # Use the predict function to predict
 # new values of fertility based on
 # education holding catholic constant
 # at the mean value
-  edpred = predict(smod, new, interval='prediction')
+  edpred <- predict(smod, new, interval='prediction')
     
 # Plot the raw data
   par(mfrow=c(1,1))
@@ -939,23 +940,23 @@ Second, we can do the same for `Catholic` holding `Education` constant at the me
 ```{r}
 # Make new values of Education
 # across the range of observed values
-  cathnew = seq(from=min(swiss$Catholic),
+  cathnew <- seq(from=min(swiss$Catholic),
                 to=max(swiss$Catholic),
                 by=0.01)
 
 # Make new column repeating the 
 # mean of Education across observations
-  ednew = rep(mean(swiss$Education), length(cathnew))
+  ednew <- rep(mean(swiss$Education), length(cathnew))
   
 # Combine them into a dataframe for
 # use in predict function and assign names
-  new = data.frame(ednew, cathnew)
-  names(new) = c('Education', 'Catholic')
+  new <- data.frame(ednew, cathnew)
+  names(new) <- c('Education', 'Catholic')
   
 # Use the predict function to predict
 # new values of fertility based on
 # education holding catholic constant at the mean value
-  cathpred = predict(smod, new, interval='prediction')
+  cathpred <- predict(smod, new, interval='prediction')
   
 # Plot the raw data
   plot(swiss$Catholic, swiss$Fertility,
@@ -976,7 +977,7 @@ Here are some tricks we can use to visualize effects of 2 continuous variables a
 
 ```{r, warning=FALSE, message=FALSE}
 # Predictions from original data
-swpred = predict(object = smod,
+swpred <- predict(object = smod,
                  newdata = swiss,
                  interval = 'prediction')
 
@@ -1054,12 +1055,12 @@ Up to this point, we have only considered the 'main effects' of categorical and/
 Here are the data:
 ```{r, eval=FALSE}
 # Here are the data:
-dental = read.csv('dental.csv')
+dental <- read.csv('dental.csv')
 ```
 
 ```{r echo=FALSE}
 # Here are the data:
-dental = read.csv('../../data/dental.csv')
+dental <- read.csv('../../data/dental.csv')
 ```
 
 Now, fit a model to the data.
@@ -1069,7 +1070,7 @@ Now, fit a model to the data.
 # we are going to use a new notation in
 # the model. So, pay attention to
 # what is going on in this call:
-dental.mod = lm(mpa~lights*resin, data=dental)
+dental.mod <- lm(mpa~lights*resin, data=dental)
 
 # If we make an ANOVA table for
 # this two-way ANOVA, we see that there are
@@ -1093,22 +1094,22 @@ Let's just use the built-in R functions to make predictions from our model. We w
 # Get all combinations of the unique
 # values for light and resin types
 # using the 'expand.grid' function
-dnew = data.frame(
+dnew <- data.frame(
   expand.grid(unique(dental$lights), unique(dental$resin))
 )
 
 # Give the new df names
-names(dnew) = c('lights', 'resin')
+names(dnew) <- c('lights', 'resin')
 
 # Sort the dataframe by lights for ease
-dnew = dnew[with(dnew, order(lights)), ]
+dnew <- dnew[with(dnew, order(lights)), ]
 
 # Make predictions from these data
 # Because we are interested in
 # comparing the different levels here,
 # we can look at 95% CIs instead
 # of prediction intervals.
-dpreds = predict(
+dpreds <- predict(
   object = dental.mod, newdata = dnew, interval = 'confidence'
 )
 # Get the observed means to go along
