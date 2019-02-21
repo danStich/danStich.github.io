@@ -75,7 +75,7 @@ Now that we've done a little model validation to assure that we are not complete
 
 **Question 4.** Were there significant effects of supplement and/or dose on guinea pig tooth length? 
 
-**Question 5.** How much of the variability in guinea pig tooth length was explained by the additive effects of supplement and dose? Remember, there are multiple ways to find this information. If you can't remember either method, check the [linear models tutorial](05_linearModels.html) from last week or `Google` it.
+**Question 5.** How much of the variability in guinea pig tooth length was explained by the additive effects of supplement and dose? Remember, there are multiple ways to find this information. If you can't remember either method, check the <a href="04_linearModels.html">linear models tutorial</a> from last week or `Google` it.
 
 If you haven't already done so, print a summary of the linear model so you can see the regression coefficients. Using what you learned in class this week, and the 1000-line long <a href="05_diagnosticsAndEffects.html"> lecture module </a>  that your wicked awesome prof made for you this week, predict the mean expected value of tooth length for each combination of `supp` and `dose`. *Remember:* there are multiple ways to do this. All are in the <a href="05_diagnosticsAndEffects.html"> lecture module </a> from this week. You can do the math by hand, or you can use the built-in `predict` function in R. Just pay close attention to how you do this, and make sure that your predictions make reasonable sense (they should if you do it correctly).
 
