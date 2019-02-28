@@ -37,6 +37,8 @@ The citation for the paper is:
   
 >Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.
 
+It is available through the course website <a href="JohnsonAndRaven1973.pdf">here</a>.
+
 **Question 1.** Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week....What is the problem with using species counts as a continuous response variable in linear models?
 
 
