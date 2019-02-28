@@ -320,7 +320,7 @@ Now, drop one data point, fit the model, and predict the missing data point one 
 
 # Fit the model that tests the effects of Education
 # on the Fertility
-  mod.Ed = lm(Fertility~Education, data=swiss)
+  mod.Ed = lm(Fertility~Education, data=data.train)
 
 # Predict Fertility from the fitted model and store
   ed.pred[i] = predict(mod.Ed, data.pred)
@@ -386,8 +386,8 @@ Boot strapping (or "jack-knifing") is similar to cross validation in that we lea
 # hold our training and predicting data
   p.Rsquare = c()
 
-# We will randomly sample our data 10,000 times
-  for(i in 1:1e4){
+# We will randomly sample our data 1,000 times
+  for(i in 1:1000){
 
 # Sample the data, taking only 22 
 # data points (about half the data).
@@ -400,7 +400,7 @@ Boot strapping (or "jack-knifing") is similar to cross validation in that we lea
 
 # Fit the model that tests the 
 # effects of education on the fertility index
-  mod.Ed = lm(Fertility~Education, data=swiss)
+  mod.Ed = lm(Fertility~Education, data=data.train)
 
 # Predict fertility from the fitted
 # model and store the result

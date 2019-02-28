@@ -678,7 +678,7 @@ Unconditional SE<span class="op">:</span><span class="st"> </span><span class="f
 
 <span class="co"># Fit the model that tests the effects of Education</span>
 <span class="co"># on the Fertility</span>
-  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>swiss)
+  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>data.train)
 
 <span class="co"># Predict Fertility from the fitted model and store</span>
   ed.pred[i] =<span class="st"> </span><span class="kw">predict</span>(mod.Ed, data.pred)
@@ -707,29 +707,29 @@ Call<span class="op">:</span>
 <span class="kw">lm</span>(<span class="dt">formula =</span> ed.obs <span class="op">~</span><span class="st"> </span>ed.pred)
 
 Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">17.036</span>  <span class="op">-</span><span class="fl">6.711</span>  <span class="op">-</span><span class="fl">1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> 
+<span class="st">     </span>Min       1Q   Median       3Q      Max 
+<span class="op">-</span><span class="fl">17.2315</span>  <span class="op">-</span><span class="fl">6.7132</span>  <span class="op">-</span><span class="fl">0.8833</span>   <span class="fl">9.7559</span>  <span class="fl">20.2830</span> 
 
 Coefficients<span class="op">:</span>
-<span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept) <span class="op">-</span><span class="fl">1.658e-14</span>  <span class="fl">1.186e+01</span>   <span class="fl">0.000</span>        <span class="dv">1</span>    
-ed.pred      <span class="fl">1.000e+00</span>  <span class="fl">1.680e-01</span>   <span class="fl">5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span>
+<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
+(Intercept)   <span class="fl">4.0940</span>    <span class="fl">12.1637</span>   <span class="fl">0.337</span>    <span class="fl">0.738</span>    
+ed.pred       <span class="fl">0.9416</span>     <span class="fl">0.1722</span>   <span class="fl">5.468</span> <span class="fl">1.91e-06</span> <span class="op">**</span><span class="er">*</span>
 <span class="op">---</span>
 Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
 
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span>
+Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.79</span> on <span class="dv">45</span> degrees of freedom
+Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.3992</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.3858</span> 
+F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="fl">29.9</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.911e-06</span>
 <span class="co"># Extract the R-squared for observed vs predicted</span>
   <span class="kw">summary</span>(pred.line)<span class="op">$</span>r.squared
-[<span class="dv">1</span>] <span class="fl">0.4406156</span>
+[<span class="dv">1</span>] <span class="fl">0.3991715</span>
           
 <span class="co"># Plot predictive line</span>
 <span class="co"># Get coefficients</span>
   <span class="kw">summary</span>(pred.line)<span class="op">$</span>coefficients
-                 Estimate Std. Error       t value     <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
-(Intercept) <span class="op">-</span><span class="fl">1.658293e-14</span> <span class="fl">11.8617938</span> <span class="op">-</span><span class="fl">1.398012e-15</span> <span class="fl">1.000000e+00</span>
-ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</span>  <span class="fl">5.953619e+00</span> <span class="fl">3.658617e-07</span>
+             Estimate Std. Error   t value     <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)
+(Intercept) <span class="fl">4.0939788</span> <span class="fl">12.1637145</span> <span class="fl">0.3365731</span> <span class="fl">7.380034e-01</span>
+ed.pred     <span class="fl">0.9416226</span>  <span class="fl">0.1722131</span> <span class="fl">5.4677763</span> <span class="fl">1.910958e-06</span>
 <span class="co"># Use sequence of new data</span>
   pred.pts =<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="kw">min</span>(ed.obs), <span class="kw">max</span>(ed.obs), <span class="dv">1</span>))
   <span class="kw">names</span>(pred.pts) =<span class="st"> &#39;ed.pred&#39;</span>
@@ -756,8 +756,8 @@ ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</s
 <span class="co"># hold our training and predicting data</span>
   p.Rsquare =<span class="st"> </span><span class="kw">c</span>()
 
-<span class="co"># We will randomly sample our data 10,000 times</span>
-  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="fl">1e4</span>){
+<span class="co"># We will randomly sample our data 1,000 times</span>
+  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>){
 
 <span class="co"># Sample the data, taking only 22 </span>
 <span class="co"># data points (about half the data).</span>
@@ -770,7 +770,7 @@ ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</s
 
 <span class="co"># Fit the model that tests the </span>
 <span class="co"># effects of education on the fertility index</span>
-  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>swiss)
+  mod.Ed =<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data=</span>data.train)
 
 <span class="co"># Predict fertility from the fitted</span>
 <span class="co"># model and store the result</span>
@@ -783,10 +783,10 @@ ed.pred      <span class="fl">1.000000e+00</span>  <span class="fl">0.1679651</s
 }</code></pre></div>
 <p>We can now calculate the median predicted R-squared and the 95% CI on this test statistic</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">median</span>(p.Rsquare)
-[<span class="dv">1</span>] <span class="fl">0.4542436</span>
+[<span class="dv">1</span>] <span class="fl">0.4618526</span>
   <span class="kw">quantile</span>(p.Rsquare, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>))
      <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span>
-<span class="fl">0.1080989</span> <span class="fl">0.6225763</span> </code></pre></div>
+<span class="fl">0.1012224</span> <span class="fl">0.6266102</span> </code></pre></div>
 <p>We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the histogram</span>
   <span class="kw">hist</span>(p.Rsquare, <span class="dt">breaks=</span><span class="dv">100</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,
