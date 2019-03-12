@@ -68,17 +68,23 @@ We can make this distribution in R:
 We can also look at this distribution:
 ```{r}
 # Make a histogram of p(Age50 | Cancer)
-  hist(p_50_cancer, col="gray87", main='', xlab = 'P(50 | Cancer)')
+  hist(p_50_cancer,
+       col="gray87",
+       main='',
+       xlab = 'P(50 | Cancer)'
+       )
 ```
 
 Now, we have a working probability distribution for the probability of being age 50 if one has cancer. We can plug this into Bayes Theorem and construct a probability distribution to solve for the inverse: the probability of having cancer given that the patient is age 50 $(P(Cancer|Age 50))$. Let's do it in R.
 
 ```{r}
-# First, let's define our other marginal probabilities as variables in R
+# First, let's define our other
+# marginal probabilities as variables in R
   p_cancer = 0.01 # Marginal probability of having cancer
   p_50 = 0.03     # Marginal probability of being age 50
   
-# Now we can solve the theorem for our finite number of observations:
+# Now we can solve the theorem
+# for our finite number of observations:
   p_cancer_50 = (p_50_cancer*p_cancer)/p_50
   
 # We can calculate descriptive statistics 
@@ -87,38 +93,53 @@ Now, we have a working probability distribution for the probability of being age
   # Using a mean and standard deviation
     mean(p_cancer_50)
     sd(p_cancer_50)
-  # Quantiles (95% CRI)
-  # Note that in Bayesian inference, we are going to call these 'credible
-  # intervals' (CRI) or 'high density intervals' (HDI), but they are 
-  # functionally the same thing as 'confidence intervals'.
-    quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
+    
+# We can calculate quantiles (95% CRI)
+# Note that in Bayesian inference,
+# we are going to call these 'credible
+# intervals' (CRI) or 'high density intervals' (HDI),
+# but they are functionally the same thing as
+# 'confidence intervals'.
+  quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
     
 # We can also look at the actual distribution
-  hist(p_cancer_50, col="gray87", main='', xlab = 'P(Cancer | 50)')
+  hist(p_cancer_50,
+       col="gray87",
+       main='',
+       xlab = 'P(Cancer | 50)'
+       )
 ```
 
 Finally, let's say now that there is uncertainty in all of our probabilities of interest
 
 ```{r}
-# First, let's define each of our probabilities as variables in R
+# First, let's define each of our
+# probabilities as variables in R
   p_50_cancer = rbeta(1e4, 20, 1e3)
   p_cancer = rbeta(1e4, 10, 1e3)
   p_50 = rbeta(1e4, 30, 1e3)
 
 # We can continue as before
-# We solve the theorem for our finite number of observations:
+# We solve the theorem for our
+# finite number of observations:
   p_cancer_50 = (p_50_cancer*p_cancer)/p_50
   
-# We calculate descriptive statistics for the conditional probability to
-# describe the probability
-  # Using a mean and standard deviation
-    mean(p_cancer_50)
-    sd(p_cancer_50)
-  # Quantiles (95% CRI)
-    quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
+# We calculate descriptive statistics
+# for the conditional probability to
+# describe the probability using a mean
+# and standard deviation
+  mean(p_cancer_50)
+  sd(p_cancer_50)
     
+# Quantiles (95% CRI and median)
+  quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
+  
 # We look at the actual distribution
-  hist(p_cancer_50, col="gray87", main='', xlab = 'P(Cancer | 50)')
+  hist(p_cancer_50,
+       col="gray87",
+       main='',
+       xlab = 'P(Cancer | 50)'
+       )
 ```
 
 Now you can see why computers are starting to matter, and we are not even doing Bayesian inference yet. Why is that?
@@ -220,7 +241,8 @@ We start by reading in data.
 # Look at the data structure
   str(birds)
 
-# It's a short data set. Let's just print it to the console
+# It's a short data set.
+# Let's just print it to the console
   birds
 ```
 
@@ -228,14 +250,12 @@ We start by reading in data.
 # Read in the data
   birds = read.csv('../../data/farmdata.csv')
 
-# Look at the data structure
-  str(birds)
-
-# It's a short data set. Let's just print it to the console
+# It's a short data set.
+# Let's just print it to the console
   birds
 ```
 
-This data set contains information about chick survival from hatch to adulthood for each cohort of birds on my small-scale poultry farm in 2017. The file contains data on the starting number at hatch, the number of chicks fledged, and the number surviving to adulthood (or harvest).
+This data set contains information about chick survival from hatch to adulthood for each cohort of birds on my small-scale poultry farm in 2017. The file contains data on the starting number at hatch, the number of chicks fledged, and the species of bird.
 
 We will use the data set to estimate chick survival from hatch to fledge. There are a number of ways we can do this. In practice, we will probably use Gibbs sampling 99% of the time (haha, Bayesian joke). But we may run into situations in which we can estimate the posterior distribution by hand or in which we need an alternative algorithm for flexibility.
 
@@ -257,7 +277,7 @@ Now, we specify the model in the 'BUGS' language so we can run our analysis. Thi
 # to turn it into one long character string 
 # that can be written to a text file
 
-modelstring="                   # Open the model string
+modelString="                   # Open the model string
   model {                       # Open the model definition
     # Likelihood
       for(i in 1:nobs{          # For each observation
@@ -279,15 +299,12 @@ modelstring="                   # Open the model string
       b <- 1
   }                             # Close the model definition
 "                               # Close the string for the model file
-
-# Write the model string to a file
-  writeLines(modelstring, con="chickSurvival.txt")
 ```
 
 If we cut this down to the bare minimum text, the model specification would look something like this:
 
 ```{r}
-modelstring="                 
+modelString="                 
   model {                       
     # Likelihood
       for(i in 1:nobs){          
@@ -300,10 +317,9 @@ modelstring="
       b <- 1
   }                             
 "                               
-writeLines(modelstring,con="chickSurvival.txt")
 ```
 
-If you look in your working directory, you will now find a text file called `chickSurvival.txt` that contains the text above. We will read this file so JAGS can use it when we fit our model below.
+This saves the model string as an object in R, that we can use later in place of writing and reading files. If you want to see what it looks like, you can do `cat(modelString)`
 
 Now specify a data set for use in JAGS. We package it in a list called `chick.data` that contains 1) the number of observations (`nobs`) so we can loop over each row of data in the likelihood, 2) the number of birds that successfully fledged in each cohort (`y`), and 3) the starting number of birds hatched in each cohort (`N`).
 
@@ -345,7 +361,7 @@ Finally, we call JAGS and run the model:
 ```{r, results='hide', message=FALSE, warning=FALSE}
 # Call jags and run the model
   chick.model <- jags(chick.data, inits=inits, parameters,
-                      "chickSurvival.txt",
+                      model.file=textConnection(modelString),
                       n.chains = nc, n.thin = nt,
                       n.iter = ni, n.burnin = nb,
                       working.directory = getwd()
@@ -445,7 +461,6 @@ plot(density(post.chick),
 ## Conclusion
 There you have it: your first Bayesian data analysis. Needless to say (perhaps?) this was a simple example. However, it demonstrates the flexibility of the method. 
 
-
 ### Okay, just *one more* example...
 We also could have fit the same 'model of the mean' using maximum likelihood estimation to solve this *generalized linear model* (GLM), by using the `glm` function in R. Below is a quick teaser, but this will be the focus of our discussions for the next few weeks so don't get worried if it makes little sense to you right now.
 
@@ -471,6 +486,7 @@ Here, we use a binomial error distribution to model the proportion of birds surv
     }
   
 # Transform the mean to the probability scale
-# We see that the mean is identical      
   inv.logit(summary(mod)$coefficients[1])
 ```
+
+We see here that the mean estimated from this method is essentially identical to that estimated above - proof positive that without prior information these two approaches lead the same estimate of the mean. We will dig into this idea more as we move through the semester.

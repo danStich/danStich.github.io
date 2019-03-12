@@ -312,14 +312,20 @@ Introduction
   p_50_cancer =<span class="st"> </span><span class="kw">rbeta</span>(<span class="fl">1e4</span>, <span class="dv">200</span>, <span class="fl">1e4</span>)</code></pre></div>
 <p>We can also look at this distribution:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a histogram of p(Age50 | Cancer)</span>
-  <span class="kw">hist</span>(p_50_cancer, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(50 | Cancer)&#39;</span>)</code></pre></div>
+  <span class="kw">hist</span>(p_50_cancer,
+       <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>,
+       <span class="dt">xlab =</span> <span class="st">&#39;P(50 | Cancer)&#39;</span>
+       )</code></pre></div>
 <p><img src="07_introToBayes_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
 <p>Now, we have a working probability distribution for the probability of being age 50 if one has cancer. We can plug this into Bayes Theorem and construct a probability distribution to solve for the inverse: the probability of having cancer given that the patient is age 50 <span class="math inline">\((P(Cancer|Age 50))\)</span>. Let’s do it in R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let&#39;s define our other marginal probabilities as variables in R</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let&#39;s define our other</span>
+<span class="co"># marginal probabilities as variables in R</span>
   p_cancer =<span class="st"> </span><span class="fl">0.01</span> <span class="co"># Marginal probability of having cancer</span>
   p_<span class="dv">50</span> =<span class="st"> </span><span class="fl">0.03</span>     <span class="co"># Marginal probability of being age 50</span>
   
-<span class="co"># Now we can solve the theorem for our finite number of observations:</span>
+<span class="co"># Now we can solve the theorem</span>
+<span class="co"># for our finite number of observations:</span>
   p_cancer_<span class="dv">50</span> =<span class="st"> </span>(p_50_cancer<span class="op">*</span>p_cancer)<span class="op">/</span>p_<span class="dv">50</span>
   
 <span class="co"># We can calculate descriptive statistics </span>
@@ -327,44 +333,59 @@ Introduction
 <span class="co"># that we can describe the distribution</span>
   <span class="co"># Using a mean and standard deviation</span>
     <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.006536706</span>
+[<span class="dv">1</span>] <span class="fl">0.006540801</span>
     <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.0004576477</span>
-  <span class="co"># Quantiles (95% CRI)</span>
-  <span class="co"># Note that in Bayesian inference, we are going to call these &#39;credible</span>
-  <span class="co"># intervals&#39; (CRI) or &#39;high density intervals&#39; (HDI), but they are </span>
-  <span class="co"># functionally the same thing as &#39;confidence intervals&#39;.</span>
-    <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
+[<span class="dv">1</span>] <span class="fl">0.0004628372</span>
+    
+<span class="co"># We can calculate quantiles (95% CRI)</span>
+<span class="co"># Note that in Bayesian inference,</span>
+<span class="co"># we are going to call these &#39;credible</span>
+<span class="co"># intervals&#39; (CRI) or &#39;high density intervals&#39; (HDI),</span>
+<span class="co"># but they are functionally the same thing as</span>
+<span class="co"># &#39;confidence intervals&#39;.</span>
+  <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
        <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% 
-<span class="fl">0.005673527</span> <span class="fl">0.006526675</span> <span class="fl">0.007446312</span> 
+<span class="fl">0.005672692</span> <span class="fl">0.006530590</span> <span class="fl">0.007478702</span> 
     
 <span class="co"># We can also look at the actual distribution</span>
-  <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
+  <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,
+       <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>,
+       <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>
+       )</code></pre></div>
 <p><img src="07_introToBayes_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
 <p>Finally, let’s say now that there is uncertainty in all of our probabilities of interest</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let&#39;s define each of our probabilities as variables in R</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, let&#39;s define each of our</span>
+<span class="co"># probabilities as variables in R</span>
   p_50_cancer =<span class="st"> </span><span class="kw">rbeta</span>(<span class="fl">1e4</span>, <span class="dv">20</span>, <span class="fl">1e3</span>)
   p_cancer =<span class="st"> </span><span class="kw">rbeta</span>(<span class="fl">1e4</span>, <span class="dv">10</span>, <span class="fl">1e3</span>)
   p_<span class="dv">50</span> =<span class="st"> </span><span class="kw">rbeta</span>(<span class="fl">1e4</span>, <span class="dv">30</span>, <span class="fl">1e3</span>)
 
 <span class="co"># We can continue as before</span>
-<span class="co"># We solve the theorem for our finite number of observations:</span>
+<span class="co"># We solve the theorem for our</span>
+<span class="co"># finite number of observations:</span>
   p_cancer_<span class="dv">50</span> =<span class="st"> </span>(p_50_cancer<span class="op">*</span>p_cancer)<span class="op">/</span>p_<span class="dv">50</span>
   
-<span class="co"># We calculate descriptive statistics for the conditional probability to</span>
-<span class="co"># describe the probability</span>
-  <span class="co"># Using a mean and standard deviation</span>
-    <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.006892193</span>
-    <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)
-[<span class="dv">1</span>] <span class="fl">0.003051983</span>
-  <span class="co"># Quantiles (95% CRI)</span>
-    <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
-       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% 
-<span class="fl">0.002609822</span> <span class="fl">0.006358937</span> <span class="fl">0.014446008</span> 
+<span class="co"># We calculate descriptive statistics</span>
+<span class="co"># for the conditional probability to</span>
+<span class="co"># describe the probability using a mean</span>
+<span class="co"># and standard deviation</span>
+  <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)
+[<span class="dv">1</span>] <span class="fl">0.006889485</span>
+  <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)
+[<span class="dv">1</span>] <span class="fl">0.003007663</span>
     
+<span class="co"># Quantiles (95% CRI and median)</span>
+  <span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))
+       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% 
+<span class="fl">0.002675844</span> <span class="fl">0.006343638</span> <span class="fl">0.014281231</span> 
+  
 <span class="co"># We look at the actual distribution</span>
-  <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>, <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>)</code></pre></div>
+  <span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,
+       <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,
+       <span class="dt">main=</span><span class="st">&#39;&#39;</span>,
+       <span class="dt">xlab =</span> <span class="st">&#39;P(Cancer | 50)&#39;</span>
+       )</code></pre></div>
 <p><img src="07_introToBayes_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>Now you can see why computers are starting to matter, and we are not even doing Bayesian inference yet. Why is that?</p>
 <p>Because we still haven’t collected any data!!! All that we have done here is state some basic mathematical representations of our beliefs about certain conditional and marginal probabilities of specific events. Those beliefs may be useful representations, or they may be way off!</p>
@@ -435,25 +456,21 @@ Introduction
 <span class="co"># Look at the data structure</span>
   <span class="kw">str</span>(birds)
 
-<span class="co"># It&#39;s a short data set. Let&#39;s just print it to the console</span>
+<span class="co"># It&#39;s a short data set.</span>
+<span class="co"># Let&#39;s just print it to the console</span>
   birds</code></pre></div>
-<pre><code>&#39;data.frame&#39;:   10 obs. of  4 variables:
- $ hatched: int  26 16 49 2 12 6 12 26 8 2
- $ fledged: int  21 15 40 2 12 6 10 24 8 2
- $ adult  : int  NA 12 NA NA 12 5 NA NA NA NA
- $ species: Factor w/ 3 levels &quot;chicken&quot;,&quot;duck&quot;,..: 1 1 1 2 2 2 1 1 2 3
-   hatched fledged adult species
-1       26      21    NA chicken
-2       16      15    12 chicken
-3       49      40    NA chicken
-4        2       2    NA    duck
-5       12      12    12    duck
-6        6       6     5    duck
-7       12      10    NA chicken
-8       26      24    NA chicken
-9        8       8    NA    duck
-10       2       2    NA   goose</code></pre>
-<p>This data set contains information about chick survival from hatch to adulthood for each cohort of birds on my small-scale poultry farm in 2017. The file contains data on the starting number at hatch, the number of chicks fledged, and the number surviving to adulthood (or harvest).</p>
+<pre><code>   hatched fledged species
+1       26      21 chicken
+2       16      15 chicken
+3       49      40 chicken
+4        2       2    duck
+5       12      12    duck
+6        6       6    duck
+7       12      10 chicken
+8       26      24 chicken
+9        8       8    duck
+10       2       2   goose</code></pre>
+<p>This data set contains information about chick survival from hatch to adulthood for each cohort of birds on my small-scale poultry farm in 2017. The file contains data on the starting number at hatch, the number of chicks fledged, and the species of bird.</p>
 <p>We will use the data set to estimate chick survival from hatch to fledge. There are a number of ways we can do this. In practice, we will probably use Gibbs sampling 99% of the time (haha, Bayesian joke). But we may run into situations in which we can estimate the posterior distribution by hand or in which we need an alternative algorithm for flexibility.</p>
 <p>Let’s start simple by estimating the mean expected survival of chicks on my farm across all cohorts and species.</p>
 </div>
@@ -468,7 +485,7 @@ Introduction
 <span class="co"># to turn it into one long character string </span>
 <span class="co"># that can be written to a text file</span>
 
-modelstring=<span class="st">&quot;                   # Open the model string</span>
+modelString=<span class="st">&quot;                   # Open the model string</span>
 <span class="st">  model {                       # Open the model definition</span>
 <span class="st">    # Likelihood</span>
 <span class="st">      for(i in 1:nobs{          # For each observation</span>
@@ -489,12 +506,9 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 <span class="st">      a &lt;- 1                    # When a and b = 1, the prior is uniform (0,1)</span>
 <span class="st">      b &lt;- 1</span>
 <span class="st">  }                             # Close the model definition</span>
-<span class="st">&quot;</span>                               <span class="co"># Close the string for the model file</span>
-
-<span class="co"># Write the model string to a file</span>
-  <span class="kw">writeLines</span>(modelstring, <span class="dt">con=</span><span class="st">&quot;chickSurvival.txt&quot;</span>)</code></pre></div>
+<span class="st">&quot;</span>                               <span class="co"># Close the string for the model file</span></code></pre></div>
 <p>If we cut this down to the bare minimum text, the model specification would look something like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelstring=<span class="st">&quot;                 </span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelString=<span class="st">&quot;                 </span>
 <span class="st">  model {                       </span>
 <span class="st">    # Likelihood</span>
 <span class="st">      for(i in 1:nobs){          </span>
@@ -506,9 +520,8 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 <span class="st">      a &lt;- 1                    </span>
 <span class="st">      b &lt;- 1</span>
 <span class="st">  }                             </span>
-<span class="st">&quot;</span>                               
-<span class="kw">writeLines</span>(modelstring,<span class="dt">con=</span><span class="st">&quot;chickSurvival.txt&quot;</span>)</code></pre></div>
-<p>If you look in your working directory, you will now find a text file called <code>chickSurvival.txt</code> that contains the text above. We will read this file so JAGS can use it when we fit our model below.</p>
+<span class="st">&quot;</span>                               </code></pre></div>
+<p>This saves the model string as an object in R, that we can use later in place of writing and reading files. If you want to see what it looks like, you can do <code>cat(modelString)</code></p>
 <p>Now specify a data set for use in JAGS. We package it in a list called <code>chick.data</code> that contains 1) the number of observations (<code>nobs</code>) so we can loop over each row of data in the likelihood, 2) the number of birds that successfully fledged in each cohort (<code>y</code>), and 3) the starting number of birds hatched in each cohort (<code>N</code>).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Package the data in a list</span>
   chick.data =<span class="st"> </span><span class="kw">list</span>(
@@ -531,7 +544,7 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 <p>Finally, we call JAGS and run the model:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Call jags and run the model</span>
   chick.model &lt;-<span class="st"> </span><span class="kw">jags</span>(chick.data, <span class="dt">inits=</span>inits, parameters,
-                      <span class="st">&quot;chickSurvival.txt&quot;</span>,
+                      <span class="dt">model.file=</span><span class="kw">textConnection</span>(modelString),
                       <span class="dt">n.chains =</span> nc, <span class="dt">n.thin =</span> nt,
                       <span class="dt">n.iter =</span> ni, <span class="dt">n.burnin =</span> nb,
                       <span class="dt">working.directory =</span> <span class="kw">getwd</span>()
@@ -539,12 +552,12 @@ modelstring=<span class="st">&quot;                   # Open the model string</s
 <p>Sweet, a progress meter! Now we’re running models!</p>
 <p>Print a summary of the model.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">print</span>(chick.model)
-Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;chickSurvival.txt&quot;</span>, fit using jags,
+Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;5&quot;</span>, fit using jags,
  <span class="dv">3</span> chains, each with <span class="dv">33000</span> <span class="kw">iterations</span> (first <span class="dv">3000</span> discarded), n.thin =<span class="st"> </span><span class="dv">3</span>
  n.sims =<span class="st"> </span><span class="dv">30000</span> iterations saved
          mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>%  Rhat n.eff
-p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.860</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">22000</span>
-deviance  <span class="fl">26.796</span>   <span class="fl">1.426</span> <span class="fl">25.797</span> <span class="fl">25.901</span> <span class="fl">26.253</span> <span class="fl">27.106</span> <span class="fl">30.839</span> <span class="fl">1.001</span> <span class="dv">24000</span>
+p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span>  <span class="dv">8700</span>
+deviance  <span class="fl">26.798</span>   <span class="fl">1.426</span> <span class="fl">25.797</span> <span class="fl">25.896</span> <span class="fl">26.250</span> <span class="fl">27.109</span> <span class="fl">30.847</span> <span class="fl">1.001</span> <span class="dv">30000</span>
 
 For each parameter, n.eff is a crude measure of effective sample size,
 and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).
@@ -675,9 +688,9 @@ Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </
     }
   
 <span class="co"># Transform the mean to the probability scale</span>
-<span class="co"># We see that the mean is identical      </span>
   <span class="kw">inv.logit</span>(<span class="kw">summary</span>(mod)<span class="op">$</span>coefficients[<span class="dv">1</span>])
 [<span class="dv">1</span>] <span class="fl">0.8805031</span></code></pre></div>
+<p>We see here that the mean estimated from this method is essentially identical to that estimated above - proof positive that without prior information these two approaches lead the same estimate of the mean. We will dig into this idea more as we move through the semester.</p>
 </div>
 </div>
 </div>
