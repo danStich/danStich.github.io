@@ -300,11 +300,17 @@ We start by reading in the data:
 ```{r, echo=TRUE, eval=FALSE}
 # Read in the data and save it to a named object
   birds = read.csv('farmdata.csv')
+
+# Drop the geese
+  birds <- birds[birds$species!='goose', ]
 ```
 
 ```{r, echo=FALSE, eval=TRUE}
 # Read in the data and save it to a named object
   birds = read.csv('../../data/farmdata.csv')
+
+# Drop the geese
+  birds <- birds[birds$species!='goose', ]
 ```
 
 Earlier in the week, we used this data set to estimate the probability of chick survival to fledge across all species and cohorts. For lab this week, I will ask you to continue analyzing these data and actually attempt to write your first methods section for this stuff.
