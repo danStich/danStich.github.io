@@ -38,7 +38,7 @@ This time we've broken assumption 2 into two components: colinearity and autocor
 
 
 ### Assumption 3: homoscedasticity
-Previously, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. During the coming weeks, we will look at models that allow us to relax this assumption further through the use of weighted least squares and random effects, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs
+Previously, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. During the coming weeks, we will look at models that allow us to relax this assumption further through the use of weighted least squares and random effects, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs.
 
 
 ### Assumption 4: linearity and additivity
