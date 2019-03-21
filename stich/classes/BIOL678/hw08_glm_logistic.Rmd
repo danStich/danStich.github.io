@@ -27,9 +27,13 @@ This data set contains a *pile* of variables, which of course makes it very fun 
 Explanations of variables are as follows:
 
 `Date`: calendar date for start of each lab test
+
 `Location`: the location in Otsego Lake, NY from which mussels were collected
+
 `SolnAge`: the age of the Virkon solution
+
 `Concentration`: concentration of Virkon in solution
+
 `Time`: exposure time
 
 We will treat concentration as a categorical variable because we only have a few different concentrations, although the argument could be made either way.
