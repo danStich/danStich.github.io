@@ -14,7 +14,7 @@ For our exercise this week, we will work with a data set from a Biological Field
 
 Start by reading in the data.
 
-```{r, eval=FALSE, echo=TRUE}
+```{r, eval=FALSE, echo=TRUE, class.source="rCode"}
 vd = read.csv('veligers.csv')
 ```
 

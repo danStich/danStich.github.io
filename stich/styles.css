@@ -6,6 +6,7 @@
   overflow-x: visible;
   word-break: keep-all;
   word-wrap: initial;
+  border-radius: 1em;
 }
 
 img {
@@ -19,7 +20,7 @@ pre.r {
   border-radius: 1em;
   background-color: rgb(240, 240, 240);
   border: none;
-  margin-bottom: 2em;
+  margin-bottom: 0;
 }
 
 .content-holder {
