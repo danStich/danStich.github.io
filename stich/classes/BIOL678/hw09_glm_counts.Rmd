@@ -22,6 +22,7 @@ We are going to continue working with the crabs data this week in lab. In case y
 These data represent the number of satellite male crabs per female (rows) horseshoe crab in relation to a number of characteristics of the females, including their color, spine condition, carapace width, and mass (g).
 
 The full citation for the paper that this data set is based on:
+
 H. J. Brockmann. 1996. Satellite male groups in horseshoe crabs, *Limulus polyphemus*. Ethology 102:1-21. doi:10.1111/j.1439-0310.1996.tb01099.x
 
 Read in the data, and recall that we want to be working with `color`, and `spine` as categorical variables since these are both classification schemes and not actually numeric data.
@@ -408,7 +409,7 @@ plot(density(exp(crabs.model3$BUGSoutput$sims.list$r[ ,i])),
 ## Your mission
 Just as in the past couple of weeks, your assignment for this lab is to write a *brief* methods section and a *brief* results section for the exercises you have been working on. **You may use either the maximum likelihood estimation procedure** covered in lecture this week, **or the Bayesian approach** detailed in the lab exercise. Just make sure you pick one or the other and stick to it in your analysis and your writing.
 
-In addition to these tasks, I would like you to **add one additional explanatory variable** to the model. I would like you to add `width` as a continuous covariate. 
+In addition to these tasks, I would like you to **add or replace at least one explanatory variable** to the model. For example, you could add `width` as a continuous covariate or replace `mass` with `width`. 
 
 Then, so we can compare the relative effect sizes of `width` and `mass`, I want you to standardize the covariates prior to including them in the model.
 
@@ -418,7 +419,7 @@ Remember that this is the same as calculating a whole bunch of z-scores. You can
   crabs$smass = as.vector(scale(crabs$mass))
 ```
 
-For your results, you can present covariates on the standardized scale, and back-transform based on our discussions earlier this week to show effects on the real scale of the variable.
+For your results, it is fine to present model predictions on the standardized scale of the variable.
 
 ```{r, eval=FALSE, echo=FALSE}
 # My code for the answer key to lab 09
