@@ -1,30 +1,42 @@
-name: "danStich"
-output_dir: "."
+name: BIOL 678
+output_dir: '.'
 navbar:
-  title: "danStich"
+  title: BIOL 678
   left:
-    - text: "Home"
-      href: index.html
-    - text: "Teaching"
-      href: teaching.html
-    - text: "Research"
-      href: research.html
-    - text: "Curriculum vitae"
-      href: cv.html
-    - text: "Course websites"  
-      href: courseWebsites.html
-    - text: "Contact"
-      href: contact.html
-      
+  - icon: fa-home
+    href: index.html
+  - text: Teaching
+    menu:
+    - text: Teaching home
+      href: ../../teaching.html
+    - text: BIOL 217
+      href: ../../classes/BIOL217/index.html
+    - text: BIOL 678
+      href: ../../classes/BIOL678/index.html
+  - text: Research
+    href: ../../research.html
+  - text: Current Students
+    href: ../../studentProjects.html
+  - text: Publications
+    href: ../../publications.html
+  - text: CV
+    href: ../../cv.html
+  - text: Contact
+    href: ../../contact.html
+  right:
+  - icon: fa-github
+    href: https://github.com/danStich
 output:
   html_document:
     theme: cosmo
     highlight: tango
-    toc: false
-    smooth_scroll: true
+    toc: no
+    smooth_scroll: yes
     fontsize: 12
     includes:
-      in_header: _header.html
-      after_body: footer.html
-    css: styles.css
-    
+      in_header: ../../_header.html
+      after_body: ../../footer.html
+    css: ../../styles.css
+    lib_dir: site_libs
+    self_contained: no
+

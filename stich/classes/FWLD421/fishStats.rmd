@@ -9,7 +9,7 @@
  
 ## Introduction
 
-Now that we have looked at some of the basic programming and common statistical tools in R, we can dive into some of the tools that have been created just for fish! There are a few packages for dealing with data from fish and fisheries, and we will just glance off the tip of the ice berg here to demonstrate some tools that we use all of the time.
+Now that we have looked at some of the basic programming and common statistical tools in R, we can dive into some of the tools that have been created just for fish! There are a few packages for dealing with data from fish and fisheries, and we will just glance off the tip of the iceberg here to demonstrate some of the ones that we use all of the time.
 
 <br>
  
