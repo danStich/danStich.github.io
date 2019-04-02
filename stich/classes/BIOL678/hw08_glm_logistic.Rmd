@@ -213,9 +213,9 @@ If you have been paying close attention this semester, you may be wondering why 
 
 
 ## Your turn
-Next, I want you to strike out on your own and make a couple of models. To start, please **choose at least one addtional continuous variable** to add to one of the models above.
+Next, I want you to strike out on your own and make a couple of models. To start, please **choose at least one additional continuous variable** to add to one of the models above, replacing `Time`.
 
-Fit a model using your new variable(s) in addition to `Time` and `Concentration`, and save it to a named object.
+Fit a model using your new variable(s) in addition to and `Concentration`, and save it to a named object.
 
 Create a third model that represents the null model. If you have forgotten since last week how to specify this, remember that we can use the following notation to specify the null model:
 ```{r}

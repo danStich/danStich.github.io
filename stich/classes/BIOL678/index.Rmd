@@ -69,7 +69,7 @@ To access the content from a given topic, please click on the corresponding link
 
 ### Linear mixed models
 
-<a href="./10_lmm.html"> Lecture tutorial </a><br> 
+<a href="./10_lmm_cray.html"> Lecture tutorial </a><br> 
 <a href="./hw10_lmm.html"> Homework assignment </a>
 
 
