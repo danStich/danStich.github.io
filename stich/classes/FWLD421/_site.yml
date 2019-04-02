@@ -4,7 +4,7 @@ navbar:
   title: BIOL 678
   left:
   - icon: fa-home
-    href: index.html
+    href: ../../index.html
   - text: Teaching
     menu:
     - text: Teaching home
