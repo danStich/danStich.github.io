@@ -9,6 +9,9 @@
 
 We introduced the linear mixed model this week, and we looked at examples of how to incorporate random effects in our inference within both frequentist and Bayesian frameworks for analysis. We will continue to probe these tools in our lab exercise this week and build some comfort working with these hierarchical models. By the end of this lab, you should be comfortable 1) specifying random effects in models, 2) running those models using restricted maximum likelihood (REML) estimation and Bayesian hierarchical models, 3) graphically dsiplaying results, and 4) communicating the methods and the results of this work through technical writing.
 
+**Note**: these models require using some code that we have not covered explicitly in class. We will be working with uncorrelated random slopes and intercepts this week. These are covered in **Chapter 12** in Kery (2010). Specifically, the code and tutorial you will need are in **12.4.1** and **12.4.2**.
+
+
 ## The data
 
 This week we will play with Yellow Perch data from the New York State Department of Environmental Conservation (NYSDEC) statewide fisheries database. These data were collected by the NYSDEC and others throughout NY during the past few decades. 
