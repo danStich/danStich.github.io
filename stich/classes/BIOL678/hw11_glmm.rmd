@@ -20,7 +20,7 @@ For our assignments this week, students can choose to work with either one of th
 
 <h4 id="multi"> **Walleye in spring** </h4>
 
-It is that magical time of year again. Birds are returning from their winter vacations, and all of the critters are twitterpaited. The salamanders and frogs are making there way to breeding pools in the soaked leaf litter, and even the fish are warming up for the spawn. There's only one problem: we don't quite know when those fish are going to get into the streams so we can catch them, clip their fins, put some tags in them, and study their every move (...muwahaha...).
+It is that magical time of year again. Birds are returning from their winter vacations, and all of the critters are twitterpaited. The salamanders and frogs are making there way to breeding pools in the soaked leaf litter, and even the fish are warming up for the spawn. There's only one problem: we don't quite know when those fish are going to get into the streams so we can catch them, clip their fins, put some tags in them, and study their every move (...muwahaha...). While the timing of daffodil emergence is often a reliable indicator, it would be nice to have a simple regression we could use to predict the timing of the fish spawn and maximize field sampling efficiency.
 
 For this first example, we will attempt to predict counts of walleye, *Sander vitreus*, in spawning streams of Otsego Lake based on historical counts and climate data.
 
@@ -71,7 +71,9 @@ Read in the data an have a look at the structure
 ```{r, echo=FALSE}
 # Read in the climate data
   climate=read.csv('../../data/tempdata.csv', stringsAsFactors = FALSE)
+```
 
+```{r}
 # Have a look at the data structure
   str(climate)
 ```
@@ -82,7 +84,7 @@ Read in the data an have a look at the structure
 
 Okay, so now we have fish records by date and we have some climate data for those same dates and then some. Now, we need to smash all of those data together so we can use them.
 
-Our first step will be to summarize the walleye data by date. To do this, we will use the `plyr` package in R.
+Our first step will be to summarize the walleye counts by date. To do this, we will use the `plyr` package in R.
 
 ```{r, message=FALSE, warning=FALSE}
 # Load the package
@@ -93,9 +95,7 @@ Tally up total counts of walleye in each stream on each day.
  
 ```{r}
 # Make a column of ones that we can sum
-wae$pres = 1
-
-weye = ddply(wae, c('date', 'site'), summarize, counts = sum(pres))
+weye = ddply(wae, c('date', 'site'), summarize, counts = length(Sex))
 ```
 
 ###### **Climate data**
@@ -136,10 +136,13 @@ Next, we will calculate degree days (in $^{\circ}$C) using both the high temp an
   # Sort climate data by date and year
     climate = climate[with(climate, order(year, day)), ]    
     
-# Add up the values to calculate degree days for each year
-  # Split the dataframe up into a list with a df for each year
+# Add up the values to calculate degree
+# days for each year
+# Split the dataframe up into a list
+# with a df for each year
     test = split(climate$ddPrep, climate$year)
-  # Replace NA values of temperature with arithmetic mean of 
+  # Replace NA values of temperature with
+  # arithmetic mean of 
   # preceding and following elements
     library(zoo)
     test = mapply(na.approx, test)
@@ -210,7 +213,8 @@ Crap! Our model failed to converge. It looks like this is probably because we ha
   eyes$sdd = scale(eyes$dd) 
 
 # Make the model
-  waeMod2 = glmer(counts~sdd + I(sdd^2) + (1|site), data=eyes,
+  waeMod2 = glmer(counts~sdd + I(sdd^2) + (1|site),
+                  data=eyes,
                   family=negative.binomial(theta=1000))
   
 # Have a look-see at the results
@@ -219,7 +223,7 @@ Crap! Our model failed to converge. It looks like this is probably because we ha
 
 Okay, looks like we are doing a lot better with this now.
 
-As we look through these results, we can see that we have a significant effect of daylight on spawning behavior. What's more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.
+As we look through these results, we can see that we have a significant effect of degree days on spawning behavior. What's more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.
 
 Now, if we want, we can make a graph to show these predictions. Here, we make predictions for all years, and then we plot those predictions for a single site (`Shadow Brook`).
 
@@ -302,7 +306,6 @@ model {
 
 }
 "
-writeLines(modelstring, "waeModel.txt")
 
 # Bundle data
   wae.data <- list(count=eyes$count,
@@ -369,6 +372,7 @@ We notice that all parameters converge. Note that if we run this without standar
     quantile(out$BUGSoutput$sims.list$beta2, probs=.975)*(sdd^2))
   
 # Plot the predictions
+  par(mar=c(5,5,1,1))
   plot(eyes$sdd, eyes$counts,
        pch=21, bg='gray', cex=1.2,
        ylim=c(0, max(eyes$counts)+50),
@@ -394,13 +398,38 @@ We notice that all parameters converge. Note that if we run this without standar
   axis(2, las=2)
 ```
 
+One thing you might notice here is the shift in our upper 95% credible interval around the posterior prediction. This is pretty typical of phenology data, and is caused by the fact that we don't really sample much once we stop catching fish. Something to consider when designing your own studies...
+
 ##### **Your mission**
 
 For this option, I want you to do the following:
 
-\item 1. Use the degree day data from 2018 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. Treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now!
+\item 1. Use the degree day data from 2019 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. Treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now!
 
-\item 2. Tell me how many walleye you predicted that the crew caught on Tuesday 10 April 2018. Then, tell me how many you predict they will catch 12 April 2018 (tonight).
+\item 2. Tell me when you expect walleye to move into the stream this year based on the model prediction.
+
+ 
+```{r, echo = FALSE, eval=FALSE}
+# My attempt at this
+ clim19 <- climate[climate$year=='2019', ]
+
+# Compare first lci to break 1 to the 
+# degree days from std sequence
+dds <- round(
+ seq(-3, 3, 0.1)*sd(eyes$dd)+mean(eyes$dd)
+ )
+init_l = dds[first(which(ucis>1))]
+init_m = dds[first(which(fit>1))]
+init_u = dds[first(which(lcis>1))]
+
+# First day on which dd hits necessary
+clim19$date[first(which(clim19$dd > init_l))]
+clim19$date[first(which(clim19$dd > init_m))]
+clim19$date[first(which(clim19$dd > init_u))]
+
+``` 
+ 
+ 
  
 ### <span style="color:gray"><b> **Plant surveys** </b></span>
 
