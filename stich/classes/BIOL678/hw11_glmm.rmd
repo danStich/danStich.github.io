@@ -404,7 +404,7 @@ One thing you might notice here is the shift in our upper 95% credible interval 
 
 For this option, I want you to do the following:
 
-\item 1. Use the degree day data from 2019 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. Treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now!
+\item 1. Use the degree day data from 2019 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. You can treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now! Or, you may be able to find a work around by looking closely at the data and your predictions from the model above.
 
 \item 2. Tell me when you expect walleye to move into the stream this year based on the model prediction.
 
@@ -413,6 +413,36 @@ For this option, I want you to do the following:
 # My attempt at this
  clim19 <- climate[climate$year=='2019', ]
 
+
+# Plot the predictions from above
+  par(mar=c(5,5,1,1))
+  plot(eyes$sdd, eyes$counts,
+       pch=21, bg='gray', cex=1.2,
+       ylim=c(0, max(eyes$counts)+50),
+       xlim=c(-3, 3),
+       xlab='Degree days (C)', ylab='Count of spawners',
+       xaxt='n', yaxt='n')
+  lines(sdd, fit, lwd=2, lty=1, col='blue')
+  lines(sdd, lcis, lwd=2, lty=2, col='red')
+  lines(sdd, ucis, lwd=2, lty=2, col='red')
+
+# Add a new x-axis 
+  axis(side=1,
+         at=seq(-3, 3, 0.5),
+         labels= 
+           #Get dd on original scale from a sequence
+           # of new standardized values
+           round(
+             seq(-3, 3, 0.5)*sd(eyes$dd)+mean(eyes$dd)
+             )
+         )
+  
+# Add a rotated y-axis
+  axis(2, las=2)
+
+
+### New Part
+#####  
 # Compare first lci to break 1 to the 
 # degree days from std sequence
 dds <- round(
@@ -423,9 +453,23 @@ init_m = dds[first(which(fit>1))]
 init_u = dds[first(which(lcis>1))]
 
 # First day on which dd hits necessary
-clim19$date[first(which(clim19$dd > init_l))]
-clim19$date[first(which(clim19$dd > init_m))]
-clim19$date[first(which(clim19$dd > init_u))]
+lowd <- clim19$date[first(which(clim19$dd > init_l))]
+meand <- clim19$date[first(which(clim19$dd > init_m))]
+highd <- clim19$date[first(which(clim19$dd > init_u))]
+
+# Get 95% CRIs on dd prediction
+# Mean dd
+dd <- (clim19$dd[clim19$date==meand]-mean(eyes$dd))/sd(eyes$dd)
+# LCI dd
+ldd <- (clim19$dd[clim19$date==lowd]-mean(eyes$dd))/sd(eyes$dd)
+# UCI dd
+udd <- (clim19$dd[clim19$date==highd]-mean(eyes$dd))/sd(eyes$dd)
+
+abline(v=c(dd, ldd, udd), lty=c(1,2,2), lwd=2, col=rep('gray40',3))
+rect(ldd, 0, udd, 200,
+     col=rgb(0.8,0.8,0.8, 0.05),
+     border=rgb(0.8,0.8,0.8, 0.05))
+text(x=dd+.02, y=150, "Today", adj=0)
 
 ``` 
  
@@ -459,7 +503,8 @@ To start with, we will fit the model using REML. Here, we need to remember to sp
 
 ```{r}
 # Fit the model and store it to an object
-  plantMod1=glmer(increase~secchi+(1|site), data=plants, family=binomial)
+  plantMod1=glmer(increase~secchi+(1|site),
+                  data=plants, family=binomial)
 
 # Take a look at the results
   summary(plantMod1)
