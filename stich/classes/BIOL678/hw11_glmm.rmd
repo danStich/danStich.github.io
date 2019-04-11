@@ -60,7 +60,7 @@ For this example, we are interested in predicting the timing of the walleye run.
 I collected some of this information ahead of time for you. Temperature, precipitation, and snow depth data were downloaded from the following, surely reliable, [website](http://www.usclimatedata.com/climate/cooperstown/new-york/united-states/usny0326/2017/3).
 
 Read in the data an have a look at the structure
-```{r, eval=FALSE, echo=FALSE}
+```{r, eval=FALSE, echo=TRUE}
 # Read in the climate data
   climate=read.csv('tempdata.csv', stringsAsFactors = FALSE)
 
@@ -80,7 +80,7 @@ Read in the data an have a look at the structure
 
 ##### **Data management**
 
-<h6 id="multi"> **Walleye counts** </h6>
+<h6> **Walleye counts** </h6>
 
 Okay, so now we have fish records by date and we have some climate data for those same dates and then some. Now, we need to smash all of those data together so we can use them.
 
@@ -510,7 +510,7 @@ To start with, we will fit the model using REML. Here, we need to remember to sp
   summary(plantMod1)
 ```
 
-After a quick look at the results, we see that Secchi depth has a significant, poositive effect on the probability that plant biomass will increase following this herbicide application.
+After a quick look at the results, we see that Secchi depth has a significant, positive effect on the probability that plant biomass will increase following this herbicide application.
 
 We could make a graph of these results as follows:
 
