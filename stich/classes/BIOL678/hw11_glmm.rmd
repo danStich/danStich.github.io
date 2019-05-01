@@ -49,7 +49,7 @@ And check out the data structure
  str(wae)
 ```
 
-These data are measurements of the length and mass of individual walleye at various reproductive stages that were captured in spawning tributaries of Otsego Lake during the 2009 and 2013 spawning season. 
+These data are measurements of the length and mass of individual walleye at various reproductive stages that were captured in spawning tributaries of Otsego Lake during the 2009 and 2013 spawning season. o
 
 We will use the data to predict number of walleye we expect to see each day in the spawning tribs during spring 2017 based on historical counts.
 
