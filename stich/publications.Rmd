@@ -12,7 +12,7 @@ title: "Publications"
 
 <!-- <b> Stich, D. S. </b>, E. Gilligan, and D. C. Oliver. *In review*. A flexible approach for estimating categorical and continuous effects on individual growth rate for mixed-stock and single population fisheries. Canadian Journal of Fisheries and Aquatic Sciences. -->
 
-Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages XXX-XXX in M. Seipker and J. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 270 pp.
+Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages XXX-XXX in M. Seipker and J. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 270 pp.<a href="./pubs/Watson_etal_2019_AFS87.pdf">[PDF]</a>
 
 George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics">[code]</a>
 
