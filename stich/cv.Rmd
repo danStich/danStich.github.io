@@ -7,7 +7,7 @@ title: "Vitae"
 
 <br>
 
-You can download a copy of my full CV as a pdf document <a href = "./stichCV.pdf"> here </a>.
+You can download a copy of my full CV as a pdf document <a href = "./stich_CV.pdf"> here </a>.
 
 For a stand-alone list of research publications, please visit the <a href="publications.html"> publications </a> link on my <a href="research.html"> research page </a>.
 
