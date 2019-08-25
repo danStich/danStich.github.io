@@ -1,8 +1,6 @@
 ```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
 # Introduction to programming in R
 
 <img src="../../images/roh.png" alt="">
