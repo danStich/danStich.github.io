@@ -1,0 +1,62 @@
+```{r, child="../../_styles.Rmd"}
+```
+ 
+<h1 id="multi">Introduction to programming in R</h1>
+
+<img src="../../images/roh.png" alt="">
+
+<h2 id="multi">Introduction</h2>
+
+The objective of this assignment is to get you started working in R and help you apply some of the concepts we’ve been discussing so far. We’ll use the examples we discussed this week in class to get you set up and coding on your own so we can build on these basics in the coming weeks.
+
+For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesn’t look quite right.
+
+In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in blue below.
+
+Example: If the instructions say, “Create a vector named `myData` that contains numbers one through five”, your script should include something like:
+
+```{r}
+# Vector of numbers one through five named ‘myData’
+myData <- c(1, 2, 3, 4, 5)
+```
+
+(Note that this vector could be created many different ways. Unless I ask for something specific, whatever works for you is fine with me). 
+
+### Exercises
+
+Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., `uspop`) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use `str()` to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: `data()`.
+ 
+\* Don’t forget to put this and your data load in the script that you will hand in.
+
+**Question 1**
+
+a.  What is the name of the dataset you chose?<br>
+b.	How many columns are in the data?<br> 
+c.	How many rows?<br>
+d.	Show the code in your script.<br>
+<br>
+
+**Question 2**. What kind of object is this dataset (e.g., vector, matrix, dataframe, list)? Show the code in your script.
+
+**Question 3**. What classes of data are included in your dataframe? Remember your friend, the function `str()`. Show code (this is the last time I’m typing it).
+
+Use the built-in R functions to produce a table of summary statistics for your dataset. You don’t have to include the table in your answers, it will show up when I run your code if you did it correctly.
+
+**Question 4**. What kind of information about your data does this give you? Be descriptive here, there’s not a ‘correct’ answer. I just want to know that you are able to look at this data summary and understand what it tells you about data.
+
+Now load the iris data that we used in our previous examples. There is one column in the dataset that is a factor class. Change this column to a character variable. 
+
+**Note**:  We might not have discovered the specific function that does this yet, but we have discussed functions for transforming data classes. When in doubt, Google it! Code development is everywhere on the internet, remember? Some go-to sources are Quick-R and Stack Overflow. If you look for the answer on the internet, one of these sites is likely to be the first hit. Try it.
+
+**Question 5**. What is the function you used to transform the factor variable to character class?
+
+**Question 6**. What was the name of the variable?
+
+**Question 7**. What is the 15th value of `Petal.Length` in the `iris` data? (Don’t forget the code in your script!!)
+
+**Question 8**. What `Species` is this measurement for (multiple ways to find this)?
+
+**Question 9**. To which `Species` of `iris` does the minimum value for `Petal.Width` correspond?
+
+**Question 10**. Make a boxplot of petal width by species. Do these differences appear to be significant statistically? Do you think the difference is biologically meaningful? Don’t be afraid to be wrong here, just trying to get you to start thinking about this stuff.
+
