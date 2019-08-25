@@ -7,82 +7,70 @@
 
 This site is intended to serve as a permanent link to course content so students can access online learning modules, data sets and code used for the class. This site is not intended for submission of class assignments, accessing reading materials, tracking grades, or viewing the syllabus. For all of those materials, please refer to the course blackboard site, accessible through: <a href="https://blackboard.oneonta.edu"> https://blackboard.oneonta.edu </a>.
 
+All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/classData"> here</a>.
+
 To access the content from a given topic, please click on the link corresponding links below. Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
 
 ### Introduction to programming in R
 
-<a href="./01_introToR.html"> Lecture tutorial </a> 
-
+<a href="./01_introToR.html"> Lecture tutorial </a><br> 
 <a href="./hw01.html"> Homework assignment </a> 
 
 ### Data simulation and visualization
 
-<a href="./02_simulationAndVisualization.html"> Lecture tutorial </a> 
-
+<a href="./02_simulationAndVisualization.html"> Lecture tutorial </a><br> 
 <a href="./hw02.html"> Homework assignment </a> 
  
 ### Probability distributions
 
-<a href="./03_probabilityDistributions.html"> Lecture tutorial </a> 
-
+<a href="./03_probabilityDistributions.html"> Lecture tutorial </a><br> 
 <a href="./hw03.html"> Homework assignment </a> 
  
 ### Introduction to inferential statistics
 
-<a href="./04_hypotheses.html"> Lecture tutorial</a> 
-
+<a href="./04_hypotheses.html"> Lecture tutorial</a><br>
 <a href="./hw04.html"> Homework assignment </a> 
  
 ### Linear models
 
-<a href="./05_linearModels.html"> Lecture tutorial </a> 
-
-<a href="./hw05.html"> Homework assignment </a> 
-
-<a href="./05_anova.html"> ANOVA worked example </a> 
-
+<a href="./05_linearModels.html"> Lecture tutorial </a><br> 
+<a href="./hw05.html"> Homework assignment </a><br> 
+<a href="./05_anova.html"> ANOVA worked example </a><br> 
 <a href="./05_violinPlotsInR.html"> Violin plots in R </a> 
  
 ### Diagnostics and effect sizes
 
-<a href="./06_diagnosticsAndEffects.html"> Lecture tutorial </a> 
-
+<a href="./06_diagnosticsAndEffects.html"> Lecture tutorial </a><br> 
 <a href="./hw06.html"> Homework assignment </a> 
  
 ### Model selection
 
-<a href="./07_modelSelection.html"> Lecture tutorial </a> 
-
+<a href="./07_modelSelection.html"> Lecture tutorial </a><br> 
 <a href="./hw07.html"> Homework assignment </a> 
  
 ### GLM: Logistic regression
 
-<a href="./08_glm_logisticRegression.html"> Lecture tutorial </a> 
-
+<a href="./08_glm_logisticRegression.html"> Lecture tutorial </a><br> 
 <a href="./hw08.html"> Homework assignment </a> 
  
 ### GLM: Count models
 
-<a href="./09_glm_countModels.html"> Lecture tutorial </a> 
-
+<a href="./09_glm_countModels.html"> Lecture tutorial </a><br> 
 <a href="./hw09.html"> Homework assignment </a> 
  
 ### Generalized linear mixed models
 
-<a href="./10_glmm.html"> Lecture tutorial </a> 
-
+<a href="./10_glmm.html"> Lecture tutorial </a><br> 
 <a href="./hw10.html"> Homework assignment </a> 
  
 ### Multivariate statistics
 
-<a href="./11_multivariate.html"> Lecture tutorial </a> 
-
+<a href="./11_multivariate.html"> Lecture tutorial </a><br> 
 <a href="./hw11.html"> Homework assignment </a> 
  
 ### Classification and regression trees (CART)
 
-<a href="./12_cart.html"> Lecture tutorial </a> 
-
+<a href="./12_cart.html"> Lecture tutorial </a><br> 
 <a href="./hw12.html"> Homework assignment </a>
  
 <br> 
