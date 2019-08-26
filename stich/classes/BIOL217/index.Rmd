@@ -12,7 +12,7 @@ To access the content from a given topic, please click on the link corresponding
 ### Introduction to programming in R
 
 <a href="./01_introToR.html"> Lecture tutorial </a><br> 
-<a href="./hw01_introToR.html"> Homework assignment </a> 
+<a href="./hw01_introToR.html"> Homework assignment</a> 
 
 ### Data simulation and visualization
 
