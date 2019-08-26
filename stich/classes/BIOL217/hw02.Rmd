@@ -1,154 +1,96 @@
-```{r, child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
- 
-<br>
- 
-# Data simulation and visualization
 
-<br>
- 
+<h1 id="multi"> Data simulation and visualization </h1>
+
 <img src="../../images/matrixSmolt.jpg" alt="">
 
-<br>
-
-## Introduction
-
-<br>
+<h2 id="multi"> Introduction </h2>
  
 The objective of this assignment is to reinforce your ability to use essential tools that you learned about last week and get you started developing necessary skills in data manipulation, simulation, and visualization. Most of the tools you will use will translate directly to other applications and functions in the R programming environment, so my hope is that we are starting to build a repertoire of useful skills for future labs.
 
 By the end of this lab, you should be comfortable: 1) reading data into R using at least one method, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots. 
 
-<br>
-
 ## Exercises
 
-<br>
- 
-### Data import
+<h3 id="multi"> Data import </h2>
 
-<br>
- 
-Read the data from `ctr_fish.csv` into R using one of the methods we used in class. If you use interactive tools in R Studio to import the data, be sure to note the name for reference in the code that follows.  If you forgot to check the name of the file, you can either click on the "Environment" tab in R Studio, or you can use the function `ls()` with no arguments to view all objects in active memory within your global environment. Don't forget, you can always read it from the website like we did last week.
+Read the data from `ctr_fish.csv` into R using one of the methods we used in class. If you named the file something different when you downloaded it, be sure to note the name for reference in the code that follows. If you forgot the name of the file, you can browse to it on your computer or through the Files tab in RStudio. If you saved your homework script in the same directory as the data (recommended), then you can just run `dir()` to see the file names. If you have gotten this far and have not saved your homework script, please do so now.
 
-<br>
- 
-```{r}
-am_shad = read.csv(file = "http://employees.oneonta.edu/stichds/data/ctr_fish.csv", header = TRUE)
+
+```{r, eval=FALSE, echo=TRUE}
+am_shad = read.csv(file ="ctr_fish.csv", header = TRUE)
 ```
 
-<br>
+```{r, eval=TRUE, echo=FALSE}
+am_shad = read.csv(file ="../../data/ctr_fish.csv", header = TRUE)
+```
 
 ### First steps in dealing with a dataset
 
-<br>
- 
-I constantly forget about the fancy new point-and-click tools that R Studio brings to the table, and that weren’t really available just a few years ago. Make sure that you look at your data structure using either `str()` or by clicking on the blue arrow to the left of the data set in your environment tab. See explanation of data (lines 98-110) in the reference script for this week to view variable explanations. Use the built-in function `summary()` to get a closer look at your data.
+I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure using either `str()` or by clicking on the blue arrow to the left of the data set in your Environment tab. See explanation of data in the <a href="02_simulationAndVisualization.html">lecture module</a> for this unit to view variable explanations. Use the built-in function `summary()` to get a closer look at your data.
 
-<br>
-
-__Question 1__. What is the minimum length of American shad in this dataset? Does this make sense to you when you look at the rest? If you are stuck think back to how we did this last week. Or, Google it.
-
-<br>
+**Question 1**. What is the minimum length of American shad in this dataset? Does this make sense to you when you look at the rest? If you are stuck think back to how we did this last week. Or, <a href="https://www.google.com/">Google</a> it.
 
 ### Fixing erroneous data points for QC
 
-<br>
- 
 After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, replace the erroneous length measurements. Hint: you need to replace all values less than 10 cm.
 
-<br>
-
-__Question 2__. Now what is the minimum length of American shad in this dataset where length was not back-calculated?
-
-<br>
+**Question 2**. Now what is the minimum length of American shad in this dataset where length was not back-calculated?
 
 ### Deterministic variable generation
 
-<br>
- 
 Now that we have fixed that problem, let's generate some data using a deterministic relationship. As part of this project, we are using information about fish length to predict individual fecundity (number of eggs per female) at each age. Use your dataframe to create a new object that includes only females, and only those fish for which length is not back-calculated.
 
-<br>
+**Question 3**. How many rows are in your new dataframe?
 
-__Question 3__. How many rows are in this dataframe?
-
-<br>
-
-Create a new column in the dataframe for fecundity using a mathematical relationship between length and fecundity. Federal scientists are currently collecting information about the relationship between length and fecundity for a population model on the Connecticut River. We are still waiting on the final numbers (and a publication or two) before these can be included in the assessment (this is real, cutting-edge science, folks!). As the modeler on the project, I have some inside information, though. I know that the average fecundity per female across all ages was about 302,000 eggs in 2015. I also know that fecundity is a non-linear function of length based on general characteristics of fish life-history. After some quick trial and error, the following equation does a pretty decent job of replicating the preliminary results of the federal fishery biologists: 
+Create a new column in the dataframe for fecundity using a mathematical relationship between length and fecundity. Federal scientists are currently collecting information about the relationship between length and fecundity for population models. We are still waiting on the final numbers (and a paper or two) before these can be included in stock assessment. As a modeler on the project, I have some inside information, though. I know that the average fecundity per female across all ages was about 302,000 eggs in 2015. I also know that fecundity is a non-linear function of length based on general characteristics of fish life-history. After some quick trial and error, the following equation does a pretty decent job of replicating the preliminary results of the federal fishery biologists: 
 
 $F_i  = 0.445 × {L_i}^{3.5}$
 
-where F is fecundity and L is fork length of each individual, i. Use this formula to create a new column in your dataframe called fecundity (and shhh...don’t tell them I hacked their eggs).
+where F is fecundity and L is fork length of each individual, i. 
 
-<br>
+Use this formula to create a new column in your dataframe called fecundity (and shhh...don’t tell them I hacked their eggs).
 
-__Question 4__. What is the mean value of fecundity across all ages in your dataframe? Does this seem like a reasonable value given the expected value of fecundity across all age classes in 2015?
+**Question 4**. What is the mean value of fecundity across all ages in your dataframe? Does this seem like a reasonable value given the expected value of fecundity across all age classes in 2015?
 
-<br>
-
-__Question 5__. What is the standard deviation of fecundity?
-
-<br>
+**Question 5**. What is the standard deviation of fecundity?
 
 ### Stochastic simulation of age-specific fecundity
 
-<br>
- 
 Now that we have fecundity estimates for each age based on some more-or-less  empirical relationship with length,let's simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says `install.packages()`, otherwise if you are using a non-lab computer, run the following code:
-
 
 Let's install the package we need
 ```{r, eval=FALSE}
 # Download the package from the internet (takes a couple minutes)
   install.packages('plyr')
-# Loads the package from a library of installed packages. Could also 
-# use library() instead of require()
-  require(plyr)    
+
+# Loads the package from a library of installed packages.
+  library(plyr)    
 ```
 
-<br>
+With the package installed, use the function `ddply( )` to calculate the mean and standard deviation of fecundity for each age class. Remember to create a new object to hold this information! **Hint**: if you have difficulty, remember to try: `?ddply` for a couple of useful examples. 
 
-With the package installed, use the function `ddply( )` to calculate the mean and standard deviation of fecundity for each age class. __Hint__: if you have difficulty, remember to try: `?ddply` for a couple of useful examples. Remember to create a new object to hold this information!
-
-<br>
-
-__Question 6__. What is the mean and standard deviation of fecundity for age-6 roes?
-
-<br>
+**Question 6**. What are the mean and standard deviation of fecundity for age-6 roes?
 
 Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function rnorm from the reference script to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic fisheries stock assessment models!
 
-<br>
+**Question 7**. How does the mean and standard deviation of your simulated values for age-6 roes compare to the 'empirical' estimates? 
 
-__Question 7__. How does the mean and standard deviation of your simulated values for age-6 roes compare to the 'empirical' estimates? 
-
-<br>
-
-__Question 8__. How does this change if you take 10 random samples instead of 10,000? Answers may vary.
-
-<br>
+**Question 8**. How does this change if you take 10 random samples instead of 10,000? Answers may vary.
 
 ### Data visualization
 
-<br>
- 
 Let's wrap this up by making a couple of nice graphs. We'll start simple with a single panel, and then up our game to produce some nice multi-panel plots. 
 
 First, make a histogram of fecundity using your random sample for age-4 roes by using `hist(...)`, replacing '...' with whatever you named this data set. 
 
-<br>
-
-__Question 9__. What are your four least favorite things about this plot?
-
-<br>
+**Question 9**. What are your four least favorite things about this plot?
 
 Change them. Don’t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use `?hist` and `?par` to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, "Add custom tick mark labels to graph in R". If you can’t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do. 
 
 Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:
 
-<br>
- 
 ```{r, echo=FALSE}
 par(mfrow=c(2, 2), mar=c(5, 5, 1, 1))
 age4 = am_shad$Length[am_shad$Age==4]
@@ -157,8 +99,6 @@ age6 = am_shad$Length[am_shad$Age==6]
 age7 = am_shad$Length[am_shad$Age==7]
 ```
 
-<br>
- 
 ```{r, eval = FALSE}
 par(mfrow=c(2, 2), mar=c(5, 5, 1, 1))
 hist(age4, main='', xlim=c(0,8e5))
@@ -167,21 +107,14 @@ hist(age6, main='', xlim=c(0,8e5))
 hist(age7, main='', xlim=c(0,8e5))
 ```
 
-<br>
-
-__Question 10__. What does the argument 'mfrow' do in this code block?
-
-<br>
+**Question 10**. What does the argument 'mfrow' do in this code block? *Hint: what happens if you change the numbers?*
 
 You could replace the code for any of these four histograms with the code you wrote for your age-6 fecundity estimates in the example above by just replacing ‘age6’ with the vector names; do this. Isn’t that a much nicer multi-panel plot? 
 
-<br>
 
 ### BONUS (1 pt): 
-
-<br>
  
-Of course, now that it's a multi-panel plot, you will need to add labels like '(a), (b), (c), and (d)' before you can submit your work to a journal. To do this, you will need to use the function `text()`. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give $1/4$ point for every NICELY placed label because I bet most of you will be able to get 1 label on there.
+Of course, now that it's a multi-panel plot, you will need to add labels like '(a), (b), (c), and (d)' before you can submit your work to a journal. To do this, you will need to use the function `text()`. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give $1/4$ point for every **nicely** placed label because I bet most of you will be able to get 1 label on there.
 
 <br>
  
