@@ -24,7 +24,7 @@ myData <- c(1, 2, 3, 4, 5)
 
 ### Exercises
 
-Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., `uspop`) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use `str()` to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: `data()`.
+Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., `uspop`) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use `str()` to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: `data()`. If you are struggling to find a dataset that fits the criteria, any of these will work just fine, and we will use many of them during this class: `beaver1`, `beaver2`, `iris`, `mtcars`,`PlantGrowth`, `swiss`, `ToothGrowth`, and `USArrests`.
  
 \* Don’t forget to put this and your data load in the script that you will hand in.
 
