@@ -34,7 +34,7 @@ I constantly forget about the fancy point-and-click tools that RStudio brings to
 
 ### Fixing erroneous data points for QC
 
-After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, replace the erroneous length measurements. Hint: you need to replace all values less than 10 cm.
+After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, fix the erroneous length measurements by multiplying them by 10. Hint: you need to replace all values less than 10 cm.
 
 **Question 2**. Now what is the minimum length of American shad in this dataset where length was not back-calculated?
 
