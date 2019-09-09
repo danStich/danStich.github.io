@@ -459,7 +459,7 @@ Data import
 </div>
 <div id="stochastic-simulation-of-age-specific-fecundity" class="section level3">
 <h3>Stochastic simulation of age-specific fecundity</h3>
-<p>Now that we have fecundity estimates for each age based on some more-or-less empirical relationship with length,let’s simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says <code>install.packages()</code>, otherwise if you are using a non-lab computer, run the following code:</p>
+<p>Now that we have fecundity estimates for each age based on some more-or-less empirical relationship with length, let’s simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says <code>install.packages()</code>, otherwise if you are using a non-lab computer, run the following code:</p>
 <p>Let’s install the package we need</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Download the package from the internet (takes a couple minutes)</span></a>
 <a class="sourceLine" id="cb2-2" title="2">  <span class="kw">install.packages</span>(<span class="st">&#39;plyr&#39;</span>)</a>
@@ -468,14 +468,14 @@ Data import
 <a class="sourceLine" id="cb2-5" title="5">  <span class="kw">library</span>(plyr)    </a></code></pre></div>
 <p>With the package installed, use the function <code>ddply( )</code> to calculate the mean and standard deviation of fecundity for each age class. Remember to create a new object to hold this information! <strong>Hint</strong>: if you have difficulty, remember to try: <code>?ddply</code> for a couple of useful examples.</p>
 <p><strong>Question 6</strong>. What are the mean and standard deviation of fecundity for age-6 roes?</p>
-<p>Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function rnorm from the reference script to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic fisheries stock assessment models!</p>
+<p>Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function <code>rnorm</code> from the <a href="02_simulationAndVisualization.html">lecture module</a> to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic stock assessment models!</p>
 <p><strong>Question 7</strong>. How does the mean and standard deviation of your simulated values for age-6 roes compare to the ‘empirical’ estimates?</p>
 <p><strong>Question 8</strong>. How does this change if you take 10 random samples instead of 10,000? Answers may vary.</p>
 </div>
 <div id="data-visualization" class="section level3">
 <h3>Data visualization</h3>
 <p>Let’s wrap this up by making a couple of nice graphs. We’ll start simple with a single panel, and then up our game to produce some nice multi-panel plots.</p>
-<p>First, make a histogram of fecundity using your random sample for age-4 roes by using <code>hist(...)</code>, replacing ‘…’ with whatever you named this data set.</p>
+<p>First, make a histogram of fecundity using your random sample for age-4 roes by using <code>hist(...)</code>, replacing ‘<code>...</code>’ with whatever you named this data set.</p>
 <p><strong>Question 9</strong>. What are your four least favorite things about this plot?</p>
 <p>Change them. Don’t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use <code>?hist</code> and <code>?par</code> to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, “Add custom tick mark labels to graph in R”. If you can’t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do.</p>
 <p>Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:</p>

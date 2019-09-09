@@ -58,7 +58,7 @@ Use this formula to create a new column in your dataframe called fecundity (and 
 
 ### Stochastic simulation of age-specific fecundity
 
-Now that we have fecundity estimates for each age based on some more-or-less  empirical relationship with length,let's simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says `install.packages()`, otherwise if you are using a non-lab computer, run the following code:
+Now that we have fecundity estimates for each age based on some more-or-less  empirical relationship with length, let's simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says `install.packages()`, otherwise if you are using a non-lab computer, run the following code:
 
 Let's install the package we need
 ```{r, eval=FALSE}
@@ -73,7 +73,7 @@ With the package installed, use the function `ddply( )` to calculate the mean an
 
 **Question 6**. What are the mean and standard deviation of fecundity for age-6 roes?
 
-Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function rnorm from the reference script to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic fisheries stock assessment models!
+Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function `rnorm` from the <a href="02_simulationAndVisualization.html">lecture module</a> to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic stock assessment models!
 
 **Question 7**. How does the mean and standard deviation of your simulated values for age-6 roes compare to the 'empirical' estimates? 
 
@@ -83,7 +83,7 @@ Create a new object that corresponds to each age class and contains 10,000 rando
 
 Let's wrap this up by making a couple of nice graphs. We'll start simple with a single panel, and then up our game to produce some nice multi-panel plots. 
 
-First, make a histogram of fecundity using your random sample for age-4 roes by using `hist(...)`, replacing '...' with whatever you named this data set. 
+First, make a histogram of fecundity using your random sample for age-4 roes by using `hist(...)`, replacing '`...`' with whatever you named this data set. 
 
 **Question 9**. What are your four least favorite things about this plot?
 
