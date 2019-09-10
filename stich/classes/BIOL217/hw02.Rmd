@@ -109,9 +109,6 @@ hist(age7, main='', xlim=c(0,8e5))
 
 **Question 10**. What does the argument 'mfrow' do in this code block? *Hint: what happens if you change the numbers?*
 
-You could replace the code for any of these four histograms with the code you wrote for your age-6 fecundity estimates in the example above by just replacing ‘age6’ with the vector names; do this. Isn’t that a much nicer multi-panel plot? 
-
-
 ### BONUS (1 pt): 
  
 Of course, now that it's a multi-panel plot, you will need to add labels like '(a), (b), (c), and (d)' before you can submit your work to a journal. To do this, you will need to use the function `text()`. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give $1/4$ point for every **nicely** placed label because I bet most of you will be able to get 1 label on there.
