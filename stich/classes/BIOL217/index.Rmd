@@ -26,7 +26,7 @@ To access the content from a given topic, please click on the link corresponding
  
 ### Introduction to inferential statistics
 
-<a href="./04_hypotheses.html"> Lecture tutorial</a><br>
+<a href="./04_hypothesisTesting.html"> Lecture tutorial</a><br>
 <a href="./hw04.html"> Homework assignment </a> 
  
 ### Linear models
