@@ -428,7 +428,7 @@ Introduction
 </h2>
 <p>This week we are going to talk about <strong>probability</strong> and <strong>probability distributions</strong> as a backdrop for the models that we will be working with during the next several weeks. Probability theory is central to statistical techniques, so it will be important for you to have a pretty firm understanding of this to grab hold of big ideas later on. If you are successful in understanding these concepts, you will have a working body of knowledge that is comparable, or better developed than many leading professionals in our fields.</p>
 <p>When we talk about probability distributions, we are talking about the probability that a <strong>random variable</strong> takes on some <strong>value</strong>. In most cases, there is a higher probability that a variable will take on certain values than others. That probability may be governed by any number of processes and thus may assume a number of different <strong>shapes</strong> with respect to the <strong>likelihood</strong> of any given value of our random variable. The differences in the shapes, and the mathematical <strong>parameters</strong> that we use to describe those shapes are called “probability distributions”.</p>
-<p>There was a time when biologists were largely restricted to using models that relied heavily on assumptions of normality in the error structure of random variables becuase of how computationally intensive other methods were. This often led to the use of strictly <strong>parametric</strong> tools like ANOVA and t-tests, or the use of strictly <strong>non-parametric</strong> tools like frequency analyses and rank- order methods. While these can still be useful techniques in our toolboxes, that time has passed, and now we have access to a wide range of tools that allow us to extend simple parametric and non-parametric tools to explicitly incorporate mechanisms that allow us to relax or change distributional assumptions. We will discuss these throughout the course, but we need to look at the underlying distributions that govern our decisions about which of these tools to use. So, this week we’ll look at specific distributions that correspond to methods that are commonly applied.</p>
+<p>There was a time when biologists were largely restricted to using models that relied heavily on assumptions of normality in the error structure of random variables because of how computationally intensive other methods were. This often led to the use of strictly <strong>parametric</strong> tools like ANOVA and t-tests, or the use of strictly <strong>non-parametric</strong> tools like frequency analyses and rank- order methods. While these can still be useful techniques in our toolboxes, that time has passed, and now we have access to a wide range of tools that allow us to extend simple parametric and non-parametric tools to explicitly incorporate mechanisms that allow us to relax or change distributional assumptions. We will discuss these throughout the course, but we need to look at the underlying distributions that govern our decisions about which of these tools to use. So, this week we’ll look at specific distributions that correspond to methods that are commonly applied.</p>
 <p>We are going to use this tutorial for our discussions about probability and probability distributions throughout the week. Next week, we will use this new information to talk about how we calculate <strong>distributional statistics</strong> from samples and how those can be used for statistical inference before we begin talking about statistical analyses for the remainder of the course. Hopefully the order of things is starting to make some sense now!</p>
 <div id="probability-distributions-in-r" class="section level2">
 <h2>Probability distributions in R</h2>
@@ -572,7 +572,7 @@ Introduction
 <a class="sourceLine" id="cb7-12" title="12"></a>
 <a class="sourceLine" id="cb7-13" title="13"><span class="co"># Flip the coin 10 times</span></a>
 <a class="sourceLine" id="cb7-14" title="14"><span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">prob=</span>.<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb7-15" title="15"> [<span class="dv">1</span>] <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span></a></code></pre></div>
+<a class="sourceLine" id="cb7-15" title="15"> [<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">0</span> <span class="dv">0</span></a></code></pre></div>
 <blockquote>
 <p>The binomial distribution</p>
 </blockquote>
@@ -582,7 +582,7 @@ Introduction
 <a class="sourceLine" id="cb8-2" title="2"><span class="co"># from a binomial distribution with 10 trials</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="co"># and probability of success equal to 0.50</span></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)</a>
-<a class="sourceLine" id="cb8-5" title="5"> [<span class="dv">1</span>] <span class="dv">7</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">4</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">8</span> <span class="dv">2</span> <span class="dv">3</span></a></code></pre></div>
+<a class="sourceLine" id="cb8-5" title="5"> [<span class="dv">1</span>] <span class="dv">5</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">5</span></a></code></pre></div>
 <blockquote>
 <p>The multinomial distribution</p>
 </blockquote>
@@ -601,9 +601,9 @@ Introduction
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">5</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)</a>
 <a class="sourceLine" id="cb10-2" title="2">     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>] [,<span class="dv">4</span>] [,<span class="dv">5</span>]</a>
 <a class="sourceLine" id="cb10-3" title="3">[<span class="dv">1</span>,]    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></a>
-<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">2</span>,]    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span></a>
-<a class="sourceLine" id="cb10-5" title="5">[<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb10-6" title="6">[<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb10-5" title="5">[<span class="dv">3</span>,]    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb10-6" title="6">[<span class="dv">4</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">1</span>    <span class="dv">0</span>    <span class="dv">1</span></a></code></pre></div>
 <p><strong>WHOA</strong> a matrix??!!! HOLY CRAP, WHAT DOES IT ALL MEAN?</p>
 <p>Take a step back, breathe, and think about this. The rows in this matrix are you and your classmates. If we took one random sample from the multinomial distribution, it would look like this:</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Take a single sample from</span></a>
@@ -611,8 +611,8 @@ Introduction
 <a class="sourceLine" id="cb11-3" title="3"><span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)</a>
 <a class="sourceLine" id="cb11-4" title="4">     [,<span class="dv">1</span>]</a>
 <a class="sourceLine" id="cb11-5" title="5">[<span class="dv">1</span>,]    <span class="dv">0</span></a>
-<a class="sourceLine" id="cb11-6" title="6">[<span class="dv">2</span>,]    <span class="dv">1</span></a>
-<a class="sourceLine" id="cb11-7" title="7">[<span class="dv">3</span>,]    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb11-6" title="6">[<span class="dv">2</span>,]    <span class="dv">0</span></a>
+<a class="sourceLine" id="cb11-7" title="7">[<span class="dv">3</span>,]    <span class="dv">1</span></a>
 <a class="sourceLine" id="cb11-8" title="8">[<span class="dv">4</span>,]    <span class="dv">0</span></a></code></pre></div>
 <p>Here, we pulled a single sample from the distribution, and probability of sampling a given individual was 0.25 (1/4). If it makes it easier, we can put your names next to it:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</a>
@@ -624,10 +624,10 @@ Introduction
 <p>Now, if I was calling on you randomly in class, after 10 questions, the spread of people who have participated in class might look like this:</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">cbind</span>(name, <span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs))</a>
 <a class="sourceLine" id="cb13-2" title="2">     name                                              </a>
-<a class="sourceLine" id="cb13-3" title="3">[<span class="dv">1</span>,] <span class="st">&quot;Alex&quot;</span>     <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></a>
-<a class="sourceLine" id="cb13-4" title="4">[<span class="dv">2</span>,] <span class="st">&quot;Eleanor&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span></a>
-<a class="sourceLine" id="cb13-5" title="5">[<span class="dv">3</span>,] <span class="st">&quot;Kathleen&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span></a>
-<a class="sourceLine" id="cb13-6" title="6">[<span class="dv">4</span>,] <span class="st">&quot;Madylin&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb13-3" title="3">[<span class="dv">1</span>,] <span class="st">&quot;Alex&quot;</span>     <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb13-4" title="4">[<span class="dv">2</span>,] <span class="st">&quot;Eleanor&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb13-5" title="5">[<span class="dv">3</span>,] <span class="st">&quot;Kathleen&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span></a>
+<a class="sourceLine" id="cb13-6" title="6">[<span class="dv">4</span>,] <span class="st">&quot;Madylin&quot;</span>  <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;0&quot;</span> <span class="st">&quot;1&quot;</span> <span class="st">&quot;1&quot;</span></a></code></pre></div>
 <p>Taking this one step further, we could just draw a name and stop looking at these ugly (no but really they are <strong>awesome</strong>!) matrices:</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">name[<span class="kw">which</span>(<span class="kw">rmultinom</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">size=</span><span class="dv">1</span>, <span class="dt">prob=</span>probs)<span class="op">&gt;</span><span class="dv">0</span>)]</a>
 <a class="sourceLine" id="cb14-2" title="2">[<span class="dv">1</span>] <span class="st">&quot;Madylin&quot;</span></a></code></pre></div>
@@ -643,7 +643,7 @@ Introduction
 <p>The negative binomial distribution</p>
 </blockquote>
 <p>Okay, this one can be a little difficult to wrap your head around but it’s an important one for us to know about. So, we will spend a little extra time setting this one up to try and be clear. Often, folks start out thinking that they’re going to use a Poisson distribution and they end up collecting with data that do not conform to the relative inflexibility of that single-parameter distribution. For the purpose of this class, we are not going to dive into the mechanics of the <strong>negative binomial distribution</strong>, but we do need to know what it looks like and why we might need it.</p>
-<p>One useful way to conceptualize the negative binomial is “how long does it take for some event to occur?”" For example, we might ask how long it takes a fish to start migrating, how long it takes a sea turtle to recover in a rehabilitation center, how long it will take for a terminal patient to expire, or how frequently we see the expression of a gene of interest. These kinds of questions are asked in aptly named “time-to-event”" models that rely on the variance structure of the negative binomial. In the context of these kinds of questions, the negative binomial is a discrete probability distribution (and not a continuous distribution) because the “time” components of the distribution is actually a series of independent Bernoulli trials (holy crap!). For example: if we want to know how many days it will take for a turtle to recover, what we are really doing is asking on each day until recovery, “Is today the day?”. Then, we flip a coin and find out. So, each day in this example is a Bernoulli trial. Another way to think about this is the number of failures occurring in a sequence before a target number of sucesses is achieved.</p>
+<p>One useful way to conceptualize the negative binomial is to ask “how long does it take for some event to occur?” For example, we might ask how long it takes a fish to start migrating, how long it takes a sea turtle to recover in a rehabilitation center, how long it will take for a terminal patient to expire, or how frequently we see the expression of a gene of interest. These kinds of questions are asked in aptly named “time-to-event” models that rely on the variance structure of the negative binomial. In the context of these kinds of questions, the negative binomial is a discrete probability distribution (and not a continuous distribution) because the “time” component of the distribution is actually a series of independent Bernoulli trials (holy crap, I know!). For example: if we want to know how many days it will take for a turtle to recover, what we are really doing is asking on each day until recovery, “Is today the day?”. Then, we flip a coin and find out. So, each day in this example is a Bernoulli trial. Another way to think about this is the number of failures occurring in a sequence before a target number of sucesses is achieved.</p>
 <p>For the classical parameterization:</p>
 <p>We will start with looking at how many failures are observed before one success in a sequence of Bernoulli trials.</p>
 <p>With probability of succes equal to 0.95, it doesn’t take long and most of the probability mass is on zero, with a couple of stragglers further out.</p>
@@ -734,12 +734,12 @@ Introduction
 <a class="sourceLine" id="cb25-13" title="13">}</a>
 <a class="sourceLine" id="cb25-14" title="14"><span class="co"># Test the function</span></a>
 <a class="sourceLine" id="cb25-15" title="15"><span class="kw">norm.mom</span>(test_norm)</a>
-<a class="sourceLine" id="cb25-16" title="16">[<span class="dv">1</span>] <span class="fl">-0.04250741</span>  <span class="fl">1.05135495</span></a></code></pre></div>
+<a class="sourceLine" id="cb25-16" title="16">[<span class="dv">1</span>] <span class="fl">-0.02925125</span>  <span class="fl">0.98935866</span></a></code></pre></div>
 <p>Because this one is so common, R has built-in estimators that rely on the exact solution provided by the formulas for the first two moments of the normal distribution:</p>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">mean</span>(test_norm)</a>
-<a class="sourceLine" id="cb26-2" title="2">[<span class="dv">1</span>] <span class="fl">-0.04250741</span></a>
+<a class="sourceLine" id="cb26-2" title="2">[<span class="dv">1</span>] <span class="fl">-0.02925125</span></a>
 <a class="sourceLine" id="cb26-3" title="3"><span class="kw">var</span>(test_norm)</a>
-<a class="sourceLine" id="cb26-4" title="4">[<span class="dv">1</span>] <span class="fl">1.052407</span></a></code></pre></div>
+<a class="sourceLine" id="cb26-4" title="4">[<span class="dv">1</span>] <span class="fl">0.990349</span></a></code></pre></div>
 <p>How do these compare to the answers returned by our function?</p>
 <blockquote>
 <p>Maximum likelihood estimator</p>
@@ -748,8 +748,8 @@ Introduction
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="kw">library</span>(MASS)</a>
 <a class="sourceLine" id="cb27-2" title="2"><span class="kw">fitdistr</span>(test_norm, <span class="st">&#39;normal&#39;</span>)</a>
 <a class="sourceLine" id="cb27-3" title="3">      mean           sd     </a>
-<a class="sourceLine" id="cb27-4" title="4">  <span class="fl">-0.04250741</span>    <span class="fl">1.02535601</span> </a>
-<a class="sourceLine" id="cb27-5" title="5"> ( <span class="fl">0.03242460</span>) ( <span class="fl">0.02292766</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb27-4" title="4">  <span class="fl">-0.02925125</span>    <span class="fl">0.99466510</span> </a>
+<a class="sourceLine" id="cb27-5" title="5"> ( <span class="fl">0.03145407</span>) ( <span class="fl">0.02224139</span>)</a></code></pre></div>
 <p>Only one problem here: R doesn’t report the second moment! It reports the square root of the second moment: the <strong>standard deviation</strong>!</p>
 <p>Finally, let’s write our own function and maximize the likelihood with the <code>optim()</code> function in R.</p>
 <div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Define the function</span></a>
@@ -773,14 +773,14 @@ Introduction
 <p>Now, we use the <code>optim</code> function to maximize the likelihood of the data (technically by minimizing the -log likehood) given different values of our parameters (<code>mu</code> and <code>sigma2</code>).</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">optim</span>(<span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), normal.lik, <span class="dt">y=</span><span class="kw">data.frame</span>(test_norm))</a>
 <a class="sourceLine" id="cb29-2" title="2"><span class="op">$</span>par</a>
-<a class="sourceLine" id="cb29-3" title="3">[<span class="dv">1</span>] <span class="fl">-0.04245958</span>  <span class="fl">1.05130310</span></a>
+<a class="sourceLine" id="cb29-3" title="3">[<span class="dv">1</span>] <span class="fl">-0.02920754</span>  <span class="fl">0.98941872</span></a>
 <a class="sourceLine" id="cb29-4" title="4"></a>
 <a class="sourceLine" id="cb29-5" title="5"><span class="op">$</span>value</a>
-<a class="sourceLine" id="cb29-6" title="6">[<span class="dv">1</span>] <span class="fl">1443.978</span></a>
+<a class="sourceLine" id="cb29-6" title="6">[<span class="dv">1</span>] <span class="fl">1413.589</span></a>
 <a class="sourceLine" id="cb29-7" title="7"></a>
 <a class="sourceLine" id="cb29-8" title="8"><span class="op">$</span>counts</a>
 <a class="sourceLine" id="cb29-9" title="9"><span class="cf">function</span> gradient </a>
-<a class="sourceLine" id="cb29-10" title="10">      <span class="dv">39</span>       <span class="ot">NA</span> </a>
+<a class="sourceLine" id="cb29-10" title="10">      <span class="dv">41</span>       <span class="ot">NA</span> </a>
 <a class="sourceLine" id="cb29-11" title="11"></a>
 <a class="sourceLine" id="cb29-12" title="12"><span class="op">$</span>convergence</a>
 <a class="sourceLine" id="cb29-13" title="13">[<span class="dv">1</span>] <span class="dv">0</span></a>
@@ -799,24 +799,24 @@ Introduction
 <a class="sourceLine" id="cb30-9" title="9"><span class="co"># Hey, we learned about those!</span></a>
 <a class="sourceLine" id="cb30-10" title="10"><span class="kw">str</span>(est)   </a>
 <a class="sourceLine" id="cb30-11" title="11">List of <span class="dv">5</span></a>
-<a class="sourceLine" id="cb30-12" title="12"> <span class="op">$</span><span class="st"> </span>par        <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="fl">-0.0425</span> <span class="fl">1.0513</span></a>
-<a class="sourceLine" id="cb30-13" title="13"> <span class="op">$</span><span class="st"> </span>value      <span class="op">:</span><span class="st"> </span>num <span class="dv">1444</span></a>
-<a class="sourceLine" id="cb30-14" title="14"> <span class="op">$</span><span class="st"> </span>counts     <span class="op">:</span><span class="st"> </span>Named int [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="dv">39</span> <span class="ot">NA</span></a>
+<a class="sourceLine" id="cb30-12" title="12"> <span class="op">$</span><span class="st"> </span>par        <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="fl">-0.0292</span> <span class="fl">0.9894</span></a>
+<a class="sourceLine" id="cb30-13" title="13"> <span class="op">$</span><span class="st"> </span>value      <span class="op">:</span><span class="st"> </span>num <span class="dv">1414</span></a>
+<a class="sourceLine" id="cb30-14" title="14"> <span class="op">$</span><span class="st"> </span>counts     <span class="op">:</span><span class="st"> </span>Named int [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="dv">41</span> <span class="ot">NA</span></a>
 <a class="sourceLine" id="cb30-15" title="15">  ..<span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;names&quot;</span>)=<span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>] <span class="st">&quot;function&quot;</span> <span class="st">&quot;gradient&quot;</span></a>
 <a class="sourceLine" id="cb30-16" title="16"> <span class="op">$</span><span class="st"> </span>convergence<span class="op">:</span><span class="st"> </span>int <span class="dv">0</span></a>
 <a class="sourceLine" id="cb30-17" title="17"> <span class="op">$</span><span class="st"> </span>message    <span class="op">:</span><span class="st"> </span><span class="ot">NULL</span></a>
 <a class="sourceLine" id="cb30-18" title="18"></a>
 <a class="sourceLine" id="cb30-19" title="19"><span class="co"># Here are the estimates    </span></a>
 <a class="sourceLine" id="cb30-20" title="20">est<span class="op">$</span>par </a>
-<a class="sourceLine" id="cb30-21" title="21">[<span class="dv">1</span>] <span class="fl">-0.04245958</span>  <span class="fl">1.05130310</span></a>
+<a class="sourceLine" id="cb30-21" title="21">[<span class="dv">1</span>] <span class="fl">-0.02920754</span>  <span class="fl">0.98941872</span></a>
 <a class="sourceLine" id="cb30-22" title="22">  </a>
 <a class="sourceLine" id="cb30-23" title="23"><span class="co"># The mean  </span></a>
 <a class="sourceLine" id="cb30-24" title="24">est<span class="op">$</span>par[<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb30-25" title="25">[<span class="dv">1</span>] <span class="fl">-0.04245958</span></a>
+<a class="sourceLine" id="cb30-25" title="25">[<span class="dv">1</span>] <span class="fl">-0.02920754</span></a>
 <a class="sourceLine" id="cb30-26" title="26"></a>
 <a class="sourceLine" id="cb30-27" title="27"><span class="co"># The variance  </span></a>
 <a class="sourceLine" id="cb30-28" title="28">est<span class="op">$</span>par[<span class="dv">2</span>] </a>
-<a class="sourceLine" id="cb30-29" title="29">[<span class="dv">1</span>] <span class="fl">1.051303</span></a></code></pre></div>
+<a class="sourceLine" id="cb30-29" title="29">[<span class="dv">1</span>] <span class="fl">0.9894187</span></a></code></pre></div>
 <p>That’s better: an exact solution!</p>
 <p>Just in case you’d like to know exactly what <code>optim</code> is doing, you can find out like this:</p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1">?optim</a></code></pre></div>
@@ -826,21 +826,21 @@ Introduction
 <p>There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.</p>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Here is the median, or 50th percentile</span></a>
 <a class="sourceLine" id="cb32-2" title="2"><span class="kw">median</span>(test_norm) </a>
-<a class="sourceLine" id="cb32-3" title="3">[<span class="dv">1</span>] <span class="fl">-0.05421886</span></a>
+<a class="sourceLine" id="cb32-3" title="3">[<span class="dv">1</span>] <span class="fl">-0.008460605</span></a>
 <a class="sourceLine" id="cb32-4" title="4"></a>
 <a class="sourceLine" id="cb32-5" title="5"><span class="co"># The 95% confidence limits</span></a>
 <a class="sourceLine" id="cb32-6" title="6"><span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>)) </a>
 <a class="sourceLine" id="cb32-7" title="7">     <span class="fl">2.5</span><span class="op">%     97.5%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-8" title="8"><span class="fl">-2.206963</span>  <span class="fl">1.942558</span> </a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="fl">-2.041748</span>  <span class="fl">1.775081</span> </a>
 <a class="sourceLine" id="cb32-9" title="9"></a>
 <a class="sourceLine" id="cb32-10" title="10"><span class="co"># Inner quartile range</span></a>
 <a class="sourceLine" id="cb32-11" title="11"><span class="kw">quantile</span>(test_norm, <span class="dt">probs =</span> <span class="kw">c</span>(<span class="fl">0.25</span>, <span class="fl">0.75</span>))    </a>
 <a class="sourceLine" id="cb32-12" title="12">       <span class="dv">25</span><span class="op">%        75%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb32-13" title="13"><span class="fl">-0.6613951</span>  <span class="fl">0.6359710</span> </a>
+<a class="sourceLine" id="cb32-13" title="13"><span class="fl">-0.7191330</span>  <span class="fl">0.6405934</span> </a>
 <a class="sourceLine" id="cb32-14" title="14"></a>
 <a class="sourceLine" id="cb32-15" title="15"><span class="co"># Range of sample</span></a>
 <a class="sourceLine" id="cb32-16" title="16"><span class="kw">range</span>(test_norm)                             </a>
-<a class="sourceLine" id="cb32-17" title="17">[<span class="dv">1</span>] <span class="fl">-3.796877</span>  <span class="fl">3.394227</span></a></code></pre></div>
+<a class="sourceLine" id="cb32-17" title="17">[<span class="dv">1</span>] <span class="fl">-3.438717</span>  <span class="fl">2.853081</span></a></code></pre></div>
 </div>
 </div>
 </div>
