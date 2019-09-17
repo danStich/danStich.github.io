@@ -152,7 +152,7 @@ The code above takes 10 random samples from a Poisson distribution with a mean (
 Suppose that we are interested in describing the distribution of the genus _Photinus_ in Upstate New York. We collected as many speciments as we could in jars (at this point if you're really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of _Photinus_ we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.
 
 **Question 9.**
-Using the data in the file `counts.txt` (you have to read it in first), estimate the mean and variance for the number of Photinus per night using any method appropriate for these data (see above or below for data read: **I want you to adapt this code**). 
+Using the data in the file `counts.txt` (you have to read it in first), estimate the mean and variance for the number of Photinus per night using any method appropriate for these data (see above or below for data read, but remember to change the file name to `counts.txt`). 
 
 Suppose that the data in question 9 looked more like those contained in this file:  
 
@@ -167,12 +167,11 @@ counts2 <- read.csv('../../data/counts2.txt')
 **Question 10.**  
 
 a. Is the mean of the data in `counts2` similar to that in `counts`?  
-
 b. What about the median?  
 
 c. Do they look the same when you plot them?  
 
-d. If not, what type of distribution is represented by these data?
+d. If not, what type of distribution is represented by the data in `counts2`?
 
-e. Calculate the parameters of it using maximum likelihood estimation.
+e. Calculate the parameters of the sample in `counts2` using maximum likelihood estimation.
 
