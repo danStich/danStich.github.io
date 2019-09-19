@@ -107,7 +107,7 @@ hist(beta.sample, main='', col='gray')
 
 a. What happens when you make the numbers approximately equal?  
 b. What happens to the histogram when `shape1` is much larger than `shape2`?  
-c. What happents to the histogram when `shape2` is much larger?  
+c. What happens to the histogram when `shape2` is much larger?  
 d. Set both parameters to 500. What happens to the spread of the distribution?
 e. Now set both parameters to 2. How does this compare to the previous?  
 f. Set both parameters to 1. Now what does the histogram look like?  
