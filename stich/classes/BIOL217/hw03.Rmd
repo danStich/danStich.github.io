@@ -82,7 +82,7 @@ Now let's take a look at another way to do this. This time, instead of handing y
   dbp <- read.csv('../../data/dbp.txt') 
 ```
 
-**Question 2.** Calculate the *mean* and *variance* of this distribution using the method of moments. Note that you can write your own function (as in the lecture tutorial), or you can use the built-in R functions that we talked about in class this week (see lecture tutorial). What are the *mean* and *sd* using this method?  
+**Question 2.** Calculate the *mean* and *variance* of this distribution using the method of moments. Note that you can write your own function (as in the lecture tutorial), or you can use the built-in R functions that we talked about in class this week (see lecture tutorial). What are the *mean* and *variance* using this method?  
 
 **Question 3.** Now calculate the *mean* and the *variance* of this sampling distribution using maximum likelihood estimation. Recall that you can estimate the parameters using `optim` and by writing out the likelihood inside of a function, or you can use in the built-in `fitdistr` function in R. If you do the latter, remember to pay attention to the answers that R gives you.  
 
