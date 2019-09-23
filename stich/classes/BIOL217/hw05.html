@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>hw05.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -36,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -107,11 +157,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -125,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -147,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -167,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -188,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -213,43 +356,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
-</li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
-</li>
-<li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../cv.html">Curriculum vitae</a>
-</li>
-<li>
-  <a href="../../contact.html">Contact</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
 <li class="dropdown">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Course websites
+    Teaching
      
     <span class="caret"></span>
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../BIOL678/index.html">BIOL 678</a>
+      <a href="../../teaching.html">Teaching home</a>
     </li>
     <li>
-      <a href="index.html">BIOL 217</a>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
     </li>
   </ul>
 </li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -263,8 +420,10 @@ $(document).ready(function () {
 </div>
 
 
-<div id="linear-models" class="section level1">
-<h1>Linear models</h1>
+<h1 id="multi">
+Linear models
+</h1>
+<p><img src="../../images/graphs.png"></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -278,11 +437,11 @@ Analysis of variance (ANOVA)
 </h3>
 <p>We’ll start this week with analysis of variance (ANOVA). ANOVA is an extension of the t-tests we worked with last week. Last week, we tested hypotheses about differences in the mean of some response between two groups. ANOVA let’s us extend that to include cases in which we might want to test for differences in more than two groups. As we will see, this allows for comparisons not only between more than two groups (e.g. through one-way ANOVA), but also allows us to look across multiple grouping factors in a single test (e.g. two-way ANOVA).</p>
 <p>We will use the simple case of the one-way ANOVA to practice our newly acquired skills in n-way ANOVA. Begin by reading in the smolt data from last week:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the smolt data</span>
-smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;smolts.txt&#39;</span>)
-
-<span class="co"># Look at the first few lines for a sanity check</span>
-<span class="kw">head</span>(smolts)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the smolt data</span></a>
+<a class="sourceLine" id="cb1-2" title="2">smolts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;smolts.txt&#39;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3"></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Look at the first few lines for a sanity check</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="kw">head</span>(smolts)</a></code></pre></div>
 <pre><code>     ID     stage  fl  mass   nka osmolality      pref max n.switch
 1 31B1F     Smolt 216  97.5 6.667        318 0.3638229  83       93
 2 31B20     Smolt 184  63.0 4.444        306 0.3922490  47      107
@@ -293,61 +452,61 @@ smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="s
 <p><em>Reminder</em>: if you have forgotten what these data mean, they are described in detail in the lab exercise from last week.</p>
 <p>Use a one-way ANOVA to investigate differences in gill NKA activity among all stages of smolts in the dataset.</p>
 <p><strong>Question 1.</strong> State the purpose of the analysis (i.e. to detect the effects of “blank” on “other blank”), and formally state the null hypothesis for this analysis.</p>
-<p><strong>Question 2.</strong> Explain the results of the test in sentence format, being sure to include the test statistic, the numerator and denominator degrees of freedom, and the p-value along with the test that you used. Also report the R<sup>2</sup> value for this model (recall you can get this multiple ways): see the reference script <code>LinearModels.html</code> or the ANOVA example (<code>anova.html</code>) on the course website. You should be able to do this in 1-2 sentences. See the ANOVA example for help putting this into words, but give it your own flare.</p>
+<p><strong>Question 2.</strong> Explain the results of the test in sentence format, being sure to include the test statistic, the numerator and denominator degrees of freedom, and the p-value along with the test that you used. Also report the R<sup>2</sup> value for this model (recall you can get this multiple ways): see the <a href="04_LinearModels.html">lecture module</a> or the <a href="04_anova.html">ANOVA example</a> on the course website. You should be able to do this in 1-2 sentences. See the ANOVA example for help putting this into words, but give it your own flare.</p>
 <p>Now, use a Tukey HSD test to determine factor-level differences in gill NKA activity between presmolts, smolts, and postsmolts. After you run the test, make a boxplot of nka by stage to help visualize the results. Be sure to label your axes!</p>
-<p><em>Reminder</em>: if you have forgotten how to conduct the Tukey HSD for pairwise comparisons of factor-level means, you can find this in the reference script for this week.</p>
+<p><em>Reminder</em>: if you have forgotten how to conduct the Tukey HSD for pairwise comparisons of factor-level means, you can find this in the <a href="04_LinearModels.html">lecture module</a> for this week.</p>
 <p>See also:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?TukeyHSD</code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">?TukeyHSD</a></code></pre></div>
 <p><strong>Question 3.</strong> Report the results of the Tukey test, being sure to include mean and sd for each factor level, in addition to p-values for tests of differences between factor levels. Use complete sentences. See the anova example on the course website for help.</p>
 <div id="kruskal-wallis-rank-sum-test" class="section level3">
 <h3>Kruskal-Wallis rank sum test</h3>
-<p>Now let’s move on to the case in which we can’t meet assumptions of normality in the residuals for our groups (assumption #2 from the reference script). Here, we need to use the Kruskal-Wallis test as a ‘non-parametric’ alternative. Recall that we fit this model using the <code>kruskal.test</code> function in R. We will use the same example that we used last week for the Wilcoxon test, smolt osmolality vs stage, but this time we will use all three stages: <code>Presmolt</code>, <code>Smolt</code>, and <code>Postsmolt</code> to examine differences in osmolality.</p>
+<p>Now let’s move on to the case in which we can’t meet assumptions of normality in the residuals for our groups (assumption #2 from the <a href="04_LinearModels.html">lecture module</a>). Here, we need to use the Kruskal-Wallis test as a ‘non-parametric’ alternative. Recall that we fit this model using the <code>kruskal.test</code> function in R. We will use the same example that we used last week for the Wilcoxon test, smolt osmolality vs stage, but this time we will use all three stages: <code>Presmolt</code>, <code>Smolt</code>, and <code>Postsmolt</code> to examine differences in osmolality.</p>
 <p>Remember that last week we showed the response variable, osmolality, was not normally distributed among these ontogenetic stages of smolt development:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>])
-
-    Shapiro<span class="op">-</span>Wilk normality test
-
-data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Smolt&quot;</span>]
-W =<span class="st"> </span><span class="fl">0.8623</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.167e-06</span>
-  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>])
-
-    Shapiro<span class="op">-</span>Wilk normality test
-
-data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Presmolt&quot;</span>]
-W =<span class="st"> </span><span class="fl">0.95214</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.03329</span>
-  <span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Postsmolt&#39;</span>])
-
-    Shapiro<span class="op">-</span>Wilk normality test
-
-data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Postsmolt&quot;</span>]
-W =<span class="st"> </span><span class="fl">0.96926</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.1626</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>])</a>
+<a class="sourceLine" id="cb4-2" title="2"></a>
+<a class="sourceLine" id="cb4-3" title="3">    Shapiro<span class="op">-</span>Wilk normality test</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Smolt&quot;</span>]</a>
+<a class="sourceLine" id="cb4-6" title="6">W =<span class="st"> </span><span class="fl">0.8623</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.167e-06</span></a>
+<a class="sourceLine" id="cb4-7" title="7"><span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>])</a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">    Shapiro<span class="op">-</span>Wilk normality test</a>
+<a class="sourceLine" id="cb4-10" title="10"></a>
+<a class="sourceLine" id="cb4-11" title="11">data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Presmolt&quot;</span>]</a>
+<a class="sourceLine" id="cb4-12" title="12">W =<span class="st"> </span><span class="fl">0.95214</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.03329</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="kw">shapiro.test</span>(smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Postsmolt&#39;</span>])</a>
+<a class="sourceLine" id="cb4-14" title="14"></a>
+<a class="sourceLine" id="cb4-15" title="15">    Shapiro<span class="op">-</span>Wilk normality test</a>
+<a class="sourceLine" id="cb4-16" title="16"></a>
+<a class="sourceLine" id="cb4-17" title="17">data<span class="op">:</span><span class="st">  </span>smolts<span class="op">$</span>osmolality[smolts<span class="op">$</span>stage <span class="op">==</span><span class="st"> &quot;Postsmolt&quot;</span>]</a>
+<a class="sourceLine" id="cb4-18" title="18">W =<span class="st"> </span><span class="fl">0.96926</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.1626</span></a></code></pre></div>
 <p>It actually is for Postsmolts, but we need the sampling distribution within each of these levels to be normal to meet the assumptions of ANOVA. This is the same as saying that the residuals are normally distributed. We can look at those assumptions like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">plot</span>(<span class="kw">lm</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts))</code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">plot</span>(<span class="kw">lm</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts))</a></code></pre></div>
 <p>I have omitted the plots here because we will discuss them in detail next week. But, if you run the code, you will see that the Q-Q plot shows a little bit of a weird pattern with a bend toward the middle of the line. Honestly, none of these diagnostics would really preclude use of an ANOVA in this particular case, but let’s continue with our example as though we are super conservative with the call.</p>
 <p>So, we move on with a non-parametric analysis for now. Use what you learned this week to test the null hypothesis that there is no difference in osmolality between groups using the <code>kruskal.test</code> function, realizing that the alternative hypothesis for this test is that at least one mean is different from the others.</p>
 <p><strong>Question 4.</strong> Did you reject the null hypothesis or fail to reject? State your answer in sentence form, and be sure to report the test statistic, degrees of freedom, and p-value in your answer.</p>
 <p><strong>Question 5.</strong> Which levels are different from one another? Can you tell from this test alone? How could you find out which levels differ?</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;PMCMR&#39;</span>)</code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Here&#39;s one option: </span>
-  <span class="kw">library</span>(PMCMR)
-
-<span class="co"># WORST NAME EVER FOR A FUNCTION!!!!</span>
-  <span class="kw">posthoc.kruskal.nemenyi.test</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts, <span class="dt">dist=</span><span class="st">&#39;Chisquare&#39;</span>)
-
-    Pairwise comparisons using Nemenyi<span class="op">-</span>test with Chi<span class="op">-</span>squared    
-                       approximation <span class="cf">for</span> independent samples 
-
-data<span class="op">:</span><span class="st">  </span>osmolality by stage 
-
-         Postsmolt Presmolt
-Presmolt <span class="fl">0.018</span>     <span class="op">-</span><span class="st">       </span>
-Smolt    <span class="fl">4.4e-06</span>   <span class="fl">7.0e-14</span> 
-
-P value adjustment method<span class="op">:</span><span class="st"> </span>none </code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">install.packages</span>(<span class="st">&#39;PMCMR&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Here&#39;s one option: </span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">library</span>(PMCMR)</a>
+<a class="sourceLine" id="cb7-3" title="3"></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co"># WORST NAME EVER FOR A FUNCTION!!!!</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="kw">posthoc.kruskal.nemenyi.test</span>(osmolality<span class="op">~</span>stage, <span class="dt">data=</span>smolts, <span class="dt">dist=</span><span class="st">&#39;Chisquare&#39;</span>)</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7">    Pairwise comparisons using Nemenyi<span class="op">-</span>test with Chi<span class="op">-</span>squared    </a>
+<a class="sourceLine" id="cb7-8" title="8">                       approximation <span class="cf">for</span> independent samples </a>
+<a class="sourceLine" id="cb7-9" title="9"></a>
+<a class="sourceLine" id="cb7-10" title="10">data<span class="op">:</span><span class="st">  </span>osmolality by stage </a>
+<a class="sourceLine" id="cb7-11" title="11"></a>
+<a class="sourceLine" id="cb7-12" title="12">         Postsmolt Presmolt</a>
+<a class="sourceLine" id="cb7-13" title="13">Presmolt <span class="fl">0.018</span>     <span class="op">-</span><span class="st">       </span></a>
+<a class="sourceLine" id="cb7-14" title="14">Smolt    <span class="fl">4.4e-06</span>   <span class="fl">7.0e-14</span> </a>
+<a class="sourceLine" id="cb7-15" title="15"></a>
+<a class="sourceLine" id="cb7-16" title="16">P value adjustment method<span class="op">:</span><span class="st"> </span>none </a></code></pre></div>
 <p>There are actually a whole bunch of different functions in the <code>PMCMR</code> package with which we conduct post-hoc tests to do pair-wise comparisons. The function above compares the response for each one of our grouping values, while correcting for inflated Type-I error rates.</p>
-<p><strong>Question 6.</strong> So now which stages differ in the response, <code>osmolality</code> according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="05_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the <code>caroline</code> package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">install.packages</span>(<span class="st">&#39;caroline&#39;</span>)
-<span class="kw">library</span>(caroline)</code></pre></div>
+<p><strong>Question 6.</strong> So now which stages differ in the response, <code>osmolality</code> according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="04_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the <code>caroline</code> package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># install.packages(&#39;caroline&#39;)</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">library</span>(caroline)</a></code></pre></div>
 </div>
 <div id="linear-regression" class="section level3">
 <h3>Linear regression</h3>
@@ -366,17 +525,16 @@ P value adjustment method<span class="op">:</span><span class="st"> </span>none 
 </blockquote>
 <p>With the <code>lm</code> function in R, use ANCOVA to test the <em>additive</em> effects of stage and gill NKA activity on plasma osmolality.</p>
 <p>Now look at the results. <strong>Remember</strong> there are two different methods we need to use to understand the results of the ANCOVA because now we have both groups and continuous explanatory variables. Remember that the <code>summary</code> function gives us the regression coefficients and an overall R<sup>2</sup> for the model, and the <code>Anova</code> function will give us the anova table for the model that we can use to determine whether or not <code>stage</code> had a significant effect overall, but we need to specify the argument <code>type = 'III'</code> in the call. In order to use the <code>Anova</code> function, you will need to install and load the <code>car</code> library:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install package</span>
-  <span class="co"># install.packages(&#39;car&#39;)</span>
-
-<span class="co"># Load it</span>
-  <span class="kw">library</span>(car)
-
-<span class="co"># Check out the Anova function</span>
-  ?Anova</code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Install package</span></a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="co"># install.packages(&#39;car&#39;)</span></a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co"># Load it</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7"><span class="co"># Check out the Anova function</span></a>
+<a class="sourceLine" id="cb9-8" title="8">?Anova</a></code></pre></div>
 <p><strong>Question 9.</strong> What can you conclude about the effects of <code>stage</code> and <code>nka</code> on osmolality? Report this in sentence format as you did above, this time being sure to include the test name, test statistic, p-value, R<sup>2</sup> for the model. This may need a few sentences because we now have to report the results of the ANOVA-style component of the analysis.</p>
 <p><strong>Question 10.</strong> Describe how osmolality varied between stages (reporting mean and sd of osmolality for each stage in addition to differences between levels). Then, describe how osmolality changed with gill NKA activity in addition to stage (be sure to indicate the direction of the relationship using your regression coefficients).</p>
-</div>
 </div>
 </div>
 
@@ -386,7 +544,7 @@ P value adjustment method<span class="op">:</span><span class="st"> </span>none 
 
 <hr>
 
-<p style="color:gray">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License.</a></p>
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
@@ -404,6 +562,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
