@@ -1,45 +1,27 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
-# ANOVA worked example  
+# ANOVA 
+<h2 id="multi"> Worked example </h2>  
 
-<br>
- 
 The purpose of this tutorial is to give a brief, *coherent* introduction to analysis of variance (ANOVA) and give you a worked example that you can use as a template for future analyses.  
 
-<br>
- 
 ## Why do we use it?
 
-<br>
- 
 Last week we talked about how to compare the means of two groups to determine whether or not the sample distributions came from the same statistical  population. But what do we do if we want to compare three groups?? ANOVA.  
 
 We use ANOVA when we would like to test the effect of one or more grouping variables on a continuous response. We generally tend to reserve ANOVA for those cases in which the grouping variable has more than two levels. To clarify, if we wished to test differences in the response between only two groups (e.g. male and female) then we would use a t-test or a Wilcoxon rank-sum test. If we wished to extend that to include three or more groups (e.g., treatment 1, treatment 2, and control) we would use an ANOVA or a non-parametric alternative.  
-
-<br>
  
 ## How do we do it?
+<h3 id="multi"> Syntax </h3>
 
-<br>
- 
-### Syntax
-
-<br>
- 
 In R, ANOVA and all other linear models that we will discuss this week are fit using the `lm` function. Let's have a look: 
 
-<br>
- 
 ```{r, collapse=TRUE}
 str(lm)
 ```
 
-<br>
- 
-This shows us that ```lm``` is a function. It takes a number of arguments, but the ones that will concern us in this course are ```formula``` and ```data```. The ```formula``` argument needs to be specified as a mathematical formula, and takes the following form:  
+This shows us that `lm` is a function. It takes a number of arguments, but the ones that will concern us in this course are `formula` and `data`. The `formula` argument needs to be specified as a mathematical formula, and takes the following form:  
 
 $y \sim x_1 + x_2, ..., + x_k$
 
@@ -47,16 +29,10 @@ where $y$ is the name of our response variable, and each $x$ is the name of an e
 
 The `data` argument is optional, but is usually a dataframe that holds our data.
 
-<br>
- 
 ### Example  
 
-<br>
- 
 Let's walk through a quick example of what this looks like using the PlantGrowth dataset in R. We'll just go through the steps here and explain it in the next section.  
 
-<br>
- 
 ```{r, collapse=TRUE, fig.height=4, fig.width=6}
 # Load the data
   data("PlantGrowth")
@@ -70,30 +46,34 @@ Let's walk through a quick example of what this looks like using the PlantGrowth
 # Fit an ANOVA to the data and store it as an object
   plant_model = lm(weight~group, data=PlantGrowth)
 
-# Check the model diagnostics to make sure we haven't blown any assumptions
-# too badly and to make sure the model fit is reasonable before we start to
+# Check the model diagnostics to make
+# sure we haven't blown any assumptions
+# too badly and to make sure the model
+# fit is reasonable before we start to
 # put any stock into the results
-  plot(plant_model)    
-  
-# Now print the anova table. Note that when we have grouping variables like this
-# we need to use the `anova` function to get factor-level statistics like these:
-  anova(plant_model)
-  
-# Summarize the model, look at the coefficients, standard errors, and R-squared
-  summary(plant_model)
-
+  par(mfrow=c(2,2))
+  plot(plant_model)
 ```
 
-<br>
- 
+```{r, echo=FALSE}
+par(mfrow=c(1,1))
+```
+
+Now print the anova table. Note that when we have grouping variables like this we need to use the `anova` function to get factor-level statistics like these:
+```{r}
+anova(plant_model)
+```
+
+Finally, we could do multiple comparisons using a Tukey Honest Significant Difference test.
+
+```{r}
+TukeyHSD(aov(plant_model))
+```
+
 That's all there is to it!
 
-<br>
- 
 ## What does it mean?  
 
-<br>
- 
 Okay, now that we have all of this neat output, what does it all mean? Let's go through it all step by step.  
 
 **1)** The first thing we did was fit the model with the `lm` function. This not only ran the model, but it stored the model as an object in R so we could run diagnostics and summarize our results.       
@@ -106,7 +86,7 @@ The third plot is a check to see if the residuals change with x (like the first)
 
 Finally, the last plot shows the `leverage` exerted by individual points. Some points far out on the ends of the data or outliers can exert undue influence on the fit of a line. In the case of this diagnostic and the `Cook's D` we usually like to see all or a large majority of the points falling between -3 and 3 on the y-axis. So, this diagnostic checks out as well.  
   
-**3)** After we actually check our assumptions and model fit, we can look at the results of the model. First, we calculate the ANOVA table for the fitted model using the aptly named `anova` function in R. This function gives us the standard ANOVA table showing sums of squares and mean squared errors for our grouping variable(s) and the model residuals (unexplained variance). The `anova` function also gives us the F-statistic for our group effects and the p-value associated with that. Note that this kind of summary is the only way to obtain such a value. Note that we can calculate the R-squared directly from this table as:  
+**3)** After we actually check our assumptions and model fit, we can look at the results of the model. First, we calculate the ANOVA table for the fitted model using the aptly named `anova` function in R. This function gives us the standard ANOVA table showing sums of squares and mean squared errors for our grouping variable(s) and the model residuals (unexplained variance). The `anova` function also gives us the F-statistic for our group effects and the p-value associated with that. Note that this kind of summary is not the only way to obtain such a value. We could calculate the R-squared directly from this table as:  
 
 $$R^2 = \frac{SSB}{SSB + SSR}$$
 
@@ -119,33 +99,67 @@ $\\$
 $$R^2 = 0.264131$$  
 
 **4)** That's really all we need to report for a one-way ANOVA, but we can get some of this info from the model using `summary` as well. For instance, note  that `summary(plant_model)` also returns an R-sqaured value if you forget the calculation. It is identical to ours.
-
-<br>
  
 ## Communicating the results 
 
-<br>
- 
 Here is a quick mock-up of what this might look like in the methods and results section of a (bad) paper:
 
-<br>
- 
 ### Methods
 
-<br>
- 
 _Data analysis_  
-We used one-way analysis of variance (ANOVA) to test the effects of treatment group (trt1, trt2, and ctrl) on the mass of plants (g). The null hypothesis for this test was that all group means were equal: $H_0: \mu_1= \mu_2 = \mu_3$. We examined diagnostic plots to assess assumtptions of normality in the residuals, verify homoscedasticity of errors, and determine the presence of inluential observations in the data.
+We used one-way analysis of variance (ANOVA) to test the effects of treatment group (`trt1`, `trt2`, and `ctrl`) on the mass of plants (g). The null hypothesis for this test was that all group means were equal: $H_0: \mu_1= \mu_2 = \mu_3$. We examined diagnostic plots to assess assumptions of normality in the residuals, verify homoscedasticity of errors, and determine the presence of influential observations in the data.
 
 We determined differences between group means using a Tukey-Kramer pairwise comparison of means to control for Type-I error rates. All tests assumed a Type-I error rate of $\alpha$ = 0.05, and statistical significance was inferred at p < 0.05.
-
-<br>
  
 ### Results
 
-<br>
- 
-Mass of plants varied significantly between treatment groups (ANOVA, F = 4.846, df~1~ = 2, df~2~ = 27, p = 0.016; Table 1). The differences between groups explained about 26% of the variation in mass (R^2^ = 0.26). The mass of plants in the trt2 group (5.5 $\pm$ 0.4 g) was significantly greater than plants in the `trt1` group (4.7 $\pm$ 0.8 g) in this study (Tukey HSD, p = 0.012; Fig. 1). We failed to detect differences in mass between plants in the control group (5.0 $\pm$ 0.6 g) and `trt1` (p = 0.39) or `trt2` (p = 0.20).
+Mass of plants varied significantly between treatment groups (ANOVA, F = 4.846, df~1~ = 2, df~2~ = 27, p = 0.016; Table 1). The differences between groups explained about 26% of the variation in mass (R^2^ = 0.26). The mass of plants in the `trt2` group (5.5 $\pm$ 0.4 g) was significantly greater than plants in the `trt1` group (4.7 $\pm$ 0.8 g) in this study (Tukey HSD, p = 0.012; Fig. 1). We failed to detect differences in mass between plants in the `ctrl` group (5.0 $\pm$ 0.6 g) and `trt1` (p = 0.39) or `trt2` (p = 0.20).
 
-<br>
- 
+```{r, echo=FALSE}
+h <- boxplot(weight~group,
+             data=PlantGrowth,
+             plot=FALSE)
+
+bxp(h, yaxt='n', xaxt='n',
+    ylab="Mass (g)", xlab='Group',
+    outline=FALSE,
+    pars=list(
+      boxwex=0.33,
+      boxlwd=2,
+      boxfill='gray87',
+      boxcol='gray40',
+      staplewex=0,
+      staplecol='gray40',
+      whiskcol='gray40',
+      whisklwd=2,
+      whisklty=1
+    )
+    )
+axis(1, at=c(1,2,3), labels=c('Control', 'Treatment 1', 'Treatment 2'))
+axis(2, las=2)
+```
+
+```{r, foldcode=TRUE, eval=FALSE}
+h <- boxplot(weight~group,
+             data=PlantGrowth,
+             plot=FALSE)
+
+bxp(h, yaxt='n', xaxt='n',
+    ylab="Mass (g)", xlab='Group',
+    outline=FALSE,
+    pars=list(
+      boxwex=0.33,
+      boxlwd=2,
+      boxfill='gray87',
+      boxcol='gray40',
+      staplewex=0,
+      staplecol='gray40',
+      whiskcol='gray40',
+      whisklwd=2,
+      whisklty=1
+    )
+    )
+axis(1, at=c(1,2,3), labels=c('Control', 'Treatment 1', 'Treatment 2'))
+axis(2, las=2)
+```
+
