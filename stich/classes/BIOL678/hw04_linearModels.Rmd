@@ -1,4 +1,4 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
 <h1 id="multi">Linear models </h1>
