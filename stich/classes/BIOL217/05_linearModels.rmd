@@ -251,7 +251,7 @@ data(swiss)
 
 Now, let's get cracking.
 
-We'll start by fitting a simple model and then build complexity
+We'll start by fitting a simple model and then build complexity.
 
 Fit a model that relates fertility to education level. Notice that this looks exactly the same as the call to `lm` for the ANOVAs above? That's because they are the same thing and people have been lying to you your whole life!!!
 ```{r}
@@ -266,19 +266,26 @@ We see that there is a significant "negative" or "inverse" relation between `Edu
 
 We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the $R^2$ value that is returned.
 
-This is as far as the summary goes for linear regression for now. That is, we don't need the ANOVA table any more because we have no factors- just continuous variables. What we end up with in this summary are the coefficients (corresponding to parameters of a model) that can be used to describe the line that passes through the data and minimizes the residual errors. 
+This is as far as the summary goes for linear regression for now. That is, we don't need the ANOVA table any more because we have no factors- just continuous variables. What we end up with in this summary are the coefficients (corresponding to parameters of a model) that can be used to describe the line that passes through the data and minimizes the residual errors (thats the part we left out above). 
 
 > WHAT??
 
-Let's explain this by actually looking at the data
+Let's explain this by actually looking at the data:
 ```{r}
-# First make a sequence of new values for Education across observed range
+# First make a sequence of new values for
+# Education across observed range
   new <- data.frame(Education=seq(0,55,.1))
 
 # Plot the raw data
   par(mar=c(4.5,4.5,1,1))
-  plot(swiss$Education, swiss$Fertility, ylab='Fertility',
-    xlab='Education', pch=21, bg='gray', cex=1.5, ylim=c(30, 100))
+  plot(x=swiss$Education,
+       swiss$Fertility,
+       ylab='Fertility',
+       xlab='Education',
+       pch=21, bg='gray',
+       cex=1.5,
+       ylim=c(30, 100)
+       )
 # Now, we will add a trendline
   preds = predict(fert.mod, newdata=new,
     interval = 'prediction')
