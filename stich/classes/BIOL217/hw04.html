@@ -597,14 +597,14 @@ The smolt data
 <div id="wilcoxon-test" class="section level3">
 <h3>Wilcoxon test</h3>
 <p>Moving on to the next variable…don’t worry, we will come back to the gill NKA data next week when we talk about ANOVA, because I know you are all dying to know about the postsmolt group.</p>
-<p>Here, we will continue to look at the presmolt and smolt life stages. First, create two vectors: the first should hold all values of the variable ‘osmolality’ for presmolts, and the second should hold all values of the variable ‘osmolality’ for smolts.</p>
+<p>Here, we will continue to look at the presmolt and smolt life stages. First, create two vectors: the first should hold all values of the variable <code>osmolality</code> for presmolts, and the second should hold all values of the variable <code>osmolality</code> for smolts.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># In case you have forgotten</span></a>
 <a class="sourceLine" id="cb8-2" title="2"><span class="co"># the data strucure already:</span></a>
 <a class="sourceLine" id="cb8-3" title="3"><span class="kw">str</span>(smolts)</a></code></pre></div>
 <p><strong>Question 6.</strong> Do these sampling distributions conform to the normal distribution? Why or why not (note that there are multiple reasons).</p>
 <p>Plot a histogram of the distributions. Can’t remember how to do this?</p>
 <p><span class="math inline">\(p(in the lecture module = 1.00)\)</span></p>
-<p>Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can’t remember how to do it? See the &lt;a “03_hypothesisTesting.html”&gt;lecture module</a>.</p>
+<p>Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can’t remember how to do it? See the <a href="04_hypothesisTesting.html">lecture module</a>.</p>
 <p><strong>Question 7.</strong> Formally state the null hypothesis and the alternative that you chose. Justify your choice.</p>
 <p><strong>Question 8.</strong> Did you reject the null hypothesis or did you fail to reject? What was the Type-I error rate that you assumed for this test?</p>
 <p><strong>Question 9.</strong> Does this make biological sense based on the description of the dataset above? Does this make biological sense based on the results of the two-sample t-test above?</p>
@@ -617,7 +617,7 @@ The smolt data
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Like this:</span></a>
 <a class="sourceLine" id="cb9-2" title="2">smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&gt;=</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;high&#39;</span></a>
 <a class="sourceLine" id="cb9-3" title="3">smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&lt;</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;low&#39;</span></a></code></pre></div>
-<p>Conduct a <span class="math inline">\(\chi^2\)</span> test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the <span class="math inline">\(\chi^2\)</span> test object.</p>
+<p>Conduct a <span class="math inline">\(\chi^2\)</span> test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the &lt;a href="04_hypothesisTesting.html&gt;lecture module</a> to extract the observed and expected values from the <span class="math inline">\(\chi^2\)</span> test object.</p>
 <p><strong>Question 10.</strong> Okay, no surprises that the frequency of high and low osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.</p>
 </div>
 </div>

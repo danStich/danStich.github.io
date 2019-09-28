@@ -197,8 +197,7 @@ We have to sacrifice a few extra degrees of freedom to stay conservative and avo
 
 Moving on to the next variable...don't worry, we will come back to the gill NKA data next week when we talk about ANOVA, because I know you are all dying to know about the postsmolt group.  
 
-Here, we will continue to look at the presmolt and smolt life stages. First, create two vectors: the first should hold all values of the variable 'osmolality' for presmolts, and the second should hold all values of the 
-variable 'osmolality' for smolts.
+Here, we will continue to look at the presmolt and smolt life stages. First, create two vectors: the first should hold all values of the variable `osmolality` for presmolts, and the second should hold all values of the variable `osmolality` for smolts.
 
 ```{r, eval=FALSE}
 # In case you have forgotten
@@ -212,7 +211,7 @@ Plot a histogram of the distributions. Can't remember how to do this?
 
 $p(in the lecture module = 1.00)$
  
-Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can't remember how to do it? See the <a "03_hypothesisTesting.html">lecture module</a>.
+Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can't remember how to do it? See the <a href="04_hypothesisTesting.html">lecture module</a>.
 
 **Question 7.** Formally state the null hypothesis and the alternative that you chose. Justify your choice.  
 
@@ -238,6 +237,6 @@ smolts2$rank[smolts2$osmolality>=400] <- 'high'
 smolts2$rank[smolts2$osmolality<400] <- 'low'
 ```
 
-Conduct a $\chi^2$ test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the reference script to extract the observed and expected values from the $\chi^2$ test object.
+Conduct a $\chi^2$ test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the <a href="04_hypothesisTesting.html>lecture module</a> to extract the observed and expected values from the $\chi^2$ test object.
 
 **Question 10.** Okay, no surprises that the frequency of high and low  osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.
