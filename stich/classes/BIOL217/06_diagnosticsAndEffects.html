@@ -1,0 +1,1523 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>06_diagnosticsAndEffects.utf8.md</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+<!DOCTYPE html>
+<head>
+<!-- Favicon for various operating systems -->
+<link rel="apple-touch-icon" sizes="180x180" href="./favicon/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./favicon/favicon-16x16.png">
+<!-- <link rel="manifest" href="./favicon/site.webmanifest"> -->
+<link rel="mask-icon" href="./favicon/safari-pinned-tab.svg" color="#603cba">
+<link rel="shortcut icon" href="./favicon/favicon.ico">
+<meta name="msapplication-TileColor" content="#603cba">
+<meta name="msapplication-config" content="./favicon/browserconfig.xml">
+<meta name="theme-color" content="#382121">
+</head>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
+</li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
+</li>
+<li>
+  <a href="../../research.html">Research</a>
+</li>
+<li>
+  <a href="../../studentProjects.html">Current Students</a>
+</li>
+<li>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
+</li>
+<li>
+  <a href="../../contact.html">Contact</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="diagnostics-and-effect-sizes" class="section level1">
+<h1>Diagnostics and effect sizes</h1>
+<p><img src="../../images/watch.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
+<p>This week in lectures and the lab exercises we will start by taking a step back for an in-depth look at the assumptions we make when we fit parametric models to data in an effort to explain the effects of explanatory variables on some response of interest, using linear models as the backdrop for our discussions. In previous lectures we learned how to fit linear models. The purpose of this lab is to provide you with the tools you need on the front end and the back end of that process so we are surrounding linear models with the goodness they deserve.</p>
+<p>We will also continue to talk about linear models that include multiple explanatory variables. Specifically, we will discuss how relationships between these variables might influence which ones we include in a given model and how we make defensible decisions when it comes to these choices. We will further probe the concept of the R<sup>2</sup> statistic as a measure of model fit, and how this is influenced by the inclusion of multiple explanatory variables.</p>
+<p>Finally, we will conclude our discussions this week with tools for communicating the results of our analyses once we have verified that we are not in major violation of assumptions. To do this, we will need to look a little more closely at the math behind linear models (not too closely!) and what exactly we are doing when we fit a linear model. These discussions will include the essential concepts of main effects, interaction effects, and response ‘surfaces’ for the case in which we include more than one explanatory variable. Please keep in mind that although we are using strictly linear models to introduce these concepts their application in the suite of models that we will discuss for the next several weeks is identical, and we will discuss exactly why this is.</p>
+<div id="assumptions-of-linear-models-diagnostics" class="section level2">
+<h2>Assumptions of linear models &amp; diagnostics</h2>
+<p>From last week:</p>
+<p>Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.</p>
+<p>There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.</p>
+<p><strong>1.</strong> Independence of observations.</p>
+<p><strong>2.</strong> Normality of residuals (with mean=0)</p>
+<p><strong>3.</strong> Homogeneity of variances (i.e. homoscedasticity)</p>
+<p>We will discuss what each of these means in class this week, and during the next several weeks we will discuss methods for verifying these assumptions or relaxing the assumptions to meet our needs through specific techniques.</p>
+<p>Let’s get some data to demonstrate these assumptions.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the turtles data,</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># it&#39;s a bit messy, so we will read it</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co"># in with an extra option to strip white spaces.</span></a>
+<a class="sourceLine" id="cb1-4" title="4">turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;turtles.txt&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>, <span class="dt">strip.white =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p>These are data that were collected 2013-2015 for Kemp’s Ridley sea turtles incidentally caught by anglers in the Gulf of Mexico. After being caught, the turtles were taken to a wildlife rehabilitation center so they could have fishing hooks removed and recover.</p>
+<p>The data columns mean:</p>
+<p><code>ID</code>: turtle ID<br> <code>Year</code>: year of capture<br> <code>Gear</code>: the gear type with which the turtle was hooked<br> <code>Width</code>: the gape width of the hook<br> <code>Removed</code>: the location from which the hook was removed<br> <code>Status</code>: survived (1) or did not (0)<br> <code>Stay</code>: length of stay in the rehab facility<br> <code>nHooks</code>: Number of hooks in the turtle</p>
+<p>We will use <code>Stay</code> as the response variable here.</p>
+<div id="independence-of-observations" class="section level3">
+<h3>Independence of observations</h3>
+<p>This assumption basically means that each row of your data was collected independently of all others. In other words, no two rows of your data are related to one another.</p>
+<p>Note that we can relax this assumption by explicitly including variables and constructs within the models that actually account for these kinds of relationships.</p>
+<p>For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups.</p>
+<p>This assumption really should be be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.</p>
+<p>We will discuss specific extensions of our basic linear models (ANOVA and regression) to relax more difficult violations such as repeated observations, and temporal or spatial autocorrelation among observations. Although we can’t cover all of these extensions in this course, we can point you in the right direction for most of them.</p>
+<p>What are we looking for here? We want data that were sampled randomly and independently from all other data points. For this information, we have to examine the actual experimental design.</p>
+<p>There is one obvious thing that is going to tell us that the observations in the turtles df are not collected independently.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">head</span>(turtles, <span class="dv">10</span>) <span class="co"># What is it?</span></a>
+<a class="sourceLine" id="cb2-2" title="2">            ID Year   Gear Width Removed Status Stay nHooks</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="dv">1</span>       AL<span class="dv">-002</span> <span class="dv">2013</span>      J  <span class="fl">1.45</span>      UE      <span class="dv">1</span>    <span class="dv">9</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="dv">2</span>  AL<span class="op">-</span>LT14<span class="dv">-001</span> <span class="dv">2014</span>      J  <span class="fl">6.25</span>      ME      <span class="dv">0</span>    <span class="dv">4</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="dv">3</span>  AL<span class="op">-</span>LT14<span class="dv">-003</span> <span class="dv">2014</span>      J  <span class="fl">5.45</span>     <span class="ot">NaN</span>      <span class="dv">1</span>   <span class="dv">16</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="dv">4</span>  AL<span class="op">-</span>LT14<span class="dv">-004</span> <span class="dv">2014</span>  Kahle  <span class="fl">2.77</span>       B      <span class="dv">0</span>    <span class="dv">6</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="dv">5</span>  AL<span class="op">-</span>LT14<span class="dv">-006</span> <span class="dv">2014</span>      J  <span class="fl">4.75</span>      ME      <span class="dv">1</span>   <span class="dv">49</span>      <span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="dv">6</span>  AL<span class="op">-</span>LT14<span class="dv">-006</span> <span class="dv">2014</span> Circle  <span class="fl">2.92</span>     <span class="ot">NaN</span>      <span class="dv">1</span>   <span class="dv">49</span>      <span class="dv">2</span></a>
+<a class="sourceLine" id="cb2-9" title="9"><span class="dv">7</span>     LT13<span class="dv">-001</span> <span class="dv">2013</span>  Kahle  <span class="fl">2.22</span>      ME      <span class="dv">1</span>   <span class="dv">29</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="dv">8</span>     LT13<span class="dv">-003</span> <span class="dv">2013</span>      J  <span class="fl">1.34</span>      ME      <span class="dv">0</span>    <span class="dv">4</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-11" title="11"><span class="dv">9</span>     LT13<span class="dv">-004</span> <span class="dv">2013</span>      J  <span class="fl">1.63</span>      ME      <span class="dv">1</span>   <span class="dv">33</span>      <span class="dv">1</span></a>
+<a class="sourceLine" id="cb2-12" title="12"><span class="dv">10</span>    LT13<span class="dv">-008</span> <span class="dv">2013</span>      J    <span class="ot">NA</span>      LE      <span class="dv">1</span>   <span class="dv">26</span>      <span class="dv">2</span></a></code></pre></div>
+<p>So, we already know that our data do not conform to the assumptions of ANOVA, linear regression, or ANCOVA- but let’s keep using these data for the sake of demonstration…There is, of course another major violation of our assumptions that has to do with experimental design (that is commonly violated): these are DISCRETE data!! We’ll pretend for now that we can think of <code>Stay</code> as a continuous variable, though.</p>
+<p>You can see how this could get tedious to do for every level of every grouping factor and then for each continuous variable. So, we can also take a “shotgun” approach and look at how variables are related to one another.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Look at correlations between variables</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">pairs</span>(turtles)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="normality-of-residuals" class="section level3">
+<h3>Normality of residuals</h3>
+<p>In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero. This allows us to drop the error term, <span class="math inline">\(\epsilon\)</span> from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we can solve everything through optimization now).</p>
+<p>There are a multitude of tools at our disposal for examining normality of the residuals for linear models. One option is to examine group-specific error structures as a surrogate for residual error prior to analysis. The other option is to examine diagnostic plots of residuals directly from a fitted model object in R or other software programs (this is actually the more appropriate tool).</p>
+<div id="option-1.-data-exploration" class="section level4">
+<h4>Option 1. Data exploration</h4>
+<p><em>What are we looking for here?</em> We are looking to see if the response variable within each group is normally distributed. To assess this, we need to think in terms of the moments of a normal distribution that we learned about earlier in the course, specifically skew and kurtosis. Here we are looking for outliers in the data, or sample distributions that are highly skewed.</p>
+<p>First, we could go level by level for all of our grouping variables and conduct Shapiro tests (not shown here).</p>
+<p>We can look at a few different plots of our response to start teasing apart some of the potential violations of our assumptions.</p>
+<p>We know we will need to look at a year effect here because that is yet another form of non-independence (and potentially homogeneity) in our data. Let’s start with a boxplot:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">boxplot</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Whoa! We have a couple of issues here.</p>
+<p>First of all: we have clearly identified a number of ‘outliers’ in our data. These are the circles that are outside the whiskers of our boxplots.</p>
+<p>One way to address these outliers is by dropping them from the data. We only want to do this if we have a pretty good justification for this ahead of time (“<em>a priori</em>”). And, sometimes these can be some of the most interesting observations.</p>
+<p>Another way to deal with this is through data transformation. For example, we could use a log transformation in an attempt to normalize extreme values in our data. This certainly looks a little better, but may not get us all the way there…</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Make a boxplot of log-transformed data</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">boxplot</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<blockquote>
+<p>NOTE: I will not cover variable transformation extensively in this class. The justification is: 1) you can Google it to learn more about what transformations are useful for what, and 2) I will argue that most of the time there are better methods for dealing with non-normal data and then I will show you how to use those methods.</p>
+</blockquote>
+<p>We can also look at histograms to investigate normality:</p>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+<details>
+<p><summary>View code</summary></p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw">hist</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>], <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a></code></pre></div>
+</details>
+<p>Clearly these data are not normal! So we try a log transformation.</p>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<details>
+<p><summary>View code</summary></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>))</a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="kw">hist</span>(<span class="kw">log</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>]), <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a></code></pre></div>
+</details>
+<p>Again, a little better, but perhaps not as good as we’d like.</p>
+<p>The preferred method for examining the normality of residuals for us is going to be actually looking at the diagnostics from a fitted model object:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Set up a plotting window so we can see 4 plots at once</span></a>
+<a class="sourceLine" id="cb8-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb8-3" title="3"></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="co"># Plot the residual diagnostics</span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="kw">plot</span>(<span class="kw">lm</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Cool! But…what the heck are we looking at here??</p>
+<p><strong>Top left</strong>: residuals vs fitted values- this shows us how the residual error changes between groups (see below). This also shows us that we have clearly violated the assumption that the residuals are normally distributed with a mean of zero.</p>
+<p><strong>Top right</strong>: this is the one we are most interested in for examining the normality of our residual errors. If our residuals are normally distributed, then the points on this plot should (approximately) follow the straight, dotted line here. It does not! Q-Q plots, like others, can also be useful for identifying outliers in our data. These are labeled.</p>
+<p><strong>Bottom left</strong>: we will discuss below</p>
+<p><strong>Bottom right</strong>: this plot is useful for identifying points that might be exerting undo influence on the intercept and slope of the line that we are trying to fit here. In general we are looking for values of Cook’s D greater than <span class="math inline">\(\frac{4}{(N-k-1)}\)</span> where <span class="math inline">\(N\)</span> is sample size and <span class="math inline">\(k\)</span> is number of explanatory variables, if we are going to set a threshold: <a href="http://stats.stackexchange.com/questions/22161/how-to-read-cooks-distance-plots">check it out.</a></p>
+<p>Here, we see that most of our data are within this, but it looks like we actually have much bigger problems based on previous plots.</p>
+<p>We can hit the data with a log transformation to see if it fixes any of our problems:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb9-2" title="2"><span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>In fact, we see that the model fit has improved substantially, although the outliers in our data are still outliers.</p>
+<p>Finally, what if we have a continuous explanatory variable? We use the same approach:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Width, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Which leads us to our next assumption…</p>
+</div>
+</div>
+<div id="homogeneity-of-variances" class="section level3">
+<h3>Homogeneity of variances</h3>
+<p>This assumption states that the residual error within groups is about equal (still normal, with a mean of zero).</p>
+<p>One option for assessing the validity of this assumption is to use the Kolmogrov-Smirnov test to determine whether the data from different groups come from the same distribution. The null hypothesis for this test is that the two distributions do not differ.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>])</a>
+<a class="sourceLine" id="cb11-2" title="2"></a>
+<a class="sourceLine" id="cb11-3" title="3">    Two<span class="op">-</span>sample Kolmogorov<span class="op">-</span>Smirnov test</a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5">data<span class="op">:</span><span class="st">  </span>turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2013</span>] and turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>]</a>
+<a class="sourceLine" id="cb11-6" title="6">D =<span class="st"> </span><span class="fl">0.21955</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.618e-05</span></a>
+<a class="sourceLine" id="cb11-7" title="7">alternative hypothesis<span class="op">:</span><span class="st"> </span>two<span class="op">-</span>sided</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2013</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>])</a>
+<a class="sourceLine" id="cb12-2" title="2"></a>
+<a class="sourceLine" id="cb12-3" title="3">    Two<span class="op">-</span>sample Kolmogorov<span class="op">-</span>Smirnov test</a>
+<a class="sourceLine" id="cb12-4" title="4"></a>
+<a class="sourceLine" id="cb12-5" title="5">data<span class="op">:</span><span class="st">  </span>turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2013</span>] and turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>]</a>
+<a class="sourceLine" id="cb12-6" title="6">D =<span class="st"> </span><span class="fl">0.13576</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.08503</span></a>
+<a class="sourceLine" id="cb12-7" title="7">alternative hypothesis<span class="op">:</span><span class="st"> </span>two<span class="op">-</span>sided</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">ks.test</span>(turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2014</span>],turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year<span class="op">==</span><span class="dv">2015</span>])</a>
+<a class="sourceLine" id="cb13-2" title="2"></a>
+<a class="sourceLine" id="cb13-3" title="3">    Two<span class="op">-</span>sample Kolmogorov<span class="op">-</span>Smirnov test</a>
+<a class="sourceLine" id="cb13-4" title="4"></a>
+<a class="sourceLine" id="cb13-5" title="5">data<span class="op">:</span><span class="st">  </span>turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2014</span>] and turtles<span class="op">$</span>Stay[turtles<span class="op">$</span>Year <span class="op">==</span><span class="st"> </span><span class="dv">2015</span>]</a>
+<a class="sourceLine" id="cb13-6" title="6">D =<span class="st"> </span><span class="fl">0.35531</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">7.072e-11</span></a>
+<a class="sourceLine" id="cb13-7" title="7">alternative hypothesis<span class="op">:</span><span class="st"> </span>two<span class="op">-</span>sided</a></code></pre></div>
+<p><strong>BUT</strong>: this only works for grouping variables, and it only compares two groups at a time, so this could be VERY cumbersome. And, since we are using R to make our lives easier, we do not want cumbersome if we can help it. This test also is supposed to be reserved for continuous distributions.</p>
+<p>As with assumption #2 above, we have two ways (the same two) to visualize this information.</p>
+<p>First, we can use our boxplots again to look at variability within groups to visually assess whether or not the variance differs from one group to the next:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Plot the data</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb14-3" title="3"><span class="kw">boxplot</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>We can see that the variance is very clearly different between groups. A log transformation will fix that…</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Plot the log-transformed data</span></a>
+<a class="sourceLine" id="cb15-2" title="2"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="kw">boxplot</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles, <span class="dt">notch=</span><span class="ot">TRUE</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
+</div>
+</div>
+<div id="residual-diagnostics-from-a-fitted-model-object" class="section level2">
+<h2>Residual diagnostics from a fitted model object</h2>
+<p>Again, this is the preferred method for assessing normality in the <strong>residuals</strong> (notice the key word here?).</p>
+<p>We can look at how residual error changes (or doesn’t) across group factors such as <code>Year</code>.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb16-2" title="2"><span class="kw">plot</span>(<span class="kw">lm</span>(Stay<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
+<p>Now we are interested in the two plots on the left side of this multipanel plot.</p>
+<p>In the top left: we can see pretty clearly that there is a distinct trend in the residual error between groups. The group on the far right is much more variable than the others!</p>
+<p>In the bottom left, we essentially see the same thing. Our standardized residuals show us that the variances are clearly not equal.</p>
+<p>Looking at a log transformation demonstrates that these problems are pretty well solved by transformation, at least enough that a linear model should be robust to the differences between groups.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Year, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
+<p>We are looking for slightly different patterns with continuous explanatory variables.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="kw">plot</span>(<span class="kw">lm</span>(<span class="kw">log</span>(Stay)<span class="op">~</span>Width, <span class="dt">data=</span>turtles))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
+<p>In the top left, we want to see two things:</p>
+<p><strong>1.</strong> Most of our data should be contained on the interval (-3,3), so it looks like we are good to go here.</p>
+<p><strong>2.</strong> If the residuals are normally distributed, we should see what looks like random scatter in the plots.</p>
+<p>In the bottom left, we want to see:</p>
+<p><strong>1.</strong> Most of our data should be less than 3 (this is the square root of standardized residual so they are all positive)</p>
+<p><strong>2.</strong> We should see random scatter in these as well.</p>
+<div id="summary" class="section level3">
+<h3>Summary</h3>
+<p>Do this stuff <strong>before</strong> you start fitting all kinds of models because it is important to think about ahead of time! Examination of residual plots should become second nature to you in these analyses because it is the most powerful tool you have for testing assumptions. Don’t freak out if things don’t look perfect (they almost never will), and realize that there may be ways of dealing with violations within the context of linear models. If not, there certainly are other models designed specifically for this purpose.</p>
+</div>
+</div>
+<div id="communicating-effect-sizes" class="section level2">
+<h2>Communicating effect sizes</h2>
+<h3 id="multi">
+Interpretting group effects
+</h3>
+<p>When we are working in the world of one-way ANOVA, or even more complex models that contain only “main effects” of categorical, explanatory variables, the interpretation of these effects is relatively straightforward. Let’s use the plant growth data as an example.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="kw">data</span>(<span class="st">&quot;PlantGrowth&quot;</span>)</a></code></pre></div>
+<p>We’ll start here by fitting a one-way anova to test effects of treatment on on plant weight.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># Get the names of the df</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">names</span>(PlantGrowth)</a>
+<a class="sourceLine" id="cb20-3" title="3">[<span class="dv">1</span>] <span class="st">&quot;weight&quot;</span> <span class="st">&quot;group&quot;</span> </a>
+<a class="sourceLine" id="cb20-4" title="4"></a>
+<a class="sourceLine" id="cb20-5" title="5"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb20-6" title="6">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data =</span> PlantGrowth)</a>
+<a class="sourceLine" id="cb20-7" title="7"></a>
+<a class="sourceLine" id="cb20-8" title="8"><span class="co"># Do the post-hoc comparisons of means</span></a>
+<a class="sourceLine" id="cb20-9" title="9"><span class="co"># Just a reminder that the only difference is trt2-trt1</span></a>
+<a class="sourceLine" id="cb20-10" title="10"><span class="kw">TukeyHSD</span>(<span class="kw">aov</span>(mod)) </a>
+<a class="sourceLine" id="cb20-11" title="11">  Tukey multiple comparisons of means</a>
+<a class="sourceLine" id="cb20-12" title="12">    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level</a>
+<a class="sourceLine" id="cb20-13" title="13"></a>
+<a class="sourceLine" id="cb20-14" title="14">Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> mod)</a>
+<a class="sourceLine" id="cb20-15" title="15"></a>
+<a class="sourceLine" id="cb20-16" title="16"><span class="op">$</span>group</a>
+<a class="sourceLine" id="cb20-17" title="17">            diff        lwr       upr     p adj</a>
+<a class="sourceLine" id="cb20-18" title="18">trt1<span class="op">-</span>ctrl <span class="fl">-0.371</span> <span class="fl">-1.0622161</span> <span class="fl">0.3202161</span> <span class="fl">0.3908711</span></a>
+<a class="sourceLine" id="cb20-19" title="19">trt2<span class="op">-</span>ctrl  <span class="fl">0.494</span> <span class="fl">-0.1972161</span> <span class="fl">1.1852161</span> <span class="fl">0.1979960</span></a>
+<a class="sourceLine" id="cb20-20" title="20">trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="fl">0.1737839</span> <span class="fl">1.5562161</span> <span class="fl">0.0120064</span></a></code></pre></div>
+<p>We’ve seen these data and this model before. We know there was a significant effect of treatment on plant weight. So, for now we will ignore the ANOVA and just look at the summary (if you want the ANOVA you can either summarize it yourself or go back to previous lecture modules).</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="kw">summary</span>(mod)</a>
+<a class="sourceLine" id="cb21-2" title="2"></a>
+<a class="sourceLine" id="cb21-3" title="3">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb21-4" title="4"><span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)</a>
+<a class="sourceLine" id="cb21-5" title="5"></a>
+<a class="sourceLine" id="cb21-6" title="6">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb21-7" title="7"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb21-8" title="8"><span class="fl">-1.0710</span> <span class="fl">-0.4180</span> <span class="fl">-0.0060</span>  <span class="fl">0.2627</span>  <span class="fl">1.3690</span> </a>
+<a class="sourceLine" id="cb21-9" title="9"></a>
+<a class="sourceLine" id="cb21-10" title="10">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb21-11" title="11"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb21-12" title="12">(Intercept)   <span class="fl">5.0320</span>     <span class="fl">0.1971</span>  <span class="fl">25.527</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb21-13" title="13">grouptrt1    <span class="fl">-0.3710</span>     <span class="fl">0.2788</span>  <span class="fl">-1.331</span>   <span class="fl">0.1944</span>    </a>
+<a class="sourceLine" id="cb21-14" title="14">grouptrt2     <span class="fl">0.4940</span>     <span class="fl">0.2788</span>   <span class="fl">1.772</span>   <span class="fl">0.0877</span> .  </a>
+<a class="sourceLine" id="cb21-15" title="15"><span class="op">---</span></a>
+<a class="sourceLine" id="cb21-16" title="16">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb21-17" title="17"></a>
+<a class="sourceLine" id="cb21-18" title="18">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.6234</span> on <span class="dv">27</span> degrees of freedom</a>
+<a class="sourceLine" id="cb21-19" title="19">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2641</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2096</span> </a>
+<a class="sourceLine" id="cb21-20" title="20">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">4.846</span> on <span class="dv">2</span> and <span class="dv">27</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.01591</span></a></code></pre></div>
+<p>The summary gives us the predicted means of the response for each factor level based on the fitted model. In the case of ANOVA, we can actually calculate these from the data because that is what the model solution should be if we haven’t violated any of our assumptions.</p>
+<div id="calculations-and-numerical-representation" class="section level4">
+<h4>Calculations and numerical representation</h4>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># We can get the model coefficients like this:</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">names</span>(mod)</a>
+<a class="sourceLine" id="cb22-3" title="3"> [<span class="dv">1</span>] <span class="st">&quot;coefficients&quot;</span>  <span class="st">&quot;residuals&quot;</span>     <span class="st">&quot;effects&quot;</span>       <span class="st">&quot;rank&quot;</span>          <span class="st">&quot;fitted.values&quot;</span> <span class="st">&quot;assign&quot;</span>        <span class="st">&quot;qr&quot;</span>            <span class="st">&quot;df.residual&quot;</span>   <span class="st">&quot;contrasts&quot;</span>     <span class="st">&quot;xlevels&quot;</span>       <span class="st">&quot;call&quot;</span>          <span class="st">&quot;terms&quot;</span>        </a>
+<a class="sourceLine" id="cb22-4" title="4">[<span class="dv">13</span>] <span class="st">&quot;model&quot;</span>        </a>
+<a class="sourceLine" id="cb22-5" title="5">coeffs &lt;-<span class="st"> </span><span class="kw">data.frame</span>(mod<span class="op">$</span>coefficients)</a>
+<a class="sourceLine" id="cb22-6" title="6"></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="co"># From the model, we can estimate:</span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="co"># Mean of control</span></a>
+<a class="sourceLine" id="cb22-9" title="9">y_control &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb22-10" title="10"><span class="co"># Mean of trt1</span></a>
+<a class="sourceLine" id="cb22-11" title="11">y_trt1 &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb22-12" title="12"><span class="co"># Mean of trt2</span></a>
+<a class="sourceLine" id="cb22-13" title="13">y_trt2 &lt;-<span class="st"> </span>coeffs[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">0</span> <span class="op">+</span><span class="st"> </span>coeffs[<span class="dv">3</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">1</span></a></code></pre></div>
+<p>Now, let’s compare our model predictions to the actual means.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Model predictions</span></a>
+<a class="sourceLine" id="cb23-2" title="2">group &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;ctrl&#39;</span>, <span class="st">&#39;trt1&#39;</span>, <span class="st">&#39;trt2&#39;</span>)</a>
+<a class="sourceLine" id="cb23-3" title="3">mu &lt;-<span class="st"> </span><span class="kw">c</span>(y_control, y_trt1, y_trt2)</a>
+<a class="sourceLine" id="cb23-4" title="4">preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(group, mu)</a>
+<a class="sourceLine" id="cb23-5" title="5"></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co"># Observed means</span></a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="kw">library</span>(plyr)</a>
+<a class="sourceLine" id="cb23-8" title="8">obs &lt;-<span class="st"> </span><span class="kw">ddply</span>(PlantGrowth, <span class="st">&#39;group&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(weight))</a>
+<a class="sourceLine" id="cb23-9" title="9"></a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="co"># Compare them</span></a>
+<a class="sourceLine" id="cb23-11" title="11">preds</a>
+<a class="sourceLine" id="cb23-12" title="12">  group    mu</a>
+<a class="sourceLine" id="cb23-13" title="13"><span class="dv">1</span>  ctrl <span class="fl">5.032</span></a>
+<a class="sourceLine" id="cb23-14" title="14"><span class="dv">2</span>  trt1 <span class="fl">4.661</span></a>
+<a class="sourceLine" id="cb23-15" title="15"><span class="dv">3</span>  trt2 <span class="fl">5.526</span></a>
+<a class="sourceLine" id="cb23-16" title="16">obs</a>
+<a class="sourceLine" id="cb23-17" title="17">  group    mu</a>
+<a class="sourceLine" id="cb23-18" title="18"><span class="dv">1</span>  ctrl <span class="fl">5.032</span></a>
+<a class="sourceLine" id="cb23-19" title="19"><span class="dv">2</span>  trt1 <span class="fl">4.661</span></a>
+<a class="sourceLine" id="cb23-20" title="20"><span class="dv">3</span>  trt2 <span class="fl">5.526</span></a></code></pre></div>
+</div>
+<div id="graphical-representation" class="section level4">
+<h4>Graphical representation</h4>
+<p>We could use any number of graphical tools to represent these results. Given that we’ve met the assumptions of normality, the simplest (and most common) method for visualizing these results is with a box plot.</p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># Set the plotting margins in a call to par</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb24-3" title="3"></a>
+<a class="sourceLine" id="cb24-4" title="4"><span class="co"># Make the box plot, but don&#39;t use the default axis</span></a>
+<a class="sourceLine" id="cb24-5" title="5"><span class="kw">boxplot</span>(weight<span class="op">~</span>group,</a>
+<a class="sourceLine" id="cb24-6" title="6">        <span class="dt">data=</span>PlantGrowth,</a>
+<a class="sourceLine" id="cb24-7" title="7">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</a>
+<a class="sourceLine" id="cb24-8" title="8">        <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>,</a>
+<a class="sourceLine" id="cb24-9" title="9">        <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">3</span>, <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb24-10" title="10">)</a>
+<a class="sourceLine" id="cb24-11" title="11"></a>
+<a class="sourceLine" id="cb24-12" title="12"><span class="co"># Add the x axis with good labels</span></a>
+<a class="sourceLine" id="cb24-13" title="13"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>),</a>
+<a class="sourceLine" id="cb24-14" title="14">  <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;Control&#39;</span>, <span class="st">&#39;Treatment 1&#39;</span>, <span class="st">&#39;Treatment 2&#39;</span>)</a>
+<a class="sourceLine" id="cb24-15" title="15">)</a>
+<a class="sourceLine" id="cb24-16" title="16"></a>
+<a class="sourceLine" id="cb24-17" title="17"><span class="co"># Add the default y-axis, but rotated</span></a>
+<a class="sourceLine" id="cb24-18" title="18"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb24-19" title="19"></a>
+<a class="sourceLine" id="cb24-20" title="20"><span class="co"># Add the y-axis label</span></a>
+<a class="sourceLine" id="cb24-21" title="21"><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Mass (g)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.5</span>)</a>
+<a class="sourceLine" id="cb24-22" title="22"></a>
+<a class="sourceLine" id="cb24-23" title="23"><span class="co"># Add a letter report to indicate</span></a>
+<a class="sourceLine" id="cb24-24" title="24"><span class="co"># significant differences between groups</span></a>
+<a class="sourceLine" id="cb24-25" title="25"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;a, b&#39;</span>)</a>
+<a class="sourceLine" id="cb24-26" title="26"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">2</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;a&#39;</span>)</a>
+<a class="sourceLine" id="cb24-27" title="27"><span class="kw">text</span>(<span class="dt">x=</span><span class="dv">3</span>, <span class="dt">y=</span><span class="fl">6.5</span>, <span class="st">&#39;b&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+</div>
+<div id="interpretting-effects-of-continuous-covariates" class="section level3">
+<h3>Interpretting effects of continuous covariates</h3>
+<p>As with group effects, the interpretation of a single, continuous predictor is pretty straightforward. Here, all we are doing is looking to use the equation for a line we have fit (y = b + mx) to predict the effects of one continuous variable on another. Let’s use the ‘swiss’ data again for this. Remember that this dataset compares fertility rates to a number of socio-economic indicators:</p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">data</span>(<span class="st">&#39;swiss&#39;</span>)</a>
+<a class="sourceLine" id="cb25-2" title="2"><span class="kw">names</span>(swiss)</a>
+<a class="sourceLine" id="cb25-3" title="3">[<span class="dv">1</span>] <span class="st">&quot;Fertility&quot;</span>        <span class="st">&quot;Agriculture&quot;</span>      <span class="st">&quot;Examination&quot;</span>      <span class="st">&quot;Education&quot;</span>        <span class="st">&quot;Catholic&quot;</span>         <span class="st">&quot;Infant.Mortality&quot;</span></a></code></pre></div>
+<p>We’ll make a model to predict the effect of education level on fertility:</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Make the model and save it to a named object called &#39;swiss.mod&#39;</span></a>
+<a class="sourceLine" id="cb26-2" title="2">swiss.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)</a></code></pre></div>
+<p>Next, we can look at the coefficient estimates for <code>swiss.mod</code>:</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Summarize the model</span></a>
+<a class="sourceLine" id="cb27-2" title="2"><span class="kw">summary</span>(swiss.mod)</a>
+<a class="sourceLine" id="cb27-3" title="3"></a>
+<a class="sourceLine" id="cb27-4" title="4">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb27-5" title="5"><span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb27-6" title="6"></a>
+<a class="sourceLine" id="cb27-7" title="7">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb27-8" title="8"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb27-9" title="9"><span class="fl">-17.036</span>  <span class="fl">-6.711</span>  <span class="fl">-1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> </a>
+<a class="sourceLine" id="cb27-10" title="10"></a>
+<a class="sourceLine" id="cb27-11" title="11">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb27-12" title="12"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb27-13" title="13">(Intercept)  <span class="fl">79.6101</span>     <span class="fl">2.1041</span>  <span class="fl">37.836</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb27-14" title="14">Education    <span class="fl">-0.8624</span>     <span class="fl">0.1448</span>  <span class="fl">-5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb27-15" title="15"><span class="op">---</span></a>
+<a class="sourceLine" id="cb27-16" title="16">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb27-17" title="17"></a>
+<a class="sourceLine" id="cb27-18" title="18">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom</a>
+<a class="sourceLine" id="cb27-19" title="19">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> </a>
+<a class="sourceLine" id="cb27-20" title="20">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></a></code></pre></div>
+<p>From this summary, we can see that we have an intercept of…</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Save intercept to a named object</span></a>
+<a class="sourceLine" id="cb28-2" title="2">intcpt &lt;-<span class="st"> </span><span class="fl">79.6101</span></a></code></pre></div>
+<p>…and a ‘slope’ for <code>Education</code> of…</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># Save slope to a named object</span></a>
+<a class="sourceLine" id="cb29-2" title="2">slp &lt;-<span class="st"> </span><span class="fl">-0.8624</span></a></code></pre></div>
+<p>As with the case of categorical explanatory variables, we are now interested in understanding how the response changes with respect to the variable of interest. But, this time we want to see what the mean (or some other measure) of the response is for all possible values of the explanatory variable from the lowest value to the maximum value, rather than just a few discrete values that we observed. To do this, we first need to formalize our equation. Let’s make a function that will predict the mean fertility for any given value of education level based on our model:</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1">y_fert &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb30-2" title="2">  intcpt <span class="op">+</span><span class="st"> </span>slp <span class="op">*</span><span class="st"> </span>x</a>
+<a class="sourceLine" id="cb30-3" title="3">}</a></code></pre></div>
+<p>Now, we can apply that function to either our observed data, or to newly generated data to make some predictions!</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># Using our observed data:</span></a>
+<a class="sourceLine" id="cb31-2" title="2"><span class="co"># Calculate new y values using </span></a>
+<a class="sourceLine" id="cb31-3" title="3"><span class="co"># the model parameters and our new data</span></a>
+<a class="sourceLine" id="cb31-4" title="4">obs_fit &lt;-<span class="st"> </span><span class="kw">y_fert</span>(swiss<span class="op">$</span>Education)</a>
+<a class="sourceLine" id="cb31-5" title="5"></a>
+<a class="sourceLine" id="cb31-6" title="6"><span class="co"># Plot the results</span></a>
+<a class="sourceLine" id="cb31-7" title="7"><span class="kw">plot</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,</a>
+<a class="sourceLine" id="cb31-8" title="8">     <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>)</a>
+<a class="sourceLine" id="cb31-9" title="9"></a>
+<a class="sourceLine" id="cb31-10" title="10"><span class="co"># Using new data based on the range of our explanatory variable:</span></a>
+<a class="sourceLine" id="cb31-11" title="11"><span class="co"># Make a sequence of new values based on the range of our data</span></a>
+<a class="sourceLine" id="cb31-12" title="12">newEd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),</a>
+<a class="sourceLine" id="cb31-13" title="13">                       <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education),</a>
+<a class="sourceLine" id="cb31-14" title="14">                       <span class="dt">by=</span><span class="fl">0.01</span>))</a>
+<a class="sourceLine" id="cb31-15" title="15"></a>
+<a class="sourceLine" id="cb31-16" title="16"><span class="co"># Give the only column a name that</span></a>
+<a class="sourceLine" id="cb31-17" title="17"><span class="co"># matches the data in the model above</span></a>
+<a class="sourceLine" id="cb31-18" title="18"><span class="kw">names</span>(newEd) &lt;-<span class="st"> &#39;Education&#39;</span></a>
+<a class="sourceLine" id="cb31-19" title="19"></a>
+<a class="sourceLine" id="cb31-20" title="20"><span class="co"># Predict changes in fertility</span></a>
+<a class="sourceLine" id="cb31-21" title="21"><span class="co"># based on education using our new values for</span></a>
+<a class="sourceLine" id="cb31-22" title="22"><span class="co"># education level, &#39;newEd&#39;, and </span></a>
+<a class="sourceLine" id="cb31-23" title="23"><span class="co"># our model parameters</span></a>
+<a class="sourceLine" id="cb31-24" title="24">pred_fit &lt;-<span class="st"> </span><span class="kw">y_fert</span>(newEd<span class="op">$</span>Education)</a>
+<a class="sourceLine" id="cb31-25" title="25"></a>
+<a class="sourceLine" id="cb31-26" title="26"><span class="co"># Plot the changes</span></a>
+<a class="sourceLine" id="cb31-27" title="27"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)    <span class="co"># This tells R to add it to the same graph</span></a>
+<a class="sourceLine" id="cb31-28" title="28"><span class="kw">plot</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
+<p>As you can see, the plotted lines completely overlap, which is exactly what we would expect.</p>
+<p>This is really useful for showing the effects of a continuous explanatory variable on the response, but there are a couple of issues:</p>
+<p><strong>1.</strong> We are showing the model predictions without any data, which can be use- ful sometimes in very complex datasets but not for simple linear models.</p>
+<p><strong>2.</strong> We are only showing the mean predictions. It would be nice to incorporate some of the uncertainty in our model, too.</p>
+<p>How can we fix these things? Glad you asked! First of all, we can actually plot the raw data against our predictions…</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Make the plot</span></a>
+<a class="sourceLine" id="cb32-2" title="2"><span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility,</a>
+<a class="sourceLine" id="cb32-3" title="3">     <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>, </a>
+<a class="sourceLine" id="cb32-4" title="4">     <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, </a>
+<a class="sourceLine" id="cb32-5" title="5">     <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, </a>
+<a class="sourceLine" id="cb32-6" title="6">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb32-7" title="7">     <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>,</a>
+<a class="sourceLine" id="cb32-8" title="8">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb32-9" title="9"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb32-10" title="10"></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="co"># That&#39;s better. Now, we can plot</span></a>
+<a class="sourceLine" id="cb32-12" title="12"><span class="co"># our predictions over the top of that</span></a>
+<a class="sourceLine" id="cb32-13" title="13"><span class="kw">lines</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<p>What about the uncertainty in our model and our data? We can add this in by using the handy-dandy predict function in R!</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1">?predict</a></code></pre></div>
+<p>To get info on how to do this for linear models, scroll down and click on the link to <code>predict.lm</code>. You will see that we need to supply some kind offitted model object, some data from which to make predictions, and the type of interval you would like to show.</p>
+<p><code>object</code>: in this case it is <code>swiss.mod</code></p>
+<p><code>newdata</code>: This needs to be a data frame. It can either be the original, or it can be a new dataframe, but it must contain columns with the same names as the explanatory variables used in the model.</p>
+<p><code>interval</code>: usually, we are interested in the prediction interval, as this tends to be more honest about the uncertainty in our model predictions and our data, but there are other options</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1">pred_int &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object=</span>swiss.mod, <span class="dt">newdata=</span>newEd, <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)</a></code></pre></div>
+<p>So, what does the predict function give us?</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">head</span>(pred_int)</a>
+<a class="sourceLine" id="cb35-2" title="2">       fit      lwr      upr</a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="dv">1</span> <span class="fl">78.74771</span> <span class="fl">59.30196</span> <span class="fl">98.19346</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="dv">2</span> <span class="fl">78.73908</span> <span class="fl">59.29377</span> <span class="fl">98.18440</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="dv">3</span> <span class="fl">78.73046</span> <span class="fl">59.28559</span> <span class="fl">98.17534</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="dv">4</span> <span class="fl">78.72184</span> <span class="fl">59.27740</span> <span class="fl">98.16628</span></a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="dv">5</span> <span class="fl">78.71321</span> <span class="fl">59.26921</span> <span class="fl">98.15722</span></a>
+<a class="sourceLine" id="cb35-8" title="8"><span class="dv">6</span> <span class="fl">78.70459</span> <span class="fl">59.26102</span> <span class="fl">98.14816</span></a></code></pre></div>
+<p>As you can see, this is a <strong>matrix</strong> with three columns named <code>fit</code>, <code>lwr</code>, and <code>upr</code>. The column <code>fit</code> is the mean prediction from our model for the new data. The columns <code>lwr</code> and <code>upr</code> are the lower and upper limits for our prediction intervals. We already have our mean line fit, so we’ll just throw in some lines for the lower and upper bounds to our predictions! To do this, we can’t use our dollar-sign notation for pred_int because it is a <strong>matrix</strong>, so we can either do <code>pred_int[ , i]</code> or <code>pred_int[ , 'colname i']</code>.</p>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Make the original plot</span></a>
+<a class="sourceLine" id="cb36-2" title="2"><span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility,</a>
+<a class="sourceLine" id="cb36-3" title="3">     <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>,</a>
+<a class="sourceLine" id="cb36-4" title="4">     <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>, </a>
+<a class="sourceLine" id="cb36-5" title="5">     <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb36-6" title="6">     <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.5</span>,</a>
+<a class="sourceLine" id="cb36-7" title="7">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb36-8" title="8"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb36-9" title="9"></a>
+<a class="sourceLine" id="cb36-10" title="10"><span class="co"># Add line for mean predictions over the top of that</span></a>
+<a class="sourceLine" id="cb36-11" title="11"><span class="kw">lines</span>(swiss<span class="op">$</span>Education, obs_fit, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb36-12" title="12"></a>
+<a class="sourceLine" id="cb36-13" title="13"><span class="co"># Add prediction intervals</span></a>
+<a class="sourceLine" id="cb36-14" title="14"><span class="kw">lines</span>(<span class="dt">x=</span>newEd<span class="op">$</span>Education, <span class="dt">y=</span>pred_int[ ,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb36-15" title="15"><span class="kw">lines</span>(<span class="dt">x=</span>newEd<span class="op">$</span>Education, <span class="dt">y=</span>pred_int[ ,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
+<p>Now that is a <strong>money</strong>, high-quality figure that shows your raw data, the model predictions, and the uncertainty associated with both of these.</p>
+</div>
+<div id="main-effects-in-ancova" class="section level3">
+<h3>Main effects in ANCOVA</h3>
+<p>Now, we are going to step up the complexity a little bit and start to look at how to interpret linear models with more than one variable, and more than one variable type. Exciting, I know!</p>
+<p>One categorical and one continuous explanatory variable- last week:</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Read in a new data set</span></a>
+<a class="sourceLine" id="cb37-2" title="2"><span class="co"># This data set contains </span></a>
+<a class="sourceLine" id="cb37-3" title="3"><span class="co"># pulses of 2 species of</span></a>
+<a class="sourceLine" id="cb37-4" title="4"><span class="co"># crickets collected under</span></a>
+<a class="sourceLine" id="cb37-5" title="5"><span class="co"># varying temperatures</span></a>
+<a class="sourceLine" id="cb37-6" title="6">crickets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crickets.txt&#39;</span>)</a></code></pre></div>
+<p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb38-2" title="2">cricket.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)</a>
+<a class="sourceLine" id="cb38-3" title="3"></a>
+<a class="sourceLine" id="cb38-4" title="4"><span class="co"># Install the car package. We need a </span></a>
+<a class="sourceLine" id="cb38-5" title="5"><span class="co"># function from this library for summary.</span></a>
+<a class="sourceLine" id="cb38-6" title="6"><span class="co"># install.packages(&#39;car&#39;) # Uncomment to install</span></a>
+<a class="sourceLine" id="cb38-7" title="7"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb38-8" title="8"></a>
+<a class="sourceLine" id="cb38-9" title="9"><span class="co"># Now we create the anova table for our ancova model</span></a>
+<a class="sourceLine" id="cb38-10" title="10"><span class="kw">Anova</span>(cricket.mod)</a>
+<a class="sourceLine" id="cb38-11" title="11">Anova <span class="kw">Table</span> (Type II tests)</a>
+<a class="sourceLine" id="cb38-12" title="12"></a>
+<a class="sourceLine" id="cb38-13" title="13">Response<span class="op">:</span><span class="st"> </span>Pulse</a>
+<a class="sourceLine" id="cb38-14" title="14">          Sum Sq Df F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb38-15" title="15">Species    <span class="fl">598.0</span>  <span class="dv">1</span>   <span class="fl">187.4</span> <span class="fl">6.272e-14</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb38-16" title="16">Temp      <span class="fl">4376.1</span>  <span class="dv">1</span>  <span class="fl">1371.4</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb38-17" title="17">Residuals   <span class="fl">89.3</span> <span class="dv">28</span>                      </a>
+<a class="sourceLine" id="cb38-18" title="18"><span class="op">---</span></a>
+<a class="sourceLine" id="cb38-19" title="19">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-20" title="20"></a>
+<a class="sourceLine" id="cb38-21" title="21"><span class="co"># And we can look at the summary of the linear model</span></a>
+<a class="sourceLine" id="cb38-22" title="22"><span class="kw">summary</span>(cricket.mod)</a>
+<a class="sourceLine" id="cb38-23" title="23"></a>
+<a class="sourceLine" id="cb38-24" title="24">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb38-25" title="25"><span class="kw">lm</span>(<span class="dt">formula =</span> Pulse <span class="op">~</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data =</span> crickets)</a>
+<a class="sourceLine" id="cb38-26" title="26"></a>
+<a class="sourceLine" id="cb38-27" title="27">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb38-28" title="28"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb38-29" title="29"><span class="fl">-3.0128</span> <span class="fl">-1.1296</span> <span class="fl">-0.3912</span>  <span class="fl">0.9650</span>  <span class="fl">3.7800</span> </a>
+<a class="sourceLine" id="cb38-30" title="30"></a>
+<a class="sourceLine" id="cb38-31" title="31">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb38-32" title="32"><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb38-33" title="33">(Intercept)  <span class="fl">-7.21091</span>    <span class="fl">2.55094</span>  <span class="fl">-2.827</span>  <span class="fl">0.00858</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb38-34" title="34">Speciesniv  <span class="fl">-10.06529</span>    <span class="fl">0.73526</span> <span class="fl">-13.689</span> <span class="fl">6.27e-14</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb38-35" title="35">Temp          <span class="fl">3.60275</span>    <span class="fl">0.09729</span>  <span class="fl">37.032</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb38-36" title="36"><span class="op">---</span></a>
+<a class="sourceLine" id="cb38-37" title="37">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb38-38" title="38"></a>
+<a class="sourceLine" id="cb38-39" title="39">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.786</span> on <span class="dv">28</span> degrees of freedom</a>
+<a class="sourceLine" id="cb38-40" title="40">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9896</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9888</span> </a>
+<a class="sourceLine" id="cb38-41" title="41">F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">1331</span> on <span class="dv">2</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a></code></pre></div>
+<p>We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.</p>
+<p>Plot the predictions by species.</p>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="kw">plot</span>(crickets<span class="op">$</span>Temp,</a>
+<a class="sourceLine" id="cb39-3" title="3">  crickets<span class="op">$</span>Pulse,</a>
+<a class="sourceLine" id="cb39-4" title="4">  <span class="dt">pch=</span><span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb39-5" title="5">  <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[crickets<span class="op">$</span>Species],</a>
+<a class="sourceLine" id="cb39-6" title="6">  <span class="dt">cex=</span><span class="fl">1.5</span>,</a>
+<a class="sourceLine" id="cb39-7" title="7">  <span class="dt">ylab =</span> <span class="st">&#39;Pulse&#39;</span>,</a>
+<a class="sourceLine" id="cb39-8" title="8">  <span class="dt">xlab =</span> <span class="st">&#39;Temperature (C)&#39;</span>,</a>
+<a class="sourceLine" id="cb39-9" title="9">  <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb39-10" title="10"></a>
+<a class="sourceLine" id="cb39-11" title="11"><span class="co"># Add the y-axis labels and rotate them</span></a>
+<a class="sourceLine" id="cb39-12" title="12"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb39-13" title="13"></a>
+<a class="sourceLine" id="cb39-14" title="14"><span class="co"># Make predictions from the fitted model object</span></a>
+<a class="sourceLine" id="cb39-15" title="15">preds &lt;-<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod, <span class="dt">newdata =</span> crickets,</a>
+<a class="sourceLine" id="cb39-16" title="16">  <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))</a>
+<a class="sourceLine" id="cb39-17" title="17"></a>
+<a class="sourceLine" id="cb39-18" title="18"><span class="co"># Add prediction lines for species &#39;ex&#39;</span></a>
+<a class="sourceLine" id="cb39-19" title="19"><span class="co"># Mean</span></a>
+<a class="sourceLine" id="cb39-20" title="20"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb39-21" title="21">      preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb39-22" title="22"><span class="co"># Lower</span></a>
+<a class="sourceLine" id="cb39-23" title="23"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb39-24" title="24">      preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb39-25" title="25"><span class="co"># Upper</span></a>
+<a class="sourceLine" id="cb39-26" title="26"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb39-27" title="27">      preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb39-28" title="28"></a>
+<a class="sourceLine" id="cb39-29" title="29"><span class="co"># Add prediction lines for species &#39;niv&#39;</span></a>
+<a class="sourceLine" id="cb39-30" title="30"><span class="co"># Mean</span></a>
+<a class="sourceLine" id="cb39-31" title="31"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb39-32" title="32">      preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb39-33" title="33"><span class="co"># Lower</span></a>
+<a class="sourceLine" id="cb39-34" title="34"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb39-35" title="35">      preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb39-36" title="36"><span class="co"># Upper</span></a>
+<a class="sourceLine" id="cb39-37" title="37"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb39-38" title="38">      preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-45-1.png" width="672" /></p>
+</div>
+<div id="main-effects-with-two-categorical-explanatory-variables" class="section level3">
+<h3>Main effects with two categorical explanatory variables</h3>
+<p>For this example, we will consider a new data set. These data are from an experiment in Restorative Dentistry and Endodontics that was published in 2014. The study examines effects of drying light and resin type on the strength of a bonding resin for teeth.</p>
+<p>The full citation for the paper is:</p>
+<p>Kim, H-Y. 2014. Statistical notes for clinical researchers: Two-way analysis of variance (ANOVA)-exploring possible interaction between factors. Restorative Dentistry and Endodontics 39(2):143-147.</p>
+<p>Here are the data:</p>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1">dental &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</a></code></pre></div>
+<p>Now, fit a model to the data.</p>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># We are looking only at main effects</span></a>
+<a class="sourceLine" id="cb41-2" title="2">dental.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights <span class="op">+</span><span class="st"> </span>resin, <span class="dt">data=</span>dental)</a></code></pre></div>
+<p>If we make an ANOVA table for this two-way ANOVA, we see that there are significant main effects of resin type but not lights used for drying.</p>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">anova</span>(dental.mod)</a>
+<a class="sourceLine" id="cb42-2" title="2">Analysis of Variance Table</a>
+<a class="sourceLine" id="cb42-3" title="3"></a>
+<a class="sourceLine" id="cb42-4" title="4">Response<span class="op">:</span><span class="st"> </span>mpa</a>
+<a class="sourceLine" id="cb42-5" title="5">          Df Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb42-6" title="6">lights     <span class="dv">1</span>   <span class="fl">34.7</span>   <span class="fl">34.72</span>  <span class="fl">0.6797</span>    <span class="fl">0.4123</span>    </a>
+<a class="sourceLine" id="cb42-7" title="7">resin      <span class="dv">3</span> <span class="fl">1999.7</span>  <span class="fl">666.57</span> <span class="fl">13.0514</span> <span class="fl">6.036e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb42-8" title="8">Residuals <span class="dv">75</span> <span class="fl">3830.5</span>   <span class="fl">51.07</span>                      </a>
+<a class="sourceLine" id="cb42-9" title="9"><span class="op">---</span></a>
+<a class="sourceLine" id="cb42-10" title="10">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
+<p>We can also examine the model coeffficients for a closer look at what this means.</p>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">summary</span>(dental.mod)</a>
+<a class="sourceLine" id="cb43-2" title="2"></a>
+<a class="sourceLine" id="cb43-3" title="3">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb43-4" title="4"><span class="kw">lm</span>(<span class="dt">formula =</span> mpa <span class="op">~</span><span class="st"> </span>lights <span class="op">+</span><span class="st"> </span>resin, <span class="dt">data =</span> dental)</a>
+<a class="sourceLine" id="cb43-5" title="5"></a>
+<a class="sourceLine" id="cb43-6" title="6">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb43-7" title="7"><span class="st">     </span>Min       1Q   Median       3Q      Max </a>
+<a class="sourceLine" id="cb43-8" title="8"><span class="fl">-14.1162</span>  <span class="fl">-4.9531</span>   <span class="fl">0.1188</span>   <span class="fl">4.4613</span>  <span class="fl">14.4663</span> </a>
+<a class="sourceLine" id="cb43-9" title="9"></a>
+<a class="sourceLine" id="cb43-10" title="10">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb43-11" title="11"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb43-12" title="12">(Intercept)   <span class="fl">19.074</span>      <span class="fl">1.787</span>  <span class="fl">10.676</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb43-13" title="13">lightsLED     <span class="fl">-1.318</span>      <span class="fl">1.598</span>  <span class="fl">-0.824</span>  <span class="fl">0.41229</span>    </a>
+<a class="sourceLine" id="cb43-14" title="14">resinB         <span class="fl">3.815</span>      <span class="fl">2.260</span>   <span class="fl">1.688</span>  <span class="fl">0.09555</span> .  </a>
+<a class="sourceLine" id="cb43-15" title="15">resinC         <span class="fl">6.740</span>      <span class="fl">2.260</span>   <span class="fl">2.982</span>  <span class="fl">0.00386</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb43-16" title="16">resinD        <span class="fl">13.660</span>      <span class="fl">2.260</span>   <span class="fl">6.044</span> <span class="fl">5.39e-08</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb43-17" title="17"><span class="op">---</span></a>
+<a class="sourceLine" id="cb43-18" title="18">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb43-19" title="19"></a>
+<a class="sourceLine" id="cb43-20" title="20">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">7.147</span> on <span class="dv">75</span> degrees of freedom</a>
+<a class="sourceLine" id="cb43-21" title="21">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.3469</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.312</span> </a>
+<a class="sourceLine" id="cb43-22" title="22">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">9.958</span> on <span class="dv">4</span> and <span class="dv">75</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.616e-06</span></a></code></pre></div>
+<p>Remember, in our data we had 2 kinds of lights, and 4 kinds of resin. But, here we have one less of each! Why is this? It is because of the way categorical variables are dummy coded for linear models, so one level of each variable is wrapped up in the estimate for our intercept.</p>
+<p>Right now, you might be a little confused about how to calculate and show the effect size for these variables. If not, you should probably take a more advanced stats class.</p>
+<p>One reasonable option might be to summarize the data by the means and plot the means.</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># Summarize the means using ddply</span></a>
+<a class="sourceLine" id="cb44-2" title="2"><span class="kw">library</span>(plyr)</a>
+<a class="sourceLine" id="cb44-3" title="3">mus &lt;-<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean =</span> <span class="kw">mean</span>(mpa))</a>
+<a class="sourceLine" id="cb44-4" title="4"></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="co"># Plot the summaries</span></a>
+<a class="sourceLine" id="cb44-6" title="6"><span class="co"># Make resin into a numeric for plotting trick</span></a>
+<a class="sourceLine" id="cb44-7" title="7">resin &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin)</a>
+<a class="sourceLine" id="cb44-8" title="8"></a>
+<a class="sourceLine" id="cb44-9" title="9"><span class="co"># Set graphical parameters</span></a>
+<a class="sourceLine" id="cb44-10" title="10"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb44-11" title="11"></a>
+<a class="sourceLine" id="cb44-12" title="12"><span class="co"># Plot the raw data by resin type</span></a>
+<a class="sourceLine" id="cb44-13" title="13"><span class="co"># and color code for lights on the second</span></a>
+<a class="sourceLine" id="cb44-14" title="14"><span class="co"># linen of code ( bg=c(&#39;blue&#39;, &#39;red&#39;)[c(dental$lights)] )</span></a>
+<a class="sourceLine" id="cb44-15" title="15"><span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,</a>
+<a class="sourceLine" id="cb44-16" title="16">     <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],</a>
+<a class="sourceLine" id="cb44-17" title="17">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb44-18" title="18"></a>
+<a class="sourceLine" id="cb44-19" title="19"><span class="co"># Plot the means for Halogen lights by resin type</span></a>
+<a class="sourceLine" id="cb44-20" title="20"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb44-21" title="21"><span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>,</a>
+<a class="sourceLine" id="cb44-22" title="22">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb44-23" title="23"></a>
+<a class="sourceLine" id="cb44-24" title="24"><span class="co"># Add a line for Halogen lights by resin type</span></a>
+<a class="sourceLine" id="cb44-25" title="25"><span class="kw">lines</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb44-26" title="26"></a>
+<a class="sourceLine" id="cb44-27" title="27"><span class="co"># Add the plot for LED lights</span></a>
+<a class="sourceLine" id="cb44-28" title="28"><span class="co"># Plot the means for LED by resin type</span></a>
+<a class="sourceLine" id="cb44-29" title="29"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb44-30" title="30"><span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>,</a>
+<a class="sourceLine" id="cb44-31" title="31">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb44-32" title="32"></a>
+<a class="sourceLine" id="cb44-33" title="33"><span class="co"># Add a line for LED lights by resin type</span></a>
+<a class="sourceLine" id="cb44-34" title="34"><span class="kw">lines</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb44-35" title="35"></a>
+<a class="sourceLine" id="cb44-36" title="36"><span class="co"># Add x and y axes</span></a>
+<a class="sourceLine" id="cb44-37" title="37"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</a>
+<a class="sourceLine" id="cb44-38" title="38"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb44-39" title="39"></a>
+<a class="sourceLine" id="cb44-40" title="40"><span class="co"># Add labels</span></a>
+<a class="sourceLine" id="cb44-41" title="41"><span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb44-42" title="42"><span class="kw">mtext</span>(<span class="st">&#39;Bond strength (mpa)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb44-43" title="43"></a>
+<a class="sourceLine" id="cb44-44" title="44"><span class="co"># Let us have a legend</span></a>
+<a class="sourceLine" id="cb44-45" title="45"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>,</a>
+<a class="sourceLine" id="cb44-46" title="46">       <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>),</a>
+<a class="sourceLine" id="cb44-47" title="47">       <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>),</a>
+<a class="sourceLine" id="cb44-48" title="48">       <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-51-1.png" width="672" /></p>
+<p>Another option is to make predictions for each combination of levels. We can do this using the math behind our model.</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># Store the coefficients in their own object</span></a>
+<a class="sourceLine" id="cb45-2" title="2">res &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">summary</span>(dental.mod)<span class="op">$</span>coefficients )</a>
+<a class="sourceLine" id="cb45-3" title="3">res</a>
+<a class="sourceLine" id="cb45-4" title="4">            Estimate Std..Error    t.value     Pr...t..</a>
+<a class="sourceLine" id="cb45-5" title="5">(Intercept) <span class="fl">19.07375</span>   <span class="fl">1.786635</span> <span class="fl">10.6757944</span> <span class="fl">1.044637e-16</span></a>
+<a class="sourceLine" id="cb45-6" title="6">lightsLED   <span class="fl">-1.31750</span>   <span class="fl">1.598015</span> <span class="fl">-0.8244603</span> <span class="fl">4.122925e-01</span></a>
+<a class="sourceLine" id="cb45-7" title="7">resinB       <span class="fl">3.81500</span>   <span class="fl">2.259935</span>  <span class="fl">1.6881019</span> <span class="fl">9.554608e-02</span></a>
+<a class="sourceLine" id="cb45-8" title="8">resinC       <span class="fl">6.74000</span>   <span class="fl">2.259935</span>  <span class="fl">2.9823872</span> <span class="fl">3.856472e-03</span></a>
+<a class="sourceLine" id="cb45-9" title="9">resinD      <span class="fl">13.66000</span>   <span class="fl">2.259935</span>  <span class="fl">6.0444226</span> <span class="fl">5.386106e-08</span></a></code></pre></div>
+<p>Make predictions for Halogen lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1">hal &lt;-<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb46-2" title="2">  res[<span class="dv">1</span>,<span class="dv">1</span>],             <span class="co"># Halogen lights, resin A</span></a>
+<a class="sourceLine" id="cb46-3" title="3">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">3</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin B</span></a>
+<a class="sourceLine" id="cb46-4" title="4">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">4</span>,<span class="dv">1</span>],  <span class="co"># Halogen lights, resin C</span></a>
+<a class="sourceLine" id="cb46-5" title="5">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">5</span>,<span class="dv">1</span>]   <span class="co"># Halogen lights, resin D</span></a>
+<a class="sourceLine" id="cb46-6" title="6">)</a></code></pre></div>
+<p>Make predictions for LED lights. Remember that the intercept term is the coefficient for Halogen lights and resin A. All other coefficients are interpreted in relation to this one, so we base our calculations for each level on this term. Sound familiar?? Now, to predict effects of LED lights and each resin type we need to include the coefficient for lightsLED.</p>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">led =<span class="st"> </span><span class="kw">c</span>(</a>
+<a class="sourceLine" id="cb47-2" title="2">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>],             <span class="co"># LED lights, resin A</span></a>
+<a class="sourceLine" id="cb47-3" title="3">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">3</span>,<span class="dv">1</span>],  <span class="co"># LED lights, resin B</span></a>
+<a class="sourceLine" id="cb47-4" title="4">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">4</span>,<span class="dv">1</span>],  <span class="co"># LED lights, resin C</span></a>
+<a class="sourceLine" id="cb47-5" title="5">  res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">5</span>,<span class="dv">1</span>]   <span class="co"># LED lights, resin D</span></a>
+<a class="sourceLine" id="cb47-6" title="6">)</a></code></pre></div>
+<p>How do these values compare to our empirical means? Let’s see…</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="co"># Plot the summaries</span></a>
+<a class="sourceLine" id="cb48-2" title="2"><span class="co"># Set graphical parameters</span></a>
+<a class="sourceLine" id="cb48-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb48-4" title="4"></a>
+<a class="sourceLine" id="cb48-5" title="5"><span class="co"># Plot the raw data by resin type and color code for lights</span></a>
+<a class="sourceLine" id="cb48-6" title="6"><span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,</a>
+<a class="sourceLine" id="cb48-7" title="7">    <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],</a>
+<a class="sourceLine" id="cb48-8" title="8">    <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb48-9" title="9"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-10" title="10"></a>
+<a class="sourceLine" id="cb48-11" title="11"><span class="co"># Plot the means for Halogen lights by resin type</span></a>
+<a class="sourceLine" id="cb48-12" title="12"><span class="kw">plot</span>(hal, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">cex =</span> <span class="fl">1.75</span>,</a>
+<a class="sourceLine" id="cb48-13" title="13">  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb48-14" title="14"></a>
+<a class="sourceLine" id="cb48-15" title="15"><span class="co"># Add a line for Halogen lights by resin type</span></a>
+<a class="sourceLine" id="cb48-16" title="16"><span class="kw">lines</span>(hal, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb48-17" title="17"></a>
+<a class="sourceLine" id="cb48-18" title="18"><span class="co"># Add the plot for LED lights</span></a>
+<a class="sourceLine" id="cb48-19" title="19"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb48-20" title="20"><span class="co"># Plot the means for LED by resin type</span></a>
+<a class="sourceLine" id="cb48-21" title="21"><span class="kw">plot</span>(led, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>,</a>
+<a class="sourceLine" id="cb48-22" title="22">  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb48-23" title="23"></a>
+<a class="sourceLine" id="cb48-24" title="24"><span class="co"># Add a line for LED lights by resin type</span></a>
+<a class="sourceLine" id="cb48-25" title="25"><span class="kw">lines</span>(led, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</a>
+<a class="sourceLine" id="cb48-26" title="26"></a>
+<a class="sourceLine" id="cb48-27" title="27"><span class="co"># Add x and y axes</span></a>
+<a class="sourceLine" id="cb48-28" title="28"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</a>
+<a class="sourceLine" id="cb48-29" title="29"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb48-30" title="30"></a>
+<a class="sourceLine" id="cb48-31" title="31"><span class="co"># Add labels</span></a>
+<a class="sourceLine" id="cb48-32" title="32"><span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb48-33" title="33"><span class="co">#mtext(&#39;Bond strength (mpa)&#39;, side=2, line=3, cex=1.25)</span></a>
+<a class="sourceLine" id="cb48-34" title="34"></a>
+<a class="sourceLine" id="cb48-35" title="35"><span class="co"># Let us have a legend</span></a>
+<a class="sourceLine" id="cb48-36" title="36"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb48-37" title="37">  <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
+<p>Well now, that is definitely different. We can clearly see now that there is no real effect of lights on the response, and that in our model we assumed that the relationship between resin and bond strength is the same across light types. So what do the differences between our empirical data and our predictions mean?</p>
+<blockquote>
+<p><strong>All models are wrong and some are useful</strong>.</p>
+</blockquote>
+<p>Clearly this specific model is not very useful. The reason for that is that in this model we have specified that the intercept of the line can change with light type, but not the slopes. We will examine a more useful model below.</p>
+<p><strong>LESSON</strong>: <em>This is why we should always check the trends in our model predictions against the raw data. These should be presented together wherever possible (becomes more difficult in complex models).</em></p>
+<p>Finally, we can use the built-in R functions to make predictions from our model:</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># Get all combinations of the unique</span></a>
+<a class="sourceLine" id="cb49-2" title="2"><span class="co"># values for light and resin types</span></a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="co"># using the &#39;expand.grid&#39; function</span></a>
+<a class="sourceLine" id="cb49-4" title="4">dnew &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb49-5" title="5">  <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))</a>
+<a class="sourceLine" id="cb49-6" title="6">)</a>
+<a class="sourceLine" id="cb49-7" title="7"></a>
+<a class="sourceLine" id="cb49-8" title="8"><span class="co"># Give the new df names</span></a>
+<a class="sourceLine" id="cb49-9" title="9"><span class="kw">names</span>(dnew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)</a>
+<a class="sourceLine" id="cb49-10" title="10"></a>
+<a class="sourceLine" id="cb49-11" title="11"><span class="co"># Sort the dataframe by lights for ease</span></a>
+<a class="sourceLine" id="cb49-12" title="12">dnew &lt;-<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]</a></code></pre></div>
+<p>Make predictions from these data. Because we are interested in comparing the different levels here, we can look at 95% CIs instead of prediction intervals.</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co"># Make the predictions</span></a>
+<a class="sourceLine" id="cb50-2" title="2">  dpreds &lt;-<span class="st"> </span><span class="kw">predict</span>(</a>
+<a class="sourceLine" id="cb50-3" title="3">    <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span></a>
+<a class="sourceLine" id="cb50-4" title="4">  )</a>
+<a class="sourceLine" id="cb50-5" title="5"></a>
+<a class="sourceLine" id="cb50-6" title="6"><span class="co"># Now plot the predictions from this model</span></a>
+<a class="sourceLine" id="cb50-7" title="7">  <span class="co"># Set graphical parameters</span></a>
+<a class="sourceLine" id="cb50-8" title="8">    <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb50-9" title="9">    </a>
+<a class="sourceLine" id="cb50-10" title="10">  <span class="co"># Plot the raw data by resin type and color code for lights</span></a>
+<a class="sourceLine" id="cb50-11" title="11">    <span class="kw">plot</span>(<span class="dt">x=</span>resin, <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,</a>
+<a class="sourceLine" id="cb50-12" title="12">         <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],</a>
+<a class="sourceLine" id="cb50-13" title="13">         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb50-14" title="14">    </a>
+<a class="sourceLine" id="cb50-15" title="15">  <span class="co"># Add lines for the mean and prediction intervals for halogen</span></a>
+<a class="sourceLine" id="cb50-16" title="16">    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb50-17" title="17">    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb50-18" title="18">    <span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb50-19" title="19">    </a>
+<a class="sourceLine" id="cb50-20" title="20">  <span class="co"># Add lines for the mean and prediction intervals for LED</span></a>
+<a class="sourceLine" id="cb50-21" title="21">    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb50-22" title="22">    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb50-23" title="23">    <span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb50-24" title="24">    </a>
+<a class="sourceLine" id="cb50-25" title="25">  <span class="co"># Add x and y axes</span></a>
+<a class="sourceLine" id="cb50-26" title="26">    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</a>
+<a class="sourceLine" id="cb50-27" title="27">    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb50-28" title="28">    </a>
+<a class="sourceLine" id="cb50-29" title="29">  <span class="co"># Add labels</span></a>
+<a class="sourceLine" id="cb50-30" title="30">    <span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb50-31" title="31">    </a>
+<a class="sourceLine" id="cb50-32" title="32">  <span class="co"># Let us have a legend</span></a>
+<a class="sourceLine" id="cb50-33" title="33">    <span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb50-34" title="34">           <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
+<p>Two things to note here:</p>
+<p><strong>1.</strong> There is huge overlap in the CIs for these relationships, which makes us comfortable in the fact that we found no evidence for an effect of lights</p>
+<p><strong>2.</strong> These predictions are pretty messed up compared to the patterns we saw in the raw data…more to follow</p>
+</div>
+<div id="main-effects-with-two-continuous-covariates" class="section level3">
+<h3>Main effects with two continuous covariates</h3>
+<p>Let’s use the swiss data for this one. We start by fitting a model.</p>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1">smod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">*</span>Catholic, <span class="dt">data=</span>swiss)</a></code></pre></div>
+<p>Now look at the results.</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">summary</span>(smod)</a>
+<a class="sourceLine" id="cb52-2" title="2"></a>
+<a class="sourceLine" id="cb52-3" title="3">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb52-4" title="4"><span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">*</span><span class="st"> </span>Catholic, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb52-5" title="5"></a>
+<a class="sourceLine" id="cb52-6" title="6">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb52-8" title="8"><span class="fl">-11.953</span>  <span class="fl">-6.319</span>  <span class="fl">-1.368</span>   <span class="fl">6.380</span>  <span class="fl">14.297</span> </a>
+<a class="sourceLine" id="cb52-9" title="9"></a>
+<a class="sourceLine" id="cb52-10" title="10">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb52-11" title="11"><span class="st">                    </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb52-12" title="12">(Intercept)        <span class="fl">70.937553</span>   <span class="fl">3.106471</span>  <span class="fl">22.835</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb52-13" title="13">Education          <span class="fl">-0.427637</span>   <span class="fl">0.260176</span>  <span class="fl">-1.644</span>  <span class="fl">0.10754</span>    </a>
+<a class="sourceLine" id="cb52-14" title="14">Catholic            <span class="fl">0.184003</span>   <span class="fl">0.054539</span>   <span class="fl">3.374</span>  <span class="fl">0.00158</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb52-15" title="15">Education<span class="op">:</span>Catholic <span class="fl">-0.009380</span>   <span class="fl">0.005904</span>  <span class="fl">-1.589</span>  <span class="fl">0.11942</span>    </a>
+<a class="sourceLine" id="cb52-16" title="16"><span class="op">---</span></a>
+<a class="sourceLine" id="cb52-17" title="17">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb52-18" title="18"></a>
+<a class="sourceLine" id="cb52-19" title="19">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">8.191</span> on <span class="dv">43</span> degrees of freedom</a>
+<a class="sourceLine" id="cb52-20" title="20">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5981</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5701</span> </a>
+<a class="sourceLine" id="cb52-21" title="21">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.33</span> on <span class="dv">3</span> and <span class="dv">43</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.286e-08</span></a></code></pre></div>
+<p>Make the coefficients into a dataframe.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1">sres &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="kw">summary</span>(smod)<span class="op">$</span>coefficients)</a></code></pre></div>
+<p>The thing that’s confusing about multiple continous predictors is how to simulate new data used in predictions if there is any colinearity between the explanatory variables.</p>
+<p>So, we can do one of two things.</p>
+<p><strong>1.</strong> We can make predictions one variable at a time and hold the others constant at their means.</p>
+<p><strong>2.</strong> We can make predictions based on our original data</p>
+<p>First, let’s consider the case of making predictions from a single continuous explanatory variable (‘covariate’) at a time.</p>
+<p>Start with <code>Education</code> since we’ve already done it.</p>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># Make new values of Education across</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="co"># the range of observed values</span></a>
+<a class="sourceLine" id="cb54-3" title="3">  ednew &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Education),</a>
+<a class="sourceLine" id="cb54-4" title="4">              <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Education),</a>
+<a class="sourceLine" id="cb54-5" title="5">              <span class="dt">by=</span><span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb54-6" title="6"></a>
+<a class="sourceLine" id="cb54-7" title="7"><span class="co"># Make a column of mean for level of Catholocism</span></a>
+<a class="sourceLine" id="cb54-8" title="8">  cathnew &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Catholic), <span class="kw">length</span>(ednew))</a>
+<a class="sourceLine" id="cb54-9" title="9">  </a>
+<a class="sourceLine" id="cb54-10" title="10"><span class="co"># Combine them into a dataframe</span></a>
+<a class="sourceLine" id="cb54-11" title="11"><span class="co"># for use in predict function and assign names</span></a>
+<a class="sourceLine" id="cb54-12" title="12">  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)</a>
+<a class="sourceLine" id="cb54-13" title="13">  <span class="kw">names</span>(new) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)</a>
+<a class="sourceLine" id="cb54-14" title="14">  </a>
+<a class="sourceLine" id="cb54-15" title="15"><span class="co"># Use the predict function to predict</span></a>
+<a class="sourceLine" id="cb54-16" title="16"><span class="co"># new values of fertility based on</span></a>
+<a class="sourceLine" id="cb54-17" title="17"><span class="co"># education holding catholic constant</span></a>
+<a class="sourceLine" id="cb54-18" title="18"><span class="co"># at the mean value</span></a>
+<a class="sourceLine" id="cb54-19" title="19">  edpred &lt;-<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)</a>
+<a class="sourceLine" id="cb54-20" title="20">    </a>
+<a class="sourceLine" id="cb54-21" title="21"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb54-22" title="22">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb54-23" title="23">  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility,</a>
+<a class="sourceLine" id="cb54-24" title="24">       <span class="dt">ylab=</span><span class="st">&#39;Fertility index&#39;</span>,</a>
+<a class="sourceLine" id="cb54-25" title="25">       <span class="dt">xlab=</span><span class="st">&#39;Education level&#39;</span>,</a>
+<a class="sourceLine" id="cb54-26" title="26">       <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb54-27" title="27">       <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb54-28" title="28">  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb54-29" title="29">  </a>
+<a class="sourceLine" id="cb54-30" title="30"><span class="co"># Now plot the mean prediction line</span></a>
+<a class="sourceLine" id="cb54-31" title="31">  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb54-32" title="32">  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb54-33" title="33">  <span class="kw">lines</span>(new<span class="op">$</span>Education, edpred[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-61-1.png" width="672" /></p>
+<p>This should look familiar…</p>
+<p>Second, we can do the same for <code>Catholic</code> holding <code>Education</code> constant at the mean observed value.</p>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="co"># Make new values of Education</span></a>
+<a class="sourceLine" id="cb55-2" title="2"><span class="co"># across the range of observed values</span></a>
+<a class="sourceLine" id="cb55-3" title="3">  cathnew &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(swiss<span class="op">$</span>Catholic),</a>
+<a class="sourceLine" id="cb55-4" title="4">                <span class="dt">to=</span><span class="kw">max</span>(swiss<span class="op">$</span>Catholic),</a>
+<a class="sourceLine" id="cb55-5" title="5">                <span class="dt">by=</span><span class="fl">0.01</span>)</a>
+<a class="sourceLine" id="cb55-6" title="6"></a>
+<a class="sourceLine" id="cb55-7" title="7"><span class="co"># Make new column repeating the </span></a>
+<a class="sourceLine" id="cb55-8" title="8"><span class="co"># mean of Education across observations</span></a>
+<a class="sourceLine" id="cb55-9" title="9">  ednew &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">mean</span>(swiss<span class="op">$</span>Education), <span class="kw">length</span>(cathnew))</a>
+<a class="sourceLine" id="cb55-10" title="10">  </a>
+<a class="sourceLine" id="cb55-11" title="11"><span class="co"># Combine them into a dataframe for</span></a>
+<a class="sourceLine" id="cb55-12" title="12"><span class="co"># use in predict function and assign names</span></a>
+<a class="sourceLine" id="cb55-13" title="13">  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(ednew, cathnew)</a>
+<a class="sourceLine" id="cb55-14" title="14">  <span class="kw">names</span>(new) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Education&#39;</span>, <span class="st">&#39;Catholic&#39;</span>)</a>
+<a class="sourceLine" id="cb55-15" title="15">  </a>
+<a class="sourceLine" id="cb55-16" title="16"><span class="co"># Use the predict function to predict</span></a>
+<a class="sourceLine" id="cb55-17" title="17"><span class="co"># new values of fertility based on</span></a>
+<a class="sourceLine" id="cb55-18" title="18"><span class="co"># education holding catholic constant at the mean value</span></a>
+<a class="sourceLine" id="cb55-19" title="19">  cathpred &lt;-<span class="st"> </span><span class="kw">predict</span>(smod, new, <span class="dt">interval=</span><span class="st">&#39;prediction&#39;</span>)</a>
+<a class="sourceLine" id="cb55-20" title="20">  </a>
+<a class="sourceLine" id="cb55-21" title="21"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb55-22" title="22">  <span class="kw">plot</span>(swiss<span class="op">$</span>Catholic, swiss<span class="op">$</span>Fertility,</a>
+<a class="sourceLine" id="cb55-23" title="23">       <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Percent Catholic&#39;</span>,</a>
+<a class="sourceLine" id="cb55-24" title="24">       <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">100</span>),</a>
+<a class="sourceLine" id="cb55-25" title="25">       <span class="dt">cex.lab=</span><span class="fl">1.5</span>, <span class="dt">cex.axis=</span><span class="fl">1.25</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb55-26" title="26">  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb55-27" title="27">  </a>
+<a class="sourceLine" id="cb55-28" title="28"><span class="co"># Now plot the mean prediction line</span></a>
+<a class="sourceLine" id="cb55-29" title="29">  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb55-30" title="30">  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb55-31" title="31">  <span class="kw">lines</span>(new<span class="op">$</span>Catholic, cathpred[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-62-1.png" width="672" /></p>
+<p>This looks a little different.</p>
+<p>Here are some tricks we can use to visualize effects of 2 continuous variables at the same time.</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># Predictions from original data</span></a>
+<a class="sourceLine" id="cb56-2" title="2">swpred &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> smod,</a>
+<a class="sourceLine" id="cb56-3" title="3">                 <span class="dt">newdata =</span> swiss,</a>
+<a class="sourceLine" id="cb56-4" title="4">                 <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)</a>
+<a class="sourceLine" id="cb56-5" title="5"></a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="co"># Load the akima library after installling</span></a>
+<a class="sourceLine" id="cb56-7" title="7"><span class="co">#install.packages(&#39;akima&#39;)</span></a>
+<a class="sourceLine" id="cb56-8" title="8"><span class="kw">library</span>(akima)</a>
+<a class="sourceLine" id="cb56-9" title="9"></a>
+<a class="sourceLine" id="cb56-10" title="10"><span class="co"># Make a dataframe out of the</span></a>
+<a class="sourceLine" id="cb56-11" title="11"><span class="co"># explanatory variables and predictions</span></a>
+<a class="sourceLine" id="cb56-12" title="12">persp.test &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>swiss<span class="op">$</span>Education, <span class="dt">y=</span>swiss<span class="op">$</span>Catholic,   <span class="dt">z=</span>swpred[,<span class="dv">1</span>])</a>
+<a class="sourceLine" id="cb56-13" title="13"></a>
+<a class="sourceLine" id="cb56-14" title="14"><span class="co"># Order the dataframe so we</span></a>
+<a class="sourceLine" id="cb56-15" title="15"><span class="co"># have increasing values of x and y</span></a>
+<a class="sourceLine" id="cb56-16" title="16">persp.test=persp.test[<span class="kw">with</span>(persp.test, <span class="kw">order</span>(x, y)), ]</a>
+<a class="sourceLine" id="cb56-17" title="17"></a>
+<a class="sourceLine" id="cb56-18" title="18"><span class="co"># Do an interpolation to get predictions</span></a>
+<a class="sourceLine" id="cb56-19" title="19"><span class="co"># over a grid of x and y values using</span></a>
+<a class="sourceLine" id="cb56-20" title="20"><span class="co"># the &#39;interp&#39; function out of the akima package</span></a>
+<a class="sourceLine" id="cb56-21" title="21">im &lt;-<span class="st"> </span><span class="kw">with</span>(persp.test, <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>, <span class="dt">extrap=</span><span class="ot">FALSE</span>))</a></code></pre></div>
+<p>Now we can use the default graphics to make some pretty fancy plots once we have interpolated our predictions across a grid of observed explanatory variables.</p>
+<p>First, we can make a two-dimensional, colored contour plot with <code>filled.contour</code>:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">filled.contour</span>(im<span class="op">$</span>x, im<span class="op">$</span>y, im<span class="op">$</span>z, <span class="dt">col =</span> <span class="kw">rev</span>(<span class="kw">terrain.colors</span>(<span class="dv">25</span>)))</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-64-1.png" width="672" /></p>
+<p>Now how about a 3D contour plot? Sweet mother of swiss, these things are freakin awesome.</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Make the data into a usable form</span></a>
+<a class="sourceLine" id="cb58-2" title="2">Education &lt;-im<span class="op">$</span>x</a>
+<a class="sourceLine" id="cb58-3" title="3">Catholic &lt;-<span class="st"> </span>im<span class="op">$</span>y</a>
+<a class="sourceLine" id="cb58-4" title="4">Fertility &lt;-<span class="st"> </span>im<span class="op">$</span>z</a>
+<a class="sourceLine" id="cb58-5" title="5">nrz &lt;-<span class="st"> </span><span class="kw">nrow</span>(Fertility)</a>
+<a class="sourceLine" id="cb58-6" title="6">ncz &lt;-<span class="st"> </span><span class="kw">ncol</span>(Fertility)</a>
+<a class="sourceLine" id="cb58-7" title="7"></a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="co"># Create a function interpolating colors in the range of specified colors</span></a>
+<a class="sourceLine" id="cb58-9" title="9">jet.colors &lt;-<span class="st"> </span><span class="kw">colorRampPalette</span>( <span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;green&quot;</span>) )</a>
+<a class="sourceLine" id="cb58-10" title="10"></a>
+<a class="sourceLine" id="cb58-11" title="11"><span class="co"># Generate the desired number of colors from this palette</span></a>
+<a class="sourceLine" id="cb58-12" title="12">nbcol &lt;-<span class="st"> </span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb58-13" title="13">color &lt;-<span class="st"> </span><span class="kw">jet.colors</span>(nbcol)</a>
+<a class="sourceLine" id="cb58-14" title="14"></a>
+<a class="sourceLine" id="cb58-15" title="15"><span class="co"># Compute the z-value at the facet centres</span></a>
+<a class="sourceLine" id="cb58-16" title="16">zfacet &lt;-<span class="st"> </span>Fertility[<span class="op">-</span><span class="dv">1</span>, <span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>Fertility[<span class="op">-</span><span class="dv">1</span>, <span class="op">-</span>ncz] <span class="op">+</span></a>
+<a class="sourceLine" id="cb58-17" title="17"><span class="st">  </span>Fertility[<span class="op">-</span>nrz, <span class="dv">-1</span>] <span class="op">+</span><span class="st"> </span>Fertility[<span class="op">-</span>nrz, <span class="op">-</span>ncz]</a>
+<a class="sourceLine" id="cb58-18" title="18"></a>
+<a class="sourceLine" id="cb58-19" title="19"><span class="co"># Recode facet z-values into color indices</span></a>
+<a class="sourceLine" id="cb58-20" title="20">facetcol &lt;-<span class="st"> </span><span class="kw">cut</span>(zfacet, nbcol)</a>
+<a class="sourceLine" id="cb58-21" title="21"></a>
+<a class="sourceLine" id="cb58-22" title="22"><span class="co"># Now make a sweet freakin&#39; graph</span></a>
+<a class="sourceLine" id="cb58-23" title="23"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">1.5</span>,<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>),  <span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb58-24" title="24"><span class="kw">persp</span>(Education, Catholic, Fertility,</a>
+<a class="sourceLine" id="cb58-25" title="25">  <span class="dt">col =</span> color[facetcol],</a>
+<a class="sourceLine" id="cb58-26" title="26">  <span class="dt">phi =</span> <span class="dv">40</span>,</a>
+<a class="sourceLine" id="cb58-27" title="27">  <span class="dt">theta =</span> <span class="dv">120</span>,</a>
+<a class="sourceLine" id="cb58-28" title="28">  <span class="dt">scale=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb58-29" title="29">  <span class="dt">box=</span><span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb58-30" title="30">  <span class="dt">ticktype=</span><span class="st">&#39;detailed&#39;</span>,</a>
+<a class="sourceLine" id="cb58-31" title="31">  <span class="dt">border=</span><span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb58-32" title="32">  <span class="dt">r=</span><span class="dv">10</span>,</a>
+<a class="sourceLine" id="cb58-33" title="33">  <span class="dt">xlab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Education&#39;</span>,</a>
+<a class="sourceLine" id="cb58-34" title="34">  <span class="dt">ylab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Catholic&#39;</span>,</a>
+<a class="sourceLine" id="cb58-35" title="35">  <span class="dt">zlab=</span><span class="st">&#39;</span><span class="ch">\n\n</span><span class="st">Fertility&#39;</span></a>
+<a class="sourceLine" id="cb58-36" title="36">)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-65-1.png" width="672" /></p>
+</div>
+<div id="interpretting-interaction-terms" class="section level3">
+<h3>Interpretting interaction terms</h3>
+<p>Up to this point, we have only considered the ‘main effects’ of categorical and/or continuous explanatory variables on our response of interest. We are now going to extend this to include ‘interaction effects’ between variables.</p>
+<div id="two-categorical-explanatory-variables" class="section level4">
+<h4>Two categorical explanatory variables</h4>
+<p>Here are the data:</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># Here are the data:</span></a>
+<a class="sourceLine" id="cb59-2" title="2">dental &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dental.csv&#39;</span>)</a></code></pre></div>
+<p>Now, fit a model to the data.</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="co"># To fit a model with an interaction,</span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="co"># we are going to use a new notation in</span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="co"># the model. So, pay attention to</span></a>
+<a class="sourceLine" id="cb60-4" title="4"><span class="co"># what is going on in this call:</span></a>
+<a class="sourceLine" id="cb60-5" title="5">dental.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(mpa<span class="op">~</span>lights<span class="op">*</span>resin, <span class="dt">data=</span>dental)</a>
+<a class="sourceLine" id="cb60-6" title="6"></a>
+<a class="sourceLine" id="cb60-7" title="7"><span class="co"># If we make an ANOVA table for</span></a>
+<a class="sourceLine" id="cb60-8" title="8"><span class="co"># this two-way ANOVA, we see that there are</span></a>
+<a class="sourceLine" id="cb60-9" title="9"><span class="co"># significant main effects of of resin type,</span></a>
+<a class="sourceLine" id="cb60-10" title="10"><span class="co"># but also a significant interaction</span></a>
+<a class="sourceLine" id="cb60-11" title="11"><span class="co"># between resin type and lights used for </span></a>
+<a class="sourceLine" id="cb60-12" title="12"><span class="co"># drying the resin on the response variable</span></a>
+<a class="sourceLine" id="cb60-13" title="13"><span class="co"># bonding strength. Cool!! What the hell</span></a>
+<a class="sourceLine" id="cb60-14" title="14"><span class="co"># does that mean?</span></a>
+<a class="sourceLine" id="cb60-15" title="15"><span class="kw">anova</span>(dental.mod)</a>
+<a class="sourceLine" id="cb60-16" title="16">Analysis of Variance Table</a>
+<a class="sourceLine" id="cb60-17" title="17"></a>
+<a class="sourceLine" id="cb60-18" title="18">Response<span class="op">:</span><span class="st"> </span>mpa</a>
+<a class="sourceLine" id="cb60-19" title="19">             Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb60-20" title="20">lights        <span class="dv">1</span>   <span class="fl">34.72</span>   <span class="fl">34.72</span>  <span class="fl">1.1067</span>    <span class="fl">0.2963</span>    </a>
+<a class="sourceLine" id="cb60-21" title="21">resin         <span class="dv">3</span> <span class="fl">1999.72</span>  <span class="fl">666.57</span> <span class="fl">21.2499</span> <span class="fl">5.792e-10</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb60-22" title="22">lights<span class="op">:</span>resin  <span class="dv">3</span> <span class="fl">1571.96</span>  <span class="fl">523.99</span> <span class="fl">16.7043</span> <span class="fl">2.457e-08</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb60-23" title="23">Residuals    <span class="dv">72</span> <span class="fl">2258.52</span>   <span class="fl">31.37</span>                      </a>
+<a class="sourceLine" id="cb60-24" title="24"><span class="op">---</span></a>
+<a class="sourceLine" id="cb60-25" title="25">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb60-26" title="26"></a>
+<a class="sourceLine" id="cb60-27" title="27"><span class="co"># And, of course, we can also examine</span></a>
+<a class="sourceLine" id="cb60-28" title="28"><span class="co"># the model coeffficients for a closer</span></a>
+<a class="sourceLine" id="cb60-29" title="29"><span class="co"># look at what this means.</span></a>
+<a class="sourceLine" id="cb60-30" title="30"><span class="kw">summary</span>(dental.mod)</a>
+<a class="sourceLine" id="cb60-31" title="31"></a>
+<a class="sourceLine" id="cb60-32" title="32">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb60-33" title="33"><span class="kw">lm</span>(<span class="dt">formula =</span> mpa <span class="op">~</span><span class="st"> </span>lights <span class="op">*</span><span class="st"> </span>resin, <span class="dt">data =</span> dental)</a>
+<a class="sourceLine" id="cb60-34" title="34"></a>
+<a class="sourceLine" id="cb60-35" title="35">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb60-36" title="36"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb60-37" title="37"><span class="fl">-11.760</span>  <span class="fl">-3.663</span>  <span class="fl">-0.320</span>   <span class="fl">3.697</span>  <span class="fl">11.250</span> </a>
+<a class="sourceLine" id="cb60-38" title="38"></a>
+<a class="sourceLine" id="cb60-39" title="39">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb60-40" title="40"><span class="st">                 </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb60-41" title="41">(Intercept)        <span class="fl">17.770</span>      <span class="fl">1.771</span>  <span class="fl">10.033</span> <span class="fl">2.57e-15</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb60-42" title="42">lightsLED           <span class="fl">1.290</span>      <span class="fl">2.505</span>   <span class="fl">0.515</span>   <span class="fl">0.6081</span>    </a>
+<a class="sourceLine" id="cb60-43" title="43">resinB              <span class="fl">2.130</span>      <span class="fl">2.505</span>   <span class="fl">0.850</span>   <span class="fl">0.3979</span>    </a>
+<a class="sourceLine" id="cb60-44" title="44">resinC              <span class="fl">4.770</span>      <span class="fl">2.505</span>   <span class="fl">1.904</span>   <span class="fl">0.0609</span> .  </a>
+<a class="sourceLine" id="cb60-45" title="45">resinD             <span class="fl">22.530</span>      <span class="fl">2.505</span>   <span class="fl">8.995</span> <span class="fl">2.13e-13</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb60-46" title="46">lightsLED<span class="op">:</span>resinB    <span class="fl">3.370</span>      <span class="fl">3.542</span>   <span class="fl">0.951</span>   <span class="fl">0.3446</span>    </a>
+<a class="sourceLine" id="cb60-47" title="47">lightsLED<span class="op">:</span>resinC    <span class="fl">3.940</span>      <span class="fl">3.542</span>   <span class="fl">1.112</span>   <span class="fl">0.2697</span>    </a>
+<a class="sourceLine" id="cb60-48" title="48">lightsLED<span class="op">:</span>resinD  <span class="fl">-17.740</span>      <span class="fl">3.542</span>  <span class="fl">-5.008</span> <span class="fl">3.78e-06</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb60-49" title="49"><span class="op">---</span></a>
+<a class="sourceLine" id="cb60-50" title="50">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb60-51" title="51"></a>
+<a class="sourceLine" id="cb60-52" title="52">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">5.601</span> on <span class="dv">72</span> degrees of freedom</a>
+<a class="sourceLine" id="cb60-53" title="53">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6149</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5775</span> </a>
+<a class="sourceLine" id="cb60-54" title="54">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">16.42</span> on <span class="dv">7</span> and <span class="dv">72</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">9.801e-13</span></a></code></pre></div>
+<p>Let’s just use the built-in R functions to make predictions from our model. We will walk through the steps below. Make sure you dig through the comments to understand what is going on here.</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># Get all combinations of the unique</span></a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="co"># values for light and resin types</span></a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="co"># using the &#39;expand.grid&#39; function</span></a>
+<a class="sourceLine" id="cb61-4" title="4">dnew &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb61-5" title="5">  <span class="kw">expand.grid</span>(<span class="kw">unique</span>(dental<span class="op">$</span>lights), <span class="kw">unique</span>(dental<span class="op">$</span>resin))</a>
+<a class="sourceLine" id="cb61-6" title="6">)</a>
+<a class="sourceLine" id="cb61-7" title="7"></a>
+<a class="sourceLine" id="cb61-8" title="8"><span class="co"># Give the new df names</span></a>
+<a class="sourceLine" id="cb61-9" title="9"><span class="kw">names</span>(dnew) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>)</a>
+<a class="sourceLine" id="cb61-10" title="10"></a>
+<a class="sourceLine" id="cb61-11" title="11"><span class="co"># Sort the dataframe by lights for ease</span></a>
+<a class="sourceLine" id="cb61-12" title="12">dnew &lt;-<span class="st"> </span>dnew[<span class="kw">with</span>(dnew, <span class="kw">order</span>(lights)), ]</a>
+<a class="sourceLine" id="cb61-13" title="13"></a>
+<a class="sourceLine" id="cb61-14" title="14"><span class="co"># Make predictions from these data</span></a>
+<a class="sourceLine" id="cb61-15" title="15"><span class="co"># Because we are interested in</span></a>
+<a class="sourceLine" id="cb61-16" title="16"><span class="co"># comparing the different levels here,</span></a>
+<a class="sourceLine" id="cb61-17" title="17"><span class="co"># we can look at 95% CIs instead</span></a>
+<a class="sourceLine" id="cb61-18" title="18"><span class="co"># of prediction intervals.</span></a>
+<a class="sourceLine" id="cb61-19" title="19">dpreds &lt;-<span class="st"> </span><span class="kw">predict</span>(</a>
+<a class="sourceLine" id="cb61-20" title="20">  <span class="dt">object =</span> dental.mod, <span class="dt">newdata =</span> dnew, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span></a>
+<a class="sourceLine" id="cb61-21" title="21">)</a>
+<a class="sourceLine" id="cb61-22" title="22"><span class="co"># Get the observed means to go along</span></a>
+<a class="sourceLine" id="cb61-23" title="23"><span class="co"># with the predictions</span></a>
+<a class="sourceLine" id="cb61-24" title="24"><span class="kw">library</span>(plyr)</a>
+<a class="sourceLine" id="cb61-25" title="25">mus =<span class="st"> </span><span class="kw">ddply</span>(dental, <span class="kw">c</span>(<span class="st">&#39;lights&#39;</span>, <span class="st">&#39;resin&#39;</span>), summarize, <span class="dt">mean=</span><span class="kw">mean</span>(mpa))</a>
+<a class="sourceLine" id="cb61-26" title="26"></a>
+<a class="sourceLine" id="cb61-27" title="27"><span class="co"># Now plot the predictions from this model</span></a>
+<a class="sourceLine" id="cb61-28" title="28"><span class="co"># Set graphical parameters</span></a>
+<a class="sourceLine" id="cb61-29" title="29"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb61-30" title="30"></a>
+<a class="sourceLine" id="cb61-31" title="31"><span class="co"># Plot the raw data by resin type and color code for lights</span></a>
+<a class="sourceLine" id="cb61-32" title="32"><span class="kw">plot</span>(<span class="dt">x=</span><span class="kw">as.numeric</span>(dental<span class="op">$</span>resin), <span class="dt">y=</span>dental<span class="op">$</span>mpa, <span class="dt">type=</span><span class="st">&#39;p&#39;</span>,</a>
+<a class="sourceLine" id="cb61-33" title="33">    <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>)[<span class="kw">c</span>(dental<span class="op">$</span>lights)],</a>
+<a class="sourceLine" id="cb61-34" title="34">    <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb61-35" title="35"></a>
+<a class="sourceLine" id="cb61-36" title="36"><span class="co"># Plot the means for Halogen lights by resin type</span></a>
+<a class="sourceLine" id="cb61-37" title="37"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb61-38" title="38"><span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;Halogen&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;blue&#39;</span>,</a>
+<a class="sourceLine" id="cb61-39" title="39">  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb61-40" title="40"></a>
+<a class="sourceLine" id="cb61-41" title="41"><span class="co"># Plot the means for LED lights by resin type</span></a>
+<a class="sourceLine" id="cb61-42" title="42"><span class="kw">par</span>(<span class="dt">new=</span><span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb61-43" title="43"><span class="kw">plot</span>(mus<span class="op">$</span>mean[mus<span class="op">$</span>lights<span class="op">==</span><span class="st">&#39;LED&#39;</span>], <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;red&#39;</span>,</a>
+<a class="sourceLine" id="cb61-44" title="44">  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">50</span>), <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;&#39;</span>, <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">cex=</span><span class="fl">1.75</span>)</a>
+<a class="sourceLine" id="cb61-45" title="45"></a>
+<a class="sourceLine" id="cb61-46" title="46"><span class="co"># Add lines for the mean and prediction intervals for halogen</span></a>
+<a class="sourceLine" id="cb61-47" title="47"><span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb61-48" title="48"><span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-49" title="49"><span class="kw">lines</span>(dpreds[<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-50" title="50"></a>
+<a class="sourceLine" id="cb61-51" title="51"><span class="co"># Add lines for the mean and prediction intervals for LED</span></a>
+<a class="sourceLine" id="cb61-52" title="52"><span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb61-53" title="53"><span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-54" title="54"><span class="kw">lines</span>(dpreds[<span class="dv">5</span><span class="op">:</span><span class="dv">8</span>,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-55" title="55"></a>
+<a class="sourceLine" id="cb61-56" title="56"><span class="co"># Add x and y axes</span></a>
+<a class="sourceLine" id="cb61-57" title="57"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>), <span class="dt">labels=</span><span class="kw">c</span>(<span class="st">&#39;A&#39;</span>,<span class="st">&#39;B&#39;</span>,<span class="st">&#39;C&#39;</span>,<span class="st">&#39;D&#39;</span>))</a>
+<a class="sourceLine" id="cb61-58" title="58"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb61-59" title="59"></a>
+<a class="sourceLine" id="cb61-60" title="60"><span class="co"># Add labels</span></a>
+<a class="sourceLine" id="cb61-61" title="61"><span class="kw">mtext</span>(<span class="st">&#39;Resin type&#39;</span>, <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb61-62" title="62"><span class="kw">mtext</span>(<span class="st">&#39;Bond strength (mpa)&#39;</span>, <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="dv">3</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</a>
+<a class="sourceLine" id="cb61-63" title="63"></a>
+<a class="sourceLine" id="cb61-64" title="64"><span class="co"># Let us have a legend</span></a>
+<a class="sourceLine" id="cb61-65" title="65"><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">1</span>, <span class="dt">y=</span><span class="dv">50</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&#39;Halogen&#39;</span>, <span class="st">&#39;LED&#39;</span>), <span class="dt">lty=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb61-66" title="66">  <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>, <span class="st">&#39;red&#39;</span>), <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)</a></code></pre></div>
+<p><img src="06_diagnosticsAndEffects_files/figure-html/unnamed-chunk-69-1.png" width="672" /></p>
+<p>Interactions between categorical variables generally are more complicated to deal with than interactions between categorical and continuous variables, because then we are only dealing with straight lines that differ by level. This does not, however, make it any less important for us to communicate how our models fit the observations we have collected. If you can get these tools under your belt, they will be extremely powerful for preparing journal articles, and perhaps more importantly, for communicating your results and the uncertainty surrounding them to stakeholders and public audiences.</p>
+</div>
+</div>
+</div>
+</div>
+
+<!DOCTYPE html>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

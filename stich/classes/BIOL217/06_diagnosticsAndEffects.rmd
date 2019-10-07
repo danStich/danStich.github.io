@@ -47,20 +47,13 @@ These are data that were collected 2013-2015 for Kemp's Ridley sea turtles incid
 
 The data columns mean:
 
-`ID`: turtle ID
-
-`Year`: year of capture
-
-`Gear`: the gear type with which the turtle was hooked
-
-`Width`: the gape width of the hook
-
-`Removed`: the location from which the hook was removed
-
-`Status`: survived (1) or did not (0)
-
-`Stay`: length of stay in the rehab facility
-
+`ID`: turtle ID<br>
+`Year`: year of capture<br>
+`Gear`: the gear type with which the turtle was hooked<br>
+`Width`: the gape width of the hook<br>
+`Removed`: the location from which the hook was removed<br>
+`Status`: survived (1) or did not (0)<br>
+`Stay`: length of stay in the rehab facility<br>
 `nHooks`: Number of hooks in the turtle
 
 We will use `Stay` as the response variable here.
@@ -73,7 +66,7 @@ Note that we can relax this assumption by explicitly including variables and con
 
 For example: in one-way ANOVA, we include grouping (factor) variables to to account for non-independence of some observations. In fact, this lack of independence is often the very thing we are interested in testing! In ANOVA, for example, we are interested in whether individuals from the same group respond in the same way. Note that this in turn places the assumption of independence on our groups.
 
-This assumption cannot, in practice, be tested within the analysis phase of a study. So, it needs to be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.
+This assumption really should be be addressed within the context of experimental design, and if not met may require alternatives to the simple cases of one-way ANOVA, ANCOVA or simple linear regression.
 
 We will discuss specific extensions of our basic linear models (ANOVA and regression) to relax more difficult violations such as repeated observations, and temporal or spatial autocorrelation among observations. Although we can't cover all of these extensions in this course, we can point you in the right direction for most of them.
 
@@ -86,7 +79,7 @@ There is one obvious thing that is going to tell us that the observations in the
 head(turtles, 10) # What is it?
 ```
 
-So, we already know that our data do not conform to the assumptions of ANOVA linear regression, or ANCOVA- but let's keep using these data for the sake of demonstration...There is, of course another major violation of our assumptions that has to do with experimental design (that is commonly violated): these are DISCRETE data!! We'll pretend for now that we can think of 'Stay' as a continuous variable, though.
+So, we already know that our data do not conform to the assumptions of ANOVA, linear regression, or ANCOVA- but let's keep using these data for the sake of demonstration...There is, of course another major violation of our assumptions that has to do with experimental design (that is commonly violated): these are DISCRETE data!! We'll pretend for now that we can think of `Stay` as a continuous variable, though.
 
 You can see how this could get tedious to do for every level of every grouping factor and then for each continuous variable. So, we can also take a "shotgun" approach and look at how variables are related to one another.
 
@@ -97,7 +90,7 @@ pairs(turtles)
 
 ### Normality of residuals
 
-In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero. This allows us to drop the error term, 'epsilon' from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we solve everything through optimization now and not ordinary least squares).
+In all linear models we make the assumption that the residual error of our model is normally distributed with a mean of zero. This allows us to drop the error term, $\epsilon$ from computation in the model fitting and allows us to calculate an exact solution in the case of ANOVA and linear regression (technological advances have really made this unecessary because we can solve everything through optimization now).
 
 There are a multitude of tools at our disposal for examining normality of the residuals for linear models. One option is to examine group-specific error structures as a surrogate for residual error prior to analysis. The other option is to examine diagnostic plots of residuals directly from a fitted model object in R or other software programs (this is actually the more appropriate tool).
 
@@ -129,7 +122,7 @@ Another way to deal with this is through data transformation. For example, we co
 boxplot(log(Stay)~Year, data=turtles, notch=TRUE, col='gray')
 ```
 
-> NOTE: I will not cover variable transformation extensively in this class. The justification is: 1) you can Google it to learn more about what transformations are useful for what, and 2) I will argue that most of the time there are better methods for dealing with non-normal data (this is why we are focused on breadth) and then I will show you how to use those methods.
+> NOTE: I will not cover variable transformation extensively in this class. The justification is: 1) you can Google it to learn more about what transformations are useful for what, and 2) I will argue that most of the time there are better methods for dealing with non-normal data and then I will show you how to use those methods.
 
 We can also look at histograms to investigate normality:
 
@@ -228,7 +221,7 @@ ks.test(turtles$Stay[turtles$Year==2013],turtles$Stay[turtles$Year==2015])
 ks.test(turtles$Stay[turtles$Year==2014],turtles$Stay[turtles$Year==2015])
 ```
 
-**BUT**: this only works for grouping variables, and it only compares two groups at a time, so this could be VERY cumbersome. And, since we are using R to make our lives easier, we do not want cumbersome if we can help it.This test also is supposed to be reserved for continuous distributions.
+**BUT**: this only works for grouping variables, and it only compares two groups at a time, so this could be VERY cumbersome. And, since we are using R to make our lives easier, we do not want cumbersome if we can help it. This test also is supposed to be reserved for continuous distributions.
 
 As with assumption #2 above, we have two ways (the same two) to visualize this information.
 
@@ -252,7 +245,7 @@ boxplot(log(Stay)~Year, data=turtles, notch=TRUE, col='gray')
 
 Again, this is the preferred method for assessing normality in the **residuals** (notice the key word here?).
 
-We can look at how residual error changes (or doesn't) across group factors such as 'Year'.
+We can look at how residual error changes (or doesn't) across group factors such as `Year`.
 
 ```{r}
 par(mfrow=c(2,2))
@@ -318,13 +311,13 @@ mod <- lm(weight~group, data = PlantGrowth)
 TukeyHSD(aov(mod)) 
 ```
 
-We've seen these data and this model before. We know there was a significant effect of treatment on plant weight. So, for now we will ignore the ANOVA and just look at the summary (if you want the ANOVA you can either summarize it yourself or go back to previous reference scripts).
+We've seen these data and this model before. We know there was a significant effect of treatment on plant weight. So, for now we will ignore the ANOVA and just look at the summary (if you want the ANOVA you can either summarize it yourself or go back to previous lecture modules).
 
 ```{r}
 summary(mod)
 ```
 
-The summary gives us the predicted means of the response for each factor level based on the fitted model. In the case of ANOVA, we can actually calculate these form the data because that is what the model solution should be if we haven't violated any of our assumptions.
+The summary gives us the predicted means of the response for each factor level based on the fitted model. In the case of ANOVA, we can actually calculate these from the data because that is what the model solution should be if we haven't violated any of our assumptions.
 
 #### Calculations and numerical representation 
 
@@ -802,8 +795,7 @@ Clearly this specific model is not very useful. The reason for that is that in t
 
 **LESSON**: *This is why we should always check the trends in our model predictions against the raw data. These should be presented together wherever possible (becomes more difficult in complex models).*
 
-Finally, we can use the built-in R functions to make predictions from
-our model:
+Finally, we can use the built-in R functions to make predictions from our model:
 
 ```{r}
 # Get all combinations of the unique
