@@ -11,7 +11,7 @@ The objective of this assignment is to move beyond simple null hypothesis signif
 
 In addition to introducing the concepts of linear models, we also will begin to build your statistical vocabulary and start using the kind of language that you see in peer-reviewed journal articles for framing the analysis in the methods section and reporting the results of statistical tests. We will ease into some of the more common vernacular this week and continue to develop this skill for the rest of the semester.  
 
-By the end of this lab, you should be comfortable running and interpretting 1) parametric linear models (regression, ANOVA, ANCOVA), and 2) non-parametric alternatives to these models.  
+By the end of this lab, you should be comfortable running and interpreting 1) parametric linear models (regression, ANOVA, ANCOVA), and 2) non-parametric alternatives to these models.  
 
 ## Exercises  
 <h3 id="multi"> Analysis of variance (ANOVA) </h3>
@@ -43,11 +43,11 @@ Use a one-way ANOVA to investigate differences in gill NKA activity among all st
 
 **Question 1.** State the purpose of the analysis (i.e. to detect the effects of "blank" on "other blank"), and formally state the null hypothesis for this analysis.  
 
-**Question 2.** Explain the results of the test in sentence format, being sure to include the test statistic, the numerator and denominator degrees of freedom, and the p-value along with the test that you used. Also report the R^2^ value for this model (recall you can get this multiple ways): see the <a href="04_LinearModels.html">lecture module</a> or the <a href="04_anova.html">ANOVA example</a> on the course website. You should be able to do this in 1-2 sentences. See the ANOVA example for help putting this into words, but give it your own flare.  
+**Question 2.** Explain the results of the test in sentence format, being sure to include the test statistic, the numerator and denominator degrees of freedom, and the p-value along with the test that you used. Also report the R^2^ value for this model (recall you can get this multiple ways): see the <a href="05_LinearModels.html">lecture module</a> or the <a href="05_anova.html">ANOVA example</a> on the course website. You should be able to do this in 1-2 sentences. See the ANOVA example for help putting this into words, but give it your own flare.  
 
 Now, use a Tukey HSD test to determine factor-level differences in gill NKA activity between presmolts, smolts, and postsmolts. After you run the test, make a boxplot of nka by stage to help visualize the results. Be sure to label your axes!  
 
-*Reminder*: if you have forgotten how to conduct the Tukey HSD for pairwise comparisons of factor-level means, you can find this in the <a href="04_LinearModels.html">lecture module</a> for this week.
+*Reminder*: if you have forgotten how to conduct the Tukey HSD for pairwise comparisons of factor-level means, you can find this in the <a href="05_LinearModels.html">lecture module</a> for this week.
 
 See also:
 
@@ -59,7 +59,7 @@ See also:
 
 ### Kruskal-Wallis rank sum test  
 
-Now let's move on to the case in which we can't meet assumptions of normality in the residuals for our groups (assumption #2 from the <a href="04_LinearModels.html">lecture module</a>). Here, we need to use the Kruskal-Wallis test as a 'non-parametric' alternative. Recall that we fit this model using the `kruskal.test` function in R. We will use the same example that we used last week for the Wilcoxon test, smolt osmolality vs stage, but this time we will use all three stages: `Presmolt`, `Smolt`, and `Postsmolt` to examine differences in osmolality.
+Now let's move on to the case in which we can't meet assumptions of normality in the residuals for our groups (assumption #2 from the <a href="05_LinearModels.html">lecture module</a>). Here, we need to use the Kruskal-Wallis test as a 'non-parametric' alternative. Recall that we fit this model using the `kruskal.test` function in R. We will use the same example that we used last week for the Wilcoxon test, smolt osmolality vs stage, but this time we will use all three stages: `Presmolt`, `Smolt`, and `Postsmolt` to examine differences in osmolality.
 
 Remember that last week we showed the response variable, osmolality, was not normally distributed among these ontogenetic stages of smolt development: 
 
@@ -97,7 +97,7 @@ posthoc.kruskal.nemenyi.test(osmolality~stage, data=smolts, dist='Chisquare')
 
 There are actually a whole bunch of different functions in the `PMCMR` package with which we conduct post-hoc tests to do pair-wise comparisons. The function above compares the response for each one of our grouping values, while correcting for inflated Type-I error rates.  
 
-**Question 6.** So now which stages differ in the response, `osmolality` according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="04_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the `caroline` package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).  
+**Question 6.** So now which stages differ in the response, `osmolality` according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="05_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the `caroline` package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).  
 
 ```{r, eval=FALSE}
 # install.packages('caroline')
