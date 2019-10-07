@@ -15,6 +15,7 @@ navbar:
       href: instructors.html
     - text: "Contact"
       href: contact.html
+  right:    
     - icon: fa-github
       href: https://github.com/danStich      
 output:

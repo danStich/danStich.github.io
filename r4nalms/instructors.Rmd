@@ -4,8 +4,6 @@
 ---
 title: "Instructors"
 ---
-
-<br bottom-margin:10px;>
  
 **Lisa Borre** is a Senior Research Specialist at the Cary Institute of Ecosystem Studies, and is the NALMS Region 3 Director. She is a co-liason for the NALMS Secchi Dip-In program, an active member in the Global Lake Ecological Observatory Network (GLEON), and Project Coordinator for the Lake Observer app.
 
@@ -13,6 +11,6 @@ title: "Instructors"
  
 **Dana Stephens** has experiencing large databases, including North American Secchi data, and used various statistical analyses to examine temporal and spatial components of these data.
 
-**Dan Stich** is an Assistant Professor in the Biology Department at SUNY Oneonta, where he teaches undergraduate and graduate courses in biometry, lake management, and ichthyology. He works extensively with R in research and teaching. He recently developed his first R package, <a  href="https://github.com/danStich/shadia"> shadia </a>, with collaborators.
+**Dan Stich** is an Assistant Professor in the Biology Department at SUNY Oneonta, where he teaches undergraduate and graduate courses in biometry, lake management, and ichthyology. He works extensively with R in research and teaching, and maintains multiple R packages.
 
 <br>

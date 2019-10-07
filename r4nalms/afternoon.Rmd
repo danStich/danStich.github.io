@@ -6,15 +6,12 @@
 title: "Afternoon session"
 ---
 
-<h3 top-margin:10px;> Introduction to R for aquatic research: intermediate </h3> 
+<h3 id="multi">Intermediate R for aquatic research</h3><br> 
 
-<br bottom-margin:10px;>
-
-The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>.
-
+The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>. <br>
 The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 
-<img src="./images/roboshad.png" alt="">
+<img src="./images/roboshad.png" alt="Graphic of American shad swimming through cyan matrix">
 
 The afternoon session of this workshop will provide an intermediate tutorial for working with aquatic data in R. It is our hope that by the end of this session, you will be comfortable conducting some basic statistical analyses and producing related graphics.
 

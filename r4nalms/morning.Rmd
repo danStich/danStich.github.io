@@ -6,17 +6,16 @@
 title: "Morning session"
 ---
 
-<h3 top-margin:10px;> Introduction to R for aquatic research: introductory </h3><br>
+<h3 top-margin:10px;>Introduction to R for aquatic research</h3><br>
 
-The tutorial for the morning session is <a href="introductory.html"> here </a>.
-
+The tutorial for the morning session is <a href="introductory.html"> here </a>.<br>
 The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 
-<img src="./images/roh.png" alt="">
+<img src="./images/roh.png" alt="R-OH, a joke about R as a functional group in an alcohol molecule">
 
 The morning session of this workshop will provide an introduction to the basics of working in R. By the end of this session, you should be comfortable working through these and other examples on your own in the future so you can learn more about the program.
 
-During this session, you will be exposed to a broad overview of programming in R, read in data from external files, do some basic data manipulation and summaries, and use data to make some basic graphs.
+During this session, you will be exposed to a broad overview of programming in R, read in data from external files, do some basic data manipulation and summaries, and use data to make some basic graphs. We will also cover basic syntax and mechanics of the programming language to facilitate discussion of more advanced topics during the <a href="afternoon.html">afternoon session</a>.
 
 <br>
  

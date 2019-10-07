@@ -2,16 +2,19 @@
 ```
 
 ---
-title: "Introduction to R for Aquatic Research"
+title: "R4NALMS"
 ---
 
-<h3 top-margin:10px;> 2018 NALMS International Symposium </h3> 
-
+<h3 top-margin:10px;> NALMS International Symposium Workshops</h3> 
 <img src="./images/graphs.png" alt="">
 
-Welcome to the home page for the <b> Introduction to R for Aquatic Research Workshop </b> at the 2018 International NALMS Symposium. 
+Welcome to the <b>R4NALMS</b> homepage for R workshops at the International NALMS Symposium. This page hosts content for two in-person workshop sessions. 
 
-This workshop will consist of two sessions. The <a href="morning.html"> morning session </a> (8:00 am - 12:00 pm) will be an introduction to <a href=https://www.r-project.org/> R </a> as a functional, vectorized, and object-oriented statistical programming language. It will cover R syntax (e.g., how to read and write R code), types of variables and objects, functions, data management (e.g., loading, referencing, manipulation, transformation, and subsets), basic descriptive statistics, and working with R packages. The <a href="afternoon.html"> afternoon session </a> (1:00 - 5:00 pm) will build on these techniques using the <a href=http://www.secchidipin.org/> Secchi Dip-In </a> data and other data sets for an Intermediate R Workshop. Topics will include regression analyses, predictions, simulation, and data visualization. Those less familiar with R should plan on attending both sessions, but those who have some experience using R could consider skipping the morning session and join during lunch for a half-day session. Laptop computers are required for both sessions. <b> All software is freely available and needs to be installed prior to the workshop because we will be working without internet </b>. Please see <a href="software.html"> this page </a> for software instructions.
+The <a href="morning.html"> morning session </a> (8:00 am - 12:00 pm) will be an introduction to <a href=https://www.r-project.org/> R </a> as a functional, vectorized, and object-oriented programming language. It will cover R syntax (e.g., how to read and write R code), types of variables and objects, functions, basic data management (e.g., loading, referencing, manipulation, transformation, and subsets), basic descriptive statistics, and working with R packages. 
+
+The <a href="afternoon.html"> afternoon session </a> (1:00 - 5:00 pm) will build on these techniques for an Intermediate R Workshop. Topics will include more advanced data management, an overview of common statistical tools in R, and plotting utilities. Those less familiar with R should plan on attending both sessions, but those who have some experience using R could consider skipping the morning session and join after lunch for a half-day session.
+
+Laptop computers are required for both sessions. <b> All software is freely available and should be installed prior to the workshop </b>. Please see <a href="software.html"> this page </a> for software installation instructions.
 
 <br>
  

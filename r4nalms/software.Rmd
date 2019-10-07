@@ -6,10 +6,9 @@
 title: "Software needs"
 ---
 
-<img src="./images/logos.png" alt="">
+<img src="./images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
-
-You will need to install some software *before you arrive* for the workshop. All software is <b> freely available </b> and <b> easily installed </b>. Please download and install the most recent versions prior to the workshop:
+To make the most of our time together, you will need to install some software *before you arrive* for the workshop. All software is <b> freely available </b> and <b> easily installed </b>. Please download and install the most recent versions prior to the workshop. If you have questions or difficulties (beyond system administrative permissions), please <a href="contact.html"> contact</a> the workshop organizers.
 
 1. <b> Download and install R </b> for <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=http://cran.us.r-project.org/> Mac </a>. You should download the most recent version of R for your operating system. Most newer laptops are 64-bit.
 
@@ -18,7 +17,7 @@ You will need to install some software *before you arrive* for the workshop. All
 3. <b> Download the workshop data </b> from 
 <a href= https://github.com/danStich/data4_r4nalms> this github repository</a> following the instructions in the `README.md` file.
 
-4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during the workshop). 
+4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during travel!). 
 
 <br>
  
