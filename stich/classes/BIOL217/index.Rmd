@@ -7,7 +7,7 @@ This site is intended to serve as a permanent link to course content so students
 
 All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/classData"> here</a>.
 
-To access the content from a given topic, please click on the link corresponding links below. Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
+To access the content from a given topic, please click on the  corresponding link below. Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
 
 ### Introduction to programming in R
 
