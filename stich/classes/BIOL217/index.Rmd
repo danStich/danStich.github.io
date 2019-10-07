@@ -48,8 +48,7 @@ To access the content from a given topic, please click on the  corresponding lin
  
 ### GLM: Logistic regression
 
-<a href="./08_glm_logisticRegression.html"> Lecture tutorial </a><br> 
-<a href="./hw08.html"> Homework assignment </a> 
+<a href="./08_glm_logisticRegression.html"> Lecture tutorial </a><br> <a href="./hw08.html"> Homework assignment </a> 
  
 ### GLM: Count models
 

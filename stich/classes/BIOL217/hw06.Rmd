@@ -29,7 +29,7 @@ Let's begin by doing some model diagnostics for a linear model. Remember, this s
   str(ToothGrowth)
 ```
 
-Dose is stored as a numeric variable, and that makes intuitive sense. However, we only have three different doses, so if we are assuming that dose is numeric, then we also need to assume that it  is being randomly sampled from a population of potential doses, which I think is clearly not the case here (otherwise we would have some that weren't a nice round number). So, we should probably convert this to a factor.
+Dose is stored as a numeric variable, and that makes intuitive sense. However, we only have three different doses, so if we are assuming that dose is numeric, then we also need to assume that it  is being randomly sampled from a population of potential doses, which I think is clearly not the case here (otherwise we would have some that weren't nice round numbers). So, we should probably convert this to a factor.
 
 ```{r}
 # Convert the dose variable to a factor
@@ -38,7 +38,7 @@ Dose is stored as a numeric variable, and that makes intuitive sense. However, w
 
 Now, let's get diagnosing.
 
-The first thing we will do is check to see if the distribution of the data are normal within groups. We can do this with a couple of tools. First, make a boxplot of tooth length (`'len'`) as a function of supplement type and dose.
+The first thing we will do is check to see if the distributions of the data are normal within groups. We can do this with a couple of tools. First, make a boxplot of tooth length (`'len'`) as a function of supplement type and dose.
 
 **Question 1.** Based on the boxplot, does it appear that the distribution of tooth lengths is fairly normal within doses? What other kinds of plots could you use to visually inspect these distributions (note: not the residuals yet)?
 
@@ -48,15 +48,15 @@ Start by fitting a model to test the additive effects of the supplement (`supp`)
 
 ```{r, eval=FALSE}
 # Remember to store the model as an object,
-# like this, replacing the ''...' in
+# like this, replacing the '...' in
 # parentheses with the appropriate 
 # formula and data arguments. Cruel, #Iknow.
   tooth.mod = lm(...)
 ```
  
-Next, graph the diagnostic plots of the residual error for the fitted model object using the `plot` function. See the <a href="05_diagnosticsAndEffects.html"> lecture module </a> for an example of how to do this. Remember, you can use the `mfrow` argument in the `par` function to get all four of these plots in one window if you prefer not to flip through them one by one.
+Next, graph the diagnostic plots of the residual error for the fitted model object using the `plot` function. See the <a href="06_diagnosticsAndEffects.html">lecture module</a> for an example of how to do this. Remember, you can use the `mfrow` argument in the `par` function to get all four of these plots in one window if you prefer not to flip through them one by one.
 
-**Question 2.** Based on our discussions about residual plots this week and the examples in the <a href="05_diagnosticsAndEffects.html"> lecture module </a>, does it appear that the residuals in the plots you made are (more or less) normally distributed with a mean of zero? How did you come to this conclusion?
+**Question 2.** Based on our discussions about residual plots this week and the examples in the <a href="06_diagnosticsAndEffects.html">lecture module</a>, does it appear that the residuals in the plots you made are (more or less) normally distributed with a mean of zero? How did you come to this conclusion?
 
 **Question 3.** Based on the residual plots you have made and our discussions, does it appear that your model violates the assumption about homogeneity of variances? How did you come to *this* conclusion?
 
@@ -75,9 +75,9 @@ Now that we've done a little model validation to assure that we are not complete
 
 **Question 4.** Were there significant effects of supplement and/or dose on guinea pig tooth length? 
 
-**Question 5.** How much of the variability in guinea pig tooth length was explained by the additive effects of supplement and dose? Remember, there are multiple ways to find this information. If you can't remember either method, check the <a href="04_linearModels.html">linear models tutorial</a> from last week or `Google` it.
+**Question 5.** How much of the variability in guinea pig tooth length was explained by the additive effects of supplement and dose? Remember, there are multiple ways to find this information. If you can't remember either method, check the <a href="05_linearModels.html">linear models tutorial</a> from last week or `Google` it.
 
-If you haven't already done so, print a summary of the linear model so you can see the regression coefficients. Using what you learned in class this week, and the 1000-line long <a href="05_diagnosticsAndEffects.html"> lecture module </a>  that your wicked awesome prof made for you this week, predict the mean expected value of tooth length for each combination of `supp` and `dose`. *Remember:* there are multiple ways to do this. All are in the <a href="05_diagnosticsAndEffects.html"> lecture module </a> from this week. You can do the math by hand, or you can use the built-in `predict` function in R. Just pay close attention to how you do this, and make sure that your predictions make reasonable sense (they should if you do it correctly).
+If you haven't already done so, print a summary of the linear model so you can see the regression coefficients. Using what you learned in class this week, and the 1000-line long <a href="06_diagnosticsAndEffects.html">lecture module</a> that your wicked awesome prof made for you this week, predict the mean expected value of tooth length for each combination of `supp` and `dose`. *Remember:* there are multiple ways to do this. All are in the <a href="06_diagnosticsAndEffects.html">lecture module</a>. You can do the math by hand, or you can use the built-in `predict` function in R. Just pay close attention to how you do this, and make sure that your predictions make reasonable sense (they should if you do it correctly).
 
 **Question 6.** Report the model-predicted tooth length for each combination of supplement and dose.
 
@@ -167,7 +167,7 @@ Go ahead and fit a new model to the ToothGrowth data, this time including the in
 
 **Question 9.** How much variability in guinea pig tooth length is explained by this model? Is that more or less than the model that did not include the interaction?
  
-Finally, use one of the methods from the <a href="05_diagnosticsAndEffects.html"> lecture module </a> to plot the predicted values of guinea pig tooth length for each combination of supplement and dose using the model that included the interaction term. To do this, you will want to use the built-in `predict` function in R. This can get a little messy, so I will help you along your way.
+Finally, use one of the methods from the <a href="06_diagnosticsAndEffects.html">lecture module</a> to plot the predicted values of guinea pig tooth length for each combination of supplement and dose using the model that included the interaction term. To do this, you will want to use the built-in `predict` function in R. This can get a little messy, so I will help you along your way.
 
 ```{r}
 # First, we need to get all combinations
@@ -189,7 +189,7 @@ Finally, use one of the methods from the <a href="05_diagnosticsAndEffects.html"
   levels = levels[with(levels, order(supp)), ]  
 ```    
 
-Now, you can make predictions using the predict function. Or, if you are a total masochist, you can do the calculations by hand using what you learned in lecture this week and the info you have in the <a href="05_diagnosticsAndEffects.html"> lecture module </a> .
+Now, you can make predictions using the predict function. Or, if you are a total masochist, you can do the calculations by hand using what you learned in lecture this week and the info you have in the  <a href="06_diagnosticsAndEffects.html">lecture module</a>.
 
 ```{r, echo=FALSE}
 # Load the ToothGrowth dataset
@@ -256,7 +256,7 @@ Now, you can make predictions using the predict function. Or, if you are a total
       col=c('blue', 'red'), pt.bg=c('blue', 'red'), bty='n')
 ```
 
-Once you have the predictions, plot the observed data and add your predictions to the plots using the `lines` function like we used in the <a href="05_diagnosticsAndEffects.html"> lecture module </a> . **One bonus point** if you can get the observed data to plot by their own colors and get your predicted lines to match those colors like above. The plot will have a lot more meaning to the reader if you can make these kinds of distinctions. See the <a href="05_diagnosticsAndEffects.html"> lecture module </a>  for guidance on how to make a pretty graph of your observed data and predictions.
+Once you have the predictions, plot the observed data and add your predictions to the plots using the `lines` function like we used in the <a href="06_diagnosticsAndEffects.html">lecture module</a>. **One bonus point** if you can get the observed data to plot by their own colors and get your predicted lines to match those colors like above. The plot will have a lot more meaning to the reader if you can make these kinds of distinctions. See the <a href="06_diagnosticsAndEffects.html">lecture module</a> for guidance on how to make a pretty graph of your observed data and predictions.
 
 **Question 10.** Now that you've had a chance to look at these things side by side, does the interaction model appear to make more intuitive sense than the main effects model? Is this supported by the amount of variability is explained by each of the models? 
 
