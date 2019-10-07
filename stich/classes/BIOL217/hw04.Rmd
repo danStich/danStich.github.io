@@ -237,6 +237,6 @@ smolts2$rank[smolts2$osmolality>=400] <- 'high'
 smolts2$rank[smolts2$osmolality<400] <- 'low'
 ```
 
-Conduct a $\chi^2$ test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the <a href="04_hypothesisTesting.html>lecture module</a> to extract the observed and expected values from the $\chi^2$ test object.
+Conduct a $\chi^2$ test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the <a href="04_hypothesisTesting.html">lecture module</a> to extract the observed and expected values from the $\chi^2$ test object.
 
 **Question 10.** Okay, no surprises that the frequency of high and low  osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.
