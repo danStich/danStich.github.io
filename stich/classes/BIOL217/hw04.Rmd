@@ -217,7 +217,7 @@ Okay, now that you have plotted an awesome histogram to check distributional ass
 
 **Question 8.** Did you reject the null hypothesis or did you fail to reject? What was the Type-I error rate that you assumed for this test?  
 
-**Question 9.** Does this make biological sense based on the description of the dataset above? Does this make biological sense based on the results of the two-sample t-test above?  
+**Question 9.** Does this make biological sense based on the description of the dataset above? Does this make statistical sense based on the results of the two-sample t-test above?  
 
 Make a boxplot of the variable 'max' by lifestage only for presmolts and smolts. **NOTE**: it may be helpful to make a seperate dataframe that does not contain postsmolts and then transform the variable 'stage' to character using tools we learned in previous labs. Call the dataframe `smolts2` for ease below.
 
