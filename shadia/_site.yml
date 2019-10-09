@@ -11,6 +11,8 @@ navbar:
       href: models.html
     - text: "Examples"
       href: examples.html
+    - text: "Version history"
+      href: version_history.html
     - text: "Contact"
       href: contact.html  
   right:
