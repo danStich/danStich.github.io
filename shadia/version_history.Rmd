@@ -19,8 +19,10 @@ Installation for older versions is slightly different than for the latest releas
 # Here is an example using v 1.3.0 - 
 # you may need to change the version
 install.packages("shadia_1.3.0.tar.gz", repo=NULL, type="source")
-```
 
+# Here is another example using devtools:
+devtools::install("path\\to\\shadia-legacy")
+```
 
 <h3 id="multi"><b>Previous versions</b></h3>
 
