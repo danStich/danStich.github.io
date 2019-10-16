@@ -16,7 +16,7 @@ Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</
 
 George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics">[code]</a>
 
-Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="./pubs/Franzem_etal_NENA_elliptio.pdf">[PDF]</a> <a href="https://github.com/danStich/elliptioPhenology">[code]</a>
+Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="./pubs/Franzem_etal_2019_NENA_elliptio.pdf">[PDF]</a> <a href="https://github.com/danStich/elliptioPhenology">[code]</a>
 
 <b>Stich, D. S.</b>, T. F. Sheehan, and J. D. Zydlewski. 2019. A dam passage performance standard model for American Shad. Canadian Journal of Fisheries and Aquatic Sciences 76:762-779. <a href="./pubs/Stich_etal_CJFAS_shadia.pdf">[PDF]</a> <a href="https://github.com/danStich/shadia">[`shadia` package]</a>
 
