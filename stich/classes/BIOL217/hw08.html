@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>hw08.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -36,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -107,11 +157,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -125,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -147,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -167,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -188,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -213,31 +356,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -251,296 +420,217 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
 <div id="generalized-linear-models-logistic-regression" class="section level1">
 <h1>Generalized linear models: logistic regression</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
+<p><img src="../../images/veligers.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>This week in lab, we will start to take a closer look at generalized linear models (GLM) through the lens of logisitic regression. This is an family that includes multiple types of analyses depending on the data. For example, we might have binary data (0, 1), binomial data (number of success per some number of trials), or multinomial data (group membership as a response). We will look at the simplest of these cases, binary logistic regression, this week.</p>
-<p><br></p>
-</div>
 <div id="the-data" class="section level2">
 <h2>The data</h2>
-<p><br></p>
-<p>For our exercise this week, we will work with a simulated data set about lung cancer patients made available through the <a href="https://stats.idre.ucla.edu/r/dae/mixed-effects-logistic-regression/">UCLA Institute for Digital Research and Education</a>. The response in this data set is <code>remission</code>, a 1/0 variable indicating whether or not a given patient went into remission following hospital treatment.</p>
+<p>For our exercise this week, we will work with a data set from a Biological Field Station intern project. The purpose of the project was to test the efficacy of Virkon as a molluscicide for dissinfecting equipment following exposure to zebra mussels <em>Dreissena polymorpha</em>. The study examined the effects of exposure time and concentration on mortality. The response in this data set is <code>dead</code>, a 1/0 variable indicating whether or not a zebra mussel was dead. Usually, with this kind of data, we use a <code>1</code> to indicate survival, but it seemed like too much fun to pass up the opportunity to model mortality as a success. So, for this data set a <code>1</code> indicates dead.</p>
 <p>Start by reading in the data.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">cancer =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/lungcancer.csv&#39;</span>)</code></pre></div>
-<p><br></p>
-<p>This data set contains a <em>pile</em> of variables, which of course makes it very fun to work with. We will work with some, but not all, of these variable this week for lab, and then you will make some additional choices about which of them you will work with for your homework, using <code>remission</code> as our response of interest throughout. Explanations of variables are as follows:</p>
-<p><br></p>
-<pre><code>tumorsize: the size of the tumor
-co2: patient CO2 levels
-pain: pain scale experienced by the patient
-wound: a ranking variable used to indicate surgical wound
-mobility: another ranking variable to rate patient mobility
-ntumors: number of cancer tumors (integer)
-nmorphine: number of morphine applications (integer)
-remission: whether or not patients went into remission (1/0)
-lungcapacity: percent of full lung capacity by patient
-Age: patient age (continuous)
-Married: whether or not the patient is married (1/0)
-FamilyHx: whether or not there is a family history of cancer (1/0)
-SmokingHx: patient smoking history (former, never, current)
-Sex: male or female
-CancerStage: severity of cancer by standard ranks (I-IV)
-LengthofStay: how long patients were in the hospital
-WBC: average white bloodcell count by patient
-RBC: average red bloodcell count by patient
-BMI: body mass index
-IL6: interleukin 6 levels by patient
-CRP: C-reactive protein levels by patient
-DID: doctor ID
-Experience: doctor experience level (years)
-School: doctor school performance (categorical)
-Lawsuts: number of lawsuits by doctor
-HID: hospital ID
-Medicaid: percent medicaid coverage by hospital</code></pre>
-<p><br></p>
-<p>Holy moly, what fun!</p>
-<p><br></p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">vd =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;veligers.csv&#39;</span>)</a></code></pre></div>
+<p>This data set contains a <em>pile</em> of variables, which of course makes it very fun to play with. We will work with some, but not all, of these variable this week for lab.</p>
+<p>Explanations of variables are as follows:</p>
+<p><code>Date</code>: calendar date for start of each lab test</p>
+<p><code>Location</code>: the location in Otsego Lake, NY from which mussels were collected</p>
+<p><code>SolnAge</code>: the age of the Virkon solution</p>
+<p><code>Concentration</code>: concentration of Virkon in solution</p>
+<p><code>Time</code>: exposure time</p>
+<p>We will treat concentration as a categorical variable because we only have a few different concentrations, although the argument could be made either way.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">vd<span class="op">$</span>Concentration =<span class="st"> </span><span class="kw">as.factor</span>(vd<span class="op">$</span>Concentration)</a></code></pre></div>
+<p>The remaining variables are physical and chemical parameters of water measured either in Otsego Lake, or in the Virkon solution. We will come back to these.</p>
 </div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p><br></p>
-<div id="a-worked-example" class="section level3">
-<h3>A worked example</h3>
-<p><br></p>
-<p>Let’s start with a simple example to get you moving along. First, we will pretend that we are interested in determining the effects of <code>Age</code> and <code>Sex</code> on the probability of a patient going into <code>remission</code> following treatment. If you have been following closely during the past few weeks, you will recognize that with a categorical variable (<code>Sex</code>) and a continuous variable (<code>Age</code>) we are looking at something that should resemble an analysis of covariance. <strong>But</strong>, our response, <code>remission</code>, can only take on values of 0 and 1, so we know that we need to use a GLM to accommodate this.</p>
-<p><br></p>
+<h3 id="multi">
+A worked example
+</h3>
+<p>Let’s start with a simple example to get you moving along. First, we are interested in determining the effects of <code>Concentration</code> and <code>Time</code> on the probability of zebra mussel death (<code>dead</code>) following exposure. If you have been following closely during the past few weeks, you will recognize that with a categorical variable (<code>Concentration</code>) and a continuous variable (<code>Time</code>) we are looking at something that should resemble ANCOVA to you. <strong>But</strong>, our response, <code>dead</code>, can only take on values of 0 and 1, so we know that we need to use a GLM to accommodate this.</p>
 <div id="analysis" class="section level4">
 <h4>Analysis</h4>
-<p><br></p>
 <p>To fit this model we will use the <code>glm</code> function in R, being sure to specify <code>family = 'binomial'</code> in our call:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
-  c.mod =<span class="st"> </span><span class="kw">glm</span>(remission<span class="op">~</span>Sex<span class="op">+</span>Age, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>, <span class="dt">data=</span>cancer)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  v.mod =<span class="st"> </span><span class="kw">glm</span>(dead<span class="op">~</span>Concentration<span class="op">+</span>Time, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>, <span class="dt">data=</span>vd)</a></code></pre></div>
 <p>Cool, that was easy!</p>
-<p><br></p>
-<div id="results" class="section level5">
-<h5>Results</h5>
-<p><br></p>
-<p>Let’s have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the <code>Anova()</code> function in the <code>car</code> package to use the correct sums of squares for these calculations because we have continuous and categorical variables.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the car library so we can get a meaningful ANOVA table for our model</span>
-  <span class="kw">library</span>(car)
-
-<span class="co"># Print the summary of the model</span>
-  <span class="kw">Anova</span>(c.mod, <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</code></pre></div>
-<pre><code>## Analysis of Deviance Table (Type II tests)
-## 
-## Response: remission
-##     LR Chisq Df Pr(&gt;Chisq)    
-## Sex    1.257  1     0.2621    
-## Age   75.377  1     &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><br></p>
-<p><strong>Question 1</strong>. Based on the output of our call to <code>Anova()</code>, what can you determine about the statistical significance of the effects of <code>Sex</code> and <code>Age</code> on the probability of patients going into remission? <!-- We can see that at our default confidence level ($\alpha$ = 0.05), we fail to reject the null hypothesis that there is no difference between sexes, but we  reject the null hypothesis that there is no effect of `Age` on `remission`.  --></p>
-<p><br></p>
+</div>
+<div id="results" class="section level4">
+<h4>Results</h4>
+<p>Let’s have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the <code>Anova()</code> function in the <code>car</code> package to use the correct calculations because we have continuous and categorical variables. The only difference is that we are now using an analysis of deviance to summarize significance, which requires the use of a Type-II test instead of a Type-III test.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Load the car library so we can get a </span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># meaningful ANOVA table for our model</span></a>
+<a class="sourceLine" id="cb4-3" title="3">  <span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># Print the summary of the model</span></a>
+<a class="sourceLine" id="cb4-6" title="6">  <span class="kw">Anova</span>(v.mod, <span class="dt">Type=</span><span class="st">&#39;II&#39;</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">Analysis of Deviance <span class="kw">Table</span> (Type II tests)</a>
+<a class="sourceLine" id="cb4-8" title="8"></a>
+<a class="sourceLine" id="cb4-9" title="9">Response<span class="op">:</span><span class="st"> </span>dead</a>
+<a class="sourceLine" id="cb4-10" title="10">              LR Chisq Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    </a>
+<a class="sourceLine" id="cb4-11" title="11">Concentration   <span class="fl">8885.8</span>  <span class="dv">5</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-12" title="12">Time            <span class="fl">4501.7</span>  <span class="dv">1</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="op">---</span></a>
+<a class="sourceLine" id="cb4-14" title="14">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
+<p><strong>Question 1.</strong> At the default confidence level (<span class="math inline">\(\alpha\)</span> = 0.05), what can you determine about effects of <code>Concentration</code> and <code>Time</code> with respect to statistical significance? Answer in sentence form, stating the null hypotheses and supporting statistics.</p>
 <p>Just as with all of our other models, we can use the <code>summary()</code> function to get the output from R.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the summary of the model</span>
-  <span class="kw">summary</span>(c.mod)</code></pre></div>
-<pre><code>## 
-## Call:
-## glm(formula = remission ~ Sex + Age, family = &quot;binomial&quot;, data = cancer)
-## 
-## Deviance Residuals: 
-##     Min       1Q   Median       3Q      Max  
-## -1.1654  -0.8581  -0.7878   1.4582   1.8985  
-## 
-## Coefficients:
-##              Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept)  0.788166   0.196091   4.019 5.83e-05 ***
-## Sexmale      0.054484   0.048557   1.122    0.262    
-## Age         -0.033089   0.003838  -8.621  &lt; 2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## (Dispersion parameter for binomial family taken to be 1)
-## 
-##     Null deviance: 10353  on 8524  degrees of freedom
-## Residual deviance: 10276  on 8522  degrees of freedom
-## AIC: 10282
-## 
-## Number of Fisher Scoring iterations: 4</code></pre>
-<p><br></p>
-<p>The <code>summary</code> of the model gives us the estimated coefficients <strong>on the logit scale</strong>, along with our usual significance codes and an <code>AIC</code> score (now in the default output because we are using maximum likelihood estimation).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Print the summary of the model</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">summary</span>(v.mod)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="kw">glm</span>(<span class="dt">formula =</span> dead <span class="op">~</span><span class="st"> </span>Concentration <span class="op">+</span><span class="st"> </span>Time, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, </a>
+<a class="sourceLine" id="cb5-6" title="6">    <span class="dt">data =</span> vd)</a>
+<a class="sourceLine" id="cb5-7" title="7"></a>
+<a class="sourceLine" id="cb5-8" title="8">Deviance Residuals<span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="st">    </span>Min       1Q   Median       3Q      Max  </a>
+<a class="sourceLine" id="cb5-10" title="10"><span class="fl">-4.3208</span>  <span class="fl">-0.0218</span>   <span class="fl">0.0214</span>   <span class="fl">0.2047</span>   <span class="fl">5.0817</span>  </a>
+<a class="sourceLine" id="cb5-11" title="11"></a>
+<a class="sourceLine" id="cb5-12" title="12">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="st">                    </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb5-14" title="14">(Intercept)       <span class="fl">-13.825053</span>   <span class="fl">0.355912</span>  <span class="fl">-38.84</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-15" title="15">Concentration0<span class="fl">.25</span>  <span class="fl">11.252573</span>   <span class="fl">0.311103</span>   <span class="fl">36.17</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-16" title="16">Concentration0<span class="fl">.5</span>   <span class="fl">12.201641</span>   <span class="fl">0.325214</span>   <span class="fl">37.52</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-17" title="17">Concentration1     <span class="fl">13.407026</span>   <span class="fl">0.344278</span>   <span class="fl">38.94</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-18" title="18">Concentration2     <span class="fl">13.527866</span>   <span class="fl">0.342963</span>   <span class="fl">39.44</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-19" title="19">Concentration3     <span class="fl">13.464877</span>   <span class="fl">0.345367</span>   <span class="fl">38.99</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-20" title="20">Time                <span class="fl">0.182631</span>   <span class="fl">0.005109</span>   <span class="fl">35.75</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="op">---</span></a>
+<a class="sourceLine" id="cb5-22" title="22">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-23" title="23"></a>
+<a class="sourceLine" id="cb5-24" title="24">(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb5-25" title="25"></a>
+<a class="sourceLine" id="cb5-26" title="26">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">15731.0</span>  on <span class="dv">12108</span>  degrees of freedom</a>
+<a class="sourceLine" id="cb5-27" title="27">Residual deviance<span class="op">:</span><span class="st">  </span><span class="fl">4989.6</span>  on <span class="dv">12102</span>  degrees of freedom</a>
+<a class="sourceLine" id="cb5-28" title="28">AIC<span class="op">:</span><span class="st"> </span><span class="fl">5003.6</span></a>
+<a class="sourceLine" id="cb5-29" title="29"></a>
+<a class="sourceLine" id="cb5-30" title="30">Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">8</span></a></code></pre></div>
+<p>The summary of the model gives us the estimated coefficients <strong>on the logit scale</strong>, along with our usual significance codes and an AIC score (now in the default output because we are using maximum likelihood estimation).</p>
 <p>Even though these parameters are on the logit scale, we can still make limited inference about the directionality of relationships as we would with linear models used earlier in the semester.</p>
-<p><br></p>
-<p><strong>Question 2</strong>. What can you tell about the direction of the relationship between <code>Age</code> and <code>remission</code> from the output from <code>summary()</code> above? <!-- Here, we see that the coefficient for `Age` is negative (`{r c.mod$Coefficients[3,1]}`), meaning that we would predict probability of `remission` to be inversely related to `Age` (higher probability of younger people going into remission). --></p>
-<p><br></p>
-<p>One thing that you’ll notice is missing from this output is the R<sup>2</sup> value that we have become familiar with during the past several weeks while working with linear models. There is no R<sup>2</sup> value because we are no longer estimating these models using ordinary least squares, but rather maximum likelihood estimation. If we wanted to get an analagous metric of variance explained by our model, we could estimate a <em>pseudo-R<sup>2</sup></em>. There are many of these available depending on the model and nature of our data. The simplest to calculate is the <strong>McFadden R<sup>2</sup></strong>. To estimate this one, we compare the deviance of our model to the deviance of an intercept-only (i.e. “null”) model using the output from the <code>summary</code> function above:</p>
-<p><br></p>
+<p><strong>Question 2.</strong> What, if any, is the direction of the relationship between <code>Time</code> and zebra mussel mortality?</p>
+<p><strong>Question 3.</strong> What is the general trend in mortality with the different concentrations listed in the <code>summary</code> of <code>vmod</code>? This may take a little thought, but remember that even as categorical variables, factor levels are listed alphanumerically in the output. If <code>Concentration == 0</code> (“control”) is in the intercept, then the remaining coefficients are directly comparable.</p>
+<!-- Here, we see that the coefficient for `Time` is positive (0.183), meaning that we would predict probability of `dead` to be directly proportional to `Time` (higher probability of death following increased exposure time). This, of course, seems perfectly reasonable. -->
+<p>One thing that you’ll notice is missing from this output is the R<sup>2</sup> value that we have become familiar with during the past several weeks while working with linear models. There is no R<sup>2</sup> value because we are no longer estimating these models using ordinary least squares, but rather maximum likelihood estimation. If we wanted to get an analagous metric of variance explained by our model, we could estimate a <em>pseudo-R<sup>2</sup></em>. There are many of these available depending on the model and nature of our data. The simplest, and arguably most common is the <strong>McFadden R<sup>2</sup></strong>. To estimate this one, we compare the deviance of our model to the deviance of an intercept-only (i.e. “null”) model using the output from the <code>summary</code> function above:</p>
 <p><span class="math display">\[McFadden R^2 = 1 - \frac{Deviance_{residual}}{Deviance_{null}}\]</span></p>
-<p><br></p>
-<p>Here, we can see that the model only explains about 1% of the variation in the response of interest:</p>
-<p><span class="math display">\[R^2 = 1 - \frac{1.0275956\times 10^{4}}{1.0352637\times 10^{4}} = 0.0074\]</span></p>
-<p><br></p>
-<p>Now that we have a feel for just how miserable this model is, our first inclination might be to throw it all away and start over (joking). But, for the sake of demonstration let’s see it through. The next step in reporting our results here is to extract some information about how <code>remission</code> changes with <code>Age</code> beyond simply stating that it was either “inversely” or “proportionally” related to <code>remission</code>. We will include <code>Sex</code> in our predictions for the sake of demonstration, realizing that this effect was not determined to be significant.</p>
-<p>Recall that we can make predictions from our model either by hand or by using the <code>predict</code> function in R. <strong>Note</strong> that if we use the <code>predict</code> function for <code>glm</code> objects in R, we no longer have the ability to set the <code>interval</code> argument as we did for objects resulting from the <code>lm()</code> function (well, we can- it will just be ignored). Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).</p>
-<p>Start by making some new data that we can use for predictions.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start with Age by making a sequence from the minimum</span>
-<span class="co"># observed age to the maximum observed age in equal</span>
-<span class="co"># increments of 1 year</span>
-  Age =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(cancer<span class="op">$</span>Age), <span class="dt">to=</span><span class="kw">max</span>(cancer<span class="op">$</span>Age), <span class="dt">by=</span><span class="dv">1</span>)
-
-<span class="co"># Now, make a column for each sex that is the same length</span>
-  females =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&#39;female&#39;</span>, <span class="kw">length</span>(Age))
-  males =<span class="st"> </span><span class="kw">rep</span>(<span class="st">&#39;male&#39;</span>, <span class="kw">length</span>(Age))
-  
-<span class="co"># Combine the information for both sexes into a vector with the same</span>
-<span class="co"># name as is used in the original data</span>
-  Sex =<span class="st"> </span><span class="kw">c</span>(females, males)
-  
-<span class="co"># Now, duplicate the age column so it is repeated </span>
-<span class="co"># for both sexes</span>
-  Age =<span class="st"> </span><span class="kw">rep</span>(Age, <span class="kw">length</span>(<span class="kw">unique</span>(Sex)))
-  
-<span class="co"># Put it all together in a dataframe</span>
-  newD =<span class="st"> </span><span class="kw">data.frame</span>(Sex, Age)</code></pre></div>
-<p><br></p>
+<p>In R, the residual deviance is stored in <code>v.mod$deviance</code> and the null deviance is stored in <code>v.mod$null.deviance</code>. So,</p>
+<!-- Here, we can see that the model only explains about 68% of the variation in the response of interest: -->
+<p><span class="math display">\[R^2 = 1 - \frac{4989.599}{1.5731041\times 10^{4}} = ?\]</span></p>
+<p><strong>Question 4.</strong> How much of the variation in zebra mussel mortality is explained by the additive effects of <code>Concentration</code> and <code>Time</code>?</p>
+<p>Now that we have a feel for just how much variability this model explains, the next step in reporting our results here is to extract some information about how <code>dead</code> changes with <code>Time</code> beyond simply stating that it was either “inversely” or “proportionally” related to <code>Time</code>. We will include <code>Concentration</code> in our predictions to account for changes between doses.</p>
+<p>Recall that we can make predictions from our model either by hand or by using the <code>predict</code> function in R. <strong>Note</strong> that if we use the <code>predict</code> function for <code>glm</code> objects in R, we no longer have the ability to set the <code>interval</code> argument as we did for objects resulting from the <code>lm()</code> function (well, we can- it will just be ignored). But, we can get standard error estimates if we make predictions on the link scale. Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).</p>
+<p>Start by making some new data that we can use for predictions. Recall from <a href="06_diagnosticsAndEffects.html">lecture module 6</a> that this gets a little more complicated when we have multiple explanatory variables. The <code>predict</code> function requires a <code>data.frame</code> with <code>names</code> that match the <code>names</code> of explanatory variables from our original data set, <code>vd</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Start with Time by making a sequence from the minimum</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># observed Time to the maximum observed Time in equal</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># increments of 1 hour</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  Time =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(vd<span class="op">$</span>Time), <span class="dt">to=</span><span class="kw">max</span>(vd<span class="op">$</span>Time), <span class="dt">by=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co"># Now, make a column for each Concentration that is the same length</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  Concentration =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">unique</span>(vd<span class="op">$</span>Concentration), <span class="kw">length</span>(Time))</a>
+<a class="sourceLine" id="cb6-8" title="8">  </a>
+<a class="sourceLine" id="cb6-9" title="9"><span class="co"># Now, duplicate the Time column so it is repeated </span></a>
+<a class="sourceLine" id="cb6-10" title="10"><span class="co"># for all Concentrationes</span></a>
+<a class="sourceLine" id="cb6-11" title="11">  Time =<span class="st"> </span><span class="kw">rep</span>(Time, <span class="kw">length</span>(<span class="kw">unique</span>(Concentration)))</a>
+<a class="sourceLine" id="cb6-12" title="12">  </a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co"># Put it all together in a dataframe</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  newD =<span class="st"> </span><span class="kw">data.frame</span>(Concentration, Time)</a>
+<a class="sourceLine" id="cb6-15" title="15">  newD =<span class="st"> </span>newD[<span class="kw">with</span>(newD, <span class="kw">order</span>(Concentration, Time)), ]</a></code></pre></div>
 <p>Now that we have new data for making predictions, let’s go ahead and do it!</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Calculate mean predicted value and SE for the predictions</span>
-<span class="co"># on the link scale</span>
-  preds =<span class="st"> </span><span class="kw">data.frame</span>(
-    <span class="kw">predict</span>(c.mod, newD, <span class="dt">type=</span><span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]
-  )
-
-<span class="co"># Now get lower and upper CIs</span>
-  preds<span class="op">$</span>lwr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.025</span>)
-  preds<span class="op">$</span>upr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</code></pre></div>
-<p><br></p>
-<p>Now, we need to define a function to invert the logit</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">inv.logit =<span class="st"> </span><span class="cf">function</span>(x){
-  <span class="kw">exp</span>(x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(x))
-}</code></pre></div>
-<p><br></p>
-<p>We can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our <code>preds</code> dataframe using the <code>apply</code> function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Convert the predictions to the probability scale</span>
-  preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] =<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X=</span>preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)],
-                             <span class="dt">MARGIN=</span><span class="dv">2</span>,
-                             <span class="dt">FUN=</span>inv.logit
-                             )</code></pre></div>
-<p><br></p>
-<p>Finally, let’s plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the predictions</span>
-<span class="co"># Set graphical parameters</span>
-  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
-<span class="co"># Females</span>
-  <span class="co"># Plot the mean predicted probability of remission</span>
-  <span class="co"># given age across the range of observed ages</span>
-    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
-         <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
-         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;red&#39;</span>),
-         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,
-         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,
-         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-         <span class="dt">ylab =</span> <span class="st">&#39;p( Remission | Age )&#39;</span>,
-         <span class="dt">xlab =</span> <span class="st">&#39;Age (years)&#39;</span>
-         )
-  <span class="co"># Lower 95% CI</span>
-    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>], 
-          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
-          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-  <span class="co"># Upper 95% CI</span>
-    <span class="kw">lines</span>(preds<span class="op">$</span>upr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>], 
-          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;female&#39;</span>],
-          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-    
-<span class="co"># Males  </span>
-  <span class="co"># Plot the mean predicted probability of remission</span>
-  <span class="co"># given age across the range of observed ages</span>
-    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
-         <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
-         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;blue&#39;</span>),
-         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,
-         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,
-         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),
-         <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,
-         <span class="dt">xlab =</span> <span class="st">&#39;Age (years)&#39;</span>
-         )
-  <span class="co"># Lower 95% CI</span>
-    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>], 
-          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
-          <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-  <span class="co"># Upper 95% CI</span>
-    <span class="kw">lines</span>(preds<span class="op">$</span>upr[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>], 
-          <span class="dt">x=</span>newD<span class="op">$</span>Age[newD<span class="op">$</span>Sex<span class="op">==</span><span class="st">&#39;male&#39;</span>],
-          <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)    </code></pre></div>
-<p><img src="hw08_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p><br></p>
-<p>Using either the graph or the estimates in the <code>fit</code> column of <code>preds</code>, we can estimate about how much <code>remission</code> changes across the range of <code>Age</code> observed. We don’t need to report this by <code>Sex</code> because we know that was not significant in our model, and the change is about the same. So, here we can say that probability of entering remission decreased from about 49% to about 16% over the range of ages observed during this study.</p>
-<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Calculate mean predicted value and SE for the predictions</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># on the link scale</span></a>
+<a class="sourceLine" id="cb7-3" title="3">  preds =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb7-4" title="4">    <span class="kw">predict</span>(v.mod, newD, <span class="dt">type=</span><span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</a>
+<a class="sourceLine" id="cb7-5" title="5">  )</a>
+<a class="sourceLine" id="cb7-6" title="6"></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co"># Now get lower and upper CIs</span></a>
+<a class="sourceLine" id="cb7-8" title="8">  preds<span class="op">$</span>lwr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.025</span>)</a>
+<a class="sourceLine" id="cb7-9" title="9">  preds<span class="op">$</span>upr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</a></code></pre></div>
+<p>Now, we need to define a function to invert the logit link function if we want to get our predictions back on the probability scale (and we do).</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">inv.logit =<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="kw">exp</span>(x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(x))</a>
+<a class="sourceLine" id="cb8-3" title="3">}</a></code></pre></div>
+<p>Now we can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our <code>preds</code> dataframe using the <code>apply</code> function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Convert the predictions to the probability scale</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] =<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X=</span>preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)],</a>
+<a class="sourceLine" id="cb9-3" title="3">                             <span class="dt">MARGIN=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb9-4" title="4">                             <span class="dt">FUN=</span>inv.logit</a>
+<a class="sourceLine" id="cb9-5" title="5">                             )</a>
+<a class="sourceLine" id="cb9-6" title="6"><span class="co"># Add our new data to the dataframe</span></a>
+<a class="sourceLine" id="cb9-7" title="7">  preds =<span class="st"> </span><span class="kw">data.frame</span>(preds, newD)</a></code></pre></div>
+<p>Finally, let’s plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice. We could go through and plot these one at a time (see lecture content), but here I will demonstrate how one might do this using a loop, followed by a number of conditionals for axis labeling. All in the name of gross overkill (oh, wait, I mean responsive programming and data visualization!).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Plot the predictions</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="co"># Set graphical parameters</span></a>
+<a class="sourceLine" id="cb10-3" title="3">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,.<span class="dv">5</span>,.<span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb10-4" title="4"></a>
+<a class="sourceLine" id="cb10-5" title="5"><span class="co"># Loop over the different doses to plot probability</span></a>
+<a class="sourceLine" id="cb10-6" title="6"><span class="co"># of mortality by exposure time</span></a>
+<a class="sourceLine" id="cb10-7" title="7"><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(preds<span class="op">$</span>Concentration))){</a>
+<a class="sourceLine" id="cb10-8" title="8">  <span class="co"># Plot the mean</span></a>
+<a class="sourceLine" id="cb10-9" title="9">    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</a>
+<a class="sourceLine" id="cb10-10" title="10">         <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</a>
+<a class="sourceLine" id="cb10-11" title="11">         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>),</a>
+<a class="sourceLine" id="cb10-12" title="12">         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,</a>
+<a class="sourceLine" id="cb10-13" title="13">         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb10-14" title="14">         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
+<a class="sourceLine" id="cb10-15" title="15">         <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,</a>
+<a class="sourceLine" id="cb10-16" title="16">         <span class="dt">xlab =</span> <span class="st">&#39;&#39;</span>,</a>
+<a class="sourceLine" id="cb10-17" title="17">         <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span></a>
+<a class="sourceLine" id="cb10-18" title="18">         )</a>
+<a class="sourceLine" id="cb10-19" title="19">  <span class="co"># Lower 95% CI</span></a>
+<a class="sourceLine" id="cb10-20" title="20">    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]], </a>
+<a class="sourceLine" id="cb10-21" title="21">          <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</a>
+<a class="sourceLine" id="cb10-22" title="22">          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb10-23" title="23">  <span class="co"># Upper 95% CI</span></a>
+<a class="sourceLine" id="cb10-24" title="24">    <span class="kw">lines</span>(preds<span class="op">$</span>upr[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]], </a>
+<a class="sourceLine" id="cb10-25" title="25">          <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</a>
+<a class="sourceLine" id="cb10-26" title="26">          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb10-27" title="27">    </a>
+<a class="sourceLine" id="cb10-28" title="28">  <span class="co"># Add the name of the metric to the plots  </span></a>
+<a class="sourceLine" id="cb10-29" title="29">    <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">60</span>, <span class="dt">y =</span> <span class="fl">0.25</span>,</a>
+<a class="sourceLine" id="cb10-30" title="30">         <span class="dt">labels =</span> <span class="kw">paste</span>(<span class="st">&quot;Concentration =&quot;</span>, <span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]),</a>
+<a class="sourceLine" id="cb10-31" title="31">         <span class="dt">adj =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-32" title="32">    </a>
+<a class="sourceLine" id="cb10-33" title="33">    <span class="co"># Add x(side=1) and y (side=2) tick marks to all plots </span></a>
+<a class="sourceLine" id="cb10-34" title="34">    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">labels =</span> <span class="ot">FALSE</span>, <span class="dt">tick =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-35" title="35">    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),</a>
+<a class="sourceLine" id="cb10-36" title="36">         <span class="dt">labels =</span> <span class="ot">FALSE</span>, <span class="dt">tick =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb10-37" title="37">    </a>
+<a class="sourceLine" id="cb10-38" title="38">  <span class="co"># Add x-axis tick labels only if plot 11 or 12</span></a>
+<a class="sourceLine" id="cb10-39" title="39">    <span class="cf">if</span>((i<span class="op">==</span><span class="dv">5</span>) <span class="op">||</span><span class="st"> </span>(i<span class="op">==</span><span class="dv">6</span>)){</a>
+<a class="sourceLine" id="cb10-40" title="40">      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="kw">max</span>(preds<span class="op">$</span>Time)), <span class="dv">10</span>),</a>
+<a class="sourceLine" id="cb10-41" title="41">           <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="kw">max</span>(preds<span class="op">$</span>Time)), <span class="dv">10</span>))  </a>
+<a class="sourceLine" id="cb10-42" title="42">    }     </a>
+<a class="sourceLine" id="cb10-43" title="43">    </a>
+<a class="sourceLine" id="cb10-44" title="44">  <span class="co"># Add y-axis tick labels only if plot number is even  </span></a>
+<a class="sourceLine" id="cb10-45" title="45">    <span class="cf">if</span>((i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</a>
+<a class="sourceLine" id="cb10-46" title="46">      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),</a>
+<a class="sourceLine" id="cb10-47" title="47">           <span class="dt">labels =</span> <span class="kw">format</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="dt">digits =</span> <span class="dv">2</span>), <span class="dt">las=</span><span class="dv">2</span>)  </a>
+<a class="sourceLine" id="cb10-48" title="48">    }    </a>
+<a class="sourceLine" id="cb10-49" title="49">    </a>
+<a class="sourceLine" id="cb10-50" title="50">}</a>
+<a class="sourceLine" id="cb10-51" title="51"></a>
+<a class="sourceLine" id="cb10-52" title="52"><span class="co"># Add x and y-axis labels to the plot    </span></a>
+<a class="sourceLine" id="cb10-53" title="53"><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&quot;Probability of mortality&quot;</span>,</a>
+<a class="sourceLine" id="cb10-54" title="54">      <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="fl">2.75</span>, <span class="dt">cex=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb10-55" title="55">      <span class="dt">adj=</span>.<span class="dv">5</span>, <span class="dt">outer=</span><span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb10-56" title="56">      )</a>
+<a class="sourceLine" id="cb10-57" title="57"><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&quot;Time (h)&quot;</span>,</a>
+<a class="sourceLine" id="cb10-58" title="58">      <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">cex=</span><span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb10-59" title="59">      <span class="dt">adj=</span>.<span class="dv">5</span>, <span class="dt">outer=</span><span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="hw08_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>Using either the graph or the estimates in the <code>fit</code> column of <code>preds</code>, we can estimate about how much <code>dead</code> changes across the range of <code>Time</code> observed. We can report this by <code>Time</code> to convey more information.</p>
+<p><strong>Question 5.</strong> Use the graph you have created, along with the model results to explain</p>
+<p>If you have been paying close attention this semester, you may be wondering why we don’t fit an interaction that would allow the effect of exposure time to vary across <code>Concentration</code>, and indeed that is a fair question. Unfortunately, the degree of mortality that results after short exposure to the higher concentrations is so high that variance estimation in the model becomes unstable and we predict confidence intervals from zero to one (despite increasing the R<sup>2</sup> to 0.94 and producing much more intuitive curves).</p>
 </div>
-</div>
-</div>
-</div>
-<div id="your-turn" class="section level2">
-<h2>Your turn</h2>
-<p><br></p>
-<p>Next, I want you to strike out on your own and make a couple of models. To start, please <strong>choose one categorical explanatory variable</strong> other than <code>Sex</code> <strong>and one continuous explanatory variable</strong> (this can be the same as the one included in the previous model or different). Do not use <code>DID</code>, <code>Experience</code>, <code>School</code>, or <code>HID</code> for this analysis.</p>
-<p><br></p>
-<p>Fit a model using your two variables, and save it to a named object.</p>
-<p>Create a third model that represents the null model. If you have forgotten since last week how to specify this, remember that we can use the following notation to specify the null model:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">null =<span class="st"> </span><span class="kw">glm</span>(remission<span class="op">~</span><span class="dv">1</span>, <span class="dt">family=</span>binomial, <span class="dt">data=</span>cancer)</code></pre></div>
-<p><br></p>
-<p>Compare the null model to your previous model using AIC for model comparison.</p>
-<p><br></p>
-<p><strong>Question 3</strong>. Do the differences in AIC scores indicate a substantial difference in the fit of the two models (i.e. is one much better than the other?). What can you conclude about your new model based on this?</p>
-<p><br></p>
-<p><strong>Question 4</strong>. Use the <code>Anova</code> function from the <code>car</code> package to report on the statistical significance of the relationship between your chosen explanatory variables and <code>remission</code>.</p>
-<p><br></p>
-<p>Make predictions from your model using the same procedure that we used above to determined how much <code>remission</code> varied between <code>Sex</code> and by <code>Age</code> (but do it for <em>your</em> variables). Be sure to estimate separately for each group of your categorical explanatory variable if this was significant in your model.</p>
-<p><br></p>
-<p><strong>Question 5</strong>. About how much does <code>remission</code> change across the range of observed values for your continuous covariate based on your model predictions?</p>
-<!-- stepped = glm(formula = remission ~ tumorsize + wound + mobility + ntumors + nmorphine + Age + FamilyHx + CancerStage + BMI + IL6 + CRP + DID + Experience + School + HID, family = binomial, data = cancer) -->
-<p><br></p>
-</div>
-<div id="bonus-2-pts" class="section level2">
-<h2>Bonus: 2 pts</h2>
-<p><br></p>
-<p>Plot your model predictions for your continuous covariate like we did above, being sure to include estimates for each group of your explanatory variable if it was significant in your new model.</p>
-<p><br></p>
-<p><br></p>
 </div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
@@ -558,6 +648,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
