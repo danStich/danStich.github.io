@@ -1,72 +1,52 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-<br>
- 
-# Model selection
+<h1 id="multi"> Model selection </h1>
 
-<br>
- 
-## Introduction  
+<img src="../../images/glass.jpg">
 
-<br>
- 
+<h2 id="multi"> Introduction </h2>  
+
 This week we are going to wrap up our discussions about linear models. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case, so we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to introduce some new kinds of explanatory variables ("polynomials"), provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework.
 
 By the end of this lab, you should 1) be comfortable fitting and interpretting linear models such as ANOVA, linear regression, and ANCOVA, 2) be able to state competing hypotheses represented by different models, and 3) be able to use modern tools to choose between competing hypotheses and make predictions that can be used to test the overall quality of your "best" model.
 
-<br>
- 
-## Exercises
-<br>
- 
-This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are stored on the course website on blackboard:
 
-<br>
- 
+## Exercises
+This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are as follows:
+
 ```{r, message=FALSE, warning=FALSE}
-# Install the 'faraway' package in R, and you can get
-# the data using data("gala"):
+# Install the 'faraway' package in R,
+# to get the data using data("gala"):
   #install.packages('faraway')
   library(faraway)
   data(gala)
-  
-# The data explanation follows:
-### Species:   number of plant species found on the island
-### Endemics:  number of endemic species
-### Area:      area of the island (km$^2$)
-### Elevation: highest elevation of the island (m)
-### Nearest:   distance from the nearest island (km)
-### Scruz:     distance from Santa Cruz island (km)
-### Adjacent:  area of the adjacent island (square km)
 ```
 
-<br>
- 
+The data explanation follows:
+
+`Species`:   number of plant species found on the island<br>
+`Endemics`:  number of endemic species<br>
+`Area`:      area of the island (km^2^)<br>
+`Elevation`: highest elevation of the island (m)<br>
+`Nearest`:   distance from the nearest island (km)<br>
+`Scruz`:     distance from Santa Cruz island (km)<br>
+`Adjacent`:  area of the adjacent island (square km)<br>
+  
 The citation for the paper is:   
   
-Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.
- 
-And it can be found [here](./JohnsonAndRaven1973.pdf) 
- 
-<br>
- 
-_**Question 1.**_ Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week....What is the problem with using species counts as a continuous response variable in linear models?
+>Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.
 
-<br>
- 
+It is available through the course website <a href="JohnsonAndRaven1973.pdf">here</a>.
+
+**Question 1.** Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week....What is the problem with using species counts as a continuous response variable in linear models?
+
+
 ### Interpreting polynomials
+The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was "non-linear". That study used log~*e*~ transformation to demonstrate this. We will try to use a  polynomial to see if we can show this another way.  
 
-<br>
- 
-The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was "non-linear". That study used log~e~ transformation to demonstrate this. We will try to use a  polynomial to see if we can show this another way.  
+**Question 2.** Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?
 
-<br>
-
-_**Question 2.**_ Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?
-
-<br>
- 
 ```{r, include=FALSE, eval=FALSE}
 # Fit the model
   isle = lm(Species~Area + I(Area^2), data=gala)
@@ -77,150 +57,100 @@ _**Question 2.**_ Given what you have learned in other courses (e.g. BIOL 181), 
   lines(area, preds)
 ```
 
-<br>
- 
-Fit a model that includes both linear and quadratic effects of Area on Species. If it's been a while since algebra, remember that a quadratic equation (aka second order polynomial aka parabola) means that there is a first order term and a second order term. This means that if you want to fit a quadratic term for `Area`, you need to create a new variable in `gala` that is `Area`^2^.
+Fit a model that includes both linear and quadratic effects of Area on Species. 
 
-<br>
+**Question 3.** What is the coefficient of determination (R^2^) of this model? How does this compare the the R^2^ values reported for the models in Johnson and Raven (1973)?
 
-_**Question 3.**_ What is the coefficient of determination (R^2^) of this model? How does this compare the the R^2^ values reported for the models in Johnson and Raven (1973)?
-
-<br>
-
-_**Question 4.**_ Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you *can* tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (Google it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.
-
-<br>
+**Question 4.** Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you *can* tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.
 
 In any case, it looks like we won't be refuting any seminal papers about species abundances in the Galapagos Islands this week. Oh, well. At least we can use the paper to guide us through the rest of our lab.
 
-<br>
- 
+
 ### Model selection
-
-<br>
- 
 Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.
-
-<br>
 
 For a change of pace from previous labs, let's keep following the Johnson and Raven (1973) paper down the rabbit hole. Let's have some fun!
 
-<br>
- 
+The models that Johnson and Raven tested looked like this
 ```{r}
-# The models that Johnson and Raven tested looked like this
+# Note: the results will not be exactly
+# the same because missing data in the paper
+# were filled in here.
 
-  # Note: the results will not be exactly the same because points were added for the missing data in the paper
-
-  # Note Also: we need to fix data point number 25 in Scruz because that is the
-  # island Scruz and we can't take the log of zero!!!
-    gala$Scruz[25] = 0.00001
+# Note also: we need to fix data point
+# number 25 in Scruz because that is the
+# island Scruz and we can't take the
+# log of zero!!!
+gala$Scruz[25] = 0.00001
 
 S1 = lm(Species~Area + Nearest + Scruz + Adjacent, data=gala)
 lnS1 = lm(log(Species)~log(Area) + log(Nearest) + log(Scruz) + log(Adjacent),
             data=gala)
 S2 = lm(Species~Area + Elevation + Nearest + Scruz + Adjacent, data=gala)
 lnS2 = lm(log(Species)~log(Area) + log(Elevation) + log(Nearest) + 
-            log(Scruz) + log(Adjacent), data=gala          )
+            log(Scruz) + log(Adjacent), data=gala)
 ```
 
-<br>
- 
 ```{r, include=FALSE, eval=FALSE}
 mod1 = list(S1, lnS1, S2, lnS2)
 mapply(AIC, mod1)
 mapply(summary, mod1)
 ```
-
-<br>
  
-_**Question 5.**_ Look at the summaries for each of these models once you fit them. Does the general pattern in the R-squared values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)? 
+**Question 5.** Look at the summaries for each of these models once you fit them. Does the general pattern in the R^2^ values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)? 
 
-<br>
+This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his [seminal 1974 paper](http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf) in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before). 
 
-This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his [seminal 1974](http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf) paper in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before). 
-
-<br>
- 
 Let's see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models.
 
-<br>
+We will use the `AICcmodavg` introduced in class for this example, but recall that we could use the `AIC` function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc~i~, $\Delta$AICc~i~, and w~i~ manually.
 
-We will use the `AICcmodavg` introduced in class for this example, but recall that we could use the `AIC` function in $R$ for this as well. Using the latter approach, you would have to calculate the sample-size corrected $AICc_i$, $delta AICc_i$, and $w_i$ manually.
-
-<br>
- 
 ```{r, eval=FALSE}
 # Install and load the necessary library
   install.packages('AICcmodavg')
   library(AICcmodavg)
 
-# Next, you will need to make a list out of your models
+# Next, you will need to make a
+# list out of your models
   mods = list(lnS1, lnS2)
 # Make sure you give it some names, too
   names(mods) = c('lnS1', ' lnS2')
 ```
 
-<br>
- 
-Now, use the `aictab` function to calculate model selection statistics for information-theoretic approach using AIC. If you've forgotten how to do this, you can Google it, or you can do:
+Now, use the `aictab` function to calculate model selection statistics for information-theoretic approach using AIC. If you've forgotten how to do this, you can <a href="https://www.google.com/">Google</a> it, or you can do:
 
-<br>
- 
 ```{r, eval=FALSE}
 ?aictab
 ```
 
-<br>
- 
 ```{r, eval=FALSE, include=FALSE}
 # Run the function to get the key for this question
   aictab(mods, names(mods))
 ```  
 
-<br>
- 
-_**Question 6.**_ Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including $delta AICc$ and the ratio of $w_i$ for the two models (see reference script).
+**Question 6.** Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including $\Delta$AICc and the ratio of w~i~ for the two models (see reference script).
 
-<br>
+**Question 7.** How do the results of your AICc model selection compare to the R^2^ values you calculated for each of these models above? Why do you think this is the case?
 
-_**Question 7.**_ How do the results of your AIC model selection compare to the R^2^ values you calculated for each of these models above? Why do you think this is the case?
-
-<br>
-
-_**Question 8.**_ Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the $log_e$ transformation of the response that Johnson and Raven used in order to compare these models with $AICc$, but you do not need to $log_e$ transform the explanatory variables if you do not wish to.
-
-<br>
+**Question 8.** Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log^*e*^ transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log^*e*^ transform the explanatory variables if you do not wish to.
 
 First, fit your new models and make a list object containing these two models and `lnS1` and `lnS2` from above. Don't forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of `lnS1` and `lnS2`.
 
-<br>
- 
-_**Question 9.**_ How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?
+**Question 9.** How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?
 
-<br>
- 
-<br>
- 
-<!-- ### Model validation -->
-<!-- Trucking on...First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week. -->
 
-<!-- ```{r} -->
-<!-- # As a reminder, here is the model that you should be working with for this: -->
-<!--   lnS1 = lm(log(Species)~log(Area) + log(Nearest) + log(Scruz) + log(Adjacent), -->
-<!--             data=gala) -->
+### Model validation
+Trucking on...First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week.
 
-<!--   summary(lnS1) -->
-<!-- ``` -->
+```{r}
+# As a reminder, here is the model that you should be working with for this:
+  lnS1 = lm(log(Species)~log(Area) + log(Nearest) + log(Scruz) + log(Adjacent),data=gala)
 
-<!-- <br> -->
+  summary(lnS1)
+```
 
-<!-- Use one of the methods from the reference script (*leave-one-out cross-validation* or *bootstrapped predictive* R^2^) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the `caret` package or the `DAAG` package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. *Note*: you do not need to make any plots for the above, but it is strongly encouraged. -->
+Use one of the methods from the reference script (*leave-one-out cross-validation* or *bootstrapped predictive* R^2^) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the `caret` package or the `DAAG` package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. *Note*: you do not need to make any plots for the above, but it is strongly encouraged.
 
-<!-- <br> -->
+Use the same method to do model validation on the best model in your model set from question 9.
 
-<!-- Use the same method to do model validation on the best model in your model set from question 9. -->
-
-<!-- <br> -->
-
-<!-- _**Question 10.**_ How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results? -->
+**Question 10.** How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?

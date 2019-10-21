@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>hw07.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -36,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -107,11 +157,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -125,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -147,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -167,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -188,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -213,31 +356,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -251,160 +420,124 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
-<p><br></p>
-<div id="model-selection" class="section level1">
-<h1>Model selection</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
+<h1 id="multi">
+Model selection
+</h1>
+<p><img src="../../images/glass.jpg"></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>This week we are going to wrap up our discussions about linear models. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case, so we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to introduce some new kinds of explanatory variables (“polynomials”), provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework.</p>
 <p>By the end of this lab, you should 1) be comfortable fitting and interpretting linear models such as ANOVA, linear regression, and ANCOVA, 2) be able to state competing hypotheses represented by different models, and 3) be able to use modern tools to choose between competing hypotheses and make predictions that can be used to test the overall quality of your “best” model.</p>
-<p><br></p>
-</div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p><br></p>
-<p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are stored on the course website on blackboard:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install the &#39;faraway&#39; package in R, and you can get</span>
-<span class="co"># the data using data(&quot;gala&quot;):</span>
-  <span class="co">#install.packages(&#39;faraway&#39;)</span>
-  <span class="kw">library</span>(faraway)
-  <span class="kw">data</span>(gala)
-  
-<span class="co"># The data explanation follows:</span>
-### Species:   number of plant species found on the island
-### Endemics:  number of endemic species
-### Area:      area of the island (km$^2$)
-### Elevation: highest elevation of the island (m)
-### Nearest:   distance from the nearest island (km)
-### Scruz:     distance from Santa Cruz island (km)
-### Adjacent:  area of the adjacent island (square km)</code></pre></div>
-<p><br></p>
+<p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are as follows:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install the &#39;faraway&#39; package in R,</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># to get the data using data(&quot;gala&quot;):</span></a>
+<a class="sourceLine" id="cb1-3" title="3">  <span class="co">#install.packages(&#39;faraway&#39;)</span></a>
+<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">library</span>(faraway)</a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">data</span>(gala)</a></code></pre></div>
+<p>The data explanation follows:</p>
+<p><code>Species</code>: number of plant species found on the island<br> <code>Endemics</code>: number of endemic species<br> <code>Area</code>: area of the island (km<sup>2</sup>)<br> <code>Elevation</code>: highest elevation of the island (m)<br> <code>Nearest</code>: distance from the nearest island (km)<br> <code>Scruz</code>: distance from Santa Cruz island (km)<br> <code>Adjacent</code>: area of the adjacent island (square km)<br></p>
 <p>The citation for the paper is:</p>
+<blockquote>
 <p>Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.</p>
-<p>And it can be found <a href="./JohnsonAndRaven1973.pdf">here</a></p>
-<p><br></p>
-<p><em><strong>Question 1.</strong></em> Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week….What is the problem with using species counts as a continuous response variable in linear models?</p>
-<p><br></p>
+</blockquote>
+<p>It is available through the course website <a href="JohnsonAndRaven1973.pdf">here</a>.</p>
+<p><strong>Question 1.</strong> Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week….What is the problem with using species counts as a continuous response variable in linear models?</p>
 <div id="interpreting-polynomials" class="section level3">
 <h3>Interpreting polynomials</h3>
-<p><br></p>
-<p>The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was “non-linear”. That study used log<sub>e</sub> transformation to demonstrate this. We will try to use a polynomial to see if we can show this another way.</p>
-<p><br></p>
-<p><em><strong>Question 2.</strong></em> Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?</p>
-<p><br></p>
-<p><br></p>
-<p>Fit a model that includes both linear and quadratic effects of Area on Species. If it’s been a while since algebra, remember that a quadratic equation (aka second order polynomial aka parabola) means that there is a first order term and a second order term. This means that if you want to fit a quadratic term for <code>Area</code>, you need to create a new variable in <code>gala</code> that is <code>Area</code><sup>2</sup>.</p>
-<p><br></p>
-<p><em><strong>Question 3.</strong></em> What is the coefficient of determination (R<sup>2</sup>) of this model? How does this compare the the R<sup>2</sup> values reported for the models in Johnson and Raven (1973)?</p>
-<p><br></p>
-<p><em><strong>Question 4.</strong></em> Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you <em>can</em> tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (Google it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.</p>
-<p><br></p>
+<p>The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was “non-linear”. That study used log<sub><em>e</em></sub> transformation to demonstrate this. We will try to use a polynomial to see if we can show this another way.</p>
+<p><strong>Question 2.</strong> Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?</p>
+<p>Fit a model that includes both linear and quadratic effects of Area on Species.</p>
+<p><strong>Question 3.</strong> What is the coefficient of determination (R<sup>2</sup>) of this model? How does this compare the the R<sup>2</sup> values reported for the models in Johnson and Raven (1973)?</p>
+<p><strong>Question 4.</strong> Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you <em>can</em> tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.</p>
 <p>In any case, it looks like we won’t be refuting any seminal papers about species abundances in the Galapagos Islands this week. Oh, well. At least we can use the paper to guide us through the rest of our lab.</p>
-<p><br></p>
 </div>
-<div id="model-selection-1" class="section level3">
+<div id="model-selection" class="section level3">
 <h3>Model selection</h3>
-<p><br></p>
 <p>Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.</p>
-<p><br></p>
 <p>For a change of pace from previous labs, let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. Let’s have some fun!</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The models that Johnson and Raven tested looked like this</span>
-
-  <span class="co"># Note: the results will not be exactly the same because points were added for the missing data in the paper</span>
-
-  <span class="co"># Note Also: we need to fix data point number 25 in Scruz because that is the</span>
-  <span class="co"># island Scruz and we can&#39;t take the log of zero!!!</span>
-    gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span>
-
-S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)
-lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),
-            <span class="dt">data=</span>gala)
-S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)
-lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span>
-<span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala          )</code></pre></div>
-<p><br></p>
-<p><br></p>
-<p><em><strong>Question 5.</strong></em> Look at the summaries for each of these models once you fit them. Does the general pattern in the R-squared values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
-<p><br></p>
-<p>This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his <a href="http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf">seminal 1974</a> paper in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before).</p>
-<p><br></p>
+<p>The models that Johnson and Raven tested looked like this</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Note: the results will not be exactly</span></a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="co"># the same because missing data in the paper</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="co"># were filled in here.</span></a>
+<a class="sourceLine" id="cb2-4" title="4"></a>
+<a class="sourceLine" id="cb2-5" title="5"><span class="co"># Note also: we need to fix data point</span></a>
+<a class="sourceLine" id="cb2-6" title="6"><span class="co"># number 25 in Scruz because that is the</span></a>
+<a class="sourceLine" id="cb2-7" title="7"><span class="co"># island Scruz and we can&#39;t take the</span></a>
+<a class="sourceLine" id="cb2-8" title="8"><span class="co"># log of zero!!!</span></a>
+<a class="sourceLine" id="cb2-9" title="9">gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span></a>
+<a class="sourceLine" id="cb2-10" title="10"></a>
+<a class="sourceLine" id="cb2-11" title="11">S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</a>
+<a class="sourceLine" id="cb2-12" title="12">lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),</a>
+<a class="sourceLine" id="cb2-13" title="13">            <span class="dt">data=</span>gala)</a>
+<a class="sourceLine" id="cb2-14" title="14">S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</a>
+<a class="sourceLine" id="cb2-15" title="15">lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb2-16" title="16"><span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala)</a></code></pre></div>
+<p><strong>Question 5.</strong> Look at the summaries for each of these models once you fit them. Does the general pattern in the R<sup>2</sup> values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
+<p>This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his <a href="http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf">seminal 1974 paper</a> in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before).</p>
 <p>Let’s see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models.</p>
-<p><br></p>
-<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in <span class="math inline">\(R\)</span> for this as well. Using the latter approach, you would have to calculate the sample-size corrected <span class="math inline">\(AICc_i\)</span>, <span class="math inline">\(delta AICc_i\)</span>, and <span class="math inline">\(w_i\)</span> manually.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Install and load the necessary library</span>
-  <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)
-  <span class="kw">library</span>(AICcmodavg)
-
-<span class="co"># Next, you will need to make a list out of your models</span>
-  mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)
-<span class="co"># Make sure you give it some names, too</span>
-  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</code></pre></div>
-<p><br></p>
-<p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can Google it, or you can do:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">?aictab</code></pre></div>
-<p><br></p>
-<p><br></p>
-<p><em><strong>Question 6.</strong></em> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(delta AICc\)</span> and the ratio of <span class="math inline">\(w_i\)</span> for the two models (see reference script).</p>
-<p><br></p>
-<p><em><strong>Question 7.</strong></em> How do the results of your AIC model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
-<p><br></p>
-<p><em><strong>Question 8.</strong></em> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the <span class="math inline">\(log_e\)</span> transformation of the response that Johnson and Raven used in order to compare these models with <span class="math inline">\(AICc\)</span>, but you do not need to <span class="math inline">\(log_e\)</span> transform the explanatory variables if you do not wish to.</p>
-<p><br></p>
+<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc<sub>i</sub>, <span class="math inline">\(\Delta\)</span>AICc<sub>i</sub>, and w<sub>i</sub> manually.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Install and load the necessary library</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">library</span>(AICcmodavg)</a>
+<a class="sourceLine" id="cb3-4" title="4"></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="co"># Next, you will need to make a</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="co"># list out of your models</span></a>
+<a class="sourceLine" id="cb3-7" title="7">  mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)</a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="co"># Make sure you give it some names, too</span></a>
+<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</a></code></pre></div>
+<p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can <a href="https://www.google.com/">Google</a> it, or you can do:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">?aictab</a></code></pre></div>
+<p><strong>Question 6.</strong> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(\Delta\)</span>AICc and the ratio of w<sub>i</sub> for the two models (see reference script).</p>
+<p><strong>Question 7.</strong> How do the results of your AICc model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
+<p><strong>Question 8.</strong> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log<sup><em>e</em></sup> transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log<sup><em>e</em></sup> transform the explanatory variables if you do not wish to.</p>
 <p>First, fit your new models and make a list object containing these two models and <code>lnS1</code> and <code>lnS2</code> from above. Don’t forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of <code>lnS1</code> and <code>lnS2</code>.</p>
-<p><br></p>
-<p><em><strong>Question 9.</strong></em> How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?</p>
-<p><br></p>
-<p><br></p>
-<!-- ### Model validation -->
-<!-- Trucking on...First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week. -->
-<!-- ```{r} -->
-<!-- # As a reminder, here is the model that you should be working with for this: -->
-<!--   lnS1 = lm(log(Species)~log(Area) + log(Nearest) + log(Scruz) + log(Adjacent), -->
-<!--             data=gala) -->
-<!--   summary(lnS1) -->
-<!-- ``` -->
-<!-- <br> -->
-<!-- Use one of the methods from the reference script (*leave-one-out cross-validation* or *bootstrapped predictive* R^2^) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the `caret` package or the `DAAG` package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. *Note*: you do not need to make any plots for the above, but it is strongly encouraged. -->
-<!-- <br> -->
-<!-- Use the same method to do model validation on the best model in your model set from question 9. -->
-<!-- <br> -->
-<!-- _**Question 10.**_ How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results? -->
+<p><strong>Question 9.</strong> How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?</p>
 </div>
+<div id="model-validation" class="section level3">
+<h3>Model validation</h3>
+<p>Trucking on…First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># As a reminder, here is the model that you should be working with for this:</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),<span class="dt">data=</span>gala)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4">  <span class="kw">summary</span>(lnS1)</a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="kw">lm</span>(<span class="dt">formula =</span> <span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw">log</span>(Adjacent), <span class="dt">data =</span> gala)</a>
+<a class="sourceLine" id="cb5-9" title="9"></a>
+<a class="sourceLine" id="cb5-10" title="10">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb5-11" title="11"><span class="st">     </span>Min       1Q   Median       3Q      Max </a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="fl">-1.61494</span> <span class="fl">-0.44016</span> <span class="fl">-0.01009</span>  <span class="fl">0.47420</span>  <span class="fl">1.39483</span> </a>
+<a class="sourceLine" id="cb5-13" title="13"></a>
+<a class="sourceLine" id="cb5-14" title="14">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb5-15" title="15"><span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb5-16" title="16">(Intercept)    <span class="fl">3.13231</span>    <span class="fl">0.22380</span>  <span class="fl">13.996</span> <span class="fl">2.48e-13</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-17" title="17"><span class="kw">log</span>(Area)      <span class="fl">0.39389</span>    <span class="fl">0.04383</span>   <span class="fl">8.987</span> <span class="fl">2.64e-09</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-18" title="18"><span class="kw">log</span>(Nearest)  <span class="fl">-0.09074</span>    <span class="fl">0.10833</span>  <span class="fl">-0.838</span>    <span class="fl">0.410</span>    </a>
+<a class="sourceLine" id="cb5-19" title="19"><span class="kw">log</span>(Scruz)    <span class="fl">-0.03025</span>    <span class="fl">0.05413</span>  <span class="fl">-0.559</span>    <span class="fl">0.581</span>    </a>
+<a class="sourceLine" id="cb5-20" title="20"><span class="kw">log</span>(Adjacent) <span class="fl">-0.02448</span>    <span class="fl">0.04698</span>  <span class="fl">-0.521</span>    <span class="fl">0.607</span>    </a>
+<a class="sourceLine" id="cb5-21" title="21"><span class="op">---</span></a>
+<a class="sourceLine" id="cb5-22" title="22">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb5-23" title="23"></a>
+<a class="sourceLine" id="cb5-24" title="24">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.7955</span> on <span class="dv">25</span> degrees of freedom</a>
+<a class="sourceLine" id="cb5-25" title="25">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7768</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7411</span> </a>
+<a class="sourceLine" id="cb5-26" title="26">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.75</span> on <span class="dv">4</span> and <span class="dv">25</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">7.731e-08</span></a></code></pre></div>
+<p>Use one of the methods from the reference script (<em>leave-one-out cross-validation</em> or <em>bootstrapped predictive</em> R<sup>2</sup>) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the <code>caret</code> package or the <code>DAAG</code> package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. <em>Note</em>: you do not need to make any plots for the above, but it is strongly encouraged.</p>
+<p>Use the same method to do model validation on the best model in your model set from question 9.</p>
+<p><strong>Question 10.</strong> How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?</p>
 </div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
@@ -422,6 +555,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

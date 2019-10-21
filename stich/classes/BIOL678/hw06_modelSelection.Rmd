@@ -25,13 +25,13 @@ This week, we are going to work with some data from species counts on the Galapa
 
 The data explanation follows:
 
-`Species`:   number of plant species found on the island
-`Endemics`:  number of endemic species
-`Area`:      area of the island (km^2^)
-`Elevation`: highest elevation of the island (m)
-`Nearest`:   distance from the nearest island (km)
-`Scruz`:     distance from Santa Cruz island (km)
-`Adjacent`:  area of the adjacent island (square km)
+`Species`:   number of plant species found on the island<br>
+`Endemics`:  number of endemic species<br>
+`Area`:      area of the island (km^2^)<br>
+`Elevation`: highest elevation of the island (m)<br>
+`Nearest`:   distance from the nearest island (km)<br>
+`Scruz`:     distance from Santa Cruz island (km)<br>
+`Adjacent`:  area of the adjacent island (square km)<br>
   
 The citation for the paper is:   
   

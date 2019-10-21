@@ -413,14 +413,14 @@ Boot strapping (or "jack-knifing") is similar to cross validation in that we lea
 }
 ```
 
-We can now calculate the median predicted R-squared and the 95% CI on this test statistic
+We can now calculate the median predicted R-squared and the 95% CI on this test statistic.
 
 ```{r}
   median(p.Rsquare)
   quantile(p.Rsquare, probs = c(0.025, 0.975))
 ```
 
-We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations
+We can look at the distribution of our r-squared values for regressions that measure the fit between our predictions and our observations.
 
 ```{r}    
 # Plot the histogram

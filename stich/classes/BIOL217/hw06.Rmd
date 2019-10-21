@@ -104,7 +104,7 @@ Next, calculate the observed mean of tooth length for each combination of supple
   tooth.mod=lm(len~supp+dose, data=ToothGrowth)
 
 # Get all combinations of the unique values for supplement type and dose
-    levels = expand.grid(unique(ToothGrowth$supp), unique(ToothGrowth$dose))
+  levels = expand.grid(unique(ToothGrowth$supp), unique(ToothGrowth$dose))
   
 # Give the new df names. These names have to match the names of the variables
 # used in fitting the model
@@ -121,6 +121,7 @@ Next, calculate the observed mean of tooth length for each combination of supple
 # comparing the different levels here, we can look at 95% CIs instead
 # of prediction intervals.
   dpreds = predict(object=tooth.mod, newdata=levels, interval='confidence')
+  
 # Now plot the predictions from this model
   # Set graphical parameters
     par(mfrow=c(1,1), mar=c(5,5,1,1))
