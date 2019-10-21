@@ -97,7 +97,7 @@ posthoc.kruskal.nemenyi.test(osmolality~stage, data=smolts, dist='Chisquare')
 
 There are actually a whole bunch of different functions in the `PMCMR` package with which we conduct post-hoc tests to do pair-wise comparisons. The function above compares the response for each one of our grouping values, while correcting for inflated Type-I error rates.  
 
-**Question 6.** So now which stages differ in the response, `osmolality` according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="05_violinPlotsInR.html">this</a> example from the course website for help. on the course website if you want to try violin plots, and use the example from the `caroline` package because it is easier. Please note that before you can use the function you will need to install and load the package (may not be able to on campus computers).  
+**Question 6.** So now which stages differ in the response, `osmolality` according to the Kruskal-Nemenyi test above? Show a visual representation of these differences using either a boxplot or a violin plot. See <a href="05_violinPlotsInR.html">this</a> example from the course website for help. I would recommend the example from the `caroline` package because it is easier, but it doesn't have some of the bells and whistles that the `vioplot` package can achieve. Please note that before you can use the functions you will need to install and load the package (may not be able to on campus computers).  
 
 ```{r, eval=FALSE}
 # install.packages('caroline')

@@ -289,7 +289,7 @@ In the bottom left, we want to see:
 Do this stuff **before** you start fitting all kinds of models because it is important to think about ahead of time! Examination of residual plots should become second nature to you in these analyses because it is the most powerful tool you have for testing assumptions. Don't freak out if things don't look perfect (they almost never will), and realize that there may be ways of dealing with violations within the context of linear models. If not, there certainly are other models designed specifically for this purpose.
 
 ## Communicating effect sizes
-<h3 id="multi"> Interpretting group effects </h3>
+<h3 id="multi"> Interpreting group effects </h3>
 
 When we are working in the world of one-way ANOVA, or even more complex models that contain only "main effects" of categorical, explanatory variables, the interpretation of these effects is relatively straightforward. Let's use the plant growth data as an example.
 
@@ -386,7 +386,7 @@ text(x=2, y=6.5, 'a')
 text(x=3, y=6.5, 'b')
 ```      
 
-### Interpretting effects of continuous covariates
+### Interpreting effects of continuous covariates
 
 As with group effects, the interpretation of a single, continuous predictor is pretty straightforward. Here, all we are doing is looking to use the equation for a line we have fit (y = b + mx) to predict the effects of one continuous variable on another. Let's use the 'swiss' data again for this. Remember that this dataset compares fertility rates to a number of socio-economic indicators:
 
@@ -1039,7 +1039,7 @@ persp(Education, Catholic, Fertility,
 )
 ```     
 
-### Interpretting interaction terms 
+### Interpreting interaction terms 
 
 Up to this point, we have only considered the 'main effects' of categorical and/or continuous explanatory variables on our response of interest. We are now going to extend this to include 'interaction effects' between variables.
 
