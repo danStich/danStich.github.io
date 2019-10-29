@@ -569,7 +569,7 @@ A worked example
 <a class="sourceLine" id="cb10-10" title="10">         <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</a>
 <a class="sourceLine" id="cb10-11" title="11">         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>),</a>
 <a class="sourceLine" id="cb10-12" title="12">         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,</a>
-<a class="sourceLine" id="cb10-13" title="13">         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>,</a>
+<a class="sourceLine" id="cb10-13" title="13">         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">1</span>,</a>
 <a class="sourceLine" id="cb10-14" title="14">         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</a>
 <a class="sourceLine" id="cb10-15" title="15">         <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,</a>
 <a class="sourceLine" id="cb10-16" title="16">         <span class="dt">xlab =</span> <span class="st">&#39;&#39;</span>,</a>
@@ -618,7 +618,7 @@ A worked example
 <a class="sourceLine" id="cb10-59" title="59">      <span class="dt">adj=</span>.<span class="dv">5</span>, <span class="dt">outer=</span><span class="ot">TRUE</span>)</a></code></pre></div>
 <p><img src="hw08_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Using either the graph or the estimates in the <code>fit</code> column of <code>preds</code>, we can estimate about how much <code>dead</code> changes across the range of <code>Time</code> observed. We can report this by <code>Time</code> to convey more information.</p>
-<p><strong>Question 5.</strong> Use the graph you have created, along with the model results to explain</p>
+<p><strong>Question 5.</strong> Use the graph you have created, along with the model results to describe how zebra mussel mortality changed with <code>Concentration</code> and <code>Time</code>.</p>
 <p>If you have been paying close attention this semester, you may be wondering why we don’t fit an interaction that would allow the effect of exposure time to vary across <code>Concentration</code>, and indeed that is a fair question. Unfortunately, the degree of mortality that results after short exposure to the higher concentrations is so high that variance estimation in the model becomes unstable and we predict confidence intervals from zero to one (despite increasing the R<sup>2</sup> to 0.94 and producing much more intuitive curves).</p>
 </div>
 </div>
