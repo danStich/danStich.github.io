@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>10_glmm.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -36,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -107,11 +157,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -125,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -147,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -167,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -188,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -213,31 +356,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -251,47 +420,19 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
-<p><br></p>
-<div id="generalized-linear-mixed-models" class="section level1">
-<h1>Generalized linear mixed models</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
-<p>This week we will talk about extending linear models and generalized linear models to include “random effects” in the model, thus resulting in the “generalized linear mixed model” or GLMM. The GLMM is actually the most generalized formulation of our linear models that we have been discussing now for the past several weeks. All linear models (ANOVA, regression, t-tests, etc.) are simply special cases of the GLMM. As such, we can think of the GLMM as the framework within which we have been working for weeks now! For this week, we will start with examples of the linear mixed model.</p>
-<p><br></p>
-</div>
+<h1 id="multi">
+Linear mixed models (LMM)
+<h1>
+<p><img src="../../images/yp.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
+<p>This week we will talk about extending linear models and generalized linear models to include “random effects” in the model, thus resulting in the “generalized linear mixed model” or GLMM. The GLMM is actually the most generalized formulation of the linear models that we have been discussing now for the past several weeks. All linear models (GLM, ANCOVA, ANOVA, regression, t-tests, etc.) are special cases of the GLMM. As such, we can think of the GLMM as the framework within which we have been working for weeks now! For this week, we will start with examples of the linear mixed model.</p>
 <div id="assumptions-of-linear-models" class="section level2">
 <h2>Assumptions of linear models</h2>
-<p><br></p>
 <p>OMG, why is this guy always talking about assumptions of linear models no matter what we do?!</p>
 <p>Just as we discussed last week, linear models are just a special case of the GLMM. That is, the linear model assumes a certain error distribution (the normal) that helps things work smoothly and correctly. During the last two weeks, we discussed how we can use link functions to relax the assumption of linear models with respect to normality of residuals and homogeneity of variances, as well as assumptions about the linearity of relationships between explanatory variables and responses of interest by using data transformation. This week, we continue to relax the underlying assumptions of linear models to unleash the true power of estimation in mixed effects models. This is essentially as far as the basic framework for linear modeling goes (with the exception of multivariate techniques), and all other cases (e.g. spatial and temporal autocorrelation regressions) are simply specialized instances of these models.</p>
-<p>Let’s take another look at the assumptions of linear models. Here, we will repeat the mantra from the past few weeks. Here are the three assumptions that we explicitly use when we use linear models, just in case you’ve forgotten them:</p>
-<p><br></p>
+<p>Let’s take another look at the assumptions of linear models. We will repeat the same mantra from the past few weeks. Here are the three assumptions that we explicitly use when we use linear models (just in case you’ve forgotten them):</p>
 
 <ol style="list-style-type: decimal">
 <li>Residuals are normally distributed with a mean of zero</li>
@@ -312,511 +453,536 @@ pre code, pre, code {
 <ol start="4" style="list-style-type: decimal">
 <li>Linear relationship between X and Y</li>
 </ol>
-<p><br></p>
 <div id="assumption-1-normality-of-residuals" class="section level3">
 <h3>Assumption 1: Normality of residuals</h3>
-<p><br></p>
-<p>We’ve seen these before, but let’s recap. For assumption 1, we are assuming a couple of implicit things: 1. The variable is <em>continuous</em> (and it must be if it’s error structure is normal), and 2. The error in our model is normally distributed. In reality, this is probably the least important assumption of linear models, and really only matters if we are trying to make predictions from the models that we make. Of course, we are often concerned with making predictions from the models that we make, so we can see why this might be important. However, more often we are in extreme violation of this assumption in some combination with assumption 4 above to such a degree that it actually does matter. For example, a response variable that is binomial (1 or zero) or multinomial in nature cannot possibly have normally distributed errors with respect to x unless there is absolutely no relationship between X and Y, right? So, if we wanted to predict the probability of patients dying from some medical treatment, or the presence/absence of species across a landscape then we can’t use linear models. This is where the link functions that we have been discussing really come into play. The purpose of the link function is to place our decidedly non-normal error structures into an asymptotically normal probability space. The other key characteristic of the link function is that it must be invertible, that way we can get back to the parameter scale that we want to use for making predictions and visualizing the results of our models.</p>
-<p><br></p>
+<p>We’ve seen these before, but let’s recap. For assumption 1, we are assuming a couple of implicit things: 1) The variable is <em>continuous</em> (and it must be if it’s error structure is normal), and 2) The error in our model is normally distributed.</p>
+<p>In reality, this is probably the least important assumption of linear models, and really only matters if we are trying to make predictions from the models that we make, or when we are in gross violation of the assumption. Of course, we are often concerned with making predictions from the models that we make, so we can see why this might be important. However, more often we are in extreme violation of this assumption in some combination with assumption 4 above to such a degree that it actually does matter. For example, a response variable that is binomial (1 or zero) or multinomial in nature cannot possibly have normally distributed errors with respect to x unless there is absolutely no relationship between X and Y, right? So, if we wanted to predict the probability of patients dying from some medical treatment, or the presence/absence of species across a landscape then we can’t use linear models. This is where the link functions that we have been discussing really come into play. The purpose of the link function is to place our decidedly non-normal error structures into an asymptotically normal probability space. The other key characteristic of the link function is that it must be invertible, that way we can get back to the parameter scale that we want to use for making predictions and visualizing the results of our models.</p>
 </div>
 <div id="assumption-2-independence-of-observations" class="section level3">
 <h3>Assumption 2: Independence of observations</h3>
-<p><br></p>
-<p>This time we’ve broken assumption 2 in two components: Colinearity and autocorrelation of errors. Remember that the manifestation of these problems is in the precision of our coefficient estimates, and have the potential to change the Type-I/II error rates in our models, causing us to draw false conclusions about which variables are important. As we discussed earlier in the course we expect to see some colinearity between observations, and we can deal with balancing this in our modeling through the use of model selection techniques to reduce Type-I and Type-II error. The past couple of weeks, we examined tools that help us determine whether or not colinearity is actually causing problems in our models that go beyond minor nuisances. As for the second part, autocorrelation, we looked at formulations of the GLM that used ‘generalized least squares’ to include auto-regressive correlation matrices in our analysis that will allowed us to relax this assumption of linear models and improve the precision of our parameter estimates. This week, we will further extend this to include random effects to account for non-independence in the observations, and correlation in the residual errors of explanatory variables that could otherwise cause issues with accuracy and precision of our estimates. We will continue to use model selection as a method for determining tradeoffs between information gain and parameter redundancy that results from colinearity between explanatory variables, as well as for hypothesis testing.</p>
-<p><br></p>
+<p>This time we’ve broken assumption 2 in two components: Colinearity and autocorrelation of errors. Remember that the manifestation of these problems has primarily been in the precision of our coefficient estimates so far. This leads to the potential for change in the Type-I/II error rates in our models, causing us to draw false conclusions about which variables are important. As we discussed earlier in the course we expect to see some colinearity between observations, and we can deal with balancing this in our modeling through the use of model selection techniques to reduce Type-I and Type-II error. During the past couple of weeks, we examined tools that help us determine whether or not colinearity is actually causing problems in our models that go beyond minor nuisances. As for the second part, autocorrelation, we briefly touched on formulations of the GLM in our readings that included auto-regressive correlation matrices to relax this assumption of linear models and improve the precision of parameter estimates. This week, we will further extend this to include random effects so we can account for non-independence in the observations, and correlation in the residual errors of explanatory variables that could otherwise cause issues with accuracy and precision of our estimates. We will continue to use model selection as a method for determining tradeoffs between information gain and parameter redundancy that results from colinearity between explanatory variables, as well as for hypothesis testing.</p>
 </div>
 <div id="assumption-3-homogeneity-of-variances" class="section level3">
 <h3>Assumption 3: Homogeneity of variances</h3>
-<p><br></p>
-<p>In past weeks, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. Last week, we noted that this could be further mitigated through the use of weighted least squares and MLE within the GLM framework, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs. This week we will examine how we can use various formulations of the GLMM to account for heteroscedasticity in residual errors directly by including the appropriate error terms in our models. This essentially means that we can start to account for things like repeated measures, nested effects, and various other violations through the use of one tool- nifty!</p>
-<p><br></p>
+<p>In past weeks, we looked at ways to reduce this issue by introducing blocking (categorical) variables to our models. Last week, we noted that this could be further mitigated through the use of weighted least squares and MLE within the GLM framework, which can be applied to a wide range of regression methods from linear models to GLMs and GLMMs. This week we will examine how we can use various formulations of the GLMM to account for heteroscedasticity in residual errors directly by including the appropriate error terms in our models. This essentially means that we can start to account for things like repeated measures, nested effects, and various other violations through the use of one tool…<strong>nifty</strong>!!</p>
 </div>
 <div id="assumption-4-linearity-and-additivity" class="section level3">
 <h3>Assumption 4: Linearity and additivity</h3>
-<p><br></p>
 <p>We’ve already looked at a couple of ways to deal with violations of these assumptions such as data transformation and/or polynomial formulations of the linear model. We will continue to apply these concepts this week as we begin to investigate the GLMM as robust framework for analysis.</p>
-<p><br></p>
 </div>
 </div>
 <div id="introducing-the-glmm" class="section level2">
 <h2>Introducing the GLMM</h2>
-<p><br></p>
-<p>The first thing you should understand about GLMMs is that they are useful for analyzing data from a large number of statistical probability distributions (basically, you can use them for any underlying error structure). But, when we use specific error structures, or make certain assumptions about the manner in which the heterogeneity of variances is structured with respect to specific factors, this model is often given specific names. For example, repeated measures ANOVA (or ANCOVA), nested ANOVA(or ANCOVA), factorial ANOVA (or ANCOVA), linear mixed models, linear mixed effects models, and generalized linear mixed effects models are all just different formulations of the GLMM with different names. It sounds confusing, but just remember this: any linear model with combinations of fixed and random effects is, at it’s core, just another GLMM! If you can convince yourself of this, you will improve your ability to understand a wide range of experimental designs and accompanying statistical models by understanding this one model type.</p>
-<p>The second thing you should understand to “get” GLMMs is what exactly is meant by a “random effect”. So far in this course we have only dealt with “fixed” group effects. The fixed effect is a categorical variable that is used to explain some variation in our response of interest. When we use a fixed effect in a statistical model, we are making the assumption that the categories for this effect are “fixed”. In other words, we have assigned the the levels, or categories, based on some a priori knowledge that the levels themselves represent all possible groups that can be used to describe the data. Because of this definition, fixed effects are usually 1) things that we manipulate directly (like dosage or some other treatment), or 2) relatively simple grouping variables such as sex. By contrast, a “random effect” is an effect that we do not generally set ahead of time or manipulate, but rather one which is considered to be a sample from a population of potential categories that we cannot census or (often) control. Please note that there is not a single, widely accepted definition for either of these things in applied statistics and the definition can be context-specific. Don’t take it from me, though, ask Andrew Gelman, globally recognized as one of the world’s leading experts on applied statistics, including the development of many modern approaches <a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">here</a>.</p>
-<p><br></p>
+<p>The first thing you should understand about GLMMs is that they are useful for analyzing data from a large number of distributions (basically, you can use them for any underlying error structure). But, when we use specific error structures, or make certain assumptions about the manner in which the heterogeneity of variances is structured with respect to specific factors, this model is often given specific names. For example, repeated measures ANOVA (or ANCOVA), nested ANOVA (or ANCOVA), factorial ANOVA (or ANCOVA), linear mixed models, linear mixed effects models, and generalized linear mixed effects models are all just different formulations of the GLMM with different names. It sounds confusing, but just remember this: any linear model with combinations of fixed and random effects is, at it’s core, just another GLMM! If you can convince yourself of this, you will improve your ability to understand a wide range of experimental designs and accompanying statistical models by understanding this one model type.</p>
+<p>The second thing you should understand to “get” GLMMs is what exactly is meant by a “random effect”. So far in this course we have only dealt with “fixed” effects. The fixed effect is a categorical variable that is used to explain some variation in our response of interest. When we use a fixed effect in a statistical model, we are making the assumption that the categories for this effect are “fixed”. In other words, we have assigned the the levels, or categories, based on some <em>a priori</em> knowledge that the levels themselves represent all possible groups that can be used to describe the data. Because of this definition, fixed effects are usually 1) things that we manipulate directly (like dosage or some other treatment), or 2) relatively simple grouping variables such as sex. By contrast, a “random effect” is an effect that we do not generally set ahead of time or manipulate, but rather one which is considered to be a sample from a population of potential categories that we cannot census or (often) control. Please note that there is not a single, widely accepted definition for either of these things in applied statistics and the definition can be context-specific. It becomes all the more confusing when we switch between maximum likelihood estimation and Bayesian inference. Don’t take it from me, though. Ask one of the world’s leading experts on the matter <a href="http://andrewgelman.com/2005/01/25/why_i_dont_use/">here</a>.</p>
 </div>
 <div id="linear-mixed-models" class="section level2">
 <h2>Linear mixed models</h2>
-<p><br></p>
-<p>We will start our explorations into GLMM by looking at the somewhat familiar case of normal data. As with the relationship between ANOVA and GLM, we can say that the linear mixed model (LMM) is just a special case of the GLMM (hence the name).</p>
-<p>So, what is a mixed model? This is a model that assumes some parameter of interest is drawn from a random sample from a distribution of possible samples. We usually use these when we are dealing with repeated samples for some group or individual, or if we wish to account for some latent variable beyond our control (e.g. lake). Essentially, the use of random effects allows us to remove extraneous noise (variance) from the study system by accounting for it directly. This can improve both the accuracy and the precision of estimates to make hypothesis testing more robust. It also allows us to generalize our conclusions to a broader scope (e.g. any lake instead of lakes X, Y, and Z). Finally, the approach allows for a great deal of flexibility in assumptions we make about the effects and associated errors in our model. We might assume within our model that effects are randomized by assigning random intercepts, random slopes and intercepts that are independent, or random slopes or intercepts that are correlated across our random variable. There are even rare cases when we might wish to examine random slopes with shared intercepts. Generally speaking, we want our random variable to contain a relatively large number of potential levels (usually &gt; 5) as this tends to result in more accurate, and more precise parameter estimates.</p>
-<p>As with so many things, these tools are often best investigated through the use of a worked example. For this section, we will simulated data about asps, and we’ll walk through maximum likelihood estimation of the LMM.</p>
-<p><br></p>
-<div id="worked-example" class="section level3">
-<h3>Worked example</h3>
-<p><br></p>
-<p>We will start by generating the data used in the book chapter. These data are for the viper asps from Chapter 9, with a new twist. Here, we simulate length and mass data for 10 vipers from each of 56 different populations. I will not cover the following in detail here, but I encourage you to delve into it as you work through your text book.</p>
-<p><br></p>
-<div id="data-generation" class="section level4">
-<h4>Data generation</h4>
-<p><br></p>
-<p>Here is the code for data simulation, shamelessly copy-and-pasted from Chapter 12 of:</p>
-<blockquote>
-<p>Kery, M. 2010. Introduction to WinBUGS for Ecologists. Academic Press, Upper Saddle River, NY.</p>
-</blockquote>
-<p><br></p>
-<p>You do not need to know this for this class, but I wanted you to see what goes into the data simulation.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">n.groups &lt;-<span class="st"> </span><span class="dv">56</span>              <span class="co"># Number of populations</span>
-n.sample &lt;-<span class="st"> </span><span class="dv">10</span>              <span class="co"># Number of vipers in each pop</span>
-n &lt;-<span class="st"> </span>n.groups <span class="op">*</span><span class="st"> </span>n.sample        <span class="co"># Total number of data points</span>
-pop &lt;-<span class="st"> </span><span class="kw">gl</span>(<span class="dt">n =</span> n.groups, <span class="dt">k =</span> n.sample)   <span class="co"># Indicator for population</span>
-
-<span class="co"># Body length (cm)</span>
-original.length &lt;-<span class="st"> </span><span class="kw">runif</span>(n, <span class="dv">45</span>, <span class="dv">70</span>) 
-mn &lt;-<span class="st"> </span><span class="kw">mean</span>(original.length)
-sd &lt;-<span class="st"> </span><span class="kw">sd</span>(original.length)
-<span class="kw">cat</span>(<span class="st">&quot;Mean and sd used to normalise.original length:&quot;</span>, mn, sd, <span class="st">&quot;</span><span class="ch">\n\n</span><span class="st">&quot;</span>)</code></pre></div>
-<pre><code>## Mean and sd used to normalise.original length: 57.13128 7.36973</code></pre>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">length &lt;-<span class="st"> </span>(original.length <span class="op">-</span><span class="st"> </span>mn) <span class="op">/</span><span class="st"> </span>sd
-<span class="kw">hist</span>(length, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">Xmat &lt;-<span class="st"> </span><span class="kw">model.matrix</span>(<span class="op">~</span>pop<span class="op">*</span>length<span class="op">-</span><span class="dv">1</span><span class="op">-</span>length)
-
-intercept.mean &lt;-<span class="st"> </span><span class="dv">230</span>           <span class="co"># mu_alpha</span>
-intercept.sd &lt;-<span class="st"> </span><span class="dv">20</span>              <span class="co"># sigma_alpha</span>
-slope.mean &lt;-<span class="st"> </span><span class="dv">60</span>                <span class="co"># mu_beta</span>
-slope.sd &lt;-<span class="st"> </span><span class="dv">30</span>                  <span class="co"># sigma_beta</span>
-
-intercept.effects&lt;-<span class="kw">rnorm</span>(<span class="dt">n =</span> n.groups, <span class="dt">mean =</span> intercept.mean, <span class="dt">sd =</span> intercept.sd)
-slope.effects &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n.groups, <span class="dt">mean =</span> slope.mean, <span class="dt">sd =</span> slope.sd)
-all.effects &lt;-<span class="st"> </span><span class="kw">c</span>(intercept.effects, slope.effects) <span class="co"># Put them all together</span>
-
-lin.pred &lt;-<span class="st"> </span>Xmat[,] <span class="op">%*%</span><span class="st"> </span>all.effects         <span class="co"># Value of lin.predictor</span>
-eps &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n =</span> n, <span class="dt">mean =</span> <span class="dv">0</span>, <span class="dt">sd =</span> <span class="dv">30</span>)      <span class="co"># residuals </span>
-mass &lt;-<span class="st"> </span>lin.pred <span class="op">+</span><span class="st"> </span>eps                      <span class="co"># response = lin.pred + residual</span>
-
-<span class="kw">hist</span>(mass, <span class="dt">col =</span> <span class="st">&quot;grey&quot;</span>)                    <span class="co"># Inspect what we&#39;ve created</span></code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(lattice)
-<span class="kw">xyplot</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">|</span><span class="st"> </span>pop)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-2-3.png" width="672" /></p>
-<p><br></p>
-<p>So, as you can see we have successfully created 56 populations of critters, each of which has some pre-defined relationship between length and mass based on 10 samples from the population. Wow. What a mess. Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation. Ultimately, what we want to do here is estimate the relationship between length and mass while accounting for inherent (well, simulated) variability between populations.</p>
-<p><br></p>
+<p>We will start our explorations into GLMM by looking at the somewhat familiar case of “normal” data, whatever mythical meaning it may have. As with the relationship between ANOVA and GLM, we can say that the linear mixed model (LMM) is just a special case of the GLMM (hence the name), both of which belong to the group of multi-level or hierarchical models that house basically every kind of model we have looked at this semester.</p>
+<p>So, what is a mixed model? This is a model that, generally speaking, assumes at least one parameter of interest is drawn from a population of potential sample sets. We usually use these when we are dealing with repeated samples for some group or individual, or if we wish to account for some latent variable beyond our control (e.g., lake or year). The use of random effects allows us to remove extraneous noise (variance) from the study system by explicitlty accounting for it. This can improve both the accuracy and the precision of estimates to make hypothesis testing on other explanatory variables more robust. It also allows us to generalize our conclusions to a broader scope (e.g. any lake instead of lakes X, Y, and Z).</p>
+<p>Beyond these mundane uses, a “multi-level” approach to modeling allows for a great deal of flexibility in assumptions we make about the effects and associated errors in our model. We might assume within our model that effects are different between populations by assigning random intercepts and/or slopes. We can specify whether we think the influence of a continuous covariate is correlated with the starting point (correlated random slopes and intercepts). There are even rare cases when we might wish to examine random slopes with shared intercepts or vice versa. In Bayesian inference we can use information at higher levels of organization, like the North American Range of a species, to inform parameter estimation at lower levels, such as individual populations.</p>
+<p>The point here is that random effects on a given parameter need not be a “nuisance” for which we wish to account: it may be the very thing we wish to harness for inference, estimation, or prediction.</p>
+<p>As with so many things, these tools are often best investigated through the use of a worked example. Generally speaking, we want the grouping variable we use to specify random effects to contain a relatively large number of potential levels (usually &gt; 5, but often &gt; 10) as this tends to result in more accurate, and more precise parameter estimates. We will look at a case to start in which we use fewer for the sake of demonstration.</p>
 </div>
-<div id="random-intercepts-model" class="section level4">
-<h4>Random-intercepts model</h4>
-<p><br></p>
-<p>First, we will analyze the data assuming that the intercepts for our linear model can vary between populations, but the relationship between length and mass is the same across all populations. This is a very common approach in many ecological and biological applications, as it often is the case that we are just trying to account for sampling design when we do this kind of analysis.</p>
-<p><br></p>
-</div>
-<div id="restricted-max-likelihood-estimation" class="section level4">
-<h4>Restricted max likelihood estimation</h4>
-<p><br></p>
-<p>This is really straightforward to do in R. First, we will load the <code>lme4</code> package that we will use for all LMM and GLMM implementation in this class. Then, we fit the model and print the output.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the lme4 library</span>
-<span class="kw">library</span>(lme4)
-
-<span class="co"># Fit the model</span>
-lme.fit1 &lt;-<span class="st"> </span><span class="kw">lmer</span>(mass <span class="op">~</span><span class="st"> </span>length <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>pop), <span class="dt">REML =</span> <span class="ot">TRUE</span>)
-
-<span class="co"># Have a look</span>
-<span class="kw">summary</span>(lme.fit1)</code></pre></div>
-<pre><code>## Linear mixed model fit by REML [&#39;lmerMod&#39;]
-## Formula: mass ~ length + (1 | pop)
-## 
-## REML criterion at convergence: 5744.1
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -2.9338 -0.6693 -0.0628  0.6927  3.2194 
-## 
-## Random effects:
-##  Groups   Name        Variance Std.Dev.
-##  pop      (Intercept)  330.5   18.18   
-##  Residual             1509.1   38.85   
-## Number of obs: 560, groups:  pop, 56
-## 
-## Fixed effects:
-##             Estimate Std. Error t value
-## (Intercept)  229.370      2.932   78.23
-## length        58.766      1.713   34.30
-## 
-## Correlation of Fixed Effects:
-##        (Intr)
-## length 0.000</code></pre>
-<p><br></p>
-<p>As we look throught the output, the first thing that you’ll probably notice is that we don’t have a p-value, which is probably already driving some people nuts. This is a bit of a philosophical sticking point, which is why it is not included in the default print method for the summary of these objects. Here, we can do statistical inference based on the overlap with our coefficient estimates with zero. What does this look like?</p>
-<p>Let’s say we want to see if our explanatory variable is significantly related to the response of interest, but we don’t have a p-value. If we still wanted to test significance of a variable (at <span class="math inline">\(\alpha\)</span> = 0.05), we could estimate the 95% CI for the regression coefficient and determine whether or not the 95% CI includes zero, like so:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Compute 95% CI on regression coefficient for length above</span>
-<span class="co"># We add or subtract 1.96 times the standard error for the coefficient because</span>
-<span class="co"># 95% of the data fall within +/- 1.96 standard deviations of the mean</span>
-
-<span class="co"># First, get the coefficients</span>
-  res =<span class="st"> </span><span class="kw">summary</span>(lme.fit1)<span class="op">$</span>coefficients
-
-  lengthCI =<span class="st"> </span><span class="kw">c</span>(res[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">-</span>(<span class="fl">1.96</span><span class="op">*</span>res[<span class="dv">2</span>,<span class="dv">2</span>]), res[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">+</span>(<span class="fl">1.96</span><span class="op">*</span>res[<span class="dv">2</span>,<span class="dv">2</span>]))
-
-<span class="co"># Print the CI to the console</span>
-  lengthCI</code></pre></div>
-<pre><code>## [1] 55.40804 62.12417</code></pre>
-<p><br></p>
-<p>Here, we can see that our 95% CI excludes zero, so we can say that length has a significant effect on mass in this species. If we wanted to show this relationship in a graph, we now have to do the math by hand, which is why I forced you to learn the math involved with this. Here is an example of how one might do this:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
-  <span class="kw">plot</span>(length, mass)
-<span class="co"># Make a sequence of new lengths</span>
-  lens =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(length), <span class="kw">max</span>(length), <span class="dt">by=</span><span class="dv">1</span>)
-<span class="co"># Predict new values for mass from lens</span>
-  masses =<span class="st"> </span>res[<span class="dv">1</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[<span class="dv">2</span>,<span class="dv">1</span>]<span class="op">*</span>lens
-<span class="co"># Add lines to the plot</span>
-  <span class="kw">lines</span>(lens, masses, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><br></p>
-<p>This gives us the overall estimate for the relationship between length and mass. What it does not get us are individual estimates of the intercepts like we might want. We can, however, get these out if we use the <code>ranef</code> function:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get random intercepts</span>
-  effs =<span class="st"> </span><span class="kw">coef</span>(lme.fit1)
-
-<span class="co"># Have a look at the first few</span>
-  <span class="kw">head</span>(effs<span class="op">$</span>pop)</code></pre></div>
-<pre><code>##   (Intercept)   length
-## 1    240.9334 58.76611
-## 2    203.0585 58.76611
-## 3    222.8307 58.76611
-## 4    211.8497 58.76611
-## 5    219.4091 58.76611
-## 6    239.6483 58.76611</code></pre>
-<p><br></p>
-<p>This gives us the random intercept for each population so we can make predictions about them individually if we want to! It only gives us one value for the length parameter because we specified this as a main effect. If want to plot the results for population 3, for example, our code would look like this:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
-  <span class="kw">plot</span>(length[pop<span class="op">==</span><span class="dv">3</span>], mass[pop<span class="op">==</span><span class="dv">3</span>],
-       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">500</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray87&#39;</span>,
-       <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">xlab=</span><span class="st">&#39;log(Length)&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Mass&#39;</span>
-       )
-<span class="co"># Make a sequence of new lengths</span>
-  lens =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(length), <span class="kw">max</span>(length), <span class="dt">by=</span>.<span class="dv">5</span>)
-<span class="co"># Predict new values for mass from lens</span>
-  masses =<span class="st"> </span>effs<span class="op">$</span>pop[<span class="dv">3</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>effs<span class="op">$</span>pop[<span class="dv">3</span>,<span class="dv">2</span>]<span class="op">*</span>lens
-<span class="co"># Add lines to the plot</span>
-  <span class="kw">lines</span>(lens, masses, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p><br></p>
-<p>But, we still don’t really have a great way of looking at differences between groups if we are interested in those. Why is this? We do not have the technology. Basically, computing group-specific variances is too far ahead of our programming algorithms. But, we can use some simulation methods to do this.</p>
-<p>The following method was released in December 2016 to meet the growing need for characterizing uncertainty in group-level predictions from mixed models. Let’s take a look at how to use some of these tools.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(merTools)
-
-<span class="co"># Tell r which population we are </span>
-<span class="co"># working with. We will store as a variable</span>
-<span class="co"># upfront so we can easily change populations</span>
-<span class="co"># by re-defining the variable, which I will</span>
-<span class="co"># call `i`. We will use population 3 to stay</span>
-<span class="co"># consistent with the example above</span>
-  i=<span class="dv">3</span>
-  
-<span class="co"># Make a sequence of new lengths</span>
-  lens =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(length),
-             <span class="kw">max</span>(length),
-             <span class="dt">by=</span>.<span class="dv">1</span>)
-  
-<span class="co"># Make a df that contains lengths</span>
-<span class="co"># and a label for population</span>
-  newd =<span class="st"> </span><span class="kw">data.frame</span>(
-    <span class="dt">pop =</span> <span class="kw">rep</span>(i, <span class="kw">length</span>(lens)),
-    <span class="dt">length =</span> lens
-  )
-
-<span class="co"># Simulate predictions from the relationship</span>
-<span class="co"># stored in the model fit using our new data</span>
-  PI &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(<span class="dt">merMod =</span> lme.fit1, <span class="dt">newdata =</span> newd, 
-                        <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">10000</span>,
-                        <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>, <span class="dt">type=</span><span class="st">&quot;linear.prediction&quot;</span>,
-                        <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span>
-                        )
-
-<span class="co"># Plot the raw data for the population of interest, i</span>
-  <span class="kw">plot</span>(length[pop<span class="op">==</span>i], mass[pop<span class="op">==</span>i],
-       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">500</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray87&#39;</span>,
-       <span class="dt">cex=</span><span class="fl">1.9</span>, <span class="dt">xlab=</span><span class="st">&#39;log(Length)&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Mass&#39;</span>
-       )
-
-<span class="co"># Predict new values for mass from lens</span>
-  masses =<span class="st"> </span>effs<span class="op">$</span>pop[i,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>effs<span class="op">$</span>pop[i,<span class="dv">2</span>]<span class="op">*</span>lens
-<span class="co"># Add lines to the plot</span>
-  <span class="kw">lines</span>(newd<span class="op">$</span>length, PI<span class="op">$</span>fit, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>) <span class="co"># Mean</span>
-  <span class="kw">lines</span>(newd<span class="op">$</span>length, PI<span class="op">$</span>upr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Upper CI</span>
-  <span class="kw">lines</span>(newd<span class="op">$</span>length, PI<span class="op">$</span>lwr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Lower CI</span></code></pre></div>
+<div id="worked-example" class="section level2">
+<h2>Worked example</h2>
+<p>Let’s start by loading in a new data set. These data come from a preliminary study of rusty crayfish <a href="https://academic.oup.com/jcb/article/37/5/615/4060680"> <em>Faxonius</em></a> <em>rusticus</em> density in various tributaries to the Susquehanna River. The data were collected as part of a summer research project by one of our former high-school interns at the SUNY Oneonta <a href="https://suny.oneonta.edu/biological-field-station"> Biological Field Station </a>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the data file</span></a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="co"># We are reading it in with the optional</span></a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="co"># argument because we don&#39;t want to deal</span></a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># with code relicts if we start</span></a>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># dropping factor levels</span></a>
+<a class="sourceLine" id="cb1-6" title="6">  cray &lt;-<span class="st">  </span><span class="kw">read.csv</span>(<span class="st">&quot;cray.csv&quot;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Look at the data structure</span></a>
+<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">str</span>(cray)</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">964</span> obs. of  <span class="dv">7</span> variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="st"> </span><span class="er">$</span><span class="st"> </span>date     <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;6/28/2018&quot;</span> <span class="st">&quot;6/28/2018&quot;</span> <span class="st">&quot;6/28/2018&quot;</span> <span class="st">&quot;6/28/2018&quot;</span> ...</a>
+<a class="sourceLine" id="cb2-5" title="5"> <span class="op">$</span><span class="st"> </span>waterbody<span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Susquehanna River&quot;</span> <span class="st">&quot;Susquehanna River&quot;</span> <span class="st">&quot;Susquehanna River&quot;</span> <span class="st">&quot;Susquehanna River&quot;</span> ...</a>
+<a class="sourceLine" id="cb2-6" title="6"> <span class="op">$</span><span class="st"> </span>site     <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Cooperstown Dam&quot;</span> <span class="st">&quot;Cooperstown Dam&quot;</span> <span class="st">&quot;Cooperstown Dam&quot;</span> <span class="st">&quot;Cooperstown Dam&quot;</span> ...</a>
+<a class="sourceLine" id="cb2-7" title="7"> <span class="op">$</span><span class="st"> </span>length   <span class="op">:</span><span class="st"> </span>num  <span class="fl">30.9</span> <span class="fl">31.2</span> <span class="fl">31.1</span> <span class="fl">29.3</span> <span class="fl">28.3</span> ...</a>
+<a class="sourceLine" id="cb2-8" title="8"> <span class="op">$</span><span class="st"> </span>mass     <span class="op">:</span><span class="st"> </span>num  <span class="fl">7.18</span> <span class="fl">6.85</span> <span class="fl">6.75</span> <span class="fl">6.46</span> <span class="fl">6.14</span> <span class="fl">5.99</span> <span class="fl">5.58</span> <span class="fl">4.95</span> <span class="fl">4.85</span> <span class="fl">4.81</span> ...</a>
+<a class="sourceLine" id="cb2-9" title="9"> <span class="op">$</span><span class="st"> </span>loglength<span class="op">:</span><span class="st"> </span>num  <span class="fl">3.43</span> <span class="fl">3.44</span> <span class="fl">3.44</span> <span class="fl">3.38</span> <span class="fl">3.34</span> ...</a>
+<a class="sourceLine" id="cb2-10" title="10"> <span class="op">$</span><span class="st"> </span>logmass  <span class="op">:</span><span class="st"> </span>num  <span class="fl">1.97</span> <span class="fl">1.92</span> <span class="fl">1.91</span> <span class="fl">1.87</span> <span class="fl">1.81</span> ...</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># And, have a look at the first few lines of data</span></a>
+<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">head</span>(cray)</a>
+<a class="sourceLine" id="cb3-3" title="3">       date         waterbody            site length mass loglength  logmass</a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="dv">1</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">30.88</span> <span class="fl">7.18</span>  <span class="fl">3.430109</span> <span class="fl">1.971299</span></a>
+<a class="sourceLine" id="cb3-5" title="5"><span class="dv">2</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">31.18</span> <span class="fl">6.85</span>  <span class="fl">3.439777</span> <span class="fl">1.924249</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="dv">3</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">31.15</span> <span class="fl">6.75</span>  <span class="fl">3.438814</span> <span class="fl">1.909543</span></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="dv">4</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">29.28</span> <span class="fl">6.46</span>  <span class="fl">3.376905</span> <span class="fl">1.865629</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="dv">5</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">28.31</span> <span class="fl">6.14</span>  <span class="fl">3.343215</span> <span class="fl">1.814825</span></a>
+<a class="sourceLine" id="cb3-9" title="9"><span class="dv">6</span> <span class="dv">6</span><span class="op">/</span><span class="dv">28</span><span class="op">/</span><span class="dv">2018</span> Susquehanna River Cooperstown Dam  <span class="fl">30.55</span> <span class="fl">5.99</span>  <span class="fl">3.419365</span> <span class="fl">1.790091</span></a></code></pre></div>
+<p>We have a fairly straightforward data set this week. There are 964 observations of 7 variables. Each of the observations (rows) corresponds to a rusty crayfish that was collected and measured (<code>length</code> in mm and <code>mass</code> in g) at one of several <code>site</code>s on a given <code>date</code>. The variable <code>catch</code> is the total number caught by electrobugging over a given <code>time</code> (minutes). To compare density between sites, <code>catch</code> was divided by (<code>time</code>/60) to calculate catch per unit effort (<code>cpue</code>) as number of crayfish per hour. Therefore, observations of <code>cpue</code>, <code>catch</code>, and <code>time</code> correspond to unique <code>date</code> and <code>site</code> combinations, but <code>length</code> and <code>mass</code> represent unique individuals within <code>site</code> and <code>date</code>.</p>
+<p>Our primary objective in this study was to collect baseline data. But curiousity led us to explore variation in the condition of crayfish when we thought we were noticing skinnier crayfish in sites of higher density. Length-weight regressions are one tool that is commonly used to investigate changes in volumetric growth with increasing length. In the absence of a standardized condition metric such as that widely applied in fish populations, relative weight (W<sub>r</sub>), we thought this might offer some insight into variability in condition.</p>
+<p>What follows is a steroid-injected version of the analysis we started with.</p>
+<p>Length-weight relationships in animals are generally parameterized by log-transforming length and mass. This is because the relationship between the two is exponential, or can be described using a power functino (ouch, think back to intro bio). For a given unit increase in length, we expect mass to increase as an approximately cubic function of length.</p>
+<p>We can see this in our un-transformed data pretty cleanly:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">plot</span>(<span class="dt">x =</span> cray<span class="op">$</span>length,</a>
+<a class="sourceLine" id="cb4-3" title="3">     <span class="dt">y =</span> cray<span class="op">$</span>mass,</a>
+<a class="sourceLine" id="cb4-4" title="4">     <span class="dt">pch =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb4-5" title="5">     <span class="dt">bg =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">35</span>),</a>
+<a class="sourceLine" id="cb4-6" title="6">     <span class="dt">col =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">05</span>),</a>
+<a class="sourceLine" id="cb4-7" title="7">     <span class="dt">xlab =</span> <span class="st">&#39;Length (mm)&#39;</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">     <span class="dt">ylab =</span> <span class="st">&#39;Mass (g)&#39;</span></a>
+<a class="sourceLine" id="cb4-9" title="9">     )</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>The relationship depicted above can be expressed mathematically as:</p>
+<p><span class="math display">\[W = aL^b,\]</span></p>
+<p>and statistically as:</p>
+<p><span class="math display">\[W_i = a {L_i}^b e^{\epsilon_i},\]</span></p>
+<p>where <span class="math inline">\(W_i\)</span> is mass (weight) of individual <span class="math inline">\(_i\)</span>, <span class="math inline">\(L_i\)</span> is length, <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span> are the coefficient and exponent describing change in mass as a power function of length, and <span class="math inline">\(\epsilon_i\)</span> is the multiplicative error term for each crayfish (residuals change with length). Here, <span class="math inline">\(b\)</span> also has interpretation relative to allometry in growth patterns, where values of 3.0 indicate isometry, values below 3 indicate negative allometry, and values above 3 indicate positive allometry in the length-weight relationship. This means that at values much above 3, we would expect individuals to get heavier faster relative to their length at large sizes.</p>
+<p>Now, we can certainly estimate this kind of relationship using nonlinear regression. But, nonlinear regression can get a little unstable due to inherent correlations between parameters, and the multiplicative error described above. So, it can be easier to log-transform both sides of the equation to make the relationship linear and achieve a constant error across the range of x (homoscedasticity). As a result, we generally linearize relationships like this to improve modeling whenever we can, in this case by taking the natural logarithm of both sides of the equation:</p>
+<p><span class="math display">\[log(W_i) = log(a) + b \cdot log(L_i) + \epsilon_i\]</span></p>
+<p>Now, that should look a whole lot like the linear models we have been talking about all semester. In fact, by substitution, we could say that:</p>
+<p><span class="math display">\[Y = \beta_0 + \beta_1 \cdot X_i + \epsilon_i\]</span></p>
+<p>where <span class="math inline">\(Y\)</span> is <code>log(mass)</code>, and <span class="math inline">\(X\)</span> is <code>log(length)</code>. Then, we just need to remember that <span class="math inline">\(\beta_0\)</span> is estimated on the log scale.</p>
+<p>We can take a look at how this looks in our data by plotting the transformed data.</p>
+<p>Start by log-transforming length and mass</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Log transform length and mass</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  cray<span class="op">$</span>loglength &lt;-<span class="st"> </span><span class="kw">log</span>(cray<span class="op">$</span>length)</a>
+<a class="sourceLine" id="cb5-3" title="3">  cray<span class="op">$</span>logmass &lt;-<span class="st"> </span><span class="kw">log</span>(cray<span class="op">$</span>mass)</a></code></pre></div>
+<p>Plot the relationship. Note that only the names have been changed</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="kw">plot</span>(<span class="dt">x =</span> cray<span class="op">$</span>loglength,</a>
+<a class="sourceLine" id="cb6-3" title="3">     <span class="dt">y =</span> cray<span class="op">$</span>logmass,</a>
+<a class="sourceLine" id="cb6-4" title="4">     <span class="dt">pch =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb6-5" title="5">     <span class="dt">bg =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">35</span>),</a>
+<a class="sourceLine" id="cb6-6" title="6">     <span class="dt">col =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">05</span>),</a>
+<a class="sourceLine" id="cb6-7" title="7">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Length (mm)&#39;</span>)),</a>
+<a class="sourceLine" id="cb6-8" title="8">     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Mass (g)&#39;</span>))</a>
+<a class="sourceLine" id="cb6-9" title="9">     )</a></code></pre></div>
 <p><img src="10_glmm_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><br></p>
-<p>We could go through and do this for each population (56 total), and we would have a pretty nice (albeit slightly unwieldy) set of figures describing the relationship between length and mass. Alternatively, we could use the model coefficients to estimate the relationship across all populations, and to make predictions about unknown populations.</p>
-<p><br></p>
-</div>
+<p>If nothing else, this tells me we need to go after more small cray this summer. For now, let’s get rid of all crayfish weighing less than 1 g because the data are sparse down there and a quick glance at our residuals withing groups will show that this results in non-normality in the residuals for the Butternut Creek site, specifically. Have a look:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Boxplot of mass by site</span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">boxplot</span>(logmass<span class="op">~</span>site, <span class="dt">data=</span>cray)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Drop the measurements for crayfish &lt; 1 g</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  cray &lt;-<span class="st"> </span>cray[cray<span class="op">$</span>mass <span class="op">&gt;</span><span class="st"> </span><span class="dv">1</span>, ]</a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">boxplot</span>(logmass<span class="op">~</span>site, <span class="dt">data=</span>cray)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>Wow, what a mess. Much better now, at least. Moving on with the analysis…</p>
+<p>Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation and Bayesian inference. Our goal here is to estimate the relationship between length and mass while accounting for inherent variability between populations.</p>
+<div id="random-intercepts-model" class="section level3">
+<h3>Random-intercepts model</h3>
+<p>First, we will analyze the data assuming that the intercepts for our linear model can vary between populations, but the relationship between length and mass is the same across all populations. This is a very common approach in many ecological and biological applications, as it often is the case that we are just trying to account for sampling design when we do this kind of analysis.</p>
+<p>This is really straightforward to do in R. First, we will load the <code>lme4</code> package.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Load the package</span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">library</span>(lme4)</a></code></pre></div>
+<p>Next, we fit the model. Notice that now we have to add an argument to speficy a random effect of <code>site</code> on the intercept <code>1</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb10-2" title="2">  craymod &lt;-<span class="st"> </span><span class="kw">lmer</span>(logmass <span class="op">~</span><span class="st"> </span>loglength <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>site),</a>
+<a class="sourceLine" id="cb10-3" title="3">               <span class="dt">data=</span>cray</a>
+<a class="sourceLine" id="cb10-4" title="4">               )</a></code></pre></div>
+<p>Being responsible individuals, we now have a look at the residuals to make sure we’ve met assumptions of normality and homoscedasticity:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Plot the residuals</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">plot</span>(craymod)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>That’s looking about as good as we could hope for, so now let’s go ahead and crack open the model summary.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Print the summary</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">summary</span>(craymod)</a>
+<a class="sourceLine" id="cb12-3" title="3">Linear mixed model fit by REML [<span class="st">&#39;lmerMod&#39;</span>]</a>
+<a class="sourceLine" id="cb12-4" title="4">Formula<span class="op">:</span><span class="st"> </span>logmass <span class="op">~</span><span class="st"> </span>loglength <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>site)</a>
+<a class="sourceLine" id="cb12-5" title="5">   Data<span class="op">:</span><span class="st"> </span>cray</a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7">REML criterion at convergence<span class="op">:</span><span class="st"> </span><span class="fl">-979.9</span></a>
+<a class="sourceLine" id="cb12-8" title="8"></a>
+<a class="sourceLine" id="cb12-9" title="9">Scaled residuals<span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-10" title="10"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="fl">-8.0004</span> <span class="fl">-0.5419</span> <span class="fl">-0.0470</span>  <span class="fl">0.4757</span>  <span class="fl">6.2850</span> </a>
+<a class="sourceLine" id="cb12-12" title="12"></a>
+<a class="sourceLine" id="cb12-13" title="13">Random effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-14" title="14"><span class="st"> </span>Groups   Name        Variance Std.Dev.</a>
+<a class="sourceLine" id="cb12-15" title="15"> <span class="kw">site</span>     (Intercept) <span class="fl">0.001777</span> <span class="fl">0.04216</span> </a>
+<a class="sourceLine" id="cb12-16" title="16"> Residual             <span class="fl">0.018895</span> <span class="fl">0.13746</span> </a>
+<a class="sourceLine" id="cb12-17" title="17">Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">889</span>, groups<span class="op">:</span><span class="st">  </span>site, <span class="dv">6</span></a>
+<a class="sourceLine" id="cb12-18" title="18"></a>
+<a class="sourceLine" id="cb12-19" title="19">Fixed effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-20" title="20"><span class="st">            </span>Estimate Std. Error t value</a>
+<a class="sourceLine" id="cb12-21" title="21">(Intercept) <span class="fl">-7.98470</span>    <span class="fl">0.08050</span>  <span class="fl">-99.19</span></a>
+<a class="sourceLine" id="cb12-22" title="22">loglength    <span class="fl">2.88991</span>    <span class="fl">0.02423</span>  <span class="fl">119.25</span></a>
+<a class="sourceLine" id="cb12-23" title="23"></a>
+<a class="sourceLine" id="cb12-24" title="24">Correlation of Fixed Effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-25" title="25"><span class="st">          </span>(Intr)</a>
+<a class="sourceLine" id="cb12-26" title="26">loglength <span class="fl">-0.975</span></a></code></pre></div>
+<p>For now, we will skip the usual walkthrough of all the wonderful tidbits that R has to offer and cut right to the chase. We can see from the table for our fixed effects that we have successfully detected the relationship between length and mass (p &lt; 0.05), but this should come as no surprise based on the plot we saw.</p>
+<p>We can see that the estimated sd for our intercept is fairly low, so we may not need to specify this as a random effect were we concerned about model complexity. Given that we are interested in this random effect, and that we (in this case) want to think of streams having been sampled from a broader population of streams, we will retain it in our model. From here, we could go on to make predictions across populations using our fixed intercept and slope, or we could use the population specific intercepts and the shared slope.</p>
+<p>First, let’s plot using the shared intercept from our fixed effects table:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Start by making a sequence of new lengths</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="co"># on the log scale</span></a>
+<a class="sourceLine" id="cb13-3" title="3">  lens &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(cray<span class="op">$</span>loglength),</a>
+<a class="sourceLine" id="cb13-4" title="4">              <span class="dt">to =</span> <span class="kw">max</span>(cray<span class="op">$</span>loglength),</a>
+<a class="sourceLine" id="cb13-5" title="5">              <span class="dt">by =</span> <span class="fl">.1</span>)</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="co"># Now, get the fixed effects</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="co"># coefficients from the model</span></a>
+<a class="sourceLine" id="cb13-9" title="9">  fcoeffs &lt;-<span class="st"> </span><span class="kw">fixef</span>(craymod)</a>
+<a class="sourceLine" id="cb13-10" title="10"></a>
+<a class="sourceLine" id="cb13-11" title="11"><span class="co"># We can make the mean predictions</span></a>
+<a class="sourceLine" id="cb13-12" title="12"><span class="co"># fairly easily here</span></a>
+<a class="sourceLine" id="cb13-13" title="13">  pred &lt;-<span class="st"> </span>fcoeffs[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>fcoeffs[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>lens</a>
+<a class="sourceLine" id="cb13-14" title="14">    </a>
+<a class="sourceLine" id="cb13-15" title="15"><span class="co"># And we could plot them on the log scale</span></a>
+<a class="sourceLine" id="cb13-16" title="16"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb13-17" title="17"><span class="kw">plot</span>(<span class="dt">x =</span> cray<span class="op">$</span>loglength,</a>
+<a class="sourceLine" id="cb13-18" title="18">     <span class="dt">y =</span> cray<span class="op">$</span>logmass,</a>
+<a class="sourceLine" id="cb13-19" title="19">     <span class="dt">pch =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb13-20" title="20">     <span class="dt">bg =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">35</span>),</a>
+<a class="sourceLine" id="cb13-21" title="21">     <span class="dt">col =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">05</span>),</a>
+<a class="sourceLine" id="cb13-22" title="22">     <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log&#39;</span>[e],<span class="st">&#39;Length (mm)&#39;</span>)),</a>
+<a class="sourceLine" id="cb13-23" title="23">     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Mass (g)&#39;</span>))</a>
+<a class="sourceLine" id="cb13-24" title="24">     )</a>
+<a class="sourceLine" id="cb13-25" title="25"> <span class="kw">lines</span>(<span class="dt">x=</span>lens, <span class="dt">y=</span>pred, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Of course, we could also plot these data on the real scale if we were concerned about actually describing the trend of interest, and at the population level, we can use the diagonal element of the variance-covariance matrix to represent uncertainty in our predictions:</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># We can make the mean predictions</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co"># fairly easily here</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  pred &lt;-<span class="st"> </span>fcoeffs[<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>fcoeffs[<span class="dv">2</span>] <span class="op">*</span><span class="st"> </span>lens</a>
+<a class="sourceLine" id="cb14-4" title="4"></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="co"># Now add the upper and lower confidence</span></a>
+<a class="sourceLine" id="cb14-6" title="6"><span class="co"># intervals for the relationship</span></a>
+<a class="sourceLine" id="cb14-7" title="7">  sds &lt;-<span class="st"> </span><span class="kw">diag</span>(<span class="kw">vcov</span>(craymod))</a>
+<a class="sourceLine" id="cb14-8" title="8">  lpred &lt;-<span class="st"> </span>(fcoeffs[<span class="dv">1</span>]<span class="op">-</span><span class="fl">1.96</span><span class="op">*</span>sds[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>(fcoeffs[<span class="dv">2</span>]<span class="op">-</span><span class="fl">1.96</span><span class="op">*</span>sds[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>lens</a>
+<a class="sourceLine" id="cb14-9" title="9">  upred &lt;-<span class="st"> </span>(fcoeffs[<span class="dv">1</span>]<span class="op">+</span><span class="fl">1.96</span><span class="op">*</span>sds[<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span>(fcoeffs[<span class="dv">2</span>]<span class="op">+</span><span class="fl">1.96</span><span class="op">*</span>sds[<span class="dv">2</span>]) <span class="op">*</span><span class="st"> </span>lens</a>
+<a class="sourceLine" id="cb14-10" title="10">    </a>
+<a class="sourceLine" id="cb14-11" title="11"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb14-12" title="12"><span class="kw">plot</span>(<span class="dt">x =</span> cray<span class="op">$</span>length,</a>
+<a class="sourceLine" id="cb14-13" title="13">     <span class="dt">y =</span> cray<span class="op">$</span>mass,</a>
+<a class="sourceLine" id="cb14-14" title="14">     <span class="dt">pch =</span> <span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb14-15" title="15">     <span class="dt">bg =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">35</span>),</a>
+<a class="sourceLine" id="cb14-16" title="16">     <span class="dt">col =</span> <span class="kw">rgb</span>(.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">8</span>,.<span class="dv">05</span>),</a>
+<a class="sourceLine" id="cb14-17" title="17">     <span class="dt">xlab =</span> <span class="st">&#39;Carapace length (mm)&#39;</span>,</a>
+<a class="sourceLine" id="cb14-18" title="18">     <span class="dt">ylab =</span> <span class="st">&#39;Mass (g)&#39;</span></a>
+<a class="sourceLine" id="cb14-19" title="19">     )</a>
+<a class="sourceLine" id="cb14-20" title="20"> <span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">exp</span>(lens), <span class="dt">y =</span> <span class="kw">exp</span>(pred), <span class="dt">col =</span> <span class="st">&#39;blue&#39;</span>)</a>
+<a class="sourceLine" id="cb14-21" title="21"> <span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">exp</span>(lens), <span class="dt">y =</span> <span class="kw">exp</span>(lpred), <span class="dt">col =</span> <span class="st">&#39;red&#39;</span>, <span class="dt">lty =</span> <span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb14-22" title="22"> <span class="kw">lines</span>(<span class="dt">x =</span> <span class="kw">exp</span>(lens), <span class="dt">y =</span> <span class="kw">exp</span>(upred), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>It is even simple enough for us to dig into the model and extract population-level intercepts here.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># Get population-level parameters</span></a>
+<a class="sourceLine" id="cb15-2" title="2">  rcoeff &lt;-<span class="st"> </span><span class="kw">coef</span>(craymod)<span class="op">$</span>site</a>
+<a class="sourceLine" id="cb15-3" title="3"></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="co"># Have a look</span></a>
+<a class="sourceLine" id="cb15-5" title="5">  rcoeff</a>
+<a class="sourceLine" id="cb15-6" title="6">                (Intercept) loglength</a>
+<a class="sourceLine" id="cb15-7" title="7">Bailey Road       <span class="fl">-8.015529</span>   <span class="fl">2.88991</span></a>
+<a class="sourceLine" id="cb15-8" title="8">Colliersville     <span class="fl">-7.946428</span>   <span class="fl">2.88991</span></a>
+<a class="sourceLine" id="cb15-9" title="9">Cooperstown Dam   <span class="fl">-8.038283</span>   <span class="fl">2.88991</span></a>
+<a class="sourceLine" id="cb15-10" title="10">Fortin Park       <span class="fl">-7.951995</span>   <span class="fl">2.88991</span></a>
+<a class="sourceLine" id="cb15-11" title="11">Route <span class="dv">23</span>          <span class="fl">-8.007405</span>   <span class="fl">2.88991</span></a>
+<a class="sourceLine" id="cb15-12" title="12">Route <span class="dv">80</span>          <span class="fl">-7.948562</span>   <span class="fl">2.88991</span></a></code></pre></div>
+<p>We can then go on to use each set of parameters shown here to make mean predictions for each stream. If want to plot the results for population 3, for example, our code would look like this:</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">plot</span>(cray<span class="op">$</span>loglength[cray<span class="op">$</span>site<span class="op">==</span><span class="st">&quot;Colliersville&quot;</span>],</a>
+<a class="sourceLine" id="cb16-3" title="3">       cray<span class="op">$</span>logmass[cray<span class="op">$</span>site<span class="op">==</span><span class="st">&quot;Colliersville&quot;</span>],</a>
+<a class="sourceLine" id="cb16-4" title="4">       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">3</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray87&#39;</span>,</a>
+<a class="sourceLine" id="cb16-5" title="5">       <span class="dt">cex=</span><span class="fl">1.25</span>,</a>
+<a class="sourceLine" id="cb16-6" title="6">       <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log&#39;</span>[e],<span class="st">&#39;Length (mm)&#39;</span>)),</a>
+<a class="sourceLine" id="cb16-7" title="7">       <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Mass (g)&#39;</span>))</a>
+<a class="sourceLine" id="cb16-8" title="8">       )</a>
+<a class="sourceLine" id="cb16-9" title="9"><span class="co"># Make a sequence of new lengths</span></a>
+<a class="sourceLine" id="cb16-10" title="10">  lens =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(cray<span class="op">$</span>loglength), <span class="kw">max</span>(cray<span class="op">$</span>loglength), <span class="dt">by=</span>.<span class="dv">01</span>)</a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="co"># Predict new values for mass from lens</span></a>
+<a class="sourceLine" id="cb16-12" title="12">  masses =<span class="st"> </span>rcoeff[<span class="dv">2</span>,<span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>rcoeff[<span class="dv">2</span>,<span class="dv">2</span>]<span class="op">*</span>lens</a>
+<a class="sourceLine" id="cb16-13" title="13"><span class="co"># Add lines to the plot</span></a>
+<a class="sourceLine" id="cb16-14" title="14">  <span class="kw">lines</span>(lens, masses, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>But, we still don’t really have a great way of looking at differences between groups if we are interested in those. Why is this? We do not have the technology. Basically, computing group-specific variances is conceptually and programmatically challenging. But, we can use some simulation methods to do this, and some of these have been implemented in newer versions of the <code>lme4</code> package and related packages.</p>
+<p>IMO, if you are going to go through simulations just to approximate confidence intervals, you are probably interested in the group-level estimates as well, and you should really be thinking about Bayesian approaches at this point.</p>
+<p>The following method was released in December 2016 to meet the growing need for characterizing uncertainty in group-level predictions from mixed models. Let’s take a look at how to use some of these tools.</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="kw">library</span>(merTools)</a>
+<a class="sourceLine" id="cb17-2" title="2"></a>
+<a class="sourceLine" id="cb17-3" title="3"><span class="co"># Tell r which population we are </span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co"># working with. We will store as a variable</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="co"># upfront so we can easily change populations</span></a>
+<a class="sourceLine" id="cb17-6" title="6"><span class="co"># by re-defining the variable, which I will</span></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="co"># call `i`. We will Colliersville to stay</span></a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co"># consistent with the example above</span></a>
+<a class="sourceLine" id="cb17-9" title="9">  i=<span class="st">&#39;Colliersville&#39;</span></a>
+<a class="sourceLine" id="cb17-10" title="10">  </a>
+<a class="sourceLine" id="cb17-11" title="11"><span class="co"># Make a sequence of new lengths</span></a>
+<a class="sourceLine" id="cb17-12" title="12">  lens =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(cray<span class="op">$</span>loglength),</a>
+<a class="sourceLine" id="cb17-13" title="13">             <span class="kw">max</span>(cray<span class="op">$</span>loglength),</a>
+<a class="sourceLine" id="cb17-14" title="14">             <span class="dt">by=</span>.<span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb17-15" title="15">  </a>
+<a class="sourceLine" id="cb17-16" title="16"><span class="co"># Make a df that contains lengths</span></a>
+<a class="sourceLine" id="cb17-17" title="17"><span class="co"># and a label for population</span></a>
+<a class="sourceLine" id="cb17-18" title="18">  newd =<span class="st"> </span><span class="kw">data.frame</span>(</a>
+<a class="sourceLine" id="cb17-19" title="19">    <span class="dt">site =</span> <span class="kw">rep</span>(i, <span class="kw">length</span>(lens)),</a>
+<a class="sourceLine" id="cb17-20" title="20">    <span class="dt">loglength =</span> lens</a>
+<a class="sourceLine" id="cb17-21" title="21">  )</a>
+<a class="sourceLine" id="cb17-22" title="22"></a>
+<a class="sourceLine" id="cb17-23" title="23"><span class="co"># Simulate predictions from the relationship</span></a>
+<a class="sourceLine" id="cb17-24" title="24"><span class="co"># stored in the model fit using our new data</span></a>
+<a class="sourceLine" id="cb17-25" title="25">  PI &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(<span class="dt">merMod =</span> craymod, <span class="dt">newdata =</span> newd, </a>
+<a class="sourceLine" id="cb17-26" title="26">                        <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">10000</span>,</a>
+<a class="sourceLine" id="cb17-27" title="27">                        <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>, <span class="dt">type=</span><span class="st">&quot;linear.prediction&quot;</span>,</a>
+<a class="sourceLine" id="cb17-28" title="28">                        <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb17-29" title="29">                        )</a>
+<a class="sourceLine" id="cb17-30" title="30"></a>
+<a class="sourceLine" id="cb17-31" title="31"><span class="co"># Plot the raw data for the population of interest, i</span></a>
+<a class="sourceLine" id="cb17-32" title="32">  <span class="kw">plot</span>(<span class="dt">x =</span> cray<span class="op">$</span>loglength[cray<span class="op">$</span>site<span class="op">==</span>i], </a>
+<a class="sourceLine" id="cb17-33" title="33">       <span class="dt">y =</span> cray<span class="op">$</span>logmass[cray<span class="op">$</span>site<span class="op">==</span>i],</a>
+<a class="sourceLine" id="cb17-34" title="34">       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">3</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray87&#39;</span>,</a>
+<a class="sourceLine" id="cb17-35" title="35">       <span class="dt">cex=</span><span class="fl">1.25</span>,</a>
+<a class="sourceLine" id="cb17-36" title="36">       <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log&#39;</span>[e],<span class="st">&#39;Length (mm)&#39;</span>)),</a>
+<a class="sourceLine" id="cb17-37" title="37">       <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Mass (g)&#39;</span>))</a>
+<a class="sourceLine" id="cb17-38" title="38">       )</a>
+<a class="sourceLine" id="cb17-39" title="39"></a>
+<a class="sourceLine" id="cb17-40" title="40"><span class="co"># Predict new values for mass from lens</span></a>
+<a class="sourceLine" id="cb17-41" title="41">  <span class="co">#masses = effs$pop[i,1] + effs$pop[i,2]*lens</span></a>
+<a class="sourceLine" id="cb17-42" title="42"><span class="co"># Add lines to the plot</span></a>
+<a class="sourceLine" id="cb17-43" title="43">  <span class="kw">lines</span>(newd<span class="op">$</span>loglength, PI<span class="op">$</span>fit, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>) <span class="co"># Mean</span></a>
+<a class="sourceLine" id="cb17-44" title="44">  <span class="kw">lines</span>(newd<span class="op">$</span>loglength, PI<span class="op">$</span>upr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Upper CI</span></a>
+<a class="sourceLine" id="cb17-45" title="45">  <span class="kw">lines</span>(newd<span class="op">$</span>loglength, PI<span class="op">$</span>lwr, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)  <span class="co"># Lower CI</span></a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
+<p>We could go through and do this for each site, and we would have a pretty nice (albeit slightly unwieldy) set of figures describing the relationship between length and mass. Alternatively, we could use the model coefficients to estimate the relationship across all populations, and to make predictions about unknown populations.</p>
 </div>
 </div>
 <div id="binary-logistic-regression" class="section level2">
 <h2>Binary (logistic) regression</h2>
-<p><br></p>
-<p>For our first example this week, we will use the same data from last week that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s read in the smolt data set that we used last time</span>
-  choice =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/StillwaterChoiceData.csv&#39;</span>)
-
-<span class="co"># Look at the first few rows of data</span>
-  <span class="kw">head</span>(choice)</code></pre></div>
-<pre><code>##   path year hatchery length mass date flow
-## 1    0 2010        1    176   57  118  345
-## 2    0 2005        1    205  101  128 1093
-## 3    0 2010        1    180   56  118  345
-## 4    0 2010        1    193   74  118  345
-## 5    0 2005        1    189   76  128 1093
-## 6    0 2010        1    180   65  118  345</code></pre>
-<p><br></p>
-<div id="data-explanation--copied-from-previous" class="section level3">
-<h3>Data Explanation- copied from previous</h3>
-<p><br></p>
-<p>These data are from a study that examined factors affecting path choice by wild and hatchery-reared endangered Atlantic salmon smolts during seaward migration in the Penobscot River, Maine. State, local, and federal fishery managers were interested in understanding what factors affected migratory routing through the lower river because there were different numbers of dams, with different estimated smolt mortality rates, on either side of a large island hydropower project in this system. If managers could understand factors influencing migratory route, they might be able to manipulate flows, stocking dates, and dam operation to improve survival of these endangered fish. Furthermore, the results of the study were used to predict the effects of dam removal, and hydropower re-allocation in the lower river on population-level consequences for these fish. These data were part of a larger analysis:</p>
-<p><br></p>
-<p>Stich, D. S., M. M. Bailey, and J. D. Zydlewski. 2014. Survival of Atlantic salmon (<em>Salmo salar</em>) smolts through a hydropower complex. Journal of Fish Biology 85:1074-1096.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># The data consist of the following variables:</span>
-<span class="co"># path:     The migratory route used by individual fish. The choices were</span>
-<span class="co">#           main-stem of the river (0) or the Stillwater Branch (1) around the</span>
-<span class="co">#           island.</span>
-<span class="co"># year:     The year in which individual fish were tagged and relocated using</span>
-<span class="co">#           acoustic telemetry.</span>
-<span class="co"># hatchery: An indicator describing if fish were reared in the wild (0) or in</span>
-<span class="co">#           the federal conservation hatchery (1)</span>
-<span class="co"># length:   Fish length (in mm)</span>
-<span class="co"># mass:     Fish mass (in grams)</span>
-<span class="co"># date:     Ordinal date on which the fish entered the hydrocomplex determined</span>
-<span class="co">#           from time-stamps on acoustic receivers</span>
-<span class="co"># flow:     Discharge recorded at the USGS gauge in the headpond of the dam</span>
-<span class="co">#           several kilometers upstream of the hydropower complex.</span></code></pre></div>
-<p><br></p>
+<p>For our second example this week, we will use the <code>choice</code> data from a couple weeks ago that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Let&#39;s read in the smolt data set that we used last time</span></a>
+<a class="sourceLine" id="cb18-2" title="2">  choice =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;StillwaterChoiceData.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb18-3" title="3"></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="co"># Look at the first few rows of data</span></a>
+<a class="sourceLine" id="cb18-5" title="5">  <span class="kw">head</span>(choice)</a></code></pre></div>
+<pre><code>  path year hatchery length mass date flow
+1    0 2010        1    176   57  118  345
+2    0 2005        1    205  101  128 1093
+3    0 2010        1    180   56  118  345
+4    0 2010        1    193   74  118  345
+5    0 2005        1    189   76  128 1093
+6    0 2010        1    180   65  118  345</code></pre>
+<div id="data-explanation" class="section level3">
+<h3>Data Explanation</h3>
+<p>These data are from a study that examined factors affecting path choice by wild and hatchery-reared endangered Atlantic salmon smolts during seaward migration in the Penobscot River, Maine. State, local, and federal fishery managers were interested in understanding what factors affected migratory routing through the lower river because there were different numbers of dams, with different estimated smolt mortality rates, on either side of a large island hydropower project in this system. If managers could understand factors influencing migratory route, they might be able to manipulate flows, stocking dates, and dam operation to improve survival of these endangered fish. Furthermore, the results of the study were used to predict the effects of dam removal, and hydropower re-allocation in the lower river on population-level consequences for these fish. Please see the &lt;08_glm_logisticRegression&gt;logistic regression module</a> for a complete explanation of the data.</p>
 </div>
 <div id="data-analysis" class="section level3">
 <h3>Data analysis</h3>
-<p><br></p>
 <p>We are going to use the 1/0 binary data to estimate the effects of a number of covariates of interest on the probability that an individual fish used the Stillwater Branch for migration in each year of this study using logistic regression. In order to do this, we will use the ‘logit’ link function, which can be defined as:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    logit =<span class="st"> </span><span class="cf">function</span>(x){
-      <span class="kw">log</span>(x <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>x))
-    }</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">logit =<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="kw">log</span>(x <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span><span class="op">-</span>x))</a>
+<a class="sourceLine" id="cb20-3" title="3">}</a></code></pre></div>
 <p>The inverse of the logit function is:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    invlogit =<span class="st"> </span><span class="cf">function</span>(x){
-      <span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x))
-    }</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">invlogit =<span class="st"> </span><span class="cf">function</span>(x){</a>
+<a class="sourceLine" id="cb21-2" title="2">  <span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x))</a>
+<a class="sourceLine" id="cb21-3" title="3">}</a></code></pre></div>
 <p>Since we are not interested in the linear trend in the use of the Stillwater Branch through time, we need to convert year to factor. This is the same as if we wanted to use this as a fixed effect in the model.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">    choice<span class="op">$</span>year =<span class="st"> </span><span class="kw">as.factor</span>(choice<span class="op">$</span>year)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">choice<span class="op">$</span>year =<span class="st"> </span><span class="kw">as.factor</span>(choice<span class="op">$</span>year)</a></code></pre></div>
 <p>Next, define a set of models based on a priori combinations of explanatory variables.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First, make an empty list to hold the models</span>
-  mods=<span class="kw">list</span>()
-
-<span class="co"># Now, fill the list with several a priori models</span>
-<span class="co"># Need to load the `lme4` package for the `glmer` function</span>
-  <span class="kw">library</span>(lme4)
-<span class="co"># Here is the list</span>
-  mods[[<span class="dv">1</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial,
-                  <span class="dt">data=</span>choice)
-  mods[[<span class="dv">2</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)
-  mods[[<span class="dv">3</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
-  mods[[<span class="dv">4</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)
-  mods[[<span class="dv">5</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)
-  mods[[<span class="dv">6</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)
-  mods[[<span class="dv">7</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># First, make an empty list to hold the models</span></a>
+<a class="sourceLine" id="cb23-2" title="2">  mods=<span class="kw">list</span>()</a>
+<a class="sourceLine" id="cb23-3" title="3"></a>
+<a class="sourceLine" id="cb23-4" title="4"><span class="co"># Now, fill the list with several a priori models</span></a>
+<a class="sourceLine" id="cb23-5" title="5"><span class="co"># Need to load the `lme4` package for the `glmer` function</span></a>
+<a class="sourceLine" id="cb23-6" title="6">  <span class="kw">library</span>(lme4)</a>
+<a class="sourceLine" id="cb23-7" title="7"><span class="co"># Here is the list</span></a>
+<a class="sourceLine" id="cb23-8" title="8">  mods[[<span class="dv">1</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-9" title="9">  mods[[<span class="dv">2</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-10" title="10">  mods[[<span class="dv">3</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-11" title="11">  mods[[<span class="dv">4</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length,<span class="dt">family=</span>binomial, <span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-12" title="12">  mods[[<span class="dv">5</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length<span class="op">+</span>hatchery,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-13" title="13">  mods[[<span class="dv">6</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>length<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)</a>
+<a class="sourceLine" id="cb23-14" title="14">  mods[[<span class="dv">7</span>]]=<span class="kw">glmer</span>(path<span class="op">~</span>(<span class="dv">1</span><span class="op">|</span>year)<span class="op">+</span>hatchery<span class="op">+</span>flow,<span class="dt">family=</span>binomial,<span class="dt">data=</span>choice)</a></code></pre></div>
 <p>Give the models some names using the formulas for each of the models. <strong>Remember</strong>: models are stored as list objects in R, and each of those list objects (models) has names. We can reference those names using the <code>$</code> notation:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="kw">length</span>(mods)){
-    <span class="kw">names</span>(mods)[i] =<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">summary</span>(mods[[i]])<span class="op">$</span>call<span class="op">$</span>formula)[<span class="dv">3</span>]
-  }</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="kw">length</span>(mods)){</a>
+<a class="sourceLine" id="cb24-2" title="2">    <span class="kw">names</span>(mods)[i] =<span class="st"> </span><span class="kw">as.character</span>(<span class="kw">summary</span>(mods[[i]])<span class="op">$</span>call<span class="op">$</span>formula)[<span class="dv">3</span>]</a>
+<a class="sourceLine" id="cb24-3" title="3">  }</a></code></pre></div>
 <p>Now, we use the <code>AICcmodavg</code> package to make a model selection table like we did last week:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the package and make the table</span>
-  <span class="kw">library</span>(AICcmodavg)
-  modtable =<span class="st"> </span><span class="kw">aictab</span>( <span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods) )</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># Load the package and make the table</span></a>
+<a class="sourceLine" id="cb25-2" title="2">  <span class="kw">library</span>(AICcmodavg)</a>
+<a class="sourceLine" id="cb25-3" title="3">  modtable =<span class="st"> </span><span class="kw">aictab</span>( <span class="dt">cand.set =</span> mods, <span class="dt">modnames =</span> <span class="kw">names</span>(mods) )</a></code></pre></div>
 <p>Finally, we can use these models to make predictions about the relationships in our models the same way we have done previously with linear models and GLMs.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Start by making a new sequence of values from which to make predictions</span>
-  newFlow =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(choice<span class="op">$</span>flow), <span class="kw">max</span>(choice<span class="op">$</span>flow), <span class="dv">1</span>)
-
-<span class="co"># Let&#39;s go ahead and use the best model to make some predictions, as we</span>
-<span class="co"># can see that flow is the most important variable here</span>
-  beta_<span class="dv">0</span> =<span class="st"> </span><span class="kw">summary</span>(mods[[<span class="dv">2</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">1</span>]
-  beta_<span class="dv">1</span> =<span class="st"> </span><span class="kw">summary</span>(mods[[<span class="dv">2</span>]])<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>]
-
-<span class="co"># Now, we can make predictions from this model-averaged estimate</span>
-  preds =<span class="st"> </span><span class="kw">invlogit</span>(beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span><span class="op">*</span>newFlow)
-
-<span class="co"># Make a *quick* plot for data vis</span>
-  <span class="kw">plot</span>(newFlow, preds, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<p><br></p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Start by making a new sequence of values from which to make predictions</span></a>
+<a class="sourceLine" id="cb26-2" title="2">  newFlow =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(choice<span class="op">$</span>flow), <span class="kw">max</span>(choice<span class="op">$</span>flow), <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb26-3" title="3"></a>
+<a class="sourceLine" id="cb26-4" title="4"><span class="co"># Let&#39;s go ahead and use the best model to make some predictions, as we</span></a>
+<a class="sourceLine" id="cb26-5" title="5"><span class="co"># can see that flow is the most important variable here</span></a>
+<a class="sourceLine" id="cb26-6" title="6">  beta_<span class="dv">0</span> =<span class="st"> </span><span class="kw">summary</span>(mods[[<span class="dv">2</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb26-7" title="7">  beta_<span class="dv">1</span> =<span class="st"> </span><span class="kw">summary</span>(mods[[<span class="dv">2</span>]])<span class="op">$</span>coefficients[<span class="dv">2</span>,<span class="dv">1</span>]</a>
+<a class="sourceLine" id="cb26-8" title="8"></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="co"># Now, we can make predictions from this model-averaged estimate</span></a>
+<a class="sourceLine" id="cb26-10" title="10">  preds =<span class="st"> </span><span class="kw">invlogit</span>(beta_<span class="dv">0</span> <span class="op">+</span><span class="st"> </span>beta_<span class="dv">1</span><span class="op">*</span>newFlow)</a>
+<a class="sourceLine" id="cb26-11" title="11"></a>
+<a class="sourceLine" id="cb26-12" title="12"><span class="co"># Make a *quick* plot for data vis</span></a>
+<a class="sourceLine" id="cb26-13" title="13">  <span class="kw">plot</span>(newFlow, preds, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>)</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 </div>
 </div>
 <div id="count-models" class="section level2">
 <h2>Count models</h2>
-<p><br></p>
 <div id="walleye-in-spring" class="section level3">
 <h3>Walleye in spring</h3>
-<p><br></p>
-<p>It is that magical time of year again. Birds are returning from their winter vacations, and all of the critters are twitterpaited. The salamanders and frogs are making there way to breeding pools in the soaked leaf litter, and even the fish are warming up for the spawn. There’s only one problem: we don’t quite know when those fish are going to get into the streams so we can catch them, clip their fins, put some tags in them, and study their every move (…muahaha…).</p>
-<p><br></p>
-<p>For this first example, we will attempt to predict counts of walleye, Sander vitreus, in spawning streams of Otsego Lake based on historical counts and climate data.</p>
-<p><br></p>
+<p>We will wrap up our discussions about GLMM with a worked example of count models. For this one, we will attempt to predict counts of walleye, <em>Sander vitreus</em>, in spawning streams of Otsego Lake based on historical counts and climate data.</p>
 <div id="data" class="section level4">
 <h4>Data</h4>
-<p><br></p>
 <p>We begin by reading in the data set:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the walleye data</span>
-  eyes =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/walleye.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># Read in the walleye data</span></a>
+<a class="sourceLine" id="cb27-2" title="2">  eyes =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;walleye.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p>Have a look at the first ten lines of the data set:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  <span class="kw">head</span>(eyes, <span class="dv">10</span>)</code></pre></div>
-<p><br></p>
-<p>And check out the data structure</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"> <span class="kw">str</span>(eyes)</code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    35 obs. of  18 variables:
-##  $ date        : chr  &quot;2009-04-05&quot; &quot;2009-04-05&quot; &quot;2009-04-05&quot; &quot;2009-04-07&quot; ...
-##  $ site        : chr  &quot;Cripple Creek&quot; &quot;Hayden Creek&quot; &quot;Shadow Brook&quot; &quot;Hayden Creek&quot; ...
-##  $ counts      : int  4 61 17 50 10 1 35 25 1 29 ...
-##  $ high_f      : num  52 52 52 NA NA 39 39 55 55 53.1 ...
-##  $ low_f       : num  32 32 32 NA NA 28 28 32 32 28.9 ...
-##  $ precip_in   : num  0.02 0.02 0.02 NA NA 0 0 0 0 0.4 ...
-##  $ snow_in     : int  0 0 0 NA NA 0 0 0 0 0 ...
-##  $ snowDepth_in: int  0 0 0 NA NA 0 0 0 0 0 ...
-##  $ high_c      : num  11.1 11.1 11.1 NA NA ...
-##  $ low_c       : num  0 0 0 NA NA ...
-##  $ mean_c      : num  5.56 5.56 5.56 NA NA ...
-##  $ ddPrep      : num  5.56 5.56 5.56 NA NA ...
-##  $ day         : int  95 95 95 97 97 99 99 100 100 102 ...
-##  $ year        : int  2009 2009 2009 2009 2009 2009 2009 2009 2009 2009 ...
-##  $ dd          : num  109 109 109 118 118 ...
-##  $ dd2         : num  11954 11954 11954 14031 14031 ...
-##  $ daylight    : num  12.9 12.9 12.9 13 13 ...
-##  $ daylight2   : num  166 166 166 168 168 ...</code></pre>
-<p><br></p>
-<p>These data are measurements of the length and mass of individual walleye at various reproductive stages that were captured in spawning tributaries of Otsego Lake during the 2009 and 2013 spawning season. These measurements are accompanied by various environmental indicators that include high and low flows, precipitation (rain and snow), high, low, mean temperatures (c) and degree days (dd), and photoperiod (daylight) on each day of the year.</p>
-<p>We will use the data to predict number of walleye we expect to see each day in the spawning tribs during spring 2018 based on historical counts and some explanatory variables of interest.</p>
-<p><br></p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">  <span class="kw">head</span>(eyes, <span class="dv">10</span>)</a></code></pre></div>
+<p>And check out the data structure:</p>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"> <span class="kw">str</span>(eyes)</a>
+<a class="sourceLine" id="cb29-2" title="2"><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">71</span> obs. of  <span class="dv">15</span> variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb29-3" title="3"><span class="st"> </span><span class="er">$</span><span class="st"> </span>date     <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;2009-04-01&quot;</span> <span class="st">&quot;2009-04-01&quot;</span> <span class="st">&quot;2009-04-01&quot;</span> <span class="st">&quot;2009-04-05&quot;</span> ...</a>
+<a class="sourceLine" id="cb29-4" title="4"> <span class="op">$</span><span class="st"> </span>site     <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Cripple Creek&quot;</span> <span class="st">&quot;Hayden Creek&quot;</span> <span class="st">&quot;Shadow Brook&quot;</span> <span class="st">&quot;Cripple Creek&quot;</span> ...</a>
+<a class="sourceLine" id="cb29-5" title="5"> <span class="op">$</span><span class="st"> </span>counts   <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">4</span> <span class="dv">61</span> <span class="dv">17</span> <span class="dv">50</span> <span class="dv">10</span> <span class="dv">1</span> <span class="dv">35</span> ...</a>
+<a class="sourceLine" id="cb29-6" title="6"> <span class="op">$</span><span class="st"> </span>high_f   <span class="op">:</span><span class="st"> </span>num  <span class="dv">48</span> <span class="dv">48</span> <span class="dv">48</span> <span class="dv">52</span> <span class="dv">52</span> <span class="dv">52</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">39</span> <span class="dv">39</span> ...</a>
+<a class="sourceLine" id="cb29-7" title="7"> <span class="op">$</span><span class="st"> </span>low_f    <span class="op">:</span><span class="st"> </span>num  <span class="dv">34</span> <span class="dv">34</span> <span class="dv">34</span> <span class="dv">32</span> <span class="dv">32</span> <span class="dv">32</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">28</span> <span class="dv">28</span> ...</a>
+<a class="sourceLine" id="cb29-8" title="8"> <span class="op">$</span><span class="st"> </span>high_c   <span class="op">:</span><span class="st"> </span>num  <span class="fl">8.89</span> <span class="fl">8.89</span> <span class="fl">8.89</span> <span class="fl">11.11</span> <span class="fl">11.11</span> ...</a>
+<a class="sourceLine" id="cb29-9" title="9"> <span class="op">$</span><span class="st"> </span>low_c    <span class="op">:</span><span class="st"> </span>num  <span class="fl">1.11</span> <span class="fl">1.11</span> <span class="fl">1.11</span> <span class="dv">0</span> <span class="dv">0</span> ...</a>
+<a class="sourceLine" id="cb29-10" title="10"> <span class="op">$</span><span class="st"> </span>mean_c   <span class="op">:</span><span class="st"> </span>num  <span class="dv">5</span> <span class="dv">5</span> <span class="dv">5</span> <span class="fl">5.56</span> <span class="fl">5.56</span> ...</a>
+<a class="sourceLine" id="cb29-11" title="11"> <span class="op">$</span><span class="st"> </span>ddPrep   <span class="op">:</span><span class="st"> </span>num  <span class="dv">5</span> <span class="dv">5</span> <span class="dv">5</span> <span class="fl">5.56</span> <span class="fl">5.56</span> ...</a>
+<a class="sourceLine" id="cb29-12" title="12"> <span class="op">$</span><span class="st"> </span>day      <span class="op">:</span><span class="st"> </span>int  <span class="dv">91</span> <span class="dv">91</span> <span class="dv">91</span> <span class="dv">95</span> <span class="dv">95</span> <span class="dv">95</span> <span class="dv">97</span> <span class="dv">97</span> <span class="dv">99</span> <span class="dv">99</span> ...</a>
+<a class="sourceLine" id="cb29-13" title="13"> <span class="op">$</span><span class="st"> </span>year     <span class="op">:</span><span class="st"> </span>int  <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> <span class="dv">2009</span> ...</a>
+<a class="sourceLine" id="cb29-14" title="14"> <span class="op">$</span><span class="st"> </span>dd       <span class="op">:</span><span class="st"> </span>num  <span class="fl">72.4</span> <span class="fl">72.4</span> <span class="fl">72.4</span> <span class="fl">109.3</span> <span class="fl">109.3</span> ...</a>
+<a class="sourceLine" id="cb29-15" title="15"> <span class="op">$</span><span class="st"> </span>dd2      <span class="op">:</span><span class="st"> </span>num  <span class="dv">5240</span> <span class="dv">5240</span> <span class="dv">5240</span> <span class="dv">11954</span> <span class="dv">11954</span> ...</a>
+<a class="sourceLine" id="cb29-16" title="16"> <span class="op">$</span><span class="st"> </span>daylight <span class="op">:</span><span class="st"> </span>num  <span class="fl">12.7</span> <span class="fl">12.7</span> <span class="fl">12.7</span> <span class="fl">12.9</span> <span class="fl">12.9</span> ...</a>
+<a class="sourceLine" id="cb29-17" title="17"> <span class="op">$</span><span class="st"> </span>daylight2<span class="op">:</span><span class="st"> </span>num  <span class="dv">161</span> <span class="dv">161</span> <span class="dv">161</span> <span class="dv">166</span> <span class="dv">166</span> ...</a></code></pre></div>
+<p>These data are counts of walleye that were captured in spawning tributaries of Otsego Lake during the 2009, 2013, 2017,and 2018 spawning season. These measurements are accompanied by various environmental indicators that include high and low flows, precipitation (rain and snow), high, low, mean temperatures (c) and degree days (dd), and photoperiod (daylight) on each day of the year.</p>
+<p>We will use the data to predict number of walleye we expect to see each day in the spawning tribs based on historical counts and some explanatory variables of interest.</p>
 </div>
-<div id="reml-estimation" class="section level4">
-<h4>REML estimation</h4>
-<p><br></p>
+<div id="estimation" class="section level4">
+<h4>Estimation</h4>
 <p>We start by estimating a model using REML. Let’s say for the sake of argument that we are simply interested in the lake-wide mean of our counts so that we know when students should, for example, be heading out to tributaries to look for walleyes in streams.</p>
-<p>For now, we will model walleye count as a function of photoperiod, with a random effect of site on the intercepts. This model assumes that there is variability in counts of spawning individuals between sites, but that the relationship between photoperiod and count is the same across all sites. In this case, we will specify a quadratic relationship between counts and dates because we expect the number of fish to increase to some point in the run before it decreases. We are not interested</p>
+<p>For now, we will model walleye count as a function of photoperiod, with a random effect of site on the intercepts. This model assumes that there is variability in counts of spawning individuals between sites, but that the relationship between photoperiod and count is the same across all sites. In this case, we will specify a quadratic relationship between counts and dates because we expect the number of fish to increase to some point in the run before it decreases. We are not interested in the individual sites in this case, but need to account for repeated observations within spawning locations.</p>
 <p>In the <code>lme4</code> package, the model might look something like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the package</span>
-  <span class="kw">library</span>(lme4)
-
-<span class="co"># Make the model</span>
-  waeMod1 =<span class="st"> </span><span class="kw">glmer</span>(counts<span class="op">~</span>dd <span class="op">+</span><span class="st"> </span>dd2 <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>site), <span class="dt">data=</span>eyes, <span class="dt">family=</span>poisson)
-  
-<span class="co"># Have a look-see at the results</span>
-  <span class="kw">summary</span>(waeMod1)</code></pre></div>
-<pre><code>## Generalized linear mixed model fit by maximum likelihood (Laplace
-##   Approximation) [glmerMod]
-##  Family: poisson  ( log )
-## Formula: counts ~ dd + dd2 + (1 | site)
-##    Data: eyes
-## 
-##      AIC      BIC   logLik deviance df.resid 
-##    847.4    853.7   -419.7    839.4       31 
-## 
-## Scaled residuals: 
-##     Min      1Q  Median      3Q     Max 
-## -6.4406 -3.0107 -0.7852  2.4903 11.4417 
-## 
-## Random effects:
-##  Groups Name        Variance Std.Dev.
-##  site   (Intercept) 0.6094   0.7807  
-## Number of obs: 35, groups:  site, 4
-## 
-## Fixed effects:
-##               Estimate Std. Error z value Pr(&gt;|z|)    
-## (Intercept) -7.360e+00  6.772e-01  -10.87   &lt;2e-16 ***
-## dd           1.396e-01  7.488e-03   18.64   &lt;2e-16 ***
-## dd2         -4.575e-04  2.479e-05  -18.45   &lt;2e-16 ***
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
-## 
-## Correlation of Fixed Effects:
-##     (Intr) dd    
-## dd  -0.793       
-## dd2  0.749 -0.983
-## fit warnings:
-## Some predictor variables are on very different scales: consider rescaling
-## convergence code: 0
-## Model failed to converge with max|grad| = 9.29104 (tol = 0.001, component 1)
-## Model is nearly unidentifiable: very large eigenvalue
-##  - Rescale variables?
-## Model is nearly unidentifiable: large eigenvalue ratio
-##  - Rescale variables?</code></pre>
-<p>As we look through these results, we can see that we have a significant effect of daylight on spawning behavior. What’s more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.</p>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Load the package</span></a>
+<a class="sourceLine" id="cb30-2" title="2">  <span class="kw">library</span>(lme4)</a>
+<a class="sourceLine" id="cb30-3" title="3"></a>
+<a class="sourceLine" id="cb30-4" title="4"><span class="co"># Make the model</span></a>
+<a class="sourceLine" id="cb30-5" title="5">  waeMod1 =<span class="st"> </span><span class="kw">glmer</span>(counts<span class="op">~</span>dd <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(dd<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>site), <span class="dt">data=</span>eyes, <span class="dt">family=</span>poisson)</a>
+<a class="sourceLine" id="cb30-6" title="6">  </a>
+<a class="sourceLine" id="cb30-7" title="7"><span class="co"># Have a look-see at the results</span></a>
+<a class="sourceLine" id="cb30-8" title="8">  <span class="kw">summary</span>(waeMod1)</a>
+<a class="sourceLine" id="cb30-9" title="9">Generalized linear mixed model fit by maximum <span class="kw">likelihood</span> (Laplace Approximation) [<span class="st">&#39;glmerMod&#39;</span>]</a>
+<a class="sourceLine" id="cb30-10" title="10"> Family<span class="op">:</span><span class="st"> </span><span class="kw">poisson</span>  ( log )</a>
+<a class="sourceLine" id="cb30-11" title="11">Formula<span class="op">:</span><span class="st"> </span>counts <span class="op">~</span><span class="st"> </span>dd <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(dd<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>site)</a>
+<a class="sourceLine" id="cb30-12" title="12">   Data<span class="op">:</span><span class="st"> </span>eyes</a>
+<a class="sourceLine" id="cb30-13" title="13"></a>
+<a class="sourceLine" id="cb30-14" title="14">     AIC      BIC   logLik deviance df.resid </a>
+<a class="sourceLine" id="cb30-15" title="15">  <span class="fl">1440.0</span>   <span class="fl">1449.1</span>   <span class="fl">-716.0</span>   <span class="fl">1432.0</span>       <span class="dv">67</span> </a>
+<a class="sourceLine" id="cb30-16" title="16"></a>
+<a class="sourceLine" id="cb30-17" title="17">Scaled residuals<span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb30-18" title="18"><span class="st">   </span>Min     1Q Median     3Q    Max </a>
+<a class="sourceLine" id="cb30-19" title="19"><span class="fl">-6.150</span> <span class="fl">-2.289</span> <span class="fl">-1.159</span>  <span class="fl">1.948</span> <span class="fl">12.425</span> </a>
+<a class="sourceLine" id="cb30-20" title="20"></a>
+<a class="sourceLine" id="cb30-21" title="21">Random effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb30-22" title="22"><span class="st"> </span>Groups Name        Variance Std.Dev.</a>
+<a class="sourceLine" id="cb30-23" title="23"> <span class="kw">site</span>   (Intercept) <span class="fl">0.01095</span>  <span class="fl">0.1047</span>  </a>
+<a class="sourceLine" id="cb30-24" title="24">Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">71</span>, groups<span class="op">:</span><span class="st">  </span>site, <span class="dv">3</span></a>
+<a class="sourceLine" id="cb30-25" title="25"></a>
+<a class="sourceLine" id="cb30-26" title="26">Fixed effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb30-27" title="27"><span class="st">              </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb30-28" title="28">(Intercept) <span class="fl">-4.087e+00</span>  <span class="fl">4.066e-01</span>  <span class="fl">-10.05</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb30-29" title="29">dd           <span class="fl">9.275e-02</span>  <span class="fl">5.248e-03</span>   <span class="fl">17.67</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb30-30" title="30"><span class="kw">I</span>(dd<span class="op">^</span><span class="dv">2</span>)     <span class="fl">-2.795e-04</span>  <span class="fl">1.666e-05</span>  <span class="fl">-16.78</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb30-31" title="31"><span class="op">---</span></a>
+<a class="sourceLine" id="cb30-32" title="32">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb30-33" title="33"></a>
+<a class="sourceLine" id="cb30-34" title="34">Correlation of Fixed Effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb30-35" title="35"><span class="st">        </span>(Intr) dd    </a>
+<a class="sourceLine" id="cb30-36" title="36">dd      <span class="fl">-0.975</span>       </a>
+<a class="sourceLine" id="cb30-37" title="37"><span class="kw">I</span>(dd<span class="op">^</span><span class="dv">2</span>)  <span class="fl">0.945</span> <span class="fl">-0.990</span></a>
+<a class="sourceLine" id="cb30-38" title="38">fit warnings<span class="op">:</span></a>
+<a class="sourceLine" id="cb30-39" title="39">Some predictor variables are on very different scales<span class="op">:</span><span class="st"> </span>consider rescaling</a>
+<a class="sourceLine" id="cb30-40" title="40">convergence code<span class="op">:</span><span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb30-41" title="41">unable to evaluate scaled gradient</a>
+<a class="sourceLine" id="cb30-42" title="42">Model failed to converge<span class="op">:</span><span class="st"> </span>degenerate  Hessian with <span class="dv">1</span> negative eigenvalues</a></code></pre></div>
+<p>As we look through these results, we can see that we have a significant effect of degree days on spawning behavior. What’s more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.</p>
+<p><strong>But</strong> we’ve got what appear to be some major issues related to convergence at the bottom of this output! [dun, dun, dun]</p>
+<p>Luckily, we can fix all of these issues by simply standardizing the covariate (<code>dd</code>) as discussed previously. This helps keep things on a unit scale for model estimation, and prevents wacky estimates like negative variances (!).</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># Standardize the covariate</span></a>
+<a class="sourceLine" id="cb31-2" title="2">  eyes<span class="op">$</span>sdd =<span class="st"> </span><span class="kw">as.vector</span>(<span class="kw">scale</span>(eyes<span class="op">$</span>dd))</a>
+<a class="sourceLine" id="cb31-3" title="3"></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co"># Make the model</span></a>
+<a class="sourceLine" id="cb31-5" title="5">  waeMod2 =<span class="st"> </span><span class="kw">glmer</span>(counts<span class="op">~</span>sdd <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(sdd<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>site),</a>
+<a class="sourceLine" id="cb31-6" title="6">                  <span class="dt">data=</span>eyes, <span class="dt">family=</span>poisson)</a>
+<a class="sourceLine" id="cb31-7" title="7">  </a>
+<a class="sourceLine" id="cb31-8" title="8"><span class="co"># Have a look-see at the results</span></a>
+<a class="sourceLine" id="cb31-9" title="9">  <span class="kw">summary</span>(waeMod2)</a>
+<a class="sourceLine" id="cb31-10" title="10">Generalized linear mixed model fit by maximum <span class="kw">likelihood</span> (Laplace Approximation) [<span class="st">&#39;glmerMod&#39;</span>]</a>
+<a class="sourceLine" id="cb31-11" title="11"> Family<span class="op">:</span><span class="st"> </span><span class="kw">poisson</span>  ( log )</a>
+<a class="sourceLine" id="cb31-12" title="12">Formula<span class="op">:</span><span class="st"> </span>counts <span class="op">~</span><span class="st"> </span>sdd <span class="op">+</span><span class="st"> </span><span class="kw">I</span>(sdd<span class="op">^</span><span class="dv">2</span>) <span class="op">+</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>site)</a>
+<a class="sourceLine" id="cb31-13" title="13">   Data<span class="op">:</span><span class="st"> </span>eyes</a>
+<a class="sourceLine" id="cb31-14" title="14"></a>
+<a class="sourceLine" id="cb31-15" title="15">     AIC      BIC   logLik deviance df.resid </a>
+<a class="sourceLine" id="cb31-16" title="16">  <span class="fl">1440.0</span>   <span class="fl">1449.1</span>   <span class="fl">-716.0</span>   <span class="fl">1432.0</span>       <span class="dv">67</span> </a>
+<a class="sourceLine" id="cb31-17" title="17"></a>
+<a class="sourceLine" id="cb31-18" title="18">Scaled residuals<span class="op">:</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb31-19" title="19"><span class="st">   </span>Min     1Q Median     3Q    Max </a>
+<a class="sourceLine" id="cb31-20" title="20"><span class="fl">-6.150</span> <span class="fl">-2.289</span> <span class="fl">-1.159</span>  <span class="fl">1.948</span> <span class="fl">12.425</span> </a>
+<a class="sourceLine" id="cb31-21" title="21"></a>
+<a class="sourceLine" id="cb31-22" title="22">Random effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb31-23" title="23"><span class="st"> </span>Groups Name        Variance Std.Dev.</a>
+<a class="sourceLine" id="cb31-24" title="24"> <span class="kw">site</span>   (Intercept) <span class="fl">0.01095</span>  <span class="fl">0.1047</span>  </a>
+<a class="sourceLine" id="cb31-25" title="25">Number of obs<span class="op">:</span><span class="st"> </span><span class="dv">71</span>, groups<span class="op">:</span><span class="st">  </span>site, <span class="dv">3</span></a>
+<a class="sourceLine" id="cb31-26" title="26"></a>
+<a class="sourceLine" id="cb31-27" title="27">Fixed effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb31-28" title="28"><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb31-29" title="29">(Intercept)  <span class="fl">3.52854</span>    <span class="fl">0.07123</span>   <span class="fl">49.54</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb31-30" title="30">sdd          <span class="fl">0.45898</span>    <span class="fl">0.03737</span>   <span class="fl">12.28</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb31-31" title="31"><span class="kw">I</span>(sdd<span class="op">^</span><span class="dv">2</span>)    <span class="fl">-0.67374</span>    <span class="fl">0.04018</span>  <span class="fl">-16.77</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb31-32" title="32"><span class="op">---</span></a>
+<a class="sourceLine" id="cb31-33" title="33">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb31-34" title="34"></a>
+<a class="sourceLine" id="cb31-35" title="35">Correlation of Fixed Effects<span class="op">:</span></a>
+<a class="sourceLine" id="cb31-36" title="36"><span class="st">         </span>(Intr) sdd   </a>
+<a class="sourceLine" id="cb31-37" title="37">sdd      <span class="fl">-0.001</span>       </a>
+<a class="sourceLine" id="cb31-38" title="38"><span class="kw">I</span>(sdd<span class="op">^</span><span class="dv">2</span>) <span class="fl">-0.292</span> <span class="fl">-0.297</span></a></code></pre></div>
 <p>Now, if we want, we can make a graph to show these predictions. Here, we make predictions for all years, and then we plot those predictions for a single site (Shadow Brook).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the merTools package</span>
-  <span class="kw">library</span>(merTools)
-  
-<span class="co"># Make a new dataframe for prediction</span>
-  dd =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(eyes<span class="op">$</span>dd), <span class="dt">to =</span> <span class="kw">max</span>(eyes<span class="op">$</span>dd), <span class="dt">by =</span> .<span class="dv">1</span>)
-  site =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">unique</span>(eyes<span class="op">$</span>site), <span class="kw">length</span>(dd)))
-  dd =<span class="st"> </span><span class="kw">rep</span>(dd, <span class="kw">length</span>(<span class="kw">unique</span>(eyes<span class="op">$</span>site)))
-  dd2 =<span class="st"> </span>dd<span class="op">^</span><span class="dv">2</span>
-  newdata =<span class="st"> </span><span class="kw">data.frame</span>(dd, dd2)
-  
-<span class="co"># Simulate predictions from the relationship stored in the model fit using</span>
-<span class="co"># our new data</span>
-  PI &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(<span class="dt">merMod =</span> waeMod1, <span class="dt">newdata =</span> newdata, 
-                        <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">1000</span>,
-                        <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>, <span class="dt">type=</span><span class="st">&quot;linear.prediction&quot;</span>,
-                        <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span>)
-  PI =<span class="st"> </span><span class="kw">apply</span>(PI, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), exp)
-<span class="co"># Plot the raw data for the population of interest, i</span>
-  <span class="kw">plot</span>(eyes<span class="op">$</span>dd, eyes<span class="op">$</span>counts, <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">500</span>), <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray87&#39;</span>, <span class="st">&#39;gray60&#39;</span>,<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;black&#39;</span>)[<span class="kw">as.factor</span>(eyes<span class="op">$</span>year)],
-       <span class="dt">cex=</span><span class="fl">1.9</span>, <span class="dt">xlab=</span><span class="st">&#39;Degree days&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Count&#39;</span>)
-
-<span class="co"># Add lines to the plot</span>
-  <span class="kw">lines</span>(newdata<span class="op">$</span>dd[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>], PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">1</span>], <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>) <span class="co"># Mean</span>
-  <span class="kw">lines</span>(newdata<span class="op">$</span>dd[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>], PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">2</span>], <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>) <span class="co"># Lower</span>
-  <span class="kw">lines</span>(newdata<span class="op">$</span>dd[<span class="dv">1</span><span class="op">:</span><span class="dv">1007</span>], PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">3</span>], <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>) <span class="co"># Upper </span></code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-22-1.png" width="672" /></p>
-<p><br></p>
-<p>We could also do this using our global parameter estimates and some new data. We see that our mean predictions aren’t terrible, but there is quite a bit of uncertainty here.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">dd =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">0</span>, <span class="dt">to =</span> <span class="dv">300</span>, <span class="dt">by =</span> <span class="dv">1</span>)
-dd2 =<span class="st"> </span>dd<span class="op">^</span><span class="dv">2</span>
-pred =<span class="kw">exp</span>(<span class="op">-</span><span class="fl">7.3601897</span> <span class="op">+</span><span class="st"> </span><span class="fl">0.1395633</span><span class="op">*</span>dd <span class="op">-</span><span class="st"> </span><span class="fl">0.0004575</span><span class="op">*</span>dd2)
-predlwr =<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">7.3601897</span><span class="op">-</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">6.772e-1</span> <span class="op">+</span><span class="st"> </span>(<span class="fl">0.1395633</span><span class="op">-</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">7.488e-3</span>)<span class="op">*</span>dd <span class="op">-</span><span class="st"> </span>(<span class="fl">0.0004575</span><span class="op">-</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">2.479e-5</span>)<span class="op">*</span>dd2)
-predupr =<span class="st"> </span><span class="kw">exp</span>(<span class="op">-</span><span class="fl">7.3601897</span><span class="op">+</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">6.772e-1</span> <span class="op">+</span><span class="st"> </span>(<span class="fl">0.1395633</span><span class="op">+</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">7.488e-3</span>)<span class="op">*</span>dd <span class="op">-</span><span class="st"> </span>(<span class="fl">0.0004575</span><span class="op">+</span><span class="fl">1.96</span><span class="op">*</span><span class="fl">2.479e-5</span>)<span class="op">*</span>dd2)
-
-<span class="kw">plot</span>(dd, pred, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;degree days&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;count&#39;</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">50</span>))
-<span class="kw">lines</span>(predlwr, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)
-<span class="kw">lines</span>(predupr, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</code></pre></div>
-<p><img src="10_glmm_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
-<p><br></p>
-</div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Load the merTools package</span></a>
+<a class="sourceLine" id="cb32-2" title="2">  <span class="kw">library</span>(merTools)</a>
+<a class="sourceLine" id="cb32-3" title="3">  </a>
+<a class="sourceLine" id="cb32-4" title="4"><span class="co"># Make a new dataframe for prediction</span></a>
+<a class="sourceLine" id="cb32-5" title="5">  sdd =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="kw">min</span>(eyes<span class="op">$</span>sdd), <span class="dt">to =</span> <span class="kw">max</span>(eyes<span class="op">$</span>sdd), <span class="dt">by =</span> <span class="fl">.1</span>)</a>
+<a class="sourceLine" id="cb32-6" title="6">  site =<span class="st"> </span><span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">unique</span>(eyes<span class="op">$</span>site), <span class="kw">length</span>(sdd)))</a>
+<a class="sourceLine" id="cb32-7" title="7">  sdd =<span class="st"> </span><span class="kw">rep</span>(sdd, <span class="kw">length</span>(<span class="kw">unique</span>(eyes<span class="op">$</span>site)))</a>
+<a class="sourceLine" id="cb32-8" title="8">  newdata =<span class="st"> </span><span class="kw">data.frame</span>(sdd)</a>
+<a class="sourceLine" id="cb32-9" title="9">  </a>
+<a class="sourceLine" id="cb32-10" title="10"><span class="co"># Simulate predictions from the relationship stored in the model fit using</span></a>
+<a class="sourceLine" id="cb32-11" title="11"><span class="co"># our new data</span></a>
+<a class="sourceLine" id="cb32-12" title="12">  PI &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(<span class="dt">merMod =</span> waeMod2, <span class="dt">newdata =</span> newdata, </a>
+<a class="sourceLine" id="cb32-13" title="13">                        <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">1000</span>,</a>
+<a class="sourceLine" id="cb32-14" title="14">                        <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>, <span class="dt">type=</span><span class="st">&quot;linear.prediction&quot;</span>,</a>
+<a class="sourceLine" id="cb32-15" title="15">                        <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb32-16" title="16">  PI =<span class="st"> </span><span class="kw">apply</span>(PI, <span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>), exp)</a>
+<a class="sourceLine" id="cb32-17" title="17"><span class="co"># Plot the raw data for the population of interest, i</span></a>
+<a class="sourceLine" id="cb32-18" title="18">  <span class="kw">plot</span>(<span class="dt">x =</span> eyes<span class="op">$</span>sdd, <span class="dt">y =</span> eyes<span class="op">$</span>counts,</a>
+<a class="sourceLine" id="cb32-19" title="19">       <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">300</span>), <span class="dt">pch=</span><span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb32-20" title="20">       <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray87&#39;</span>, <span class="st">&#39;gray60&#39;</span>,<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;black&#39;</span>)[<span class="kw">as.factor</span>(eyes<span class="op">$</span>year)],</a>
+<a class="sourceLine" id="cb32-21" title="21">       <span class="dt">cex=</span><span class="fl">1.25</span>, <span class="dt">xlab=</span><span class="st">&#39;Degree days&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Count&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb32-22" title="22">  </a>
+<a class="sourceLine" id="cb32-23" title="23"><span class="co"># Add x-axis - this is the tricky part!!</span></a>
+<a class="sourceLine" id="cb32-24" title="24">  <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb32-25" title="25">       <span class="dt">at =</span> (<span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>)<span class="op">-</span><span class="kw">mean</span>(eyes<span class="op">$</span>dd))<span class="op">/</span><span class="kw">sd</span>(eyes<span class="op">$</span>dd), </a>
+<a class="sourceLine" id="cb32-26" title="26">       <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">200</span>,<span class="dv">50</span>)</a>
+<a class="sourceLine" id="cb32-27" title="27">       )</a>
+<a class="sourceLine" id="cb32-28" title="28"><span class="co"># Add lines to the plot</span></a>
+<a class="sourceLine" id="cb32-29" title="29">  <span class="kw">lines</span>(newdata<span class="op">$</span>sdd[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>],</a>
+<a class="sourceLine" id="cb32-30" title="30">        PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb32-31" title="31">        <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>)</a>
+<a class="sourceLine" id="cb32-32" title="32">  <span class="kw">lines</span>(newdata<span class="op">$</span>sdd[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>],</a>
+<a class="sourceLine" id="cb32-33" title="33">        PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">2</span>],</a>
+<a class="sourceLine" id="cb32-34" title="34">        <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>)</a>
+<a class="sourceLine" id="cb32-35" title="35">  <span class="kw">lines</span>(newdata<span class="op">$</span>sdd[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>],</a>
+<a class="sourceLine" id="cb32-36" title="36">        PI[site<span class="op">==</span><span class="st">&#39;Shadow Brook&#39;</span>,<span class="dv">3</span>],</a>
+<a class="sourceLine" id="cb32-37" title="37">        <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>) </a>
+<a class="sourceLine" id="cb32-38" title="38">  <span class="kw">box</span>()</a></code></pre></div>
+<p><img src="10_glmm_files/figure-html/unnamed-chunk-35-1.png" width="672" /></p>
+<p>We could also do this using our global parameter estimates and some new data. We would see that our mean predictions aren’t terrible, but there is quite a bit of uncertainty here, as above.</p>
 </div>
 </div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
@@ -834,6 +1000,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

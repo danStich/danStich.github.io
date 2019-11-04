@@ -281,7 +281,7 @@ model {
     count[i] ~ dnegbin(p[i], r)     # The random variable
     p[i] <- r/(r+lambda[i])
     log(lambda[i]) <- mu[i]
-    mu[i] <- alpha[site[i]] + beta*sdd[i] + beta2*(sdd[i]^2) # Expectation
+    mu[i] <- alpha[site[i]] + beta*X[i] + beta2*(X[i]^2) # Expectation
  }
 
 # Priors
@@ -310,7 +310,7 @@ model {
 # Bundle data
   wae.data <- list(count=eyes$count,
                    site = as.numeric(as.factor(eyes$site)), 
-                   sdd = as.vector(eyes$sdd),
+                   X = as.vector(eyes$sdd),
                    ngroups = length(unique(eyes$site)),
                    n = nrow(eyes)
                    )

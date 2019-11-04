@@ -176,7 +176,6 @@ If nothing else, this tells me we need to go after more small cray this summer. 
   boxplot(logmass~site, data=cray)
 ```
 
-
 Wow, what a mess. Much better now, at least. Moving on with the analysis...
 
 Next, we will take a look at a few different ways to analyze these data using maximum likelihood estimation and Bayesian inference. Our goal here is to estimate the relationship between length and mass while accounting for inherent variability between populations.
