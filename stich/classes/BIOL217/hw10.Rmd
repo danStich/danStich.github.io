@@ -5,11 +5,9 @@
  
 # Generalized linear mixed models
 
+<img src="../../images/matrixSmolt.jpg" alt="">
 
- 
-## Introduction
-
-
+<h2 id="multi"> Introduction </h2> 
    
 This week we extended the analytical framework that we have been working with to include both fixed and random effects. We have discussed why we might want to use it and how to interpret the results of these tools. The purpose of this lab is to get you comfortable using GLMM with real data.
 
