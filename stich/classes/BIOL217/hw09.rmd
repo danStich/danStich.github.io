@@ -123,7 +123,7 @@ Realize that we could also make these predictions across `year` for each `sex`, 
   years = seq(1986, 2015, 1)
   
 # Make the predictions
-  bothSexes_preds = exp( 35.216836 -0.016106*years + 0.141910*.5 )
+  bothSexes_preds = exp( 36.269089 - 0.016632*years + 0.142461*.5 )
   
 # Plot the results
   plot(africa$year, africa$number, pch=21, bg=c('gray', 'black')[africa$sex],

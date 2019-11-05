@@ -512,7 +512,7 @@ Introduction
 <a class="sourceLine" id="cb9-2" title="2">  years =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1986</span>, <span class="dv">2015</span>, <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb9-3" title="3">  </a>
 <a class="sourceLine" id="cb9-4" title="4"><span class="co"># Make the predictions</span></a>
-<a class="sourceLine" id="cb9-5" title="5">  bothSexes_preds =<span class="st"> </span><span class="kw">exp</span>( <span class="fl">35.216836</span> <span class="fl">-0.016106</span><span class="op">*</span>years <span class="op">+</span><span class="st"> </span><span class="fl">0.141910</span><span class="op">*</span>.<span class="dv">5</span> )</a>
+<a class="sourceLine" id="cb9-5" title="5">  bothSexes_preds =<span class="st"> </span><span class="kw">exp</span>( <span class="fl">36.269089</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.016632</span><span class="op">*</span>years <span class="op">+</span><span class="st"> </span><span class="fl">0.142461</span><span class="op">*</span>.<span class="dv">5</span> )</a>
 <a class="sourceLine" id="cb9-6" title="6">  </a>
 <a class="sourceLine" id="cb9-7" title="7"><span class="co"># Plot the results</span></a>
 <a class="sourceLine" id="cb9-8" title="8">  <span class="kw">plot</span>(africa<span class="op">$</span>year, africa<span class="op">$</span>number, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[africa<span class="op">$</span>sex],</a>
