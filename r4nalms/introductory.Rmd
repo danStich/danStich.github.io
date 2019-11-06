@@ -11,12 +11,12 @@ Welcome to programming in R! This module will serve as a tutorial to help you ge
 
 Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or [these](https://www.rstudio.com/resources/cheatsheets/)) can help you along the way by serving as handy references.
 
-## Working with code
+## **Working with code**
 We will spend a bit of time during the morning session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.
 
 There are a lot of different ways to write computer code. Each has pros and cons and **all** of them are intended to increase efficiency and readability. There is no "right" way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:
 
-### Commenting code is helpful
+### **Commenting code is helpful**
 
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(width=20)
@@ -36,7 +36,7 @@ knitr::opts_chunk$set(width=20)
 # what you did.
 ```
 
-### There are a few ways to run code:
+### **There are a few ways to run code:**
 
 1. Click on a line of code and press `Ctrl + Enter`.
      
@@ -56,7 +56,7 @@ Type the following line of code into a blank source file, and run it using one o
 > ```
 
 
-### Section breaks help organization
+### **Section breaks help organization**
 
 I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I've written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.
 
@@ -67,7 +67,7 @@ I like to use the built-in headings to separate big chunks of code and keep thin
 
 ```
 
-### Some stricter R programming rules:
+### **Some stricter R programming rules:**
 All code is in R is case sensitive.
 ```{r}
 # Example (run the following lines):
@@ -128,7 +128,7 @@ Some **symbols** are also reserved for special use as operators, like:
 ```
 ...and a bunch of others.
 
-<h3 id="multi">Some other handy tricks</h3>
+<h3 id="multi">**Some other handy tricks**</h3>
 
 The `Home` button will move you to the start of the line of code, and to the start of the line if you press it twice. The `End` button on your keyboard will take you to the end of a line. These will help you move around your code faster.
 
@@ -138,10 +138,10 @@ A Single click of the mouse will move the cursor into position. Double-click wil
 
 Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press `Ctrl + F` to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.
 
-#### Functions are the life blood
+#### **Functions are the life blood**
 Functions make R what it is. These are all of the "commands" that are available to a user through the base software, or through **packages** that can be added on. When you can't find the function you need, you can write one to do it (eventually). At their most basic level, **functions** do stuff to **objects** in R. This is what makes R both a functional programming language and an object-oriented programming language.
 
-## Data structures and manipulation
+## **Data structures and manipulation**
 <h3 id="multi"> Vectors </h3> 
 
 Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of  functionality outside this original scope. R is what is known as a "high-level" or "interpreted" language. This means the pieces that make it up are a little more intuitive to the average user than low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. Because anyone can write new functions for R, it has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an "intuitive", "user-friendly" language.
@@ -160,7 +160,7 @@ So, even if we define something with a single value, it is still just a vector w
 
 The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox *that* is. Let's play with some:
 
-#### Atomic vectors
+#### **Atomic vectors**
 
 A vector that can hold one and only one kind of data:
 
@@ -175,7 +175,7 @@ And some others, but none with which we'll concern ourselves.
 
 Below are some examples of `atomic vectors`. Run the code to see what it does:
 
-#### Integers and numerics
+#### **Integers and numerics**
 ```{r}    
 a <- c(1, 2, 3, 4, 5) # Make a vector of integers 1-5
 print(a) # One way to look at our vector
@@ -192,7 +192,7 @@ a <- seq(from=1, to=5, by=1)
 str(a)       
 ```
 
-#### Characters and factors
+#### **Characters and factors**
 **Characters** are anything that is represented as text strings.
 ```{r}    
 b <- c('a', 'b', 'c', 'd', 'e') # Make a character vector
@@ -215,7 +215,7 @@ as.numeric(b)
 
 Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it...in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.
 
-#### Logical vectors
+#### **Logical vectors**
 Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object `a` we created earlier is the same as object `b`. If we store the results of this logical check to a new vector `c`, we get a new logical vector of `TRUE` and `FALSE`.
 ```{r, message=FALSE, warning=FALSE}
 # The '==' compares the numeric vector to the factor one
@@ -235,7 +235,7 @@ unique(b)    # We can just look at unique values
 
 The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.
 
-#### Vector operations
+#### **Vector operations**
 A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.
 
 For example, we can reference specific elements of vectors directly. Here, we specify that we want to print the third element of `a`.
@@ -292,7 +292,7 @@ a         # Yup, looks about right
 
 And we can do lots of other nifty things like this.
 
-### Matrices
+### **Matrices**
 Matrices are rectangular objects that we can think of as being made up of vectors.
 
 We can make matrices by binding vectors that already exist
@@ -331,7 +331,7 @@ All the same operations we did on vectors above...one example.
 
 More on matrices as we need them. We won't use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.
 
-### Dataframes
+### **Dataframes**
 Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!
 
 **Dataframes** are made up of **atomic vectors**.
@@ -379,7 +379,7 @@ e
 
 Referencing specific elements of a dataframe is similar to a the same in a matrix, with some added capabilities. We'll look at this with some real data so it's more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let's read in our first real data file as most of our data are stored that way and will be read in as `.csv` or `.txt` files.
 
-### Loading data from files
+### **Loading data from files**
 First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., `setwd("C:/Users/.../physical.csv")`), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in *this* case). Then, we can set the working directory in R to that folder using any number of different options. My preferences is to either work out of R projects, or to use `Session > Set Working Directory > To Source File Location`.
 
 Next, we have to assign our data to a new object, or R will just dump it to the console and it won't be stored in our environment. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.
@@ -506,7 +506,7 @@ save(otsego, file='otsego.rda')
 
 When this kind of a data file is loaded back into the environment (using `load(file='otsego.rda')`)' it has the same name, but is stored as a **list**. Dun, dun, dun...
 
-### Lists
+### **Lists**
 Lists are the ultimate container in R. They are actually a generalized vector that can hold different classes of data. Each element of a list can be any kind of object (an atomic vector, a matrix, a dataframe, or even another list!!). In fact, even a dataframe can be thought of as a list with just one element (the dataframe). In fact, a data frame is an element of the list that comprises our environments. Gross, right?
 
 The real, filthy R programming relies heavily on lists. We will have to work with them at some point, but we won't take a ton of time on them here. In general, when you run a regression model or do an interpolation, you can expect that the results will come back in a list.
@@ -529,10 +529,10 @@ myList[[2]][5]   # But can still get into each object
 
 Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.
 
-## Summarizing and visualizing data
+## **Summarizing and visualizing data**
 Now that we have a handle on how R works, and how to get our data in, let's take a little time to examine statistical and graphical summaries of our data.
 
-### Data summaries
+### **Data summaries**
 Some of the most fundamental work we do involves summarizing information across ranges of categories or factors (e.g. mean water temperature in July). This helps us start to detangle complicated patterns in data, and can be helpful to others when they read about our awesome research.
 
 Most data summaries are handled effectively using a limited number of R functions applied in different ways. A fairly small number of functions can be used to imitate the functionality of things like queries, look-up tables, and pivot tables that one might use in other software programs. Once you get used to working with these functions, the whole process is a lot faster and a lot more reproducible in R compared to other programs.
@@ -609,14 +609,14 @@ write.table(summarydata, 'summary.csv', row.names = FALSE,
 
 The result is a table that is ready to go with just a few formatting changes, even if it is ridiculously long.
 
-### Basic graphs
+### **Basic graphs**
 Now that we have an informative table, let's see what we can do about distilling the 10,000 rows of data we have into a couple of simple graphs.
 
 One of the most attractive aspects of working with data in R is the power of the base graphics package. We basically have access to any kind of plot you can imagine, and if you can imagine a kind of plot that isn't there, you can build it one way or another. 
 
 One of the most powerful aspects of plotting in R is that we are working with a scripted language. That means, that if we go out and collect more data, we can add those to our existing data files, or replace the old files with new ones, and re-run our code, with minimal changes, to produce updated graphs. This will make you feel a lot better about writing 20 or 30 lines of code to produce the kind of graph that you'll be happy with.
 
-#### Boxplots
+#### **Boxplots**
 Usually, when we are trying to summarize a **continuous** response across **categorical** explanatory variables, a **boxplot** is a reasonable starting place. Wow, that's a lot of bold in one sentence. 
 
 Why don't we start simple? Let's make a boxplot of temperatures by month in the lake.
@@ -690,43 +690,33 @@ Alright, now our graph is starting to look pretty snazy!
 
 Let's move on and check out a couple more plots to show off some of the power of the base `graphics` package that is loaded by default.
 
-#### Scatterplots
+#### **Scatterplots**
 Here, we will skip the niceties and cut right to the chase. We will set a couple of graphical parameters up front so we can compare our two graphs side by side. To do this, we specify a graphical matrix using the argument `mfrow`, which needs to be a vector containing the number of rows, and the number of columns for the plotting window (defaults to `c(1,1)`). Then, we will make a default scatterplot on the left, and a juiced-up version on the right.
 ```{r}
 # Subset the data so we are just working with 
 # temps from the epilimnion in July
 july <- otsego[otsego$month==7 & otsego$depth<8, ]
 
-# Set main graphical parameters
-par(mfrow=c(1, 2))
-
-# Make the default scatterplot
-plot(july$year, july$temp)
-
-# Now, make a better plot and add it
+# Let's improve on the default
+# scatter plot a little here.
 plot(july$year, july$temp,
-     xlab='Year', 
-     ylab=expression(paste('Temperature (', degree, 'C)')),
-     pch = 21,               # Use a filled circle
-     bg=rgb(.5,.5,.5,0.10),  # RGB colors for point background
-     col=rgb(.5,.5,.5,0.10), # RGB colors for point outline
-     yaxt='n'                # Don't plot y-axis...yet
+     xlab = 'Year', 
+     ylab = expression(paste('Temperature (', degree, 'C)')),
+     pch = 21,                 # Use a filled circle
+     bg = rgb(.5,.5,.5,0.50),  # RGB colors for point background
+     col = rgb(.5,.5,.5,0.50), # RGB colors for point outline
+     cex = 1.5,                # Character expansion
+     yaxt='n'                  # Don't plot y-axis...yet
      )
 # Add the y-axis
 axis(side=2, las=2)
 ```
 
-#### Histograms
+#### **Histograms**
 Scatterplots are great for looking at bivariate relationships, but sometimes all we want to see is a univariate distribution. We usually use histograms for this, and this is done very easily in R. We will take the same approach to the one we used to demonstrate scatterplots here, with some different tweaks and extra arguments because of the quirks associated with histograms in R.
 
 ```{r}
-# Set up the graphing space
-par(mfrow=c(1,2))
-
-# Make the default histogram
-hist(july$temp)
-
-# Now, make a better one
+# Again, adding some tweaks
 hist(july$temp,
      xlim=c(17,27),
      col='gray87',

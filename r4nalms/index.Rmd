@@ -5,7 +5,7 @@
 title: "R4NALMS"
 ---
 
-<h3 top-margin:10px;> NALMS International Symposium Workshops</h3> 
+<h3 top-margin:10px;><b>NALMS International Symposium R Workshops</b></h3> 
 <img src="./images/graphs.png" alt="">
 
 Welcome to the <b>R4NALMS</b> homepage for R workshops at the International NALMS Symposium. This page hosts content for two in-person workshop sessions. 

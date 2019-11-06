@@ -3,21 +3,17 @@
 ```
 
 ---
-title: "Afternoon session"
+title: Afternoon session
 ---
 
-<h3 id="multi">Intermediate R for aquatic research</h3><br> 
-
-The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>. <br>
-The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
+<h3 top-margin:10px;><b>Intermediate R for aquatic research</b></h3>
 
 <img src="./images/roboshad.png" alt="Graphic of American shad swimming through cyan matrix">
 
-The afternoon session of this workshop will provide an intermediate tutorial for working with aquatic data in R. It is our hope that by the end of this session, you will be comfortable conducting some basic statistical analyses and producing related graphics.
+The afternoon session of this workshop will provide an intermediate tutorial for working with data in R. It is our hope that by the end of this session, you will be comfortable conducting some basic statistical analyses and producing related graphics. During this session, you will be exposed to intermediate data manipulation, some basic GIS functionality, basic statistical analyses, and a whole lot of plotting (including lake isopleths) using the powerful base graphics in R and the utilities provided through `ggplot2`. This workshop assumes a basic understanding of elementary statistics, and some working knowledge of R and Rstudio. Those attending the morning session will be sufficiently prepared for the afternoon session.
 
-During this session, you will be exposed to intermediate data manipulation, regression analysis (including diagnostics and predictions), and learn how to make publication-quality plots (including *isopleths*) using the powerful base graphics in R.
+The tutorial for the afternoon session is located <a href="intermediate.html"> here </a>.
 
-This workshop assumes a basic understanding of elementary statistics, and some working knowledge of R and Rstudio. Those attending the morning session will be sufficiently prepared for the afternoon session.
-
+The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. 
 <br>
  

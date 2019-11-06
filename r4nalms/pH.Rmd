@@ -5,7 +5,7 @@
 title: "pH isopleths"
 ---
 
-### Data read
+### **Data read**
 ```{r, eval=F}
 otsego <- read.csv('physical.csv')
 ```
@@ -14,7 +14,8 @@ otsego <- read.csv('physical.csv')
 otsego <- read.csv('data/physical.csv')
 ```
 
-### Date manipulation
+
+### **Date manipulation**
 ```{r}
 # First, we convert the date column
 # to a character string. We pass the
@@ -36,7 +37,7 @@ lim <- na.omit(otsego)
 lim$depth = -1 *lim$depth
 ```
 
-### Load the `akima` package:
+### **Load the `akima` package:**
 ```{r, eval=T, echo=FALSE, warning=FALSE, message=FALSE}
 library(akima)
 ```
@@ -45,7 +46,7 @@ library(akima)
 library(akima, lib.loc = 'r_lib')
 ```
 
-### Isopleth creation
+### **Isopleth creation**
 We interpolate `pH` across `date` and `depth`. The interpolation we are using is basically just a bunch of linear regresions to predict `pH` for values of `date` and `depth` across a regular grid. Then, we make the plot.
 ```{r}
 # Create a data frame containing the
