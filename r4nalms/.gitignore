@@ -29,3 +29,6 @@ rsconnect/
 *.Rproj
 physicalF.csv
 attendees.xlsx
+notcommit/
+R4NALMS_intermediate.R
+R4NALMS_intro.R
