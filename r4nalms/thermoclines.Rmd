@@ -7,7 +7,7 @@ title: "Thermocline analysis"
 
 Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.
 
-### Package load
+### **Package load**
 ```{r, echo=T, eval=F}
 # Load necessary packages
 library(lubridate, lib.loc = 'r_libs')
@@ -23,8 +23,7 @@ library(ggplot2)
 ```
 
 
-
-### Data read
+### **Data read**
 ```{r, eval=F, echo=T}
 # Read in the data
 limnos <- read.csv('physical.csv')
@@ -36,8 +35,7 @@ limnos <- read.csv('data/physical.csv')
 ```
 
 
-  
-### Data manipulation
+### **Data manipulation**
 ```{r}
 # Data formatting & extraction
 limnos$date <- as.POSIXct(limnos$date, format="%m/%d/%Y")
@@ -55,8 +53,7 @@ limlist <- split(limnos, list(limnos$date))
 ```
 
 
-
-### Calculate thermocline depth
+### **Calculate thermocline depth**
 If you just have a single dataframe, you can pass the appropriate columns straight to the `thermo.depth` function in `rLakeAnalyzer`. But, we are looking to calculate thermocline depth for `r length(limlist)` different datasets. To make this easier, we pack them in a list (above) and then use `lapply` to apply the `thermo.depth` function to each element of the list. But, the `thermo.depth` function was not designed for this specifically, so we will first write a function that can be applied to a list, with a short name.
 ```{r}
 # Create a function to calculate thermocline
@@ -74,13 +71,11 @@ ltd <- function(x){
 ```
 
 
-
 Now we can use the function we made to apply across all elements of our list.
 ```{r}
 # Create a test object that contains the 
 test <- lapply(limlist, ltd)
 ```
-
 
 
 Once we've done that, we can put everything back into a single dataframe.
@@ -91,8 +86,7 @@ out <- do.call(rbind, test)
 ```
 
 
-
-### Plot changes in thermocline depth
+### **Plot changes in thermocline depth**
 Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the `ggplot2` library.
 
 First, subset the data so we are just working with July data.
@@ -117,4 +111,3 @@ plot+theme(plot.margin=margin(5,5,10,10))
 ```
 
 <br>
-

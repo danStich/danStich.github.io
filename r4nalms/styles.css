@@ -3,7 +3,7 @@
 
 #pre code, #code, pre {
   white-space: pre;
-  overflow-x: visible;
+  overflow-x: scroll;
   word-break: keep-all;
   word-wrap: initial;
   border-radius: 1em;
@@ -19,6 +19,7 @@ img {
 pre.r {
   border-radius: 1em;
   background-color: rgb(240, 240, 240);
+  overflow-x: auto;
   border: none;
   margin-bottom: 0;
 }
@@ -46,9 +47,11 @@ pre.r {
 
 body {
   font-size: 14pt;
-  padding-left: 5%;
-  padding-right: 5%;
-  width: 100%;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-right: auto;
+  margin-left: auto;
+  width: 90vw;
 }
 
 p {
