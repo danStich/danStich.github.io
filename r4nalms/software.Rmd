@@ -17,7 +17,9 @@ To make the most of our time together, you will need to install some software *b
 3. <b> Download the workshop data </b> from 
 <a href= https://github.com/danStich/data4_r4nalms> this github repository</a> following the instructions in the `README.md` file.
 
-4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during travel!). 
+4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during travel!). Or, you can star the <a href="https://github.com/danStich/danStich.github.io/tree/master/r4nalms">GitHub repository</a> and download the code and data used to generate the website. 
+
+**If you want to try working with code or data before the workshop, you will need to know how to install packages in R.** To do this, you can type `install.packages("PACKAGE")` in the console and run, being sure to replace `PACKAGE` with the actual name of the package. If you are working with a recent version of Rstudio, you will probably get a prompt to install missing packages the first time you open `R4NALMS_intro.R` or `R4NALMS_intermediate.R`. The packages we are going to work with include: `akima`, `ggplot2`, `plyr`, `rgdal`, and `sp`.
 
 <br>
  
