@@ -22,8 +22,6 @@ Principle component analysis (PCA) is a tool for ordination, and exploring assoc
 
 Adapted from Thiago G. Martins (2013). Let's use the iris data in R to demonstrate the application of PCA in R through a worked example.
 
-
- 
 ```{r}
 # Load data
   data(iris)
@@ -62,13 +60,11 @@ These plots help us determine how many of the principle components we need to re
 
 For a more-reliable approach to this, we can also look at the summary of our PCA to compare relative importance of the different components and the amount of variation that each explains.
 
-
 ```{r}  
   summary(ir.pca)
 ```
 
 Let's take a closer look. Our summary provides us with the following info for each of the principle components in our analysis
-
 
 1. Standard deviation- sd associated with each principle component
 
@@ -86,6 +82,7 @@ For the "prettier" option, you will need to install a couple of packages Note th
 # devtools package
   #install.package('devtools')
   library(devtools)
+
 # ggbiplot and vqv packages from a git hub repository
   #install_github("vqv/ggbiplot")
   library(ggbiplot)
