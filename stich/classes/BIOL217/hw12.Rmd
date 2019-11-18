@@ -1,9 +1,11 @@
-```{r child="_styles.Rmd"}
+```{r child="../../_styles.Rmd"}
 ```
 
-# Decision trees
+<h1 id="multi"> Classification and regression trees (CART) </h1>
 
-<h2 id="multi"> Introduction </h2>  
+<img src="../../images/water.jpg" alt="">
+
+<h2 id="multi"> Introduction </h2>
 
 This week we will continue down the path of machine learning and exploratory/ descriptive statistical tools by talking about *decision trees*, with a specific focus on classification and regression trees. In our discussions this week, and in our readings, we learned that CART can be complementary to many of the analyses we have done this semester. We also learned that this tool could very likely replace many of the techniques we have talked about this semester in studies for which we have complex datasets with large numbers of explanatory variables. But, the real power in this technique lies in the ability to identify emergent patterns in data that we might otherwise overlook given our limited ability to observe them, even with other powerful statistical tools. All of this, recall, comes with the added bonus that the technique is free of any kind of distributional assumptions, and it can handle missing data in both the response and the explanatory variables. This utility also extends into the realm of multivariate techniques with the development of multivariate trees in very recent years.  
 
@@ -109,7 +111,7 @@ _**Question 2.**_ Using the `printcp` function, how many splits are in the model
 Now go back and fit a new tree corresponding to the cp that was in your answer to *question 2*. Plot the fitted tree with the '`prp`' function, include the argument '`extra = 1`' in your call. 
  
  
-_**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data  [here]("../../data/water.pdf) file to find out what the abbreviations stand for if you need to.
+_**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data  [here]("../../data/water.pdf) to find out what the abbreviations stand for if you need to.
  
 Just as we could calculate a misclassification rate for classification trees, we can also calculate an R-squared value for our training models for regression trees. To do this, we subtract the relative error for our tree at the final split from 1.00. You can get relative error using the `printcp` fuunction like you did above.
  

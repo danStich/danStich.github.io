@@ -420,32 +420,10 @@ $(document).ready(function () {
 </div>
 
 
-<style>
-pre code, pre, code {
-  white-space: pre !important;
-  overflow-x: scroll !important;
-  word-break: keep-all !important;
-  word-wrap: initial !important;
-}
-
-.column {
-    float: left;
-    padding: 15px;
-}
-
-.clearfix::after {
-    content: "";
-    clear: both;
-    display: table;
-}
-
-.content {
-    width: 75%;
-}
-
-</style>
-<div id="classification-and-regression-trees-cart" class="section level1">
-<h1>Classification and regression trees (CART)</h1>
+<h1 id="multi">
+Classification and regression trees (CART)
+</h1>
+<p><img src="../../images/water.jpg" alt=""></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -501,138 +479,137 @@ Introduction
 <a class="sourceLine" id="cb3-5" title="5">                  )</a></code></pre></div>
 <p>We can print a summary of the tree to examine where the splits occurred and how these locations were chosen by the algorithm.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Print the summary</span></a>
-<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">summary</span>(iris.ct)</a></code></pre></div>
-<pre><code>## Call:
-## rpart(formula = Species ~ ., data = iris, subset = train)
-##   n= 75 
-## 
-##          CP nsplit  rel error     xerror       xstd
-## 1 0.5217391      0 1.00000000 1.00000000 0.09168313
-## 2 0.4565217      1 0.47826087 0.54347826 0.08874963
-## 3 0.0100000      2 0.02173913 0.04347826 0.03033109
-## 
-## Variable importance
-## Petal.Length  Petal.Width Sepal.Length  Sepal.Width 
-##           33           31           21           14 
-## 
-## Node number 1: 75 observations,    complexity param=0.5217391
-##   predicted class=setosa      expected loss=0.6133333  P(node) =1
-##     class counts:    29    22    24
-##    probabilities: 0.387 0.293 0.320 
-##   left son=2 (29 obs) right son=3 (46 obs)
-##   Primary splits:
-##       Petal.Length &lt; 2.6  to the left,  improve=26.69681, (0 missing)
-##       Petal.Width  &lt; 0.8  to the left,  improve=26.69681, (0 missing)
-##       Sepal.Length &lt; 5.45 to the left,  improve=18.52740, (0 missing)
-##       Sepal.Width  &lt; 3.35 to the right, improve=10.62932, (0 missing)
-##   Surrogate splits:
-##       Petal.Width  &lt; 0.8  to the left,  agree=1.000, adj=1.000, (0 split)
-##       Sepal.Length &lt; 5.45 to the left,  agree=0.920, adj=0.793, (0 split)
-##       Sepal.Width  &lt; 3.35 to the right, agree=0.827, adj=0.552, (0 split)
-## 
-## Node number 2: 29 observations
-##   predicted class=setosa      expected loss=0  P(node) =0.3866667
-##     class counts:    29     0     0
-##    probabilities: 1.000 0.000 0.000 
-## 
-## Node number 3: 46 observations,    complexity param=0.4565217
-##   predicted class=virginica   expected loss=0.4782609  P(node) =0.6133333
-##     class counts:     0    22    24
-##    probabilities: 0.000 0.478 0.522 
-##   left son=6 (23 obs) right son=7 (23 obs)
-##   Primary splits:
-##       Petal.Length &lt; 4.75 to the left,  improve=21.04348, (0 missing)
-##       Petal.Width  &lt; 1.65 to the left,  improve=19.28986, (0 missing)
-##       Sepal.Length &lt; 6.65 to the left,  improve= 4.52795, (0 missing)
-##       Sepal.Width  &lt; 2.95 to the left,  improve= 1.53176, (0 missing)
-##   Surrogate splits:
-##       Petal.Width  &lt; 1.75 to the left,  agree=0.957, adj=0.913, (0 split)
-##       Sepal.Length &lt; 6.35 to the left,  agree=0.739, adj=0.478, (0 split)
-##       Sepal.Width  &lt; 2.95 to the left,  agree=0.652, adj=0.304, (0 split)
-## 
-## Node number 6: 23 observations
-##   predicted class=versicolor  expected loss=0.04347826  P(node) =0.3066667
-##     class counts:     0    22     1
-##    probabilities: 0.000 0.957 0.043 
-## 
-## Node number 7: 23 observations
-##   predicted class=virginica   expected loss=0  P(node) =0.3066667
-##     class counts:     0     0    23
-##    probabilities: 0.000 0.000 1.000</code></pre>
+<a class="sourceLine" id="cb4-2" title="2">  <span class="kw">summary</span>(iris.ct)</a>
+<a class="sourceLine" id="cb4-3" title="3">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">rpart</span>(<span class="dt">formula =</span> Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris, <span class="dt">subset =</span> train)</a>
+<a class="sourceLine" id="cb4-5" title="5">  n=<span class="st"> </span><span class="dv">75</span> </a>
+<a class="sourceLine" id="cb4-6" title="6"></a>
+<a class="sourceLine" id="cb4-7" title="7">         CP nsplit  rel error     xerror       xstd</a>
+<a class="sourceLine" id="cb4-8" title="8"><span class="dv">1</span> <span class="fl">0.5217391</span>      <span class="dv">0</span> <span class="fl">1.00000000</span> <span class="fl">1.00000000</span> <span class="fl">0.09168313</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="dv">2</span> <span class="fl">0.4565217</span>      <span class="dv">1</span> <span class="fl">0.47826087</span> <span class="fl">0.54347826</span> <span class="fl">0.08874963</span></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="dv">3</span> <span class="fl">0.0100000</span>      <span class="dv">2</span> <span class="fl">0.02173913</span> <span class="fl">0.04347826</span> <span class="fl">0.03033109</span></a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">Variable importance</a>
+<a class="sourceLine" id="cb4-13" title="13">Petal.Length  Petal.Width Sepal.Length  Sepal.Width </a>
+<a class="sourceLine" id="cb4-14" title="14">          <span class="dv">33</span>           <span class="dv">31</span>           <span class="dv">21</span>           <span class="dv">14</span> </a>
+<a class="sourceLine" id="cb4-15" title="15"></a>
+<a class="sourceLine" id="cb4-16" title="16">Node number <span class="dv">1</span><span class="op">:</span><span class="st"> </span><span class="dv">75</span> observations,    complexity param=<span class="fl">0.5217391</span></a>
+<a class="sourceLine" id="cb4-17" title="17">  predicted class=setosa      expected loss=<span class="fl">0.6133333</span>  <span class="kw">P</span>(node) =<span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-18" title="18">    class counts<span class="op">:</span><span class="st">    </span><span class="dv">29</span>    <span class="dv">22</span>    <span class="dv">24</span></a>
+<a class="sourceLine" id="cb4-19" title="19">   probabilities<span class="op">:</span><span class="st"> </span><span class="fl">0.387</span> <span class="fl">0.293</span> <span class="fl">0.320</span> </a>
+<a class="sourceLine" id="cb4-20" title="20">  left son=<span class="dv">2</span> (<span class="dv">29</span> obs) right son=<span class="dv">3</span> (<span class="dv">46</span> obs)</a>
+<a class="sourceLine" id="cb4-21" title="21">  Primary splits<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-22" title="22"><span class="st">      </span>Petal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.6</span>  to the left,  improve=<span class="fl">26.69681</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-23" title="23">      Petal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.8</span>  to the left,  improve=<span class="fl">26.69681</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-24" title="24">      Sepal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">5.45</span> to the left,  improve=<span class="fl">18.52740</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-25" title="25">      Sepal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">3.35</span> to the right, improve=<span class="fl">10.62932</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-26" title="26">  Surrogate splits<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-27" title="27"><span class="st">      </span>Petal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.8</span>  to the left,  agree=<span class="fl">1.000</span>, adj=<span class="fl">1.000</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-28" title="28">      Sepal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">5.45</span> to the left,  agree=<span class="fl">0.920</span>, adj=<span class="fl">0.793</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-29" title="29">      Sepal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">3.35</span> to the right, agree=<span class="fl">0.827</span>, adj=<span class="fl">0.552</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-30" title="30"></a>
+<a class="sourceLine" id="cb4-31" title="31">Node number <span class="dv">2</span><span class="op">:</span><span class="st"> </span><span class="dv">29</span> observations</a>
+<a class="sourceLine" id="cb4-32" title="32">  predicted class=setosa      expected loss=<span class="dv">0</span>  <span class="kw">P</span>(node) =<span class="fl">0.3866667</span></a>
+<a class="sourceLine" id="cb4-33" title="33">    class counts<span class="op">:</span><span class="st">    </span><span class="dv">29</span>     <span class="dv">0</span>     <span class="dv">0</span></a>
+<a class="sourceLine" id="cb4-34" title="34">   probabilities<span class="op">:</span><span class="st"> </span><span class="fl">1.000</span> <span class="fl">0.000</span> <span class="fl">0.000</span> </a>
+<a class="sourceLine" id="cb4-35" title="35"></a>
+<a class="sourceLine" id="cb4-36" title="36">Node number <span class="dv">3</span><span class="op">:</span><span class="st"> </span><span class="dv">46</span> observations,    complexity param=<span class="fl">0.4565217</span></a>
+<a class="sourceLine" id="cb4-37" title="37">  predicted class=virginica   expected loss=<span class="fl">0.4782609</span>  <span class="kw">P</span>(node) =<span class="fl">0.6133333</span></a>
+<a class="sourceLine" id="cb4-38" title="38">    class counts<span class="op">:</span><span class="st">     </span><span class="dv">0</span>    <span class="dv">22</span>    <span class="dv">24</span></a>
+<a class="sourceLine" id="cb4-39" title="39">   probabilities<span class="op">:</span><span class="st"> </span><span class="fl">0.000</span> <span class="fl">0.478</span> <span class="fl">0.522</span> </a>
+<a class="sourceLine" id="cb4-40" title="40">  left son=<span class="dv">6</span> (<span class="dv">23</span> obs) right son=<span class="dv">7</span> (<span class="dv">23</span> obs)</a>
+<a class="sourceLine" id="cb4-41" title="41">  Primary splits<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-42" title="42"><span class="st">      </span>Petal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">4.75</span> to the left,  improve=<span class="fl">21.04348</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-43" title="43">      Petal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.65</span> to the left,  improve=<span class="fl">19.28986</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-44" title="44">      Sepal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">6.65</span> to the left,  improve=<span class="st"> </span><span class="fl">4.52795</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-45" title="45">      Sepal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.95</span> to the left,  improve=<span class="st"> </span><span class="fl">1.53176</span>, (<span class="dv">0</span> missing)</a>
+<a class="sourceLine" id="cb4-46" title="46">  Surrogate splits<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-47" title="47"><span class="st">      </span>Petal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">1.75</span> to the left,  agree=<span class="fl">0.957</span>, adj=<span class="fl">0.913</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-48" title="48">      Sepal.Length <span class="op">&lt;</span><span class="st"> </span><span class="fl">6.35</span> to the left,  agree=<span class="fl">0.739</span>, adj=<span class="fl">0.478</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-49" title="49">      Sepal.Width  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.95</span> to the left,  agree=<span class="fl">0.652</span>, adj=<span class="fl">0.304</span>, (<span class="dv">0</span> split)</a>
+<a class="sourceLine" id="cb4-50" title="50"></a>
+<a class="sourceLine" id="cb4-51" title="51">Node number <span class="dv">6</span><span class="op">:</span><span class="st"> </span><span class="dv">23</span> observations</a>
+<a class="sourceLine" id="cb4-52" title="52">  predicted class=versicolor  expected loss=<span class="fl">0.04347826</span>  <span class="kw">P</span>(node) =<span class="fl">0.3066667</span></a>
+<a class="sourceLine" id="cb4-53" title="53">    class counts<span class="op">:</span><span class="st">     </span><span class="dv">0</span>    <span class="dv">22</span>     <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-54" title="54">   probabilities<span class="op">:</span><span class="st"> </span><span class="fl">0.000</span> <span class="fl">0.957</span> <span class="fl">0.043</span> </a>
+<a class="sourceLine" id="cb4-55" title="55"></a>
+<a class="sourceLine" id="cb4-56" title="56">Node number <span class="dv">7</span><span class="op">:</span><span class="st"> </span><span class="dv">23</span> observations</a>
+<a class="sourceLine" id="cb4-57" title="57">  predicted class=virginica   expected loss=<span class="dv">0</span>  <span class="kw">P</span>(node) =<span class="fl">0.3066667</span></a>
+<a class="sourceLine" id="cb4-58" title="58">    class counts<span class="op">:</span><span class="st">     </span><span class="dv">0</span>     <span class="dv">0</span>    <span class="dv">23</span></a>
+<a class="sourceLine" id="cb4-59" title="59">   probabilities<span class="op">:</span><span class="st"> </span><span class="fl">0.000</span> <span class="fl">0.000</span> <span class="fl">1.000</span> </a></code></pre></div>
 <p>Finally, we can make some very rudimentary plots in base graphics for the tree and this can greatly facilitate the interpretation of these trees. We will also add some text to the plot to make it a little easier to understand.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Make the plot</span></a>
-<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">plot</span>(iris.ct, <span class="dt">minbranch=</span> <span class="dv">10</span>, <span class="dt">compress=</span><span class="ot">TRUE</span>, <span class="dt">margin=</span>.<span class="dv">15</span>, <span class="dt">nspace=</span><span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Adding text to the plot makes the tree understandable</span></a>
-<a class="sourceLine" id="cb6-5" title="5">  <span class="kw">text</span>(iris.ct, <span class="dt">use.n =</span> <span class="ot">TRUE</span>, <span class="dt">all =</span> <span class="ot">FALSE</span>, <span class="dt">fancy =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Make the plot</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">plot</span>(iris.ct, <span class="dt">minbranch=</span> <span class="dv">10</span>, <span class="dt">compress=</span><span class="ot">TRUE</span>, <span class="dt">margin=</span>.<span class="dv">15</span>, <span class="dt">nspace=</span><span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="co"># Adding text to the plot makes the tree understandable</span></a>
+<a class="sourceLine" id="cb5-5" title="5">  <span class="kw">text</span>(iris.ct, <span class="dt">use.n =</span> <span class="ot">TRUE</span>, <span class="dt">all =</span> <span class="ot">FALSE</span>, <span class="dt">fancy =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>While this graphical representation is easier to understand than the summary output of the tree, it is not much nicer to look at than the tabular output. So, let’s see if we can do something about that!</p>
-</div>
 </div>
 <div id="tree-visualization" class="section level1">
 <h1>Tree visualization</h1>
 <p>Let’s load a new package for making some nicer trees that we might actually want to use in a talk, on a poster, or even in a paper. One trade off that we need to consider when making decisions about information and data visualization is what we gain and loose with various representations of our trees. For example, the plots above are a mess and we almost certainly wouldn’t want to use them for data presentation in a paper, a talk, or poster. However, they do contain a lot of useful information that we are likely going to lose with nicer looking tools.</p>
 <p>We will rely on the aptly named <code>rpart.plot</code> package to start looking at our trees. Specifically, we are going to use the <code>prp</code> function for a nicer looking tree.</p>
 <p>You’ll notice right away that we lose the neat-o group membership numbers that we got out of the ugly plots. On the other hand, this is a lot nicer to look at! Plus, it is a lot clearer to see which side the split for each variable represents.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Library load</span></a>
-<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">library</span>(rpart.plot)</a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># Plot the rpart object. Here, we add an </span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co"># argument to make the variable names shorter</span></a>
-<a class="sourceLine" id="cb7-6" title="6"><span class="co"># so we can fit more in a single pane</span></a>
-<a class="sourceLine" id="cb7-7" title="7">  <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Library load</span></a>
+<a class="sourceLine" id="cb6-2" title="2">  <span class="kw">library</span>(rpart.plot)</a>
+<a class="sourceLine" id="cb6-3" title="3"></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Plot the rpart object. Here, we add an </span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="co"># argument to make the variable names shorter</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="co"># so we can fit more in a single pane</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <p>But, wouldn’t it be nice if we could get a <em>little</em> more information out of this nicer layout? <strong>Glad you ask</strong>!</p>
 <p>One simple way to do it is to pass values to the <code>extra</code> argument in the <code>prp</code> function. With all of the options available in this plotting utility, it is hard to imagine one named <code>extra</code>, but let’s take a look at how a few of the possible values for <code>extra</code> change the plot (see <code>?prp</code> for a detailed list of possible display options.)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">  <span class="co"># We can get counts in each category for each split</span></a>
-<a class="sourceLine" id="cb8-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">  <span class="co"># We can get counts in each category for each split</span></a>
+<a class="sourceLine" id="cb7-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">1</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">  <span class="co"># Classification rate (this one is only </span></a>
-<a class="sourceLine" id="cb9-2" title="2">  <span class="co"># for classification trees, not to be</span></a>
-<a class="sourceLine" id="cb9-3" title="3">  <span class="co"># used for regression trees)</span></a>
-<a class="sourceLine" id="cb9-4" title="4">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">  <span class="co"># Classification rate (this one is only </span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co"># for classification trees, not to be</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="co"># used for regression trees)</span></a>
+<a class="sourceLine" id="cb8-4" title="4">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-8-2.png" width="672" /></p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">  <span class="co"># Misclassification rates (also for classification trees only)</span></a>
-<a class="sourceLine" id="cb10-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">  <span class="co"># Misclassification rates (also for classification trees only)</span></a>
+<a class="sourceLine" id="cb9-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">3</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-8-3.png" width="672" /></p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">  <span class="co"># Probability of membership in a node by class...</span></a>
-<a class="sourceLine" id="cb11-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">4</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">  <span class="co"># Probability of membership in a node by class...</span></a>
+<a class="sourceLine" id="cb10-2" title="2">    <span class="kw">prp</span>(iris.ct, <span class="dt">varlen =</span> <span class="dv">3</span>, <span class="dt">extra=</span><span class="dv">4</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-8-4.png" width="672" /></p>
 <blockquote>
 <p>Here is a <em>really</em> nice way of visualizing these trees, though.</p>
 </blockquote>
 <p><strong>Note</strong>: You may have let the package install a <code>.dll</code> file for <code>gtk+</code> in order to get the <code>RColorBrewer</code> package to work. <code>Gtk+</code> is the cross-platform <code>GIMP tool kit</code> for building graphical user interfaces (GUIs). This will not be required as part of the assignment this week because you will probably not be able to install this on the school PCs, but I want you to there is more to life (and machine learning) than ugly graphs. Now you have the code.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Install and load the packages</span></a>
-<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">library</span>(rattle) <span class="co"># We&#39;ll use this one to make some more functional plots</span></a>
-<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">library</span>(RColorBrewer) <span class="co"># We&#39;ll use this one for colors</span></a>
-<a class="sourceLine" id="cb12-4" title="4"></a>
-<a class="sourceLine" id="cb12-5" title="5"><span class="co"># Make the plot</span></a>
-<a class="sourceLine" id="cb12-6" title="6">  <span class="co">#prp(iris.ct)</span></a>
-<a class="sourceLine" id="cb12-7" title="7">  </a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="co"># Now, make it fancy</span></a>
-<a class="sourceLine" id="cb12-9" title="9">  <span class="kw">fancyRpartPlot</span>(iris.ct, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Install and load the packages</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">library</span>(rattle) <span class="co"># We&#39;ll use this one to make some more functional plots</span></a>
+<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">library</span>(RColorBrewer) <span class="co"># We&#39;ll use this one for colors</span></a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co"># Make the plot</span></a>
+<a class="sourceLine" id="cb11-6" title="6">  <span class="co">#prp(iris.ct)</span></a>
+<a class="sourceLine" id="cb11-7" title="7">  </a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co"># Now, make it fancy</span></a>
+<a class="sourceLine" id="cb11-9" title="9">  <span class="kw">fancyRpartPlot</span>(iris.ct, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Wicked awesome.</p>
 </div>
 <div id="pruning-the-tree" class="section level1">
 <h1>Pruning the tree</h1>
 <p>Now that we have looked at how to fit a tree and how to visualize a tree, we really should take a look at how to make sure the tree is not garbage. We can do this a few different ways. We have some tools available to us that we can use to determine the number of splits we should keep, what the predictive power of the resultant trees are, and we can even explore some statistical stopping rules that can eliminate the need for pruning, at least in theory.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Let&#39;s start by fitting a tree to the data that we assume is overfit from the</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="co"># get-go</span></a>
-<a class="sourceLine" id="cb13-3" title="3">  <span class="kw">set.seed</span>(<span class="dv">5</span>)</a>
-<a class="sourceLine" id="cb13-4" title="4">  iris.ot =<span class="st"> </span><span class="kw">rpart</span>(</a>
-<a class="sourceLine" id="cb13-5" title="5">                  Species <span class="op">~</span><span class="st"> </span>. ,</a>
-<a class="sourceLine" id="cb13-6" title="6">                  <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb13-7" title="7">                  <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,</a>
-<a class="sourceLine" id="cb13-8" title="8">                  <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),</a>
-<a class="sourceLine" id="cb13-9" title="9">                  <span class="dt">cp=</span><span class="fl">0.000001</span>,</a>
-<a class="sourceLine" id="cb13-10" title="10">                  <span class="dt">minsplit =</span> <span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb13-11" title="11">                  <span class="dt">minbucket =</span> <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb13-12" title="12"></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="co"># Take a quick look at the plot</span></a>
-<a class="sourceLine" id="cb13-14" title="14">  <span class="kw">prp</span>(iris.ot)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Let&#39;s start by fitting a tree to the data that we assume is overfit from the</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co"># get-go</span></a>
+<a class="sourceLine" id="cb12-3" title="3">  <span class="kw">set.seed</span>(<span class="dv">5</span>)</a>
+<a class="sourceLine" id="cb12-4" title="4">  iris.ot =<span class="st"> </span><span class="kw">rpart</span>(</a>
+<a class="sourceLine" id="cb12-5" title="5">                  Species <span class="op">~</span><span class="st"> </span>. ,</a>
+<a class="sourceLine" id="cb12-6" title="6">                  <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb12-7" title="7">                  <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,</a>
+<a class="sourceLine" id="cb12-8" title="8">                  <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),</a>
+<a class="sourceLine" id="cb12-9" title="9">                  <span class="dt">cp=</span><span class="fl">0.000001</span>,</a>
+<a class="sourceLine" id="cb12-10" title="10">                  <span class="dt">minsplit =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb12-11" title="11">                  <span class="dt">minbucket =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb12-12" title="12"></a>
+<a class="sourceLine" id="cb12-13" title="13"><span class="co"># Take a quick look at the plot</span></a>
+<a class="sourceLine" id="cb12-14" title="14">  <span class="kw">prp</span>(iris.ot)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">fancyRpartPlot</span>(iris.ot, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1">  <span class="kw">fancyRpartPlot</span>(iris.ot, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
 <p>Now we need to pick the tree size that minimizes misclassification rate (prediction error). To do this, we are basically going to look at changes in three things:</p>
 <ol style="list-style-type: decimal">
@@ -645,30 +622,30 @@ Introduction
 </ol>
 <p>First, let’s look at how the cross-validation results change with respect to the size of our tree. This initial plot shows us how the relative error and the complexity parameter (cp) change with an increasing number of splits.</p>
 <p>In this plot, it is clear that by the third split we have minimized the xerror and decreases in information loss are minimized through the addition of more splits, but let’s keep moving along.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">  <span class="kw">plotcp</span>(iris.ot)</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">  <span class="kw">plotcp</span>(iris.ot)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Another, perhaps more familiar, way to look at this is to plot changes in the predictive R-squared value for the tree with respect to subsequent splits. Again, it is clear that by the time we get two splits out from the root that we have essentially explained as much variance as we are going to squeeze out of this tree.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb16-2" title="2">  <span class="kw">rsq.rpart</span>(iris.ot)</a></code></pre></div>
-<pre><code>## 
-## Classification tree:
-## rpart(formula = Species ~ ., data = iris, method = &quot;class&quot;, parms = list(split = &quot;information&quot;), 
-##     cp = 1e-06, minsplit = 1, minbucket = 1)
-## 
-## Variables actually used in tree construction:
-## [1] Petal.Length Petal.Width  Sepal.Length
-## 
-## Root node error: 100/150 = 0.66667
-## 
-## n= 150 
-## 
-##        CP nsplit rel error xerror     xstd
-## 1 5.0e-01      0      1.00   1.18 0.050173
-## 2 4.4e-01      1      0.50   0.67 0.060888
-## 3 2.0e-02      2      0.06   0.09 0.029086
-## 4 1.0e-02      3      0.04   0.08 0.027520
-## 5 5.0e-03      6      0.01   0.08 0.027520
-## 6 1.0e-06      8      0.00   0.09 0.029086</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb15-2" title="2">  <span class="kw">rsq.rpart</span>(iris.ot)</a>
+<a class="sourceLine" id="cb15-3" title="3"></a>
+<a class="sourceLine" id="cb15-4" title="4">Classification tree<span class="op">:</span></a>
+<a class="sourceLine" id="cb15-5" title="5"><span class="kw">rpart</span>(<span class="dt">formula =</span> Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;information&quot;</span>), </a>
+<a class="sourceLine" id="cb15-6" title="6">    <span class="dt">cp =</span> <span class="fl">1e-06</span>, <span class="dt">minsplit =</span> <span class="dv">1</span>, <span class="dt">minbucket =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb15-7" title="7"></a>
+<a class="sourceLine" id="cb15-8" title="8">Variables actually used <span class="cf">in</span> tree construction<span class="op">:</span></a>
+<a class="sourceLine" id="cb15-9" title="9">[<span class="dv">1</span>] Petal.Length Petal.Width  Sepal.Length</a>
+<a class="sourceLine" id="cb15-10" title="10"></a>
+<a class="sourceLine" id="cb15-11" title="11">Root node error<span class="op">:</span><span class="st"> </span><span class="dv">100</span><span class="op">/</span><span class="dv">150</span> =<span class="st"> </span><span class="fl">0.66667</span></a>
+<a class="sourceLine" id="cb15-12" title="12"></a>
+<a class="sourceLine" id="cb15-13" title="13">n=<span class="st"> </span><span class="dv">150</span> </a>
+<a class="sourceLine" id="cb15-14" title="14"></a>
+<a class="sourceLine" id="cb15-15" title="15">       CP nsplit rel error xerror     xstd</a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="dv">1</span> <span class="fl">5.0e-01</span>      <span class="dv">0</span>      <span class="fl">1.00</span>   <span class="fl">1.18</span> <span class="fl">0.050173</span></a>
+<a class="sourceLine" id="cb15-17" title="17"><span class="dv">2</span> <span class="fl">4.4e-01</span>      <span class="dv">1</span>      <span class="fl">0.50</span>   <span class="fl">0.67</span> <span class="fl">0.060888</span></a>
+<a class="sourceLine" id="cb15-18" title="18"><span class="dv">3</span> <span class="fl">2.0e-02</span>      <span class="dv">2</span>      <span class="fl">0.06</span>   <span class="fl">0.09</span> <span class="fl">0.029086</span></a>
+<a class="sourceLine" id="cb15-19" title="19"><span class="dv">4</span> <span class="fl">1.0e-02</span>      <span class="dv">3</span>      <span class="fl">0.04</span>   <span class="fl">0.08</span> <span class="fl">0.027520</span></a>
+<a class="sourceLine" id="cb15-20" title="20"><span class="dv">5</span> <span class="fl">5.0e-03</span>      <span class="dv">6</span>      <span class="fl">0.01</span>   <span class="fl">0.08</span> <span class="fl">0.027520</span></a>
+<a class="sourceLine" id="cb15-21" title="21"><span class="dv">6</span> <span class="fl">1.0e-06</span>      <span class="dv">8</span>      <span class="fl">0.00</span>   <span class="fl">0.09</span> <span class="fl">0.029086</span></a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>We can also print the results of the model fit to take a look at the numbers behind all of these graphs.</p>
 <p>Some simple calculations are helpful for this:</p>
@@ -677,45 +654,45 @@ Introduction
 <li>Prediction error rate in cross-validation = <code>Root node error</code> * <code>xerror</code> * 100</li>
 </ul>
 <p>We want the cp value (with a simpler tree) that minimizes the <code>xerror</code>. The key here is that we want the first model to minimize <code>xerror</code>.</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">  <span class="kw">printcp</span>(iris.ot)</a></code></pre></div>
-<pre><code>## 
-## Classification tree:
-## rpart(formula = Species ~ ., data = iris, method = &quot;class&quot;, parms = list(split = &quot;information&quot;), 
-##     cp = 1e-06, minsplit = 1, minbucket = 1)
-## 
-## Variables actually used in tree construction:
-## [1] Petal.Length Petal.Width  Sepal.Length
-## 
-## Root node error: 100/150 = 0.66667
-## 
-## n= 150 
-## 
-##        CP nsplit rel error xerror     xstd
-## 1 5.0e-01      0      1.00   1.18 0.050173
-## 2 4.4e-01      1      0.50   0.67 0.060888
-## 3 2.0e-02      2      0.06   0.09 0.029086
-## 4 1.0e-02      3      0.04   0.08 0.027520
-## 5 5.0e-03      6      0.01   0.08 0.027520
-## 6 1.0e-06      8      0.00   0.09 0.029086</code></pre>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1">  <span class="kw">printcp</span>(iris.ot)</a>
+<a class="sourceLine" id="cb16-2" title="2"></a>
+<a class="sourceLine" id="cb16-3" title="3">Classification tree<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="kw">rpart</span>(<span class="dt">formula =</span> Species <span class="op">~</span><span class="st"> </span>., <span class="dt">data =</span> iris, <span class="dt">method =</span> <span class="st">&quot;class&quot;</span>, <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&quot;information&quot;</span>), </a>
+<a class="sourceLine" id="cb16-5" title="5">    <span class="dt">cp =</span> <span class="fl">1e-06</span>, <span class="dt">minsplit =</span> <span class="dv">1</span>, <span class="dt">minbucket =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb16-6" title="6"></a>
+<a class="sourceLine" id="cb16-7" title="7">Variables actually used <span class="cf">in</span> tree construction<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-8" title="8">[<span class="dv">1</span>] Petal.Length Petal.Width  Sepal.Length</a>
+<a class="sourceLine" id="cb16-9" title="9"></a>
+<a class="sourceLine" id="cb16-10" title="10">Root node error<span class="op">:</span><span class="st"> </span><span class="dv">100</span><span class="op">/</span><span class="dv">150</span> =<span class="st"> </span><span class="fl">0.66667</span></a>
+<a class="sourceLine" id="cb16-11" title="11"></a>
+<a class="sourceLine" id="cb16-12" title="12">n=<span class="st"> </span><span class="dv">150</span> </a>
+<a class="sourceLine" id="cb16-13" title="13"></a>
+<a class="sourceLine" id="cb16-14" title="14">       CP nsplit rel error xerror     xstd</a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="dv">1</span> <span class="fl">5.0e-01</span>      <span class="dv">0</span>      <span class="fl">1.00</span>   <span class="fl">1.18</span> <span class="fl">0.050173</span></a>
+<a class="sourceLine" id="cb16-16" title="16"><span class="dv">2</span> <span class="fl">4.4e-01</span>      <span class="dv">1</span>      <span class="fl">0.50</span>   <span class="fl">0.67</span> <span class="fl">0.060888</span></a>
+<a class="sourceLine" id="cb16-17" title="17"><span class="dv">3</span> <span class="fl">2.0e-02</span>      <span class="dv">2</span>      <span class="fl">0.06</span>   <span class="fl">0.09</span> <span class="fl">0.029086</span></a>
+<a class="sourceLine" id="cb16-18" title="18"><span class="dv">4</span> <span class="fl">1.0e-02</span>      <span class="dv">3</span>      <span class="fl">0.04</span>   <span class="fl">0.08</span> <span class="fl">0.027520</span></a>
+<a class="sourceLine" id="cb16-19" title="19"><span class="dv">5</span> <span class="fl">5.0e-03</span>      <span class="dv">6</span>      <span class="fl">0.01</span>   <span class="fl">0.08</span> <span class="fl">0.027520</span></a>
+<a class="sourceLine" id="cb16-20" title="20"><span class="dv">6</span> <span class="fl">1.0e-06</span>      <span class="dv">8</span>      <span class="fl">0.00</span>   <span class="fl">0.09</span> <span class="fl">0.029086</span></a></code></pre></div>
 <p>Now we can get the cp for tree that is the first to reach the minimum xerror (with the fewest number of splits):</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">bestcp =<span class="st"> </span>iris.ot<span class="op">$</span>cptable[<span class="kw">which.min</span>(iris.ot<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]</a>
-<a class="sourceLine" id="cb20-2" title="2">bestcp</a></code></pre></div>
-<pre><code>## [1] 0.01</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1">bestcp =<span class="st"> </span>iris.ot<span class="op">$</span>cptable[<span class="kw">which.min</span>(iris.ot<span class="op">$</span>cptable[,<span class="st">&quot;xerror&quot;</span>]),<span class="st">&quot;CP&quot;</span>]</a>
+<a class="sourceLine" id="cb17-2" title="2">bestcp</a>
+<a class="sourceLine" id="cb17-3" title="3">[<span class="dv">1</span>] <span class="fl">0.01</span></a></code></pre></div>
 <p>We can use the information we have to calculate the misclassification rate for our optimal tree based on the equation on line 221. Here, we can see that our best tree will have a misclassification rate of 0.035. IN OTHER WORDS, we have effectively explained 96.5% of the variance in our data with this regression tree. Aw snap!</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">  <span class="fl">5e-3</span><span class="op">*</span>.<span class="dv">07</span><span class="op">*</span><span class="dv">100</span></a></code></pre></div>
-<pre><code>## [1] 0.035</code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1">  <span class="fl">5e-3</span><span class="op">*</span>.<span class="dv">07</span><span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb18-2" title="2">[<span class="dv">1</span>] <span class="fl">0.035</span></a></code></pre></div>
 <p>Now we can use that cp to prune our tree by re-fitting our model with a new cp argument, changing nothing else, to see where the splits are and how they can be interpretted.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1">iris.pt =<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>. ,</a>
-<a class="sourceLine" id="cb24-2" title="2">                <span class="dt">data =</span> iris,</a>
-<a class="sourceLine" id="cb24-3" title="3">                <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,</a>
-<a class="sourceLine" id="cb24-4" title="4">                <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),</a>
-<a class="sourceLine" id="cb24-5" title="5">                <span class="dt">cp=</span><span class="fl">0.01</span></a>
-<a class="sourceLine" id="cb24-6" title="6">                )</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">iris.pt =<span class="st"> </span><span class="kw">rpart</span>(Species <span class="op">~</span><span class="st"> </span>. ,</a>
+<a class="sourceLine" id="cb19-2" title="2">                <span class="dt">data =</span> iris,</a>
+<a class="sourceLine" id="cb19-3" title="3">                <span class="dt">method =</span> <span class="st">&#39;class&#39;</span>,</a>
+<a class="sourceLine" id="cb19-4" title="4">                <span class="dt">parms =</span> <span class="kw">list</span>(<span class="dt">split =</span> <span class="st">&#39;information&#39;</span>),</a>
+<a class="sourceLine" id="cb19-5" title="5">                <span class="dt">cp=</span><span class="fl">0.01</span></a>
+<a class="sourceLine" id="cb19-6" title="6">                )</a></code></pre></div>
 <p>We see that our plot is reduced compared to the original overfitted plot, and it actually is identical to the original, although this is not always the case.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb25-2" title="2">  <span class="kw">prp</span>(iris.pt)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1">  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb20-2" title="2">  <span class="kw">prp</span>(iris.pt)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1">  <span class="kw">fancyRpartPlot</span>(iris.pt, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">  <span class="kw">fancyRpartPlot</span>(iris.pt, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">sub=</span><span class="st">&#39;&#39;</span>)</a></code></pre></div>
 <p><img src="12_cart_files/figure-html/unnamed-chunk-17-2.png" width="672" /></p>
 <p>That should get you started fitting and pruning CART models. Although the examples that we used above are for classification trees, you should understand that these concepts work the same way for regression trees, although the interpretation varies slightly. In fact, it is more straightforward because we are just counting the number of records in each node instead of the number of records within each group in each node.</p>
 <p><br></p>

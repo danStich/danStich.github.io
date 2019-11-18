@@ -1,11 +1,12 @@
-```{r, child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
 
+<h1 id="multi"> Classification and regression trees (CART) </h1>
 
-# Classification and regression trees (CART) 
+<img src="../../images/water.jpg" alt="">
+
+<h2 id="multi"> Introduction </h2>
  
-<h2 id="multi"> Introduction </h2>  
-
 This week we will explore machine learning techniques for understanding biological and ecological data sets. We are moving on to a set of techniques known broadly as decision trees. Within this class of models, we will focus our discussion on a group of predictive tools known as "classification and regression trees" or **CART**. CART relies on 'recursive partitioning' to identify patterns in the variance of response variables with respect to explanatory variables of interest. If the response is categorical, then we use **classification trees**. If it is numeric, then we call them **regression trees**. Relatively recent work has led to the development of tools that also handle multiple responses: multivariate decision trees.
 
 In a way, CART can be thought of as a tool that is complementary to some of the tools that we have already talked about this semester. We can look at differences between groups and distributions like many tools we discussed, but now we are flipping the process on its head. Instead of looking for differences in a response between a priori groups that we have defined as experimental treatments or presumably different biological populations, we will be using computer algorithms to search for unknown statistical populations within the structure of our response of interest with respect to our explanatory variables. Sometimes these are populations that we assume exist ahead of time, but very often they are populations that would be hidden from detection through the use of other quantitative tools.
