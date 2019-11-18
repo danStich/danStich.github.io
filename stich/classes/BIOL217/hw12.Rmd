@@ -1,32 +1,27 @@
 ```{r child="_styles.Rmd"}
 ```
 
-<br>
- 
 # Decision trees
 
-<br>
- 
-## Introduction  
+<h2 id="multi"> Introduction </h2>  
 
-This week we will continue down the path of machine learning and exploratory/ descriptive statistical tools by talking about *decision trees*, with a specific focus on classification and regression trees. In our discussions this week, and in our readings, we learned that CART can be complementary to many of the analyses we have done this semester. We also learned that this tool could very likely replace many of the techniques we have talked about this semester in studies for which we have complex datasets with large numbers of explanatory variables. But, the real power in this technique lies in the predictive power of decision trees and the ability to identify emergent patterns in data that we might otherwise overlook given our limited ability to observe them, even with other powerful statistical tools. All of this, recall, comes with the added bonus that the technique is free of any kind of distributional assumptions, and it can handle missing data in the response and the explanatory variables. This utility also extends into the realm of multivariate techniques with the development of multivariate trees in very recent years.  
+This week we will continue down the path of machine learning and exploratory/ descriptive statistical tools by talking about *decision trees*, with a specific focus on classification and regression trees. In our discussions this week, and in our readings, we learned that CART can be complementary to many of the analyses we have done this semester. We also learned that this tool could very likely replace many of the techniques we have talked about this semester in studies for which we have complex datasets with large numbers of explanatory variables. But, the real power in this technique lies in the ability to identify emergent patterns in data that we might otherwise overlook given our limited ability to observe them, even with other powerful statistical tools. All of this, recall, comes with the added bonus that the technique is free of any kind of distributional assumptions, and it can handle missing data in both the response and the explanatory variables. This utility also extends into the realm of multivariate techniques with the development of multivariate trees in very recent years.  
 
-<br>
- 
-As discussed in class, classification trees tend to be slightly more complex than regression trees, and if you can interpret a classification tree you can interpret a regression tree. Furthermore, classification trees provide a nice alternative to complex categorical regression techniques (i.e multinomial logistic regression) and are naturally well suited for situations in which we might otherwise employ binomial logistic regression. For these reasons we restrict our treatment of CART to classification trees during the lecture this week. Now, we will work with regression trees for this lab.
+As discussed in class, classification trees tend to be slightly more complex than regression trees, and if you can interpret a classification tree you can interpret a regression tree. Furthermore, classification trees provide a nice alternative to complex categorical regression techniques (i.e multinomial logistic regression) and are naturally well suited for situations in which we might otherwise employ binomial logistic regression. For these reasons we restrict our treatment of CART to classification trees during the lecture this week. Now, we will work with regression trees for the lab.
 
-<br>
- 
-By the end of this week, you should understand why we use decision trees and what their limits are, 2) how to implement classification and regression trees in R (inluding how to diagnose overfitting and predictive ability), and 3) how to interpret the results of a fitted tree.
+By the end of this week, you should understand 1) why we use decision trees and what their limits are, 2) how to implement classification and regression trees in R (inluding how to diagnose overfitting and predictive ability), and 3) how to interpret the results of a fitted tree.
 
-<br>
- 
+
 ## Exercises
-Let's start with the data. The data this week come from a study that looked at effects of various local and landscape-scale factors on total phosphorus, total nitrogen, and nitrates within just under 350 lakes in Michigan. The full description of these data is posted on the course website as the data set is extensive and we will only need to examine a few of these variables closely by the time we finish fitting our trees. For now, it might be helpful for you to know that variables 21 and 22 represent connectivity measurements and all variables 13:94 represent landscape variables at different scales. (Wow, that's a lot of variables!!)
+Let's start with the data. The data this week come from a study that looked at effects of various local and landscape-scale factors on total phosphorus, total nitrogen, and nitrates within just under 350 lakes in Michigan.
 
-```{r}
+The paper can be found [here]("https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454")
+
+The full description of these data is posted on the course website <a href='../../data/water.pdf'>here</a>as the data set is extensive and we will only need to examine a few of these variables closely by the time we finish fitting our trees. For now, it might be helpful for you to know that variables 21 and 22 represent connectivity measurements and all variables 13:94 represent landscape variables at different scales. (Wow, that's a lot of variables!!)
+
+```{r, eval=FALSE, echo=TRUE}
 # Read in the data set
-  water = read.csv("http://employees.oneonta.edu/stichds/data/water.csv")
+  water = read.csv("water.csv")
   
 # Get a feel for the data structure:
 # Lots of numeric variables and a few factors
@@ -34,21 +29,26 @@ Let's start with the data. The data this week come from a study that looked at e
   str(water)
 ```
 
-<br>
- 
-There's no real meaningful way for us to deal with a few of the variables in this study using CART. These include lake names, organizational codes within the dataset, and response variables that we are not going to concern ourselves with. So, let's go ahead and delete those.
+
+```{r, eval=TRUE, echo=FALSE}
+# Read in the data set
+  water = read.csv("../../data/water.csv")
+  
+# Get a feel for the data structure:
+# Lots of numeric variables and a few factors
+# that will need to be removed
+  str(water)
+```
+
+There's no real meaningful way for us to deal with a few of the variables in this study using CART. These include lake names, organizational codes within the dataset, and response variables that we are not going to concern ourselves with. So, let's go ahead and remove those for now.
 
 ```{r}
 # Remove the columns that we don't need
   water = water[ , -c(1, 2, 5, 6, 12,16,17)]
 ```
 
-<br>
-   
 We've done this so it is easier for us to use the entire dataframe when we make the call to `rpart`. We'll also get rid of species for now to make things a little easier to interpret. And, as long as we are at it, we need to cast all of the remaining variables in the dataframe as factors.
 
-<br>
- 
 Before you go any further, set a seed for random processes in your script. The reason for this is that it will make your results reproduceable when I run your code. Pick any number you like. you can choose it from a random number generator if you like, but enter the reuslt in the '`set.seed`' function, like this:
 
 ```{r, eval=FALSE}
@@ -60,8 +60,6 @@ Before you go any further, set a seed for random processes in your script. The r
   
 ```  
 
-<br>
- 
 Now that you have the data ready for analysis, start by fitting a tree to the data that is overfit (the response is TP). Don't forget to load the `rpart` package if you haven't done so already. Remember the point of doing this is that we want to grow a big tree so we can prune it back to a reasonable size. unfortunately we won't know what that is until after we overfit the tree. 
 
 ```{r, echo=FALSE, include=FALSE, warning=FALSE, message=FALSE}
@@ -76,8 +74,7 @@ Now that you have the data ready for analysis, start by fitting a tree to the da
   water.ot = rpart(TP ~ ., cp = 0.000001, data = water)
 ```
 
-<br>
- 
+
 This is what my tree looked like. Now that is a tree we can prune!
 ```{r, warning=FALSE, message=FALSE}
 # Take a quick look at the plot
@@ -86,8 +83,7 @@ This is what my tree looked like. Now that is a tree we can prune!
   prp(water.ot)
 ```
  
-<br>
-  
+
 _**Question 1.**_ Your tree may look slightly different from mine given that they are randomly generated. How many "*leaves*" are on your overfit tree? You can find this out by looking at `obj$frame` where `obj` is the name of your regression tree.
 
 ```{r, echo=FALSE, include=FALSE}  
@@ -107,31 +103,22 @@ rsq.rpart(water.ft)
 par(mfrow=c(1,1))
 ```
  
-<br>
-  
+ 
 _**Question 2.**_ Using the `printcp` function, how many splits are in the model that minimizes cross validation error ('`xerror`')? What is the complexity parameter (cp) for this regression tree?
  
-<br>
-  
 Now go back and fit a new tree corresponding to the cp that was in your answer to *question 2*. Plot the fitted tree with the '`prp`' function, include the argument '`extra = 1`' in your call. 
  
-<br>
-  
-_**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data in the [README](http://employees.oneonta.edu/stichds/classes/BIOL217/README.rtf) file to find out what the abbreviations stand for if you need to.
  
-<br>
-  
+_**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data  [here]("../../data/water.pdf) file to find out what the abbreviations stand for if you need to.
+ 
 Just as we could calculate a misclassification rate for classification trees, we can also calculate an R-squared value for our training models for regression trees. To do this, we subtract the relative error for our tree at the final split from 1.00. You can get relative error using the `printcp` fuunction like you did above.
  
-<br>
-  
+
 _**Question 4**_ How much variance is explained by your regression tree. Does this surprise you given the number of explanatory variables you had at your disposal?
  
-<br>
+_**Question 5.**_ How do the results of your *predictive model* compare to the findings of the *hypothesis testing* reported in the abstract of [the paper](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454)? Can you say anything about the directionality of the relationships that you have identified with your regression tree?
   
-_**Question 5.**_ How do the results of your *predictive model* compare to the findings of the *hypothesis testing* reported in the abstract of [this paper](http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454)? Can you say anything about the directionality of the relationships that you have identified with your regression tree?
-  
-<br>
-  
-<br>
+
+<br>  
+
   
