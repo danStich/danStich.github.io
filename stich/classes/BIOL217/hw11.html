@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>hw11.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,6 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -36,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -107,11 +157,9 @@ h6 {
 }
 </style>
 
-<link rel="stylesheet" href="styles.css" type="text/css" />
+<link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -125,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -147,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -167,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -188,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -213,31 +356,57 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">danStich</a>
+      <a class="navbar-brand" href="index.html">BIOL 217</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
         <li>
-  <a href="../../index.html">Home</a>
+  <a href="index.html">
+    <span class="fa fa-home"></span>
+     
+  </a>
 </li>
-<li>
-  <a href="../../teaching.html">Teaching</a>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Teaching
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../../teaching.html">Teaching home</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
+    </li>
+    <li>
+      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
+    </li>
+  </ul>
 </li>
 <li>
   <a href="../../research.html">Research</a>
 </li>
 <li>
-  <a href="../../cv.html">Curriculum vitae</a>
+  <a href="../../studentProjects.html">Current Students</a>
 </li>
 <li>
-  <a href="../../courseWebsites.html">Course websites</a>
+  <a href="../../publications.html">Publications</a>
+</li>
+<li>
+  <a href="../../cv.html">CV</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/danStich">
+    <span class="fa fa-github"></span>
+     
+  </a>
+</li>
       </ul>
     </div><!--/.nav-collapse -->
   </div><!--/.container -->
@@ -275,31 +444,27 @@ pre code, pre, code {
 }
 
 </style>
-<p><br></p>
-<div id="lab-11-multivariate-data-analysis" class="section level1">
-<h1>Lab 11: multivariate data analysis</h1>
-<p><br></p>
-<div id="introduction" class="section level2">
-<h2>Introduction</h2>
-<p><br></p>
+<h1 id="multi">
+Multivariate statistics
+<h1>
+<p><img src="../../images/iris.jpg" alt=""></p>
+<h2 id="multi">
+Introduction
+</h2>
 <p>This week we are going to tak a hard left (or right depending on which is your dominant hand) and begin to discuss methods with which we can examine <em>emergent patterns</em> in complex, messy data sets. To begin these discussions, we will take a look at the use of multivariate techniques this week. This class of analysis kind of stands on its own compared to a lot of the other methods we have discussed so far this semester. One of the biggest changes that we will see in this lab is that we are no longer working with a single response variable and one or more explanatory variables, but rather <em>many</em> response variables and one or more explanatory variables. These methods rely heavily on linear algebra, as we have discussed in class, and more broadly these and other machine-learning techniques make extensive use of distance-based measurements between observations. This week, we will try to give you a taste of what these tools can be used for. Next week, we will continue to push into some (slightly) more-advanced techniques.</p>
 <p>By the end of this lab, you should 1) understand why we use multivariate analyses and how they do or do not fit in the context of what we have discussed so far, 2) be comfortable analyzing and visualizing associations with these methods, and 3) be able to interpret the results of some basic multivariate analyses.</p>
-<p><br></p>
-</div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p><br></p>
-<div id="the-data" class="section level3">
-<h3>The data</h3>
-<p><br></p>
+<h3 id="multi">
+The data
+</h3>
 <p>This week we will work with a data set from a student in the Biology Department at SUNY Oneonta!! These data are from a study that examined the number of plant species at 4 different field sites in New York in the presence or absence of turtles.</p>
 <p>Let’s start by reading in the data file.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data file</span>
-  turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/indTurtles.csv&#39;</span>)
-  
-<span class="co"># Have a look at the data</span>
-  <span class="kw">str</span>(turtles)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the data file</span></a>
+<a class="sourceLine" id="cb1-2" title="2">  turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;indTurtles.csv&#39;</span>)</a>
+<a class="sourceLine" id="cb1-3" title="3">  </a>
+<a class="sourceLine" id="cb1-4" title="4"><span class="co"># Have a look at the data</span></a>
+<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">str</span>(turtles)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    32 obs. of  38 variables:
 ##  $ SITE                        : Factor w/ 4 levels &quot;AC&quot;,&quot;CB&quot;,&quot;CC&quot;,..: 3 3 3 3 1 1 1 1 4 4 ...
 ##  $ TURTLE                      : int  0 0 0 0 0 0 0 0 0 0 ...
@@ -339,7 +504,6 @@ pre code, pre, code {
 ##  $ Snails                      : int  0 0 0 0 0 7 2 0 10 0 ...
 ##  $ Slugs                       : int  0 4 2 1 0 2 4 0 14 0 ...
 ##  $ Other.organisms             : int  4 2 1 2 0 1 1 0 0 1 ...</code></pre>
-<p><br></p>
 <p>The <em>very</em> brief decsription of the data is as follows:</p>
 <pre><code>  # Site:     Site ID
   # turtle:   Turtles present or absent
@@ -348,174 +512,138 @@ pre code, pre, code {
   # Snails:   Snail counts
   # Slugs:    Number of slugs
   # Other.organisms:  Number of other organisms </code></pre>
-<p><br></p>
-</div>
 <div id="pca-for-habitat-variables" class="section level3">
 <h3>PCA for habitat variables</h3>
-<p><br></p>
 <p>First, let’s start out by looking at how habiat variables differ between sites. We can use PCA to ordinate and visualize the habitats for us in just a few dimensions. Then we can test to see if certain combinations of habitat variables are associated with the different sites using a multivariate analysis of variance (MANOVA).</p>
 <p>First, we will need to reformat our data a little bit to get it in shape for R. I’ve done some of this ahead of time to make things go a little more quickly- mostly deleting blank rows, and some calculations that were done in Excel<span class="math inline">\(^\circledR\)</span>.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a matrix out of the habitat data</span>
-  ttl.mat =<span class="st"> </span>turtles[ , <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>]</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Make a matrix out of the habitat data</span></a>
+<a class="sourceLine" id="cb4-2" title="2">  ttl.mat =<span class="st"> </span>turtles[ , <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>]</a></code></pre></div>
 <p>Next, fit a PCA to the habitat data, ‘<code>ttl.mat</code>’. See the reference script for a walk through on how to do this. Use the <code>summary</code> function to look at the results of the PCA.</p>
-<p><br></p>
-<p><br></p>
 <p><strong>Question 1.</strong> How much of the variance is explained by the first two principal components? How many components do you need to go to before you have explained 95% of the variance?</p>
-<p><br></p>
 <p>Remember that another way we can get this information is by plotting the SD of each principal component in order.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the SD of the PCs</span>
-  <span class="kw">plot</span>(ttl.pca, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</code></pre></div>
-<p><img src="hw11_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
-<p><br></p>
-<p>Now, we can plot the PCA in two dimensional space reasonably well. We’ll use the pretty graphs that we talked about earlier this week for demonstration.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># There are multiple tools for visualizing our data in 2-d space (commonly</span>
-<span class="co"># referred to as a &#39;biplot&#39;)</span>
-<span class="co"># For the &quot;prettier&quot; option, you will need to install a couple of packages</span>
-  <span class="co"># devtools package</span>
-    <span class="co">#install.packages(&#39;devtools&#39;)</span>
-    <span class="kw">library</span>(devtools)
-  <span class="co"># ggbiplot and vqv packages from a git hub repository</span>
-    <span class="co">#install_github(&quot;ggbiplot&quot;, &quot;vqv&quot;)</span>
-    <span class="kw">library</span>(ggbiplot)
-
-<span class="co"># The ggbiplot package makes some pretty nice biplots, but the syntax for</span>
-<span class="co"># these plots (and other ggplot packages) is quite different from what we have</span>
-<span class="co"># been working with in the base graphics</span>
-  <span class="co"># First, we have to specify the graphical parameters in the function</span>
-    g =<span class="st"> </span><span class="kw">ggbiplot</span>(ttl.pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>,
-                  <span class="dt">groups =</span> turtles<span class="op">$</span>SITE, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>,
-                  <span class="dt">circle =</span> <span class="ot">TRUE</span>)
-
-  <span class="co"># Now we specify the colors that we want to use</span>
-    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)
-    
-  <span class="co"># Add a legend</span>
-    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)
-    
-  <span class="co"># And finally, we can actually print the biplot to our graphics device</span>
-    <span class="kw">print</span>(g)  </code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Plot the SD of the PCs</span></a>
+<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">plot</span>(ttl.pca, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</a></code></pre></div>
 <p><img src="hw11_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<p>Now, we can plot the PCA in two dimensional space reasonably well. We’ll use the pretty graphs that we talked about earlier this week for demonstration.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># There are multiple tools for visualizing our data in 2-d space (commonly</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># referred to as a &#39;biplot&#39;)</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># For the &quot;prettier&quot; option, you will need to install a couple of packages</span></a>
+<a class="sourceLine" id="cb6-4" title="4">  <span class="co"># devtools package</span></a>
+<a class="sourceLine" id="cb6-5" title="5">    <span class="co">#install.packages(&#39;devtools&#39;)</span></a>
+<a class="sourceLine" id="cb6-6" title="6">    <span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="co"># ggbiplot and vqv packages from a git hub repository</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    <span class="co">#install_github(&quot;ggbiplot&quot;, &quot;vqv&quot;)</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    <span class="kw">library</span>(ggbiplot)</a>
+<a class="sourceLine" id="cb6-10" title="10"></a>
+<a class="sourceLine" id="cb6-11" title="11"><span class="co"># The ggbiplot package makes some pretty nice biplots, but the syntax for</span></a>
+<a class="sourceLine" id="cb6-12" title="12"><span class="co"># these plots (and other ggplot packages) is quite different from what we have</span></a>
+<a class="sourceLine" id="cb6-13" title="13"><span class="co"># been working with in the base graphics</span></a>
+<a class="sourceLine" id="cb6-14" title="14">  <span class="co"># First, we have to specify the graphical parameters in the function</span></a>
+<a class="sourceLine" id="cb6-15" title="15">    g =<span class="st"> </span><span class="kw">ggbiplot</span>(ttl.pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>,</a>
+<a class="sourceLine" id="cb6-16" title="16">                  <span class="dt">groups =</span> turtles<span class="op">$</span>SITE, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb6-17" title="17">                  <span class="dt">circle =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb6-18" title="18"></a>
+<a class="sourceLine" id="cb6-19" title="19">  <span class="co"># Now we specify the colors that we want to use</span></a>
+<a class="sourceLine" id="cb6-20" title="20">    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)</a>
+<a class="sourceLine" id="cb6-21" title="21">    </a>
+<a class="sourceLine" id="cb6-22" title="22">  <span class="co"># Add a legend</span></a>
+<a class="sourceLine" id="cb6-23" title="23">    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)</a>
+<a class="sourceLine" id="cb6-24" title="24">    </a>
+<a class="sourceLine" id="cb6-25" title="25">  <span class="co"># And finally, we can actually print the biplot to our graphics device</span></a>
+<a class="sourceLine" id="cb6-26" title="26">    <span class="kw">print</span>(g)  </a></code></pre></div>
+<p><img src="hw11_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 <!-- [](pca.png) -->
-<p><br></p>
 <p>Wrap up this part of the analysis by using a multivariate analysis of variance (MANOVA) to see if the habitat variables actually vary significantly between sites. If you can’t install the <code>car</code> package to use the <code>Anova</code> function needed to calculate Type II sum of squares for this test, then you can use the <code>manova</code> function in base R to fit the model instead of the <code>lm</code> function that we used in the reference script. The syntax is virtually identical. Note that either way, your response variable should be <code>as.matrix(ttl.mat)</code> to conform to the function’s requirement that a matrix be passed to the argument because we subsetted the dataframe above and neither <code>lm</code> or <code>manova</code> will take a dataframe as an argument.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># MANOVA    </span>
-  <span class="kw">summary</span>(<span class="kw">manova</span>(<span class="kw">as.matrix</span>(ttl.mat)<span class="op">~</span>turtles[,<span class="dv">1</span>]))
-    
-<span class="co"># This analysis indicates that the sites (turtles[,1]) vary significantly with</span>
-<span class="co"># respect to the habitat measurements that were taken at alpha = 0.05.</span>
-<span class="op">-------------------------------------------------------------------------------</span><span class="st">    </span>
-<span class="co"># Parameter       Df    Pillai    Approx. F    num Df    den Df       Pr(&gt;F)   </span>
-<span class="op">-------------------------------------------------------------------------------</span>
-<span class="co"># turtles[, 1]    3   0.87259       2.7686        12        81      0.003335 </span>
-<span class="co"># Residuals      28                                           </span>
-<span class="op">-------------------------------------------------------------------------------</span></code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># MANOVA    </span></a>
+<a class="sourceLine" id="cb7-2" title="2">  <span class="kw">summary</span>(<span class="kw">manova</span>(<span class="kw">as.matrix</span>(ttl.mat)<span class="op">~</span>turtles[,<span class="dv">1</span>]))</a>
+<a class="sourceLine" id="cb7-3" title="3">    </a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="co"># This analysis indicates that the sites (turtles[,1]) vary significantly with</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="co"># respect to the habitat measurements that were taken at alpha = 0.05.</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="op">-------------------------------------------------------------------------------</span><span class="st">    </span></a>
+<a class="sourceLine" id="cb7-7" title="7"><span class="co"># Parameter       Df    Pillai    Approx. F    num Df    den Df       Pr(&gt;F)   </span></a>
+<a class="sourceLine" id="cb7-8" title="8"><span class="op">-------------------------------------------------------------------------------</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="co"># turtles[, 1]    3   0.87259       2.7686        12        81      0.003335 </span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="co"># Residuals      28                                           </span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="op">-------------------------------------------------------------------------------</span></a></code></pre></div>
 <p><strong>Question 2.</strong> Does the test you conducted indicate that the habitat variables vary significantly between sites at <span class="math inline">\(\alpha\)</span> = 0.05?</p>
-<p><br></p>
 </div>
 <div id="community-analysis-with-nmds" class="section level3">
 <h3>Community analysis with NMDS</h3>
-<p><br></p>
 <p>Moving along, we will now examine the associations between species, site, and the presence of turtles using non-metric multidimensional scaling (NMDS). To do this, we will use the <code>vegan</code> package in R.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the vegan library</span>
-  <span class="co">#install.packages(&#39;vegan&#39;)</span>
-  <span class="kw">library</span>(vegan)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Load the vegan library</span></a>
+<a class="sourceLine" id="cb8-2" title="2">  <span class="co">#install.packages(&#39;vegan&#39;)</span></a>
+<a class="sourceLine" id="cb8-3" title="3">  <span class="kw">library</span>(vegan)</a></code></pre></div>
 <p>Now that we have thought about why we want to use this technique, let’s go ahead and look at how we use it. First, we will need to do a little more data manipulation. Let’s reduce the data matrix down to its simplest form, by calculating the mean count for each species for each combination of <code>site</code> and <code>turtle</code>. Our reason for doing this is that there are <em>a lot</em> of zeroes in our data and we don’t want to rely too heavily on any technique to deal with those zeroes as they may influence our inference. If we had more sites with more reps at each site this might be less of a problem and we may choose to use the raw data. But in this case, we can reduce the dimensionality of our problem a bit before we move on.</p>
-<p><br></p>
 <p>Use ddply to get the average of samples across sites. This is a slightly different use of the ddply function than we’ve seen previously, but it is really effective for summarizing data with a lot of columns.</p>
-<p><br></p>
 <p><strong>Note</strong>: the following may not work for you (I still don’t know why). If this is the case, please skip the next two chunks of code.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the plyr library    </span>
-  <span class="kw">library</span>(plyr)    
-<span class="co"># Summarize the data</span>
-  turtles2 =<span class="st"> </span><span class="kw">ddply</span>(turtles, <span class="kw">c</span>(<span class="st">&#39;SITE&#39;</span>, <span class="st">&#39;TURTLE&#39;</span>), <span class="kw">numcolwise</span>(mean, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))   </code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Load the plyr library    </span></a>
+<a class="sourceLine" id="cb9-2" title="2">  <span class="kw">library</span>(plyr)    </a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="co"># Summarize the data</span></a>
+<a class="sourceLine" id="cb9-4" title="4">  turtles2 =<span class="st"> </span><span class="kw">ddply</span>(turtles, <span class="kw">c</span>(<span class="st">&#39;SITE&#39;</span>, <span class="st">&#39;TURTLE&#39;</span>), <span class="kw">numcolwise</span>(mean, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))   </a></code></pre></div>
 <p><strong>If that did not work for you</strong>, then do this, otherwise do not:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">turtles2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;http://employees.oneonta.edu/stichds/data/turtles2.csv&#39;</span>)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">turtles2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;turtles2.csv&#39;</span>)</a></code></pre></div>
 <p>Get a species x community matrix of the data for NMDS and assign a name to it. Here, we are leaving out the habitat data and removing the snails, slugs, and ‘other species’ to keep the question focused on the plant community.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the matrix</span>
-  community_matrix =<span class="st"> </span><span class="kw">as.matrix</span>(turtles2[ , <span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)] )
-  
-<span class="co"># Assign dimension names  </span>
-  <span class="kw">dimnames</span>(community_matrix) =<span class="st"> </span><span class="kw">list</span>(
-    turtles2[ , <span class="dv">1</span>],
-    <span class="kw">names</span>(turtles2)[<span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)])</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Make the matrix</span></a>
+<a class="sourceLine" id="cb11-2" title="2">  community_matrix =<span class="st"> </span><span class="kw">as.matrix</span>(turtles2[ , <span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)] )</a>
+<a class="sourceLine" id="cb11-3" title="3">  </a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="co"># Assign dimension names  </span></a>
+<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">dimnames</span>(community_matrix) =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb11-6" title="6">    turtles2[ , <span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb11-7" title="7">    <span class="kw">names</span>(turtles2)[<span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)])</a></code></pre></div>
 <p>Now, fit the NMDS to the data. We still have quite a few zeros in these data, so let’s use the jaccard distance calculation for our <code>distance</code> argument here just to be on the safe side. In theory, if the zeros are not actually a problem, the Jaccard distance calculations <em>should</em> return the same distance matrix as the Bray-Curtis distance calculations.</p>
-<p><br></p>
-<p><br></p>
 <p><strong>Note the following</strong>: a) the transformation that was selected by the ordination algorithm, b) the number of runs before a solution was reached, and c) the stress at the final run. These are the kinds of things you will want to report when you do ordination.</p>
-<p><br></p>
 <p><strong>Question 3.</strong> What is the qualitative evaluation for your the <code>stress</code> of this ordination based upon the rules of thumb we discussed for the interpretation of stress? If you can’t remember or didn’t write it down, hit the stack[Overflow].</p>
-<p><br></p>
 <p>You can take a look at the fit by printing the fitted ordination to the console with the print function.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Let&#39;s take a look at the summary to make sure we know what is going on here</span>
-  <span class="kw">print</span>(example_NMDS)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Let&#39;s take a look at the summary to make sure we know what is going on here</span></a>
+<a class="sourceLine" id="cb12-2" title="2">  <span class="kw">print</span>(example_NMDS)</a></code></pre></div>
 <p>We can make a stress plot of the data to get a feel for the fit and get some sense of the fit of this model to our data. This will also give us a sense of how well the ordination captures the variability of the data.</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Take a look at the stress plot for the ordination</span>
-  <span class="kw">stressplot</span>(example_NMDS)</code></pre></div>
-<p><br></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Take a look at the stress plot for the ordination</span></a>
+<a class="sourceLine" id="cb13-2" title="2">  <span class="kw">stressplot</span>(example_NMDS)</a></code></pre></div>
 <p><strong>Question 4.</strong> How much of the variance in the data can be explained by the non-metric and linear fits for the ordination?</p>
-<p><br></p>
 <p>Plot the ordination of species abundances by site and turtle treatment to visualize the associations:</p>
-<p><br></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Now we can plot the ordination for our NMDS given that we are satisfied with</span>
-<span class="co"># the stress parameter and the convergenc</span>
-  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))
-  <span class="co"># First, make a blank plot of the nmds</span>
-    <span class="kw">ordiplot</span>(example_NMDS,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>)
-  <span class="co"># Now, we can add some ellipses to show the grouping indicated by nmds</span>
-    <span class="kw">ordiellipse</span>(example_NMDS, <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>] ,
-              <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>), <span class="dt">label=</span>F, <span class="dt">show.groups =</span> <span class="dv">0</span>)
-  <span class="co"># Now, we can add some ellipses to show the grouping indicated by nmds</span>
-    <span class="kw">ordiellipse</span>(example_NMDS, <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>] ,
-              <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>), <span class="dt">label=</span>F, <span class="dt">show.groups =</span> <span class="dv">1</span>)  
-  <span class="co"># Add the raw species data. Note that no matter what the columns actually</span>
-  <span class="co"># represent, you will always use &quot;species&quot; for these plots because that is</span>
-  <span class="co"># what these tools were originally designed for.</span>
-    <span class="kw">orditorp</span>(example_NMDS, <span class="dt">display=</span><span class="st">&quot;species&quot;</span>, <span class="dt">col=</span><span class="st">&quot;gray40&quot;</span>, <span class="dt">air=</span><span class="fl">0.1</span>)
-  <span class="co"># Next, add the communities to the plot. Same as above, these will always be</span>
-  <span class="co"># called &quot;sites&quot; even if that isn&#39;t what your rows represent. It is just a</span>
-  <span class="co"># convention based on the purpose for which the tools were built,</span>
-    <span class="kw">orditorp</span>(example_NMDS, <span class="dt">display=</span><span class="st">&quot;sites&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dv">4</span>)),
-      <span class="dt">air=</span><span class="fl">0.01</span>,<span class="dt">cex=</span><span class="fl">1.25</span>)  
-    <span class="kw">legend</span>(<span class="dt">x =</span> <span class="op">-</span><span class="fl">1.5</span>, <span class="dt">y=</span>.<span class="dv">85</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Turtles absent&quot;</span>, <span class="st">&quot;Turtles present&quot;</span>),
-      <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</code></pre></div>
-<p><img src="hw11_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
-<p><br></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Now we can plot the ordination for our NMDS given that we are satisfied with</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="co"># the stress parameter and the convergenc</span></a>
+<a class="sourceLine" id="cb14-3" title="3">  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb14-4" title="4">  <span class="co"># First, make a blank plot of the nmds</span></a>
+<a class="sourceLine" id="cb14-5" title="5">    <span class="kw">ordiplot</span>(example_NMDS,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</a>
+<a class="sourceLine" id="cb14-6" title="6">  <span class="co"># Now, we can add some ellipses to show the grouping indicated by nmds</span></a>
+<a class="sourceLine" id="cb14-7" title="7">    <span class="kw">ordiellipse</span>(example_NMDS, <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>] ,</a>
+<a class="sourceLine" id="cb14-8" title="8">              <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>), <span class="dt">label=</span>F, <span class="dt">show.groups =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb14-9" title="9">  <span class="co"># Now, we can add some ellipses to show the grouping indicated by nmds</span></a>
+<a class="sourceLine" id="cb14-10" title="10">    <span class="kw">ordiellipse</span>(example_NMDS, <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>] ,</a>
+<a class="sourceLine" id="cb14-11" title="11">              <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>), <span class="dt">label=</span>F, <span class="dt">show.groups =</span> <span class="dv">1</span>)  </a>
+<a class="sourceLine" id="cb14-12" title="12">  <span class="co"># Add the raw species data. Note that no matter what the columns actually</span></a>
+<a class="sourceLine" id="cb14-13" title="13">  <span class="co"># represent, you will always use &quot;species&quot; for these plots because that is</span></a>
+<a class="sourceLine" id="cb14-14" title="14">  <span class="co"># what these tools were originally designed for.</span></a>
+<a class="sourceLine" id="cb14-15" title="15">    <span class="kw">orditorp</span>(example_NMDS, <span class="dt">display=</span><span class="st">&quot;species&quot;</span>, <span class="dt">col=</span><span class="st">&quot;gray40&quot;</span>, <span class="dt">air=</span><span class="fl">0.1</span>)</a>
+<a class="sourceLine" id="cb14-16" title="16">  <span class="co"># Next, add the communities to the plot. Same as above, these will always be</span></a>
+<a class="sourceLine" id="cb14-17" title="17">  <span class="co"># called &quot;sites&quot; even if that isn&#39;t what your rows represent. It is just a</span></a>
+<a class="sourceLine" id="cb14-18" title="18">  <span class="co"># convention based on the purpose for which the tools were built,</span></a>
+<a class="sourceLine" id="cb14-19" title="19">    <span class="kw">orditorp</span>(example_NMDS, <span class="dt">display=</span><span class="st">&quot;sites&quot;</span>, <span class="dt">col=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dv">4</span>)),</a>
+<a class="sourceLine" id="cb14-20" title="20">      <span class="dt">air=</span><span class="fl">0.01</span>,<span class="dt">cex=</span><span class="fl">1.25</span>)  </a>
+<a class="sourceLine" id="cb14-21" title="21">    <span class="kw">legend</span>(<span class="dt">x =</span> <span class="fl">-1.5</span>, <span class="dt">y=</span>.<span class="dv">85</span>, <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Turtles absent&quot;</span>, <span class="st">&quot;Turtles present&quot;</span>),</a>
+<a class="sourceLine" id="cb14-22" title="22">      <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>))</a></code></pre></div>
+<p><img src="hw11_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>The ordination shows</p>
-<p><br></p>
 <ol style="list-style-type: decimal">
 <li><p>All of the sites appear to show some shift in the plant community for incidences where turtles were found and were not with the exception of site ‘CC’.</p></li>
 <li><p>An overall separation in the plant communities between sites when turtles were not found, but some similarity between sites AC and BC where turtles were found.</p></li>
 <li><p>A weak difference in plant communities in which turtles were found compared to plant communities in which turles were not found. This difference appears to be driven primarily by species on the NMDS2 axis.</p></li>
 </ol>
-<p><br></p>
 <p>Lastly, go ahead and test to see if there is a difference in community composition between sites and treatments. For this, we will use adonis (and the aptly named <code>adonis</code> function in R) to test additive effects of <code>site</code> and <code>turtle</code> on the species assemblage in each location. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the <code>turtle</code> variable as explanatory variables.</p>
-<p><br></p>
-<p><br></p>
 <p>The results show that the plant communities vary significantly by site (<code>turtles[,1]</code>) with the presence or absence of turtles (<code>turtles[,2]</code>) at a confidence level of <span class="math inline">\(\alpha\)</span> = 0.10, but not at <span class="math inline">\(\alpha\)</span> = 0.05. This is likely due to the fact that the plant communities within each site show some variability between locations in which turtles were found and locations in which they were not found. Future work might focus on a greater number of samples within sites to better characterize this variability during the growing season in addition to sampling a greater number of sites.</p>
-<p><br></p>
 <p><strong>Question 5.</strong> Based on the plot of the ordination, and the results of the adonis test: is species composition associated with the presence of turtles within sites? What about between sites? Why do you suppose this is the case?</p>
 <p><br></p>
-<p><br></p>
-</div>
 </div>
 </div>
 
 <!DOCTYPE html>
-<p>Copyright &copy; 2017 Dan Stich. All rights reserved.</p>
+
+<br>
+
+<hr>
+
+<p style="color:gray; text-align:center">This work is licensed under a <a href="https://creativecommons.org/licenses/by/4.0/legalcode">Creative Commons Attribution 4.0 International License</a>. Data are provided for educational purposes only unless otherwise noted.</p>
 
 
 
@@ -533,6 +661,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>

@@ -1,45 +1,42 @@
 ```{r child="_styles.Rmd"}
 ```
 
-<br>
- 
-# Lab 11: multivariate data analysis
+<h1 id="multi"> Multivariate statistics <h1>
 
-<br>
- 
-## Introduction  
+<img src="../../images/iris.jpg" alt="">
 
-<br>
- 
+<h2 id="multi"> Introduction </h2>
+
 This week we are going to tak a hard left (or right depending on which is your dominant hand) and begin to discuss methods with which we can examine *emergent patterns* in complex, messy data sets. To begin these discussions, we will take a look at the use of multivariate techniques this week. This class of analysis kind of stands on its own compared to a lot of the other methods we have discussed so far this semester. One of the biggest changes that we will see in this lab is that we are no longer working with a single response variable and one or more explanatory variables, but rather *many* response variables and one or more explanatory variables. These methods rely heavily on linear algebra, as we have discussed in class, and more broadly these and other machine-learning techniques make extensive use of distance-based measurements between observations. This week, we will try to give you a taste of what these tools can be used for. Next week, we will continue to push into some (slightly) more-advanced techniques.
 
 By the end of this lab, you should 1) understand why we use multivariate analyses and how they do or do not fit in the context of what we have discussed so far, 2) be comfortable analyzing and visualizing associations with these methods, and 3) be able to interpret the results of some basic multivariate analyses.
 
-<br>
+
  
 ## Exercises
 
-<br>
- 
-### The data
+<h3 id="multi"> The data </h3>
 
-<br>
- 
+
 This week we will work with a data set from a student in the Biology Department at SUNY Oneonta!! These data are from a study that  examined the number of plant species at 4 different field sites in New York in the presence or absence of turtles.
 
 Let's start by reading in the data file.
 
-<br>
- 
-```{r}
+```{r, echo=TRUE, eval=FALSE}
 # Read in the data file
-  turtles = read.csv('http://employees.oneonta.edu/stichds/data/indTurtles.csv')
+  turtles = read.csv('indTurtles.csv')
   
 # Have a look at the data
   str(turtles)
 ```
 
-<br>
+```{r, eval=TRUE, echo=FALSE}
+# Read in the data file
+  turtles = read.csv('../../data/indTurtles.csv')
+  
+# Have a look at the data
+  str(turtles)
+```
  
 The *very* brief decsription of the data is as follows:
 
@@ -53,28 +50,22 @@ The *very* brief decsription of the data is as follows:
   # Other.organisms:  Number of other organisms 
 ```    
 
-<br>
- 
 ### PCA for habitat variables
 
-<br>
- 
 First, let's start out by looking at how habiat variables differ between sites. We can use PCA to ordinate and visualize the habitats for us in just a few dimensions. Then we can test to see if certain combinations of habitat variables are associated with the different sites using a multivariate analysis of variance (MANOVA).
 
 First, we will need to reformat our data a little bit to get it in shape for R. I've done some of this ahead of time to make things go a little more quickly- mostly deleting blank rows, and some calculations that were done in Excel$^\circledR$.
 
-<br>
- 
 ```{r}
 # Make a matrix out of the habitat data
   ttl.mat = turtles[ , 3:6]
 ```
 
-<br>
+
    
 Next, fit a PCA to the habitat data, '`ttl.mat`'. See the reference script for a walk through on how to do this. Use the `summary` function to look at the results of the PCA.
 
-<br>
+
  
 ```{r, echo=FALSE, results='hide', include=FALSE}  
 # Do a pca on the habitat variable to re-classify the sites
@@ -83,28 +74,18 @@ Next, fit a PCA to the habitat data, '`ttl.mat`'. See the reference script for a
 # Print a summary of the pca
   summary(ttl.pca)
 ```
-
-<br>
  
 **Question 1.** How much of the variance is explained by the first two principal components? How many components do you need to go to before you have explained 95% of the variance?
 
-<br> 
- 
 Remember that another way we can get this information is by plotting the SD of each principal component in order. 
 
-<br>
- 
 ```{r}
 # Plot the SD of the PCs
   plot(ttl.pca, type='l', lwd=2, col='blue')
 ```
 
-<br>
- 
 Now, we can plot the PCA in two dimensional space reasonably well. We'll use the pretty graphs that we talked about earlier this week for demonstration. 
 
-<br>
- 
 ```{r, warning=FALSE, message=FALSE}
 # There are multiple tools for visualizing our data in 2-d space (commonly
 # referred to as a 'biplot')
@@ -136,12 +117,8 @@ Now, we can plot the PCA in two dimensional space reasonably well. We'll use the
 
 <!-- [](pca.png) -->
 
-<br>
- 
 Wrap up this part of the analysis by using a multivariate analysis of variance (MANOVA) to see if the habitat variables actually vary significantly between sites. If you can't install the `car` package to use the `Anova` function needed to calculate Type II sum of squares for this test, then you can use the `manova` function in base R to fit the model instead of the `lm` function that we used in the reference script. The syntax is virtually identical. Note that either way, your response variable should be `as.matrix(ttl.mat)` to conform to the function's requirement that a matrix be passed to the argument because we subsetted the dataframe above and neither `lm` or `manova` will take a dataframe as an argument.
 
-<br>
- 
 ```{r, echo=TRUE, eval=FALSE} 
 # MANOVA    
   summary(manova(as.matrix(ttl.mat)~turtles[,1]))
@@ -156,35 +133,26 @@ Wrap up this part of the analysis by using a multivariate analysis of variance (
 -------------------------------------------------------------------------------
 ```
 
-<br>
- 
 **Question 2.** Does the test you conducted indicate that the habitat variables vary significantly between sites at $\alpha$ = 0.05?
 
-<br>
- 
+
 ### Community analysis with NMDS
 
-<br>
- 
 Moving along, we will now examine the associations between species, site, and the presence of turtles using non-metric multidimensional scaling (NMDS). To do this, we will use the `vegan` package in R. 
 
-<br>
- 
 ```{r, warning=FALSE, message=FALSE}
 # Load the vegan library
   #install.packages('vegan')
   library(vegan)
 ```
 
-<br>
- 
 Now that we have thought about why we want to use this technique, let's go ahead and look at how we use it. First, we will need to do a little more data manipulation. Let's reduce the data matrix down to its simplest form, by calculating the mean count for each species for each combination of `site` and `turtle`. Our reason for doing this is that there are *a lot* of zeroes in our data and we don't want to rely too heavily on any technique to deal with those zeroes as they may influence our inference. If we had more sites with more reps at each site this might be less of a problem and we may choose to use the raw data. But in this case, we can reduce the dimensionality of our problem a bit before we move on.
 
-<br>
+
  
 Use ddply to get the average of samples across sites. This is a slightly different use of the ddply function than we've seen previously, but it is  really effective for summarizing data with a lot of columns.
 
-<br>
+
  
 **Note**: the following may not work for you (I still don't know why). If this is the case, please skip the next two chunks of code. 
  
@@ -201,16 +169,16 @@ write.table(turtles2, 'turtles2.csv', row.names=FALSE, quote=FALSE, sep=',')
 ```
 
 **If that did not work for you**, then do this, otherwise do not:
-```{r}
-turtles2 = read.csv('http://employees.oneonta.edu/stichds/data/turtles2.csv')
+```{r, eval=FALSE, echo=TRUE}
+turtles2 = read.csv('turtles2.csv')
 ```
 
-<br>
- 
+```{r, eval=TRUE, echo=FALSE}
+turtles2 = read.csv('../../data/turtles2.csv')
+```
+
 Get a species x community matrix of the data for NMDS and assign a name to it. Here, we are leaving out the habitat data and removing the snails, slugs, and 'other species' to keep the question focused on the plant community.
 
-<br>
- 
 ```{r}
 # Make the matrix
   community_matrix = as.matrix(turtles2[ , c(8:(ncol(turtles2))-3)] )
@@ -221,12 +189,8 @@ Get a species x community matrix of the data for NMDS and assign a name to it. H
     names(turtles2)[c(8:(ncol(turtles2))-3)])
 ```
 
-<br>
- 
 Now, fit the NMDS to the data. We still have quite a few zeros in these data, so let's use the jaccard distance calculation for our `distance` argument here just to be on the safe side. In theory, if the zeros are not actually a problem, the Jaccard distance calculations *should* return the same distance matrix as the Bray-Curtis distance calculations.
 
-<br>
- 
 ```{r, echo=FALSE, results='hide'}
 # Now, we will fit the NMDS using the metaMDS function in the vegan package
   example_NMDS=metaMDS(
@@ -236,46 +200,28 @@ Now, fit the NMDS to the data. We still have quite a few zeros in these data, so
   )
 ```
 
-<br>
- 
 **Note the following**: a) the transformation that was selected by the ordination algorithm, b) the number of runs before a solution was reached, and c) the stress at the final run. These are the kinds of things you will want to report when you do ordination.
 
-<br>
- 
 **Question 3.** What is the qualitative evaluation for your the `stress` of this ordination based upon the rules of thumb we discussed for the interpretation of stress? If you can't remember or didn't write it down, hit the stack[Overflow].
 
-<br>
- 
 You can take a look at the fit by printing the fitted ordination to the console with the print function.
 
-<br>
- 
 ```{r, eval=FALSE}  
 # Let's take a look at the summary to make sure we know what is going on here
   print(example_NMDS)
 ```
  
-<br>
-  
 We can make a stress plot of the data to get a feel for the fit and get some sense of the fit of this model to our data. This will also give us a sense of how well the ordination captures the variability of the data.
 
-<br>
- 
 ```{r, eval=FALSE}
 # Take a look at the stress plot for the ordination
   stressplot(example_NMDS)
 ```
 
-<br>
- 
 **Question 4.** How much of the variance in the data can be explained by the non-metric and linear fits for the ordination?
 
-<br>
- 
 Plot the ordination of species abundances by site and turtle treatment to visualize the associations:
 
-<br>
- 
 ```{r, echo=TRUE}
 # Now we can plot the ordination for our NMDS given that we are satisfied with
 # the stress parameter and the convergenc
@@ -301,11 +247,7 @@ Plot the ordination of species abundances by site and turtle treatment to visual
       bty='n', fill=c("blue", "red"))
 ```
 
-<br>
- 
 The ordination shows
-
-<br>
  
 1. All of the sites appear to show some shift in the plant community for incidences where turtles were found and were not with the exception of site 'CC'.
 
@@ -313,26 +255,14 @@ The ordination shows
 
 3. A weak difference in plant communities in which turtles were found compared to plant communities in which turles were not found. This difference appears to be driven primarily by species on the NMDS2 axis.
 
-<br>
- 
 Lastly, go ahead and test to see if there is a difference in community composition between sites and treatments. For this, we will use adonis (and the aptly named `adonis` function in R) to test additive effects of `site` and `turtle` on the species assemblage in each location. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the `turtle` variable as explanatory variables.     
-
-<br>
- 
 ```{r, echo=FALSE, results='hide'}    
 # Do a significance test to see if plants vary by turtle presence/absence
   adonis(community_matrix~turtles2[,1]+turtles2[,2], permutations = 9999)
 ``` 
 
-<br>
- 
 The results show that the plant communities vary significantly by site  (`turtles[,1]`) with the presence or absence of turtles (`turtles[,2]`) at a confidence level of $\alpha$ = 0.10, but not at $\alpha$ = 0.05. This is likely due to the fact that the plant communities within each site show some variability between locations in which turtles were found and locations in which they were not found. Future work might focus on a greater number of samples within sites to better characterize this variability during the growing season in addition to sampling a greater number of sites.
- 
-<br>
  
 **Question 5.** Based on the plot of the ordination, and the results of the adonis test: is species composition associated with the presence of turtles within sites? What about between sites? Why do you suppose this is the case?
 
 <br>
- 
-<br>
- 
