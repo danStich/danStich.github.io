@@ -376,6 +376,9 @@ $(document).ready(function () {
   <a href="instructors.html">Instructors</a>
 </li>
 <li>
+  <a href="resources.html">Additional Resources</a>
+</li>
+<li>
   <a href="contact.html">Contact</a>
 </li>
       </ul>
@@ -807,8 +810,11 @@ Vectors
 <p>If it looks like nothing happened, then it probably worked. Have a look at your Environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">ls</span>()            <span class="co"># We can use ls() to see what is in our environment</span></a>
-<a class="sourceLine" id="cb69-2" title="2"> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>      <span class="st">&quot;A&quot;</span>      <span class="st">&quot;b&quot;</span>      <span class="st">&quot;c&quot;</span>      <span class="st">&quot;d&quot;</span>      <span class="st">&quot;e&quot;</span>      <span class="st">&quot;f&quot;</span>      <span class="st">&quot;hook1&quot;</span> </a>
-<a class="sourceLine" id="cb69-3" title="3"> [<span class="dv">9</span>] <span class="st">&quot;hook2&quot;</span>  <span class="st">&quot;mat&quot;</span>    <span class="st">&quot;otsego&quot;</span></a></code></pre></div>
+<a class="sourceLine" id="cb69-2" title="2"> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>         <span class="st">&quot;A&quot;</span>         <span class="st">&quot;b&quot;</span>         <span class="st">&quot;c&quot;</span>         <span class="st">&quot;coord_dd&quot;</span>  <span class="st">&quot;coord_utm&quot;</span></a>
+<a class="sourceLine" id="cb69-3" title="3"> [<span class="dv">7</span>] <span class="st">&quot;d&quot;</span>         <span class="st">&quot;dd&quot;</span>        <span class="st">&quot;e&quot;</span>         <span class="st">&quot;f&quot;</span>         <span class="st">&quot;hook1&quot;</span>     <span class="st">&quot;hook2&quot;</span>    </a>
+<a class="sourceLine" id="cb69-4" title="4">[<span class="dv">13</span>] <span class="st">&quot;im&quot;</span>        <span class="st">&quot;ins&quot;</span>       <span class="st">&quot;lim&quot;</span>       <span class="st">&quot;lmod&quot;</span>      <span class="st">&quot;mat&quot;</span>       <span class="st">&quot;means&quot;</span>    </a>
+<a class="sourceLine" id="cb69-5" title="5">[<span class="dv">19</span>] <span class="st">&quot;mod&quot;</span>       <span class="st">&quot;newd&quot;</span>      <span class="st">&quot;otsego&quot;</span>    <span class="st">&quot;plotter&quot;</span>   <span class="st">&quot;preds&quot;</span>     <span class="st">&quot;vermont&quot;</span>  </a>
+<a class="sourceLine" id="cb69-6" title="6">[<span class="dv">25</span>] <span class="st">&quot;VT&quot;</span>       </a></code></pre></div>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></a>
 <a class="sourceLine" id="cb70-2" title="2">         lake      date month year depth temp   pH do_mgl  cond do_sat</a>
 <a class="sourceLine" id="cb70-3" title="3"><span class="dv">1</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">0.1</span> <span class="fl">0.39</span> <span class="fl">7.88</span>   <span class="fl">12.7</span> <span class="fl">0.300</span>     <span class="ot">NA</span></a>

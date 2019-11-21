@@ -13,6 +13,8 @@ navbar:
       href: afternoon.html
     - text: "Instructors"
       href: instructors.html
+    - text: "Additional Resources"
+      href: resources.html
     - text: "Contact"
       href: contact.html
   right:    

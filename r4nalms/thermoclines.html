@@ -376,6 +376,9 @@ $(document).ready(function () {
   <a href="instructors.html">Instructors</a>
 </li>
 <li>
+  <a href="resources.html">Additional Resources</a>
+</li>
+<li>
   <a href="contact.html">Contact</a>
 </li>
       </ul>
@@ -402,19 +405,19 @@ $(document).ready(function () {
 
 <p>Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.</p>
 <div id="package-load" class="section level3">
-<h3>Package load</h3>
+<h3><strong>Package load</strong></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load necessary packages</span></a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a></code></pre></div>
 </div>
 <div id="data-read" class="section level3">
-<h3>Data read</h3>
+<h3><strong>Data read</strong></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Read in the data</span></a>
 <a class="sourceLine" id="cb2-2" title="2">limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</a></code></pre></div>
 </div>
 <div id="data-manipulation" class="section level3">
-<h3>Data manipulation</h3>
+<h3><strong>Data manipulation</strong></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Data formatting &amp; extraction</span></a>
 <a class="sourceLine" id="cb3-2" title="2">limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)</a>
 <a class="sourceLine" id="cb3-3" title="3">limnos<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(limnos<span class="op">$</span>date)</a>
@@ -430,7 +433,7 @@ $(document).ready(function () {
 <a class="sourceLine" id="cb3-13" title="13">limlist &lt;-<span class="st"> </span><span class="kw">split</span>(limnos, <span class="kw">list</span>(limnos<span class="op">$</span>date))</a></code></pre></div>
 </div>
 <div id="calculate-thermocline-depth" class="section level3">
-<h3>Calculate thermocline depth</h3>
+<h3><strong>Calculate thermocline depth</strong></h3>
 <p>If you just have a single dataframe, you can pass the appropriate columns straight to the <code>thermo.depth</code> function in <code>rLakeAnalyzer</code>. But, we are looking to calculate thermocline depth for 114 different datasets. To make this easier, we pack them in a list (above) and then use <code>lapply</code> to apply the <code>thermo.depth</code> function to each element of the list. But, the <code>thermo.depth</code> function was not designed for this specifically, so we will first write a function that can be applied to a list, with a short name.</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Create a function to calculate thermocline</span></a>
 <a class="sourceLine" id="cb4-2" title="2"><span class="co"># depth that can be applied to a list as long</span></a>
@@ -453,7 +456,7 @@ $(document).ready(function () {
 <a class="sourceLine" id="cb6-3" title="3">out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</a></code></pre></div>
 </div>
 <div id="plot-changes-in-thermocline-depth" class="section level3">
-<h3>Plot changes in thermocline depth</h3>
+<h3><strong>Plot changes in thermocline depth</strong></h3>
 <p>Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the <code>ggplot2</code> library.</p>
 <p>First, subset the data so we are just working with July data.</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Make a plot of July thermocline depth </span></a>
