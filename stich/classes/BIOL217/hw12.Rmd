@@ -62,7 +62,7 @@ Before you go any further, set a seed for random processes in your script. The r
   
 ```  
 
-Now that you have the data ready for analysis, start by fitting a tree to the data that is overfit (the response is TP). Don't forget to load the `rpart` package if you haven't done so already. Remember the point of doing this is that we want to grow a big tree so we can prune it back to a reasonable size. unfortunately we won't know what that is until after we overfit the tree. 
+Now that you have the data ready for analysis, start by fitting a tree to the data that is overfit (the response is `TP`). Don't forget to load the `rpart` package if you haven't done so already. Remember the point of doing this is that we want to grow a big tree so we can prune it back to a reasonable size. unfortunately we won't know what that is until after we overfit the tree. 
 
 ```{r, echo=FALSE, include=FALSE, warning=FALSE, message=FALSE}
 # Load rpart  
@@ -110,15 +110,12 @@ _**Question 2.**_ Using the `printcp` function, how many splits are in the model
  
 Now go back and fit a new tree corresponding to the cp that was in your answer to *question 2*. Plot the fitted tree with the '`prp`' function, include the argument '`extra = 1`' in your call. 
  
- 
 _**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data <a href='../../data/water.pdf'>here</a> to find out what the abbreviations stand for if you need to.
  
 Just as we could calculate a misclassification rate for classification trees, we can also calculate an R-squared value for our training models for regression trees. To do this, we subtract the relative error for our tree at the final split from 1.00. You can get relative error using the `printcp` fuunction like you did above.
  
-
 _**Question 4**_ How much variance is explained by your regression tree. Does this surprise you given the number of explanatory variables you had at your disposal?
  
 _**Question 5.**_ How do the results of your *predictive model* compare to the findings of the *hypothesis testing* reported in the abstract of <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454">the paper</a>? Can you say anything about the directionality of the relationships that you have identified with your regression tree?
-  
 
 <br>  
