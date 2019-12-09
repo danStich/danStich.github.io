@@ -7,7 +7,7 @@
 
 <h2 id="multi"> Introduction </h2>
 
-This week in lectures and the lab exercises we will start by taking a step back for an in-depth look at the assumptions we make when we fit parametric models to data in an effort to explain the effects of explanatory variables on some response of interest, using linear models as the backdrop for our discussions. In previous lectures we learned how to fit linear models. The purpose of this lab is to provide you with the tools you need on the front end and the back end of that process so we are surrounding linear models with the goodness they deserve.
+This week in lecture and the lab exercises we will start by taking a step back for an in-depth look at the assumptions we make when we fit parametric models to data in an effort to explain the effects of explanatory variables on some response of interest, using linear models as the backdrop for our discussions. In previous lectures we learned how to fit linear models. The purpose of this lab is to provide you with the tools you need on the front end and the back end of that process so we are surrounding linear models with the goodness they deserve.
 
 We will also continue to talk about linear models that include multiple explanatory variables. Specifically, we will discuss how relationships between these variables might influence which ones we include in a given model and how we make defensible decisions when it comes to these choices. We will further probe the concept of the R^2^ statistic as a measure of model fit, and how this is influenced by the inclusion of multiple explanatory variables.
 
