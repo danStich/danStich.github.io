@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -82,7 +83,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -243,18 +243,6 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
 
@@ -346,7 +334,7 @@ $(document).ready(function () {
 <h1>Advanced Quantitative Biology (BIOL 678)</h1>
 <p><img src="../../images/matrixSmolt.jpg" alt=""></p>
 <p>This site is intended to serve as a permanent link to course content so students can access online learning modules, data sets and code used for the class. This site is not intended for submission of class assignments, accessing reading materials, tracking grades, or viewing the syllabus. For all of those materials, please refer to the course blackboard site, accessible through <a href="https://blackboard.oneonta.edu"> Blackboard </a>.</p>
-<p>All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/classData"> here </a></p>
+<p>All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/classData">here</a>.</p>
 <p>To access the content from a given topic, please click on the corresponding links below. Please review the <a href="rubric.html"> rubric </a> for submitting programming assignments through Blackboard each week prior to submission.</p>
 <div id="introduction-to-programming-in-r" class="section level3">
 <h3>Introduction to programming in R</h3>
@@ -419,6 +407,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
