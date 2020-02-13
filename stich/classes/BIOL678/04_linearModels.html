@@ -7,11 +7,12 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title></title>
+<title>04_linearModels.utf8.md</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -20,7 +21,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -37,43 +39,90 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-div.sourceCode { overflow-x: auto; }
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-pre, code { background-color: #f8f8f8; }
-code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
-code > span.dt { color: #204a87; } /* DataType */
-code > span.dv { color: #0000cf; } /* DecVal */
-code > span.bn { color: #0000cf; } /* BaseN */
-code > span.fl { color: #0000cf; } /* Float */
-code > span.ch { color: #4e9a06; } /* Char */
-code > span.st { color: #4e9a06; } /* String */
-code > span.co { color: #8f5902; font-style: italic; } /* Comment */
-code > span.ot { color: #8f5902; } /* Other */
-code > span.al { color: #ef2929; } /* Alert */
-code > span.fu { color: #000000; } /* Function */
-code > span.er { color: #a40000; font-weight: bold; } /* Error */
-code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
-code > span.cn { color: #000000; } /* Constant */
-code > span.sc { color: #000000; } /* SpecialChar */
-code > span.vs { color: #4e9a06; } /* VerbatimString */
-code > span.ss { color: #4e9a06; } /* SpecialString */
-code > span.im { } /* Import */
-code > span.va { color: #000000; } /* Variable */
-code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
-code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
-code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
-code > span.ex { } /* Extension */
-code > span.at { color: #c4a000; } /* Attribute */
-code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
-code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
-code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
-code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+<style type="text/css" data-origin="pandoc">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  { background-color: #f8f8f8; }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ef2929; } /* Alert */
+code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #c4a000; } /* Attribute */
+code span.bn { color: #0000cf; } /* BaseN */
+code span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4e9a06; } /* Char */
+code span.cn { color: #000000; } /* Constant */
+code span.co { color: #8f5902; font-style: italic; } /* Comment */
+code span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code span.dt { color: #204a87; } /* DataType */
+code span.dv { color: #0000cf; } /* DecVal */
+code span.er { color: #a40000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #0000cf; } /* Float */
+code span.fu { color: #000000; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code span.ot { color: #8f5902; } /* Other */
+code span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code span.sc { color: #000000; } /* SpecialChar */
+code span.ss { color: #4e9a06; } /* SpecialString */
+code span.st { color: #4e9a06; } /* String */
+code span.va { color: #000000; } /* Variable */
+code span.vs { color: #4e9a06; } /* VerbatimString */
+code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -110,9 +159,7 @@ h6 {
 
 <link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -126,13 +173,18 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -148,7 +200,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -168,6 +219,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -189,19 +277,73 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-</script>
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -285,7 +427,7 @@ Linear models
 <h2 id="multi">
 Introduction
 </h2>
-<p>This week, we will introduce a class of statistical tools known collectively as linear models. This class of tools includes such examples as one-way ANOVA, linear regression and correlation, and by extension includes all other n-way ANOVAs, multiple linear regression, and analysis of covariance (ANCOVA). Later this semester, we will see that these models be extended even further to include generalized linear models, generalized linear mixed models, and a number of multivariate techniques for complex data analysis.</p>
+<p>This week, we will introduce a class of statistical tools known collectively as linear models. This class of tools includes such examples as one-way ANOVA, linear regression and correlation, and by extension includes all other n-way ANOVAs, multiple linear regression, and analysis of covariance (ANCOVA). Later this semester, we will see that these models can be extended even further to include generalized linear models, generalized linear mixed models, and a number of multivariate techniques for complex data analysis.</p>
 <p>So, that said, this week is the gateway into the rest of the world of parametric and semi-parametric statistics. As a result, we will focus primarily on parametric applications this week and next, although we will discuss the simple case of the Kruskal-Wallis test as an alternative to the parametric ANOVA. In two weeks you will know why you will almost never need this test again! The over-arching theme for this week is that any of these methods can be expressed as the formula for a line, which is how they got their names. We will start with ANOVA because it is analagous to many of the methods that we’ve already discussed. However, it is important to recognize that this is just a special case of linear models. We will show this during our discussions this week.</p>
 <p>Because we are now entering into the realm of ‘the rest of statistics’ we also need to start ‘talking the talk’ in addition to ‘walking the walk’, so we will practice how to write methods sections for these tests and how to report the results. In reality, once you are comfortable using a couple of functions in R, writing up the methods and results is more challenging than fitting models, so we want to be thoughtful about how we do it!</p>
 <div id="analysis-of-variance-anova" class="section level2">
@@ -295,65 +437,65 @@ One-way ANOVA
 </h3>
 <p>We will use some of the built-in datasets in R this week to demonstrate our analyses and show how to communicate the methods and the results of our statistical inference.</p>
 <p>Let’s start by loading up the <code>PlantGrowth</code> dataset in R:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(PlantGrowth)</code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">data</span>(PlantGrowth)</a></code></pre></div>
 <p>Here, we see that we have a dataframe with 30 observations of two variables. The first variable describes plant growth (in units of mass), and the second variable describes control and treatment groups for individual plants.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(PlantGrowth)
-<span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">30</span> obs. of  <span class="dv">2</span> variables<span class="op">:</span>
-<span class="st"> </span><span class="er">$</span><span class="st"> </span>weight<span class="op">:</span><span class="st"> </span>num  <span class="fl">4.17</span> <span class="fl">5.58</span> <span class="fl">5.18</span> <span class="fl">6.11</span> <span class="fl">4.5</span> <span class="fl">4.61</span> <span class="fl">5.17</span> <span class="fl">4.53</span> <span class="fl">5.33</span> <span class="fl">5.14</span> ...
- <span class="op">$</span><span class="st"> </span>group <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;ctrl&quot;</span>,<span class="st">&quot;trt1&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">str</span>(PlantGrowth)</a>
+<a class="sourceLine" id="cb2-2" title="2"><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">30</span> obs. of  <span class="dv">2</span> variables<span class="op">:</span></a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="st"> </span><span class="er">$</span><span class="st"> </span>weight<span class="op">:</span><span class="st"> </span>num  <span class="fl">4.17</span> <span class="fl">5.58</span> <span class="fl">5.18</span> <span class="fl">6.11</span> <span class="fl">4.5</span> <span class="fl">4.61</span> <span class="fl">5.17</span> <span class="fl">4.53</span> <span class="fl">5.33</span> <span class="fl">5.14</span> ...</a>
+<a class="sourceLine" id="cb2-4" title="4"> <span class="op">$</span><span class="st"> </span>group <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">3</span> levels <span class="st">&quot;ctrl&quot;</span>,<span class="st">&quot;trt1&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</a></code></pre></div>
 <p>Let’s begin by fitting a one-way ANOVA to the plant data. In practice, this is <em>very</em> easy. First of all though, we would report our <strong>methods</strong> like this:</p>
 <blockquote>
 <p>We used a one-way analysis of variance (ANOVA) to estimate the effects of treatment group on the mass (g) of plants assuming a Type-I error rate of <span class="math inline">\(\alpha\)</span> = 0.05. Differences between groups were assumed to be significant at p &lt; 0.05.</p>
 </blockquote>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
-model &lt;-<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth)
-
-<span class="co"># Print the model object to the console</span>
-model
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)
-
-Coefficients<span class="op">:</span>
-(Intercept)    grouptrt1    grouptrt2  
-      <span class="fl">5.032</span>       <span class="op">-</span><span class="fl">0.371</span>        <span class="fl">0.494</span>  </code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb3-2" title="2">model &lt;-<span class="st"> </span><span class="kw">lm</span>(weight<span class="op">~</span>group, <span class="dt">data=</span>PlantGrowth)</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co"># Print the model object to the console</span></a>
+<a class="sourceLine" id="cb3-5" title="5">model</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb3-8" title="8"><span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)</a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb3-11" title="11">(Intercept)    grouptrt1    grouptrt2  </a>
+<a class="sourceLine" id="cb3-12" title="12">      <span class="fl">5.032</span>       <span class="fl">-0.371</span>        <span class="fl">0.494</span>  </a></code></pre></div>
 <p>Easy to do, but not very useful for getting the information that we need. What we get here is essentially just one part of the information that we would like to (should) report.</p>
 <p>If we look at the summary of the output, we can get more of what we need:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Look at a summary of</span>
-<span class="co"># the model object</span>
-<span class="kw">summary</span>(model)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)
-
-Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">1.0710</span> <span class="op">-</span><span class="fl">0.4180</span> <span class="op">-</span><span class="fl">0.0060</span>  <span class="fl">0.2627</span>  <span class="fl">1.3690</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)   <span class="fl">5.0320</span>     <span class="fl">0.1971</span>  <span class="fl">25.527</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-grouptrt1    <span class="op">-</span><span class="fl">0.3710</span>     <span class="fl">0.2788</span>  <span class="op">-</span><span class="fl">1.331</span>   <span class="fl">0.1944</span>    
-grouptrt2     <span class="fl">0.4940</span>     <span class="fl">0.2788</span>   <span class="fl">1.772</span>   <span class="fl">0.0877</span> .  
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.6234</span> on <span class="dv">27</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2641</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2096</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">4.846</span> on <span class="dv">2</span> and <span class="dv">27</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.01591</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Look at a summary of</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="co"># the model object</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="kw">summary</span>(model)</a>
+<a class="sourceLine" id="cb4-4" title="4"></a>
+<a class="sourceLine" id="cb4-5" title="5">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="kw">lm</span>(<span class="dt">formula =</span> weight <span class="op">~</span><span class="st"> </span>group, <span class="dt">data =</span> PlantGrowth)</a>
+<a class="sourceLine" id="cb4-7" title="7"></a>
+<a class="sourceLine" id="cb4-8" title="8">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="fl">-1.0710</span> <span class="fl">-0.4180</span> <span class="fl">-0.0060</span>  <span class="fl">0.2627</span>  <span class="fl">1.3690</span> </a>
+<a class="sourceLine" id="cb4-11" title="11"></a>
+<a class="sourceLine" id="cb4-12" title="12">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb4-14" title="14">(Intercept)   <span class="fl">5.0320</span>     <span class="fl">0.1971</span>  <span class="fl">25.527</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-15" title="15">grouptrt1    <span class="fl">-0.3710</span>     <span class="fl">0.2788</span>  <span class="fl">-1.331</span>   <span class="fl">0.1944</span>    </a>
+<a class="sourceLine" id="cb4-16" title="16">grouptrt2     <span class="fl">0.4940</span>     <span class="fl">0.2788</span>   <span class="fl">1.772</span>   <span class="fl">0.0877</span> .  </a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="op">---</span></a>
+<a class="sourceLine" id="cb4-18" title="18">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb4-19" title="19"></a>
+<a class="sourceLine" id="cb4-20" title="20">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.6234</span> on <span class="dv">27</span> degrees of freedom</a>
+<a class="sourceLine" id="cb4-21" title="21">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2641</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.2096</span> </a>
+<a class="sourceLine" id="cb4-22" title="22">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">4.846</span> on <span class="dv">2</span> and <span class="dv">27</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.01591</span></a></code></pre></div>
 <p>That’s better, and we get some useful information here. First of all, we get the value of the test statistic, the df, and the p-value for the model. We also get the <span class="math inline">\(R^2\)</span> for the model: 0.26. This statistic tells us roughly what percentage of the total variance in the data is explained by the model we fit. Another way of thinking of this is as a signal-to-noise ratio. More formally, it is the sum of squares between groups divided by the sum of squares total:</p>
 <p><span class="math display">\[R^2 = \frac{SSB}{SST}\]</span></p>
 <p>Let’s use the <code>anova</code> function to summarize the object a little further.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Get an ANOVA table for the model</span>
-<span class="kw">anova</span>(model)
-Analysis of Variance Table
-
-Response<span class="op">:</span><span class="st"> </span>weight
-          Df  Sum Sq Mean Sq F value  <span class="kw">Pr</span>(<span class="op">&gt;</span>F)  
-group      <span class="dv">2</span>  <span class="fl">3.7663</span>  <span class="fl">1.8832</span>  <span class="fl">4.8461</span> <span class="fl">0.01591</span> <span class="op">*</span>
-Residuals <span class="dv">27</span> <span class="fl">10.4921</span>  <span class="fl">0.3886</span>                  
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Get an ANOVA table for the model</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">anova</span>(model)</a>
+<a class="sourceLine" id="cb5-3" title="3">Analysis of Variance Table</a>
+<a class="sourceLine" id="cb5-4" title="4"></a>
+<a class="sourceLine" id="cb5-5" title="5">Response<span class="op">:</span><span class="st"> </span>weight</a>
+<a class="sourceLine" id="cb5-6" title="6">          Df  Sum Sq Mean Sq F value  <span class="kw">Pr</span>(<span class="op">&gt;</span>F)  </a>
+<a class="sourceLine" id="cb5-7" title="7">group      <span class="dv">2</span>  <span class="fl">3.7663</span>  <span class="fl">1.8832</span>  <span class="fl">4.8461</span> <span class="fl">0.01591</span> <span class="op">*</span></a>
+<a class="sourceLine" id="cb5-8" title="8">Residuals <span class="dv">27</span> <span class="fl">10.4921</span>  <span class="fl">0.3886</span>                  </a>
+<a class="sourceLine" id="cb5-9" title="9"><span class="op">---</span></a>
+<a class="sourceLine" id="cb5-10" title="10">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
 <p>Okay, this is really what we needed: an ANOVA table with a break down of the residuals, mean squared errors, etc. And, we can now say:</p>
 <blockquote>
 <p>We found that the treatment had a significant effect on plant weight (ANOVA, F = 4.846, df<sub>1</sub> = 2, df<sub>2</sub> = 27, p = 0.0159).</p>
@@ -361,38 +503,38 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <p><strong>NOTE</strong> that all of these statistics were present in the summary of the model, as well. They just weren’t neatly organized, and we would need to do the calculations by hand to drag them out of it.</p>
 <p>But, what if we want to know more about how treatment affected weight? Then, we could use a ‘pair-wise’ comparison to test for differences between factor levels. Because this essentially means conducting a whole bunch of t-tests, we need a way to account for our repeated Type-I error rate, because at <span class="math inline">\(\alpha\)</span> = 0.05 we stand a 1 in 20 chance of falsely rejecting the null even if it is true.</p>
 <p>One tool that lets us make multiple comparisons between groups is the Tukey HSD (honest significant difference) test. This test makes comparisons between each group while controlling for Type-I error. Essentially, this makes it harder to detect differences between groups but when we do we are more sure that they are not spurious. Sound confusing? At least it’s easy to do in R.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># We need to recast this as an ANOVA model with `aov` in R...</span>
-<span class="co"># this is essentially the same thing as the `lm` function, but  </span>
-<span class="co"># in a different wrapper (literally) that allows us to access </span>
-<span class="co"># the info in a different way</span>
-
-<span class="kw">TukeyHSD</span>(    <span class="co"># The function that does the Tukey test</span>
-  <span class="kw">aov</span>(       <span class="co"># A wrapper for lm objects</span>
-    model    <span class="co"># The model that we ran above</span>
-    )
-  )
-  Tukey multiple comparisons of means
-    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level
-
-Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> model)
-
-<span class="op">$</span>group
-            diff        lwr       upr     p adj
-trt1<span class="op">-</span>ctrl <span class="op">-</span><span class="fl">0.371</span> <span class="op">-</span><span class="fl">1.0622161</span> <span class="fl">0.3202161</span> <span class="fl">0.3908711</span>
-trt2<span class="op">-</span>ctrl  <span class="fl">0.494</span> <span class="op">-</span><span class="fl">0.1972161</span> <span class="fl">1.1852161</span> <span class="fl">0.1979960</span>
-trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="fl">0.1737839</span> <span class="fl">1.5562161</span> <span class="fl">0.0120064</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># We need to recast this as an ANOVA model with `aov` in R...</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="co"># this is essentially the same thing as the `lm` function, but  </span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="co"># in a different wrapper (literally) that allows us to access </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="co"># the info in a different way</span></a>
+<a class="sourceLine" id="cb6-5" title="5"></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="kw">TukeyHSD</span>(    <span class="co"># The function that does the Tukey test</span></a>
+<a class="sourceLine" id="cb6-7" title="7">  <span class="kw">aov</span>(       <span class="co"># A wrapper for lm objects</span></a>
+<a class="sourceLine" id="cb6-8" title="8">    model    <span class="co"># The model that we ran above</span></a>
+<a class="sourceLine" id="cb6-9" title="9">    )</a>
+<a class="sourceLine" id="cb6-10" title="10">  )</a>
+<a class="sourceLine" id="cb6-11" title="11">  Tukey multiple comparisons of means</a>
+<a class="sourceLine" id="cb6-12" title="12">    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level</a>
+<a class="sourceLine" id="cb6-13" title="13"></a>
+<a class="sourceLine" id="cb6-14" title="14">Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> model)</a>
+<a class="sourceLine" id="cb6-15" title="15"></a>
+<a class="sourceLine" id="cb6-16" title="16"><span class="op">$</span>group</a>
+<a class="sourceLine" id="cb6-17" title="17">            diff        lwr       upr     p adj</a>
+<a class="sourceLine" id="cb6-18" title="18">trt1<span class="op">-</span>ctrl <span class="fl">-0.371</span> <span class="fl">-1.0622161</span> <span class="fl">0.3202161</span> <span class="fl">0.3908711</span></a>
+<a class="sourceLine" id="cb6-19" title="19">trt2<span class="op">-</span>ctrl  <span class="fl">0.494</span> <span class="fl">-0.1972161</span> <span class="fl">1.1852161</span> <span class="fl">0.1979960</span></a>
+<a class="sourceLine" id="cb6-20" title="20">trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="fl">0.1737839</span> <span class="fl">1.5562161</span> <span class="fl">0.0120064</span></a></code></pre></div>
 <p>This report shows us exactly how the response differs with respect to the treatment groups. Here, we see that the only significant difference occurs between <code>trt2</code> and <code>trt1</code>. How do we know this? based on the p-values…</p>
 <p>For the readers, and for us, it may be easier to see this information displayed graphically:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make a boxplot of weight by group</span>
-<span class="co"># using the PlantGrowth data</span>
-<span class="kw">boxplot</span>(
-  weight<span class="op">~</span>group,           <span class="co"># Relationship of interest as formula</span>
-  <span class="dt">data=</span>PlantGrowth,       <span class="co"># Name of the data set</span>
-  <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,             <span class="co"># Fill color for boxes</span>
-  <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,        <span class="co"># Y-axis label</span>
-  <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>, <span class="co"># X-axis label</span>
-  <span class="dt">boxwex=</span>.<span class="dv">25</span>
-  )</code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Make a boxplot of weight by group</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="co"># using the PlantGrowth data</span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="kw">boxplot</span>(</a>
+<a class="sourceLine" id="cb7-4" title="4">  weight<span class="op">~</span>group,           <span class="co"># Relationship of interest as formula</span></a>
+<a class="sourceLine" id="cb7-5" title="5">  <span class="dt">data=</span>PlantGrowth,       <span class="co"># Name of the data set</span></a>
+<a class="sourceLine" id="cb7-6" title="6">  <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,             <span class="co"># Fill color for boxes</span></a>
+<a class="sourceLine" id="cb7-7" title="7">  <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,        <span class="co"># Y-axis label</span></a>
+<a class="sourceLine" id="cb7-8" title="8">  <span class="dt">xlab=</span><span class="st">&#39;Treatment group&#39;</span>, <span class="co"># X-axis label</span></a>
+<a class="sourceLine" id="cb7-9" title="9">  <span class="dt">boxwex=</span>.<span class="dv">25</span></a>
+<a class="sourceLine" id="cb7-10" title="10">  )</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>In addition to what we wrote before, we can now say something along the lines of:</p>
 <blockquote>
@@ -402,87 +544,87 @@ trt2<span class="op">-</span>trt1  <span class="fl">0.865</span>  <span class="f
 <h3>Two-way ANOVA</h3>
 <p>Next, we’ll step up the complexity and talk about cases for which we have more than one grouping variable and some kind of numeric response. In these cases, we can use a two-way (or ‘n-way’ depending on number of factors) ANOVA to examine effects of more than one grouping variable on the response.</p>
 <p>Here, we will use a dataset describing differences in the mass of belly- button lint collected from males and females of three species of apes.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the data:</span>
-lint &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;lint.txt&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Read in the data:</span></a>
+<a class="sourceLine" id="cb8-2" title="2">lint &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;lint.txt&#39;</span>)</a></code></pre></div>
 <div id="main-effects-model" class="section level4">
 <h4>Main effects model</h4>
 <p>Now we can fit a model to the data. This will work the same way as for the one-way ANOVA above, but this time we will add more terms on the right hand side of the equation. We will start by looking at the <em>main effects</em> model for this dataset.</p>
 <p>What is a main-effects model? This model assumes that the response of interest, in this case the mass of belly button lint, <code>lintmass</code>, is affected by both <code>species</code> and <code>gender</code>, and that within species the effect of gender is the same. For example, the mass of belly button lint could be greater in one species compared to others, and if there is a difference between sexes we would expect that trend to be the same across species (e.g., boys always have more lint than girls- sorry guys, it’s probably true!).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and save it to an object</span>
-lint.model&lt;-<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
-
-<span class="co"># Look at the summary of the model fit</span>
-<span class="kw">summary</span>(lint.model)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)
-
-Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">2.5792</span> <span class="op">-</span><span class="fl">0.9021</span>  <span class="fl">0.0875</span>  <span class="fl">0.8448</span>  <span class="fl">2.3917</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">                 </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)       <span class="fl">15.5458</span>     <span class="fl">0.6133</span>  <span class="fl">25.346</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-speciesSpecies <span class="dv">2</span>  <span class="op">-</span><span class="fl">3.4375</span>     <span class="fl">0.7512</span>  <span class="op">-</span><span class="fl">4.576</span> <span class="fl">0.000183</span> <span class="op">**</span><span class="er">*</span>
-speciesSpecies <span class="dv">3</span>  <span class="op">-</span><span class="fl">1.8750</span>     <span class="fl">0.7512</span>  <span class="op">-</span><span class="fl">2.496</span> <span class="fl">0.021414</span> <span class="op">*</span><span class="st">  </span>
-genderMale         <span class="fl">4.9083</span>     <span class="fl">0.6133</span>   <span class="fl">8.003</span> <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.502</span> on <span class="dv">20</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8096</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.781</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">28.35</span> on <span class="dv">3</span> and <span class="dv">20</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.107e-07</span>
-
-<span class="co"># Print the anova table</span>
-<span class="kw">anova</span>(lint.model)
-Analysis of Variance Table
-
-Response<span class="op">:</span><span class="st"> </span>lintmass
-          Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-species    <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span>  <span class="fl">10.499</span> <span class="fl">0.0007633</span> <span class="op">**</span><span class="er">*</span>
-gender     <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span>  <span class="fl">64.041</span>  <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span>
-Residuals <span class="dv">20</span>  <span class="fl">45.143</span>   <span class="fl">2.257</span>                      
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Fit the model and save it to an object</span></a>
+<a class="sourceLine" id="cb9-2" title="2">lint.model&lt;-<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)</a>
+<a class="sourceLine" id="cb9-3" title="3"></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="co"># Look at the summary of the model fit</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="kw">summary</span>(lint.model)</a>
+<a class="sourceLine" id="cb9-6" title="6"></a>
+<a class="sourceLine" id="cb9-7" title="7">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb9-8" title="8"><span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">+</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)</a>
+<a class="sourceLine" id="cb9-9" title="9"></a>
+<a class="sourceLine" id="cb9-10" title="10">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="fl">-2.5792</span> <span class="fl">-0.9021</span>  <span class="fl">0.0875</span>  <span class="fl">0.8448</span>  <span class="fl">2.3917</span> </a>
+<a class="sourceLine" id="cb9-13" title="13"></a>
+<a class="sourceLine" id="cb9-14" title="14">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb9-15" title="15"><span class="st">                 </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb9-16" title="16">(Intercept)       <span class="fl">15.5458</span>     <span class="fl">0.6133</span>  <span class="fl">25.346</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb9-17" title="17">speciesSpecies <span class="dv">2</span>  <span class="fl">-3.4375</span>     <span class="fl">0.7512</span>  <span class="fl">-4.576</span> <span class="fl">0.000183</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb9-18" title="18">speciesSpecies <span class="dv">3</span>  <span class="fl">-1.8750</span>     <span class="fl">0.7512</span>  <span class="fl">-2.496</span> <span class="fl">0.021414</span> <span class="op">*</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb9-19" title="19">genderMale         <span class="fl">4.9083</span>     <span class="fl">0.6133</span>   <span class="fl">8.003</span> <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb9-20" title="20"><span class="op">---</span></a>
+<a class="sourceLine" id="cb9-21" title="21">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-22" title="22"></a>
+<a class="sourceLine" id="cb9-23" title="23">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.502</span> on <span class="dv">20</span> degrees of freedom</a>
+<a class="sourceLine" id="cb9-24" title="24">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8096</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.781</span> </a>
+<a class="sourceLine" id="cb9-25" title="25">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">28.35</span> on <span class="dv">3</span> and <span class="dv">20</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">2.107e-07</span></a>
+<a class="sourceLine" id="cb9-26" title="26"></a>
+<a class="sourceLine" id="cb9-27" title="27"><span class="co"># Print the anova table</span></a>
+<a class="sourceLine" id="cb9-28" title="28"><span class="kw">anova</span>(lint.model)</a>
+<a class="sourceLine" id="cb9-29" title="29">Analysis of Variance Table</a>
+<a class="sourceLine" id="cb9-30" title="30"></a>
+<a class="sourceLine" id="cb9-31" title="31">Response<span class="op">:</span><span class="st"> </span>lintmass</a>
+<a class="sourceLine" id="cb9-32" title="32">          Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb9-33" title="33">species    <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span>  <span class="fl">10.499</span> <span class="fl">0.0007633</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb9-34" title="34">gender     <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span>  <span class="fl">64.041</span>  <span class="fl">1.16e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb9-35" title="35">Residuals <span class="dv">20</span>  <span class="fl">45.143</span>   <span class="fl">2.257</span>                      </a>
+<a class="sourceLine" id="cb9-36" title="36"><span class="op">---</span></a>
+<a class="sourceLine" id="cb9-37" title="37">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
 <p>As you can see, the output for the model is much the same as for the one- way ANOVA. The only real difference is that we have more than one grouping variable here.</p>
 <p>We could look at the data all at once, but this gets a bit messy:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Make the boxplot to start with</span>
-<span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species<span class="op">+</span>gender, <span class="co"># Formula</span>
-        <span class="dt">data=</span>lint,                       <span class="co"># The data set</span>
-        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,                      <span class="co"># Color for box fill</span>
-        <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,                 <span class="co"># Label for y-axis</span>
-        <span class="dt">names=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;Species 1&#39;</span>, <span class="st">&#39;Species 2&#39;</span>, <span class="st">&#39;Species 3&#39;</span>), <span class="dv">2</span>),
-        <span class="dt">boxwex=</span>.<span class="dv">25</span>
-        )
-
-<span class="co"># Add a vertical line to separate sexes</span>
-<span class="kw">abline</span>(<span class="dt">v=</span><span class="fl">3.5</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lwd=</span><span class="dv">1</span>)
-
-<span class="co"># Label sexes at the top of the plot</span>
-<span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Female&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">2</span>))
-<span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Male&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">5</span>))</code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Make the boxplot to start with</span></a>
+<a class="sourceLine" id="cb10-2" title="2"><span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species<span class="op">+</span>gender, <span class="co"># Formula</span></a>
+<a class="sourceLine" id="cb10-3" title="3">        <span class="dt">data=</span>lint,                       <span class="co"># The data set</span></a>
+<a class="sourceLine" id="cb10-4" title="4">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,                      <span class="co"># Color for box fill</span></a>
+<a class="sourceLine" id="cb10-5" title="5">        <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,                 <span class="co"># Label for y-axis</span></a>
+<a class="sourceLine" id="cb10-6" title="6">        <span class="dt">names=</span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;Species 1&#39;</span>, <span class="st">&#39;Species 2&#39;</span>, <span class="st">&#39;Species 3&#39;</span>), <span class="dv">2</span>),</a>
+<a class="sourceLine" id="cb10-7" title="7">        <span class="dt">boxwex=</span>.<span class="dv">25</span></a>
+<a class="sourceLine" id="cb10-8" title="8">        )</a>
+<a class="sourceLine" id="cb10-9" title="9"></a>
+<a class="sourceLine" id="cb10-10" title="10"><span class="co"># Add a vertical line to separate sexes</span></a>
+<a class="sourceLine" id="cb10-11" title="11"><span class="kw">abline</span>(<span class="dt">v=</span><span class="fl">3.5</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lwd=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb10-12" title="12"></a>
+<a class="sourceLine" id="cb10-13" title="13"><span class="co"># Label sexes at the top of the plot</span></a>
+<a class="sourceLine" id="cb10-14" title="14"><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Female&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb10-15" title="15"><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&#39;Male&#39;</span>, <span class="dt">side=</span><span class="dv">3</span>, <span class="dt">at =</span> <span class="kw">c</span>(<span class="dv">23</span>, <span class="dv">5</span>))</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>We can also look at the factors seperately:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Set the plotting window so it can</span>
-<span class="co"># fit two boxplots side by side</span>
-<span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))
-
-<span class="co"># Add the first boxplot to the plotting window</span>
-<span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species,
-        <span class="dt">data=</span>lint,
-        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
-        <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,
-        <span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&#39;Sp. 1&#39;</span>, <span class="st">&#39;Sp. 2&#39;</span>, <span class="st">&#39;Sp. 3&#39;</span>)
-        )
-
-<span class="co"># Add the second boxplot</span>
-<span class="kw">boxplot</span>(lintmass<span class="op">~</span>gender,
-        <span class="dt">data=</span>lint,
-        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
-        <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,
-        <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&#39;Female&#39;</span>, <span class="st">&#39;Male&#39;</span>)
-        )</code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Set the plotting window so it can</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="co"># fit two boxplots side by side</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>))</a>
+<a class="sourceLine" id="cb11-4" title="4"></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="co"># Add the first boxplot to the plotting window</span></a>
+<a class="sourceLine" id="cb11-6" title="6"><span class="kw">boxplot</span>(<span class="dt">formula=</span>lintmass<span class="op">~</span>species,</a>
+<a class="sourceLine" id="cb11-7" title="7">        <span class="dt">data=</span>lint,</a>
+<a class="sourceLine" id="cb11-8" title="8">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,</a>
+<a class="sourceLine" id="cb11-9" title="9">        <span class="dt">ylab=</span><span class="st">&#39;Mass (g)&#39;</span>,</a>
+<a class="sourceLine" id="cb11-10" title="10">        <span class="dt">names =</span> <span class="kw">c</span>(<span class="st">&#39;Sp. 1&#39;</span>, <span class="st">&#39;Sp. 2&#39;</span>, <span class="st">&#39;Sp. 3&#39;</span>)</a>
+<a class="sourceLine" id="cb11-11" title="11">        )</a>
+<a class="sourceLine" id="cb11-12" title="12"></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="co"># Add the second boxplot</span></a>
+<a class="sourceLine" id="cb11-14" title="14"><span class="kw">boxplot</span>(lintmass<span class="op">~</span>gender,</a>
+<a class="sourceLine" id="cb11-15" title="15">        <span class="dt">data=</span>lint,</a>
+<a class="sourceLine" id="cb11-16" title="16">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,</a>
+<a class="sourceLine" id="cb11-17" title="17">        <span class="dt">ylab=</span><span class="st">&#39;&#39;</span>,</a>
+<a class="sourceLine" id="cb11-18" title="18">        <span class="dt">names=</span><span class="kw">c</span>(<span class="st">&#39;Female&#39;</span>, <span class="st">&#39;Male&#39;</span>)</a>
+<a class="sourceLine" id="cb11-19" title="19">        )</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
 <p>Hopefully after seeing these results you are now starting to realize how important a few well-placed figures and tables can be for clearly communicating the results of your research (even if it is about belly-button lint).</p>
 </div>
@@ -490,46 +632,46 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <h4>Interaction terms</h4>
 <p>The n-way ANOVA is the first kind of model we have used in which it is possible to consider <em>interactions</em> between two factors. An interaction is a situation that occurs when the effects of two or more factors is not additive. This means that the effect of gender might change for different species. For example, let us consider the following scenario in the lint data.</p>
 <p>Perhaps we hypothesize that lint accumulation in the belly buttons of females differs in pattern from males due to social grooming patterns and sex-specific behavioral patterns favoring females. As a result, we might expect that sex and species could have some kind of non-additive effect on lint mass in these apes. To test this, we would use the following:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit a new model that includes an interaction, signified by &#39;*&#39;</span>
-lint.modeli &lt;-<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)
-
-<span class="co"># Summarize the model</span>
-<span class="kw">summary</span>(lint.modeli)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)
-
-Residuals<span class="op">:</span>
-<span class="st">   </span>Min     1Q Median     3Q    Max 
-<span class="op">-</span><span class="fl">2.525</span> <span class="op">-</span><span class="fl">0.750</span>  <span class="fl">0.050</span>  <span class="fl">1.019</span>  <span class="fl">1.875</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">                            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)                  <span class="fl">14.9250</span>     <span class="fl">0.7404</span>  <span class="fl">20.159</span> <span class="fl">8.40e-14</span> <span class="op">**</span><span class="er">*</span>
-speciesSpecies <span class="dv">2</span>             <span class="op">-</span><span class="fl">2.2500</span>     <span class="fl">1.0471</span>  <span class="op">-</span><span class="fl">2.149</span>   <span class="fl">0.0455</span> <span class="op">*</span><span class="st">  </span>
-speciesSpecies <span class="dv">3</span>             <span class="op">-</span><span class="fl">1.2000</span>     <span class="fl">1.0471</span>  <span class="op">-</span><span class="fl">1.146</span>   <span class="fl">0.2668</span>    
-genderMale                    <span class="fl">6.1500</span>     <span class="fl">1.0471</span>   <span class="fl">5.874</span> <span class="fl">1.46e-05</span> <span class="op">**</span><span class="er">*</span>
-speciesSpecies <span class="dv">2</span><span class="op">:</span>genderMale  <span class="op">-</span><span class="fl">2.3750</span>     <span class="fl">1.4808</span>  <span class="op">-</span><span class="fl">1.604</span>   <span class="fl">0.1261</span>    
-speciesSpecies <span class="dv">3</span><span class="op">:</span>genderMale  <span class="op">-</span><span class="fl">1.3500</span>     <span class="fl">1.4808</span>  <span class="op">-</span><span class="fl">0.912</span>   <span class="fl">0.3740</span>    
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.481</span> on <span class="dv">18</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8335</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7873</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">18.03</span> on <span class="dv">5</span> and <span class="dv">18</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.898e-06</span>
-
-<span class="co"># Print an ANOVA table for the model</span>
-<span class="kw">anova</span>(lint.modeli)
-Analysis of Variance Table
-
-Response<span class="op">:</span><span class="st"> </span>lintmass
-               Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-species         <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span> <span class="fl">10.8079</span> <span class="fl">0.0008253</span> <span class="op">**</span><span class="er">*</span>
-gender          <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span> <span class="fl">65.9253</span> <span class="fl">1.983e-07</span> <span class="op">**</span><span class="er">*</span>
-species<span class="op">:</span>gender  <span class="dv">2</span>   <span class="fl">5.676</span>   <span class="fl">2.838</span>  <span class="fl">1.2943</span> <span class="fl">0.2984104</span>    
-Residuals      <span class="dv">18</span>  <span class="fl">39.468</span>   <span class="fl">2.193</span>                      
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Fit a new model that includes an interaction, signified by &#39;*&#39;</span></a>
+<a class="sourceLine" id="cb12-2" title="2">lint.modeli &lt;-<span class="st"> </span><span class="kw">lm</span>(lintmass<span class="op">~</span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data=</span>lint)</a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co"># Summarize the model</span></a>
+<a class="sourceLine" id="cb12-5" title="5"><span class="kw">summary</span>(lint.modeli)</a>
+<a class="sourceLine" id="cb12-6" title="6"></a>
+<a class="sourceLine" id="cb12-7" title="7">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-8" title="8"><span class="kw">lm</span>(<span class="dt">formula =</span> lintmass <span class="op">~</span><span class="st"> </span>species <span class="op">*</span><span class="st"> </span>gender, <span class="dt">data =</span> lint)</a>
+<a class="sourceLine" id="cb12-9" title="9"></a>
+<a class="sourceLine" id="cb12-10" title="10">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-11" title="11"><span class="st">   </span>Min     1Q Median     3Q    Max </a>
+<a class="sourceLine" id="cb12-12" title="12"><span class="fl">-2.525</span> <span class="fl">-0.750</span>  <span class="fl">0.050</span>  <span class="fl">1.019</span>  <span class="fl">1.875</span> </a>
+<a class="sourceLine" id="cb12-13" title="13"></a>
+<a class="sourceLine" id="cb12-14" title="14">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb12-15" title="15"><span class="st">                            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb12-16" title="16">(Intercept)                  <span class="fl">14.9250</span>     <span class="fl">0.7404</span>  <span class="fl">20.159</span> <span class="fl">8.40e-14</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb12-17" title="17">speciesSpecies <span class="dv">2</span>             <span class="fl">-2.2500</span>     <span class="fl">1.0471</span>  <span class="fl">-2.149</span>   <span class="fl">0.0455</span> <span class="op">*</span><span class="st">  </span></a>
+<a class="sourceLine" id="cb12-18" title="18">speciesSpecies <span class="dv">3</span>             <span class="fl">-1.2000</span>     <span class="fl">1.0471</span>  <span class="fl">-1.146</span>   <span class="fl">0.2668</span>    </a>
+<a class="sourceLine" id="cb12-19" title="19">genderMale                    <span class="fl">6.1500</span>     <span class="fl">1.0471</span>   <span class="fl">5.874</span> <span class="fl">1.46e-05</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb12-20" title="20">speciesSpecies <span class="dv">2</span><span class="op">:</span>genderMale  <span class="fl">-2.3750</span>     <span class="fl">1.4808</span>  <span class="fl">-1.604</span>   <span class="fl">0.1261</span>    </a>
+<a class="sourceLine" id="cb12-21" title="21">speciesSpecies <span class="dv">3</span><span class="op">:</span>genderMale  <span class="fl">-1.3500</span>     <span class="fl">1.4808</span>  <span class="fl">-0.912</span>   <span class="fl">0.3740</span>    </a>
+<a class="sourceLine" id="cb12-22" title="22"><span class="op">---</span></a>
+<a class="sourceLine" id="cb12-23" title="23">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb12-24" title="24"></a>
+<a class="sourceLine" id="cb12-25" title="25">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.481</span> on <span class="dv">18</span> degrees of freedom</a>
+<a class="sourceLine" id="cb12-26" title="26">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.8335</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7873</span> </a>
+<a class="sourceLine" id="cb12-27" title="27">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">18.03</span> on <span class="dv">5</span> and <span class="dv">18</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">1.898e-06</span></a>
+<a class="sourceLine" id="cb12-28" title="28"></a>
+<a class="sourceLine" id="cb12-29" title="29"><span class="co"># Print an ANOVA table for the model</span></a>
+<a class="sourceLine" id="cb12-30" title="30"><span class="kw">anova</span>(lint.modeli)</a>
+<a class="sourceLine" id="cb12-31" title="31">Analysis of Variance Table</a>
+<a class="sourceLine" id="cb12-32" title="32"></a>
+<a class="sourceLine" id="cb12-33" title="33">Response<span class="op">:</span><span class="st"> </span>lintmass</a>
+<a class="sourceLine" id="cb12-34" title="34">               Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb12-35" title="35">species         <span class="dv">2</span>  <span class="fl">47.396</span>  <span class="fl">23.698</span> <span class="fl">10.8079</span> <span class="fl">0.0008253</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb12-36" title="36">gender          <span class="dv">1</span> <span class="fl">144.550</span> <span class="fl">144.550</span> <span class="fl">65.9253</span> <span class="fl">1.983e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb12-37" title="37">species<span class="op">:</span>gender  <span class="dv">2</span>   <span class="fl">5.676</span>   <span class="fl">2.838</span>  <span class="fl">1.2943</span> <span class="fl">0.2984104</span>    </a>
+<a class="sourceLine" id="cb12-38" title="38">Residuals      <span class="dv">18</span>  <span class="fl">39.468</span>   <span class="fl">2.193</span>                      </a>
+<a class="sourceLine" id="cb12-39" title="39"><span class="op">---</span></a>
+<a class="sourceLine" id="cb12-40" title="40">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
 <p>Alas, in the case of the lint model, this interaction is not significant, so we now have some evidence to suggest that either our hypothesis or our experimental design (or both) were flawed.</p>
 <p>Note that the n-way ANOVA is also the framework within which the randomized block design is implemented. We will not cover that in this course as the implementation is identical to that above and virtually none of you will ever have any occasion to actually use a randomized block design.</p>
 </div>
@@ -539,25 +681,25 @@ Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv"
 <h2>Non-parametric “ANOVA”: Kruskal-Wallis</h2>
 <p>We will give the non-parametric Kruskal-Wallis test a brief treatment here. The main reason that the treatment will be brief is that we will cover a wide variety of methods from now until the end of this course that will all but eliminate the need for this technique in your tool box. However, some of you will inevitably have some need for this (probably because the edict has been passed down to you from a superior who doesn’t ‘get’ GLM).</p>
 <p>We will use the <code>airquality</code> data for this example</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Load the data set</span>
-<span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)
-
-<span class="co"># Now test for test for differences</span>
-<span class="co"># in Ozone levels between months in the</span>
-<span class="co"># data set.</span>
-air.test&lt;-<span class="st"> </span><span class="kw">kruskal.test</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)
-air.test
-
-    Kruskal<span class="op">-</span>Wallis rank sum test
-
-data<span class="op">:</span><span class="st">  </span>Ozone by Month
-Kruskal<span class="op">-</span>Wallis chi<span class="op">-</span>squared =<span class="st"> </span><span class="fl">29.267</span>, df =<span class="st"> </span><span class="dv">4</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.901e-06</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Load the data set</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)</a>
+<a class="sourceLine" id="cb13-3" title="3"></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Now test for test for differences</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="co"># in Ozone levels between months in the</span></a>
+<a class="sourceLine" id="cb13-6" title="6"><span class="co"># data set.</span></a>
+<a class="sourceLine" id="cb13-7" title="7">air.test&lt;-<span class="st"> </span><span class="kw">kruskal.test</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)</a>
+<a class="sourceLine" id="cb13-8" title="8">air.test</a>
+<a class="sourceLine" id="cb13-9" title="9"></a>
+<a class="sourceLine" id="cb13-10" title="10">    Kruskal<span class="op">-</span>Wallis rank sum test</a>
+<a class="sourceLine" id="cb13-11" title="11"></a>
+<a class="sourceLine" id="cb13-12" title="12">data<span class="op">:</span><span class="st">  </span>Ozone by Month</a>
+<a class="sourceLine" id="cb13-13" title="13">Kruskal<span class="op">-</span>Wallis chi<span class="op">-</span>squared =<span class="st"> </span><span class="fl">29.267</span>, df =<span class="st"> </span><span class="dv">4</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.901e-06</span></a></code></pre></div>
 <p>We find that there are signigicant shifts in median <code>Ozone</code> between <code>months</code>. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">boxplot</span>(Ozone <span class="op">~</span><span class="st"> </span>Month,
-        <span class="dt">data =</span> airquality,
-        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,
-        <span class="dt">ylab=</span><span class="st">&#39;Ozone&#39;</span>,
-        <span class="dt">xlab =</span> <span class="st">&#39;Month&#39;</span>)</code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">boxplot</span>(Ozone <span class="op">~</span><span class="st"> </span>Month,</a>
+<a class="sourceLine" id="cb14-2" title="2">        <span class="dt">data =</span> airquality,</a>
+<a class="sourceLine" id="cb14-3" title="3">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,</a>
+<a class="sourceLine" id="cb14-4" title="4">        <span class="dt">ylab=</span><span class="st">&#39;Ozone&#39;</span>,</a>
+<a class="sourceLine" id="cb14-5" title="5">        <span class="dt">xlab =</span> <span class="st">&#39;Month&#39;</span>)</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>As far as the utility of Kruskal-Wallis goes, this is about it without getting into gross complexities that, in and of themselves, warrant an alternative approach. The alternative approach will be the focus of much discussion for the rest of the semester.</p>
 </div>
@@ -574,34 +716,34 @@ Kruskal<span class="op">-</span>Wallis chi<span class="op">-</span>squared =<spa
 <p>Data!</p>
 </blockquote>
 <p>These data are for fertility and infant mortality rates as related to a number of socio-economic indicators. Take a moment to look at them:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">data</span>(swiss)
-?swiss</code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">data</span>(swiss)</a>
+<a class="sourceLine" id="cb15-2" title="2">?swiss</a></code></pre></div>
 <p>Now, let’s get cracking.</p>
 <p>We’ll start by fitting a simple model and then build complexity</p>
 <p>Fit a model that relates fertility to education level. Notice that this looks exactly the same as the call to lm for the ANOVAs above? That’s because they are the same thing and people have been lying to you your whole life!!!</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model and assign it to a named object</span>
-fert.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)
-
-<span class="co"># Summarize the model</span>
-<span class="kw">summary</span>(fert.mod)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">data =</span> swiss)
-
-Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">17.036</span>  <span class="op">-</span><span class="fl">6.711</span>  <span class="op">-</span><span class="fl">1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)  <span class="fl">79.6101</span>     <span class="fl">2.1041</span>  <span class="fl">37.836</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-Education    <span class="op">-</span><span class="fl">0.8624</span>     <span class="fl">0.1448</span>  <span class="op">-</span><span class="fl">5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Fit the model and assign it to a named object</span></a>
+<a class="sourceLine" id="cb16-2" title="2">fert.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb16-3" title="3"></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="co"># Summarize the model</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="kw">summary</span>(fert.mod)</a>
+<a class="sourceLine" id="cb16-6" title="6"></a>
+<a class="sourceLine" id="cb16-7" title="7">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb16-9" title="9"></a>
+<a class="sourceLine" id="cb16-10" title="10">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-11" title="11"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb16-12" title="12"><span class="fl">-17.036</span>  <span class="fl">-6.711</span>  <span class="fl">-1.011</span>   <span class="fl">9.526</span>  <span class="fl">19.689</span> </a>
+<a class="sourceLine" id="cb16-13" title="13"></a>
+<a class="sourceLine" id="cb16-14" title="14">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb16-15" title="15"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb16-16" title="16">(Intercept)  <span class="fl">79.6101</span>     <span class="fl">2.1041</span>  <span class="fl">37.836</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb16-17" title="17">Education    <span class="fl">-0.8624</span>     <span class="fl">0.1448</span>  <span class="fl">-5.954</span> <span class="fl">3.66e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb16-18" title="18"><span class="op">---</span></a>
+<a class="sourceLine" id="cb16-19" title="19">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb16-20" title="20"></a>
+<a class="sourceLine" id="cb16-21" title="21">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom</a>
+<a class="sourceLine" id="cb16-22" title="22">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> </a>
+<a class="sourceLine" id="cb16-23" title="23">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></a></code></pre></div>
 <p>We see that there is a significant negative relation between <code>Education</code> level and <code>fertility</code>. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.</p>
 <p>We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the <span class="math inline">\(R^2\)</span> value that is returned.</p>
 <p>This is as far as the summary goes for linear regression for now. That is, we don’t need the ANOVA table any more because we have no factors- just continuous variables. What we end up with in this summary are the coefficients (corresponding to parameters of a model) that can be used to describe the line that passes through the data and minimizes the residual errors.</p>
@@ -609,74 +751,74 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>WHAT??</p>
 </blockquote>
 <p>Let’s explain this by actually looking at the data</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># First make a sequence of new values for Education across observed range</span>
-  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Education=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,.<span class="dv">1</span>))
-
-<span class="co"># Plot the raw data</span>
-  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="fl">4.5</span>,<span class="dv">1</span>,<span class="dv">1</span>))
-  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility&#39;</span>,
-    <span class="dt">xlab=</span><span class="st">&#39;Education&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>))
-<span class="co"># Now, we will add a trendline</span>
-  preds =<span class="st"> </span><span class="kw">predict</span>(fert.mod, <span class="dt">newdata=</span>new,
-    <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)
-  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
-  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
-  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># First make a sequence of new values for Education across observed range</span></a>
+<a class="sourceLine" id="cb17-2" title="2">  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Education=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,.<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb17-3" title="3"></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb17-5" title="5">  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>,<span class="fl">4.5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb17-6" title="6">  <span class="kw">plot</span>(swiss<span class="op">$</span>Education, swiss<span class="op">$</span>Fertility, <span class="dt">ylab=</span><span class="st">&#39;Fertility&#39;</span>,</a>
+<a class="sourceLine" id="cb17-7" title="7">    <span class="dt">xlab=</span><span class="st">&#39;Education&#39;</span>, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">cex=</span><span class="fl">1.5</span>, <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">30</span>, <span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb17-8" title="8"><span class="co"># Now, we will add a trendline</span></a>
+<a class="sourceLine" id="cb17-9" title="9">  preds =<span class="st"> </span><span class="kw">predict</span>(fert.mod, <span class="dt">newdata=</span>new,</a>
+<a class="sourceLine" id="cb17-10" title="10">    <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>)</a>
+<a class="sourceLine" id="cb17-11" title="11">  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">1</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb17-12" title="12">  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb17-13" title="13">  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
 <p>FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself</p>
 <p>We can, of course, extend this to include multiple continuous explanatory variables of interest.</p>
 <p><strong>Example:</strong></p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Effects of Education and % Catholic on fertility</span>
-multiple.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">+</span>Catholic, <span class="dt">data=</span>swiss)
-
-<span class="kw">summary</span>(multiple.mod)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic, <span class="dt">data =</span> swiss)
-
-Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">15.042</span>  <span class="op">-</span><span class="fl">6.578</span>  <span class="op">-</span><span class="fl">1.431</span>   <span class="fl">6.122</span>  <span class="fl">14.322</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept) <span class="fl">74.23369</span>    <span class="fl">2.35197</span>  <span class="fl">31.562</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-Education   <span class="op">-</span><span class="fl">0.78833</span>    <span class="fl">0.12929</span>  <span class="op">-</span><span class="fl">6.097</span> <span class="fl">2.43e-07</span> <span class="op">**</span><span class="er">*</span>
-Catholic     <span class="fl">0.11092</span>    <span class="fl">0.02981</span>   <span class="fl">3.721</span>  <span class="fl">0.00056</span> <span class="op">**</span><span class="er">*</span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">8.331</span> on <span class="dv">44</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5745</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5552</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="fl">29.7</span> on <span class="dv">2</span> and <span class="dv">44</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">6.849e-09</span>
-
-<span class="co"># Or if we want to get really crazy:</span>
-full.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Agriculture<span class="op">+</span>Examination<span class="op">+</span>Education<span class="op">+</span>Catholic,
-  <span class="dt">data=</span>swiss)
-
-<span class="kw">summary</span>(full.mod)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>
-<span class="st">    </span>Catholic, <span class="dt">data =</span> swiss)
-
-Residuals<span class="op">:</span>
-<span class="st">     </span>Min       1Q   Median       3Q      Max 
-<span class="op">-</span><span class="fl">15.7813</span>  <span class="op">-</span><span class="fl">6.3308</span>   <span class="fl">0.8113</span>   <span class="fl">5.7205</span>  <span class="fl">15.5569</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept) <span class="fl">91.05542</span>    <span class="fl">6.94881</span>  <span class="fl">13.104</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-Agriculture <span class="op">-</span><span class="fl">0.22065</span>    <span class="fl">0.07360</span>  <span class="op">-</span><span class="fl">2.998</span>  <span class="fl">0.00455</span> <span class="op">**</span><span class="st"> </span>
-Examination <span class="op">-</span><span class="fl">0.26058</span>    <span class="fl">0.27411</span>  <span class="op">-</span><span class="fl">0.951</span>  <span class="fl">0.34722</span>    
-Education   <span class="op">-</span><span class="fl">0.96161</span>    <span class="fl">0.19455</span>  <span class="op">-</span><span class="fl">4.943</span> <span class="fl">1.28e-05</span> <span class="op">**</span><span class="er">*</span>
-Catholic     <span class="fl">0.12442</span>    <span class="fl">0.03727</span>   <span class="fl">3.339</span>  <span class="fl">0.00177</span> <span class="op">**</span><span class="st"> </span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">7.736</span> on <span class="dv">42</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6498</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6164</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">19.48</span> on <span class="dv">4</span> and <span class="dv">42</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.95e-09</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Effects of Education and % Catholic on fertility</span></a>
+<a class="sourceLine" id="cb18-2" title="2">multiple.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Education<span class="op">+</span>Catholic, <span class="dt">data=</span>swiss)</a>
+<a class="sourceLine" id="cb18-3" title="3"></a>
+<a class="sourceLine" id="cb18-4" title="4"><span class="kw">summary</span>(multiple.mod)</a>
+<a class="sourceLine" id="cb18-5" title="5"></a>
+<a class="sourceLine" id="cb18-6" title="6">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-7" title="7"><span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span>Catholic, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb18-8" title="8"></a>
+<a class="sourceLine" id="cb18-9" title="9">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-10" title="10"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb18-11" title="11"><span class="fl">-15.042</span>  <span class="fl">-6.578</span>  <span class="fl">-1.431</span>   <span class="fl">6.122</span>  <span class="fl">14.322</span> </a>
+<a class="sourceLine" id="cb18-12" title="12"></a>
+<a class="sourceLine" id="cb18-13" title="13">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-14" title="14"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb18-15" title="15">(Intercept) <span class="fl">74.23369</span>    <span class="fl">2.35197</span>  <span class="fl">31.562</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb18-16" title="16">Education   <span class="fl">-0.78833</span>    <span class="fl">0.12929</span>  <span class="fl">-6.097</span> <span class="fl">2.43e-07</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb18-17" title="17">Catholic     <span class="fl">0.11092</span>    <span class="fl">0.02981</span>   <span class="fl">3.721</span>  <span class="fl">0.00056</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb18-18" title="18"><span class="op">---</span></a>
+<a class="sourceLine" id="cb18-19" title="19">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb18-20" title="20"></a>
+<a class="sourceLine" id="cb18-21" title="21">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">8.331</span> on <span class="dv">44</span> degrees of freedom</a>
+<a class="sourceLine" id="cb18-22" title="22">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5745</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.5552</span> </a>
+<a class="sourceLine" id="cb18-23" title="23">F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="fl">29.7</span> on <span class="dv">2</span> and <span class="dv">44</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">6.849e-09</span></a>
+<a class="sourceLine" id="cb18-24" title="24"></a>
+<a class="sourceLine" id="cb18-25" title="25"><span class="co"># Or if we want to get really crazy:</span></a>
+<a class="sourceLine" id="cb18-26" title="26">full.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Fertility<span class="op">~</span>Agriculture<span class="op">+</span>Examination<span class="op">+</span>Education<span class="op">+</span>Catholic,</a>
+<a class="sourceLine" id="cb18-27" title="27">  <span class="dt">data=</span>swiss)</a>
+<a class="sourceLine" id="cb18-28" title="28"></a>
+<a class="sourceLine" id="cb18-29" title="29"><span class="kw">summary</span>(full.mod)</a>
+<a class="sourceLine" id="cb18-30" title="30"></a>
+<a class="sourceLine" id="cb18-31" title="31">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-32" title="32"><span class="kw">lm</span>(<span class="dt">formula =</span> Fertility <span class="op">~</span><span class="st"> </span>Agriculture <span class="op">+</span><span class="st"> </span>Examination <span class="op">+</span><span class="st"> </span>Education <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-33" title="33"><span class="st">    </span>Catholic, <span class="dt">data =</span> swiss)</a>
+<a class="sourceLine" id="cb18-34" title="34"></a>
+<a class="sourceLine" id="cb18-35" title="35">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-36" title="36"><span class="st">     </span>Min       1Q   Median       3Q      Max </a>
+<a class="sourceLine" id="cb18-37" title="37"><span class="fl">-15.7813</span>  <span class="fl">-6.3308</span>   <span class="fl">0.8113</span>   <span class="fl">5.7205</span>  <span class="fl">15.5569</span> </a>
+<a class="sourceLine" id="cb18-38" title="38"></a>
+<a class="sourceLine" id="cb18-39" title="39">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb18-40" title="40"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb18-41" title="41">(Intercept) <span class="fl">91.05542</span>    <span class="fl">6.94881</span>  <span class="fl">13.104</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb18-42" title="42">Agriculture <span class="fl">-0.22065</span>    <span class="fl">0.07360</span>  <span class="fl">-2.998</span>  <span class="fl">0.00455</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-43" title="43">Examination <span class="fl">-0.26058</span>    <span class="fl">0.27411</span>  <span class="fl">-0.951</span>  <span class="fl">0.34722</span>    </a>
+<a class="sourceLine" id="cb18-44" title="44">Education   <span class="fl">-0.96161</span>    <span class="fl">0.19455</span>  <span class="fl">-4.943</span> <span class="fl">1.28e-05</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb18-45" title="45">Catholic     <span class="fl">0.12442</span>    <span class="fl">0.03727</span>   <span class="fl">3.339</span>  <span class="fl">0.00177</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb18-46" title="46"><span class="op">---</span></a>
+<a class="sourceLine" id="cb18-47" title="47">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb18-48" title="48"></a>
+<a class="sourceLine" id="cb18-49" title="49">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">7.736</span> on <span class="dv">42</span> degrees of freedom</a>
+<a class="sourceLine" id="cb18-50" title="50">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6498</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.6164</span> </a>
+<a class="sourceLine" id="cb18-51" title="51">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">19.48</span> on <span class="dv">4</span> and <span class="dv">42</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.95e-09</span></a></code></pre></div>
 <p>During the next couple of weeks, we’ll try to figure out a way to deal with this rat’s nest of different explanatory variables.</p>
 </div>
 <div id="analysis-of-covariance-ancova" class="section level2">
@@ -687,11 +829,11 @@ F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </
 <p>We are in the real world and we have multiple explanatory variables that we would like to test; some are factors and some are continuous. We want a nice elegant way of wrapping these all in to one analysis. How? It’s easier than you might think…</p>
 <p>Read in a new data set.</p>
 <p>This data set contains pulses of two species of crickets collected under varying temperatures.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Read in the cricket data and assign it to a named object</span>
-crickets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crickets.txt&#39;</span>)
-
-<span class="co"># Have a look</span>
-<span class="kw">head</span>(crickets)</code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Read in the cricket data and assign it to a named object</span></a>
+<a class="sourceLine" id="cb19-2" title="2">crickets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crickets.txt&#39;</span>)</a>
+<a class="sourceLine" id="cb19-3" title="3"></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="co"># Have a look</span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="kw">head</span>(crickets)</a></code></pre></div>
 <pre><code>  Species Temp Pulse
 1      ex 20.8  67.9
 2      ex 20.8  65.1
@@ -700,94 +842,94 @@ crickets &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span cl
 5      ex 24.0  79.4
 6      ex 24.0  80.4</code></pre>
 <p>Here we want to investigate the effects of species and temperature on pulses of individual crickets.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Fit the model</span>
-  cricket.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)</code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Fit the model</span></a>
+<a class="sourceLine" id="cb21-2" title="2">  cricket.mod &lt;-<span class="st"> </span><span class="kw">lm</span>(Pulse<span class="op">~</span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data=</span>crickets)</a></code></pre></div>
 <p>Install the car package. We need a function from this library for summary.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Uncomment front of line to install</span>
-<span class="co"># install.packages(&#39;car&#39;) </span>
-
-<span class="co"># Load the package</span>
-<span class="kw">library</span>(car)
-
-<span class="co"># Now we create the anova table</span>
-<span class="co"># for our ancova model</span>
-<span class="kw">Anova</span>(cricket.mod, <span class="dt">type=</span><span class="st">&#39;III&#39;</span>)
-Anova <span class="kw">Table</span> (Type III tests)
-
-Response<span class="op">:</span><span class="st"> </span>Pulse
-            Sum Sq Df   F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    
-(Intercept)   <span class="fl">25.5</span>  <span class="dv">1</span>    <span class="fl">7.9906</span>  <span class="fl">0.008582</span> <span class="op">**</span><span class="st"> </span>
-Species      <span class="fl">598.0</span>  <span class="dv">1</span>  <span class="fl">187.3994</span> <span class="fl">6.272e-14</span> <span class="op">**</span><span class="er">*</span>
-Temp        <span class="fl">4376.1</span>  <span class="dv">1</span> <span class="fl">1371.3541</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span>
-Residuals     <span class="fl">89.3</span> <span class="dv">28</span>                        
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-<span class="co"># And we can look at the</span>
-<span class="co"># summary of the linear model</span>
-<span class="kw">summary</span>(cricket.mod)
-
-Call<span class="op">:</span>
-<span class="kw">lm</span>(<span class="dt">formula =</span> Pulse <span class="op">~</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data =</span> crickets)
-
-Residuals<span class="op">:</span>
-<span class="st">    </span>Min      1Q  Median      3Q     Max 
-<span class="op">-</span><span class="fl">3.0128</span> <span class="op">-</span><span class="fl">1.1296</span> <span class="op">-</span><span class="fl">0.3912</span>  <span class="fl">0.9650</span>  <span class="fl">3.7800</span> 
-
-Coefficients<span class="op">:</span>
-<span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    
-(Intercept)  <span class="op">-</span><span class="fl">7.21091</span>    <span class="fl">2.55094</span>  <span class="op">-</span><span class="fl">2.827</span>  <span class="fl">0.00858</span> <span class="op">**</span><span class="st"> </span>
-Speciesniv  <span class="op">-</span><span class="fl">10.06529</span>    <span class="fl">0.73526</span> <span class="op">-</span><span class="fl">13.689</span> <span class="fl">6.27e-14</span> <span class="op">**</span><span class="er">*</span>
-Temp          <span class="fl">3.60275</span>    <span class="fl">0.09729</span>  <span class="fl">37.032</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span>
-<span class="op">---</span>
-Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span>
-
-Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.786</span> on <span class="dv">28</span> degrees of freedom
-Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9896</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9888</span> 
-F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">1331</span> on <span class="dv">2</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Uncomment front of line to install</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="co"># install.packages(&#39;car&#39;) </span></a>
+<a class="sourceLine" id="cb22-3" title="3"></a>
+<a class="sourceLine" id="cb22-4" title="4"><span class="co"># Load the package</span></a>
+<a class="sourceLine" id="cb22-5" title="5"><span class="kw">library</span>(car)</a>
+<a class="sourceLine" id="cb22-6" title="6"></a>
+<a class="sourceLine" id="cb22-7" title="7"><span class="co"># Now we create the anova table</span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="co"># for our ancova model</span></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="kw">Anova</span>(cricket.mod, <span class="dt">type=</span><span class="st">&#39;III&#39;</span>)</a>
+<a class="sourceLine" id="cb22-10" title="10">Anova <span class="kw">Table</span> (Type III tests)</a>
+<a class="sourceLine" id="cb22-11" title="11"></a>
+<a class="sourceLine" id="cb22-12" title="12">Response<span class="op">:</span><span class="st"> </span>Pulse</a>
+<a class="sourceLine" id="cb22-13" title="13">            Sum Sq Df   F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
+<a class="sourceLine" id="cb22-14" title="14">(Intercept)   <span class="fl">25.5</span>  <span class="dv">1</span>    <span class="fl">7.9906</span>  <span class="fl">0.008582</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-15" title="15">Species      <span class="fl">598.0</span>  <span class="dv">1</span>  <span class="fl">187.3994</span> <span class="fl">6.272e-14</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb22-16" title="16">Temp        <span class="fl">4376.1</span>  <span class="dv">1</span> <span class="fl">1371.3541</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb22-17" title="17">Residuals     <span class="fl">89.3</span> <span class="dv">28</span>                        </a>
+<a class="sourceLine" id="cb22-18" title="18"><span class="op">---</span></a>
+<a class="sourceLine" id="cb22-19" title="19">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb22-20" title="20"></a>
+<a class="sourceLine" id="cb22-21" title="21"><span class="co"># And we can look at the</span></a>
+<a class="sourceLine" id="cb22-22" title="22"><span class="co"># summary of the linear model</span></a>
+<a class="sourceLine" id="cb22-23" title="23"><span class="kw">summary</span>(cricket.mod)</a>
+<a class="sourceLine" id="cb22-24" title="24"></a>
+<a class="sourceLine" id="cb22-25" title="25">Call<span class="op">:</span></a>
+<a class="sourceLine" id="cb22-26" title="26"><span class="kw">lm</span>(<span class="dt">formula =</span> Pulse <span class="op">~</span><span class="st"> </span>Species <span class="op">+</span><span class="st"> </span>Temp, <span class="dt">data =</span> crickets)</a>
+<a class="sourceLine" id="cb22-27" title="27"></a>
+<a class="sourceLine" id="cb22-28" title="28">Residuals<span class="op">:</span></a>
+<a class="sourceLine" id="cb22-29" title="29"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
+<a class="sourceLine" id="cb22-30" title="30"><span class="fl">-3.0128</span> <span class="fl">-1.1296</span> <span class="fl">-0.3912</span>  <span class="fl">0.9650</span>  <span class="fl">3.7800</span> </a>
+<a class="sourceLine" id="cb22-31" title="31"></a>
+<a class="sourceLine" id="cb22-32" title="32">Coefficients<span class="op">:</span></a>
+<a class="sourceLine" id="cb22-33" title="33"><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
+<a class="sourceLine" id="cb22-34" title="34">(Intercept)  <span class="fl">-7.21091</span>    <span class="fl">2.55094</span>  <span class="fl">-2.827</span>  <span class="fl">0.00858</span> <span class="op">**</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-35" title="35">Speciesniv  <span class="fl">-10.06529</span>    <span class="fl">0.73526</span> <span class="fl">-13.689</span> <span class="fl">6.27e-14</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb22-36" title="36">Temp          <span class="fl">3.60275</span>    <span class="fl">0.09729</span>  <span class="fl">37.032</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb22-37" title="37"><span class="op">---</span></a>
+<a class="sourceLine" id="cb22-38" title="38">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
+<a class="sourceLine" id="cb22-39" title="39"></a>
+<a class="sourceLine" id="cb22-40" title="40">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">1.786</span> on <span class="dv">28</span> degrees of freedom</a>
+<a class="sourceLine" id="cb22-41" title="41">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9896</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9888</span> </a>
+<a class="sourceLine" id="cb22-42" title="42">F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">1331</span> on <span class="dv">2</span> and <span class="dv">28</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a></code></pre></div>
 <p>We see that there are significant effects of species and temperature on the pulse of individual crickets. Everything else proceeds as above! We can build in complexity as needed, and we can make predictions as above.</p>
 <div id="making-and-plotting-model-predictions" class="section level3">
 <h3>Making and plotting model predictions</h3>
 <p>Here we will take a quick look at how to plot model predictions over our raw data to demonstrate the relationships we have discovered and to show how they compare to our observations.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Plot the raw data</span>
-<span class="kw">plot</span>(crickets<span class="op">$</span>Temp,
-  crickets<span class="op">$</span>Pulse,
-  <span class="dt">pch=</span><span class="dv">21</span>,
-  <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[crickets<span class="op">$</span>Species],
-  <span class="dt">cex=</span><span class="fl">1.5</span>,
-  <span class="dt">ylab =</span> <span class="st">&#39;Pulse&#39;</span>,
-  <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),
-  <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>)
-<span class="co"># Add the y-axis labels and rotate them</span>
-<span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)
-
-<span class="co"># Make predictions from the fitted model object</span>
-preds &lt;-<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod,
-                     <span class="dt">newdata =</span> crickets,
-                     <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))
-
-<span class="co"># Plot the predictions</span>
-<span class="co"># Add prediction lines for species &#39;ex&#39;</span>
-<span class="co"># Mean</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
-  preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
-<span class="co"># Lower</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
-  preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-<span class="co"># Upper</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],
-  preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-
-<span class="co"># Add prediction lines for species &#39;niv&#39;</span>
-<span class="co"># Mean</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
-  preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)
-<span class="co"># Lower</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
-  preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)
-<span class="co"># Upper</span>
-<span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],
-  preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Plot the raw data</span></a>
+<a class="sourceLine" id="cb23-2" title="2"><span class="kw">plot</span>(crickets<span class="op">$</span>Temp,</a>
+<a class="sourceLine" id="cb23-3" title="3">  crickets<span class="op">$</span>Pulse,</a>
+<a class="sourceLine" id="cb23-4" title="4">  <span class="dt">pch=</span><span class="dv">21</span>,</a>
+<a class="sourceLine" id="cb23-5" title="5">  <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[crickets<span class="op">$</span>Species],</a>
+<a class="sourceLine" id="cb23-6" title="6">  <span class="dt">cex=</span><span class="fl">1.5</span>,</a>
+<a class="sourceLine" id="cb23-7" title="7">  <span class="dt">ylab =</span> <span class="st">&#39;Pulse&#39;</span>,</a>
+<a class="sourceLine" id="cb23-8" title="8">  <span class="dt">xlab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),</a>
+<a class="sourceLine" id="cb23-9" title="9">  <span class="dt">yaxt =</span> <span class="st">&#39;n&#39;</span>)</a>
+<a class="sourceLine" id="cb23-10" title="10"><span class="co"># Add the y-axis labels and rotate them</span></a>
+<a class="sourceLine" id="cb23-11" title="11"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb23-12" title="12"></a>
+<a class="sourceLine" id="cb23-13" title="13"><span class="co"># Make predictions from the fitted model object</span></a>
+<a class="sourceLine" id="cb23-14" title="14">preds &lt;-<span class="st"> </span>(<span class="kw">predict.lm</span>(cricket.mod,</a>
+<a class="sourceLine" id="cb23-15" title="15">                     <span class="dt">newdata =</span> crickets,</a>
+<a class="sourceLine" id="cb23-16" title="16">                     <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span>))</a>
+<a class="sourceLine" id="cb23-17" title="17"></a>
+<a class="sourceLine" id="cb23-18" title="18"><span class="co"># Plot the predictions</span></a>
+<a class="sourceLine" id="cb23-19" title="19"><span class="co"># Add prediction lines for species &#39;ex&#39;</span></a>
+<a class="sourceLine" id="cb23-20" title="20"><span class="co"># Mean</span></a>
+<a class="sourceLine" id="cb23-21" title="21"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb23-22" title="22">  preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb23-23" title="23"><span class="co"># Lower</span></a>
+<a class="sourceLine" id="cb23-24" title="24"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb23-25" title="25">  preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb23-26" title="26"><span class="co"># Upper</span></a>
+<a class="sourceLine" id="cb23-27" title="27"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>],</a>
+<a class="sourceLine" id="cb23-28" title="28">  preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;ex&#39;</span>], <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb23-29" title="29"></a>
+<a class="sourceLine" id="cb23-30" title="30"><span class="co"># Add prediction lines for species &#39;niv&#39;</span></a>
+<a class="sourceLine" id="cb23-31" title="31"><span class="co"># Mean</span></a>
+<a class="sourceLine" id="cb23-32" title="32"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb23-33" title="33">  preds[,<span class="dv">1</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb23-34" title="34"><span class="co"># Lower</span></a>
+<a class="sourceLine" id="cb23-35" title="35"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb23-36" title="36">  preds[,<span class="dv">2</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb23-37" title="37"><span class="co"># Upper</span></a>
+<a class="sourceLine" id="cb23-38" title="38"><span class="kw">lines</span>(crickets<span class="op">$</span>Temp[crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>],</a>
+<a class="sourceLine" id="cb23-39" title="39">  preds[,<span class="dv">3</span>][crickets<span class="op">$</span>Species<span class="op">==</span><span class="st">&#39;niv&#39;</span>], <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
 </div>
 </div>
@@ -827,6 +969,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
