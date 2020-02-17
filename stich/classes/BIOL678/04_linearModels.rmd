@@ -206,14 +206,14 @@ We will use the `airquality` data for this example
 # Load the data set
 data("airquality")
 
-# Now test for test for differences
+# Now test for differences
 # in Ozone levels between months in the
 # data set.
 air.test<- kruskal.test(Ozone ~ Month, data = airquality)
 air.test
 ```  
 
-We find that there are signigicant shifts in median `Ozone` between `months`. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.
+We find that there are significant shifts in median `Ozone` between `months`. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.
 ```{r}
 boxplot(Ozone ~ Month,
         data = airquality,
@@ -260,7 +260,7 @@ fert.mod <- lm(Fertility~Education, data = swiss)
 summary(fert.mod)
 ```
 
-We see that there is a significant negative relation between `Education` level and `fertility`. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.
+We see that there is a significant negative (inverse) relation between `Education` level and `fertility`. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.
 
 We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the $R^2$ value that is returned.
 
@@ -268,7 +268,7 @@ This is as far as the summary goes for linear regression for now. That is, we do
 
 > WHAT??
 
-Let's explain this by actually looking at the data
+Let's explain this by actually looking at the data:
 ```{r}
 # First make a sequence of new values for Education across observed range
   new <- data.frame(Education=seq(0,55,.1))
@@ -285,7 +285,7 @@ Let's explain this by actually looking at the data
   lines(new[,1], preds[,2], col='red', lty=1, lwd=2)
 ```
 
-FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself
+FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself.
 
 We can, of course, extend this to include multiple continuous explanatory variables of interest.
 
@@ -408,7 +408,7 @@ lines(crickets$Temp[crickets$Species=='niv'],
 
 ## Assumptions of general linear models
 
-Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.
+Now that you hold real power in your hands to do data analysis, we need to have our first talk about due diligence and assumptions of the statistical models that we use.
 
 There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.
 

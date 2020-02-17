@@ -684,7 +684,7 @@ One-way ANOVA
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Load the data set</span></a>
 <a class="sourceLine" id="cb13-2" title="2"><span class="kw">data</span>(<span class="st">&quot;airquality&quot;</span>)</a>
 <a class="sourceLine" id="cb13-3" title="3"></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Now test for test for differences</span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Now test for differences</span></a>
 <a class="sourceLine" id="cb13-5" title="5"><span class="co"># in Ozone levels between months in the</span></a>
 <a class="sourceLine" id="cb13-6" title="6"><span class="co"># data set.</span></a>
 <a class="sourceLine" id="cb13-7" title="7">air.test&lt;-<span class="st"> </span><span class="kw">kruskal.test</span>(Ozone <span class="op">~</span><span class="st"> </span>Month, <span class="dt">data =</span> airquality)</a>
@@ -694,7 +694,7 @@ One-way ANOVA
 <a class="sourceLine" id="cb13-11" title="11"></a>
 <a class="sourceLine" id="cb13-12" title="12">data<span class="op">:</span><span class="st">  </span>Ozone by Month</a>
 <a class="sourceLine" id="cb13-13" title="13">Kruskal<span class="op">-</span>Wallis chi<span class="op">-</span>squared =<span class="st"> </span><span class="fl">29.267</span>, df =<span class="st"> </span><span class="dv">4</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">6.901e-06</span></a></code></pre></div>
-<p>We find that there are signigicant shifts in median <code>Ozone</code> between <code>months</code>. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.</p>
+<p>We find that there are significant shifts in median <code>Ozone</code> between <code>months</code>. Hopefully, it is now obvious that we can use a boxplot to visualize these differences.</p>
 <div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="kw">boxplot</span>(Ozone <span class="op">~</span><span class="st"> </span>Month,</a>
 <a class="sourceLine" id="cb14-2" title="2">        <span class="dt">data =</span> airquality,</a>
 <a class="sourceLine" id="cb14-3" title="3">        <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>,</a>
@@ -744,13 +744,13 @@ One-way ANOVA
 <a class="sourceLine" id="cb16-21" title="21">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">9.446</span> on <span class="dv">45</span> degrees of freedom</a>
 <a class="sourceLine" id="cb16-22" title="22">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4406</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.4282</span> </a>
 <a class="sourceLine" id="cb16-23" title="23">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">35.45</span> on <span class="dv">1</span> and <span class="dv">45</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">3.659e-07</span></a></code></pre></div>
-<p>We see that there is a significant negative relation between <code>Education</code> level and <code>fertility</code>. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.</p>
+<p>We see that there is a significant negative (inverse) relation between <code>Education</code> level and <code>fertility</code>. In other words, more highly educated individuals have fewer children. You can tell this is a negative relationship because of the minus sign in front of the coefficient. We know that the relationship is significant because of the small p-value and corresponding significance codes.</p>
 <p>We can also see that we have explained a little more than 40% of the variability in the response with this one explanatory variable if we look at the <span class="math inline">\(R^2\)</span> value that is returned.</p>
 <p>This is as far as the summary goes for linear regression for now. That is, we don’t need the ANOVA table any more because we have no factors- just continuous variables. What we end up with in this summary are the coefficients (corresponding to parameters of a model) that can be used to describe the line that passes through the data and minimizes the residual errors.</p>
 <blockquote>
 <p>WHAT??</p>
 </blockquote>
-<p>Let’s explain this by actually looking at the data</p>
+<p>Let’s explain this by actually looking at the data:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># First make a sequence of new values for Education across observed range</span></a>
 <a class="sourceLine" id="cb17-2" title="2">  new &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">Education=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">55</span>,.<span class="dv">1</span>))</a>
 <a class="sourceLine" id="cb17-3" title="3"></a>
@@ -765,7 +765,7 @@ One-way ANOVA
 <a class="sourceLine" id="cb17-12" title="12">  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">3</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a>
 <a class="sourceLine" id="cb17-13" title="13">  <span class="kw">lines</span>(new[,<span class="dv">1</span>], preds[,<span class="dv">2</span>], <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</a></code></pre></div>
 <p><img src="04_linearModels_files/figure-html/unnamed-chunk-19-1.png" width="672" /></p>
-<p>FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself</p>
+<p>FYI these are the kinds of regression fits that terrify me because of the one point way out there by itself.</p>
 <p>We can, of course, extend this to include multiple continuous explanatory variables of interest.</p>
 <p><strong>Example:</strong></p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Effects of Education and % Catholic on fertility</span></a>
@@ -935,7 +935,7 @@ One-way ANOVA
 </div>
 <div id="assumptions-of-general-linear-models" class="section level2">
 <h2>Assumptions of general linear models</h2>
-<p>Now that you hold real power in your hands to do data analysis, we need to to have our first talk about due diligence and assumptions of the statistical models that we use.</p>
+<p>Now that you hold real power in your hands to do data analysis, we need to have our first talk about due diligence and assumptions of the statistical models that we use.</p>
 <p>There are three fundamental assumptions that we either need to validate or address through experimental design in this class of models.</p>
 <ol style="list-style-type: decimal">
 <li>Independence of observations.</li>
