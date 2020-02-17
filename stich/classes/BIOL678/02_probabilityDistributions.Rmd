@@ -52,18 +52,18 @@ Take a look at the table at the bottom of this Wikipedia page just to get an ide
 
 > Distributions that we'll focus on this week:
 
-  1. Continuous
-    + Normal (Gaussian)
-    + Lognormal
-    + Beta
-    + Uniform\*
+  1. Continuous <br>
+    Normal (Gaussian) <br>
+    Lognormal <br>
+    Beta <br>
+    Uniform <br>
   <br>
   2. Discrete distributions
-    + Bernouli
-    + Binomial
-    + Multinomial
-    + Poisson
-    + Negative binomial
+    Bernouli <br>
+    Binomial <br>
+    Multinomial <br>
+    Poisson <br>
+    Negative binomial <br>
     
 \* We'll talk about this one more during the second half of the semester.
 
