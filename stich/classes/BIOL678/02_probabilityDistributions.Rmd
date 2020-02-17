@@ -530,7 +530,7 @@ Just in case you'd like to know exactly what `optim` is doing, remember that you
 
 > Quantiles and other descriptive statistics
 
-There are a number of other ways we might like to describe this this (or any) sampling distribution. Here are a few examples that we will work with this semester.
+There are a number of other ways we might like to describe this (or any) sampling distribution. Here are a few examples that we will work with this semester.
 
 ```{r} 
 # Here is the median, or 50th percentile
