@@ -9,7 +9,7 @@
 
 The objective of this assignment is to take a step back and evaluate the assumptions that we make when we conduct parametric tests and create linear models that we use to explain data or make predictions. This week we will start with how we can test our assumptions, and then move on to how we communicate our results with respect to effects of explanatory variables on our response of interest.
 
-This lab will continue to build on our work with linear models in R, and will help us understand exactly why we use these methods, how we we use them to draw inference, and how to interpret the results. In addition to building these critical skills, the lab will also serve to set the stage for the next several weeks of class during which we will examine a more generalized framework (the GLM).
+This lab will continue to build on our work with linear models in R, and will help us understand exactly why we use these methods, how we use them to draw inference, and how to interpret the results. In addition to building these critical skills, the lab will also serve to set the stage for the next several weeks of class during which we will examine a more generalized framework (the GLM).
 
 By the end of this lab, you should be able to: 1) conduct visual assessment of the validity of assumptions related to linear models on a case-by-case basis, and 2) be able to compute and communicate effects of explanatory variables on a response of interest.
 

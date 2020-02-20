@@ -36,8 +36,7 @@ smolts <- read.csv('../../data/smolts.txt')
 head(smolts)
 ```
 
-*Reminder*: if you have forgotten what these data mean, they are described in
-detail in the lab exercise from last week.
+*Reminder*: if you have forgotten what these data mean, they are described in detail in the lab exercise from last week.
 
 Use a one-way ANOVA to investigate differences in gill NKA activity among all stages of smolts in the dataset.  
 
