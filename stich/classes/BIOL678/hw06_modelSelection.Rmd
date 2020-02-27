@@ -57,9 +57,9 @@ The first thing we will do this week is lay out an example to help you interpret
   lines(area, preds)
 ```
 
-Fit a model that includes both linear and quadratic effects of Area on Species. 
+Fit a model that includes both linear and quadratic effects of `Area` on `Species`. 
 
-**Question 3.** What is the coefficient of determination (R^2^) of this model? How does this compare the the R^2^ values reported for the models in Johnson and Raven (1973)?
+**Question 3.** What is the coefficient of determination (R^2^) of this model? How does this compare to the R^2^ values reported for the models in Johnson and Raven (1973)?
 
 **Question 4.** Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you *can* tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.
 
@@ -75,12 +75,13 @@ The models that Johnson and Raven tested looked like this
 ```{r}
 # Note: the results will not be exactly
 # the same because missing data in the paper
-# were fi
+# were filled in here.
 
 # Note also: we need to fix data point
 # number 25 in Scruz because that is the
 # island Scruz and we can't take the
-# log of zero!!!
+# log of zero! Lots of good reasons not
+# to do this, but on with our example.
 gala$Scruz[25] = 0.00001
 
 S1 = lm(Species~Area + Nearest + Scruz + Adjacent, data=gala)
@@ -132,7 +133,7 @@ Now, use the `aictab` function to calculate model selection statistics for infor
 
 **Question 7.** How do the results of your AICc model selection compare to the R^2^ values you calculated for each of these models above? Why do you think this is the case?
 
-**Question 8.** Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log^*e*^ transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log^*e*^ transform the explanatory variables if you do not wish to.
+**Question 8.** Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log~*e*~ transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log~*e*~ transform the explanatory variables if you do not wish to.
 
 First, fit your new models and make a list object containing these two models and `lnS1` and `lnS2` from above. Don't forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of `lnS1` and `lnS2`.
 

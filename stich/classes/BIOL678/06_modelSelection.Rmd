@@ -425,7 +425,7 @@ We can look at the distribution of our r-squared values for regressions that mea
 ```{r}    
 # Plot the histogram
   hist(p.Rsquare, breaks=100, yaxt='n', xaxt='n',
-       ylim=c(0,5e2), xlim=c(0,.75), col='gray87',
+       ylim=c(0,50), xlim=c(0,.75), col='gray87',
        xlab = expression('Predicted R'^'2'),
        main='', cex.lab=1.3)
 
