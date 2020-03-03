@@ -61,7 +61,7 @@ Fit a model that includes both linear and quadratic effects of `Area` on `Specie
 
 **Question 3.** What is the coefficient of determination (R^2^) of this model? How does this compare to the R^2^ values reported for the models in Johnson and Raven (1973)?
 
-**Question 4.** Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you *can* tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.
+**Question 4.** Based on the hypothesis that you gave above (in Question 2), do the results of this regression make sense to you? Why or why not? HINT: you *can* tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.
 
 In any case, it looks like we won't be refuting any seminal papers about species abundances in the Galapagos Islands this week. Oh, well. At least we can use the paper to guide us through the rest of our lab.
 

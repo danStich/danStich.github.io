@@ -39,25 +39,21 @@ Hopefully, you can see from this example and earlier learning about rules of pro
 
 It will quickly become obvious to you that the answer is "computers". To demonstrate this, let's consider a slightly more complex example.
 
-Now, let's assume that we don't actually have exact information about the probability that individuals who have cancer are age 50. Let's instead assume that we only have a rough idea about that probability, and that we can put a loose distribution around it. Now, there is no longer an exact mathematical solution for Bayes Theorem but rather an infinite number of potential solutions. If we know the distribution, then we can discretize the distribution and find a finite number of solutions to the theorem that would allow us to describe the probability of our event of interest most of the the time. However, there are cases for which this problem becomes intractable without the use of computers, even when the distribution is known. You can imagine that this becomes considerably more complex if the distribution is not known with certainty.
+Now, let's assume that we don't actually have exact information about the probability that individuals who have cancer are age 50. Let's instead assume that we only have a rough idea about that probability, and that we can put a loose distribution around it. Now, there is no longer an exact mathematical solution for Bayes Theorem but rather an infinite number of potential solutions. If we know the distribution, then we can discretize the distribution and find a finite number of solutions to the theorem that would allow us to describe the probability of our event of interest most of the the time. However, there are cases for which this problem becomes intractable without the use of computers, even when the distribution is known. You can imagine that this becomes considerably more complex if the form of the distribution is not known with certainty.
 
 For the sake of demonstration, let's examine how this procedure changes if we have some uncertainty in one of our probabilities on the right-hand side of the equation:
 
 Looking back at our example, we had:
 $$P(Cancer|Age 50) = \frac{P(Age 50|Cancer)\cdot P(Cancer)}{P(Age 50)}$$
 
-
- 
 And, by substitution:
 $$P(Cancer|Age 50) = \frac{0.02\cdot 0.01}{0.03}$$
 
-Let's now assume that the probability that persons with cancer is now an unknown quantity that is drawn from a beta distribution that can be described by parameters $\alpha$ = 200, and $\beta$ = 10,000: 
+Let's now assume that the proportion of people with cancer who are also 50 years old is now an unknown quantity that is drawn from a beta distribution that can be described by parameters $\alpha$ = 200, and $\beta$ = 10,000: 
 
 $$P(Cancer|Age 50) = \frac{Beta(200, 10000) \cdot 0.01}{0.03}$$
 
-
- 
-Realistically, this is a *much* tighter distribution than we would use for a situation like this, but we'll get to that in a bit.
+Realistically, this is a *much* tighter distribution than we would use for a situation like this, but we'll get to that during coming weeks. The point is that even a little uncertainty makes the process more complicated than if exact values are *known*.
 
 We can make this distribution in R:
 ```{r}
@@ -75,71 +71,83 @@ We can also look at this distribution:
        )
 ```
 
-Now, we have a working probability distribution for the probability of being age 50 if one has cancer. We can plug this into Bayes Theorem and construct a probability distribution to solve for the inverse: the probability of having cancer given that the patient is age 50 $(P(Cancer|Age 50))$. Let's do it in R.
+Now, we have a working probability distribution for the probability of being age 50 given that one has cancer. We can plug this into Bayes Theorem and construct a probability distribution to solve for the inverse: the probability of having cancer given that the patient is age 50 $(P(Cancer|Age 50))$. Let's do it in R.
+
+
+First, let's define our other marginal probabilities as variables in R.
+```{r}
+p_cancer <- 0.01 # Marginal probability of having cancer
+p_50 <- 0.03     # Marginal probability of being age 50
+```
+  
+Now we can solve the theorem for our finite number of observations:
 
 ```{r}
-# First, let's define our other
-# marginal probabilities as variables in R
-  p_cancer = 0.01 # Marginal probability of having cancer
-  p_50 = 0.03     # Marginal probability of being age 50
-  
-# Now we can solve the theorem
-# for our finite number of observations:
-  p_cancer_50 = (p_50_cancer*p_cancer)/p_50
-  
-# We can calculate descriptive statistics 
-# for the conditional probability so
-# that we can describe the distribution
-  # Using a mean and standard deviation
-    mean(p_cancer_50)
-    sd(p_cancer_50)
-    
-# We can calculate quantiles (95% CRI)
-# Note that in Bayesian inference,
-# we are going to call these 'credible
-# intervals' (CRI) or 'high density intervals' (HDI),
-# but they are functionally the same thing as
-# 'confidence intervals'.
-  quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
-    
-# We can also look at the actual distribution
-  hist(p_cancer_50,
-       col="gray87",
-       main='',
-       xlab = 'P(Cancer | 50)'
-       )
+p_cancer_50 <- (p_50_cancer*p_cancer)/p_50
 ```
 
-Finally, let's say now that there is uncertainty in all of our probabilities of interest
+We can calculate descriptive statistics for the conditional probability so that we can describe the distribution.
+
+```{r}
+# Using a mean and standard deviation
+  mean(p_cancer_50)
+  sd(p_cancer_50)
+```
+
+We can calculate quantiles (95% CRI). Note that in Bayesian inference, we are going to call these 'credible intervals' (CRI) or 'high density intervals' (HDI) depending on assumptions related to normality, but they are functionally the same thing as 'confidence intervals'.
+
+```{r}
+quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
+
+```
+
+We can also look at the actual distribution:
+
+```{r}
+hist(p_cancer_50,
+     col="gray87",
+     main='',
+     xlab = 'P(Cancer | 50)'
+     )
+```
+
+Finally, let's say now that there is uncertainty in all of our probabilities of interest:
 
 ```{r}
 # First, let's define each of our
 # probabilities as variables in R
-  p_50_cancer = rbeta(1e4, 20, 1e3)
-  p_cancer = rbeta(1e4, 10, 1e3)
-  p_50 = rbeta(1e4, 30, 1e3)
+  p_50_cancer <- rbeta(1e4, 20, 1e3)
+  p_cancer <- rbeta(1e4, 10, 1e3)
+  p_50 <- rbeta(1e4, 30, 1e3)
+```
 
-# We can continue as before
-# We solve the theorem for our
-# finite number of observations:
-  p_cancer_50 = (p_50_cancer*p_cancer)/p_50
-  
-# We calculate descriptive statistics
-# for the conditional probability to
-# describe the probability using a mean
-# and standard deviation
+We can continue as before. We solve the theorem for our finite number of observations:
+
+```{r}
+  p_cancer_50 <- (p_50_cancer*p_cancer)/p_50
+```
+
+We calculate descriptive statistics for the conditional probability to describe the probability using a mean and standard deviation.
+
+```{r}
   mean(p_cancer_50)
   sd(p_cancer_50)
-    
-# Quantiles (95% CRI and median)
-  quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
-  
-# We look at the actual distribution
-  hist(p_cancer_50,
-       col="gray87",
-       main='',
-       xlab = 'P(Cancer | 50)'
-       )
+```
+
+Quantiles (95% CRI and median):
+
+```{r}
+quantile(p_cancer_50, probs=c(0.025, 0.50, 0.975))
+```
+
+And, have a look at our new distribution:
+
+```{r}
+hist(p_cancer_50,
+     col="gray87",
+     main='',
+     xlab = 'P(Cancer | 50)'
+     )
 ```
 
 Now you can see why computers are starting to matter, and we are not even doing Bayesian inference yet. Why is that?
@@ -176,22 +184,22 @@ There are multiple approaches that we could take to formulating a prior distribu
 # A uniform distribution that indicates we
 # have no knowledge about how survival
 # varies between hospitals
-  p_hosp_flat = runif(1e4, 0, 1)
+  p_hosp_flat <- runif(1e4, 0, 1)
 
 # A diffuse prior that indicates we think
 # survival is the same between hospitals but
 # we don't want to make too strong a statement
-  p_hosp_dif = rbeta(1e4, 5, 5)
+  p_hosp_dif <- rbeta(1e4, 5, 5)
   
 # A peaked (strong) prior that indicates we 
 # are relatively certain ahead of time that
 # survival is the same in both hospitals
-  p_hosp_str = rbeta(1e4, 500, 500)
+  p_hosp_str <- rbeta(1e4, 500, 500)
   
 # A strong prior that indicates we think
 # survival is substantially different
 # between hospitals
-  p_hosp_bi = rbeta(1e4, .5, .5)
+  p_hosp_bi <- rbeta(1e4, .5, .5)
 ```
 
 We can look at these to compare them.
@@ -227,7 +235,6 @@ You'll recall from our early adventures into probability distributions and the m
 In the simplest sense, the posterior distribution is a combination of our prior distribution and our data. So if you remember nothing else in the explanation, remember that.
 
 
- 
 ## A worked example
 In this section, we will apply Bayes theorem to update our prior beliefs about the probability of some event of interest in order to demonstrate how we can estimate a conditional probability for that event given some data. We will use the example to demonstrate how the prior and our data interact to form the posterior.
 
@@ -236,7 +243,7 @@ In this section, we will apply Bayes theorem to update our prior beliefs about t
 We start by reading in data. 
 ```{r, echo=TRUE, eval=FALSE}
 # Read in the data
-  birds = read.csv('farmdata.csv')
+  birds <- read.csv('farmdata.csv')
 
 # Look at the data structure
   str(birds)
@@ -248,7 +255,7 @@ We start by reading in data.
 
 ```{r, echo=FALSE}
 # Read in the data
-  birds = read.csv('../../data/farmdata.csv')
+  birds <- read.csv('../../data/farmdata.csv')
 
 # It's a short data set.
 # Let's just print it to the console
@@ -325,7 +332,7 @@ Now specify a data set for use in JAGS. We package it in a list called `chick.da
 
 ```{r}
 # Package the data in a list
-  chick.data = list(
+  chick.data <- list(
     nobs = nrow(birds),
     y = birds$fledged,
     N = birds$hatched
@@ -385,11 +392,11 @@ If I wanted to determine whether or not some level of survival was credible for 
 ### Model summary
 As for the rest of this summary. For now, we will focus on a few specific things:
 
-**1.** Do our estimates make logical sense. Not are they right or wrong, but is our estimate crap or not. If the 95% CRI goes from zero to one, then we probably have some issues with estimation because this means that we learned nothing new from the data.
+**1.** Do our estimates make logical sense? Not are they right or wrong, but is our estimate crap or not? If the 95% CRI goes from zero to one, then we probably have some issues with estimation because this means that we learned nothing new from the data (crap).
 
-**2.** We need to look at the value of `Rhat`($\hat{r}$, the Gelman-Rubin convergence diagnostic). This statistic is a diagnostic that can help us determine whether or not the model has converged on an estimate for our parameter(s) of interest. It assesses the degree of mixing between the Markov chains that we used to come to our estimates. We will examine some graphical diagnostics of mixing below.
+**2.** We need to look at the value of `Rhat`($\hat{r}$, the Gelman-Rubin convergence diagnostic or potential scale-reduction factor). This statistic is a diagnostic that can help us determine whether or not the model has even converged on an estimate for our parameter(s) of interest. It assesses the degree of mixing between the Markov chains that we used to come to our estimates. We will examine some graphical diagnostics of mixing below.
 
-**3.** We need to pay attention to `n.eff`. This quantity is the 'number of effective samples' that we have taken from the posterior. As discussed in class, the draws that are taken from the Gibbs sampler are necessarily auto-correlated. `n.eff` tells us how many independent samples we can actually consider ourselves to have drawn from the posterior. To have have some degree of confidence in our parameter estimates, we want this to be at least several hundred large. More is better, but these models can take a long time to run as they build in complexity so there is a balance to be struck. If we are running long chains and we still are not achieving large n.eff, it is a pretty good indication that we need to increase our thinning rate or consider an alternative model parameterization. If you use this inferential framework in your future, you will also want to look at diagnostics like ACF plots, or auto-correlation function plots that can show you how auto-correlation changes with thinning rate.
+**3.** We need to pay attention to `n.eff`. This quantity is the 'number of effective samples' that we have taken from the posterior. As discussed in class, the draws we take from the posterior can be auto-correlated to varying degrees depending on the sampler used. `n.eff` tells us how many independent samples we can actually consider ourselves to have drawn from the posterior. To have have some degree of confidence in our parameter estimates, we want this to be at least several hundred large. More is better, but these models can take a long time to run as they build in complexity so there is a balance to be struck. If we are running long chains and we still are not achieving large `n.eff`, it is a pretty good indication that we need to increase our thinning rate or (more likely) consider an alternative model parameterization. If you use this inferential framework in your future, you will also want to look at diagnostics like ACF plots, or auto-correlation function plots that can show you how auto-correlation changes with thinning rate. You may also want to check out <a href="https://mc-stan.org/">Stan</a>, a newer program that reduces autocorrelatio between samples using a different approach to MCMC estimation. It is what all of the cool kids are doing right now, but it is a little tougher to code in when you are first learning.
  
  
 ### Diagnostic plots
