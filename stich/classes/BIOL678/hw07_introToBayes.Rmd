@@ -288,7 +288,8 @@ In the preceding sections we looked at the GLM as an extension of linear models,
 
 ## Your first Bayesian model
 <h3 id="multi"> Binomial logistic regresion </h3>
-For this week's assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see the <a href="stich/classes/BIOL678/07_introToBayes.html">lecture module</a>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.
+
+For this week's assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see the <a href="07_introToBayes.html">lecture module</a>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.
 
 We start by reading in the data:
  
@@ -363,7 +364,7 @@ Let's start by running the same model as we did in lecture:
 ### Your mission
 Your lab assignment for this week is two-fold.
 
-**First** I want you to modify the model above to allow survival to vary between bird species. You can do this a few different ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the `falco.model` earlier in this tutorial. Don't forget to change the data and priors that you pass to JAGS, too!
+**First** I want you to modify the model above to allow survival to vary between bird species. You can do this a few different ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the `falco.model` earlier in this tutorial. Don't forget to change the data and priors that you pass to JAGS, too! Just in case you get really lost trying to translate from the normal likelihood in the `falco.model` to the binomial likelihood we *need* to use, you can find an example of the model I want you to build (for different data, of course) by clicking <a href="projectScramble.html">here</a>.
 
 **Second** Write a brief methods and results section for your model. The methods should include a few *logically organized* sentences about the data (e.g. testing effects of this on that), the model structure (likelihood and priors), diagnostics ($\hat{r}$ and `n.eff`), and model settings (burn-in, thinning rate, number of chains, and number of samples).
 
