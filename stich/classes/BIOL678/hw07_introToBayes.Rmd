@@ -288,7 +288,7 @@ In the preceding sections we looked at the GLM as an extension of linear models,
 
 ## Your first Bayesian model
 <h3 id="multi"> Binomial logistic regresion </h3>
-For this week's assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see the <a href="">lecture module</a>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.
+For this week's assignment, we will take another look at the chick survival data that we played with in class for lecture. For a detailed explanation fo the data, please see the <a href="stich/classes/BIOL678/07_introToBayes.html">lecture module</a>. Briefly, the data set contains information on chicken and duck survival through various life-history stages at my place.
 
 We start by reading in the data:
  
