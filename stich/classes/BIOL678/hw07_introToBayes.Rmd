@@ -134,8 +134,7 @@ For what it is worth, fitting an ANOVA in JAGS is considerably less intuitive th
 
 > Start by specifying the model
 
-This model specification is slightly different than what is presented in Kery 2010. the reason for this is that the `sink()` function used in the book can act funny if we are writing to certain directories, file systems, etc, and (really) because your homeworks won't compile without physically writing the model to a file.
-
+This model specification is slightly different than what is presented in Kery 2010. the reason for this is that the `sink()` function used in the book can act funny if we are writing to certain directories, file systems, etc, and (really) because your homeworks won't compile using that approach.
 
  
 ```{r}
@@ -167,13 +166,9 @@ This model specification is slightly different than what is presented in Kery 20
 
     }
   "
-
-# Write the model to a file
-  writeLines(modelString, "falcomodel.txt")
 ```
 
 
- 
 > Bundle the data for JAGS
 
 ```{r}
@@ -256,7 +251,7 @@ The biggest differences here are:
   falco.model = jags(data = falco.data,
                      inits = inits,
                      parameters.to.save = params,
-                     model.file = "falcomodel.txt",
+                     model.file = textConnection(modelString),
                      n.iter = ni,
                      n.burnin = nb,
                      n.thin = nt,
@@ -331,8 +326,6 @@ Let's start by running the same model as we did in lecture:
         b <- 1
     }                             
   " 
-# Write the model to a text file
-  writeLines(modelstring,con="chickSurvival.txt")
 
 # Package the data in a list
   chick.data = list(
@@ -354,20 +347,23 @@ Let's start by running the same model as we did in lecture:
   nc <- 3         # Number of chains
     
 # Call jags and run the model
-  chick.model <- jags(chick.data,
-                      inits=inits,
-                      parameters,
-                      "chickSurvival.txt",
-                      n.chains = nc, n.thin = nt,
-                      n.iter = ni, n.burnin = nb,
-                      working.directory = getwd()
-                      )    
+  chick.model <- jags(
+    chick.data,
+    inits=inits,
+    parameters,
+    model.file = textConnection(modelString),
+    n.chains = nc,
+    n.thin = nt,
+    n.iter = ni,
+    n.burnin = nb,
+    working.directory = getwd()
+  )    
 ```    
    
 ### Your mission
 Your lab assignment for this week is two-fold.
 
-**First** I want you to modify the model above to allow survival to vary between bird species. You can do this in any number of conceivable ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the `falco.model` earlier in this tutorial. Don't forget to change the data and priors that you pass to JAGS, too!
+**First** I want you to modify the model above to allow survival to vary between bird species. You can do this a few different ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the `falco.model` earlier in this tutorial. Don't forget to change the data and priors that you pass to JAGS, too!
 
 **Second** Write a brief methods and results section for your model. The methods should include a few *logically organized* sentences about the data (e.g. testing effects of this on that), the model structure (likelihood and priors), diagnostics ($\hat{r}$ and `n.eff`), and model settings (burn-in, thinning rate, number of chains, and number of samples).
 

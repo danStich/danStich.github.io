@@ -7,6 +7,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
@@ -114,7 +115,7 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
       if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
       var style = rule.style.cssText;
       // check if color or background-color is set
-      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      if (rule.style.color === '' && rule.style.backgroundColor === '') continue;
       // replace div.sourceCode by a pre.sourceCode rule
       sheets[i].deleteRule(j);
       sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
@@ -158,9 +159,7 @@ h6 {
 
 <link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -174,7 +173,6 @@ code {
 }
 img {
   max-width:100%;
-  height: auto;
 }
 .tabbed-pane {
   padding-top: 12px;
@@ -279,8 +277,6 @@ $(document).ready(function () {
 });
 </script>
 
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
 
 <style type="text/css">
@@ -337,20 +333,17 @@ $(document).ready(function () {
 }
 </style>
 
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
-  });
-});
-</script>
-
 <!-- code folding -->
 
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -471,13 +464,13 @@ Introduction
 <a class="sourceLine" id="cb2-4" title="4">    Welch Two Sample t<span class="op">-</span>test</a>
 <a class="sourceLine" id="cb2-5" title="5"></a>
 <a class="sourceLine" id="cb2-6" title="6">data<span class="op">:</span><span class="st">  </span>y by x</a>
-<a class="sourceLine" id="cb2-7" title="7">t =<span class="st"> </span><span class="fl">50.39</span>, df =<span class="st"> </span><span class="fl">93.572</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a>
+<a class="sourceLine" id="cb2-7" title="7">t =<span class="st"> </span><span class="fl">53.205</span>, df =<span class="st"> </span><span class="fl">89.183</span>, p<span class="op">-</span>value <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a>
 <a class="sourceLine" id="cb2-8" title="8">alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span></a>
 <a class="sourceLine" id="cb2-9" title="9"><span class="dv">95</span> percent confidence interval<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-10" title="10"><span class="st"> </span><span class="fl">27.16647</span> <span class="fl">29.39530</span></a>
+<a class="sourceLine" id="cb2-10" title="10"><span class="st"> </span><span class="fl">26.79298</span> <span class="fl">28.87177</span></a>
 <a class="sourceLine" id="cb2-11" title="11">sample estimates<span class="op">:</span></a>
 <a class="sourceLine" id="cb2-12" title="12">mean <span class="cf">in</span> group <span class="dv">1</span> mean <span class="cf">in</span> group <span class="dv">2</span> </a>
-<a class="sourceLine" id="cb2-13" title="13">       <span class="fl">105.4694</span>         <span class="fl">77.1885</span> </a></code></pre></div>
+<a class="sourceLine" id="cb2-13" title="13">      <span class="fl">105.30298</span>        <span class="fl">77.47061</span> </a></code></pre></div>
 <p>Here, we reject the null hypothesis at <span class="math inline">\(\alpha\)</span> = 0.05. We can see that the 95% CI on the estimated difference in wingspan between sexes is 26-28 cm.</p>
 </div>
 <div id="anova" class="section level4">
@@ -489,8 +482,8 @@ Introduction
 <a class="sourceLine" id="cb3-4" title="4"><span class="co"># Summarize the model</span></a>
 <a class="sourceLine" id="cb3-5" title="5">  <span class="kw">summary</span>(mod.anova)</a>
 <a class="sourceLine" id="cb3-6" title="6">            Df Sum Sq Mean Sq F value <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
-<a class="sourceLine" id="cb3-7" title="7">x            <span class="dv">1</span>  <span class="dv">19195</span>   <span class="dv">19195</span>    <span class="dv">2350</span> <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb3-8" title="8">Residuals   <span class="dv">98</span>    <span class="dv">800</span>       <span class="dv">8</span>                   </a>
+<a class="sourceLine" id="cb3-7" title="7">x            <span class="dv">1</span>  <span class="dv">18591</span>   <span class="dv">18591</span>    <span class="dv">2721</span> <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb3-8" title="8">Residuals   <span class="dv">98</span>    <span class="dv">670</span>       <span class="dv">7</span>                   </a>
 <a class="sourceLine" id="cb3-9" title="9"><span class="op">---</span></a>
 <a class="sourceLine" id="cb3-10" title="10">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
 <p>Here, we see that the results are essentially identical to our t-test. No surprises there if you have been following along. Finally, we can fit the model as a linear regression and we <em>should</em> obtain the same results because we now know that all of these tests are essentially the same thing.</p>
@@ -505,18 +498,18 @@ Introduction
 <a class="sourceLine" id="cb4-9" title="9"></a>
 <a class="sourceLine" id="cb4-10" title="10">Residuals<span class="op">:</span></a>
 <a class="sourceLine" id="cb4-11" title="11"><span class="st">    </span>Min      1Q  Median      3Q     Max </a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="fl">-7.6107</span> <span class="fl">-1.9299</span> <span class="fl">-0.0264</span>  <span class="fl">1.8431</span>  <span class="fl">6.6335</span> </a>
+<a class="sourceLine" id="cb4-12" title="12"><span class="fl">-5.6112</span> <span class="fl">-1.9212</span> <span class="fl">-0.2483</span>  <span class="fl">1.7874</span>  <span class="fl">6.6679</span> </a>
 <a class="sourceLine" id="cb4-13" title="13"></a>
 <a class="sourceLine" id="cb4-14" title="14">Coefficients<span class="op">:</span></a>
 <a class="sourceLine" id="cb4-15" title="15"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb4-16" title="16">(Intercept) <span class="fl">133.7503</span>     <span class="fl">0.8653</span>  <span class="fl">154.57</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb4-17" title="17">x           <span class="fl">-28.2809</span>     <span class="fl">0.5834</span>  <span class="fl">-48.48</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-16" title="16">(Intercept) <span class="fl">133.1354</span>     <span class="fl">0.7915</span>  <span class="fl">168.21</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-17" title="17">x           <span class="fl">-27.8324</span>     <span class="fl">0.5336</span>  <span class="fl">-52.16</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
 <a class="sourceLine" id="cb4-18" title="18"><span class="op">---</span></a>
 <a class="sourceLine" id="cb4-19" title="19">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb4-20" title="20"></a>
-<a class="sourceLine" id="cb4-21" title="21">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.858</span> on <span class="dv">98</span> degrees of freedom</a>
-<a class="sourceLine" id="cb4-22" title="22">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">   </span><span class="fl">0.96</span>, Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9596</span> </a>
-<a class="sourceLine" id="cb4-23" title="23">F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">2350</span> on <span class="dv">1</span> and <span class="dv">98</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a>
+<a class="sourceLine" id="cb4-21" title="21">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">2.614</span> on <span class="dv">98</span> degrees of freedom</a>
+<a class="sourceLine" id="cb4-22" title="22">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9652</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.9649</span> </a>
+<a class="sourceLine" id="cb4-23" title="23">F<span class="op">-</span>statistic<span class="op">:</span><span class="st">  </span><span class="dv">2721</span> on <span class="dv">1</span> and <span class="dv">98</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="er">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span></a>
 <a class="sourceLine" id="cb4-24" title="24">  </a>
 <a class="sourceLine" id="cb4-25" title="25"><span class="co"># Get an ANOVA table for the linear regression model</span></a>
 <a class="sourceLine" id="cb4-26" title="26">  <span class="kw">anova</span>(mod.reg)</a>
@@ -524,8 +517,8 @@ Introduction
 <a class="sourceLine" id="cb4-28" title="28"></a>
 <a class="sourceLine" id="cb4-29" title="29">Response<span class="op">:</span><span class="st"> </span>y</a>
 <a class="sourceLine" id="cb4-30" title="30">          Df  Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
-<a class="sourceLine" id="cb4-31" title="31">x          <span class="dv">1</span> <span class="fl">19195.4</span> <span class="fl">19195.4</span>  <span class="fl">2350.1</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb4-32" title="32">Residuals <span class="dv">98</span>   <span class="fl">800.4</span>     <span class="fl">8.2</span>                      </a>
+<a class="sourceLine" id="cb4-31" title="31">x          <span class="dv">1</span> <span class="fl">18591.4</span> <span class="fl">18591.4</span>  <span class="fl">2720.5</span> <span class="op">&lt;</span><span class="st"> </span><span class="fl">2.2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb4-32" title="32">Residuals <span class="dv">98</span>   <span class="fl">669.7</span>     <span class="fl">6.8</span>                      </a>
 <a class="sourceLine" id="cb4-33" title="33"><span class="op">---</span></a>
 <a class="sourceLine" id="cb4-34" title="34">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
 <p>Once again, we see that the results are essentially identical between the t-test, the ANOVA, and the linear regression. Now, we will show that the results are also the same if we test the effect of sex on wingspan using a GLM.</p>
@@ -548,20 +541,20 @@ Introduction
 <a class="sourceLine" id="cb5-10" title="10"></a>
 <a class="sourceLine" id="cb5-11" title="11">Deviance Residuals<span class="op">:</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb5-12" title="12"><span class="st">    </span>Min       1Q   Median       3Q      Max  </a>
-<a class="sourceLine" id="cb5-13" title="13"><span class="fl">-7.6107</span>  <span class="fl">-1.9299</span>  <span class="fl">-0.0264</span>   <span class="fl">1.8431</span>   <span class="fl">6.6335</span>  </a>
+<a class="sourceLine" id="cb5-13" title="13"><span class="fl">-5.6112</span>  <span class="fl">-1.9212</span>  <span class="fl">-0.2483</span>   <span class="fl">1.7874</span>   <span class="fl">6.6679</span>  </a>
 <a class="sourceLine" id="cb5-14" title="14"></a>
 <a class="sourceLine" id="cb5-15" title="15">Coefficients<span class="op">:</span></a>
 <a class="sourceLine" id="cb5-16" title="16"><span class="st">            </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb5-17" title="17">(Intercept) <span class="fl">133.7503</span>     <span class="fl">0.8653</span>  <span class="fl">154.57</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb5-18" title="18">x           <span class="fl">-28.2809</span>     <span class="fl">0.5834</span>  <span class="fl">-48.48</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-17" title="17">(Intercept) <span class="fl">133.1354</span>     <span class="fl">0.7915</span>  <span class="fl">168.21</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
+<a class="sourceLine" id="cb5-18" title="18">x           <span class="fl">-27.8324</span>     <span class="fl">0.5336</span>  <span class="fl">-52.16</span>   <span class="op">&lt;</span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
 <a class="sourceLine" id="cb5-19" title="19"><span class="op">---</span></a>
 <a class="sourceLine" id="cb5-20" title="20">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
 <a class="sourceLine" id="cb5-21" title="21"></a>
-<a class="sourceLine" id="cb5-22" title="22">(Dispersion parameter <span class="cf">for</span> gaussian family taken to be <span class="fl">8.167845</span>)</a>
+<a class="sourceLine" id="cb5-22" title="22">(Dispersion parameter <span class="cf">for</span> gaussian family taken to be <span class="fl">6.833802</span>)</a>
 <a class="sourceLine" id="cb5-23" title="23"></a>
-<a class="sourceLine" id="cb5-24" title="24">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">19995.85</span>  on <span class="dv">99</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb5-25" title="25">Residual deviance<span class="op">:</span><span class="st">   </span><span class="fl">800.45</span>  on <span class="dv">98</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb5-26" title="26">AIC<span class="op">:</span><span class="st"> </span><span class="fl">497.79</span></a>
+<a class="sourceLine" id="cb5-24" title="24">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">19261.11</span>  on <span class="dv">99</span>  degrees of freedom</a>
+<a class="sourceLine" id="cb5-25" title="25">Residual deviance<span class="op">:</span><span class="st">   </span><span class="fl">669.71</span>  on <span class="dv">98</span>  degrees of freedom</a>
+<a class="sourceLine" id="cb5-26" title="26">AIC<span class="op">:</span><span class="st"> </span><span class="fl">479.96</span></a>
 <a class="sourceLine" id="cb5-27" title="27"></a>
 <a class="sourceLine" id="cb5-28" title="28">Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">2</span></a></code></pre></div>
 <p>The results are identical to what we got above from our t-test, ANOVA, and our linear regression model!</p>
@@ -575,7 +568,7 @@ Introduction
 <blockquote>
 <p>Start by specifying the model</p>
 </blockquote>
-<p>This model specification is slightly different than what is presented in Kery 2010. the reason for this is that the <code>sink()</code> function used in the book can act funny if we are writing to certain directories, file systems, etc, and (really) because your homeworks won’t compile without physically writing the model to a file.</p>
+<p>This model specification is slightly different than what is presented in Kery 2010. the reason for this is that the <code>sink()</code> function used in the book can act funny if we are writing to certain directories, file systems, etc, and (really) because your homeworks won’t compile using that approach.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">  modelString =<span class="st"> &quot;</span></a>
 <a class="sourceLine" id="cb6-2" title="2"><span class="st">    model {</span></a>
 <a class="sourceLine" id="cb6-3" title="3"></a>
@@ -603,10 +596,7 @@ Introduction
 <a class="sourceLine" id="cb6-25" title="25"><span class="st">        effect &lt;- alpha[1] - alpha[2]</span></a>
 <a class="sourceLine" id="cb6-26" title="26"></a>
 <a class="sourceLine" id="cb6-27" title="27"><span class="st">    }</span></a>
-<a class="sourceLine" id="cb6-28" title="28"><span class="st">  &quot;</span></a>
-<a class="sourceLine" id="cb6-29" title="29"></a>
-<a class="sourceLine" id="cb6-30" title="30"><span class="co"># Write the model to a file</span></a>
-<a class="sourceLine" id="cb6-31" title="31">  <span class="kw">writeLines</span>(modelString, <span class="st">&quot;falcomodel.txt&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb6-28" title="28"><span class="st">  &quot;</span></a></code></pre></div>
 <blockquote>
 <p>Bundle the data for JAGS</p>
 </blockquote>
@@ -659,7 +649,7 @@ Introduction
 <a class="sourceLine" id="cb11-4" title="4">  falco.model =<span class="st"> </span><span class="kw">jags</span>(<span class="dt">data =</span> falco.data,</a>
 <a class="sourceLine" id="cb11-5" title="5">                     <span class="dt">inits =</span> inits,</a>
 <a class="sourceLine" id="cb11-6" title="6">                     <span class="dt">parameters.to.save =</span> params,</a>
-<a class="sourceLine" id="cb11-7" title="7">                     <span class="dt">model.file =</span> <span class="st">&quot;falcomodel.txt&quot;</span>,</a>
+<a class="sourceLine" id="cb11-7" title="7">                     <span class="dt">model.file =</span> <span class="kw">textConnection</span>(modelString),</a>
 <a class="sourceLine" id="cb11-8" title="8">                     <span class="dt">n.iter =</span> ni,</a>
 <a class="sourceLine" id="cb11-9" title="9">                     <span class="dt">n.burnin =</span> nb,</a>
 <a class="sourceLine" id="cb11-10" title="10">                     <span class="dt">n.thin =</span> nt,</a>
@@ -671,21 +661,21 @@ Introduction
 </blockquote>
 <p>When we print our results, we get a table of model coefficient estimates, along with the uncertainty associated with those estimates and a couple of pieces of information about convergence diagnostics. From this table, we can see that the mean <span class="math inline">\(\pm\)</span> SD wingspan of female peregrin falcons (alpha[1]) is about 105 <span class="math inline">\(\pm\)</span> 0 cm and the mean wingspan of male peregrin falcons is about 77 <span class="math inline">\(\pm\)</span> 0 cm. The mean estimated difference in wingspans between males and females is about 28, and the 95% CRI is 27 - 29 cm. We know that this difference is statistically significant at <span class="math inline">\(\alpha\)</span> = 0.05 because the 95% CRI does not include zero.</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">  <span class="kw">print</span>(falco.model, <span class="dt">digits =</span> <span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb12-2" title="2">Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;falcomodel.txt&quot;</span>, fit using jags,</a>
+<a class="sourceLine" id="cb12-2" title="2">Inference <span class="cf">for</span> Bugs model at <span class="st">&quot;4&quot;</span>, fit using jags,</a>
 <a class="sourceLine" id="cb12-3" title="3"> <span class="dv">3</span> chains, each with <span class="dv">15000</span> <span class="kw">iterations</span> (first <span class="dv">5000</span> discarded), n.thin =<span class="st"> </span><span class="dv">5</span></a>
 <a class="sourceLine" id="cb12-4" title="4"> n.sims =<span class="st"> </span><span class="dv">6000</span> iterations saved</a>
 <a class="sourceLine" id="cb12-5" title="5">         mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>% Rhat n.eff</a>
-<a class="sourceLine" id="cb12-6" title="6">alpha[<span class="dv">1</span>]  <span class="fl">105.45</span>    <span class="fl">0.37</span> <span class="fl">104.70</span> <span class="fl">105.20</span> <span class="fl">105.44</span> <span class="fl">105.70</span> <span class="fl">106.18</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
-<a class="sourceLine" id="cb12-7" title="7">alpha[<span class="dv">2</span>]   <span class="fl">77.17</span>    <span class="fl">0.46</span>  <span class="fl">76.25</span>  <span class="fl">76.85</span>  <span class="fl">77.17</span>  <span class="fl">77.48</span>  <span class="fl">78.07</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
-<a class="sourceLine" id="cb12-8" title="8">effect     <span class="fl">28.28</span>    <span class="fl">0.59</span>  <span class="fl">27.10</span>  <span class="fl">27.89</span>  <span class="fl">28.28</span>  <span class="fl">28.67</span>  <span class="fl">29.48</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
-<a class="sourceLine" id="cb12-9" title="9">sigma       <span class="fl">8.50</span>    <span class="fl">1.26</span>   <span class="fl">6.38</span>   <span class="fl">7.60</span>   <span class="fl">8.37</span>   <span class="fl">9.24</span>  <span class="fl">11.36</span>    <span class="dv">1</span>  <span class="dv">2800</span></a>
-<a class="sourceLine" id="cb12-10" title="10">deviance  <span class="fl">494.91</span>    <span class="fl">2.63</span> <span class="fl">491.99</span> <span class="fl">493.01</span> <span class="fl">494.18</span> <span class="fl">496.08</span> <span class="fl">501.89</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
+<a class="sourceLine" id="cb12-6" title="6">alpha[<span class="dv">1</span>]  <span class="fl">105.29</span>    <span class="fl">0.35</span> <span class="fl">104.62</span> <span class="fl">105.05</span> <span class="fl">105.29</span> <span class="fl">105.53</span> <span class="fl">105.96</span>    <span class="dv">1</span>  <span class="dv">1500</span></a>
+<a class="sourceLine" id="cb12-7" title="7">alpha[<span class="dv">2</span>]   <span class="fl">77.46</span>    <span class="fl">0.42</span>  <span class="fl">76.67</span>  <span class="fl">77.18</span>  <span class="fl">77.46</span>  <span class="fl">77.74</span>  <span class="fl">78.30</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
+<a class="sourceLine" id="cb12-8" title="8">effect     <span class="fl">27.83</span>    <span class="fl">0.55</span>  <span class="fl">26.74</span>  <span class="fl">27.45</span>  <span class="fl">27.83</span>  <span class="fl">28.19</span>  <span class="fl">28.91</span>    <span class="dv">1</span>  <span class="dv">2400</span></a>
+<a class="sourceLine" id="cb12-9" title="9">sigma       <span class="fl">7.13</span>    <span class="fl">1.04</span>   <span class="fl">5.39</span>   <span class="fl">6.40</span>   <span class="fl">7.05</span>   <span class="fl">7.76</span>   <span class="fl">9.41</span>    <span class="dv">1</span>  <span class="dv">6000</span></a>
+<a class="sourceLine" id="cb12-10" title="10">deviance  <span class="fl">477.05</span>    <span class="fl">2.53</span> <span class="fl">474.20</span> <span class="fl">475.24</span> <span class="fl">476.39</span> <span class="fl">478.17</span> <span class="fl">483.53</span>    <span class="dv">1</span>  <span class="dv">3100</span></a>
 <a class="sourceLine" id="cb12-11" title="11"></a>
 <a class="sourceLine" id="cb12-12" title="12">For each parameter, n.eff is a crude measure of effective sample size,</a>
 <a class="sourceLine" id="cb12-13" title="13">and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).</a>
 <a class="sourceLine" id="cb12-14" title="14"></a>
 <a class="sourceLine" id="cb12-15" title="15">DIC <span class="kw">info</span> (using the rule, <span class="dt">pD =</span> <span class="kw">var</span>(deviance)<span class="op">/</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb12-16" title="16">pD =<span class="st"> </span><span class="fl">3.5</span> and DIC =<span class="st"> </span><span class="fl">498.4</span></a>
+<a class="sourceLine" id="cb12-16" title="16">pD =<span class="st"> </span><span class="fl">3.2</span> and DIC =<span class="st"> </span><span class="fl">480.2</span></a>
 <a class="sourceLine" id="cb12-17" title="17">DIC is an estimate of expected predictive <span class="kw">error</span> (lower deviance is better).</a></code></pre></div>
 <blockquote>
 <p>Assess convergence</p>
@@ -728,41 +718,42 @@ Binomial logistic regresion
 <a class="sourceLine" id="cb15-12" title="12"><span class="st">        b &lt;- 1</span></a>
 <a class="sourceLine" id="cb15-13" title="13"><span class="st">    }                             </span></a>
 <a class="sourceLine" id="cb15-14" title="14"><span class="st">  &quot;</span> </a>
-<a class="sourceLine" id="cb15-15" title="15"><span class="co"># Write the model to a text file</span></a>
-<a class="sourceLine" id="cb15-16" title="16">  <span class="kw">writeLines</span>(modelstring,<span class="dt">con=</span><span class="st">&quot;chickSurvival.txt&quot;</span>)</a>
-<a class="sourceLine" id="cb15-17" title="17"></a>
-<a class="sourceLine" id="cb15-18" title="18"><span class="co"># Package the data in a list</span></a>
-<a class="sourceLine" id="cb15-19" title="19">  chick.data =<span class="st"> </span><span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb15-20" title="20">    <span class="dt">nobs =</span> <span class="kw">nrow</span>(birds),</a>
-<a class="sourceLine" id="cb15-21" title="21">    <span class="dt">y =</span> birds<span class="op">$</span>fledged,</a>
-<a class="sourceLine" id="cb15-22" title="22">    <span class="dt">N =</span> birds<span class="op">$</span>hatched</a>
-<a class="sourceLine" id="cb15-23" title="23">  )</a>
-<a class="sourceLine" id="cb15-24" title="24">  </a>
-<a class="sourceLine" id="cb15-25" title="25"><span class="co"># Parameters monitored</span></a>
-<a class="sourceLine" id="cb15-26" title="26">  parameters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>)  </a>
-<a class="sourceLine" id="cb15-27" title="27">  </a>
-<a class="sourceLine" id="cb15-28" title="28"><span class="co"># Initial values</span></a>
-<a class="sourceLine" id="cb15-29" title="29">  inits &lt;-<span class="st"> </span><span class="cf">function</span>(){<span class="kw">list</span>(<span class="dt">p=</span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))}  </a>
-<a class="sourceLine" id="cb15-30" title="30">  </a>
-<a class="sourceLine" id="cb15-31" title="31"><span class="co"># MCMC settings</span></a>
-<a class="sourceLine" id="cb15-32" title="32">  ni &lt;-<span class="st"> </span><span class="dv">33000</span>     <span class="co"># Number of draws from posterior (for each chain)</span></a>
-<a class="sourceLine" id="cb15-33" title="33">  nt &lt;-<span class="st"> </span><span class="dv">3</span>         <span class="co"># Thinning rate</span></a>
-<a class="sourceLine" id="cb15-34" title="34">  nb &lt;-<span class="st"> </span><span class="dv">3000</span>      <span class="co"># Number of draws to discard as burn-in</span></a>
-<a class="sourceLine" id="cb15-35" title="35">  nc &lt;-<span class="st"> </span><span class="dv">3</span>         <span class="co"># Number of chains</span></a>
-<a class="sourceLine" id="cb15-36" title="36">    </a>
-<a class="sourceLine" id="cb15-37" title="37"><span class="co"># Call jags and run the model</span></a>
-<a class="sourceLine" id="cb15-38" title="38">  chick.model &lt;-<span class="st"> </span><span class="kw">jags</span>(chick.data,</a>
-<a class="sourceLine" id="cb15-39" title="39">                      <span class="dt">inits=</span>inits,</a>
-<a class="sourceLine" id="cb15-40" title="40">                      parameters,</a>
-<a class="sourceLine" id="cb15-41" title="41">                      <span class="st">&quot;chickSurvival.txt&quot;</span>,</a>
-<a class="sourceLine" id="cb15-42" title="42">                      <span class="dt">n.chains =</span> nc, <span class="dt">n.thin =</span> nt,</a>
-<a class="sourceLine" id="cb15-43" title="43">                      <span class="dt">n.iter =</span> ni, <span class="dt">n.burnin =</span> nb,</a>
-<a class="sourceLine" id="cb15-44" title="44">                      <span class="dt">working.directory =</span> <span class="kw">getwd</span>()</a>
-<a class="sourceLine" id="cb15-45" title="45">                      )    </a></code></pre></div>
+<a class="sourceLine" id="cb15-15" title="15"></a>
+<a class="sourceLine" id="cb15-16" title="16"><span class="co"># Package the data in a list</span></a>
+<a class="sourceLine" id="cb15-17" title="17">  chick.data =<span class="st"> </span><span class="kw">list</span>(</a>
+<a class="sourceLine" id="cb15-18" title="18">    <span class="dt">nobs =</span> <span class="kw">nrow</span>(birds),</a>
+<a class="sourceLine" id="cb15-19" title="19">    <span class="dt">y =</span> birds<span class="op">$</span>fledged,</a>
+<a class="sourceLine" id="cb15-20" title="20">    <span class="dt">N =</span> birds<span class="op">$</span>hatched</a>
+<a class="sourceLine" id="cb15-21" title="21">  )</a>
+<a class="sourceLine" id="cb15-22" title="22">  </a>
+<a class="sourceLine" id="cb15-23" title="23"><span class="co"># Parameters monitored</span></a>
+<a class="sourceLine" id="cb15-24" title="24">  parameters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>)  </a>
+<a class="sourceLine" id="cb15-25" title="25">  </a>
+<a class="sourceLine" id="cb15-26" title="26"><span class="co"># Initial values</span></a>
+<a class="sourceLine" id="cb15-27" title="27">  inits &lt;-<span class="st"> </span><span class="cf">function</span>(){<span class="kw">list</span>(<span class="dt">p=</span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))}  </a>
+<a class="sourceLine" id="cb15-28" title="28">  </a>
+<a class="sourceLine" id="cb15-29" title="29"><span class="co"># MCMC settings</span></a>
+<a class="sourceLine" id="cb15-30" title="30">  ni &lt;-<span class="st"> </span><span class="dv">33000</span>     <span class="co"># Number of draws from posterior (for each chain)</span></a>
+<a class="sourceLine" id="cb15-31" title="31">  nt &lt;-<span class="st"> </span><span class="dv">3</span>         <span class="co"># Thinning rate</span></a>
+<a class="sourceLine" id="cb15-32" title="32">  nb &lt;-<span class="st"> </span><span class="dv">3000</span>      <span class="co"># Number of draws to discard as burn-in</span></a>
+<a class="sourceLine" id="cb15-33" title="33">  nc &lt;-<span class="st"> </span><span class="dv">3</span>         <span class="co"># Number of chains</span></a>
+<a class="sourceLine" id="cb15-34" title="34">    </a>
+<a class="sourceLine" id="cb15-35" title="35"><span class="co"># Call jags and run the model</span></a>
+<a class="sourceLine" id="cb15-36" title="36">  chick.model &lt;-<span class="st"> </span><span class="kw">jags</span>(</a>
+<a class="sourceLine" id="cb15-37" title="37">    chick.data,</a>
+<a class="sourceLine" id="cb15-38" title="38">    <span class="dt">inits=</span>inits,</a>
+<a class="sourceLine" id="cb15-39" title="39">    parameters,</a>
+<a class="sourceLine" id="cb15-40" title="40">    <span class="dt">model.file =</span> <span class="kw">textConnection</span>(modelString),</a>
+<a class="sourceLine" id="cb15-41" title="41">    <span class="dt">n.chains =</span> nc,</a>
+<a class="sourceLine" id="cb15-42" title="42">    <span class="dt">n.thin =</span> nt,</a>
+<a class="sourceLine" id="cb15-43" title="43">    <span class="dt">n.iter =</span> ni,</a>
+<a class="sourceLine" id="cb15-44" title="44">    <span class="dt">n.burnin =</span> nb,</a>
+<a class="sourceLine" id="cb15-45" title="45">    <span class="dt">working.directory =</span> <span class="kw">getwd</span>()</a>
+<a class="sourceLine" id="cb15-46" title="46">  )    </a></code></pre></div>
 <div id="your-mission" class="section level3">
 <h3>Your mission</h3>
 <p>Your lab assignment for this week is two-fold.</p>
-<p><strong>First</strong> I want you to modify the model above to allow survival to vary between bird species. You can do this in any number of conceivable ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the <code>falco.model</code> earlier in this tutorial. Don’t forget to change the data and priors that you pass to JAGS, too!</p>
+<p><strong>First</strong> I want you to modify the model above to allow survival to vary between bird species. You can do this a few different ways. For example, you could write the model so that it is similar to the model of wingspan above for the falcon example, or you could look into your text book for any number of parameterizations (see, for example, model specifications in Chapters 17-19). Basically, all you need to do here is to adapt the prior in the chickSurvival model above to use a loop just like the <code>falco.model</code> earlier in this tutorial. Don’t forget to change the data and priors that you pass to JAGS, too!</p>
 <p><strong>Second</strong> Write a brief methods and results section for your model. The methods should include a few <em>logically organized</em> sentences about the data (e.g. testing effects of this on that), the model structure (likelihood and priors), diagnostics (<span class="math inline">\(\hat{r}\)</span> and <code>n.eff</code>), and model settings (burn-in, thinning rate, number of chains, and number of samples).</p>
 <p><strong>Third</strong> Write an even briefer results section indicating any significant differences in survival between bird species, with at least one graph of the posterior distributions or a derived parameter showing the difference in estimated surival between them.</p>
 </div>
@@ -839,6 +830,23 @@ $(document).ready(function () {
 
 
 </script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
