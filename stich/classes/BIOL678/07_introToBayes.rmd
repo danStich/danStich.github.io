@@ -57,7 +57,7 @@ Realistically, this is a *much* tighter distribution than we would use for a sit
 
 We can make this distribution in R:
 ```{r}
-# Simulate 10000 random values for p(Cancer|50)
+# Simulate 10000 random values for p(Age 50 | Cancer)
   p_50_cancer = rbeta(1e4, 200, 1e4)
 ```
 

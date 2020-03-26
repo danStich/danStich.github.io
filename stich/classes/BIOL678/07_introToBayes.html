@@ -450,7 +450,7 @@ Introduction
 <p><span class="math display">\[P(Cancer|Age 50) = \frac{Beta(200, 10000) \cdot 0.01}{0.03}\]</span></p>
 <p>Realistically, this is a <em>much</em> tighter distribution than we would use for a situation like this, but we’ll get to that during coming weeks. The point is that even a little uncertainty makes the process more complicated than if exact values are <em>known</em>.</p>
 <p>We can make this distribution in R:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Simulate 10000 random values for p(Cancer|50)</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Simulate 10000 random values for p(Age 50 | Cancer)</span></a>
 <a class="sourceLine" id="cb1-2" title="2">  p_<span class="dv">50</span>_cancer =<span class="st"> </span><span class="kw">rbeta</span>(<span class="fl">1e4</span>, <span class="dv">200</span>, <span class="fl">1e4</span>)</a></code></pre></div>
 <p>We can also look at this distribution:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Make a histogram of p(Age50 | Cancer)</span></a>
@@ -469,13 +469,13 @@ Introduction
 <p>We can calculate descriptive statistics for the conditional probability so that we can describe the distribution.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Using a mean and standard deviation</span></a>
 <a class="sourceLine" id="cb5-2" title="2">  <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">[<span class="dv">1</span>] <span class="fl">0.006531673</span></a>
+<a class="sourceLine" id="cb5-3" title="3">[<span class="dv">1</span>] <span class="fl">0.006533747</span></a>
 <a class="sourceLine" id="cb5-4" title="4">  <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5">[<span class="dv">1</span>] <span class="fl">0.0004564573</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-5" title="5">[<span class="dv">1</span>] <span class="fl">0.0004560728</span></a></code></pre></div>
 <p>We can calculate quantiles (95% CRI). Note that in Bayesian inference, we are going to call these ‘credible intervals’ (CRI) or ‘high density intervals’ (HDI) depending on assumptions related to normality, but they are functionally the same thing as ‘confidence intervals’.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb6-2" title="2">       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% </a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="fl">0.005674685</span> <span class="fl">0.006520993</span> <span class="fl">0.007460190</span> </a></code></pre></div>
+<a class="sourceLine" id="cb6-3" title="3"><span class="fl">0.005677572</span> <span class="fl">0.006519887</span> <span class="fl">0.007467495</span> </a></code></pre></div>
 <p>We can also look at the actual distribution:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb7-2" title="2">     <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,</a>
@@ -493,13 +493,13 @@ Introduction
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">  p_cancer_<span class="dv">50</span> &lt;-<span class="st"> </span>(p_<span class="dv">50</span>_cancer<span class="op">*</span>p_cancer)<span class="op">/</span>p_<span class="dv">50</span></a></code></pre></div>
 <p>We calculate descriptive statistics for the conditional probability to describe the probability using a mean and standard deviation.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">  <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb10-2" title="2">[<span class="dv">1</span>] <span class="fl">0.006882778</span></a>
+<a class="sourceLine" id="cb10-2" title="2">[<span class="dv">1</span>] <span class="fl">0.00690469</span></a>
 <a class="sourceLine" id="cb10-3" title="3">  <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">1</span>] <span class="fl">0.003034055</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">1</span>] <span class="fl">0.003012498</span></a></code></pre></div>
 <p>Quantiles (95% CRI and median):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb11-2" title="2">       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% </a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="fl">0.002598754</span> <span class="fl">0.006353177</span> <span class="fl">0.014370260</span> </a></code></pre></div>
+<a class="sourceLine" id="cb11-3" title="3"><span class="fl">0.002676010</span> <span class="fl">0.006323471</span> <span class="fl">0.014326331</span> </a></code></pre></div>
 <p>And, have a look at our new distribution:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb12-2" title="2">     <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,</a>
@@ -676,8 +676,8 @@ Introduction
 <a class="sourceLine" id="cb25-3" title="3"> <span class="dv">3</span> chains, each with <span class="dv">33000</span> <span class="kw">iterations</span> (first <span class="dv">3000</span> discarded), n.thin =<span class="st"> </span><span class="dv">3</span></a>
 <a class="sourceLine" id="cb25-4" title="4"> n.sims =<span class="st"> </span><span class="dv">30000</span> iterations saved</a>
 <a class="sourceLine" id="cb25-5" title="5">         mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>%  Rhat n.eff</a>
-<a class="sourceLine" id="cb25-6" title="6">p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.878</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">27000</span></a>
-<a class="sourceLine" id="cb25-7" title="7">deviance  <span class="fl">26.804</span>   <span class="fl">1.443</span> <span class="fl">25.797</span> <span class="fl">25.897</span> <span class="fl">26.250</span> <span class="fl">27.127</span> <span class="fl">30.892</span> <span class="fl">1.001</span> <span class="dv">15000</span></a>
+<a class="sourceLine" id="cb25-6" title="6">p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">30000</span></a>
+<a class="sourceLine" id="cb25-7" title="7">deviance  <span class="fl">26.779</span>   <span class="fl">1.405</span> <span class="fl">25.797</span> <span class="fl">25.895</span> <span class="fl">26.238</span> <span class="fl">27.077</span> <span class="fl">30.830</span> <span class="fl">1.001</span> <span class="dv">30000</span></a>
 <a class="sourceLine" id="cb25-8" title="8"></a>
 <a class="sourceLine" id="cb25-9" title="9">For each parameter, n.eff is a crude measure of effective sample size,</a>
 <a class="sourceLine" id="cb25-10" title="10">and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).</a>
