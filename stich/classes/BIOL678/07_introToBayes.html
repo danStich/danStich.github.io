@@ -469,13 +469,13 @@ Introduction
 <p>We can calculate descriptive statistics for the conditional probability so that we can describe the distribution.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Using a mean and standard deviation</span></a>
 <a class="sourceLine" id="cb5-2" title="2">  <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb5-3" title="3">[<span class="dv">1</span>] <span class="fl">0.006533747</span></a>
+<a class="sourceLine" id="cb5-3" title="3">[<span class="dv">1</span>] <span class="fl">0.006541984</span></a>
 <a class="sourceLine" id="cb5-4" title="4">  <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb5-5" title="5">[<span class="dv">1</span>] <span class="fl">0.0004560728</span></a></code></pre></div>
+<a class="sourceLine" id="cb5-5" title="5">[<span class="dv">1</span>] <span class="fl">0.0004626237</span></a></code></pre></div>
 <p>We can calculate quantiles (95% CRI). Note that in Bayesian inference, we are going to call these ‘credible intervals’ (CRI) or ‘high density intervals’ (HDI) depending on assumptions related to normality, but they are functionally the same thing as ‘confidence intervals’.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb6-2" title="2">       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% </a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="fl">0.005677572</span> <span class="fl">0.006519887</span> <span class="fl">0.007467495</span> </a></code></pre></div>
+<a class="sourceLine" id="cb6-3" title="3"><span class="fl">0.005665284</span> <span class="fl">0.006535849</span> <span class="fl">0.007484516</span> </a></code></pre></div>
 <p>We can also look at the actual distribution:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb7-2" title="2">     <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,</a>
@@ -493,13 +493,13 @@ Introduction
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">  p_cancer_<span class="dv">50</span> &lt;-<span class="st"> </span>(p_<span class="dv">50</span>_cancer<span class="op">*</span>p_cancer)<span class="op">/</span>p_<span class="dv">50</span></a></code></pre></div>
 <p>We calculate descriptive statistics for the conditional probability to describe the probability using a mean and standard deviation.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">  <span class="kw">mean</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb10-2" title="2">[<span class="dv">1</span>] <span class="fl">0.00690469</span></a>
+<a class="sourceLine" id="cb10-2" title="2">[<span class="dv">1</span>] <span class="fl">0.00688786</span></a>
 <a class="sourceLine" id="cb10-3" title="3">  <span class="kw">sd</span>(p_cancer_<span class="dv">50</span>)</a>
-<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">1</span>] <span class="fl">0.003012498</span></a></code></pre></div>
+<a class="sourceLine" id="cb10-4" title="4">[<span class="dv">1</span>] <span class="fl">0.002996654</span></a></code></pre></div>
 <p>Quantiles (95% CRI and median):</p>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="kw">quantile</span>(p_cancer_<span class="dv">50</span>, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.50</span>, <span class="fl">0.975</span>))</a>
 <a class="sourceLine" id="cb11-2" title="2">       <span class="fl">2.5</span><span class="op">%         50%</span><span class="st">       </span><span class="fl">97.5</span>% </a>
-<a class="sourceLine" id="cb11-3" title="3"><span class="fl">0.002676010</span> <span class="fl">0.006323471</span> <span class="fl">0.014326331</span> </a></code></pre></div>
+<a class="sourceLine" id="cb11-3" title="3"><span class="fl">0.002596763</span> <span class="fl">0.006396662</span> <span class="fl">0.014089875</span> </a></code></pre></div>
 <p>And, have a look at our new distribution:</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">hist</span>(p_cancer_<span class="dv">50</span>,</a>
 <a class="sourceLine" id="cb12-2" title="2">     <span class="dt">col=</span><span class="st">&quot;gray87&quot;</span>,</a>
@@ -652,7 +652,7 @@ Introduction
 <p>Tell JAGS which of the model parameters we would like to monitor. This has to be a character vector containing names of parameters from the model specified above. In this case, the only parameter of interest is <code>p</code>, or probability of survival to fledge.</p>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Parameters monitored</span></a>
 <a class="sourceLine" id="cb21-2" title="2">  parameters &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;p&quot;</span>)</a></code></pre></div>
-<p>Provide initial values for stochastic nodes. We need to provide initial starting values for each parameter modeled. We use a <em>random</em> starting value for each parameter because we don’t want our model estimates to be influenced by the starting value. In this case, we have only one parameter, <code>p</code>, and we just need a number between one and zero, so we can use the <code>runif</code> function to get one.</p>
+<p>Provide initial values for parameters. We need to provide initial starting values for each parameter modeled. We use a <em>random</em> starting value for each parameter because we don’t want our model estimates to be influenced by the starting value. In this case, we have only one parameter, <code>p</code>, and we just need a number between one and zero, so we can use the <code>runif</code> function to get one.</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># Function to provide initial values</span></a>
 <a class="sourceLine" id="cb22-2" title="2">  inits &lt;-<span class="st"> </span><span class="cf">function</span>(){<span class="kw">list</span>(<span class="dt">p=</span><span class="kw">runif</span>(<span class="dv">1</span>,<span class="dv">0</span>,<span class="dv">1</span>))}</a></code></pre></div>
 <p>Provide the MCMC settings for the model run. Here, we tell JAGS that we want to take 33,000 samples from the posterior distribution (number of iterations, <code>ni</code>). We will only keep every third sample (thinning rate, <code>nt</code>), and we will discard the first 3,000 samples (burnin, <code>nb</code>). We will repeat this process 3 times (number of chains, <code>nc</code>) for a total of 30,000 samples from the posterior.</p>
@@ -676,8 +676,8 @@ Introduction
 <a class="sourceLine" id="cb25-3" title="3"> <span class="dv">3</span> chains, each with <span class="dv">33000</span> <span class="kw">iterations</span> (first <span class="dv">3000</span> discarded), n.thin =<span class="st"> </span><span class="dv">3</span></a>
 <a class="sourceLine" id="cb25-4" title="4"> n.sims =<span class="st"> </span><span class="dv">30000</span> iterations saved</a>
 <a class="sourceLine" id="cb25-5" title="5">         mu.vect sd.vect   <span class="fl">2.5</span><span class="op">%    25%</span><span class="st">    </span><span class="dv">50</span><span class="op">%    75%</span><span class="st">  </span><span class="fl">97.5</span>%  Rhat n.eff</a>
-<a class="sourceLine" id="cb25-6" title="6">p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.922</span> <span class="fl">1.001</span> <span class="dv">30000</span></a>
-<a class="sourceLine" id="cb25-7" title="7">deviance  <span class="fl">26.779</span>   <span class="fl">1.405</span> <span class="fl">25.797</span> <span class="fl">25.895</span> <span class="fl">26.238</span> <span class="fl">27.077</span> <span class="fl">30.830</span> <span class="fl">1.001</span> <span class="dv">30000</span></a>
+<a class="sourceLine" id="cb25-6" title="6">p          <span class="fl">0.876</span>   <span class="fl">0.026</span>  <span class="fl">0.821</span>  <span class="fl">0.859</span>  <span class="fl">0.877</span>  <span class="fl">0.894</span>  <span class="fl">0.921</span> <span class="fl">1.001</span> <span class="dv">17000</span></a>
+<a class="sourceLine" id="cb25-7" title="7">deviance  <span class="fl">26.788</span>   <span class="fl">1.391</span> <span class="fl">25.797</span> <span class="fl">25.900</span> <span class="fl">26.249</span> <span class="fl">27.105</span> <span class="fl">30.752</span> <span class="fl">1.001</span> <span class="dv">30000</span></a>
 <a class="sourceLine" id="cb25-8" title="8"></a>
 <a class="sourceLine" id="cb25-9" title="9">For each parameter, n.eff is a crude measure of effective sample size,</a>
 <a class="sourceLine" id="cb25-10" title="10">and Rhat is the potential scale reduction <span class="kw">factor</span> (at convergence, <span class="dt">Rhat=</span><span class="dv">1</span>).</a>

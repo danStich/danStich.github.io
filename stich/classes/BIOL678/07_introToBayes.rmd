@@ -346,7 +346,7 @@ Tell JAGS which of the model parameters we would like to monitor. This has to be
   parameters <- c("p")
 ```
 
-Provide initial values for stochastic nodes. We need to provide initial starting values for each parameter modeled. We use a *random* starting value for each parameter because we don't want our model estimates to be influenced by the starting value. In this case, we have only one parameter, ```p```, and we just need a number between one and zero, so we can use the ```runif``` function to get one. 
+Provide initial values for parameters. We need to provide initial starting values for each parameter modeled. We use a *random* starting value for each parameter because we don't want our model estimates to be influenced by the starting value. In this case, we have only one parameter, ```p```, and we just need a number between one and zero, so we can use the ```runif``` function to get one. 
 
 ```{r}
 # Function to provide initial values
