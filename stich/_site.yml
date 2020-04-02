@@ -25,7 +25,7 @@ navbar:
       href: contact.html  
   right:
     - text: "shadia"
-      href: https://danstich.github.io/shadia/
+      href: https://shadia-ui.github.io/
     - icon: fa-github
       href: https://github.com/danStich
 output:
