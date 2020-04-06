@@ -100,7 +100,7 @@ And, you can see here that even within groups the distributions do not look like
 library(MASS)
 ```
 
-For this example, we will use a function called `glm.nb`. This function us estimate a GLM for lets us estimate parameters for a GLM that uses the negative binomial error distribution and estimates the "overdispersion parameter" for the negative binomial distribution. You, of course, remember this parameter and know it as `theta` from our discussions about probability distributions.
+For this example, we will use a function called `glm.nb`. This function lets us estimate parameters for a GLM that uses the negative binomial error distribution and estimates the "overdispersion parameter" for the negative binomial distribution. You, *of course*, remember this parameter and know it as `theta` from our discussions about probability distributions. Just in case you're having trouble remembering, take a look at the lecture module for <a href = "02_probabilityDistributions.html">probability distributions</a>.
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 ?glm.nb
