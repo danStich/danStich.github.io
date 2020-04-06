@@ -61,7 +61,9 @@ H. J. Brockmann. 1996. Satellite male groups in horseshoe crabs, *Limulus polyph
 
 # Right away, we can see that
 # this model is not a very good fit to the data.
+  par(mfrow=c(2,2))
   plot(count.mod)
+  par(mfrow=c(1,1))
 ```
 
 This brings us to the next important point we need to make about GLMS...
@@ -123,10 +125,17 @@ Play around with the two formulations above and see if there's a difference. *Cl
 Now, let's take a look at the distribution of the residuals.
 ```{r}
 res = neg.mod$residuals
-plot(neg.mod)
 ```
 
-Our residuals appear to also take on a negative binomial error distribution, but these plots start to become pretty meaningless in the world of GLMs without a few tweaks...
+
+And, we can look at the output for the default diagnostic plots for `glm` objects in R as we have done in weeks past:
+```{r, echo=FALSE}
+par(mfrow=c(2,2))
+plot(neg.mod)
+par(mfrow=c(1,1))
+```
+
+Our residuals appear to also take on a negative binomial error distribution, but these plots are hard to interpret in the world of GLMs without a few tweaks...
 
 Luckily, there is also a tool for this purpose:
 ```{r, message=FALSE, warning=FALSE}
