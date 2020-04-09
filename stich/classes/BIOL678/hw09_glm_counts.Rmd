@@ -476,9 +476,9 @@ This still isn't super satisfying because of that one data point on the far righ
 ## Your mission
 Just as in the past couple of weeks, your assignment for this lab is to write a *brief* methods section and a *brief* results section for the exercises you have been working on. **You may use either the maximum likelihood estimation procedure** covered in lecture this week, **or the Bayesian approach** detailed in the lab exercise. Just make sure you pick one or the other and stick to it in your analysis and your writing.
 
-In addition to these tasks, I would like you to **add or replace at least one explanatory variable** to the model. For example, you could add `width` as a continuous covariate or replace `mass` with `width`. 
+In addition to these tasks, I would like you to **compare mass and width by running two different models**. To do this, you will need to run the model above, and then compare results to a model in which you replace `mass` with `width`. You can use DIC to compare the models initially.
 
-Then, so we can compare the relative effect sizes of `width` and `mass`, I want you to standardize the covariates prior to including them in the model.
+I want you to standardize the covariates prior to including them in the model so we can compare the relative effect sizes of `width` and `mass` based on the magnitudes of `beta` estimated for each model.
 
 Remember that this is the same as calculating a whole bunch of z-scores. You can achieve this in R like this (for example):
 ```{r, eval=FALSE}
@@ -486,7 +486,7 @@ Remember that this is the same as calculating a whole bunch of z-scores. You can
   crabs$smass = as.vector(scale(crabs$mass))
 ```
 
-For your results, it is fine to present model predictions on the standardized scale of the variable.
+For your results, it is fine to present model predictions on the standardized scale of the variable. I do want you to compare the relative effects of `mass` and `width` using a combination of DIC and the standardized coefficient estimates.
 
 ```{r, eval=FALSE, echo=FALSE}
 # My code for the answer key to lab 09
