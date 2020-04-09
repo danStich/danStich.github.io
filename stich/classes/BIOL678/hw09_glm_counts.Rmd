@@ -72,7 +72,7 @@ $$log(\lambda_{i}) = \alpha_{i_j}$$
 
 This approach accomplishes the same thing as dummy coding color and writing $log(\lambda_i) = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \beta_3 \cdot x_3$, but the former easier to write out in notation and in the BUGS language. It also makes it easier to communicate means. If we want relative effect sizes, we can just calculate them by doing simple algebra with the posteriors.
 
-And, finally, we assume that the i^th^ value of is drawn from a normal distribution on the link scale, dependent upon the color (j) of the female crab in the i^th^ observation. We specify the prior on alpha for each j^th^ color as a diffuse, normal distribution with a mean ($\mu$) of zero and a variance ($\sigma^2$) of 100 (in BUGS language $\tau = 0.01$).
+And, finally, we assume that the i^th^ value of $\alpha$ is drawn from a normal distribution on the link scale, dependent upon the color (j) of the female crab in the i^th^ observation. We specify the prior on alpha for each j^th^ color as a diffuse, normal distribution with a mean ($\mu$) of zero and a variance ($\sigma^2$) of 100 (in BUGS language $\tau = 0.01$).
 
 $$\alpha_{j} = Normal(0, 0.01)$$
 
@@ -338,26 +338,40 @@ plot(density(exp(crabs.model2$BUGSoutput$sims.list$alpha[,i] +
 
 
 ## Shifting gears
-This example is probably a good case for switching over to the negative binomial distribution. The code to demonstrate this is below. This is the formulation you will work with for the rest of lab.
+This example is probably a good case for switching over to the negative binomial distribution. The code to demonstrate this is below. We drop the interaction term and focus on the big picture here. This is the formulation you will work with for the rest of lab.
 
 ```{r}
 modelstring="                 
   model {                       
     # Likelihood
       for(i in 1:nobs){    
-        N[i] ~ dnegbin(p[i], r[color[i]]) 
-        logit(p[i]) <- alpha[color[i]] + beta[color[i]]*mass[i]
+        # Count is outcome of Negative binomial PDF
+        N[i] ~ dnegbin(p[i], r) 
+        
+        # Re-define p (success parameter)
+        # in terms of lambda (count) and
+        # r (overdispersion)
+        p[i] <- r/(r+lambda[i]) 
+        
+        # Log-link between lambda and linear
+        # predictor
+        log(lambda[i]) <- mu[i]
+        
+        # Expectation from linear predictor on log
+        # scale
+        mu[i] <- alpha[color[i]] + beta*X[i]
       }
 
+    # Slope
+      beta ~ dnorm(0,0.0001)
+      r ~ dgamma(0.0001, 0.0001)T(0,3)
+      
     # Priors
       for(i in 1:ncolors){
         alpha[i] ~ dnorm(0,0.0001) 
-        beta[i] ~ dnorm(0,0.0001)
-        r[i] ~ dgamma(0.0001, 0.0001)T(0,3)
       }
   }                             
-"                               
-writeLines(modelstring,con="crabsMod3.txt")
+"                                  
 
 # Package the data in a list
   crabs.data = list(
@@ -365,7 +379,7 @@ writeLines(modelstring,con="crabsMod3.txt")
     N = crabs$satellites,
     color = crabs$color,
     ncolors = length(unique(crabs$color)),
-    mass=crabs$mass
+    X=crabs$mass
   )
 
 # Parameters monitored
@@ -374,8 +388,8 @@ writeLines(modelstring,con="crabsMod3.txt")
 # Initial values
   inits <- function(){list(
     alpha=rnorm(length(unique(crabs$color)),0,1),
-    beta=rnorm(length(unique(crabs$color)),0,1),
-    r=runif(length(unique(crabs$color)),0,1)
+    beta=rnorm(1,0,1),
+    r=runif(1,0,1)
     )}
 
 # MCMC settings
@@ -385,7 +399,8 @@ writeLines(modelstring,con="crabsMod3.txt")
   nc <- 3          # Number of chains
 
 # Call jags and run the model
-  crabs.model3 <- jags(crabs.data, inits=inits, parameters, "crabsMod3.txt",
+  crabs.model3 <- jags(crabs.data, inits=inits, parameters, 
+    model.file = textConnection(modelstring),
     n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb,
     working.directory = getwd())
 
@@ -393,17 +408,69 @@ writeLines(modelstring,con="crabsMod3.txt")
   print(crabs.model3, digits=2) 
 ```
 
-If we want to see how the estimates from this model compare to the observed data, we can plot the posterior densities for r over the top of histograms for each color. All in all this is looking pretty darn good.
-```{r}  
-par(mfrow=c(2,2))  
-for(i in 1:length(unique(crabs$color))){  
-hist(crabs$satellites[crabs$color==i], xlim=c(0, 20), yaxt='n',
-     bty='l', main='', xlab = 'Number of satellites', col='gray87')  
-par(new=TRUE)
-plot(density(exp(crabs.model3$BUGSoutput$sims.list$r[ ,i])),
-     xlim=c(0, 20), main='', xlab='', ylab='', col='red', yaxt='n', bty='l')
+We see that mass has a significant effect on number of satellites across color groups based on exclusion of zero from the 95% CRI. We can tell that the number of satellite males increases with increasing mass of females.
+
+If we wanted to vizualize this, we could do something like:
+```{r}
+# Make new masses for prediction
+X = seq(min(crabs.data$X), max(crabs.data$X), 0.2)
+
+# Get posteriors
+alpha = crabs.model3$BUGSoutput$sims.list$alpha
+beta = crabs.model3$BUGSoutput$sims.list$beta
+
+# Get posterior prediction for each iteration
+# Choose a crab color group to predict. Change it out
+# and see how the plots respond. The rest of the code
+# stays the same when we do this.
+color = 1
+
+# Loop through manual predictions. Note we invert
+# the log-link function with exp() inside this loop
+pred = matrix(0, nrow = length(beta), ncol = length(X))
+for(i in 1:length(beta)){
+  for(t in 1:length(X)){
+    pred[i, t] = exp(alpha[i, color] + beta[i] * X[t])
+  }
 }
+
+# Calculate mean and 95% CRI of predicted satellites
+# for each value in our new sequence of X used for preds
+meanpred = apply(pred, 2, mean)
+lwr = apply(pred, 2, quantile, probs=c(0.025))
+upr = apply(pred, 2, quantile, probs=c(0.975))
+
+# Make a white plot to start
+plot(x = crabs$mass[crabs$color==color],
+     y = crabs$satellites[crabs$color==color], yaxt='n',
+     pch = 21, col = 'white',
+     ylim = c(0, 20),
+     ylab = 'Number of satellites', xlab = 'Mass',
+     main = paste("Color group ", color, sep='')
+     )
+
+# Add a polygon for 95% CRI
+polygon(x = c(X, rev(X)), y = c(lwr, rev(upr)),
+        col = 'gray87', border = NA
+        )
+
+# Add the raw data as points
+points(x = crabs$mass[crabs$color==color],
+       y = crabs$satellites[crabs$color==color],
+       pch = 21, col = 'black', bg = 'black')
+
+# Add line for mean prediction
+lines(x = X, y = meanpred, col='black', lty=1)
+
+# Add the y-axis with rotated tick labels
+axis(side = 2, las = 2)
+
+# Drop a box around the plot
+box()
+
 ```
+
+This still isn't super satisfying because of that one data point on the far right that we saw back in diagnostics (try `color = 2` in code above), but the pattern generally fits the data. Of course, we would want to go back through and check it out, along with Bayesian p-values and other diagnostics.
 
 
 ## Your mission
@@ -451,7 +518,6 @@ modelstring="
       }
   }                             
 "                               
-writeLines(modelstring,con="crabsMod.txt")
 
 # Model settings and calibration --------------------------
 # Package the data in a list
@@ -480,7 +546,8 @@ writeLines(modelstring,con="crabsMod.txt")
   nc <- 3          # Number of chains
 
 # Call jags and run the model
-  crabs.model <- jags(crabs.data, inits=inits, parameters, "crabsMod.txt",
+  crabs.model <- jags(crabs.data, inits=inits, parameters, 
+    model.file = "crabsMod.txt",
     n.chains = nc, n.thin = nt, n.iter = ni, n.burnin = nb,
     working.directory = getwd())
 
