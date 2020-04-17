@@ -237,9 +237,9 @@ Did you see that one coming?
 
 \item 2. Fit a model that includes random effects on intercept *and* slope.
 
-\item 3. Graph the mean overall relationship between length and mass based on the overall intercept and slope.
+\item 3. Graph the mean overall relationship between length and mass based on the overall intercept and slope. Determine whether the overall slope parameter differs significantly from 3.00 based on the mean (`Estimate`) and standard errors (`Std. Error`) in the `Fixed effects` table in your model `summary()`.
 
-\item 4. Determine whether any of the $\beta$s overlap with zero.
+\item 4. Compare each of the lake-specific $\beta$s with 3.00 (isometric growth) and note any obvious patterns (tests of statistical significance not required).
 
 \item 5. Write a brief methods and brief results section.
 
