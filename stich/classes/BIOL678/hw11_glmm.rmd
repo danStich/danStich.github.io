@@ -12,28 +12,28 @@ This week in lecture, we introduced the generalized linear mixed model (GLMM). A
 ## Choose your own data adventure {.tabset .tabset-fade} 
 <!-- .tabset-fade .tabset-pills} -->
 
-This week we will work with two different data examples to demonstrate a couple different applications of GLMM to non-normal data. The binomial and Poisson distributions are commonly used to describe biological and ecological processes due to the nature of the data we collect. Therefore, one of the examples this week will use a Bernouli response (special case of the binomial where `N` = 1), and the other will use a Poisson (count) response to demonstrate the application of GLMMs in biology and ecology. Please realize that these examples hold true for any response that takes similar forms, and they are easily generalized to include a wide variety of other sampling distributions.
+This week we will work with two different data examples to demonstrate a couple different applications of GLMM to non-normal data. The binomial and Poisson distributions are commonly used to describe biological and ecological processes due to the nature of the data we collect. Therefore, one of the examples this week will use a Bernouli response (special case of the binomial where `N` = 1), and the other will use a count response to demonstrate the application of GLMMs in biology and ecology. Please realize that procedures outlined below are generally applicable within the broader context of GLMM, and they are easily generalized to include a wide variety of other sampling distributions not discussed in class.
 
-For our assignments this week, students can choose to work with either one of these examples, and must only submit a write-up for one of them. You choose, although I encourage you to explore with both of them to investigate similarities and differences in how things work for the models.
+For our assignments this week, you may choose to work with either one of these examples, and must only submit a write-up for one of them. You choose, although I encourage you to explore with both of them to investigate similarities and differences in how things work for the models.
 
 ### <span style="color:black"> Walleye phenology</span>
 
-<h4 id="multi"> **Walleye in spring** </h4>
+<h2 id="multi"><b> Walleye phenology </b></h2>
 
 It is that magical time of year again. Birds are returning from their winter vacations, and all of the critters are twitterpaited. The salamanders and frogs are making there way to breeding pools in the soaked leaf litter, and even the fish are warming up for the spawn. There's only one problem: we don't quite know when those fish are going to get into the streams so we can catch them, clip their fins, put some tags in them, and study their every move (...muwahaha...). While the timing of daffodil emergence is often a reliable indicator, it would be nice to have a simple regression we could use to predict the timing of the fish spawn and maximize field sampling efficiency.
 
 For this first example, we will attempt to predict counts of walleye, *Sander vitreus*, in spawning streams of Otsego Lake based on historical counts and climate data.
 
-##### **Walleye data**
+<h3 id="multi"><b> Walleye data </b></h3>
 
 We begin by reading in the data set:
 
-```{r, eval=FALSE}
+```{r, echo=TRUE, eval=FALSE}
 # Read in the walleye data
-  wae = read.csv('otsegoRunCounts.csv', stringsAsFactors = FALSE)
+  wae = read.csv('classData-master/otsegoRunCounts.csv', stringsAsFactors = FALSE)
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 # Read in the walleye data
   wae = read.csv('../../data/otsegoRunCounts.csv', stringsAsFactors = FALSE)
 ```
@@ -53,34 +53,40 @@ These data are measurements of the length and mass of individual walleye at vari
 
 We will use the data to predict number of walleye we expect to see each day in the spawning tribs during spring 2017 based on historical counts.
 
-##### **Climate data**
+<h3 id="multi"><b> Climate Data </b></h3>
 
 For this example, we are interested in predicting the timing of the walleye run. Generally speaking, phenology of spawning events in fishes and many other animals is driven by circannual rhythms entrained by photoperiod. However, temperature often acts as a trigger for releasing behavior related to spawning...**Translation**: if we want to predict timing of the spawning run, we need to have data for photoperiod and temperature, too!
 
 I collected some of this information ahead of time for you. Temperature, precipitation, and snow depth data were downloaded from the following, surely reliable, [website](http://www.usclimatedata.com/climate/cooperstown/new-york/united-states/usny0326/2017/3).
 
 Read in the data an have a look at the structure
-```{r, eval=FALSE, echo=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 # Read in the climate data
-  climate=read.csv('tempdata.csv', stringsAsFactors = FALSE)
+  climate=read.csv('classData-master/tempdata.csv', stringsAsFactors = FALSE)
 
 # Have a look at the data structure
   str(climate)
+  
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 # Read in the climate data
   climate=read.csv('../../data/tempdata.csv', stringsAsFactors = FALSE)
+
+# Have a look at the data structure
+  str(climate)
+  
 ```
+
 
 ```{r}
 # Have a look at the data structure
   str(climate)
+
 ```
 
-##### **Data management**
-
-<h6> **Walleye counts** </h6>
+<h3 ><b> Data management </b></h3>
+<h4 id="multi"><b> Walleye counts </b></h4>
 
 Okay, so now we have fish records by date and we have some climate data for those same dates and then some. Now, we need to smash all of those data together so we can use them.
 
@@ -98,7 +104,7 @@ Tally up total counts of walleye in each stream on each day.
 weye = ddply(wae, c('date', 'site'), summarize, counts = length(Sex))
 ```
 
-###### **Climate data**
+<h4><b> Climate data </b></h4>
 
 Next, we will get the climate data in order. 
 
@@ -150,8 +156,9 @@ Next, we will calculate degree days (in $^{\circ}$C) using both the high temp an
     dd = mapply(cumsum, test)
   # Unlist the result and add it to the climate data  
     climate$dd = unlist(dd)
-    climate$dd2 = climate$dd^2
 ```
+
+<h4><b> Data merge </b></h4>
 
 We can now add degree days to our fish data. What? Fish data? I forgot we had that!
 
@@ -160,15 +167,13 @@ To wrap up our climate analysis, we will quickly calculate day length at Otsego 
 ```{r, message=FALSE, warning=FALSE}
 library(geosphere)
 climate$daylight = daylength(lat = 42.76, doy = climate$day)
-climate$daylight2 = climate$daylight^2
 ```
 
-Our final job will be to add all of the climate data to our new dataframe containing walleye counts. This is relatively easy to do in R using the `merge` function, like so:
+Our final job will be to add all of the climate data to our new dataframe containing walleye counts. This is relatively easy to do in R using the `merge()` function, like so:
 
 ```{r}
 # First, format the date column in the weye df
-  weye$date = as.Date(as.character(weye$date),
-                      format="%m/%d/%Y")  
+  weye$date = as.Date(as.character(weye$date), format="%m/%d/%Y")  
 
 # Merge the two dataframes
   eyes = merge(weye, climate)
@@ -183,11 +188,11 @@ Our final job will be to add all of the climate data to our new dataframe contai
 
 Wow, that's rough! We went from several hundred lines of data to just a handful pretty quickly!!
 
-##### Modeling counts
+<h3><b> Modeling counts </b></h3>
 
 After our data management triathalon, we can finally model walleye counts as a function of some explanatory variables of interest. As has become our practice during the last several lessons, we will do this in both frequentist and Bayesian frameworks.
 
-###### REML Estimation
+<h4><b> REML estimation </b></h4>
 
 We start by estimating a model using REML. Let's say for the sake of argument that we are simply interested in the lake-wide mean of our counts so that we know when students should, for example, be heading out to tributaries to look for walleyes in streams. 
 
@@ -200,7 +205,7 @@ In the `lme4` package, the model might look something like this:
   library(lme4)
 
 # Make the model
-  waeMod1 = glmer(counts~dd + dd2 + (1|site), data=eyes, family=poisson)
+  waeMod1 = glmer(counts~dd + (dd^2) + (1|site), data=eyes, family=poisson)
   
 # Have a look-see at the results
   summary(waeMod1)
@@ -226,6 +231,8 @@ Okay, looks like we are doing a lot better with this now.
 As we look through these results, we can see that we have a significant effect of degree days on spawning behavior. What's more is that our count of spawning fish appears to increase during the year to a point before it starts to decrease.
 
 Now, if we want, we can make a graph to show these predictions. Here, we make predictions for all years, and then we plot those predictions for a single site (`Shadow Brook`).
+
+You will need to install the `merTools` package for this one before you can run the code below (`install.packages(merTolls)`). You will have to allow it to build from source.
 
 ```{r, message=FALSE, warning=FALSE}
 # Load the merTools package
@@ -267,50 +274,63 @@ Now, if we want, we can make a graph to show these predictions. Here, we make pr
 
 We could also do this using our global parameter estimates and some new data. We see that our mean predictions aren't terrible, but there is quite a bit of uncertainty here.
 
-##### **Bayesian estimation**
+<h4><b> Bayesian estimation </b></h4>
 
 We can fit the same model in the Bayesian framework, too. Here we specify it just as we have during the past couple of weeks.
+
+Let's make sure to standardize covariates first:
+
+```{r}
+#eyes = eyes[eyes$year!=2019, ]
+eyes$stemp = scale(eyes$mean_c)  # Temperature
+eyes$stemp[is.na(eyes$stemp)] <- mean(eyes$stemp, na.rm = T)
+eyes$sdd = scale(eyes$dd)        # Degree days
+eyes$sdaylight  = scale(eyes$dd) # Daylight/photoperiod
+eyes$doy = yday(eyes$date)
+eyes$sdoy = scale(eyes$doy)
+```
+
+Now write out a model with random intercepts to predict count as a function of some covariate of interest (we'll start with degree day in the example that follows):
 
 ```{r, message=FALSE, warning=FALSE}
 # Write model
 modelstring="
-model {
+  model {
+  
+    # Likelihood
+    for(i in 1:n){
+      count[i] ~ dnegbin(p[i], r)     # The random variable
+      p[i] <- r/(r+lambda[i])
+      log(lambda[i]) <- mu[i]
+      mu[i] <- alpha[site[i]] + beta*X[i] + beta2*(X[i]^2) # Expectation
+    }
+    
+    # Priors
+    for (i in 1:ngroups){      
+      alpha[i] ~ dnorm(mu.int, tau.int)   # Random intercepts
+    }
+    
+    mu.int ~ dnorm(0, 0.1)       # Mean hyperparameter for random intercepts
+    tau.int <- 1 / (sigma.int * sigma.int)
+    sigma.int ~ dunif(0, 100)      # SD hyperparameter for random intercepts
+    
+    beta ~ dnorm(0, taub)          # Common slope
+    taub <- 1 / ( sigmab * sigmab)    # Residual precision
+    sigmab ~ dunif(0, 100)          # Residual standard deviation
+    
+    beta2 ~ dnorm(0, taub2)          # Common slope
+    taub2 <- 1 / ( sigmab2 * sigmab2)    # Residual precision
+    sigmab2 ~ dunif(0, 100)          # Residual standard deviation
+    
+    r ~ dgamma(0.001, 0.001)          # Site-specific overdispersion
 
-# Likelihood
- for(i in 1:n){
-    count[i] ~ dnegbin(p[i], r)     # The random variable
-    p[i] <- r/(r+lambda[i])
-    log(lambda[i]) <- mu[i]
-    mu[i] <- alpha[site[i]] + beta*X[i] + beta2*(X[i]^2) # Expectation
- }
-
-# Priors
- for (i in 1:ngroups){      
-    alpha[i] ~ dnorm(mu.int, tau.int)   # Random intercepts
- }
-
- mu.int ~ dnorm(0, 0.1)       # Mean hyperparameter for random intercepts
- tau.int <- 1 / (sigma.int * sigma.int)
- sigma.int ~ dunif(0, 100)      # SD hyperparameter for random intercepts
-
- beta ~ dnorm(0, 0.001)          # Common slope
- taub <- 1 / ( sigmab * sigmab)    # Residual precision
- sigmab ~ dunif(0, 100)          # Residual standard deviation
-
- beta2 ~ dnorm(0, 0.0001)          # Common slope
- taub2 <- 1 / ( sigmab2 * sigmab2)    # Residual precision
- sigmab2 ~ dunif(0, 100)          # Residual standard deviation
-
- r ~ dgamma(0.01, 0.001)          # Site-specific overdispersion
-
-
-}
+  }
 "
 
 # Bundle data
   wae.data <- list(count=eyes$count,
                    site = as.numeric(as.factor(eyes$site)), 
-                   X = as.vector(eyes$sdd),
+                   X = as.vector(eyes$sdd), # replace covariates here
                    ngroups = length(unique(eyes$site)),
                    n = nrow(eyes)
                    )
@@ -333,8 +353,8 @@ parameters <- c("alpha", "beta", "beta2","mu.int", "sigma.int", "sigmab",
                 "sigmab2")
 
 # MCMC settings
-ni <- 5000
-nb <- 1000
+ni <-5000
+nb <- 2500
 nt <- 10
 nc <- 3
 
@@ -342,14 +362,29 @@ nc <- 3
   library(R2jags)
 
 # Run the Gibbs sampler
-  out <-jags(wae.data, inits=NULL, parameters, "waeModel.txt", n.thin=nt, 
-  n.chains=nc, n.burnin=nb, n.iter=ni, progress.bar = 'none')
+  out <-jags(wae.data, inits=NULL, parameters,
+             model.file = textConnection(modelstring),
+             n.thin=nt, n.chains=nc, n.burnin=nb, n.iter=ni,
+             progress.bar = 'text')
   
 # Print the results  
-  print(out$BUGSoutput$summary[ , c(1:3, 7:9)], digits=3)
+  print(out, digits=3)
 ```
 
-We notice that all parameters converge. Note that if we run this without standardizing our degree day covariate, convergence is not quite as clean. This is likely because of correlations between `dd` and `dd2`. Just as we did for the REML model, we could plot predictions for these results...
+We notice that all parameters converge. Note that if we run this without standardizing our degree day covariate, convergence is not quite as clean. This is likely because of correlations between `dd` and `dd2`. 
+
+One thing you might notice here is the shift in our upper 95% credible interval around the posterior prediction. This is pretty typical of phenology data, and is caused by the fact that we don't really sample much once we stop catching fish. Something to consider when designing your own studies...
+
+
+<h3><b> Your mission </b></h3>
+
+If you choose this homework option, I would like you to do the following:
+
+\item 1. Re-run the code block above, replacing `sdd` in `wae.data` with each of the other standardized covariates from `eyes` (`stemp`, `sdaylight`, and `sdoy`). For each model, I want you to get the DIC and check convergence (do this one first).
+
+\item 2. Then, using the best model DIC, please make predictions from the model coefficients. Below is an example using the degree day model above. You can use the predictions about walleye counts vs degree days to find out the approximate date of first spawn by looking up the date that corresponds to minimum degree day where predicted counts > 0 in the climate data (or `temp`, `daylight`, `doy`).
+
+\item 3. Submit a brief writeup describing methods and results.
 
 ```{r}
 # Make a new sequence of standardized degree days  
@@ -374,161 +409,119 @@ We notice that all parameters converge. Note that if we run this without standar
 # Plot the predictions
   par(mar=c(5,5,1,1))
   plot(eyes$sdd, eyes$counts,
-       pch=21, bg='gray', cex=1.2,
+       pch=21, bg=c('white', 'gray', 'black')[as.factor(eyes$site)], cex=1.2,
        ylim=c(0, max(eyes$counts)+50),
-       xlim=c(-3, 3),
-       xlab='Degree days (C)', ylab='Count of spawners',
+       xlim=c(-2.9, 3),
+       xlab='Degree days (C)', 
+       ylab='Count of spawners',
        xaxt='n', yaxt='n')
-  lines(sdd, fit, lwd=2, lty=1, col='blue')
-  lines(sdd, lcis, lwd=2, lty=2, col='red')
-  lines(sdd, ucis, lwd=2, lty=2, col='red')
+  lines(sdd, fit, lwd=2, lty=1, col='black')
+  lines(sdd, lcis, lwd=2, lty=2, col='gray40')
+  lines(sdd, ucis, lwd=2, lty=2, col='gray40')
 
 # Add a new x-axis 
   axis(side=1,
-         at=seq(-3, 3, 0.5),
+         at=(seq(0,300,50)-mean(eyes$dd))/sd(eyes$dd),
          labels= 
            #Get dd on original scale from a sequence
            # of new standardized values
-           round(
-             seq(-3, 3, 0.5)*sd(eyes$dd)+mean(eyes$dd)
-             )
+           seq(0,300,50)
          )
   
 # Add a rotated y-axis
   axis(2, las=2)
 ```
-
-One thing you might notice here is the shift in our upper 95% credible interval around the posterior prediction. This is pretty typical of phenology data, and is caused by the fact that we don't really sample much once we stop catching fish. Something to consider when designing your own studies...
-
-##### **Your mission**
-
-For this option, I want you to do the following:
-
-\item 1. Use the degree day data from 2019 that we made (waaaay up top) to predict mean and 95% CI for counts from each of the models above, using any of the methods you have learned in this course. You can treat these like sequences that we've been passing to the `newdata` argument in the `predict` function all semester, or that we have recently been using to make predictions by hand. **Note** that you will not get the back end of the curve because it is early April right now! Or, you may be able to find a work around by looking closely at the data and your predictions from the model above.
-
-\item 2. Tell me when you expect walleye to move into the stream this year based on the model prediction.
-
- 
-```{r, echo = FALSE, eval=FALSE}
-# My attempt at this
- clim19 <- climate[climate$year=='2019', ]
-
-
-# Plot the predictions from above
-  par(mar=c(5,5,1,1))
-  plot(eyes$sdd, eyes$counts,
-       pch=21, bg='gray', cex=1.2,
-       ylim=c(0, max(eyes$counts)+50),
-       xlim=c(-3, 3),
-       xlab='Degree days (C)', ylab='Count of spawners',
-       xaxt='n', yaxt='n')
-  lines(sdd, fit, lwd=2, lty=1, col='blue')
-  lines(sdd, lcis, lwd=2, lty=2, col='red')
-  lines(sdd, ucis, lwd=2, lty=2, col='red')
-
-# Add a new x-axis 
-  axis(side=1,
-         at=seq(-3, 3, 0.5),
-         labels= 
-           #Get dd on original scale from a sequence
-           # of new standardized values
-           round(
-             seq(-3, 3, 0.5)*sd(eyes$dd)+mean(eyes$dd)
-             )
-         )
-  
-# Add a rotated y-axis
-  axis(2, las=2)
-
-
-### New Part
-#####  
-# Compare first lci to break 1 to the 
-# degree days from std sequence
-dds <- round(
- seq(-3, 3, 0.1)*sd(eyes$dd)+mean(eyes$dd)
- )
-init_l = dds[first(which(ucis>1))]
-init_m = dds[first(which(fit>1))]
-init_u = dds[first(which(lcis>1))]
-
-# First day on which dd hits necessary
-lowd <- clim19$date[first(which(clim19$dd > init_l))]
-meand <- clim19$date[first(which(clim19$dd > init_m))]
-highd <- clim19$date[first(which(clim19$dd > init_u))]
-
-# Get 95% CRIs on dd prediction
-# Mean dd
-dd <- (clim19$dd[clim19$date==meand]-mean(eyes$dd))/sd(eyes$dd)
-# LCI dd
-ldd <- (clim19$dd[clim19$date==lowd]-mean(eyes$dd))/sd(eyes$dd)
-# UCI dd
-udd <- (clim19$dd[clim19$date==highd]-mean(eyes$dd))/sd(eyes$dd)
-
-abline(v=c(dd, ldd, udd), lty=c(1,2,2), lwd=2, col=rep('gray40',3))
-rect(ldd, 0, udd, 200,
-     col=rgb(0.8,0.8,0.8, 0.05),
-     border=rgb(0.8,0.8,0.8, 0.05))
-text(x=dd+.02, y=150, "Today", adj=0)
-
-``` 
- 
- 
  
 ### <span style="color:gray"><b> **Plant surveys** </b></span>
 
-#### **Big milfoil problems**
+<h2 id="multi"><b> Big milfoil problems </b></h2>
 
-For this example, we will look at increases or decreases in Eurasian watermilfoil (*Myriophylum spicatum*) following herbicide treatment at different doses. We will use a Bernoulli response (1 or 0) to test effects of secchi depth on treatment response across 30 sites.
+For this example, we will look at increases or decreases in Eurasian watermilfoil (*Myriophylum spicatum*) following herbicide treatment at different doses. We will use a Bernoulli response (1 or 0) to test effects of turbidity on successful achievement of plant control across 30 sites.
 
-#### **Data**
+<h3 id="multi"><b> Data </b></h3>
 
 Start by reading in the data:
 
 ```{r, eval=FALSE, echo=TRUE}
 # Read in the plant data
-  plants = read.csv("plants.csv")
+  plants = read.csv("classData-master/plants2.csv")
 ```
 
-```{r, echo=FALSE}
+```{r, echo=FALSE, eval=TRUE}
 # Read in the plant data
-  plants = read.csv("../../data/plants.csv")
+  plants = read.csv("../../data/plants2.csv")
 ```
 
-This is a pretty straightforward data set compared to the walleye phenology set (hopefully that is not what led you here). We have 5 paired samples of Eurasian watermilfoil from each of 30 sites before and after treatment with herbicide. Those data have been condensed to indicate whether the species increased or decreased at each site following herbicide application. Here, we will investigate the influence of Secchi depth (an index for water clarity where greater values indicate clearer water) on this response, while accounting for random variation between sites.
+This is a pretty straightforward data set compared to the walleye phenology set (hopefully that is not what led you here). Here, we have samples of Eurasian watermilfoil control from each of 30 experimental waterbodies treated with an herbicide at 5 different conductivities. Those data have been condensed to indicate whether the species increased or decreased at each site following herbicide application. Here, we will investigate the influence of conductivity (an index for turbidity where greater values indicate more turbid water) on this response, while accounting for random variation between sites.
 
-##### **Estimation with REML**
+<h3 id="multi"><b> Estimation with REML </b></h3>
 
 To start with, we will fit the model using REML. Here, we need to remember to specify a site-specific random effect on the intercept and we need to give R the `family` for our link function.
 
 ```{r}
 # Fit the model and store it to an object
-  plantMod1=glmer(increase~secchi+(1|site),
+  plantMod1=glmer(success~conductivity+(1|site),
                   data=plants, family=binomial)
 
-# Take a look at the results
-  summary(plantMod1)
 ```
 
-After a quick look at the results, we see that Secchi depth has a significant, positive effect on the probability that plant biomass will increase following this herbicide application.
+Crud! The first thing we get smacked with is a warning about predictor (explanatory) variables being on very different scales. This is because the variable we are using (conductivity) varies across a huge range. That causes numerical problems during estimation with the algorithm being used.
+
+Let's scale and center (standardize) the conductivity variable
+```{r}
+# Scale and center the variable
+  plants$scond <- as.vector(scale(plants$conductivity))
+
+# Fit the model and store it to an object
+  plantMod1=glmer(success~scond+(1|site),
+                  data=plants, family=binomial)
+```
+
+After a quick look at the results, we see that turbidity has a significant, negative effect on the probability of successful control following this herbicide application.
 
 We could make a graph of these results as follows:
 
 ```{r}
-# First, make a function to invert the logit
+# Get the fixed-effects coefficients from the model
+  f.coefs <- summary(plantMod1)$coefficients
+
+# Make a function to invert the logit
   invlogit=function(x){exp(x)/(1+exp(x))}
 
-# Now we can make predictions
-  newSecchi = seq(0, 5, 0.10)
-  preds = -4.744 + 1.980*newSecchi
+# Now we can make predictions with a sequence over 
+# the range of observed values using y = mx + b
+  newCond = seq(-3, 3, 0.10)
+  preds = f.coefs[1,1] + f.coefs[2,1]*newCond
   
-  plot(newSecchi, invlogit(preds), type='l', lwd=2, col='blue')
+# Get upper and lower 95% CI for predictions, too!
+  lwr = (f.coefs[1,1]-1.96*f.coefs[1,2]) + (f.coefs[2,1]-1.96*f.coefs[2,2])*newCond
+  upr = (f.coefs[1,1]+1.96*f.coefs[1,2]) + (f.coefs[2,1]+1.96*f.coefs[2,2])*newCond
   
+# Make a quick plot, inverting the logit function for 
+# predictions on the fly
+  plot(newCond, invlogit(preds), type='l', lwd=2, col='white',
+       xlab = 'Standardized conductivity',
+       ylab = 'Probability of successful control',
+       yaxt = 'n', ylim = c(0, 1)
+       )
+  axis(side=2, las=2)
+# Add lower and upper prediction of success by conductivity
+# also inverting logit on the fly
+  polygon(x = c(newCond, rev(newCond)), y = c(invlogit(lwr), rev(invlogit(upr))),
+          col = rgb(0.8, 0.8, 0.8, 0.5), border = NA
+          )
+  lines(newCond, invlogit(preds), lty=1, lwd=1, col='black')
+
 ```
 
-##### **Bayesian estimation**
+We can see that most of the uncertainty in this relationship occurs at higher `conductivity`, and the rest of the pattern is much what we would expect based on the value of `beta` from our model.
 
-Now, we will estimate a model using Bayesian methods.
+If we wanted to make predictions for one or more of the sites, we could do so using the `merTools` package as demonstrated in the walleye phenology example (check it out for the homework!).
+
+
+<h3 id="multi"><b> Bayesian estimation </b></h3>
+
+Now, we will estimate a model with random slopes using Bayesian methods.
 
 ```{r}
 modelstring="
@@ -548,12 +541,10 @@ modelstring="
         # Likelihood
           for(i in 1:N){
             y[i] ~ dbern(mu[i])
-            logit(mu[i]) <- alpha[site[i]] + beta*secchi[i]
+            logit(mu[i]) <- alpha[site[i]] + beta*X[i]
           }
         }
 "
-writeLines(modelstring, "plantModel.txt")
-
 ```
 
 > Make the data 
@@ -561,10 +552,10 @@ writeLines(modelstring, "plantModel.txt")
 ```{r}
 # Package the data in a list for JAGS
     jags.data <- list(
-      y = plants$increase,
+      y = plants$success,
       site = plants$site,
-      secchi=plants$secchi,
-      ngroups=length(unique(plants$site)),
+      X = plants$scond,
+      ngroups = length(unique(plants$site)),
       N = nrow(plants)
     )
 ```
@@ -595,22 +586,12 @@ writeLines(modelstring, "plantModel.txt")
 ```{r}
 # MCMC settings
   ni <- 15000
-  nt <- 3
+  nt <- 5
   nb <- 5000
   nc <- 3
 ```
 
 > Run the model
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# Load the R2jags package
-  library(R2jags)
-
-# Call JAGS from R and run the model
-   plant_glmm <- jags(jags.data, inits, parameters,
-     "plantModel.txt", n.chains = nc, n.thin = nt, n.iter = ni,
-     n.burnin = nb, progress.bar = 'none')
-```
 
 ```{r, eval=FALSE, message=FALSE, warning=FALSE}
 # Load the R2jags package
@@ -618,8 +599,20 @@ writeLines(modelstring, "plantModel.txt")
 
 # Call JAGS from R and run the model
    plant_glmm <- jags(jags.data, inits, parameters,
-     "plantModel.txt", n.chains = nc, n.thin = nt, n.iter = ni,
+     model.file = textConnection(modelstring),
+     n.chains = nc, n.thin = nt, n.iter = ni,
      n.burnin = nb)
+```
+
+```{r, eval=TRUE, echo=FALSE, message=FALSE, warning=FALSE}
+# Load the R2jags package
+  library(R2jags)
+
+# Call JAGS from R and run the model
+   plant_glmm <- jags(jags.data, inits, parameters,
+     model.file = textConnection(modelstring),
+     n.chains = nc, n.thin = nt, n.iter = ni,
+     n.burnin = nb, progress.bar = 'none')
 ```
 
 > Look at the results
@@ -629,20 +622,95 @@ writeLines(modelstring, "plantModel.txt")
   print(plant_glmm, digits=3)
 ```
 
-As you can see from the output, we have estimates of probability of increase in plant biomass on the logits scale for each site. If we wanted to see the overall average effect of Secchi depth on treatment effectiveness, we could look at it like this:
+This output can be a bit daunting because of the `alpha` overload. Here, we have a unique `alpha` for each of our initial 30 sites. We have a single `beta` describing the change in probability of `success` as a function of `conductivity`.
+
+If we just want the overall change in probability of success as related to conductivity, then will want to work with our global mean, `mu.int` for now. For this homework option, I will ask you to pick one of the sites to make predictions using one of the `alpha` parameters instead of `mu.int`.
 
 ```{r}
-newSecchi = seq(0, 10, 1)
-preds = plant_glmm$BUGSoutput$mean$mu.int + plant_glmm$BUGSoutput$mean$beta*newSecchi
-preds = invlogit(preds)
-plot(newSecchi, preds, type='l', col='blue', xlab='Secchi depth (m)', ylab='Probability of increase')
+# Get the posteriors
+posts = plant_glmm$BUGSoutput$sims.list
+
+# Have a look at them
+names(posts)
+```
+
+Get the regression coefficients:
+
+```{r}
+# Intercept estimates
+mu.int <- posts$mu.int 
+
+# Slope estimates
+beta <- posts$beta 
 
 ```
 
-##### **Your mission**
+Now that we have our coefficient estimates, we can make predictions using our good old friend $y = mx + b$, or `pred = mu.int + beta * scond`. We have to step up our coding game a little here to make one prediction for each pair of parameter estimates stored in our posteriors.
+
+We start by making a new sequence of our `X` variable (`conductivity`)
+
+```{r}
+# Make up some new values of our
+# standardized covariate (conductivity)
+newcond = seq(-3, 3, .5)
+
+```
+
+Now, we will make an empty matrix with the same number of rows as our MCMC samples in `alpha` and `mu.int` and a number of columns corresponding to the number of elements in `newcond`. 
+
+```{r}
+# Make an empty matrix to hold predictions
+preds = matrix(NA, nrow=length(mu.int), ncol=length(newcond))
+
+```
+Here comes the tricky part. We are going to loop over the rows and columns in the matrix, pulling new values of `alpha` and `mu.int` as well as new values of `newcond` in a nested, sequential way. Note that `alpha` and `mu.int` are indexed by `i` and `newcond` is indexed by a `t`.
+
+```{r}
+for(i in 1:nrow(preds)){
+  for(t in 1:ncol(preds)){
+    preds[i,t] <- mu.int[i] + beta[i]*newcond[t]
+  }
+}
+
+```
+
+Now, let's calculate some summary statistics from the joint posterior prediction. First, we will get the mean and and 95% CRI for probability of `success` for each new observation of `conductivity`.
+```{r}
+pred.mean <- invlogit(apply(preds, 2, mean))
+pred.lwr <- invlogit(apply(preds, 2, quantile, 0.025))
+pred.upr <- invlogit(apply(preds, 2, quantile, 0.975))
+
+```
+
+```{r}
+# Make a quick plot, inverting the logit function for 
+# predictions on the fly
+  plot(newcond, pred.mean, type='l', lwd=2, col='white',
+       xlab = 'Standardized conductivity',
+       ylab = 'Probability of successful control',
+       yaxt = 'n', ylim = c(0, 1)
+       )
+  axis(side=2, las=2)
+# Add lower and upper prediction of success by conductivity
+# also inverting logit on the fly
+  polygon(x = c(newcond, rev(newcond)), y = c(pred.lwr, rev(pred.upr)),
+          col = rgb(0.8, 0.8, 0.8, 0.5), border = NA
+          )
+  lines(newcond, pred.mean, lty=1, lwd=1, col='black')
+
+```
+
+Notice here that the variance around our predictions at high values of standardized `conductivity` is much better estimated than in our REML fit above. 
+
+
+<h3 id="multi"><b> Your mission </b></h3>
 
 For this option, I want you to do the following:
 
-\item 1. Run the model out to convergence and make sure n.eff is sufficiently large.
+\item 1. Using either REML or Bayesian estimation, first run the model out to convergence. Make sure diagnostics idicate that estimates have converged and effective sample size (ESS, or `n.eff`) is sufficiently large if using Bayesian.
 
-\item 2. Plot the overall mean posterior predictions for *each iteration* of the simulation in gray, and show lines for the mean, and 95% CRI, as we did in lab last week (and in the LMM lecture, and in the GLMM lecture).
+\item 2. Make predictions for at least one individual site using one set of `alpha` estimates from the model. If using REML, you can see an example of how to do this in the walleye phenology homework option.
+
+\item 3. Submit a brief writeup describing methods and results.
+
+<br>
