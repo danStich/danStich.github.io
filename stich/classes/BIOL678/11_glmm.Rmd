@@ -9,7 +9,7 @@
  
 This week, we will continue our discussions about mixed effects models and extend the linear mixed model (LMM) to include error distributions other than the normal. This should feel pretty familiar to the transition that we made from the general linear model (ANCOVA) to the generalized linear model (GLM) a few weeks ago (I know, it feels like it was only yesterday).
 
-For our first example this week, we will use the same data from last week that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).
+For our first example this week, we will use the same data from that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).
 
 ## Data explanation 
 
@@ -291,14 +291,19 @@ First, let's grab our posterior estimates
 posts = choice_glmm$BUGSoutput$sims.list
 ```
 
-Take a look at the names of the sims list and then the structure of this list so you know what the heck is going on here.
+Take a look at the names of the `sims.list` and then the structure of this list so you know what the heck is going on here.
  
+We have 5 elements in our list: 
 ```{r}
-names(posts) # We have 5 elements in our list
-str(posts)   # Notice that alpha is a matrix with six columns? Need that!
+names(posts)
 ```
 
-The first parameter we will look at here is beta to determine the overall effect of flow. The interpretation of this coefficient, because it is standardized, is the change in the probability of using the Stillwater Branch across all years given a 1 standard deviation change in flow.
+Notice that alpha is a matrix with six columns? Need that!
+```{r}
+str(posts)
+```
+
+The first parameter we will look at here is `beta` to determine the overall effect of `flow`. The interpretation of this coefficient, because it is standardized, is the change in the probability of using the Stillwater Branch across all years given a 1 standard deviation change in `flow`.
 
 ```{r}
 beta.post = posts$beta
@@ -313,7 +318,7 @@ abline(v=quantile(beta.post, 0.025), col='red', lty=2, lwd=2)
 abline(v=quantile(beta.post, 0.975), col='red', lty=2, lwd=2)
 ```
 
-Now, we can actually look at the change in flow with respect to a given year calculate the probability of using the Stillwater Branch given year and some new values for beta.
+Now, we can actually look at the change in flow with respect to a given year and calculate the probability of using the Stillwater Branch given flow and some new values for beta.
 
 ```{r}
   rflow = max(flow)-min(flow)
@@ -415,7 +420,7 @@ Of course, if we were trying to show the uncertainty in each of our estimates we
   lines(newFlow, mean2012, type='l', col='red', lwd=2)
 ```
 
-Some of you may have noticed that the slope of lines does not change in this example. We could, of course implement this change in our model, and this essentially becomes the equivelant of adding an interaction term to our model.
+Some of you may have noticed that the slope of lines does not change in this example. We could, of course implement this change in our model, and this essentially becomes the equivelant of adding an interaction term to our model (separate slopes and intercepts).
 
 ```{r}
 modelstring="
@@ -485,9 +490,9 @@ writeLines(modelstring, "glmm.model2.txt")
   print(choice_glmm, digits=3)
 ```
 
-Notice that this one takes a little longer to run, but now we can essentially make the same predictions that we did before and the rest of our estimated parameters are essentially identical to the values we got previously.
+Notice that this one takes a little longer to run, but now we can essentially make the same predictions that we did before and the rest of our estimated parameters are basically identical to the values we got previously.
 
-Let's have a quick look at the output
+Let's have a quick look at the output:
   
 ```{r}  
 posts = choice_glmm$BUGSoutput$sims.list
@@ -518,3 +523,4 @@ str(posts)   # Notice that alpha AND betas are matrices now?
 ```
 
 So, not much evidence for an interaction in this case, which, given the biology of this species and the potential mechanisms by which flow might influence path choice, is exactly what we would expect to see!
+

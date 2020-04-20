@@ -20,7 +20,8 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/font-awesome-4.5.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
 <head>
 <!-- Favicon for various operating systems -->
@@ -37,7 +38,7 @@
 
 
 <style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
+<style type="text/css" data-origin="pandoc">
 div.sourceCode { overflow-x: auto; }
 table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
   margin: 0; padding: 0; vertical-align: baseline; border: none; }
@@ -73,7 +74,29 @@ code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Doc
 code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
 code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
 code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+
 </style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    for (var j = 0; j < rules.length; j++) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") continue;
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' || rule.style.backgroundColor === '') continue;
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
 <style type="text/css">
   pre:not([class]) {
     background-color: white;
@@ -110,9 +133,7 @@ h6 {
 
 <link rel="stylesheet" href="..\..\styles.css" type="text/css" />
 
-</head>
 
-<body>
 
 <style type = "text/css">
 .main-container {
@@ -131,8 +152,14 @@ img {
 .tabbed-pane {
   padding-top: 12px;
 }
+.html-widget {
+  margin-bottom: 20px;
+}
 button.code-folding-btn:focus {
   outline: none;
+}
+summary {
+  display: list-item;
 }
 </style>
 
@@ -148,7 +175,6 @@ body {
   padding-top: 56px;
   margin-top: -56px;
 }
-
 .section h2 {
   padding-top: 56px;
   margin-top: -56px;
@@ -168,6 +194,43 @@ body {
 .section h6 {
   padding-top: 56px;
   margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
 }
 </style>
 
@@ -189,19 +252,85 @@ $(document).ready(function () {
 });
 </script>
 
-
-<div class="container-fluid main-container">
-
 <!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
 <script>
 $(document).ready(function () {
   window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
 });
 </script>
 
 <!-- code folding -->
 
 
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
 
 
 
@@ -286,7 +415,7 @@ Generalized linear mixed models (GLMM)
 Introduction
 </h2>
 <p>This week, we will continue our discussions about mixed effects models and extend the linear mixed model (LMM) to include error distributions other than the normal. This should feel pretty familiar to the transition that we made from the general linear model (ANCOVA) to the generalized linear model (GLM) a few weeks ago (I know, it feels like it was only yesterday).</p>
-<p>For our first example this week, we will use the same data from last week that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).</p>
+<p>For our first example this week, we will use the same data from that we used to demonstrate binomial logistic regression. This time, we will add in a random intercept term that will allow us to account for repeated observations within a year. This has two implications: 1) it accounts for the fact that the years in which we conducted this study are random samples from a larger, unobserved population, and 2) it accounts for the heterogeneity of variance that theoretically might occur as a result of taking multiple, and variable, numbers of measurements within a given year- thereby reducing the overall error of the model and our associated parameter estimates (in theory).</p>
 <div id="data-explanation" class="section level2">
 <h2>Data explanation</h2>
 <p>Let’s start by reading in the data (copied and pasted from GLM lessons).</p>
@@ -474,16 +603,16 @@ Introduction
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Print the model</span>
   <span class="kw">print</span>(choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>summary[ , <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>,<span class="dv">7</span><span class="op">:</span><span class="dv">9</span>)])
                  mean        sd        <span class="fl">2.5</span><span class="op">%       97.5%</span><span class="st">     </span>Rhat n.eff
-alpha[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">1.8082616</span> <span class="fl">0.3342874</span>  <span class="op">-</span><span class="fl">2.4555132</span>  <span class="op">-</span><span class="fl">1.1301251</span> <span class="fl">1.001198</span>  <span class="dv">2900</span>
-alpha[<span class="dv">2</span>]   <span class="op">-</span><span class="fl">2.2058594</span> <span class="fl">0.3011408</span>  <span class="op">-</span><span class="fl">2.8429475</span>  <span class="op">-</span><span class="fl">1.6494010</span> <span class="fl">1.013379</span>   <span class="dv">170</span>
-alpha[<span class="dv">3</span>]   <span class="op">-</span><span class="fl">1.6232448</span> <span class="fl">0.2309685</span>  <span class="op">-</span><span class="fl">2.0692677</span>  <span class="op">-</span><span class="fl">1.1726488</span> <span class="fl">1.002060</span>  <span class="dv">1300</span>
-alpha[<span class="dv">4</span>]   <span class="op">-</span><span class="fl">1.8904362</span> <span class="fl">0.2663574</span>  <span class="op">-</span><span class="fl">2.4181718</span>  <span class="op">-</span><span class="fl">1.3276111</span> <span class="fl">1.001714</span>  <span class="dv">1600</span>
-alpha[<span class="dv">5</span>]   <span class="op">-</span><span class="fl">2.3742391</span> <span class="fl">0.3169794</span>  <span class="op">-</span><span class="fl">3.0367581</span>  <span class="op">-</span><span class="fl">1.8237502</span> <span class="fl">1.000557</span>  <span class="dv">3000</span>
-alpha[<span class="dv">6</span>]   <span class="op">-</span><span class="fl">2.3171434</span> <span class="fl">0.3053783</span>  <span class="op">-</span><span class="fl">2.9382482</span>  <span class="op">-</span><span class="fl">1.7796349</span> <span class="fl">1.003741</span>   <span class="dv">620</span>
-beta        <span class="fl">0.5311783</span> <span class="fl">0.1752987</span>   <span class="fl">0.2093466</span>   <span class="fl">0.8940811</span> <span class="fl">1.001193</span>  <span class="dv">2900</span>
-deviance  <span class="fl">557.9649753</span> <span class="fl">3.6979814</span> <span class="fl">552.6671576</span> <span class="fl">566.4955454</span> <span class="fl">1.001996</span>  <span class="dv">1300</span>
-mu.int     <span class="op">-</span><span class="fl">2.0380425</span> <span class="fl">0.3158351</span>  <span class="op">-</span><span class="fl">2.6507885</span>  <span class="op">-</span><span class="fl">1.4495687</span> <span class="fl">1.004072</span>  <span class="dv">3000</span>
-sigma.int   <span class="fl">0.5659887</span> <span class="fl">0.3871344</span>   <span class="fl">0.1031143</span>   <span class="fl">1.6126078</span> <span class="fl">1.005076</span>   <span class="dv">440</span></code></pre></div>
+alpha[<span class="dv">1</span>]   <span class="op">-</span><span class="fl">1.8076321</span> <span class="fl">0.3261660</span>  <span class="op">-</span><span class="fl">2.4316734</span>  <span class="op">-</span><span class="fl">1.1287218</span> <span class="fl">1.005354</span>   <span class="dv">410</span>
+alpha[<span class="dv">2</span>]   <span class="op">-</span><span class="fl">2.2239556</span> <span class="fl">0.2956963</span>  <span class="op">-</span><span class="fl">2.8614749</span>  <span class="op">-</span><span class="fl">1.7109974</span> <span class="fl">1.004520</span>   <span class="dv">640</span>
+alpha[<span class="dv">3</span>]   <span class="op">-</span><span class="fl">1.6117401</span> <span class="fl">0.2279741</span>  <span class="op">-</span><span class="fl">2.0514845</span>  <span class="op">-</span><span class="fl">1.1714138</span> <span class="fl">1.000804</span>  <span class="dv">3000</span>
+alpha[<span class="dv">4</span>]   <span class="op">-</span><span class="fl">1.8784337</span> <span class="fl">0.2664358</span>  <span class="op">-</span><span class="fl">2.3922141</span>  <span class="op">-</span><span class="fl">1.3551932</span> <span class="fl">1.003169</span>   <span class="dv">750</span>
+alpha[<span class="dv">5</span>]   <span class="op">-</span><span class="fl">2.3738938</span> <span class="fl">0.3054974</span>  <span class="op">-</span><span class="fl">3.0037307</span>  <span class="op">-</span><span class="fl">1.8190500</span> <span class="fl">1.003749</span>   <span class="dv">620</span>
+alpha[<span class="dv">6</span>]   <span class="op">-</span><span class="fl">2.3216476</span> <span class="fl">0.3118462</span>  <span class="op">-</span><span class="fl">2.9732052</span>  <span class="op">-</span><span class="fl">1.7805837</span> <span class="fl">1.001269</span>  <span class="dv">2600</span>
+beta        <span class="fl">0.5326992</span> <span class="fl">0.1735279</span>   <span class="fl">0.2017943</span>   <span class="fl">0.8918719</span> <span class="fl">1.006515</span>   <span class="dv">330</span>
+deviance  <span class="fl">557.8020197</span> <span class="fl">3.6374114</span> <span class="fl">552.6020549</span> <span class="fl">566.2728221</span> <span class="fl">1.001439</span>  <span class="dv">2100</span>
+mu.int     <span class="op">-</span><span class="fl">2.0313261</span> <span class="fl">0.3048610</span>  <span class="op">-</span><span class="fl">2.6252785</span>  <span class="op">-</span><span class="fl">1.4125900</span> <span class="fl">1.006120</span>   <span class="dv">880</span>
+sigma.int   <span class="fl">0.5609196</span> <span class="fl">0.3570836</span>   <span class="fl">0.1115044</span>   <span class="fl">1.4121216</span> <span class="fl">1.012933</span>  <span class="dv">3000</span></code></pre></div>
 <p>At a glance it is clear that this model has converged and we have effectively sampled the posterior distribution, even at a relatively low number of runs. If we wanted to, we could bump up our sampling intensity to get a few more estimates, but we won’t waste class time with that right now. Besides, we have pretty solid evidence that all of our parameters are well estimated.</p>
 <p>If you have been paying close attention you are now noticing that our estimates for <code>alpha[1:6]</code> are NOT the same as the estimates in our GLM model in which p(Stillwater) was estimated separately for each year when we ran this as a fixed effects model (even if we do the logit transformation)!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># Invlogit</span>
@@ -492,7 +621,7 @@ sigma.int   <span class="fl">0.5659887</span> <span class="fl">0.3871344</span> 
       choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>sims.list<span class="op">$</span>alpha, <span class="dv">2</span>, mean
       )
     )     
-[<span class="dv">1</span>] <span class="fl">0.14084835</span> <span class="fl">0.09922554</span> <span class="fl">0.16475786</span> <span class="fl">0.13119474</span> <span class="fl">0.08515831</span> <span class="fl">0.08971307</span></code></pre></div>
+[<span class="dv">1</span>] <span class="fl">0.14092456</span> <span class="fl">0.09761980</span> <span class="fl">0.16634716</span> <span class="fl">0.13256888</span> <span class="fl">0.08518521</span> <span class="fl">0.08934592</span></code></pre></div>
 <p>Why is that?</p>
 <p>It’s because these <strong>are not slopes</strong>. They are random intercepts for each year that govern the relationship between flow and path choice! You’ll also notice that if you invert the logit link function that not all of the estimates are uniformally larger or smaller. This is a phenomenon known as ‘shrinkage’. Because we are sharing data across multiple levels of a random factor, the tendency is for the sampler to pull the mean of each level nearer to the overall mean for the sampling ‘universe’ that is being considered here:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">invlogit</span>(<span class="op">-</span><span class="fl">2.037</span>)
@@ -505,25 +634,27 @@ sigma.int   <span class="fl">0.5659887</span> <span class="fl">0.3871344</span> 
 </blockquote>
 <p>First, let’s grab our posterior estimates</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posts =<span class="st"> </span>choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>sims.list</code></pre></div>
-<p>Take a look at the names of the sims list and then the structure of this list so you know what the heck is going on here.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(posts) <span class="co"># We have 5 elements in our list</span>
-[<span class="dv">1</span>] <span class="st">&quot;alpha&quot;</span>     <span class="st">&quot;beta&quot;</span>      <span class="st">&quot;deviance&quot;</span>  <span class="st">&quot;mu.int&quot;</span>    <span class="st">&quot;sigma.int&quot;</span>
-<span class="kw">str</span>(posts)   <span class="co"># Notice that alpha is a matrix with six columns? Need that!</span>
+<p>Take a look at the names of the <code>sims.list</code> and then the structure of this list so you know what the heck is going on here.</p>
+<p>We have 5 elements in our list:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(posts)
+[<span class="dv">1</span>] <span class="st">&quot;alpha&quot;</span>     <span class="st">&quot;beta&quot;</span>      <span class="st">&quot;deviance&quot;</span>  <span class="st">&quot;mu.int&quot;</span>    <span class="st">&quot;sigma.int&quot;</span></code></pre></div>
+<p>Notice that alpha is a matrix with six columns? Need that!</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">str</span>(posts)
 List of <span class="dv">5</span>
- <span class="op">$</span><span class="st"> </span>alpha    <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="fl">1.97</span> <span class="op">-</span><span class="fl">1.92</span> <span class="op">-</span><span class="fl">1.78</span> <span class="op">-</span><span class="fl">1.72</span> <span class="op">-</span><span class="fl">1.44</span> ...
- <span class="op">$</span><span class="st"> </span>beta     <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.539</span> <span class="fl">0.458</span> <span class="fl">0.537</span> <span class="fl">0.712</span> <span class="fl">0.55</span> ...
- <span class="op">$</span><span class="st"> </span>deviance <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="dv">554</span> <span class="dv">562</span> <span class="dv">554</span> <span class="dv">559</span> <span class="dv">556</span> ...
- <span class="op">$</span><span class="st"> </span>mu.int   <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="op">-</span><span class="fl">2.36</span> <span class="op">-</span><span class="fl">2.22</span> <span class="op">-</span><span class="fl">2.12</span> <span class="op">-</span><span class="fl">1.92</span> <span class="op">-</span><span class="fl">2.17</span> ...
- <span class="op">$</span><span class="st"> </span>sigma.int<span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">1.001</span> <span class="fl">0.215</span> <span class="fl">0.313</span> <span class="fl">0.229</span> <span class="fl">0.588</span> ...</code></pre></div>
-<p>The first parameter we will look at here is beta to determine the overall effect of flow. The interpretation of this coefficient, because it is standardized, is the change in the probability of using the Stillwater Branch across all years given a 1 standard deviation change in flow.</p>
+ <span class="op">$</span><span class="st"> </span>alpha    <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="fl">1.74</span> <span class="op">-</span><span class="fl">1.94</span> <span class="op">-</span><span class="fl">1.82</span> <span class="op">-</span><span class="fl">1.95</span> <span class="op">-</span><span class="fl">1.85</span> ...
+ <span class="op">$</span><span class="st"> </span>beta     <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.445</span> <span class="fl">0.318</span> <span class="fl">0.517</span> <span class="fl">0.708</span> <span class="fl">0.369</span> ...
+ <span class="op">$</span><span class="st"> </span>deviance <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="dv">555</span> <span class="dv">562</span> <span class="dv">555</span> <span class="dv">555</span> <span class="dv">560</span> ...
+ <span class="op">$</span><span class="st"> </span>mu.int   <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="op">-</span><span class="fl">2.2</span> <span class="op">-</span><span class="fl">2.14</span> <span class="op">-</span><span class="fl">2.04</span> <span class="op">-</span><span class="fl">2.47</span> <span class="op">-</span><span class="fl">2.01</span> ...
+ <span class="op">$</span><span class="st"> </span>sigma.int<span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.277</span> <span class="fl">0.24</span> <span class="fl">0.454</span> <span class="fl">0.769</span> <span class="fl">0.563</span> ...</code></pre></div>
+<p>The first parameter we will look at here is <code>beta</code> to determine the overall effect of <code>flow</code>. The interpretation of this coefficient, because it is standardized, is the change in the probability of using the Stillwater Branch across all years given a 1 standard deviation change in <code>flow</code>.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">beta.post =<span class="st"> </span>posts<span class="op">$</span>beta</code></pre></div>
 <p>We can see that the 95% HDI for beta does not include zero, so we can conclude that there is a significant effect of flow on path choice, and that increased flow is associated with increased probability of using the Stillwater Branch.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">hist</span>(beta.post, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;gray60&#39;</span>, <span class="dt">xlab=</span><span class="kw">expression</span>(beta), <span class="dt">breaks=</span><span class="dv">25</span>)
 <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(beta.post), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">quantile</span>(beta.post, <span class="fl">0.025</span>), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)
 <span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">quantile</span>(beta.post, <span class="fl">0.975</span>), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-25-1.png" width="672" /></p>
-<p>Now, we can actually look at the change in flow with respect to a given year calculate the probability of using the Stillwater Branch given year and some new values for beta.</p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Now, we can actually look at the change in flow with respect to a given year and calculate the probability of using the Stillwater Branch given flow and some new values for beta.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">  rflow =<span class="st"> </span><span class="kw">max</span>(flow)<span class="op">-</span><span class="kw">min</span>(flow)
   newFlow =<span class="st"> </span><span class="kw">seq</span>(<span class="kw">min</span>(flow), <span class="kw">max</span>(flow), <span class="dt">by =</span> rflow<span class="op">/</span><span class="kw">length</span>(beta.post))[<span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(beta.post)]
   p2005 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -539,7 +670,7 @@ List of <span class="dv">5</span>
   <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(pts)){
     <span class="kw">lines</span>(newFlow, pts[ , i], <span class="dt">col=</span><span class="kw">terrain.colors</span>(<span class="dv">7</span>)[i], <span class="dt">lwd=</span><span class="dv">2</span>)
   }</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
 <p>Of course, if we were trying to show the uncertainty in each of our estimates we might do something more along these “lines”..hahaha!</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># 2005</span>
   mean2005 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -553,7 +684,7 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2005, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># 2006</span>
   mean2006 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -567,7 +698,7 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2006, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-2.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-2.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># 2009</span>
   mean2009 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -581,7 +712,7 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2009, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-3.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-3.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># 2010</span>
   mean2010 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -595,7 +726,7 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2010, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-4.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-4.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># 2011</span>
   mean2011 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -609,7 +740,7 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2011, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-5.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-5.png" width="672" /></p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">
 <span class="co"># 2012</span>
   mean2012 =<span class="st"> </span><span class="kw">invlogit</span>(<span class="kw">mean</span>(posts<span class="op">$</span>alpha[,<span class="dv">1</span>]) <span class="op">+</span><span class="st"> </span><span class="kw">mean</span>(beta.post)<span class="op">*</span>newFlow)
@@ -623,8 +754,8 @@ List of <span class="dv">5</span>
   }
   <span class="kw">box</span>()
   <span class="kw">lines</span>(newFlow, mean2012, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-27-6.png" width="672" /></p>
-<p>Some of you may have noticed that the slope of lines does not change in this example. We could, of course implement this change in our model, and this essentially becomes the equivelant of adding an interaction term to our model.</p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-28-6.png" width="672" /></p>
+<p>Some of you may have noticed that the slope of lines does not change in this example. We could, of course implement this change in our model, and this essentially becomes the equivelant of adding an interaction term to our model (separate slopes and intercepts).</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">modelstring=<span class="st">&quot;</span>
 <span class="st">  model{</span>
 <span class="st">    # Likelihood</span>
@@ -687,20 +818,20 @@ List of <span class="dv">5</span>
 
 <span class="co"># Print the model</span>
   <span class="kw">print</span>(choice_glmm, <span class="dt">digits=</span><span class="dv">3</span>)</code></pre></div>
-<p>Notice that this one takes a little longer to run, but now we can essentially make the same predictions that we did before and the rest of our estimated parameters are essentially identical to the values we got previously.</p>
-<p>Let’s have a quick look at the output</p>
+<p>Notice that this one takes a little longer to run, but now we can essentially make the same predictions that we did before and the rest of our estimated parameters are basically identical to the values we got previously.</p>
+<p>Let’s have a quick look at the output:</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">posts =<span class="st"> </span>choice_glmm<span class="op">$</span>BUGSoutput<span class="op">$</span>sims.list
 <span class="kw">names</span>(posts) <span class="co"># We have 7 elements in our list now</span>
 [<span class="dv">1</span>] <span class="st">&quot;alpha&quot;</span>      <span class="st">&quot;beta&quot;</span>       <span class="st">&quot;deviance&quot;</span>   <span class="st">&quot;mu.beta&quot;</span>    <span class="st">&quot;mu.int&quot;</span>     <span class="st">&quot;sigma.beta&quot;</span> <span class="st">&quot;sigma.int&quot;</span> 
 <span class="kw">str</span>(posts)   <span class="co"># Notice that alpha AND betas are matrices now?</span>
 List of <span class="dv">7</span>
- <span class="op">$</span><span class="st"> </span>alpha     <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="fl">1.79</span> <span class="op">-</span><span class="fl">1.59</span> <span class="op">-</span><span class="fl">1.9</span> <span class="op">-</span><span class="fl">1.89</span> <span class="op">-</span><span class="fl">1.94</span> ...
- <span class="op">$</span><span class="st"> </span>beta      <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="fl">0.25</span> <span class="fl">0.614</span> <span class="fl">0.431</span> <span class="fl">0.533</span> <span class="fl">0.925</span> ...
- <span class="op">$</span><span class="st"> </span>deviance  <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="dv">563</span> <span class="dv">556</span> <span class="dv">557</span> <span class="dv">559</span> <span class="dv">559</span> ...
- <span class="op">$</span><span class="st"> </span>mu.beta   <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.302</span> <span class="fl">0.725</span> <span class="fl">0.339</span> <span class="fl">0.466</span> <span class="fl">0.735</span> ...
- <span class="op">$</span><span class="st"> </span>mu.int    <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="op">-</span><span class="fl">1.99</span> <span class="op">-</span><span class="fl">2.06</span> <span class="op">-</span><span class="fl">1.91</span> <span class="op">-</span><span class="fl">1.97</span> <span class="op">-</span><span class="fl">2.46</span> ...
- <span class="op">$</span><span class="st"> </span>sigma.beta<span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">61.4</span> <span class="fl">17.2</span> <span class="fl">43.3</span> <span class="fl">38.8</span> <span class="fl">16.8</span> ...
- <span class="op">$</span><span class="st"> </span>sigma.int <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.183</span> <span class="fl">0.433</span> <span class="fl">0.288</span> <span class="fl">0.188</span> <span class="fl">0.393</span> ...
+ <span class="op">$</span><span class="st"> </span>alpha     <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="op">-</span><span class="dv">2</span> <span class="op">-</span><span class="fl">2.01</span> <span class="op">-</span><span class="fl">1.36</span> <span class="op">-</span><span class="fl">1.02</span> <span class="op">-</span><span class="fl">1.9</span> ...
+ <span class="op">$</span><span class="st"> </span>beta      <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">6</span>] <span class="fl">0.791</span> <span class="fl">1.211</span> <span class="fl">0.493</span> <span class="op">-</span><span class="fl">0.31</span> <span class="fl">0.407</span> ...
+ <span class="op">$</span><span class="st"> </span>deviance  <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="dv">561</span> <span class="dv">571</span> <span class="dv">561</span> <span class="dv">561</span> <span class="dv">557</span> ...
+ <span class="op">$</span><span class="st"> </span>mu.beta   <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.162</span> <span class="fl">0.639</span> <span class="fl">0.759</span> <span class="fl">0.451</span> <span class="fl">0.63</span> ...
+ <span class="op">$</span><span class="st"> </span>mu.int    <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="op">-</span><span class="fl">2.05</span> <span class="op">-</span><span class="fl">1.87</span> <span class="op">-</span><span class="fl">1.76</span> <span class="op">-</span><span class="fl">2.25</span> <span class="op">-</span><span class="fl">1.84</span> ...
+ <span class="op">$</span><span class="st"> </span>sigma.beta<span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">62.3</span> <span class="fl">86.2</span> <span class="fl">30.3</span> <span class="fl">44.2</span> <span class="fl">23.3</span> ...
+ <span class="op">$</span><span class="st"> </span>sigma.int <span class="op">:</span><span class="st"> </span>num [<span class="dv">1</span><span class="op">:</span><span class="dv">3000</span>, <span class="dv">1</span>] <span class="fl">0.385</span> <span class="fl">0.27</span> <span class="fl">0.229</span> <span class="fl">0.767</span> <span class="fl">0.216</span> ...
 
 <span class="co"># Calculate the probability of using</span>
 <span class="co"># the Stillwater Branch given year and</span>
@@ -723,7 +854,7 @@ List of <span class="dv">7</span>
   <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">ncol</span>(pts)){
     <span class="kw">lines</span>(newFlow, pts[ , i], <span class="dt">col=</span><span class="kw">terrain.colors</span>(<span class="dv">7</span>)[i], <span class="dt">lwd=</span><span class="dv">2</span>)
   }</code></pre></div>
-<p><img src="11_glmm_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p><img src="11_glmm_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 <p>So, not much evidence for an interaction in this case, which, given the biology of this species and the potential mechanisms by which flow might influence path choice, is exactly what we would expect to see!</p>
 </div>
 </div>

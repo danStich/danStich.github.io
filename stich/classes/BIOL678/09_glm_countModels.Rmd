@@ -16,8 +16,7 @@ profession.
 
 For the Poisson family, the link function that we will use is the 'log' link function. This function allows us to work with data that are constrained to be non-negative, a desireable property when we are working with count data.
 
-Let's use a crab data set to demonstrate the GLM with Poisson data, we will walk through this data set for both the Poisson and negative binomial examples, addressing some distributinal assumptions and model fit along the
-way.
+Let's use a crab data set to demonstrate the GLM with Poisson data, we will walk through this data set for both the Poisson and negative binomial examples, addressing some distributinal assumptions and model fit along the way.
 
 ```{r, echo=TRUE, eval=FALSE}
 # Read in the data. These data also are available through
