@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>intermediate.utf8.md</title>
+<title>Intermediate R</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -410,68 +413,68 @@ $(document).ready(function () {
 <div id="data-overview-and-management" class="section level2">
 <h2><strong>Data overview and management</strong></h2>
 <p>Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road. Let’s start by reading in part of the <strong>Secchi Dip-In</strong> data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Vermont. We read the data in with the argument <code>stringsAsFactors = FALSE</code> because there are a lot of string variables in the data, and factors can add extra handling time to our workflow (see <a href="introductory.html"> morning session tutorial </a>).</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">vermont &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;vermont.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vermont &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;vermont.csv&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
 <p>So, what are we working with here? Let’s have a look. Remember from the morning session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the <strong>structure</strong> of your data using <code>str()</code>.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Like this:</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw">str</span>(vermont)</a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">3773</span> obs. of  <span class="dv">18</span> variables<span class="op">:</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st"> </span><span class="er">$</span><span class="st"> </span>Country                 <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-5" title="5"> <span class="op">$</span><span class="st"> </span>Latitude                <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">44.2</span> <span class="fl">44.2</span> <span class="fl">44.2</span> ...</a>
-<a class="sourceLine" id="cb2-6" title="6"> <span class="op">$</span><span class="st"> </span>Longitude               <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> ...</a>
-<a class="sourceLine" id="cb2-7" title="7"> <span class="op">$</span><span class="st"> </span>Year                    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;1996&quot;</span> <span class="st">&quot;1996&quot;</span> <span class="st">&quot;1972-1975&quot;</span> <span class="st">&quot;1972-1975&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-8" title="8"> <span class="op">$</span><span class="st"> </span>Month                   <span class="op">:</span><span class="st"> </span>int  <span class="dv">7</span> <span class="dv">7</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">7</span> <span class="dv">7</span> ...</a>
-<a class="sourceLine" id="cb2-9" title="9"> <span class="op">$</span><span class="st"> </span>Day                     <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">2</span> <span class="dv">4</span> ...</a>
-<a class="sourceLine" id="cb2-10" title="10"> <span class="op">$</span><span class="st"> </span>Secchi..m.              <span class="op">:</span><span class="st"> </span>num  <span class="fl">7.5</span> <span class="dv">8</span> <span class="fl">2.13</span> <span class="fl">2.54</span> <span class="fl">3.66</span> ...</a>
-<a class="sourceLine" id="cb2-11" title="11"> <span class="op">$</span><span class="st"> </span>NLA..                   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-12" title="12"> <span class="op">$</span><span class="st"> </span>State                   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-13" title="13"> <span class="op">$</span><span class="st"> </span>Water.Body              <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Riche Lake?&quot;</span> <span class="st">&quot;Riche Lake?&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-14" title="14"> <span class="op">$</span><span class="st"> </span>County..Borough.Parrish.<span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Rutland&quot;</span> <span class="st">&quot;Rutland&quot;</span> <span class="st">&quot;Addison&quot;</span> <span class="st">&quot;Addison&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-15" title="15"> <span class="op">$</span><span class="st"> </span>GNIS.ID                 <span class="op">:</span><span class="st"> </span>num  <span class="dv">45011</span> <span class="dv">45011</span> <span class="dv">946367</span> <span class="dv">946367</span> <span class="dv">946367</span> ...</a>
-<a class="sourceLine" id="cb2-16" title="16"> <span class="op">$</span><span class="st"> </span>GNIS.Feature.Name       <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Unnamed (Riche Lake?)&quot;</span> <span class="st">&quot;Unnamed (Riche Lake?)&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-17" title="17"> <span class="op">$</span><span class="st"> </span>GNIS.Class              <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;Lake&quot;</span> <span class="st">&quot;Lake&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-18" title="18"> <span class="op">$</span><span class="st"> </span>GNIS.County             <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;Addison&quot;</span> <span class="st">&quot;Addison&quot;</span> ...</a>
-<a class="sourceLine" id="cb2-19" title="19"> <span class="op">$</span><span class="st"> </span>GNIS.Latitude           <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">44.2</span> <span class="fl">44.2</span> <span class="fl">44.2</span> ...</a>
-<a class="sourceLine" id="cb2-20" title="20"> <span class="op">$</span><span class="st"> </span>GNIS.Longitude          <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> ...</a>
-<a class="sourceLine" id="cb2-21" title="21"> <span class="op">$</span><span class="st"> </span>GNIS.Elevation..m.      <span class="op">:</span><span class="st"> </span>int  <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> ...</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Like this:</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="kw">str</span>(vermont)</span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">3773</span> obs. of  <span class="dv">18</span> variables<span class="op">:</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="st"> </span><span class="er">$</span><span class="st"> </span>Country                 <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> <span class="st">&quot;USA&quot;</span> ...</span>
+<span id="cb2-5"><a href="#cb2-5"></a> <span class="op">$</span><span class="st"> </span>Latitude                <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">44.2</span> <span class="fl">44.2</span> <span class="fl">44.2</span> ...</span>
+<span id="cb2-6"><a href="#cb2-6"></a> <span class="op">$</span><span class="st"> </span>Longitude               <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> ...</span>
+<span id="cb2-7"><a href="#cb2-7"></a> <span class="op">$</span><span class="st"> </span>Year                    <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;1996&quot;</span> <span class="st">&quot;1996&quot;</span> <span class="st">&quot;1972-1975&quot;</span> <span class="st">&quot;1972-1975&quot;</span> ...</span>
+<span id="cb2-8"><a href="#cb2-8"></a> <span class="op">$</span><span class="st"> </span>Month                   <span class="op">:</span><span class="st"> </span>int  <span class="dv">7</span> <span class="dv">7</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">7</span> <span class="dv">7</span> ...</span>
+<span id="cb2-9"><a href="#cb2-9"></a> <span class="op">$</span><span class="st"> </span>Day                     <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">2</span> <span class="dv">4</span> ...</span>
+<span id="cb2-10"><a href="#cb2-10"></a> <span class="op">$</span><span class="st"> </span>Secchi..m.              <span class="op">:</span><span class="st"> </span>num  <span class="fl">7.5</span> <span class="dv">8</span> <span class="fl">2.13</span> <span class="fl">2.54</span> <span class="fl">3.66</span> ...</span>
+<span id="cb2-11"><a href="#cb2-11"></a> <span class="op">$</span><span class="st"> </span>NLA..                   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> ...</span>
+<span id="cb2-12"><a href="#cb2-12"></a> <span class="op">$</span><span class="st"> </span>State                   <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> <span class="st">&quot;Vermont&quot;</span> ...</span>
+<span id="cb2-13"><a href="#cb2-13"></a> <span class="op">$</span><span class="st"> </span>Water.Body              <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Riche Lake?&quot;</span> <span class="st">&quot;Riche Lake?&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> ...</span>
+<span id="cb2-14"><a href="#cb2-14"></a> <span class="op">$</span><span class="st"> </span>County..Borough.Parrish.<span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Rutland&quot;</span> <span class="st">&quot;Rutland&quot;</span> <span class="st">&quot;Addison&quot;</span> <span class="st">&quot;Addison&quot;</span> ...</span>
+<span id="cb2-15"><a href="#cb2-15"></a> <span class="op">$</span><span class="st"> </span>GNIS.ID                 <span class="op">:</span><span class="st"> </span>num  <span class="dv">45011</span> <span class="dv">45011</span> <span class="dv">946367</span> <span class="dv">946367</span> <span class="dv">946367</span> ...</span>
+<span id="cb2-16"><a href="#cb2-16"></a> <span class="op">$</span><span class="st"> </span>GNIS.Feature.Name       <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;Unnamed (Riche Lake?)&quot;</span> <span class="st">&quot;Unnamed (Riche Lake?)&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> <span class="st">&quot;Lake Champlain&quot;</span> ...</span>
+<span id="cb2-17"><a href="#cb2-17"></a> <span class="op">$</span><span class="st"> </span>GNIS.Class              <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;Lake&quot;</span> <span class="st">&quot;Lake&quot;</span> ...</span>
+<span id="cb2-18"><a href="#cb2-18"></a> <span class="op">$</span><span class="st"> </span>GNIS.County             <span class="op">:</span><span class="st"> </span>chr  <span class="st">&quot;&quot;</span> <span class="st">&quot;&quot;</span> <span class="st">&quot;Addison&quot;</span> <span class="st">&quot;Addison&quot;</span> ...</span>
+<span id="cb2-19"><a href="#cb2-19"></a> <span class="op">$</span><span class="st"> </span>GNIS.Latitude           <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">44.2</span> <span class="fl">44.2</span> <span class="fl">44.2</span> ...</span>
+<span id="cb2-20"><a href="#cb2-20"></a> <span class="op">$</span><span class="st"> </span>GNIS.Longitude          <span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> <span class="fl">-73.3</span> ...</span>
+<span id="cb2-21"><a href="#cb2-21"></a> <span class="op">$</span><span class="st"> </span>GNIS.Elevation..m.      <span class="op">:</span><span class="st"> </span>int  <span class="ot">NA</span> <span class="ot">NA</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> <span class="dv">29</span> ...</span></code></pre></div>
 <p>Now that we have an idea of what the data set looks like, let’s take a little closer look. First, there are a couple of things that we can do that will clean up our code down the road a little bit. Let’s have a quick look at our column names again.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">names</span>(vermont)</a>
-<a class="sourceLine" id="cb3-2" title="2"> [<span class="dv">1</span>] <span class="st">&quot;Country&quot;</span>                  <span class="st">&quot;Latitude&quot;</span>                </a>
-<a class="sourceLine" id="cb3-3" title="3"> [<span class="dv">3</span>] <span class="st">&quot;Longitude&quot;</span>                <span class="st">&quot;Year&quot;</span>                    </a>
-<a class="sourceLine" id="cb3-4" title="4"> [<span class="dv">5</span>] <span class="st">&quot;Month&quot;</span>                    <span class="st">&quot;Day&quot;</span>                     </a>
-<a class="sourceLine" id="cb3-5" title="5"> [<span class="dv">7</span>] <span class="st">&quot;Secchi..m.&quot;</span>               <span class="st">&quot;NLA..&quot;</span>                   </a>
-<a class="sourceLine" id="cb3-6" title="6"> [<span class="dv">9</span>] <span class="st">&quot;State&quot;</span>                    <span class="st">&quot;Water.Body&quot;</span>              </a>
-<a class="sourceLine" id="cb3-7" title="7">[<span class="dv">11</span>] <span class="st">&quot;County..Borough.Parrish.&quot;</span> <span class="st">&quot;GNIS.ID&quot;</span>                 </a>
-<a class="sourceLine" id="cb3-8" title="8">[<span class="dv">13</span>] <span class="st">&quot;GNIS.Feature.Name&quot;</span>        <span class="st">&quot;GNIS.Class&quot;</span>              </a>
-<a class="sourceLine" id="cb3-9" title="9">[<span class="dv">15</span>] <span class="st">&quot;GNIS.County&quot;</span>              <span class="st">&quot;GNIS.Latitude&quot;</span>           </a>
-<a class="sourceLine" id="cb3-10" title="10">[<span class="dv">17</span>] <span class="st">&quot;GNIS.Longitude&quot;</span>           <span class="st">&quot;GNIS.Elevation..m.&quot;</span>      </a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">names</span>(vermont)</span>
+<span id="cb3-2"><a href="#cb3-2"></a> [<span class="dv">1</span>] <span class="st">&quot;Country&quot;</span>                  <span class="st">&quot;Latitude&quot;</span>                </span>
+<span id="cb3-3"><a href="#cb3-3"></a> [<span class="dv">3</span>] <span class="st">&quot;Longitude&quot;</span>                <span class="st">&quot;Year&quot;</span>                    </span>
+<span id="cb3-4"><a href="#cb3-4"></a> [<span class="dv">5</span>] <span class="st">&quot;Month&quot;</span>                    <span class="st">&quot;Day&quot;</span>                     </span>
+<span id="cb3-5"><a href="#cb3-5"></a> [<span class="dv">7</span>] <span class="st">&quot;Secchi..m.&quot;</span>               <span class="st">&quot;NLA..&quot;</span>                   </span>
+<span id="cb3-6"><a href="#cb3-6"></a> [<span class="dv">9</span>] <span class="st">&quot;State&quot;</span>                    <span class="st">&quot;Water.Body&quot;</span>              </span>
+<span id="cb3-7"><a href="#cb3-7"></a>[<span class="dv">11</span>] <span class="st">&quot;County..Borough.Parrish.&quot;</span> <span class="st">&quot;GNIS.ID&quot;</span>                 </span>
+<span id="cb3-8"><a href="#cb3-8"></a>[<span class="dv">13</span>] <span class="st">&quot;GNIS.Feature.Name&quot;</span>        <span class="st">&quot;GNIS.Class&quot;</span>              </span>
+<span id="cb3-9"><a href="#cb3-9"></a>[<span class="dv">15</span>] <span class="st">&quot;GNIS.County&quot;</span>              <span class="st">&quot;GNIS.Latitude&quot;</span>           </span>
+<span id="cb3-10"><a href="#cb3-10"></a>[<span class="dv">17</span>] <span class="st">&quot;GNIS.Longitude&quot;</span>           <span class="st">&quot;GNIS.Elevation..m.&quot;</span>      </span></code></pre></div>
 <p>Most of these are nice and clean, but there are some things that happen when we read data into R from Excel files. One of the things that R does is to replace all spaces and special characters with periods (<code>.</code>). This can make things a little difficult to read when we write code. For example, the column that said <code>Secchi (m)</code> in our Excel spreadsheet now says <code>Secchi..m.</code>. This confusion is compounded by the fact that some programming languages and R functions rely on the <code>.</code> for special purposes.</p>
 <p>We are not going to replace all of the names, because we are not going to work with all of the columns, but let’s replace a couple of these that we are definitely going to use (if only to show how this works). For now, let’s just change the names for <code>Secchi..m.</code> and for <code>County..Borough.Parrish.</code>.</p>
 <p>Remember that the result of <code>names(vermont)</code> is a vector, and we can replace individual elements of that vector. We just need to know the index of the element we wish to replace. In this case, <code>Secchi..m.</code> is the 7th column of the dataframe <code>vermont</code>, and <code>County..Borough.Parrish.</code> is the 11th.</p>
 <p>Here is how it works:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># First, we replace Secchi..m. with Secchi</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">names</span>(vermont)[<span class="dv">7</span>] &lt;-<span class="st"> &quot;Secchi&quot;</span></a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co"># Next, we replace County..Borough.Parrish.</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># with just County because we are working in a </span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co"># single state in this case, not because we are</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># County-centric :)</span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="kw">names</span>(vermont)[<span class="dv">11</span>] &lt;-<span class="st"> &quot;County&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># First, we replace Secchi..m. with Secchi</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="kw">names</span>(vermont)[<span class="dv">7</span>] &lt;-<span class="st"> &quot;Secchi&quot;</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Next, we replace County..Borough.Parrish.</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># with just County because we are working in a </span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># single state in this case, not because we are</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># County-centric :)</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="kw">names</span>(vermont)[<span class="dv">11</span>] &lt;-<span class="st"> &quot;County&quot;</span></span></code></pre></div>
 <p>Of course, we could always do this in one fell swoop:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Replace names of both at once</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># because that is cooler than one</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># at a time.</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="kw">names</span>(vermont)[<span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Secchi&#39;</span>, <span class="st">&#39;County&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Replace names of both at once</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># because that is cooler than one</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># at a time.</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="kw">names</span>(vermont)[<span class="kw">c</span>(<span class="dv">7</span>,<span class="dv">11</span>)] &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Secchi&#39;</span>, <span class="st">&#39;County&#39;</span>)</span></code></pre></div>
 <p>Have a quick look to make sure you are happy with the new names.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Print the names of the df</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># to the console so we can </span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># see them.</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="kw">names</span>(vermont)</a>
-<a class="sourceLine" id="cb6-5" title="5"> [<span class="dv">1</span>] <span class="st">&quot;Country&quot;</span>            <span class="st">&quot;Latitude&quot;</span>           <span class="st">&quot;Longitude&quot;</span>         </a>
-<a class="sourceLine" id="cb6-6" title="6"> [<span class="dv">4</span>] <span class="st">&quot;Year&quot;</span>               <span class="st">&quot;Month&quot;</span>              <span class="st">&quot;Day&quot;</span>               </a>
-<a class="sourceLine" id="cb6-7" title="7"> [<span class="dv">7</span>] <span class="st">&quot;Secchi&quot;</span>             <span class="st">&quot;NLA..&quot;</span>              <span class="st">&quot;State&quot;</span>             </a>
-<a class="sourceLine" id="cb6-8" title="8">[<span class="dv">10</span>] <span class="st">&quot;Water.Body&quot;</span>         <span class="st">&quot;County&quot;</span>             <span class="st">&quot;GNIS.ID&quot;</span>           </a>
-<a class="sourceLine" id="cb6-9" title="9">[<span class="dv">13</span>] <span class="st">&quot;GNIS.Feature.Name&quot;</span>  <span class="st">&quot;GNIS.Class&quot;</span>         <span class="st">&quot;GNIS.County&quot;</span>       </a>
-<a class="sourceLine" id="cb6-10" title="10">[<span class="dv">16</span>] <span class="st">&quot;GNIS.Latitude&quot;</span>      <span class="st">&quot;GNIS.Longitude&quot;</span>     <span class="st">&quot;GNIS.Elevation..m.&quot;</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Print the names of the df</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># to the console so we can </span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># see them.</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="kw">names</span>(vermont)</span>
+<span id="cb6-5"><a href="#cb6-5"></a> [<span class="dv">1</span>] <span class="st">&quot;Country&quot;</span>            <span class="st">&quot;Latitude&quot;</span>           <span class="st">&quot;Longitude&quot;</span>         </span>
+<span id="cb6-6"><a href="#cb6-6"></a> [<span class="dv">4</span>] <span class="st">&quot;Year&quot;</span>               <span class="st">&quot;Month&quot;</span>              <span class="st">&quot;Day&quot;</span>               </span>
+<span id="cb6-7"><a href="#cb6-7"></a> [<span class="dv">7</span>] <span class="st">&quot;Secchi&quot;</span>             <span class="st">&quot;NLA..&quot;</span>              <span class="st">&quot;State&quot;</span>             </span>
+<span id="cb6-8"><a href="#cb6-8"></a>[<span class="dv">10</span>] <span class="st">&quot;Water.Body&quot;</span>         <span class="st">&quot;County&quot;</span>             <span class="st">&quot;GNIS.ID&quot;</span>           </span>
+<span id="cb6-9"><a href="#cb6-9"></a>[<span class="dv">13</span>] <span class="st">&quot;GNIS.Feature.Name&quot;</span>  <span class="st">&quot;GNIS.Class&quot;</span>         <span class="st">&quot;GNIS.County&quot;</span>       </span>
+<span id="cb6-10"><a href="#cb6-10"></a>[<span class="dv">16</span>] <span class="st">&quot;GNIS.Latitude&quot;</span>      <span class="st">&quot;GNIS.Longitude&quot;</span>     <span class="st">&quot;GNIS.Elevation..m.&quot;</span></span></code></pre></div>
 <p>Notice that above, we need to put indices inside of a call to <code>c()</code> (the concatenate function) because otherwise R tries to interpret these as row and column indices and the program will return an error.</p>
 </div>
 <div id="data-exploration" class="section level2">
@@ -482,54 +485,54 @@ $(document).ready(function () {
 <p>Before we go anywhere near our response, we might take a look at where our data come from since we’ve been talking about counties and the like. This is an important part of data QC, and is also a great opportunity to show off some of the GIS capabilities of R.</p>
 <p>Let’s read in a shape file of the Vermont border. There are <em>lots</em> of packages that will handle this for us. I am using the <code>rgdal</code> and <code>sp</code> packages here because of familiarity, and because I know that the workflow will play fairly well with <code>ggplot2</code>. I will use the <code>::</code> notation below so you know which functions come from which package, but you do not need to do so as long as both packages are installed and attached (loaded).</p>
 <p>First, read in the shape file.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(rgdal)</a>
-<a class="sourceLine" id="cb7-2" title="2">VT &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">readOGR</span>(<span class="st">&quot;VT_Data__State_Boundary.shp&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(rgdal)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>VT &lt;-<span class="st"> </span>rgdal<span class="op">::</span><span class="kw">readOGR</span>(<span class="st">&quot;VT_Data__State_Boundary.shp&quot;</span>)</span></code></pre></div>
 <p>Next, we will convert our points from the <code>vermont</code> data into a projected coordinate system that will allow us to overlay the data points onto the outline of the state and do some QC. This will take a few steps.</p>
 <p>Get rid of the points with missing coordinates. We aren’t going to be able to use these for any kind of spatial analysis.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Remove those points with missing longitude and latitude</span></a>
-<a class="sourceLine" id="cb8-2" title="2">d &lt;-<span class="st"> </span>vermont[<span class="op">!</span><span class="kw">is.na</span>(vermont<span class="op">$</span>Longitude) <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(vermont<span class="op">$</span>Latitude),]</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Remove those points with missing longitude and latitude</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>d &lt;-<span class="st"> </span>vermont[<span class="op">!</span><span class="kw">is.na</span>(vermont<span class="op">$</span>Longitude) <span class="op">|</span><span class="st"> </span><span class="op">!</span><span class="kw">is.na</span>(vermont<span class="op">$</span>Latitude),]</span></code></pre></div>
 <p>We will create an object (<code>coord_dd</code>) to hold the <code>SpatialPoints-class</code> object that contains decimal degrees.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Load sp package</span></a>
-<a class="sourceLine" id="cb9-2" title="2"><span class="kw">library</span>(sp)</a>
-<a class="sourceLine" id="cb9-3" title="3"></a>
-<a class="sourceLine" id="cb9-4" title="4"><span class="co"># Assign longitude and latitude to a </span></a>
-<a class="sourceLine" id="cb9-5" title="5"><span class="co"># SpatialPoints-class obj</span></a>
-<a class="sourceLine" id="cb9-6" title="6">coord_dd =<span class="st"> </span>sp<span class="op">::</span><span class="kw">SpatialPoints</span>(<span class="kw">cbind</span>(d<span class="op">$</span>Longitude, d<span class="op">$</span>Latitude),</a>
-<a class="sourceLine" id="cb9-7" title="7">                             <span class="dt">proj4string=</span><span class="kw">CRS</span>(<span class="st">&quot;+proj=longlat&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Load sp package</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">library</span>(sp)</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Assign longitude and latitude to a </span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># SpatialPoints-class obj</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>coord_dd =<span class="st"> </span>sp<span class="op">::</span><span class="kw">SpatialPoints</span>(<span class="kw">cbind</span>(d<span class="op">$</span>Longitude, d<span class="op">$</span>Latitude),</span>
+<span id="cb9-7"><a href="#cb9-7"></a>                             <span class="dt">proj4string=</span><span class="kw">CRS</span>(<span class="st">&quot;+proj=longlat&quot;</span>))</span></code></pre></div>
 <p>We can convert these into UTM pretty easily, too:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># Get UTMs for the longitudes and latitudes using</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="co"># the coordinate system of our shape file</span></a>
-<a class="sourceLine" id="cb10-3" title="3">coord_utm &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">spTransform</span>(coord_dd, <span class="kw">CRS</span>(<span class="kw">proj4string</span>(VT)))</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Get UTMs for the longitudes and latitudes using</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># the coordinate system of our shape file</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>coord_utm &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">spTransform</span>(coord_dd, <span class="kw">CRS</span>(<span class="kw">proj4string</span>(VT)))</span></code></pre></div>
 <p>Assign the UTMs to variables in our data set</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Assign the coordinates to new columns</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co"># in our dataframe</span></a>
-<a class="sourceLine" id="cb11-3" title="3">d<span class="op">$</span>x &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[,<span class="dv">1</span>]</a>
-<a class="sourceLine" id="cb11-4" title="4">d<span class="op">$</span>y &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[,<span class="dv">2</span>]</a>
-<a class="sourceLine" id="cb11-5" title="5">sp<span class="op">::</span><span class="kw">coordinates</span>(d) &lt;-<span class="st"> </span><span class="er">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Assign the coordinates to new columns</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># in our dataframe</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>d<span class="op">$</span>x &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[,<span class="dv">1</span>]</span>
+<span id="cb11-4"><a href="#cb11-4"></a>d<span class="op">$</span>y &lt;-<span class="st"> </span>coord_utm<span class="op">@</span>coords[,<span class="dv">2</span>]</span>
+<span id="cb11-5"><a href="#cb11-5"></a>sp<span class="op">::</span><span class="kw">coordinates</span>(d) &lt;-<span class="st"> </span><span class="er">~</span><span class="st"> </span>x <span class="op">+</span><span class="st"> </span>y</span></code></pre></div>
 <p>Now, project the coordinates for our data to match the CRS of the state outline just to be sure that everything matches.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1">sp<span class="op">::</span><span class="kw">proj4string</span>(d) &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">proj4string</span>(VT)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>sp<span class="op">::</span><span class="kw">proj4string</span>(d) &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">proj4string</span>(VT)</span></code></pre></div>
 <p>We can plot these quickly to get an idea of the spread we are working with:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># We&#39;ll use the ggplot2 library</span></a>
-<a class="sourceLine" id="cb13-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb13-3" title="3"></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="co"># Make the plot</span></a>
-<a class="sourceLine" id="cb13-5" title="5"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-6" title="6"><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</a>
-<a class="sourceLine" id="cb13-7" title="7">             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb13-8" title="8">             <span class="dt">fill =</span> <span class="st">&quot;gray40&quot;</span>,</a>
-<a class="sourceLine" id="cb13-9" title="9">             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-10" title="10"><span class="co">#coord_sf() +</span></a>
-<a class="sourceLine" id="cb13-11" title="11"><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(d),</a>
-<a class="sourceLine" id="cb13-12" title="12">           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-13" title="13"><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Easting&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-14" title="14"><span class="kw">ggtitle</span>(<span class="st">&quot;Vermont lakes&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-15" title="15"><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb13-16" title="16">      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb13-17" title="17">      ) <span class="op">+</span><span class="st">    </span></a>
-<a class="sourceLine" id="cb13-18" title="18"><span class="st">  </span></a>
-<a class="sourceLine" id="cb13-19" title="19"><span class="co"># Adjusting output width: distorts CRS  </span></a>
-<a class="sourceLine" id="cb13-20" title="20"><span class="co"># but can actually see the plot</span></a>
-<a class="sourceLine" id="cb13-21" title="21"><span class="kw">coord_equal</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># We&#39;ll use the ggplot2 library</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="co"># Make the plot</span></span>
+<span id="cb13-5"><a href="#cb13-5"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-6"><a href="#cb13-6"></a><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</span>
+<span id="cb13-7"><a href="#cb13-7"></a>             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb13-8"><a href="#cb13-8"></a>             <span class="dt">fill =</span> <span class="st">&quot;gray40&quot;</span>,</span>
+<span id="cb13-9"><a href="#cb13-9"></a>             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></span>
+<span id="cb13-10"><a href="#cb13-10"></a><span class="co">#coord_sf() +</span></span>
+<span id="cb13-11"><a href="#cb13-11"></a><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(d),</span>
+<span id="cb13-12"><a href="#cb13-12"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></span>
+<span id="cb13-13"><a href="#cb13-13"></a><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Easting&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></span>
+<span id="cb13-14"><a href="#cb13-14"></a><span class="kw">ggtitle</span>(<span class="st">&quot;Vermont lakes&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-15"><a href="#cb13-15"></a><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
+<span id="cb13-16"><a href="#cb13-16"></a>      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb13-17"><a href="#cb13-17"></a>      ) <span class="op">+</span><span class="st">    </span></span>
+<span id="cb13-18"><a href="#cb13-18"></a><span class="st">  </span></span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="co"># Adjusting output width: distorts CRS  </span></span>
+<span id="cb13-20"><a href="#cb13-20"></a><span class="co"># but can actually see the plot</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a><span class="kw">coord_equal</span>(<span class="dt">ratio=</span>.<span class="dv">5</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-16-1.png" width="500%" /></p>
 <blockquote>
 <h2>
@@ -539,90 +542,90 @@ $(document).ready(function () {
 <p>It looks like we have at least one or two data points from the near-arctic region. I know Vermont is cold this time of year, but this might be a little ridiculous!</p>
 <p>These types of errors are really common, so it is important to check your data, even if you are the one who entered it. This one is probably just a case of someone having swapped longitude and latitude, but we’re in the middle of a workshop, so we can’t assume that - let’s get rid of it. There are also a couple of points over the state line in New Hampshire that we’ll get rid of while we’re at it.</p>
 <p>Luckily, we can take care of this pretty easily using the spatial tools we’ve been working with.</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Perform a spatial intersect between</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co"># the Vermont shapefile (polygon) and</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co"># the SpatialPoints object.</span></a>
-<a class="sourceLine" id="cb14-4" title="4"><span class="co"># Note that order is important here.</span></a>
-<a class="sourceLine" id="cb14-5" title="5">ins &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">over</span>(d, VT)</a>
-<a class="sourceLine" id="cb14-6" title="6"></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co"># Then, we can drop the points that </span></a>
-<a class="sourceLine" id="cb14-8" title="8"><span class="co"># do not not intersect with the polygon,</span></a>
-<a class="sourceLine" id="cb14-9" title="9"><span class="co"># now saving over the original data set.</span></a>
-<a class="sourceLine" id="cb14-10" title="10">dd &lt;-<span class="st"> </span>d[<span class="op">!</span><span class="kw">is.na</span>(ins[,<span class="dv">1</span>]),]</a>
-<a class="sourceLine" id="cb14-11" title="11"></a>
-<a class="sourceLine" id="cb14-12" title="12"><span class="co"># Get the modified data back out of the</span></a>
-<a class="sourceLine" id="cb14-13" title="13"><span class="co"># SpatialPoints object</span></a>
-<a class="sourceLine" id="cb14-14" title="14">vermont &lt;-<span class="st"> </span>dd<span class="op">@</span>data</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Perform a spatial intersect between</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># the Vermont shapefile (polygon) and</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># the SpatialPoints object.</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a><span class="co"># Note that order is important here.</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>ins &lt;-<span class="st"> </span>sp<span class="op">::</span><span class="kw">over</span>(d, VT)</span>
+<span id="cb14-6"><a href="#cb14-6"></a></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># Then, we can drop the points that </span></span>
+<span id="cb14-8"><a href="#cb14-8"></a><span class="co"># do not not intersect with the polygon,</span></span>
+<span id="cb14-9"><a href="#cb14-9"></a><span class="co"># now saving over the original data set.</span></span>
+<span id="cb14-10"><a href="#cb14-10"></a>dd &lt;-<span class="st"> </span>d[<span class="op">!</span><span class="kw">is.na</span>(ins[,<span class="dv">1</span>]),]</span>
+<span id="cb14-11"><a href="#cb14-11"></a></span>
+<span id="cb14-12"><a href="#cb14-12"></a><span class="co"># Get the modified data back out of the</span></span>
+<span id="cb14-13"><a href="#cb14-13"></a><span class="co"># SpatialPoints object</span></span>
+<span id="cb14-14"><a href="#cb14-14"></a>vermont &lt;-<span class="st"> </span>dd<span class="op">@</span>data</span></code></pre></div>
 <p>We can plot the polygon and the points again just to double check:</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># We&#39;ll use the ggplot2 library</span></a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">library</span>(ggplot2)</a>
-<a class="sourceLine" id="cb15-3" title="3"></a>
-<a class="sourceLine" id="cb15-4" title="4"><span class="co"># Make the plot</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-6" title="6"><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</a>
-<a class="sourceLine" id="cb15-7" title="7">             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb15-8" title="8">             <span class="dt">fill =</span> <span class="st">&quot;gray60&quot;</span>,</a>
-<a class="sourceLine" id="cb15-9" title="9">             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-10" title="10"><span class="kw">coord_sf</span>() <span class="op">+</span><span class="st">  </span></a>
-<a class="sourceLine" id="cb15-11" title="11"><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</a>
-<a class="sourceLine" id="cb15-12" title="12">           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-13" title="13"><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Easting&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb15-14" title="14"><span class="kw">ggtitle</span>(<span class="st">&quot;Vermont lakes&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-15" title="15"><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</a>
-<a class="sourceLine" id="cb15-16" title="16">      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb15-17" title="17">      )</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="co"># We&#39;ll use the ggplot2 library</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">library</span>(ggplot2)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a><span class="co"># Make the plot</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb15-6"><a href="#cb15-6"></a><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</span>
+<span id="cb15-7"><a href="#cb15-7"></a>             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb15-8"><a href="#cb15-8"></a>             <span class="dt">fill =</span> <span class="st">&quot;gray60&quot;</span>,</span>
+<span id="cb15-9"><a href="#cb15-9"></a>             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></span>
+<span id="cb15-10"><a href="#cb15-10"></a><span class="kw">coord_sf</span>() <span class="op">+</span><span class="st">  </span></span>
+<span id="cb15-11"><a href="#cb15-11"></a><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</span>
+<span id="cb15-12"><a href="#cb15-12"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></span>
+<span id="cb15-13"><a href="#cb15-13"></a><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;Easting&quot;</span>, <span class="dt">y=</span><span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a><span class="kw">ggtitle</span>(<span class="st">&quot;Vermont lakes&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
+<span id="cb15-16"><a href="#cb15-16"></a>      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb15-17"><a href="#cb15-17"></a>      )</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
 <p>Of course, we could really snaz this up a bit, too!</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Make the plot...again</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</a>
-<a class="sourceLine" id="cb16-4" title="4">             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</a>
-<a class="sourceLine" id="cb16-5" title="5">             <span class="dt">fill =</span> <span class="st">&quot;gray90&quot;</span>,</a>
-<a class="sourceLine" id="cb16-6" title="6">             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-7" title="7"><span class="kw">coord_sf</span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-8" title="8"><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</a>
-<a class="sourceLine" id="cb16-9" title="9">           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> dd<span class="op">$</span>Secchi),</a>
-<a class="sourceLine" id="cb16-10" title="10">           <span class="dt">alpha=</span>.<span class="dv">5</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-11" title="11"><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-12" title="12"><span class="kw">ggtitle</span>(<span class="st">&quot;Secchi depth (m)&quot;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-13" title="13"><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</a>
-<a class="sourceLine" id="cb16-14" title="14">      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">14</span>),</a>
-<a class="sourceLine" id="cb16-15" title="15">      <span class="dt">legend.position =</span> <span class="st">&#39;right&#39;</span>,</a>
-<a class="sourceLine" id="cb16-16" title="16">      <span class="dt">legend.title.align =</span> <span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb16-17" title="17">      <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb16-18" title="18">      <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</a>
-<a class="sourceLine" id="cb16-19" title="19">      <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()</a>
-<a class="sourceLine" id="cb16-20" title="20">      ) <span class="op">+</span></a>
-<a class="sourceLine" id="cb16-21" title="21"><span class="kw">scale_colour_gradientn</span>(<span class="st">&quot;&quot;</span>, <span class="dt">colours=</span><span class="kw">c</span>(<span class="st">&quot;gray90&quot;</span>,<span class="st">&quot;black&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Make the plot...again</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="kw">ggplot</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">geom_polygon</span>(<span class="dt">data =</span> <span class="kw">fortify</span>(VT),</span>
+<span id="cb16-4"><a href="#cb16-4"></a>             <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb16-5"><a href="#cb16-5"></a>             <span class="dt">fill =</span> <span class="st">&quot;gray90&quot;</span>,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>             <span class="kw">aes</span>(<span class="dt">x=</span>long, <span class="dt">y=</span>lat)) <span class="op">+</span></span>
+<span id="cb16-7"><a href="#cb16-7"></a><span class="kw">coord_sf</span>() <span class="op">+</span></span>
+<span id="cb16-8"><a href="#cb16-8"></a><span class="kw">geom_point</span>(<span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</span>
+<span id="cb16-9"><a href="#cb16-9"></a>           <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y, <span class="dt">color =</span> dd<span class="op">$</span>Secchi),</span>
+<span id="cb16-10"><a href="#cb16-10"></a>           <span class="dt">alpha=</span>.<span class="dv">5</span>, <span class="dt">size=</span><span class="dv">3</span>) <span class="op">+</span></span>
+<span id="cb16-11"><a href="#cb16-11"></a><span class="kw">labs</span>(<span class="dt">x=</span><span class="st">&quot;&quot;</span>, <span class="dt">y=</span><span class="st">&quot;&quot;</span>) <span class="op">+</span></span>
+<span id="cb16-12"><a href="#cb16-12"></a><span class="kw">ggtitle</span>(<span class="st">&quot;Secchi depth (m)&quot;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="kw">theme</span>(<span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>, <span class="dt">face =</span> <span class="st">&quot;bold&quot;</span>),</span>
+<span id="cb16-14"><a href="#cb16-14"></a>      <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">14</span>),</span>
+<span id="cb16-15"><a href="#cb16-15"></a>      <span class="dt">legend.position =</span> <span class="st">&#39;right&#39;</span>,</span>
+<span id="cb16-16"><a href="#cb16-16"></a>      <span class="dt">legend.title.align =</span> <span class="dv">0</span>,</span>
+<span id="cb16-17"><a href="#cb16-17"></a>      <span class="dt">panel.background =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb16-18"><a href="#cb16-18"></a>      <span class="dt">axis.ticks.y =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.text.y =</span> <span class="kw">element_blank</span>(),</span>
+<span id="cb16-19"><a href="#cb16-19"></a>      <span class="dt">axis.ticks.x =</span> <span class="kw">element_blank</span>(),<span class="dt">axis.text.x =</span> <span class="kw">element_blank</span>()</span>
+<span id="cb16-20"><a href="#cb16-20"></a>      ) <span class="op">+</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="kw">scale_colour_gradientn</span>(<span class="st">&quot;&quot;</span>, <span class="dt">colours=</span><span class="kw">c</span>(<span class="st">&quot;gray90&quot;</span>,<span class="st">&quot;black&quot;</span>))</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-19-1.png" width="960" /></p>
 <p>Super! That may seem like a lot of work this time around, but the next time you want to do something like this, you will be ready to fly. On to the actual data!</p>
 </div>
 <div id="data-exploration-1" class="section level3">
 <h3><strong>Data exploration</strong></h3>
 <p>To start with, let’s take a quick look at <code>Secchi</code> using a histogram.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Make the histogram</span></a>
-<a class="sourceLine" id="cb17-2" title="2"><span class="kw">hist</span>(vermont<span class="op">$</span>Secchi, </a>
-<a class="sourceLine" id="cb17-3" title="3">     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,</a>
-<a class="sourceLine" id="cb17-4" title="4">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</a>
-<a class="sourceLine" id="cb17-5" title="5">     <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>,</a>
-<a class="sourceLine" id="cb17-6" title="6">     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb17-7" title="7"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb17-8" title="8"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Make the histogram</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="kw">hist</span>(vermont<span class="op">$</span>Secchi, </span>
+<span id="cb17-3"><a href="#cb17-3"></a>     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,</span>
+<span id="cb17-4"><a href="#cb17-4"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb17-5"><a href="#cb17-5"></a>     <span class="dt">xlab=</span><span class="st">&#39;Secchi depth (m)&#39;</span>,</span>
+<span id="cb17-6"><a href="#cb17-6"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-20-1.png" width="672" /></p>
 <p>From this plot alone, there are a few things that should be obvious.</p>
 <p>First, we can see that the distribution of our response is <strong>right-skewed</strong>, with many more observations near zero than near the maximum.</p>
 <p>Second, perhaps more nuanced, is that there are no values less than zero. For anyone who has spent some time using a Secchi disk, the reason for this is probably obvious. We can’t have negative values for light penetration into the water column<sup>[citation needed]</sup>. This variable is <strong>zero bound</strong>. This is actually common for a lot of parameters we measure in lake management because we frequently are interested in concentrations, depths, areas, and other non-negative quantities.</p>
 <p>We will need to think about both of these characteristics as we move into statistical analyses. One of the central assumptions of modern regression tools relates to normality of residuals, which in the absence of heterogenous groups, can initially be approximated using a histogram of the response. To show this, we can plot the residuals:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Make the histogram, this time</span></a>
-<a class="sourceLine" id="cb18-2" title="2"><span class="co"># subtracting the mean from each </span></a>
-<a class="sourceLine" id="cb18-3" title="3"><span class="co"># value. Is the result normal?</span></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="kw">hist</span>(vermont<span class="op">$</span>Secchi<span class="op">-</span><span class="kw">mean</span>(vermont<span class="op">$</span>Secchi),</a>
-<a class="sourceLine" id="cb18-5" title="5">     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </a>
-<a class="sourceLine" id="cb18-6" title="6">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</a>
-<a class="sourceLine" id="cb18-7" title="7">     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</a>
-<a class="sourceLine" id="cb18-8" title="8">     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb18-9" title="9"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb18-10" title="10"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Make the histogram, this time</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># subtracting the mean from each </span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="co"># value. Is the result normal?</span></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="kw">hist</span>(vermont<span class="op">$</span>Secchi<span class="op">-</span><span class="kw">mean</span>(vermont<span class="op">$</span>Secchi),</span>
+<span id="cb18-5"><a href="#cb18-5"></a>     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </span>
+<span id="cb18-6"><a href="#cb18-6"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb18-7"><a href="#cb18-7"></a>     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</span>
+<span id="cb18-8"><a href="#cb18-8"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb18-9"><a href="#cb18-9"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span>
+<span id="cb18-10"><a href="#cb18-10"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="dv">5</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-21-1.png" width="672" /></p>
 <p>This looks pretty much the same as the one above, but the x-axis has changed. We should know, at this point that the distribution above is decidedly <em>not</em> normal.</p>
 </div>
@@ -630,29 +633,29 @@ $(document).ready(function () {
 <div id="transformations" class="section level2">
 <h2><strong>Transformations</strong></h2>
 <p>We can handle both of these problems by log-transforming our data like this:</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1">vermont<span class="op">$</span>logSecchi &lt;-<span class="st"> </span><span class="kw">log</span>(vermont<span class="op">$</span>Secchi)</a></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>vermont<span class="op">$</span>logSecchi &lt;-<span class="st"> </span><span class="kw">log</span>(vermont<span class="op">$</span>Secchi)</span></code></pre></div>
 <p>We can plot histogram of the residuals again to see what it did:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># Make the histogram,</span></a>
-<a class="sourceLine" id="cb20-2" title="2"><span class="co"># subtracting the mean from each </span></a>
-<a class="sourceLine" id="cb20-3" title="3"><span class="co"># value. Is the result normal?</span></a>
-<a class="sourceLine" id="cb20-4" title="4"><span class="kw">hist</span>(vermont<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(vermont<span class="op">$</span>logSecchi),</a>
-<a class="sourceLine" id="cb20-5" title="5">     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </a>
-<a class="sourceLine" id="cb20-6" title="6">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</a>
-<a class="sourceLine" id="cb20-7" title="7">     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</a>
-<a class="sourceLine" id="cb20-8" title="8">     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb20-9" title="9"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb20-10" title="10"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">2.3</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># Make the histogram,</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a><span class="co"># subtracting the mean from each </span></span>
+<span id="cb20-3"><a href="#cb20-3"></a><span class="co"># value. Is the result normal?</span></span>
+<span id="cb20-4"><a href="#cb20-4"></a><span class="kw">hist</span>(vermont<span class="op">$</span>logSecchi<span class="op">-</span><span class="kw">mean</span>(vermont<span class="op">$</span>logSecchi),</span>
+<span id="cb20-5"><a href="#cb20-5"></a>     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </span>
+<span id="cb20-6"><a href="#cb20-6"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb20-7"><a href="#cb20-7"></a>     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</span>
+<span id="cb20-8"><a href="#cb20-8"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb20-9"><a href="#cb20-9"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span>
+<span id="cb20-10"><a href="#cb20-10"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span><span class="fl">2.3</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-23-1.png" width="672" /></p>
 <p>Our residuals look more like a normal distribution now, although there is still some skew.</p>
 <p>What has this done to our data, though? Let’s have a look:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># Make the histogram.</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">hist</span>(vermont<span class="op">$</span>logSecchi,</a>
-<a class="sourceLine" id="cb21-3" title="3">     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </a>
-<a class="sourceLine" id="cb21-4" title="4">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</a>
-<a class="sourceLine" id="cb21-5" title="5">     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</a>
-<a class="sourceLine" id="cb21-6" title="6">     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</a>
-<a class="sourceLine" id="cb21-7" title="7"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</a>
-<a class="sourceLine" id="cb21-8" title="8"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span>.<span class="dv">75</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="co"># Make the histogram.</span></span>
+<span id="cb21-2"><a href="#cb21-2"></a><span class="kw">hist</span>(vermont<span class="op">$</span>logSecchi,</span>
+<span id="cb21-3"><a href="#cb21-3"></a>     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, </span>
+<span id="cb21-4"><a href="#cb21-4"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb21-5"><a href="#cb21-5"></a>     <span class="dt">xlab=</span><span class="st">&#39;Error&#39;</span>,</span>
+<span id="cb21-6"><a href="#cb21-6"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>)</span>
+<span id="cb21-7"><a href="#cb21-7"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span>
+<span id="cb21-8"><a href="#cb21-8"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="op">-</span>.<span class="dv">75</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-24-1.png" width="672" /></p>
 <p>As you can see, our response variable is no longer constrained to be greater than zero on the log scale, so we don’t have to worry about getting negative predictions from any of the statistical models that we make. We could move on to do some kind of a Box-Cox transformation that would really smooth this out, but we would lose a lot of interprebility.</p>
 <p>Now we can move forward with some statistics!</p>
@@ -662,22 +665,22 @@ $(document).ready(function () {
 <p>Let’s start with the simple case of comparing <code>Secchi</code> between lakes and reservoirs. If you have a basic understanding of statistics, you might immediately realize that this is a comparison of a continuous variable between two groups. We have a couple of paths forward here. We could either set aside distributional assumpstions and use <strong>non-parametric</strong> methods, or we could assume some distribution for our error structure and proceed using <strong>parametric</strong> or <strong>semi-parametric</strong> statistics.</p>
 <p>In either case, we are going to have to make sure we only have data for lakes and reservoirs first. (If you looked closely at the data you will have realized that there are also records for <code>Swamp</code> and <code>Bay</code> in our dataset.)</p>
 <p>To get rid of the observations related to <code>Swamp</code> and <code>Bay</code> for now, let’s just drop that level from our <code>GNIS.Class</code> variable in the <code>vermont</code> data set.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1">vermont &lt;-<span class="st"> </span>vermont[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Lake&quot;</span> <span class="op">|</span><span class="st"> </span>vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Reservoir&quot;</span>, ]</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>vermont &lt;-<span class="st"> </span>vermont[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Lake&quot;</span> <span class="op">|</span><span class="st"> </span>vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&quot;Reservoir&quot;</span>, ]</span></code></pre></div>
 <div id="wilcoxon-rank-sums-test" class="section level3">
 <h3><strong>Wilcoxon rank-sums test</strong></h3>
 <p>Let’s start by fitting a quick Wilcoxon rank-sums test (aka Mann-Whitney U-test). While our options for non-parametric statistics are limited in complexity, they do not require distributional assumptions, and they tend to be more <strong>conservative</strong> than parametric tests, especially under limited sample sizes (not the case here).</p>
 <p>Here is how we do it:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="co"># Wilcox test to assess the null hypothesis</span></a>
-<a class="sourceLine" id="cb23-2" title="2"><span class="co"># that there is no difference in Secchi between</span></a>
-<a class="sourceLine" id="cb23-3" title="3"><span class="co"># lakes and reservoirs.</span></a>
-<a class="sourceLine" id="cb23-4" title="4"><span class="kw">wilcox.test</span>(<span class="dt">x=</span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Lake&#39;</span>],</a>
-<a class="sourceLine" id="cb23-5" title="5">            <span class="dt">y=</span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Reservoir&#39;</span>])</a>
-<a class="sourceLine" id="cb23-6" title="6"></a>
-<a class="sourceLine" id="cb23-7" title="7">    Wilcoxon rank sum test with continuity correction</a>
-<a class="sourceLine" id="cb23-8" title="8"></a>
-<a class="sourceLine" id="cb23-9" title="9">data<span class="op">:</span><span class="st">  </span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class <span class="op">==</span><span class="st"> &quot;Lake&quot;</span>] and vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class <span class="op">==</span><span class="st"> &quot;Reservoir&quot;</span>]</a>
-<a class="sourceLine" id="cb23-10" title="10">W =<span class="st"> </span><span class="dv">1323781</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0006573</span></a>
-<a class="sourceLine" id="cb23-11" title="11">alternative hypothesis<span class="op">:</span><span class="st"> </span>true location shift is not equal to <span class="dv">0</span></a></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="co"># Wilcox test to assess the null hypothesis</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a><span class="co"># that there is no difference in Secchi between</span></span>
+<span id="cb23-3"><a href="#cb23-3"></a><span class="co"># lakes and reservoirs.</span></span>
+<span id="cb23-4"><a href="#cb23-4"></a><span class="kw">wilcox.test</span>(<span class="dt">x=</span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Lake&#39;</span>],</span>
+<span id="cb23-5"><a href="#cb23-5"></a>            <span class="dt">y=</span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class<span class="op">==</span><span class="st">&#39;Reservoir&#39;</span>])</span>
+<span id="cb23-6"><a href="#cb23-6"></a></span>
+<span id="cb23-7"><a href="#cb23-7"></a>    Wilcoxon rank sum test with continuity correction</span>
+<span id="cb23-8"><a href="#cb23-8"></a></span>
+<span id="cb23-9"><a href="#cb23-9"></a>data<span class="op">:</span><span class="st">  </span>vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class <span class="op">==</span><span class="st"> &quot;Lake&quot;</span>] and vermont<span class="op">$</span>Secchi[vermont<span class="op">$</span>GNIS.Class <span class="op">==</span><span class="st"> &quot;Reservoir&quot;</span>]</span>
+<span id="cb23-10"><a href="#cb23-10"></a>W =<span class="st"> </span><span class="dv">1323781</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0006573</span></span>
+<span id="cb23-11"><a href="#cb23-11"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true location shift is not equal to <span class="dv">0</span></span></code></pre></div>
 <p>Okay, if you have never done a Wilcox test by hand, or even in Excel, please appreciate how <strong>ridiculously easy</strong> this is. But, more importantly, what is going in the output here?</p>
 <p>We can see that we have conducted a Wilcoxon rank sum test. Second, R gives us a friendly reminder of what our data were that went into this. Next, we have the actual statistics for the test, including the test statistic <code>W</code> and the <code>p-value</code> for the comparison. With the handy-dandy <code>alternative hypothesis</code> that R provides us, we can conclude that since p &lt; 0.05 we reject the null hypothesis that there is no difference between groups.</p>
 <p>While this is useful for making inference, we don’t get a good sense of how the group means actually differed from this test (although we could graph it). For that, we need to start making some assumptions about our data and the shape of the error associated with those data.</p>
@@ -700,66 +703,66 @@ $(document).ready(function () {
 <h3><strong>The t-test</strong></h3>
 <p>The t-test is our go-to tool for comparing two group means with parametric statistics. Even when we use analysis of variance (ANOVA) to test for differences in means between more than two groups, we still need to use t-tests to follow up and determine pair-wise differences (usually using a Tukey HSD or analagous test to control family-wise error rates).</p>
 <p>Using a t-test in R is pretty straightforward. For this example, we will use a t-test to test the null hypothesis that there is no difference in <code>Secchi</code> between <code>Lake</code> and <code>Reservoir</code> classes. To do this, we use the function <code>t.test()</code>.</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># T-test to assess the null hypothesis</span></a>
-<a class="sourceLine" id="cb24-2" title="2"><span class="co"># that there is no difference in Secchi</span></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="co"># between lakes and reservoirs in Vermont.</span></a>
-<a class="sourceLine" id="cb24-4" title="4"></a>
-<a class="sourceLine" id="cb24-5" title="5"><span class="co"># We use logSecchi to meet assumptions</span></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="co"># of normality.</span></a>
-<a class="sourceLine" id="cb24-7" title="7"></a>
-<a class="sourceLine" id="cb24-8" title="8"><span class="co"># We can specify this one using a formula.</span></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="co"># To be conservative here, we will assume </span></a>
-<a class="sourceLine" id="cb24-10" title="10"><span class="co"># that we have unequal variances using</span></a>
-<a class="sourceLine" id="cb24-11" title="11"><span class="co"># one of the optional arguments. Note that</span></a>
-<a class="sourceLine" id="cb24-12" title="12"><span class="co"># the default in R is to assume that variances</span></a>
-<a class="sourceLine" id="cb24-13" title="13"><span class="co"># are not equal, and this defaults to </span></a>
-<a class="sourceLine" id="cb24-14" title="14"><span class="co"># a Welch&#39;s t-test that uses a calculated df</span></a>
-<a class="sourceLine" id="cb24-15" title="15"><span class="co"># to adjust the calculated test statistic.</span></a>
-<a class="sourceLine" id="cb24-16" title="16"><span class="kw">t.test</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>vermont, <span class="dt">equal=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb24-17" title="17"></a>
-<a class="sourceLine" id="cb24-18" title="18">    Welch Two Sample t<span class="op">-</span>test</a>
-<a class="sourceLine" id="cb24-19" title="19"></a>
-<a class="sourceLine" id="cb24-20" title="20">data<span class="op">:</span><span class="st">  </span>logSecchi by GNIS.Class</a>
-<a class="sourceLine" id="cb24-21" title="21">t =<span class="st"> </span><span class="fl">-3.7287</span>, df =<span class="st"> </span><span class="fl">2596.3</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001966</span></a>
-<a class="sourceLine" id="cb24-22" title="22">alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span></a>
-<a class="sourceLine" id="cb24-23" title="23"><span class="dv">95</span> percent confidence interval<span class="op">:</span></a>
-<a class="sourceLine" id="cb24-24" title="24"><span class="st"> </span><span class="fl">-0.09668250</span> <span class="fl">-0.03004061</span></a>
-<a class="sourceLine" id="cb24-25" title="25">sample estimates<span class="op">:</span></a>
-<a class="sourceLine" id="cb24-26" title="26"><span class="st">     </span>mean <span class="cf">in</span> group Lake mean <span class="cf">in</span> group Reservoir </a>
-<a class="sourceLine" id="cb24-27" title="27">               <span class="fl">1.444183</span>                <span class="fl">1.507544</span> </a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="co"># T-test to assess the null hypothesis</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a><span class="co"># that there is no difference in Secchi</span></span>
+<span id="cb24-3"><a href="#cb24-3"></a><span class="co"># between lakes and reservoirs in Vermont.</span></span>
+<span id="cb24-4"><a href="#cb24-4"></a></span>
+<span id="cb24-5"><a href="#cb24-5"></a><span class="co"># We use logSecchi to meet assumptions</span></span>
+<span id="cb24-6"><a href="#cb24-6"></a><span class="co"># of normality.</span></span>
+<span id="cb24-7"><a href="#cb24-7"></a></span>
+<span id="cb24-8"><a href="#cb24-8"></a><span class="co"># We can specify this one using a formula.</span></span>
+<span id="cb24-9"><a href="#cb24-9"></a><span class="co"># To be conservative here, we will assume </span></span>
+<span id="cb24-10"><a href="#cb24-10"></a><span class="co"># that we have unequal variances using</span></span>
+<span id="cb24-11"><a href="#cb24-11"></a><span class="co"># one of the optional arguments. Note that</span></span>
+<span id="cb24-12"><a href="#cb24-12"></a><span class="co"># the default in R is to assume that variances</span></span>
+<span id="cb24-13"><a href="#cb24-13"></a><span class="co"># are not equal, and this defaults to </span></span>
+<span id="cb24-14"><a href="#cb24-14"></a><span class="co"># a Welch&#39;s t-test that uses a calculated df</span></span>
+<span id="cb24-15"><a href="#cb24-15"></a><span class="co"># to adjust the calculated test statistic.</span></span>
+<span id="cb24-16"><a href="#cb24-16"></a><span class="kw">t.test</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>vermont, <span class="dt">equal=</span><span class="ot">FALSE</span>)</span>
+<span id="cb24-17"><a href="#cb24-17"></a></span>
+<span id="cb24-18"><a href="#cb24-18"></a>    Welch Two Sample t<span class="op">-</span>test</span>
+<span id="cb24-19"><a href="#cb24-19"></a></span>
+<span id="cb24-20"><a href="#cb24-20"></a>data<span class="op">:</span><span class="st">  </span>logSecchi by GNIS.Class</span>
+<span id="cb24-21"><a href="#cb24-21"></a>t =<span class="st"> </span><span class="fl">-3.7287</span>, df =<span class="st"> </span><span class="fl">2596.3</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">0.0001966</span></span>
+<span id="cb24-22"><a href="#cb24-22"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span></span>
+<span id="cb24-23"><a href="#cb24-23"></a><span class="dv">95</span> percent confidence interval<span class="op">:</span></span>
+<span id="cb24-24"><a href="#cb24-24"></a><span class="st"> </span><span class="fl">-0.09668250</span> <span class="fl">-0.03004061</span></span>
+<span id="cb24-25"><a href="#cb24-25"></a>sample estimates<span class="op">:</span></span>
+<span id="cb24-26"><a href="#cb24-26"></a><span class="st">     </span>mean <span class="cf">in</span> group Lake mean <span class="cf">in</span> group Reservoir </span>
+<span id="cb24-27"><a href="#cb24-27"></a>               <span class="fl">1.444183</span>                <span class="fl">1.507544</span> </span></code></pre></div>
 <p>Yay, more output!</p>
 <p>Similar to the <code>wilcox.test</code>, the output of our <code>t.test</code> gives us the test that was used, the data provided to the function, the test statistics (now with <code>df</code>), and the <code>alternative hypothesis</code> to be accepted if p &lt; 0.05. But, in contrast to the Wilcox, we have a little more information to go on.</p>
 <p>This time, we get an actual confidence interval our estimate of the difference between groups. Here, we see that we are 95% confident that the true difference in <code>logSecchi</code> between <code>Lake</code> and <code>Reservoir</code> is between -0.1 and -0.03. Note that this difference is positive because we specified <code>x</code> as the <code>logSecchi</code> for <code>Lake</code> and <code>y</code> as the <code>logSecchi</code> for <code>Reservoir</code>. If we had reversed this, our 95% confidence interval on the estimated difference would have used negative values. In either case, we can now say that lakes have greater Secchi depths than reservoirs.</p>
 <p>R also tells us that the mean of <code>logSecchi</code> is 1.44 for <code>Lake</code> and 1.51 for <code>Reservoir</code>. We can bring these back to the real scale using the function <code>exp</code> to say that the mean of <code>Secchi</code> is 4.24 for <code>Lake</code> and 4.52 for <code>Reservoir</code>.</p>
 <p>We could go about showing these differences graphically using (for example) a boxplot:</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># Make a boxplot of Secchi by waterbody type</span></a>
-<a class="sourceLine" id="cb25-2" title="2"></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="co"># We make the boxes narrower because</span></a>
-<a class="sourceLine" id="cb25-4" title="4"><span class="co"># flat, wide boxes look gross and </span></a>
-<a class="sourceLine" id="cb25-5" title="5"><span class="co"># make people not want to use R for</span></a>
-<a class="sourceLine" id="cb25-6" title="6"><span class="co"># graphing even though it is awesome.</span></a>
-<a class="sourceLine" id="cb25-7" title="7"><span class="kw">boxplot</span>(Secchi<span class="op">~</span>GNIS.Class,</a>
-<a class="sourceLine" id="cb25-8" title="8">        <span class="dt">data =</span> vermont,</a>
-<a class="sourceLine" id="cb25-9" title="9">        <span class="dt">notch=</span><span class="ot">TRUE</span>,</a>
-<a class="sourceLine" id="cb25-10" title="10">        <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,</a>
-<a class="sourceLine" id="cb25-11" title="11">        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>),</a>
-<a class="sourceLine" id="cb25-12" title="12">        <span class="dt">xlab=</span><span class="st">&#39;Waterbody type&#39;</span>,</a>
-<a class="sourceLine" id="cb25-13" title="13">        <span class="dt">ylab=</span><span class="st">&#39;Secchi depth&#39;</span>,</a>
-<a class="sourceLine" id="cb25-14" title="14">        <span class="dt">boxwex =</span> <span class="fl">.25</span>,</a>
-<a class="sourceLine" id="cb25-15" title="15">        <span class="dt">outline=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb25-16" title="16">        <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,</a>
-<a class="sourceLine" id="cb25-17" title="17">        <span class="co"># Other parameters to make</span></a>
-<a class="sourceLine" id="cb25-18" title="18">        <span class="co"># it prettier</span></a>
-<a class="sourceLine" id="cb25-19" title="19">        <span class="dt">pars =</span> <span class="kw">list</span>(</a>
-<a class="sourceLine" id="cb25-20" title="20">          <span class="dt">staplewex=</span><span class="dv">0</span>,</a>
-<a class="sourceLine" id="cb25-21" title="21">          <span class="dt">whisklty=</span><span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb25-22" title="22">          <span class="dt">whisklwd=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb25-23" title="23">          <span class="dt">whiskcol=</span><span class="st">&#39;gray40&#39;</span>,</a>
-<a class="sourceLine" id="cb25-24" title="24">          <span class="dt">boxlwd=</span><span class="dv">2</span>,</a>
-<a class="sourceLine" id="cb25-25" title="25">          <span class="dt">boxcol=</span><span class="st">&#39;gray40&#39;</span></a>
-<a class="sourceLine" id="cb25-26" title="26">        )</a>
-<a class="sourceLine" id="cb25-27" title="27">        )</a>
-<a class="sourceLine" id="cb25-28" title="28"><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="co"># Make a boxplot of Secchi by waterbody type</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a></span>
+<span id="cb25-3"><a href="#cb25-3"></a><span class="co"># We make the boxes narrower because</span></span>
+<span id="cb25-4"><a href="#cb25-4"></a><span class="co"># flat, wide boxes look gross and </span></span>
+<span id="cb25-5"><a href="#cb25-5"></a><span class="co"># make people not want to use R for</span></span>
+<span id="cb25-6"><a href="#cb25-6"></a><span class="co"># graphing even though it is awesome.</span></span>
+<span id="cb25-7"><a href="#cb25-7"></a><span class="kw">boxplot</span>(Secchi<span class="op">~</span>GNIS.Class,</span>
+<span id="cb25-8"><a href="#cb25-8"></a>        <span class="dt">data =</span> vermont,</span>
+<span id="cb25-9"><a href="#cb25-9"></a>        <span class="dt">notch=</span><span class="ot">TRUE</span>,</span>
+<span id="cb25-10"><a href="#cb25-10"></a>        <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,</span>
+<span id="cb25-11"><a href="#cb25-11"></a>        <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">12</span>),</span>
+<span id="cb25-12"><a href="#cb25-12"></a>        <span class="dt">xlab=</span><span class="st">&#39;Waterbody type&#39;</span>,</span>
+<span id="cb25-13"><a href="#cb25-13"></a>        <span class="dt">ylab=</span><span class="st">&#39;Secchi depth&#39;</span>,</span>
+<span id="cb25-14"><a href="#cb25-14"></a>        <span class="dt">boxwex =</span> <span class="fl">.25</span>,</span>
+<span id="cb25-15"><a href="#cb25-15"></a>        <span class="dt">outline=</span><span class="ot">FALSE</span>,</span>
+<span id="cb25-16"><a href="#cb25-16"></a>        <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,</span>
+<span id="cb25-17"><a href="#cb25-17"></a>        <span class="co"># Other parameters to make</span></span>
+<span id="cb25-18"><a href="#cb25-18"></a>        <span class="co"># it prettier</span></span>
+<span id="cb25-19"><a href="#cb25-19"></a>        <span class="dt">pars =</span> <span class="kw">list</span>(</span>
+<span id="cb25-20"><a href="#cb25-20"></a>          <span class="dt">staplewex=</span><span class="dv">0</span>,</span>
+<span id="cb25-21"><a href="#cb25-21"></a>          <span class="dt">whisklty=</span><span class="dv">1</span>,</span>
+<span id="cb25-22"><a href="#cb25-22"></a>          <span class="dt">whisklwd=</span><span class="dv">2</span>,</span>
+<span id="cb25-23"><a href="#cb25-23"></a>          <span class="dt">whiskcol=</span><span class="st">&#39;gray40&#39;</span>,</span>
+<span id="cb25-24"><a href="#cb25-24"></a>          <span class="dt">boxlwd=</span><span class="dv">2</span>,</span>
+<span id="cb25-25"><a href="#cb25-25"></a>          <span class="dt">boxcol=</span><span class="st">&#39;gray40&#39;</span></span>
+<span id="cb25-26"><a href="#cb25-26"></a>        )</span>
+<span id="cb25-27"><a href="#cb25-27"></a>        )</span>
+<span id="cb25-28"><a href="#cb25-28"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
 </div>
 <div id="analysis-of-variance" class="section level3">
@@ -767,27 +770,27 @@ $(document).ready(function () {
 <p>It is only a small step to move from a t-test to analysis of variance (ANOVA) conceptually, and this also requires only a small change to code in R. In theory, ANOVA is usually used to compare means of a continuous response when we have three or more groups. In practice, it is mathematically equivelant to a t-test if we have only two groups (the F-statistic is, in fact, just the sqaure of the t-statistic).</p>
 <p>To demonstrate this, and to keep ourselves from being swept afield with another data set, let’s demonstrate ANOVA using the same scenario.</p>
 <p>It can be more convenient to store the results of ANOVA in an object than just dumping the output to the console, so let’s start there. First, we will fit our ANOVA with the <code>lm</code> function (stands for linear model) because this is the most general tool for us.</p>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># Fit an ANOVA to test for differences in</span></a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="co"># means between groups</span></a>
-<a class="sourceLine" id="cb26-3" title="3">mod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>vermont)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="co"># Fit an ANOVA to test for differences in</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a><span class="co"># means between groups</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>mod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>GNIS.Class, <span class="dt">data=</span>vermont)</span></code></pre></div>
 <p>Now, before we get into looking at p-values here, it is <strong>important</strong> that <strong>we diagnose the model first</strong>.</p>
 <blockquote>
 <p>Residual plots for linear models</p>
 </blockquote>
 <blockquote>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># There are four plots that come out</span></a>
-<a class="sourceLine" id="cb27-2" title="2"><span class="co"># of this call. To see them all at </span></a>
-<a class="sourceLine" id="cb27-3" title="3"><span class="co"># once, you need to set up the plotting</span></a>
-<a class="sourceLine" id="cb27-4" title="4"><span class="co"># window to accomodate that. Otherwise, </span></a>
-<a class="sourceLine" id="cb27-5" title="5"><span class="co"># you have to hit ENTER (RETURN) to scroll</span></a>
-<a class="sourceLine" id="cb27-6" title="6"><span class="co"># through them one at a time.</span></a>
-<a class="sourceLine" id="cb27-7" title="7"></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb27-9" title="9"></a>
-<a class="sourceLine" id="cb27-10" title="10"><span class="co"># The default plot function knows what</span></a>
-<a class="sourceLine" id="cb27-11" title="11"><span class="co"># to do with lm objects.</span></a>
-<a class="sourceLine" id="cb27-12" title="12"></a>
-<a class="sourceLine" id="cb27-13" title="13"><span class="kw">plot</span>(mod)</a></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># There are four plots that come out</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a><span class="co"># of this call. To see them all at </span></span>
+<span id="cb27-3"><a href="#cb27-3"></a><span class="co"># once, you need to set up the plotting</span></span>
+<span id="cb27-4"><a href="#cb27-4"></a><span class="co"># window to accomodate that. Otherwise, </span></span>
+<span id="cb27-5"><a href="#cb27-5"></a><span class="co"># you have to hit ENTER (RETURN) to scroll</span></span>
+<span id="cb27-6"><a href="#cb27-6"></a><span class="co"># through them one at a time.</span></span>
+<span id="cb27-7"><a href="#cb27-7"></a></span>
+<span id="cb27-8"><a href="#cb27-8"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>))</span>
+<span id="cb27-9"><a href="#cb27-9"></a></span>
+<span id="cb27-10"><a href="#cb27-10"></a><span class="co"># The default plot function knows what</span></span>
+<span id="cb27-11"><a href="#cb27-11"></a><span class="co"># to do with lm objects.</span></span>
+<span id="cb27-12"><a href="#cb27-12"></a></span>
+<span id="cb27-13"><a href="#cb27-13"></a><span class="kw">plot</span>(mod)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
 </blockquote>
 <blockquote>
@@ -811,27 +814,27 @@ $(document).ready(function () {
 <p>This plot is useful for identifying points that might be exerting undo influence on the intercept and slope of the line that we are trying to fit here. In general we are looking for values of Cook’s D greater than <span class="math inline">\(\frac{4}{(N-k-1)}\)</span> where <span class="math inline">\(N\)</span> is sample size and <span class="math inline">\(k\)</span> is number of explanatory variables, if we are going to set a threshold: <a href="http://stats.stackexchange.com/questions/22161/how-to-read-cooks-distance-plots">check it out</a>. Here, we see that most of our data are within this, but we might have a couple of data points worth looking into.</p>
 <p>Now that we have verified that we are not in gross violation of our assumptions, let’s have a look at the results.</p>
 <p>We can make an ANOVA summary table in R using the lowercase <code>anova</code> function to get overall factor significance.</p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># Get ANOVA summary for the model</span></a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="kw">anova</span>(mod)</a>
-<a class="sourceLine" id="cb28-3" title="3">Analysis of Variance Table</a>
-<a class="sourceLine" id="cb28-4" title="4"></a>
-<a class="sourceLine" id="cb28-5" title="5">Response<span class="op">:</span><span class="st"> </span>logSecchi</a>
-<a class="sourceLine" id="cb28-6" title="6">             Df Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </a>
-<a class="sourceLine" id="cb28-7" title="7">GNIS.Class    <span class="dv">1</span>   <span class="fl">3.14</span> <span class="fl">3.14258</span>  <span class="fl">12.211</span> <span class="fl">0.0004808</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb28-8" title="8">Residuals  <span class="dv">3636</span> <span class="fl">935.77</span> <span class="fl">0.25736</span>                      </a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="op">---</span></a>
-<a class="sourceLine" id="cb28-10" title="10">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># Get ANOVA summary for the model</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a><span class="kw">anova</span>(mod)</span>
+<span id="cb28-3"><a href="#cb28-3"></a>Analysis of Variance Table</span>
+<span id="cb28-4"><a href="#cb28-4"></a></span>
+<span id="cb28-5"><a href="#cb28-5"></a>Response<span class="op">:</span><span class="st"> </span>logSecchi</span>
+<span id="cb28-6"><a href="#cb28-6"></a>             Df Sum Sq Mean Sq F value    <span class="kw">Pr</span>(<span class="op">&gt;</span>F)    </span>
+<span id="cb28-7"><a href="#cb28-7"></a>GNIS.Class    <span class="dv">1</span>   <span class="fl">3.14</span> <span class="fl">3.14258</span>  <span class="fl">12.211</span> <span class="fl">0.0004808</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb28-8"><a href="#cb28-8"></a>Residuals  <span class="dv">3636</span> <span class="fl">935.77</span> <span class="fl">0.25736</span>                      </span>
+<span id="cb28-9"><a href="#cb28-9"></a><span class="op">---</span></span>
+<span id="cb28-10"><a href="#cb28-10"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span></code></pre></div>
 <p>Here, we can see that out factor <code>GNIS.Class</code> had a significant effect on <code>logSecchi</code>, and we can reject the null hypothesis that there is no difference between any of the group means.</p>
 <p>To poke this a bit further, we would ask R to conduct a <strong>multiple-comparisons</strong> test to examine <strong>pair-wise differences</strong> if we had more than two groups. I usually use a <code>TukeyHSD</code> for this. To use this test, we will just need to wrap our model in the <code>aov</code> function:</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">TukeyHSD</span>( <span class="kw">aov</span>(mod))</a>
-<a class="sourceLine" id="cb29-2" title="2">  Tukey multiple comparisons of means</a>
-<a class="sourceLine" id="cb29-3" title="3">    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level</a>
-<a class="sourceLine" id="cb29-4" title="4"></a>
-<a class="sourceLine" id="cb29-5" title="5">Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> mod)</a>
-<a class="sourceLine" id="cb29-6" title="6"></a>
-<a class="sourceLine" id="cb29-7" title="7"><span class="op">$</span>GNIS.Class</a>
-<a class="sourceLine" id="cb29-8" title="8">                     diff        lwr        upr     p adj</a>
-<a class="sourceLine" id="cb29-9" title="9">Reservoir<span class="op">-</span>Lake <span class="fl">0.06336156</span> <span class="fl">0.02781085</span> <span class="fl">0.09891226</span> <span class="fl">0.0004808</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="kw">TukeyHSD</span>( <span class="kw">aov</span>(mod))</span>
+<span id="cb29-2"><a href="#cb29-2"></a>  Tukey multiple comparisons of means</span>
+<span id="cb29-3"><a href="#cb29-3"></a>    <span class="dv">95</span>% family<span class="op">-</span>wise confidence level</span>
+<span id="cb29-4"><a href="#cb29-4"></a></span>
+<span id="cb29-5"><a href="#cb29-5"></a>Fit<span class="op">:</span><span class="st"> </span><span class="kw">aov</span>(<span class="dt">formula =</span> mod)</span>
+<span id="cb29-6"><a href="#cb29-6"></a></span>
+<span id="cb29-7"><a href="#cb29-7"></a><span class="op">$</span>GNIS.Class</span>
+<span id="cb29-8"><a href="#cb29-8"></a>                     diff        lwr        upr     p adj</span>
+<span id="cb29-9"><a href="#cb29-9"></a>Reservoir<span class="op">-</span>Lake <span class="fl">0.06336156</span> <span class="fl">0.02781085</span> <span class="fl">0.09891226</span> <span class="fl">0.0004808</span></span></code></pre></div>
 <p>The output from this function produces a mean and CI of the difference for each pair-wise comparison, along with a p-value for the test. In this case, we see that we only have one comparison, but that <code>logSecchi</code> is significantly different between groups.</p>
 <p>From there, we can go on to make group-specific boxplots of the response to make the difference clearer for the reader. One of the cool things about doing this in R is that the code for the boxplot above wouldn’t change, even if we had more than two groups in our data.</p>
 </div>
@@ -850,125 +853,125 @@ $(document).ready(function () {
 <p>How about fitting this kind of model in R? It will take us less time than it did to write out the equations.</p>
 <p>Here, we will fit a linear regression to test the effects of <code>Latitude</code> and <code>Year</code> on <code>logSecchi</code>. To do this, we can stick with the <code>lm</code> function. But first, we need to do some work to get <code>Year</code> into a format we can use.</p>
 <p>Right now, <code>Year</code> is stored as a character string. But, we need to have it as a numeric. We can convert this to a numeric easily:</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># Change </span></a>
-<a class="sourceLine" id="cb30-2" title="2">vermont<span class="op">$</span>Year &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(vermont<span class="op">$</span>Year, <span class="st">&#39;Year &#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># Change </span></span>
+<span id="cb30-2"><a href="#cb30-2"></a>vermont<span class="op">$</span>Year &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(vermont<span class="op">$</span>Year, <span class="st">&#39;Year &#39;</span>)</span></code></pre></div>
 <p><strong>Note</strong>: You will get a warning letting you know that <code>NA</code> values have been introduced by <code>coercion</code>. This means that R found some values that it didn’t know how to convert to <code>numeric</code>. In this case, it is obvservations that were reported as means across a range of dates (e.g., <code>1972-1975</code>). R will ignore these <code>NA</code> values in statistical analyses, and we have plenty of data from that range, so we will just move on with life for now.</p>
 <p>Next, we will fit the model using the same <code>lm</code> function that we used for ANOVA above. The reason we can do this is that ANOVA, t-tests, and linear regressions are all just specific cases of the linear model.</p>
 <p>We will fit a model testing the effect of <code>Elevation</code> on <code>logSecchi</code>.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="kw">names</span>(vermont)[<span class="dv">18</span>] &lt;-<span class="st"> &#39;Elevation&#39;</span></a>
-<a class="sourceLine" id="cb31-2" title="2">lmod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>Elevation, <span class="dt">data=</span>vermont)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a><span class="kw">names</span>(vermont)[<span class="dv">18</span>] &lt;-<span class="st"> &#39;Elevation&#39;</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>lmod &lt;-<span class="st"> </span><span class="kw">lm</span>(logSecchi<span class="op">~</span>Elevation, <span class="dt">data=</span>vermont)</span></code></pre></div>
 <p>Don’t forget to look at the residuals!</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># Look at residuals for model</span></a>
-<a class="sourceLine" id="cb32-2" title="2"><span class="co"># testing effect of latitude</span></a>
-<a class="sourceLine" id="cb32-3" title="3"><span class="co"># on logSecchi</span></a>
-<a class="sourceLine" id="cb32-4" title="4"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</a>
-<a class="sourceLine" id="cb32-5" title="5"><span class="kw">plot</span>(lmod)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="co"># Look at residuals for model</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a><span class="co"># testing effect of latitude</span></span>
+<span id="cb32-3"><a href="#cb32-3"></a><span class="co"># on logSecchi</span></span>
+<span id="cb32-4"><a href="#cb32-4"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>,<span class="dv">2</span>))</span>
+<span id="cb32-5"><a href="#cb32-5"></a><span class="kw">plot</span>(lmod)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-36-1.png" width="672" /></p>
 <p>From our residual diagnostics, we see that we have some minor issues with the residuals and leverage exerted by what appear to be our our most extreme Secchi readings, but that overall things look pretty good. For now, let’s move along with the demonstration.</p>
 <p>We can get the regression coefficients for our model directly from a summary of a fitted model object.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">summary</span>(lmod)</a>
-<a class="sourceLine" id="cb33-2" title="2"></a>
-<a class="sourceLine" id="cb33-3" title="3">Call<span class="op">:</span></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="kw">lm</span>(<span class="dt">formula =</span> logSecchi <span class="op">~</span><span class="st"> </span>Elevation, <span class="dt">data =</span> vermont)</a>
-<a class="sourceLine" id="cb33-5" title="5"></a>
-<a class="sourceLine" id="cb33-6" title="6">Residuals<span class="op">:</span></a>
-<a class="sourceLine" id="cb33-7" title="7"><span class="st">     </span>Min       1Q   Median       3Q      Max </a>
-<a class="sourceLine" id="cb33-8" title="8"><span class="fl">-2.20506</span> <span class="fl">-0.31013</span>  <span class="fl">0.04849</span>  <span class="fl">0.35266</span>  <span class="fl">1.26407</span> </a>
-<a class="sourceLine" id="cb33-9" title="9"></a>
-<a class="sourceLine" id="cb33-10" title="10">Coefficients<span class="op">:</span></a>
-<a class="sourceLine" id="cb33-11" title="11"><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb33-12" title="12">(Intercept) <span class="fl">1.417e+00</span>  <span class="fl">1.509e-02</span>  <span class="fl">93.922</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb33-13" title="13">Elevation   <span class="fl">1.843e-04</span>  <span class="fl">4.916e-05</span>   <span class="fl">3.749</span> <span class="fl">0.000181</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb33-14" title="14"><span class="op">---</span></a>
-<a class="sourceLine" id="cb33-15" title="15">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb33-16" title="16"></a>
-<a class="sourceLine" id="cb33-17" title="17">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.5072</span> on <span class="dv">3636</span> degrees of freedom</a>
-<a class="sourceLine" id="cb33-18" title="18">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.00385</span>,   Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.003576</span> </a>
-<a class="sourceLine" id="cb33-19" title="19">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">14.05</span> on <span class="dv">1</span> and <span class="dv">3636</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.0001806</span></a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a><span class="kw">summary</span>(lmod)</span>
+<span id="cb33-2"><a href="#cb33-2"></a></span>
+<span id="cb33-3"><a href="#cb33-3"></a>Call<span class="op">:</span></span>
+<span id="cb33-4"><a href="#cb33-4"></a><span class="kw">lm</span>(<span class="dt">formula =</span> logSecchi <span class="op">~</span><span class="st"> </span>Elevation, <span class="dt">data =</span> vermont)</span>
+<span id="cb33-5"><a href="#cb33-5"></a></span>
+<span id="cb33-6"><a href="#cb33-6"></a>Residuals<span class="op">:</span></span>
+<span id="cb33-7"><a href="#cb33-7"></a><span class="st">     </span>Min       1Q   Median       3Q      Max </span>
+<span id="cb33-8"><a href="#cb33-8"></a><span class="fl">-2.20506</span> <span class="fl">-0.31013</span>  <span class="fl">0.04849</span>  <span class="fl">0.35266</span>  <span class="fl">1.26407</span> </span>
+<span id="cb33-9"><a href="#cb33-9"></a></span>
+<span id="cb33-10"><a href="#cb33-10"></a>Coefficients<span class="op">:</span></span>
+<span id="cb33-11"><a href="#cb33-11"></a><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
+<span id="cb33-12"><a href="#cb33-12"></a>(Intercept) <span class="fl">1.417e+00</span>  <span class="fl">1.509e-02</span>  <span class="fl">93.922</span>  <span class="op">&lt;</span><span class="st"> </span><span class="fl">2e-16</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb33-13"><a href="#cb33-13"></a>Elevation   <span class="fl">1.843e-04</span>  <span class="fl">4.916e-05</span>   <span class="fl">3.749</span> <span class="fl">0.000181</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb33-14"><a href="#cb33-14"></a><span class="op">---</span></span>
+<span id="cb33-15"><a href="#cb33-15"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb33-16"><a href="#cb33-16"></a></span>
+<span id="cb33-17"><a href="#cb33-17"></a>Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.5072</span> on <span class="dv">3636</span> degrees of freedom</span>
+<span id="cb33-18"><a href="#cb33-18"></a>Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.00385</span>,   Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.003576</span> </span>
+<span id="cb33-19"><a href="#cb33-19"></a>F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">14.05</span> on <span class="dv">1</span> and <span class="dv">3636</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">0.0001806</span></span></code></pre></div>
 <p>Here, <code>(Intercept)</code> is the y-intercept for our model, and <code>Elevation</code> is our “slope”. In this case, we see that our y-intercept is significantly different from zero (p = 0), and we detected a significant effect of <code>Elevation</code> on <code>logSecchi</code> (p = 0.00018). The interpretation of the latter is that the slope is not equal to zero.</p>
 <p>Looking a little closer at the output, we can also see that we have explained less than 1% of the variability in <code>logSecchi</code> using <code>Elevation</code> as an explanatory variable (R<sup>2</sup> = 0.004). But, let’s plot the result anyway.</p>
 <p>In order to plot the result of our model, we need to make some predictions from it first. To do this, we will need some new data.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># Make new values of Latitude</span></a>
-<a class="sourceLine" id="cb34-2" title="2"><span class="co"># that we can use to predict </span></a>
-<a class="sourceLine" id="cb34-3" title="3"><span class="co"># logSecchi. If we want to use</span></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="co"># the default predict function,</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="co"># this has to be a variable</span></a>
-<a class="sourceLine" id="cb34-6" title="6"><span class="co"># named &quot;Latitude&quot; in a new </span></a>
-<a class="sourceLine" id="cb34-7" title="7"><span class="co"># dataframe that we can give</span></a>
-<a class="sourceLine" id="cb34-8" title="8"><span class="co"># to R.</span></a>
-<a class="sourceLine" id="cb34-9" title="9"></a>
-<a class="sourceLine" id="cb34-10" title="10"><span class="co"># To make these new values, we </span></a>
-<a class="sourceLine" id="cb34-11" title="11"><span class="co"># use a sequence that goes from</span></a>
-<a class="sourceLine" id="cb34-12" title="12"><span class="co"># the minimum to the maximum of</span></a>
-<a class="sourceLine" id="cb34-13" title="13"><span class="co"># our observed values and avoid</span></a>
-<a class="sourceLine" id="cb34-14" title="14"><span class="co"># making predictions outside the</span></a>
-<a class="sourceLine" id="cb34-15" title="15"><span class="co"># observed range of Latitudes.</span></a>
-<a class="sourceLine" id="cb34-16" title="16"></a>
-<a class="sourceLine" id="cb34-17" title="17"><span class="co"># We use a sequence to ensure </span></a>
-<a class="sourceLine" id="cb34-18" title="18"><span class="co"># that we only get one of each</span></a>
-<a class="sourceLine" id="cb34-19" title="19"><span class="co"># value so we can make some nice</span></a>
-<a class="sourceLine" id="cb34-20" title="20"><span class="co"># line graphs of our predictions.</span></a>
-<a class="sourceLine" id="cb34-21" title="21"></a>
-<a class="sourceLine" id="cb34-22" title="22">newd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</a>
-<a class="sourceLine" id="cb34-23" title="23">  <span class="dt">Elevation =</span> <span class="kw">seq</span>(</a>
-<a class="sourceLine" id="cb34-24" title="24">    <span class="dt">from=</span><span class="kw">min</span>(vermont<span class="op">$</span>Elevation, <span class="dt">na.rm=</span>T),</a>
-<a class="sourceLine" id="cb34-25" title="25">    <span class="dt">to=</span><span class="kw">max</span>(vermont<span class="op">$</span>Elevation, <span class="dt">na.rm=</span>T),</a>
-<a class="sourceLine" id="cb34-26" title="26">    <span class="dt">by=</span>.<span class="dv">01</span></a>
-<a class="sourceLine" id="cb34-27" title="27">    )</a>
-<a class="sourceLine" id="cb34-28" title="28">  )</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="co"># Make new values of Latitude</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a><span class="co"># that we can use to predict </span></span>
+<span id="cb34-3"><a href="#cb34-3"></a><span class="co"># logSecchi. If we want to use</span></span>
+<span id="cb34-4"><a href="#cb34-4"></a><span class="co"># the default predict function,</span></span>
+<span id="cb34-5"><a href="#cb34-5"></a><span class="co"># this has to be a variable</span></span>
+<span id="cb34-6"><a href="#cb34-6"></a><span class="co"># named &quot;Latitude&quot; in a new </span></span>
+<span id="cb34-7"><a href="#cb34-7"></a><span class="co"># dataframe that we can give</span></span>
+<span id="cb34-8"><a href="#cb34-8"></a><span class="co"># to R.</span></span>
+<span id="cb34-9"><a href="#cb34-9"></a></span>
+<span id="cb34-10"><a href="#cb34-10"></a><span class="co"># To make these new values, we </span></span>
+<span id="cb34-11"><a href="#cb34-11"></a><span class="co"># use a sequence that goes from</span></span>
+<span id="cb34-12"><a href="#cb34-12"></a><span class="co"># the minimum to the maximum of</span></span>
+<span id="cb34-13"><a href="#cb34-13"></a><span class="co"># our observed values and avoid</span></span>
+<span id="cb34-14"><a href="#cb34-14"></a><span class="co"># making predictions outside the</span></span>
+<span id="cb34-15"><a href="#cb34-15"></a><span class="co"># observed range of Latitudes.</span></span>
+<span id="cb34-16"><a href="#cb34-16"></a></span>
+<span id="cb34-17"><a href="#cb34-17"></a><span class="co"># We use a sequence to ensure </span></span>
+<span id="cb34-18"><a href="#cb34-18"></a><span class="co"># that we only get one of each</span></span>
+<span id="cb34-19"><a href="#cb34-19"></a><span class="co"># value so we can make some nice</span></span>
+<span id="cb34-20"><a href="#cb34-20"></a><span class="co"># line graphs of our predictions.</span></span>
+<span id="cb34-21"><a href="#cb34-21"></a></span>
+<span id="cb34-22"><a href="#cb34-22"></a>newd &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
+<span id="cb34-23"><a href="#cb34-23"></a>  <span class="dt">Elevation =</span> <span class="kw">seq</span>(</span>
+<span id="cb34-24"><a href="#cb34-24"></a>    <span class="dt">from=</span><span class="kw">min</span>(vermont<span class="op">$</span>Elevation, <span class="dt">na.rm=</span>T),</span>
+<span id="cb34-25"><a href="#cb34-25"></a>    <span class="dt">to=</span><span class="kw">max</span>(vermont<span class="op">$</span>Elevation, <span class="dt">na.rm=</span>T),</span>
+<span id="cb34-26"><a href="#cb34-26"></a>    <span class="dt">by=</span>.<span class="dv">01</span></span>
+<span id="cb34-27"><a href="#cb34-27"></a>    )</span>
+<span id="cb34-28"><a href="#cb34-28"></a>  )</span></code></pre></div>
 <p>Now, we can use our new values to predict logSecchi from the parameters of our linear regression model. We use the default <code>predict</code> function in R for this.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># Make predictions from the model using</span></a>
-<a class="sourceLine" id="cb35-2" title="2"><span class="co"># the new data.</span></a>
-<a class="sourceLine" id="cb35-3" title="3"></a>
-<a class="sourceLine" id="cb35-4" title="4"><span class="co"># We specify interval=&#39;prediction&#39; to</span></a>
-<a class="sourceLine" id="cb35-5" title="5"><span class="co"># get prediction intervals, but we could</span></a>
-<a class="sourceLine" id="cb35-6" title="6"><span class="co"># also ask for &#39;confidence&#39; intervals.</span></a>
-<a class="sourceLine" id="cb35-7" title="7">preds &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> lmod,</a>
-<a class="sourceLine" id="cb35-8" title="8">                 <span class="dt">newdata =</span> newd,</a>
-<a class="sourceLine" id="cb35-9" title="9">                 <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span></a>
-<a class="sourceLine" id="cb35-10" title="10">                 )</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a><span class="co"># Make predictions from the model using</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a><span class="co"># the new data.</span></span>
+<span id="cb35-3"><a href="#cb35-3"></a></span>
+<span id="cb35-4"><a href="#cb35-4"></a><span class="co"># We specify interval=&#39;prediction&#39; to</span></span>
+<span id="cb35-5"><a href="#cb35-5"></a><span class="co"># get prediction intervals, but we could</span></span>
+<span id="cb35-6"><a href="#cb35-6"></a><span class="co"># also ask for &#39;confidence&#39; intervals.</span></span>
+<span id="cb35-7"><a href="#cb35-7"></a>preds &lt;-<span class="st"> </span><span class="kw">predict</span>(<span class="dt">object =</span> lmod,</span>
+<span id="cb35-8"><a href="#cb35-8"></a>                 <span class="dt">newdata =</span> newd,</span>
+<span id="cb35-9"><a href="#cb35-9"></a>                 <span class="dt">interval =</span> <span class="st">&#39;prediction&#39;</span></span>
+<span id="cb35-10"><a href="#cb35-10"></a>                 )</span></code></pre></div>
 <p>Let’s have a look at what our predictions look like:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="co"># Take a look at the first few</span></a>
-<a class="sourceLine" id="cb36-2" title="2"><span class="co"># rows of the preds dataframe</span></a>
-<a class="sourceLine" id="cb36-3" title="3"><span class="kw">head</span>(preds)</a>
-<a class="sourceLine" id="cb36-4" title="4">       fit       lwr      upr</a>
-<a class="sourceLine" id="cb36-5" title="5"><span class="dv">1</span> <span class="fl">1.422422</span> <span class="fl">0.4276590</span> <span class="fl">2.417185</span></a>
-<a class="sourceLine" id="cb36-6" title="6"><span class="dv">2</span> <span class="fl">1.422424</span> <span class="fl">0.4276608</span> <span class="fl">2.417187</span></a>
-<a class="sourceLine" id="cb36-7" title="7"><span class="dv">3</span> <span class="fl">1.422426</span> <span class="fl">0.4276627</span> <span class="fl">2.417188</span></a>
-<a class="sourceLine" id="cb36-8" title="8"><span class="dv">4</span> <span class="fl">1.422427</span> <span class="fl">0.4276646</span> <span class="fl">2.417190</span></a>
-<a class="sourceLine" id="cb36-9" title="9"><span class="dv">5</span> <span class="fl">1.422429</span> <span class="fl">0.4276664</span> <span class="fl">2.417192</span></a>
-<a class="sourceLine" id="cb36-10" title="10"><span class="dv">6</span> <span class="fl">1.422431</span> <span class="fl">0.4276683</span> <span class="fl">2.417194</span></a></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="co"># Take a look at the first few</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a><span class="co"># rows of the preds dataframe</span></span>
+<span id="cb36-3"><a href="#cb36-3"></a><span class="kw">head</span>(preds)</span>
+<span id="cb36-4"><a href="#cb36-4"></a>       fit       lwr      upr</span>
+<span id="cb36-5"><a href="#cb36-5"></a><span class="dv">1</span> <span class="fl">1.422422</span> <span class="fl">0.4276590</span> <span class="fl">2.417185</span></span>
+<span id="cb36-6"><a href="#cb36-6"></a><span class="dv">2</span> <span class="fl">1.422424</span> <span class="fl">0.4276608</span> <span class="fl">2.417187</span></span>
+<span id="cb36-7"><a href="#cb36-7"></a><span class="dv">3</span> <span class="fl">1.422426</span> <span class="fl">0.4276627</span> <span class="fl">2.417188</span></span>
+<span id="cb36-8"><a href="#cb36-8"></a><span class="dv">4</span> <span class="fl">1.422427</span> <span class="fl">0.4276646</span> <span class="fl">2.417190</span></span>
+<span id="cb36-9"><a href="#cb36-9"></a><span class="dv">5</span> <span class="fl">1.422429</span> <span class="fl">0.4276664</span> <span class="fl">2.417192</span></span>
+<span id="cb36-10"><a href="#cb36-10"></a><span class="dv">6</span> <span class="fl">1.422431</span> <span class="fl">0.4276683</span> <span class="fl">2.417194</span></span></code></pre></div>
 <p><strong>Whoa</strong>! Why are all of our predicted so small? This is because they are on the log<sub>e</sub> scale. We can get them back on the real scale by exponentiating. Here, we can transform these back to the real scale or we can just plot our results with a log-axis. For now, we will just make a plot of the relationship on the log scale. We start with the raw data, and add our predictions from there.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># Get a dataframe with mean by elevation to clean</span></a>
-<a class="sourceLine" id="cb37-2" title="2"><span class="co"># things up a little</span></a>
-<a class="sourceLine" id="cb37-3" title="3"><span class="kw">library</span>(plyr)</a>
-<a class="sourceLine" id="cb37-4" title="4">means=<span class="kw">ddply</span>(vermont, <span class="st">&#39;Elevation&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(logSecchi))</a>
-<a class="sourceLine" id="cb37-5" title="5"></a>
-<a class="sourceLine" id="cb37-6" title="6"><span class="co"># Make the base plot, axes, etc.</span></a>
-<a class="sourceLine" id="cb37-7" title="7"><span class="kw">plot</span>(<span class="dt">x =</span> means<span class="op">$</span>Elevation,</a>
-<a class="sourceLine" id="cb37-8" title="8">     <span class="dt">y =</span> means<span class="op">$</span>mu,</a>
-<a class="sourceLine" id="cb37-9" title="9">     <span class="dt">xlab =</span> <span class="st">&#39;Elevation (m)&#39;</span>,</a>
-<a class="sourceLine" id="cb37-10" title="10">     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Secchi depth (m)&#39;</span>)),</a>
-<a class="sourceLine" id="cb37-11" title="11">     <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>,</a>
-<a class="sourceLine" id="cb37-12" title="12">     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(vermont<span class="op">$</span>logSecchi)),</a>
-<a class="sourceLine" id="cb37-13" title="13">     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span></a>
-<a class="sourceLine" id="cb37-14" title="14">     )</a>
-<a class="sourceLine" id="cb37-15" title="15"><span class="co"># Add a rotated y-axis</span></a>
-<a class="sourceLine" id="cb37-16" title="16"><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">log</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>))</a>
-<a class="sourceLine" id="cb37-17" title="17"></a>
-<a class="sourceLine" id="cb37-18" title="18"><span class="co"># Plot a polygon</span></a>
-<a class="sourceLine" id="cb37-19" title="19"><span class="kw">polygon</span>(<span class="dt">x=</span><span class="kw">c</span>(newd<span class="op">$</span>Elevation, <span class="kw">rev</span>(newd<span class="op">$</span>Elevation)),</a>
-<a class="sourceLine" id="cb37-20" title="20">        <span class="dt">y=</span><span class="kw">c</span>(preds[,<span class="dv">2</span>], <span class="kw">rev</span>(preds[,<span class="dv">3</span>])),</a>
-<a class="sourceLine" id="cb37-21" title="21">        <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="dt">border=</span><span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb37-22" title="22"></a>
-<a class="sourceLine" id="cb37-23" title="23"><span class="co"># Add the raw data over the top of the polygon</span></a>
-<a class="sourceLine" id="cb37-24" title="24"><span class="kw">points</span>(means<span class="op">$</span>Elevation, means<span class="op">$</span>mu, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)</a>
-<a class="sourceLine" id="cb37-25" title="25"></a>
-<a class="sourceLine" id="cb37-26" title="26"><span class="co"># Now, add the lines for the mean, lower, and</span></a>
-<a class="sourceLine" id="cb37-27" title="27"><span class="co"># upper CIs from the model that we used</span></a>
-<a class="sourceLine" id="cb37-28" title="28"><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">1</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
-<a class="sourceLine" id="cb37-29" title="29"><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">2</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</a>
-<a class="sourceLine" id="cb37-30" title="30"><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">3</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="co"># Get a dataframe with mean by elevation to clean</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a><span class="co"># things up a little</span></span>
+<span id="cb37-3"><a href="#cb37-3"></a><span class="kw">library</span>(plyr)</span>
+<span id="cb37-4"><a href="#cb37-4"></a>means=<span class="kw">ddply</span>(vermont, <span class="st">&#39;Elevation&#39;</span>, summarize, <span class="dt">mu=</span><span class="kw">mean</span>(logSecchi))</span>
+<span id="cb37-5"><a href="#cb37-5"></a></span>
+<span id="cb37-6"><a href="#cb37-6"></a><span class="co"># Make the base plot, axes, etc.</span></span>
+<span id="cb37-7"><a href="#cb37-7"></a><span class="kw">plot</span>(<span class="dt">x =</span> means<span class="op">$</span>Elevation,</span>
+<span id="cb37-8"><a href="#cb37-8"></a>     <span class="dt">y =</span> means<span class="op">$</span>mu,</span>
+<span id="cb37-9"><a href="#cb37-9"></a>     <span class="dt">xlab =</span> <span class="st">&#39;Elevation (m)&#39;</span>,</span>
+<span id="cb37-10"><a href="#cb37-10"></a>     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;log &#39;</span>[e],<span class="st">&#39;Secchi depth (m)&#39;</span>)),</span>
+<span id="cb37-11"><a href="#cb37-11"></a>     <span class="dt">col=</span><span class="st">&quot;gray&quot;</span>,</span>
+<span id="cb37-12"><a href="#cb37-12"></a>     <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="kw">max</span>(vermont<span class="op">$</span>logSecchi)),</span>
+<span id="cb37-13"><a href="#cb37-13"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span></span>
+<span id="cb37-14"><a href="#cb37-14"></a>     )</span>
+<span id="cb37-15"><a href="#cb37-15"></a><span class="co"># Add a rotated y-axis</span></span>
+<span id="cb37-16"><a href="#cb37-16"></a><span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">log</span>(<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>)), <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">15</span>))</span>
+<span id="cb37-17"><a href="#cb37-17"></a></span>
+<span id="cb37-18"><a href="#cb37-18"></a><span class="co"># Plot a polygon</span></span>
+<span id="cb37-19"><a href="#cb37-19"></a><span class="kw">polygon</span>(<span class="dt">x=</span><span class="kw">c</span>(newd<span class="op">$</span>Elevation, <span class="kw">rev</span>(newd<span class="op">$</span>Elevation)),</span>
+<span id="cb37-20"><a href="#cb37-20"></a>        <span class="dt">y=</span><span class="kw">c</span>(preds[,<span class="dv">2</span>], <span class="kw">rev</span>(preds[,<span class="dv">3</span>])),</span>
+<span id="cb37-21"><a href="#cb37-21"></a>        <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="dt">border=</span><span class="ot">NA</span>)</span>
+<span id="cb37-22"><a href="#cb37-22"></a></span>
+<span id="cb37-23"><a href="#cb37-23"></a><span class="co"># Add the raw data over the top of the polygon</span></span>
+<span id="cb37-24"><a href="#cb37-24"></a><span class="kw">points</span>(means<span class="op">$</span>Elevation, means<span class="op">$</span>mu, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)</span>
+<span id="cb37-25"><a href="#cb37-25"></a></span>
+<span id="cb37-26"><a href="#cb37-26"></a><span class="co"># Now, add the lines for the mean, lower, and</span></span>
+<span id="cb37-27"><a href="#cb37-27"></a><span class="co"># upper CIs from the model that we used</span></span>
+<span id="cb37-28"><a href="#cb37-28"></a><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">1</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb37-29"><a href="#cb37-29"></a><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">2</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;black&#39;</span>)</span>
+<span id="cb37-30"><a href="#cb37-30"></a><span class="kw">lines</span>(newd<span class="op">$</span>Elevation, preds[,<span class="dv">3</span>], <span class="dt">lwd=</span><span class="dv">1</span>, <span class="dt">lty=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-41-1.png" width="672" /></p>
 <p>Wow, this graph is almost as underwhelming as the R<sup>2</sup> for the model that was used to create it. In fact, it looks like we’re underpredicting <code>logSecchi</code> at higher <code>Elevation</code> pretty severely using this model. <strong>This should highlight the importance of communicating effects</strong>. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result.</p>
 <p>[gets off stump]</p>
@@ -982,127 +985,127 @@ $(document).ready(function () {
 <p>Here, we will investigate some basic tools for visualizing response surfaces, and specifically, we will create some isopleths.</p>
 <p>For this example, we will go back to the <code>otsego</code> data that we used in the morning session and start by making an isopleth of <code>temp</code> for a single year. In this crowd, the concept probably requires less explanation than any of the statistics we’ve used so far, but basically we want to come up with a 3-dimensional way to visualize changes in temperature across time (days) and space (depth).</p>
 <p>Let’s read in the data</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</span></code></pre></div>
 <p>One of the first things that we are going to have to deal with is the formatting of dates in this data set. Right now, R sees the column <code>date</code> as a <strong>factor</strong> with 539 <strong>levels</strong>. To do this, we will need to first convert <code>date</code> to <code>character</code>, and then to <code>Date</code> by specifying the format.</p>
 <p>Converting from factor/character to Date is probably one of the most frustrating aspects of working in R early on, so take your time and make sure you understand what this code is doing.</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># Data formatting &amp; extraction</span></a>
-<a class="sourceLine" id="cb39-2" title="2"></a>
-<a class="sourceLine" id="cb39-3" title="3"><span class="co"># First, we convert the date column</span></a>
-<a class="sourceLine" id="cb39-4" title="4"><span class="co"># to a character string. We pass the</span></a>
-<a class="sourceLine" id="cb39-5" title="5"><span class="co"># result directly to the as.Date </span></a>
-<a class="sourceLine" id="cb39-6" title="6"><span class="co"># function, and along with that we</span></a>
-<a class="sourceLine" id="cb39-7" title="7"><span class="co"># specify a format so R knows where it</span></a>
-<a class="sourceLine" id="cb39-8" title="8"><span class="co"># is looking for specific elements of</span></a>
-<a class="sourceLine" id="cb39-9" title="9"><span class="co"># the date info we are trying to pass.</span></a>
-<a class="sourceLine" id="cb39-10" title="10">otsego<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(</a>
-<a class="sourceLine" id="cb39-11" title="11">  <span class="kw">as.character</span>(otsego<span class="op">$</span>date),</a>
-<a class="sourceLine" id="cb39-12" title="12">  <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span></a>
-<a class="sourceLine" id="cb39-13" title="13">  )</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="co"># Data formatting &amp; extraction</span></span>
+<span id="cb39-2"><a href="#cb39-2"></a></span>
+<span id="cb39-3"><a href="#cb39-3"></a><span class="co"># First, we convert the date column</span></span>
+<span id="cb39-4"><a href="#cb39-4"></a><span class="co"># to a character string. We pass the</span></span>
+<span id="cb39-5"><a href="#cb39-5"></a><span class="co"># result directly to the as.Date </span></span>
+<span id="cb39-6"><a href="#cb39-6"></a><span class="co"># function, and along with that we</span></span>
+<span id="cb39-7"><a href="#cb39-7"></a><span class="co"># specify a format so R knows where it</span></span>
+<span id="cb39-8"><a href="#cb39-8"></a><span class="co"># is looking for specific elements of</span></span>
+<span id="cb39-9"><a href="#cb39-9"></a><span class="co"># the date info we are trying to pass.</span></span>
+<span id="cb39-10"><a href="#cb39-10"></a>otsego<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.Date</span>(</span>
+<span id="cb39-11"><a href="#cb39-11"></a>  <span class="kw">as.character</span>(otsego<span class="op">$</span>date),</span>
+<span id="cb39-12"><a href="#cb39-12"></a>  <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span></span>
+<span id="cb39-13"><a href="#cb39-13"></a>  )</span></code></pre></div>
 <p>Next, we <em>could</em> subset the data, retaining only those observations for a given year. But, we are better off just using all of the data, and then zooming in on our contour plot by setting the x-axis (date) to the time period we desire (see below).</p>
 <p>Then, we will omit any of the <code>NA</code> values in our data to make the next part a little easier to do.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="co"># Remove NA values to make life easier</span></a>
-<a class="sourceLine" id="cb40-2" title="2">lim &lt;-<span class="st"> </span><span class="kw">na.omit</span>(otsego)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="co"># Remove NA values to make life easier</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>lim &lt;-<span class="st"> </span><span class="kw">na.omit</span>(otsego)</span></code></pre></div>
 <p>Finally, we just do a little math trick to reverse the order of depths for interpolation and plotting in order to make the surface of the water show up at the top of our graphs. We will undo this when we label the graph.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># Multiply depth column by -1 so depth will</span></a>
-<a class="sourceLine" id="cb41-2" title="2"><span class="co"># plot from top to bottom.</span></a>
-<a class="sourceLine" id="cb41-3" title="3">lim<span class="op">$</span>depth =<span class="st"> </span><span class="dv">-1</span> <span class="op">*</span>lim<span class="op">$</span>depth</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="co"># Multiply depth column by -1 so depth will</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a><span class="co"># plot from top to bottom.</span></span>
+<span id="cb41-3"><a href="#cb41-3"></a>lim<span class="op">$</span>depth =<span class="st"> </span><span class="dv">-1</span> <span class="op">*</span>lim<span class="op">$</span>depth</span></code></pre></div>
 <p>Now, we are ready to do the math behind the isopleth and plot it. To do the math, we need to load the <code>akima</code> package:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">library</span>(akima)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">library</span>(akima)</span></code></pre></div>
 <p>Next, we interpolate <code>temp</code> across <code>date</code> and <code>depth</code>. The interpolation we are using is basically just a bunch of linear regresions to predict <code>temp</code> for values of <code>date</code> and <code>temp</code> across a regular grid.</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># Create a data frame containing the</span></a>
-<a class="sourceLine" id="cb43-2" title="2"><span class="co"># x, y, and z variables of interest</span></a>
-<a class="sourceLine" id="cb43-3" title="3">plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim<span class="op">$</span>date, <span class="dt">y=</span>lim<span class="op">$</span>depth, <span class="dt">z=</span>lim<span class="op">$</span>temp)</a>
-<a class="sourceLine" id="cb43-4" title="4"></a>
-<a class="sourceLine" id="cb43-5" title="5"><span class="co"># Sort it so we have ascending values of x and y</span></a>
-<a class="sourceLine" id="cb43-6" title="6">plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, <span class="kw">order</span>(x, y)), ]</a>
-<a class="sourceLine" id="cb43-7" title="7"></a>
-<a class="sourceLine" id="cb43-8" title="8"><span class="co"># Make a regularly spaced x, y, z grid using</span></a>
-<a class="sourceLine" id="cb43-9" title="9"><span class="co"># linear interpolation from the akima package</span></a>
-<a class="sourceLine" id="cb43-10" title="10">im =<span class="st"> </span><span class="kw">with</span>(plotter,</a>
-<a class="sourceLine" id="cb43-11" title="11">          <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>,</a>
-<a class="sourceLine" id="cb43-12" title="12">                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>date)),</a>
-<a class="sourceLine" id="cb43-13" title="13">                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>depth)))</a>
-<a class="sourceLine" id="cb43-14" title="14">          )</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="co"># Create a data frame containing the</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a><span class="co"># x, y, and z variables of interest</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>plotter =<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">x=</span>lim<span class="op">$</span>date, <span class="dt">y=</span>lim<span class="op">$</span>depth, <span class="dt">z=</span>lim<span class="op">$</span>temp)</span>
+<span id="cb43-4"><a href="#cb43-4"></a></span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="co"># Sort it so we have ascending values of x and y</span></span>
+<span id="cb43-6"><a href="#cb43-6"></a>plotter =<span class="st"> </span>plotter[<span class="kw">with</span>(plotter, <span class="kw">order</span>(x, y)), ]</span>
+<span id="cb43-7"><a href="#cb43-7"></a></span>
+<span id="cb43-8"><a href="#cb43-8"></a><span class="co"># Make a regularly spaced x, y, z grid using</span></span>
+<span id="cb43-9"><a href="#cb43-9"></a><span class="co"># linear interpolation from the akima package</span></span>
+<span id="cb43-10"><a href="#cb43-10"></a>im =<span class="st"> </span><span class="kw">with</span>(plotter,</span>
+<span id="cb43-11"><a href="#cb43-11"></a>          <span class="kw">interp</span>(x, y, z, <span class="dt">duplicate=</span><span class="st">&#39;mean&#39;</span>,</span>
+<span id="cb43-12"><a href="#cb43-12"></a>                 <span class="dt">nx=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>date)),</span>
+<span id="cb43-13"><a href="#cb43-13"></a>                 <span class="dt">ny=</span><span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>depth)))</span>
+<span id="cb43-14"><a href="#cb43-14"></a>          )</span></code></pre></div>
 <p>To wrap it all up, we can make the plot. This looks like a lot of code, but it is mostly comments. For this plot, we will zoom in on year 2017 by limiting the range of the x-axis.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="co"># Plot the isopleth</span></a>
-<a class="sourceLine" id="cb44-2" title="2"><span class="co"># filled.contour is the function that actually </span></a>
-<a class="sourceLine" id="cb44-3" title="3"><span class="co"># makes the contour plot. This is the same function</span></a>
-<a class="sourceLine" id="cb44-4" title="4"><span class="co"># that is used in the wtr.heat.map function in the</span></a>
-<a class="sourceLine" id="cb44-5" title="5"><span class="co"># RLakeAnalyzer package, but it is executed from</span></a>
-<a class="sourceLine" id="cb44-6" title="6"><span class="co"># within a convenience wrapper there, so it is </span></a>
-<a class="sourceLine" id="cb44-7" title="7"><span class="co"># hard to customize. </span></a>
-<a class="sourceLine" id="cb44-8" title="8"></a>
-<a class="sourceLine" id="cb44-9" title="9"><span class="co"># I tend to work with the filled.contour</span></a>
-<a class="sourceLine" id="cb44-10" title="10"><span class="co"># function from the graphics package (included</span></a>
-<a class="sourceLine" id="cb44-11" title="11"><span class="co"># in base R and loaded by default). This is</span></a>
-<a class="sourceLine" id="cb44-12" title="12"><span class="co"># just a preference driven by need for</span></a>
-<a class="sourceLine" id="cb44-13" title="13"><span class="co"># more flexibility.</span></a>
-<a class="sourceLine" id="cb44-14" title="14"></a>
-<a class="sourceLine" id="cb44-15" title="15"><span class="co"># Set up plotting window margins</span></a>
-<a class="sourceLine" id="cb44-16" title="16"><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">8</span>)) </a>
-<a class="sourceLine" id="cb44-17" title="17"></a>
-<a class="sourceLine" id="cb44-18" title="18"><span class="co"># Make the graph</span></a>
-<a class="sourceLine" id="cb44-19" title="19"><span class="kw">filled.contour</span>(</a>
-<a class="sourceLine" id="cb44-20" title="20">  im<span class="op">$</span>x, <span class="co"># Variable on x-axis (date)</span></a>
-<a class="sourceLine" id="cb44-21" title="21">  im<span class="op">$</span>y, <span class="co"># Variable on y-axis (depth)</span></a>
-<a class="sourceLine" id="cb44-22" title="22">  im<span class="op">$</span>z, <span class="co"># Response (wq parameter) </span></a>
-<a class="sourceLine" id="cb44-23" title="23">  <span class="co"># Could also choose &#39;grey.colors&#39; or &#39;terrain.colors&#39;.</span></a>
-<a class="sourceLine" id="cb44-24" title="24">  <span class="co"># If you want the ramp to go the other way,</span></a>
-<a class="sourceLine" id="cb44-25" title="25">  <span class="co"># just delete the &#39;rev&#39;. Note that you will</span></a>
-<a class="sourceLine" id="cb44-26" title="26">  <span class="co"># need to change the 26 in parentheses to match</span></a>
-<a class="sourceLine" id="cb44-27" title="27">  <span class="co"># the number of levels that you actually have or</span></a>
-<a class="sourceLine" id="cb44-28" title="28">  <span class="co"># want to display.</span></a>
-<a class="sourceLine" id="cb44-29" title="29">  <span class="dt">col=</span><span class="kw">topo.colors</span>(<span class="dv">26</span>),  </a>
-<a class="sourceLine" id="cb44-30" title="30">  <span class="co"># I don&#39;t like in-figure titles.</span></a>
-<a class="sourceLine" id="cb44-31" title="31">  <span class="co"># You can add one, though. You will, however,</span></a>
-<a class="sourceLine" id="cb44-32" title="32">  <span class="co"># need to change the &#39;mar&#39; argument in the call</span></a>
-<a class="sourceLine" id="cb44-33" title="33">  <span class="co"># to par above.</span></a>
-<a class="sourceLine" id="cb44-34" title="34">  <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),</a>
-<a class="sourceLine" id="cb44-35" title="35">  <span class="co"># Specify y-axis limits.</span></a>
-<a class="sourceLine" id="cb44-36" title="36">  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im<span class="op">$</span>y), <span class="kw">max</span>(im<span class="op">$</span>y)),</a>
-<a class="sourceLine" id="cb44-37" title="37">  <span class="co"># Specify x-axis limits. In</span></a>
-<a class="sourceLine" id="cb44-38" title="38">  <span class="co"># this case, we are &quot;zooming in&quot;</span></a>
-<a class="sourceLine" id="cb44-39" title="39">  <span class="co"># on year 2017</span></a>
-<a class="sourceLine" id="cb44-40" title="40">  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im<span class="op">$</span>x)), </a>
-<a class="sourceLine" id="cb44-41" title="41">  <span class="co"># X-axis label</span></a>
-<a class="sourceLine" id="cb44-42" title="42">  <span class="dt">xlab=</span><span class="st">&#39;Date&#39;</span>, </a>
-<a class="sourceLine" id="cb44-43" title="43">  <span class="co"># Y-axis label</span></a>
-<a class="sourceLine" id="cb44-44" title="44">  <span class="dt">ylab=</span><span class="st">&#39;Depth (m)&#39;</span>,</a>
-<a class="sourceLine" id="cb44-45" title="45">  <span class="co"># Axis options</span></a>
-<a class="sourceLine" id="cb44-46" title="46">  <span class="dt">plot.axes =</span> {  </a>
-<a class="sourceLine" id="cb44-47" title="47">        <span class="co"># This is how we include</span></a>
-<a class="sourceLine" id="cb44-48" title="48">        <span class="co"># countour lines</span></a>
-<a class="sourceLine" id="cb44-49" title="49">        <span class="kw">contour</span>(                            </a>
-<a class="sourceLine" id="cb44-50" title="50">        im<span class="op">$</span>x,                             </a>
-<a class="sourceLine" id="cb44-51" title="51">        im<span class="op">$</span>y,                             </a>
-<a class="sourceLine" id="cb44-52" title="52">        im<span class="op">$</span>z,                             </a>
-<a class="sourceLine" id="cb44-53" title="53">        <span class="dt">nlevels =</span> <span class="dv">26</span>,                     </a>
-<a class="sourceLine" id="cb44-54" title="54">        <span class="dt">drawlabels =</span> <span class="ot">FALSE</span>,               </a>
-<a class="sourceLine" id="cb44-55" title="55">        <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">26</span>),</a>
-<a class="sourceLine" id="cb44-56" title="56">        <span class="dt">lwd =</span> <span class="dv">1</span>,                          </a>
-<a class="sourceLine" id="cb44-57" title="57">        <span class="dt">lty =</span> <span class="dv">2</span>,                          </a>
-<a class="sourceLine" id="cb44-58" title="58">        <span class="dt">add =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb44-59" title="59">        )</a>
-<a class="sourceLine" id="cb44-60" title="60">    <span class="co"># Y-axis</span></a>
-<a class="sourceLine" id="cb44-61" title="61">    <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="op">-</span><span class="dv">50</span>,<span class="op">-</span><span class="dv">10</span>),</a>
-<a class="sourceLine" id="cb44-62" title="62">         <span class="dt">labels=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb44-63" title="63">    )</a>
-<a class="sourceLine" id="cb44-64" title="64">    <span class="co"># X-axis</span></a>
-<a class="sourceLine" id="cb44-65" title="65">    <span class="kw">axis</span>(<span class="dv">1</span>,</a>
-<a class="sourceLine" id="cb44-66" title="66">         <span class="dt">at=</span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/05/01&quot;</span>),</a>
-<a class="sourceLine" id="cb44-67" title="67">                <span class="dt">by=</span><span class="st">&quot;2 months&quot;</span>,</a>
-<a class="sourceLine" id="cb44-68" title="68">                <span class="dt">length.out=</span><span class="dv">16</span></a>
-<a class="sourceLine" id="cb44-69" title="69">                ), </a>
-<a class="sourceLine" id="cb44-70" title="70">         <span class="dt">labels =</span> <span class="kw">format</span>(</a>
-<a class="sourceLine" id="cb44-71" title="71">           <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/05/01&quot;</span>),</a>
-<a class="sourceLine" id="cb44-72" title="72">               <span class="dt">by=</span><span class="st">&quot;2 months&quot;</span>,</a>
-<a class="sourceLine" id="cb44-73" title="73">               <span class="dt">length.out=</span><span class="dv">16</span></a>
-<a class="sourceLine" id="cb44-74" title="74">               ),</a>
-<a class="sourceLine" id="cb44-75" title="75">           <span class="st">&quot;%b %Y&quot;</span></a>
-<a class="sourceLine" id="cb44-76" title="76">           )</a>
-<a class="sourceLine" id="cb44-77" title="77">    )</a>
-<a class="sourceLine" id="cb44-78" title="78">  }                                     </a>
-<a class="sourceLine" id="cb44-79" title="79">)             </a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="co"># Plot the isopleth</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a><span class="co"># filled.contour is the function that actually </span></span>
+<span id="cb44-3"><a href="#cb44-3"></a><span class="co"># makes the contour plot. This is the same function</span></span>
+<span id="cb44-4"><a href="#cb44-4"></a><span class="co"># that is used in the wtr.heat.map function in the</span></span>
+<span id="cb44-5"><a href="#cb44-5"></a><span class="co"># RLakeAnalyzer package, but it is executed from</span></span>
+<span id="cb44-6"><a href="#cb44-6"></a><span class="co"># within a convenience wrapper there, so it is </span></span>
+<span id="cb44-7"><a href="#cb44-7"></a><span class="co"># hard to customize. </span></span>
+<span id="cb44-8"><a href="#cb44-8"></a></span>
+<span id="cb44-9"><a href="#cb44-9"></a><span class="co"># I tend to work with the filled.contour</span></span>
+<span id="cb44-10"><a href="#cb44-10"></a><span class="co"># function from the graphics package (included</span></span>
+<span id="cb44-11"><a href="#cb44-11"></a><span class="co"># in base R and loaded by default). This is</span></span>
+<span id="cb44-12"><a href="#cb44-12"></a><span class="co"># just a preference driven by need for</span></span>
+<span id="cb44-13"><a href="#cb44-13"></a><span class="co"># more flexibility.</span></span>
+<span id="cb44-14"><a href="#cb44-14"></a></span>
+<span id="cb44-15"><a href="#cb44-15"></a><span class="co"># Set up plotting window margins</span></span>
+<span id="cb44-16"><a href="#cb44-16"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="dv">8</span>)) </span>
+<span id="cb44-17"><a href="#cb44-17"></a></span>
+<span id="cb44-18"><a href="#cb44-18"></a><span class="co"># Make the graph</span></span>
+<span id="cb44-19"><a href="#cb44-19"></a><span class="kw">filled.contour</span>(</span>
+<span id="cb44-20"><a href="#cb44-20"></a>  im<span class="op">$</span>x, <span class="co"># Variable on x-axis (date)</span></span>
+<span id="cb44-21"><a href="#cb44-21"></a>  im<span class="op">$</span>y, <span class="co"># Variable on y-axis (depth)</span></span>
+<span id="cb44-22"><a href="#cb44-22"></a>  im<span class="op">$</span>z, <span class="co"># Response (wq parameter) </span></span>
+<span id="cb44-23"><a href="#cb44-23"></a>  <span class="co"># Could also choose &#39;grey.colors&#39; or &#39;terrain.colors&#39;.</span></span>
+<span id="cb44-24"><a href="#cb44-24"></a>  <span class="co"># If you want the ramp to go the other way,</span></span>
+<span id="cb44-25"><a href="#cb44-25"></a>  <span class="co"># just delete the &#39;rev&#39;. Note that you will</span></span>
+<span id="cb44-26"><a href="#cb44-26"></a>  <span class="co"># need to change the 26 in parentheses to match</span></span>
+<span id="cb44-27"><a href="#cb44-27"></a>  <span class="co"># the number of levels that you actually have or</span></span>
+<span id="cb44-28"><a href="#cb44-28"></a>  <span class="co"># want to display.</span></span>
+<span id="cb44-29"><a href="#cb44-29"></a>  <span class="dt">col=</span><span class="kw">topo.colors</span>(<span class="dv">26</span>),  </span>
+<span id="cb44-30"><a href="#cb44-30"></a>  <span class="co"># I don&#39;t like in-figure titles.</span></span>
+<span id="cb44-31"><a href="#cb44-31"></a>  <span class="co"># You can add one, though. You will, however,</span></span>
+<span id="cb44-32"><a href="#cb44-32"></a>  <span class="co"># need to change the &#39;mar&#39; argument in the call</span></span>
+<span id="cb44-33"><a href="#cb44-33"></a>  <span class="co"># to par above.</span></span>
+<span id="cb44-34"><a href="#cb44-34"></a>  <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),</span>
+<span id="cb44-35"><a href="#cb44-35"></a>  <span class="co"># Specify y-axis limits.</span></span>
+<span id="cb44-36"><a href="#cb44-36"></a>  <span class="dt">ylim=</span><span class="kw">c</span>(<span class="kw">min</span>(im<span class="op">$</span>y), <span class="kw">max</span>(im<span class="op">$</span>y)),</span>
+<span id="cb44-37"><a href="#cb44-37"></a>  <span class="co"># Specify x-axis limits. In</span></span>
+<span id="cb44-38"><a href="#cb44-38"></a>  <span class="co"># this case, we are &quot;zooming in&quot;</span></span>
+<span id="cb44-39"><a href="#cb44-39"></a>  <span class="co"># on year 2017</span></span>
+<span id="cb44-40"><a href="#cb44-40"></a>  <span class="dt">xlim=</span><span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&#39;2017/05/01&#39;</span>), <span class="kw">max</span>(im<span class="op">$</span>x)), </span>
+<span id="cb44-41"><a href="#cb44-41"></a>  <span class="co"># X-axis label</span></span>
+<span id="cb44-42"><a href="#cb44-42"></a>  <span class="dt">xlab=</span><span class="st">&#39;Date&#39;</span>, </span>
+<span id="cb44-43"><a href="#cb44-43"></a>  <span class="co"># Y-axis label</span></span>
+<span id="cb44-44"><a href="#cb44-44"></a>  <span class="dt">ylab=</span><span class="st">&#39;Depth (m)&#39;</span>,</span>
+<span id="cb44-45"><a href="#cb44-45"></a>  <span class="co"># Axis options</span></span>
+<span id="cb44-46"><a href="#cb44-46"></a>  <span class="dt">plot.axes =</span> {  </span>
+<span id="cb44-47"><a href="#cb44-47"></a>        <span class="co"># This is how we include</span></span>
+<span id="cb44-48"><a href="#cb44-48"></a>        <span class="co"># countour lines</span></span>
+<span id="cb44-49"><a href="#cb44-49"></a>        <span class="kw">contour</span>(                            </span>
+<span id="cb44-50"><a href="#cb44-50"></a>        im<span class="op">$</span>x,                             </span>
+<span id="cb44-51"><a href="#cb44-51"></a>        im<span class="op">$</span>y,                             </span>
+<span id="cb44-52"><a href="#cb44-52"></a>        im<span class="op">$</span>z,                             </span>
+<span id="cb44-53"><a href="#cb44-53"></a>        <span class="dt">nlevels =</span> <span class="dv">26</span>,                     </span>
+<span id="cb44-54"><a href="#cb44-54"></a>        <span class="dt">drawlabels =</span> <span class="ot">FALSE</span>,               </span>
+<span id="cb44-55"><a href="#cb44-55"></a>        <span class="dt">col =</span> <span class="kw">topo.colors</span>(<span class="dv">26</span>),</span>
+<span id="cb44-56"><a href="#cb44-56"></a>        <span class="dt">lwd =</span> <span class="dv">1</span>,                          </span>
+<span id="cb44-57"><a href="#cb44-57"></a>        <span class="dt">lty =</span> <span class="dv">2</span>,                          </span>
+<span id="cb44-58"><a href="#cb44-58"></a>        <span class="dt">add =</span> <span class="ot">TRUE</span></span>
+<span id="cb44-59"><a href="#cb44-59"></a>        )</span>
+<span id="cb44-60"><a href="#cb44-60"></a>    <span class="co"># Y-axis</span></span>
+<span id="cb44-61"><a href="#cb44-61"></a>    <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">at=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="op">-</span><span class="dv">50</span>,<span class="op">-</span><span class="dv">10</span>),</span>
+<span id="cb44-62"><a href="#cb44-62"></a>         <span class="dt">labels=</span><span class="kw">seq</span>(<span class="dv">0</span>,<span class="dv">50</span>,<span class="dv">10</span>)</span>
+<span id="cb44-63"><a href="#cb44-63"></a>    )</span>
+<span id="cb44-64"><a href="#cb44-64"></a>    <span class="co"># X-axis</span></span>
+<span id="cb44-65"><a href="#cb44-65"></a>    <span class="kw">axis</span>(<span class="dv">1</span>,</span>
+<span id="cb44-66"><a href="#cb44-66"></a>         <span class="dt">at=</span><span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/05/01&quot;</span>),</span>
+<span id="cb44-67"><a href="#cb44-67"></a>                <span class="dt">by=</span><span class="st">&quot;2 months&quot;</span>,</span>
+<span id="cb44-68"><a href="#cb44-68"></a>                <span class="dt">length.out=</span><span class="dv">16</span></span>
+<span id="cb44-69"><a href="#cb44-69"></a>                ), </span>
+<span id="cb44-70"><a href="#cb44-70"></a>         <span class="dt">labels =</span> <span class="kw">format</span>(</span>
+<span id="cb44-71"><a href="#cb44-71"></a>           <span class="kw">seq</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/05/01&quot;</span>),</span>
+<span id="cb44-72"><a href="#cb44-72"></a>               <span class="dt">by=</span><span class="st">&quot;2 months&quot;</span>,</span>
+<span id="cb44-73"><a href="#cb44-73"></a>               <span class="dt">length.out=</span><span class="dv">16</span></span>
+<span id="cb44-74"><a href="#cb44-74"></a>               ),</span>
+<span id="cb44-75"><a href="#cb44-75"></a>           <span class="st">&quot;%b %Y&quot;</span></span>
+<span id="cb44-76"><a href="#cb44-76"></a>           )</span>
+<span id="cb44-77"><a href="#cb44-77"></a>    )</span>
+<span id="cb44-78"><a href="#cb44-78"></a>  }                                     </span>
+<span id="cb44-79"><a href="#cb44-79"></a>)             </span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-49-1.png" width="672" /></p>
 <p>One of the things we have to be careful about with these graphs is that they are models, and if we are missing data at critical time periods, then our models are only as good as our data allow. This can be seen in the plot above. There is a gap in info from late November 2017 when the lake starts to turnover and conditions got rough until early January, when safe ice had set up for winter sampling. The result, in this case, is the apparent loss of the 4<span class="math inline">\(^\circ\)</span>C layer of water in the lake.</p>
 <p>Have a go at these isopleths again, substituting DO or pH. You should find that the only code that needs to be changed is the variable used for <code>z</code> when you create the <code>plotter</code> data above, and the title of the plot.</p>

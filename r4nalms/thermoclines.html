@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>thermoclines.utf8.md</title>
+<title>Thermocline analysis</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -406,73 +409,73 @@ $(document).ready(function () {
 <p>Below, we run through a quick example of slightly more complex data manipulation and application of some plots outside of the base graphics to analyze summer thermocline depth in Otsego Lake, NY during the past several years.</p>
 <div id="package-load" class="section level3">
 <h3><strong>Package load</strong></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load necessary packages</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"><span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load necessary packages</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span></code></pre></div>
 </div>
 <div id="data-read" class="section level3">
 <h3><strong>Data read</strong></h3>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Read in the data</span></a>
-<a class="sourceLine" id="cb2-2" title="2">limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</span></code></pre></div>
 </div>
 <div id="data-manipulation" class="section level3">
 <h3><strong>Data manipulation</strong></h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Data formatting &amp; extraction</span></a>
-<a class="sourceLine" id="cb3-2" title="2">limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3">limnos<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(limnos<span class="op">$</span>date)</a>
-<a class="sourceLine" id="cb3-4" title="4">limnos<span class="op">$</span>day &lt;-<span class="st">  </span><span class="kw">yday</span>(limnos<span class="op">$</span>date)</a>
-<a class="sourceLine" id="cb3-5" title="5">limnos<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">month</span>(limnos<span class="op">$</span>date)</a>
-<a class="sourceLine" id="cb3-6" title="6"></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="co"># Remove rows with NA to make life easier for now</span></a>
-<a class="sourceLine" id="cb3-8" title="8">limnos &lt;-<span class="st"> </span><span class="kw">na.omit</span>(limnos)</a>
-<a class="sourceLine" id="cb3-9" title="9"></a>
-<a class="sourceLine" id="cb3-10" title="10"><span class="co"># Create a list of dataframes split by date</span></a>
-<a class="sourceLine" id="cb3-11" title="11"><span class="co"># so each date corresponds to a df that is an</span></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co"># element of the list</span></a>
-<a class="sourceLine" id="cb3-13" title="13">limlist &lt;-<span class="st"> </span><span class="kw">split</span>(limnos, <span class="kw">list</span>(limnos<span class="op">$</span>date))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Data formatting &amp; extraction</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>limnos<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(limnos<span class="op">$</span>date)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>limnos<span class="op">$</span>day &lt;-<span class="st">  </span><span class="kw">yday</span>(limnos<span class="op">$</span>date)</span>
+<span id="cb3-5"><a href="#cb3-5"></a>limnos<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">month</span>(limnos<span class="op">$</span>date)</span>
+<span id="cb3-6"><a href="#cb3-6"></a></span>
+<span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Remove rows with NA to make life easier for now</span></span>
+<span id="cb3-8"><a href="#cb3-8"></a>limnos &lt;-<span class="st"> </span><span class="kw">na.omit</span>(limnos)</span>
+<span id="cb3-9"><a href="#cb3-9"></a></span>
+<span id="cb3-10"><a href="#cb3-10"></a><span class="co"># Create a list of dataframes split by date</span></span>
+<span id="cb3-11"><a href="#cb3-11"></a><span class="co"># so each date corresponds to a df that is an</span></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># element of the list</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a>limlist &lt;-<span class="st"> </span><span class="kw">split</span>(limnos, <span class="kw">list</span>(limnos<span class="op">$</span>date))</span></code></pre></div>
 </div>
 <div id="calculate-thermocline-depth" class="section level3">
 <h3><strong>Calculate thermocline depth</strong></h3>
 <p>If you just have a single dataframe, you can pass the appropriate columns straight to the <code>thermo.depth</code> function in <code>rLakeAnalyzer</code>. But, we are looking to calculate thermocline depth for 114 different datasets. To make this easier, we pack them in a list (above) and then use <code>lapply</code> to apply the <code>thermo.depth</code> function to each element of the list. But, the <code>thermo.depth</code> function was not designed for this specifically, so we will first write a function that can be applied to a list, with a short name.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Create a function to calculate thermocline</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co"># depth that can be applied to a list as long</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># as depth is in the 5th column and temperature</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="co"># is in the 6th column of each list element (matrix</span></a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># or dataframe). This function creates a new</span></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co"># variable (column) called &#39;thermo&#39; in each df,</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="co"># and returns the original object modified in </span></a>
-<a class="sourceLine" id="cb4-8" title="8"><span class="co"># place.</span></a>
-<a class="sourceLine" id="cb4-9" title="9">ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x){</a>
-<a class="sourceLine" id="cb4-10" title="10">  x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[,<span class="dv">6</span>], x[,<span class="dv">5</span>])</a>
-<a class="sourceLine" id="cb4-11" title="11">  <span class="kw">return</span>(x)</a>
-<a class="sourceLine" id="cb4-12" title="12">}</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create a function to calculate thermocline</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># depth that can be applied to a list as long</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># as depth is in the 5th column and temperature</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># is in the 6th column of each list element (matrix</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># or dataframe). This function creates a new</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># variable (column) called &#39;thermo&#39; in each df,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># and returns the original object modified in </span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># place.</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a>ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[,<span class="dv">6</span>], x[,<span class="dv">5</span>])</span>
+<span id="cb4-11"><a href="#cb4-11"></a>  <span class="kw">return</span>(x)</span>
+<span id="cb4-12"><a href="#cb4-12"></a>}</span></code></pre></div>
 <p>Now we can use the function we made to apply across all elements of our list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Create a test object that contains the </span></a>
-<a class="sourceLine" id="cb5-2" title="2">test &lt;-<span class="st"> </span><span class="kw">lapply</span>(limlist, ltd)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Create a test object that contains the </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>test &lt;-<span class="st"> </span><span class="kw">lapply</span>(limlist, ltd)</span></code></pre></div>
 <p>Once we’ve done that, we can put everything back into a single dataframe.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Stack all of the dfs in the list into</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># a single, large df</span></a>
-<a class="sourceLine" id="cb6-3" title="3">out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Stack all of the dfs in the list into</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># a single, large df</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>out &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, test)</span></code></pre></div>
 </div>
 <div id="plot-changes-in-thermocline-depth" class="section level3">
 <h3><strong>Plot changes in thermocline depth</strong></h3>
 <p>Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the <code>ggplot2</code> library.</p>
 <p>First, subset the data so we are just working with July data.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Make a plot of July thermocline depth </span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># across years, and include predictions from</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co"># a GAM for data viz.</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># First, subset the data</span></a>
-<a class="sourceLine" id="cb7-5" title="5">out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span>,]</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Make a plot of July thermocline depth </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># across years, and include predictions from</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># a GAM for data viz.</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># First, subset the data</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a>out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span>,]</span></code></pre></div>
 <p>Next, fit the plot. Note the differences between the <code>ggplot2</code> code and the code we have used thus far for plotting. You can do a lot more out of the box with <code>ggplot</code> graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Now, plot it with ggplot2 functions</span></a>
-<a class="sourceLine" id="cb8-2" title="2">plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(out1, <span class="kw">aes</span>(year, thermo)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">pch=</span><span class="dv">21</span>,<span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;gam&#39;</span>, <span class="dt">level=</span>.<span class="dv">999</span>,</a>
-<a class="sourceLine" id="cb8-5" title="5">              <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;tomato&#39;</span>) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Year&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">2011</span>, <span class="dv">2017</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-7" title="7"><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;July thermocline depth (m)&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">5</span>,<span class="dv">10</span>)</a>
-<a class="sourceLine" id="cb8-8" title="8">plot<span class="op">+</span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">margin</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Now, plot it with ggplot2 functions</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(out1, <span class="kw">aes</span>(year, thermo)) <span class="op">+</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">pch=</span><span class="dv">21</span>,<span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>) <span class="op">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;gam&#39;</span>, <span class="dt">level=</span>.<span class="dv">999</span>,</span>
+<span id="cb8-5"><a href="#cb8-5"></a>              <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;tomato&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Year&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">2011</span>, <span class="dv">2017</span>) <span class="op">+</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;July thermocline depth (m)&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">5</span>,<span class="dv">10</span>)</span>
+<span id="cb8-8"><a href="#cb8-8"></a>plot<span class="op">+</span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">margin</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>))</span></code></pre></div>
 <p><img src="thermoclines_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><br></p>
 </div>
