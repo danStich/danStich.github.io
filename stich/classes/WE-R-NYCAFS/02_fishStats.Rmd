@@ -1,8 +1,8 @@
 ```{r, child="../../_styles.Rmd"}
 ```
 
-
 # Introductory fisheries statistics in R
+<img src="../../images/matrixSmolt.jpg" alt="">
 <h2 id="multi"> Introduction</h2>
 
 Now that we have looked at some of the basic programming and common statistical tools in R, we can dive into some of the tools that have been created just for fish! There are a few packages for dealing with data from fish and fisheries, and we will just glance off the tip of the iceberg here to demonstrate some of the tools that we use all of the time in fisheries. Hopefully you find, like many of us, that once you've tackled the code the first time it is easy to translate from one species or data set to another. And next time, you'll have a head-start!
@@ -14,13 +14,13 @@ Let's start by reading in some data for Largemouth Bass in New York State so we 
  
 ```{r}
 # Read in the data file
-  bass = read.csv('lmblw.csv', stringsAsFactors = FALSE)
+bass <- read.csv("lmblw.csv", stringsAsFactors = FALSE)
 
 # Have a quick look at the first ten lines of the data
-  head(bass, 10)
-  
+head(bass, 10)
+
 # Take a quick look at the data structure
-  str(bass)
+str(bass)
 ```
   
 > We can even look at it like a spreadsheet!
@@ -32,16 +32,17 @@ View(bass)
 Now, let's make a basic l-f histogram of the bass data
 ```{r}
 # Make a histogram with all of the arguments set to their defaults
-  hist(x = bass$Length)
+hist(x = bass$Length)
 ```
 
 This is pretty ugly, and it doesn't do a whole lot for us in terms of biological meaning. We can modify this plot to use standard `breaks` or `bins` so that we can get, for example, 10-mm length bins that may have more biological meaning.
 
 ```{r}
 # Make a histogram with all of the arguments set to their defaults
-  hist(x = bass$Length,
-       breaks = diff(range(bass$Length))/10
-       )
+hist(
+  x = bass$Length,
+  breaks = diff(range(bass$Length)) / 10
+)
 ```
 
 Here, we told R to calculate the difference (`diff`) between the upper and lower values returned from the function `range`. Then, we divide that difference (250 mm) by 10 to get 25 10-mm length bins.
@@ -56,13 +57,13 @@ Once you have your lake picked out, we need to subset our data:
 ```{r}
 # Get the data for the lake you want to use
 # Notice the comma inside the brackets here!!
-  mybass = bass[bass$Water == 'Saratoga Lake', ]
+mybass <- bass[bass$Water == "Saratoga Lake", ]
 ```
 
 Make sure you have enough data for this to work
 ```{r}
 # Check number of rows in the data set
-  nrow(mybass)
+nrow(mybass)
 ```
 
 Now, let's make a better looking histogram.
@@ -71,16 +72,17 @@ Now, let's make a better looking histogram.
 # Make a histogram with 10-mm length
 # bins that looks much better than the
 # previous one if only because it's gray.
-  hist(x = mybass$Length,
-       breaks = diff(range(mybass$Length))/10,
-       yaxt = 'n',  # Don't print y-axis yet
-       xaxt = 'n',  # Don't print x-axis yet
-       col = 'gray87',
-       main = '',
-       xlab = 'Fork length (mm)'
-       )
-  axis(side = 1, pos = 0)
-  axis(side = 2, pos = min(bass$Length), las = 2)
+hist(
+  x = mybass$Length,
+  breaks = diff(range(mybass$Length)) / 10,
+  yaxt = "n", # Don't print y-axis yet
+  xaxt = "n", # Don't print x-axis yet
+  col = "gray87",
+  main = "",
+  xlab = "Fork length (mm)"
+)
+axis(side = 1, pos = 0)
+axis(side = 2, pos = min(bass$Length), las = 2)
 ```
 
 There, that looks a lot better. We might even think about putting this in a report or an article. 
@@ -92,7 +94,7 @@ So, we can make some pretty nice figures by hand, but this can be a lot to learn
  
 ```{r, warning=FALSE, message=FALSE}
 # Load the FSA library
-  library(FSA)
+library(FSA)
 ```
  
 The `FSA` package contains a lot of really cool tools that make life a lot easier. And, you can even get an introductory fisheries statistics book, [fishR](http://derekogle.com/IFAR/), that goes along with it. We will cover some basic applications here, but realize that this package can be used for a whole lot of other stuff, and now includes much of what previously was housed in many different places.
@@ -101,10 +103,11 @@ For example, if we wanted to create a length-frequency histogram that shows some
 ```{r}
 
 # Make an l-f histogram that includes Gabelhouse lengths
-psdPlot(~Length,    # Tell R the name of your length data          
-        data=mybass, # Tell it the name of the data frame
-        species="Largemouth Bass", # Pass species
-        w=10) # Tell R how wide length-bins are
+psdPlot(~Length, # Tell R the name of your length data
+  data = mybass, # Tell it the name of the data frame
+  species = "Largemouth Bass", # Pass species
+  w = 10
+) # Tell R how wide length-bins are
 ```
 
 This is a heck of a lot easier than going through all of that other stuff if what we want is an l-f histogram with all of this stuff on it. But, if that's not what you want then you have to do it by hand or customize the code from `FSA`, so it's good to know both. 
@@ -119,10 +122,11 @@ We will demonstrate PSD calculations in R using the `FSA` package here. Note tha
 ```{r}
 # Calculate PSD for Gabelhouse length categories
 # and each of the intervals
-  psdCalc(~Length,
-          data=mybass,
-          species="Largemouth Bass",
-          digits=1)
+psdCalc(~Length,
+  data = mybass,
+  species = "Largemouth Bass",
+  digits = 1
+)
 ```
 
 If you take a close look at the output, you can see that we not only get point estimates for each of the standard length categories we normally care about, but we also get 95% confidence intervals from those estimates! Very cool...how long do you think that would have taken you in Excel?
@@ -137,29 +141,30 @@ Let's start by making up (er, simulating) data for predator PSD and prey SD with
 
 ```{r}
 # Make up mean and 95% CI of PSD for each species
-  prey <- c(45.4, 30.2, 56.8)
-  pred <- c(24.5, 10.2, 36.7)
-  
-# Give names to the values in each of those objects  
-  names(prey) <- names(pred) <- c("Estimate", "95% LCI", "95% UCI")
-  
+prey <- c(45.4, 30.2, 56.8)
+pred <- c(24.5, 10.2, 36.7)
+
+# Give names to the values in each of those objects
+names(prey) <- names(pred) <- c("Estimate", "95% LCI", "95% UCI")
+
 # Print predator and prey objects to see what they look like
-  prey
-  pred
+prey
+pred
 ```
 
 Next, we will make a blank plotting window for our tic-tac-toe graph.
 
 ```{r}
-tictactoe(predobj = c(30, 70),
-          preyobj = c(30, 70),
-          predlab = "Predator PSD",
-          preylab = "Prey PSD", obj.col = "black",
-          obj.trans = 0.2,
-          bnd.col = "black",
-          bnd.lwd = 1,
-          bnd.lty = 2
-          )
+tictactoe(
+  predobj = c(30, 70),
+  preyobj = c(30, 70),
+  predlab = "Predator PSD",
+  preylab = "Prey PSD", obj.col = "black",
+  obj.trans = 0.2,
+  bnd.col = "black",
+  bnd.lwd = 1,
+  bnd.lty = 2
+)
 ```
 
 Now, that gives us a really nice blank plot! What about the data? 
@@ -171,38 +176,45 @@ Well, we can add the data on our tic-tac-toe graph, of course.
 # `plotCI` function first. You may need
 # to install this if it didn't automatically
 # install with `FSA`
-  library(plotrix)
+library(plotrix)
 
 # Plot the PSD and the confidence intervals
-  plotCI(prey[1],pred[1],li=prey[2],ui=prey[3],
-         err="x",pch=16,add=TRUE)
-  plotCI(prey[1],pred[1],li=pred[2],ui=pred[3],
-         err="y",pch=16,add=TRUE)
-
+plotCI(prey[1], pred[1],
+  li = prey[2], ui = prey[3],
+  err = "x", pch = 16, add = TRUE
+)
+plotCI(prey[1], pred[1],
+  li = pred[2], ui = pred[3],
+  err = "y", pch = 16, add = TRUE
+)
 ```
 
 ```{r, echo=FALSE}
-tictactoe(predobj = c(30, 70),
-          preyobj = c(30, 70),
-          predlab = "Predator PSD",
-          preylab = "Prey PSD", obj.col = "black",
-          obj.trans = 0.2,
-          bnd.col = "black",
-          bnd.lwd = 1,
-          bnd.lty = 2
-          )
+tictactoe(
+  predobj = c(30, 70),
+  preyobj = c(30, 70),
+  predlab = "Predator PSD",
+  preylab = "Prey PSD", obj.col = "black",
+  obj.trans = 0.2,
+  bnd.col = "black",
+  bnd.lwd = 1,
+  bnd.lty = 2
+)
 # Load the `plotrix` package for the
 # `plotCI` function first. You may need
 # to install this if it didn't automatically
 # install with `FSA`
-  library(plotrix)
+library(plotrix)
 
 # Plot the PSD and the confidence intervals
-  plotCI(prey[1],pred[1],li=prey[2],ui=prey[3],
-         err="x",pch=16,add=TRUE)
-  plotCI(prey[1],pred[1],li=pred[2],ui=pred[3],
-         err="y",pch=16,add=TRUE)
-
+plotCI(prey[1], pred[1],
+  li = prey[2], ui = prey[3],
+  err = "x", pch = 16, add = TRUE
+)
+plotCI(prey[1], pred[1],
+  li = pred[2], ui = pred[3],
+  err = "y", pch = 16, add = TRUE
+)
 ```
 
  
@@ -221,13 +233,13 @@ I know, sounds confusing, but the math is actually more straightforward than the
 Let's start by reading in a new data set. This one has American shad *Alosa sapidissima* lengths and ages in the Susquehanna River. We have around 10,000 paired fork lengths and otolith ages. Side note: these are real data that we are working with right now for the 2020 ASMFC stock assessment for the species.
 ```{r}
 # Read in the shad data
-  shad <- read.csv('sus_shad.csv')
+shad <- read.csv("sus_shad.csv")
 ```
 
 Next, we need to define the von Bertalanffy growth model as an object so R can see it. **Important**: I am using `FL` and `Age` below because those are the names of the columns in my data that hold length and age data. You will need to change that if you have different names for those columns in your data!
 ```{r}
 # Define von Bertalanffy growth function
-  vbmod <- FL ~ Linf * (1 - exp( -K * (Age - t0) ) )
+vbmod <- FL ~ Linf * (1 - exp(-K * (Age - t0)))
 ```
 
 Now, we can pass this on to a non-linear optimizer, just like you might do with the Solver Add-in for Excel. But first, we need to come up with some starting values. Without any prior knowledge of the study population this can be tough. But, we can get some starting values for our parameters (`Linf`, `K`, and `t0`) using the `FSA` package.
@@ -236,14 +248,14 @@ Now, we can pass this on to a non-linear optimizer, just like you might do with 
 # Get starting values for each of your
 # parameters using the `vbStarts` function
 # from `FSA`
-  starts = vbStarts(formula=FL~Age, data=shad)
+starts <- vbStarts(formula = FL ~ Age, data = shad)
 ```
 
 Now, we have a `list` of starting values that we can use to start estimating the growth function.
 ```{r}
-# Have a look at the starting values for 
+# Have a look at the starting values for
 # the parameters.
-  starts
+starts
 ```
 
 With these in hand, we can finally estimate the parameters for the von Bertalanffy growth function for these fishies:
@@ -251,46 +263,46 @@ With these in hand, we can finally estimate the parameters for the von Bertalanf
 ```{r}
 # Fit the von Bertalanffy growth function using
 # nonlinear least squares (nls) optimization
-  mymod = nls(vbmod, data = shad, start = starts)
+mymod <- nls(vbmod, data = shad, start = starts)
 ```
 
 And, at long last we can have a look at the parameter estimates like this:
 
 ```{r}
 # Show model summary
-  summary(mymod)
+summary(mymod)
 ```
 
 If we make a new sequence of ages, we can even predict mean length at age:
 ```{r}
 # New sequence of ages with tiny steps
 # to make the line look smooth
-  newage <- seq(1, 13, .5)
+newage <- seq(1, 13, .5)
 
 # Get parameters
-  params = summary(mymod)$coefficients
+params <- summary(mymod)$coefficients
 
 # Predict mean length at age:
-  pred = params[1,1]*(1-exp(-params[2,1]*(newage-params[3,1])))
+pred <- params[1, 1] * (1 - exp(-params[2, 1] * (newage - params[3, 1])))
 ```
 
 And finally, we can plot this against the raw data:
 
 ```{r}
 # Plot the raw data
-  plot(shad$Age,
-       shad$FL,
-       pch=21, 
-       bg=rgb(0.8, 0.8, 0.8, 0.15),
-       col=rgb(0.8, 0.8, 0.8, 0.15),
-       xlab = 'Age (years)',
-       ylab = 'Fork length (mm)',
-       yaxt='n'
-       )
-  axis(2, las=2)
-       
+plot(shad$Age,
+  shad$FL,
+  pch = 21,
+  bg = rgb(0.8, 0.8, 0.8, 0.15),
+  col = rgb(0.8, 0.8, 0.8, 0.15),
+  xlab = "Age (years)",
+  ylab = "Fork length (mm)",
+  yaxt = "n"
+)
+axis(2, las = 2)
+
 # Add the mean length at age predictions
-  lines(x=newage, y=pred, lty=1, lwd=2, col='gray40')
+lines(x = newage, y = pred, lty = 1, lwd = 2, col = "gray40")
 ```
  
 
