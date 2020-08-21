@@ -12,7 +12,7 @@ navbar:
   - text: "Additional Resources"
     href: resources.html
   - text: "Contact"
-    href: ../../contact.html
+    href: contact.html
   right:
   - icon: fa-github
     href: https://github.com/danStich
