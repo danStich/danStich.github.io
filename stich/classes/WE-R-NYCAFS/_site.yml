@@ -1,0 +1,37 @@
+name: "We R NYCAFS"
+output_dir: "."
+navbar:
+  title: "We R NYCAFS"
+  left:
+  - icon: fa-home
+    href: index.html
+  - text: "Workshop modules"
+    href: content.html
+  - text: "Software needs"
+    href: software.html
+  - text: "Additional Resources"
+    href: resources.html
+  - text: "Contact"
+    href: contact.html
+  - text: "NY Chapter AFS"
+    href: https://newyork.fisheries.org/    
+  right:
+  - icon: fa-github
+    href: https://github.com/danStich
+  - icon: fa fa-youtube-play
+    href: https://www.youtube.com/channel/UCk9swndX8R02PVEvQGUKG-A   
+      
+output:
+  html_document:
+    theme: cosmo
+    highlight: tango
+    toc: false
+    smooth_scroll: true
+    fontsize: 12
+    includes:
+      in_header: ../../_header.html
+      after_body: ../../footer.html
+    css: ../../styles.css
+    lib_dir: site_libs
+    self_contained: no
+    
