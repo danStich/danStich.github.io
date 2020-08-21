@@ -1,0 +1,24 @@
+
+```{r, child="_styles.Rmd"}
+```
+
+---
+title: "Additional resources"
+---
+
+Every year people ask about about additional resources so they can keep learning about the power of R. In response to those requests, I provide a brief peek through the window into the world of all that is available. One of the great things about using a super-popular, free software program is that tons of people have put together how-tos, blogs, forums (fora? Sounds like flora...), websites, and free ebooks. Truthfully, there are more resources out there than can reasonably be accomodated here, but some of the links below contain links to *even more* resources. It's resources all the way down.
+
+Here are a few of my favorites:
+
+<a href="https://rstudio.com/resources/cheatsheets/">**The cheat sheets**</a> The RStudio cheatsheets page is something nobody should ever have to live without. There are literally dozens of these things, and they are super useful. I have gone through periods of learning R when these adorned every nook and cranny of my office. A one-stop shop with something for everyone.
+
+<a href="https://swirlstats.com/students.html">**Swirl**</a> is an R package that was written to help people learn R. What a novel idea, eh? There are a bunch of really handy course modules that you can install through R from the <a href="https://github.com/swirldev/swirl_courses#swirl-courses">Swirl GitHub repo</a>
+
+<a href="">**YaRrr: The Pirate's Guide to R**</a> Translated from ancient Pirate to English by <a href="https://ndphillips.github.io/">Dr. Nathaniel D. Phillips</a>, this is hands-down **my fave** resource for introductory R programming. A *free*, *online* or *PDF* book. It is logically laid out, full of really bad humor (sorry!), and walks the first-time user through the learning process step-by-step. The examples are primarily from psychology, but you'll have so much fun you won't even notice they (the pirates?) aren't talking about biology. There are also some really nice tabular layouts of different functions and how they work in R. **This book lists a ton of resources that I will not repeat here for the sake of posterity (and to get you to read it!)**.
+
+<a>**Soc med??**</a> Totes! <a href="https://twitter.com/hashtag/rstat">#rstat</a> Who'd have thunk it? Well with all of the useless stuff floating around social media (and all the useful stuff like cat videos!) I guess it should come as no surprise that folks are doing great things on social media, like crowd-sourcing a list of links for learning R! Check it out and follow along.
+
+**The interwebs** Finally, when in doubt, the internet is your friend (100% sincere, no sarcasm intended). There are even custom search engines like <a href="https://rseek.org/">**rseek**</a> that will help you filter out the unrelated content. Honestly, regular search engines work great as long as you include `r` as one of your terms. Top-hitting resources that I return to time and again include <a href="https://stackoverflow.com/questions/tagged/r">StackOverflow</a> and <a href="https://www.r-bloggers.com/">R-bloggers</a>. You can subscribe and receive updates, too, if that is the kind of daily feed you like to get!
+
+<br>
+ 

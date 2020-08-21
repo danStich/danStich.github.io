@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>hw10.utf8.md</title>
+<title>hw10.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -366,35 +369,11 @@ $(document).ready(function () {
      
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Teaching
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../../teaching.html">Teaching home</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
-    </li>
-  </ul>
+<li>
+  <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
-  <a href="../../publications.html">Publications</a>
-</li>
-<li>
-  <a href="../../cv.html">CV</a>
+  <a href="resources.html">Additional Resources</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
@@ -458,8 +437,8 @@ Introduction
 <h3>Linear mixed models (LMM- a special case of GLMM)</h3>
 <p>We have looked at the GLMM initially this week because of it’s utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on uses. For example, we might refer to them as ‘repeated measures’ ANOVA, ‘nested’ or ‘factorial’ ANOVA, or ‘linear mixed models’ (LMM).</p>
 <p>Let’s take a look at a new data set for this example. Read in the data file called <code>est.mvmt.txt</code>, either from the course website or from your working directory.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the data</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  est.mvmt =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;est.mvmt.txt&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  est.mvmt =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;est.mvmt.txt&#39;</span>)</span></code></pre></div>
 <p>These data are from endangered Atlantic salmon <em>Salmo salar</em> smolts. The response in the data is <code>Rate</code> and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]).</p>
 <p>A brief description of the data follows:</p>
 <pre><code>  TagID: individual fish ID
@@ -492,60 +471,78 @@ Introduction
 <li><p>Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.</p></li>
 </ol>
 <p>Make a list object of the models that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Here is an example of ONE FORM of the syntax we might use to</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># fit a linear mixed model in the &quot;lme4&quot; package using lme4::lmer</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  Mov.mod =<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">log</span>(Rate) <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>TagID) <span class="op">+</span><span class="st">  </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,</a>
-<a class="sourceLine" id="cb3-4" title="4">                <span class="dt">data =</span> est.mvmt)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Here is an example of ONE FORM of the syntax we might use to</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># fit a linear mixed model in the &quot;lme4&quot; package using lme4::lmer</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  Mov.mod =<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">log</span>(Rate) <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>TagID) <span class="op">+</span><span class="st">  </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,</span>
+<span id="cb3-4"><a href="#cb3-4"></a>                <span class="dt">data =</span> est.mvmt)</span></code></pre></div>
 <pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Note that this doesn&#39;t look much different that the specification that </span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># we used for generalized linear mixed effects models earlier in the</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># within lme4. The only difference is that we have dropped the &#39;g&#39; from</span></a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># the front-end of the function.</span></a>
-<a class="sourceLine" id="cb5-5" title="5">  </a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="co"># PLEASE </span><span class="al">NOTE</span><span class="co">: you do not need to build this model for the exercise. It </span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="co"># just happened to be the first in the list of candidate models from the</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="co"># R script that we used to analyze these data for the study.</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Note that this doesn&#39;t look much different that the specification that </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># we used for generalized linear mixed effects models earlier in the</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># within lme4. The only difference is that we have dropped the &#39;g&#39; from</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># the front-end of the function.</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  </span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># PLEASE </span><span class="al">NOTE</span><span class="co">: you do not need to build this model for the exercise. It </span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># just happened to be the first in the list of candidate models from the</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># R script that we used to analyze these data for the study.</span></span></code></pre></div>
 <p><strong>Question 1.</strong> Why did you choose to test this model set? What factors did you consider in their development?</p>
 <p>Next we will use an information-theoretic approach to model selection based on Akaike’s information criterion. <strong>Another great example of how fast this field is moving forward</strong>: the last time I taught this class, I wrote <em>…we cannot rely on the canned functions from <code>AICcmodavg</code> package that have been so convenient for the past several weeks. The functions in that package have still not been adapted for use with linear mixed effects models or generalized linear models in <code>lme4</code>. Part of this reason lies in the philosophical debate within the statistical community about how many degrees of freedom we should use for the estimation of the random effect in these models. I won’t torture you with the gory details, but suffice it to say that this is yet another hotly contested issue in statistics that has not seen much resolution. Like I’ve been saying all week- this is what happens when you work on the bleeding edge of the razor. Luckily, we can write our own set of calculations, wrapped in a function called <code>aic.tableR</code> that we will <code>source</code> from a separate file.</em></p>
 <p>Let’s take a look at the function so we know how it works. <strong>Note</strong> that you will not be able to source the file because you don’t have it.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Just typing the name of any function in R (and running the code) </span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># will allow us to see how it works!</span></a>
-<a class="sourceLine" id="cb6-3" title="3">  <span class="kw">source</span>(<span class="st">&quot;aic.tableR.R&quot;</span>)</a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># Like this:    </span></a>
-<a class="sourceLine" id="cb6-5" title="5">  aic.tableR</a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co">## function (x, y = NULL) </span></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="co">## {</span></a>
-<a class="sourceLine" id="cb6-8" title="8"><span class="co">##     k &lt;- c()</span></a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co">##     for (i in 1:length(x)) {</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co">##         k[i] &lt;- nrow(data.frame(summary(x[[i]])[10])) + 1</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co">##     AICc &lt;- c(rep(0, length(k)))</span></a>
-<a class="sourceLine" id="cb6-13" title="13"><span class="co">##     DeltaAIC &lt;- c(rep(0, length(k)))</span></a>
-<a class="sourceLine" id="cb6-14" title="14"><span class="co">##     AICWeight &lt;- c(rep(0, length(k)))</span></a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co">##     Deviance &lt;- c(rep(0, length(k)))</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co">##     R.lik &lt;- c(rep(0, length(k)))</span></a>
-<a class="sourceLine" id="cb6-17" title="17"><span class="co">##     if (is.null(y)) {</span></a>
-<a class="sourceLine" id="cb6-18" title="18"><span class="co">##         y = rep(&quot;&quot;, length(x))</span></a>
-<a class="sourceLine" id="cb6-19" title="19"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-20" title="20"><span class="co">##     ranks &lt;- data.frame(y, k, AICc, DeltaAIC, AICWeight)</span></a>
-<a class="sourceLine" id="cb6-21" title="21"><span class="co">##     names(ranks)[1] &lt;- &quot;Model&quot;</span></a>
-<a class="sourceLine" id="cb6-22" title="22"><span class="co">##     for (i in 1:nrow(ranks)) {</span></a>
-<a class="sourceLine" id="cb6-23" title="23"><span class="co">##         ranks$AICc[i] &lt;- AIC(x[[i]]) + (((2 * k[i]) * (k[i] + </span></a>
-<a class="sourceLine" id="cb6-24" title="24"><span class="co">##             1))/(nrow(est.mvmt) - k[i] - 1))</span></a>
-<a class="sourceLine" id="cb6-25" title="25"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-26" title="26"><span class="co">##     ranks &lt;- ranks[with(ranks, order(AICc)), ]</span></a>
-<a class="sourceLine" id="cb6-27" title="27"><span class="co">##     for (i in 1:nrow(ranks)) {</span></a>
-<a class="sourceLine" id="cb6-28" title="28"><span class="co">##         ranks$DeltaAIC[i] &lt;- ranks$AICc[i] - ranks$AICc[1]</span></a>
-<a class="sourceLine" id="cb6-29" title="29"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-30" title="30"><span class="co">##     for (i in 1:nrow(ranks)) {</span></a>
-<a class="sourceLine" id="cb6-31" title="31"><span class="co">##         R.lik[i] &lt;- exp(-0.5 * ranks$DeltaAIC[i])</span></a>
-<a class="sourceLine" id="cb6-32" title="32"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-33" title="33"><span class="co">##     for (i in 1:length(R.lik)) {</span></a>
-<a class="sourceLine" id="cb6-34" title="34"><span class="co">##         ranks$AICWeight[i] &lt;- R.lik[i]/sum(R.lik[1:length(R.lik)])</span></a>
-<a class="sourceLine" id="cb6-35" title="35"><span class="co">##     }</span></a>
-<a class="sourceLine" id="cb6-36" title="36"><span class="co">##     ranks[, 3:5] &lt;- round(ranks[, 3:5], 2)</span></a>
-<a class="sourceLine" id="cb6-37" title="37"><span class="co">##     return(ranks)</span></a>
-<a class="sourceLine" id="cb6-38" title="38"><span class="co">## }</span></a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Just typing the name of any function in R (and running the code) </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># will allow us to see how it works!</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="kw">source</span>(<span class="st">&quot;aic.tableR.R&quot;</span>)</span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Like this:    </span></span>
+<span id="cb6-5"><a href="#cb6-5"></a>  aic.tableR</span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co">## function(x, y=NULL){</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a><span class="co">##       # Create a column to hold number of parameters for our model</span></span>
+<span id="cb6-8"><a href="#cb6-8"></a><span class="co">##         k &lt;- c()</span></span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co">##       # Get number of parameters for each ith model in our candidate model set</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co">##         for (i in 1:length(x)){</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##         # Note that we are adding a one to the number of parameters in each</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co">##         # model. This is to account for the df needed to estimate the random</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a><span class="co">##         # effect. I suppose we could use a different number or a series of</span></span>
+<span id="cb6-14"><a href="#cb6-14"></a><span class="co">##         # numbers if we were interested in evaluating the sensitivity of</span></span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##         # model selection statistics to the</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##           k[i]&lt;-nrow(data.frame(summary(x[[i]])[10]))+1</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##         }</span></span>
+<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##       # Make blank columns to hold statistics</span></span>
+<span id="cb6-19"><a href="#cb6-19"></a><span class="co">##         AICc &lt;- c(rep(0, length(k)))        # AICc score</span></span>
+<span id="cb6-20"><a href="#cb6-20"></a><span class="co">##         DeltaAIC &lt;- c(rep(0, length(k)))    # Delta AICc</span></span>
+<span id="cb6-21"><a href="#cb6-21"></a><span class="co">##         AICWeight &lt;- c(rep(0, length(k)))   # Wi</span></span>
+<span id="cb6-22"><a href="#cb6-22"></a><span class="co">##         Deviance &lt;- c(rep(0, length(k)))    # Model deviance</span></span>
+<span id="cb6-23"><a href="#cb6-23"></a><span class="co">##         R.lik&lt;-c(rep(0, length(k)))         # Rel. likelihood for wi</span></span>
+<span id="cb6-24"><a href="#cb6-24"></a><span class="co">##       # Make a dataframe to hold results of model selection</span></span>
+<span id="cb6-25"><a href="#cb6-25"></a><span class="co">##         if(is.null(y)){ y=rep(&quot;&quot;, length(x))}</span></span>
+<span id="cb6-26"><a href="#cb6-26"></a><span class="co">## </span></span>
+<span id="cb6-27"><a href="#cb6-27"></a><span class="co">##         ranks&lt;-data.frame(y, k, AICc, DeltaAIC, AICWeight)</span></span>
+<span id="cb6-28"><a href="#cb6-28"></a><span class="co">##         names(ranks)[1] &lt;- &quot;Model&quot;</span></span>
+<span id="cb6-29"><a href="#cb6-29"></a><span class="co">##       # Get AICc for each model</span></span>
+<span id="cb6-30"><a href="#cb6-30"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
+<span id="cb6-31"><a href="#cb6-31"></a><span class="co">##           # Note that we are penalizing the likelihood of each model based on</span></span>
+<span id="cb6-32"><a href="#cb6-32"></a><span class="co">##           # the number of parameters in each model in addition to sample size</span></span>
+<span id="cb6-33"><a href="#cb6-33"></a><span class="co">##           ranks$AICc[i] &lt;- AIC(x[[i]])+(((2*k[i])*(k[i]+1))/</span></span>
+<span id="cb6-34"><a href="#cb6-34"></a><span class="co">##             (nrow(est.mvmt)-k[i]-1))</span></span>
+<span id="cb6-35"><a href="#cb6-35"></a><span class="co">##         }</span></span>
+<span id="cb6-36"><a href="#cb6-36"></a><span class="co">##       # Sort the table by AICc to get them in order for calculations</span></span>
+<span id="cb6-37"><a href="#cb6-37"></a><span class="co">##         ranks &lt;- ranks[with(ranks, order(AICc)), ]</span></span>
+<span id="cb6-38"><a href="#cb6-38"></a><span class="co">##       # Calculate delta AIC</span></span>
+<span id="cb6-39"><a href="#cb6-39"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
+<span id="cb6-40"><a href="#cb6-40"></a><span class="co">##           ranks$DeltaAIC[i] &lt;- ranks$AICc[i]-ranks$AICc[1]</span></span>
+<span id="cb6-41"><a href="#cb6-41"></a><span class="co">##         }</span></span>
+<span id="cb6-42"><a href="#cb6-42"></a><span class="co">##       # Calculate the relative likelihood for each of the models</span></span>
+<span id="cb6-43"><a href="#cb6-43"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
+<span id="cb6-44"><a href="#cb6-44"></a><span class="co">##           R.lik[i] &lt;- exp(-.5*ranks$DeltaAIC[i])</span></span>
+<span id="cb6-45"><a href="#cb6-45"></a><span class="co">##         }</span></span>
+<span id="cb6-46"><a href="#cb6-46"></a><span class="co">##       # Calculate AIC weight for each of the models based on the relative</span></span>
+<span id="cb6-47"><a href="#cb6-47"></a><span class="co">##       # likelihood</span></span>
+<span id="cb6-48"><a href="#cb6-48"></a><span class="co">##         for(i in 1:length(R.lik)){</span></span>
+<span id="cb6-49"><a href="#cb6-49"></a><span class="co">##           ranks$AICWeight[i] &lt;- R.lik[i]/sum(R.lik[1:length(R.lik)])</span></span>
+<span id="cb6-50"><a href="#cb6-50"></a><span class="co">##         }</span></span>
+<span id="cb6-51"><a href="#cb6-51"></a><span class="co">##       # Round off the calculated columns to two decimal places because that is</span></span>
+<span id="cb6-52"><a href="#cb6-52"></a><span class="co">##       # really all we need for wi and we want the rest to be standardized.</span></span>
+<span id="cb6-53"><a href="#cb6-53"></a><span class="co">##         ranks[ , 3:5] &lt;- round(ranks[ , 3:5], 2)</span></span>
+<span id="cb6-54"><a href="#cb6-54"></a><span class="co">##       # Print the model selection results</span></span>
+<span id="cb6-55"><a href="#cb6-55"></a><span class="co">##         return(ranks)</span></span>
+<span id="cb6-56"><a href="#cb6-56"></a><span class="co">##   }</span></span></code></pre></div>
 <p>Fast forward a couple of years, and now model selection for GLMM has been implemented in the <code>AICcmodavg</code> package. So, you can now use the <code>aictab</code> function in the <code>AICcmodavg</code> package instead of the <code>aic.tableR</code> function we have defined above to calculate model selection statistics for your model list (thank goodness because I am having a heck of a time trying to source this through the web over the campus network). Go ahead: do it.</p>
 <p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model?</p>
 <!-- What is the probability that your top model is the best in the candidate set? Using the $w_i$ ratio that we introduced a few weeks back, how many times better supported is your best model compared to your second best model? -->
@@ -554,13 +551,13 @@ Introduction
 <p>Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values? Notice that there is only one plot for the diagnostics here. This is because we are pretty much only concerned with the fact that the residuals of the random effect are normally distributed. Now that’s what I call flexibility.</p>
 <p>Now go ahead and look at the summary of your best model.</p>
 <p><strong>Food for thought</strong>: What factors were included in your best model? Are they all considered significant at <span class="math inline">\(alpha\)</span> = 0.05?</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Note that if you have factors in your model,</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="co"># you can still get an overall significance</span></a>
-<a class="sourceLine" id="cb7-3" title="3"><span class="co"># level for your variables for GLMM and LMM using</span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="co"># car::Anova. Here is the first one from the model</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co"># list from the paper:</span></a>
-<a class="sourceLine" id="cb7-6" title="6">  <span class="kw">library</span>(car)</a>
-<a class="sourceLine" id="cb7-7" title="7">  <span class="kw">Anova</span>(Mov.mods[[<span class="dv">1</span>]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Note that if you have factors in your model,</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># you can still get an overall significance</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># level for your variables for GLMM and LMM using</span></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># car::Anova. Here is the first one from the model</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># list from the paper:</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>  <span class="kw">library</span>(car)</span>
+<span id="cb7-7"><a href="#cb7-7"></a>  <span class="kw">Anova</span>(Mov.mods[[<span class="dv">1</span>]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type II Wald chisquare tests)
 ## 
 ## Response: log(Rate)
@@ -577,21 +574,21 @@ Introduction
 <p>Philosophically, there is some reasonable opposition to the comparison of mixed effects models with their fixed effects counterparts, namely that exclusion of the fixed effect (if part of experimental design) is pseudo-replication (more specifically, it is ‘sacrificial pseudoreplication’ according to <a href = "www.masterenbiodiversidad.org/docs/asig3/Hurlbert_1984_Pseudoreplication.pdf">Hurlbert (1984)</a>.</p>
 <p>The <em>point</em> of all of this is that we included the random effect in order to account for issues with experimental design, so we might want to use it to temper our predictions to improve the accuracy of estimating population-level means.</p>
 <p>For the example model I have been using we can get a 95% CI on the mean movement rate of individuals as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># Get coefficients and ses</span></a>
-<a class="sourceLine" id="cb9-2" title="2">  cc =<span class="st"> </span><span class="kw">fixef</span>(Mov.mods[[<span class="dv">1</span>]])[<span class="dv">1</span>]                   <span class="co"># Intercept</span></a>
-<a class="sourceLine" id="cb9-3" title="3">  ss =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">unlist</span>(<span class="kw">VarCorr</span>(Mov.mods[[<span class="dv">1</span>]])))      <span class="co"># Random effects SD</span></a>
-<a class="sourceLine" id="cb9-4" title="4">  se =<span class="st"> </span><span class="kw">summary</span>(Mov.mods[[<span class="dv">1</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># Intercept se</span></a>
-<a class="sourceLine" id="cb9-5" title="5"></a>
-<a class="sourceLine" id="cb9-6" title="6"><span class="co"># Print the mean movement rate for</span></a>
-<a class="sourceLine" id="cb9-7" title="7"><span class="co"># smolts (in body lengths per second). </span></a>
-<a class="sourceLine" id="cb9-8" title="8"><span class="co"># Note that we need to use exp() because</span></a>
-<a class="sourceLine" id="cb9-9" title="9"><span class="co"># the analysis was on the log scale.</span></a>
-<a class="sourceLine" id="cb9-10" title="10">  <span class="kw">exp</span>(cc)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Get coefficients and ses</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  cc =<span class="st"> </span><span class="kw">fixef</span>(Mov.mods[[<span class="dv">1</span>]])[<span class="dv">1</span>]                   <span class="co"># Intercept</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  ss =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">unlist</span>(<span class="kw">VarCorr</span>(Mov.mods[[<span class="dv">1</span>]])))      <span class="co"># Random effects SD</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a>  se =<span class="st"> </span><span class="kw">summary</span>(Mov.mods[[<span class="dv">1</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># Intercept se</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Print the mean movement rate for</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># smolts (in body lengths per second). </span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># Note that we need to use exp() because</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># the analysis was on the log scale.</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>  <span class="kw">exp</span>(cc)</span></code></pre></div>
 <pre><code>## (Intercept) 
 ##    1.352833</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Now we can ask R to give us a 95% CI on the estimate Note that we</span></a>
-<a class="sourceLine" id="cb11-2" title="2"><span class="co"># need to use exp() because the analysis was on the log scale.</span></a>
-<a class="sourceLine" id="cb11-3" title="3">  <span class="kw">exp</span>(<span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="dt">mean=</span>cc,<span class="dt">sd=</span>ss<span class="op">+</span>se)) </a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Now we can ask R to give us a 95% CI on the estimate Note that we</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># need to use exp() because the analysis was on the log scale.</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="kw">exp</span>(<span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="dt">mean=</span>cc,<span class="dt">sd=</span>ss<span class="op">+</span>se)) </span></code></pre></div>
 <pre><code>## [1] 1.303878 1.403625</code></pre>
 <p><strong>Question 5.</strong> Using the code above, do the same thing for your best model and report the model-predicted mean and 95% CI for smolt movement through the estuary. How does this compare to the median movement rate of of smolts in the data set? Why do you suppose this is? I will take one of two answers, only one is correct though.</p>
 </div>

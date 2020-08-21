@@ -1,15 +1,12 @@
-```{r, child="../../_styles.Rmd"}
-```
+# Data simulation and visualization (#sim-vis)
 
-<h1 id="multi"> Data simulation and visualization </h1>
+<img src="matrixSmolt.jpg" alt="">
 
-<img src="../../images/matrixSmolt.jpg" alt="">
-
-<h2 id="multi"> Introduction </h2>
+## Introduction {#intro2}
 
 The purpose of this unit is to get you comfortable simulating data in R and give you some tools for vizualizing the data that you have simulated or collected. This is not meant to be a comprehensive treatment of these subjects but rather an introduction to the tools that are available to you. Similarly, this is just meant to get you started. There are a lot of tools out there and you may come up with something that works better for you once you have some basics under your belt. 
 
-> **Why are we talking about simulating data?**
+**Why are we talking about simulating data?**
 
 There are a few good reasons for this:
 
@@ -17,9 +14,9 @@ There are a few good reasons for this:
 
 2. Tools used for data simulation are similar or the same as many of the tools that you will need for manipulating and analyzing data.
 
-3. Simulation can be as useful on the back end of statistical analyses as it is for experimental design. For example, we need to simulate data to make predictions in many cases.
+3. Simulation can be as useful on the back end of statistical analyses as it is for experimental design. For example, we need to simulate data to make predictions and visualize our results in many cases.
 
-> **And data visualization- why do we care?**
+**And data visualization- why do we care?**
 
 1. There are few statistical tests that hold intuitive meaning to our readers. The ability to present information in a visually meaningful way to the reader can help to make the interpretation of your science crystal clear without having to worry about whether or not your reader has the faculties to interpret the results of statistical tests.
 
@@ -28,9 +25,9 @@ There are a few good reasons for this:
 3. There are a few graphical tools that are very useful for basic data exploration, diagnostics, etc., that can make your life a lot easier for data analysis and interpretation. They can also help you decide whether something has gone terribly wrong.
 
 
-## Simulating data in R
+## Simulating data in R (#sim)
 
-There are a lot of tools specifically created for simulating data in R. We can't even begin to cover them all, but we can build up a basic working knowledge of some of those that are more essential. This week we will look at some simple, common tools for basic data generation. Next week, we will extend this to include more on probability distributions.
+There are a lot of tools specifically created for simulating data in R. We can't even begin to cover them all, but we can build up a basic working knowledge of some of those that are more essential. In this chapter we will look at some simple, common tools for basic data generation. In [Chapter3](#probability), we will extend this to include more on probability distributions. As we go along, we will layer in additional tools for data manipulation.
 
 There are a lot of different reasons why we might want to simulate data, from creating derived variables, to data organization, variable coding, power analyses, model predictions and validation, and 'heuristic' exercises.
 
@@ -38,7 +35,7 @@ Let's start with some really simple functions in R.
 
 We can simulate data in two ways: deterministically and stochastically.
 
-**Deterministic**: this one is well defined. Here we are usually talking about assigning a variable based on some known characteristic or an error-free mathematical calculation.
+**Deterministic**: this one is well defined. Here we are usually talking about assigning a variable some value based on some known characteristic or a (presumably error-free) mathematical calculation.
 
 **Stochastic**: this one is looser. Here we are usually talking about things like random number generation, subsampling, and a variety of other more advanced techniques. The objective usually is to incorporate some aspect of probability or uncertainty. This uncertainty can either be due to process error or observation error. 
 
@@ -46,13 +43,13 @@ Process error is due to real 'noise' in a study system. It can, in itself, be a 
 
 Observation error can be thought of as 'false' noise in the study system that has been introduced due to our inability to perfectly observe some process of interest). This more commonly is thought of as a nuisance to be accounted for in many contemporary studies, but can also be an interesting field of inquiry in its own right. A common cause of observation error is imperfect detection of individuals or species in field surverys.
 
-### Deterministic simulation
+## Deterministic operations
 
-By nature, deterministic simulation is inherently more boring than stochastic simulation, because relationships are known. This usually is manifested in the form of data manipulation, categorical or ordinal variable assignments, or calculation of derived quantities. We might also think of these simply as "transformations" of variables.
+By nature, deterministic simulation or data modification is inherently more boring than stochastic simulation, because relationships are known, but it gives us a really clean playing field. This usually is manifested in the form of data manipulation, categorical or ordinal variable assignments, or calculation of derived quantities. We might also think of these simply as "transformations" of variables.
     
-#### Data read    
+### Data read    
 
-Let's start by reading in a data file- this time we use **real** data. These are sex-specific length-at-age data for American shad (*Alosa sapidissima*) from the Connecticut River. The data currently are being used in some models that I maintain with collaborators from NOAA Fisheries, the US Geological Survey, and US Fish and Wildlife Service. The data were provided by CT Department of Energy and Environmental Protection and come from adult fish that are returning to the river from the ocean to spawn.
+Let's start by reading in a data file- this time we use **real** data. These are sex-specific length-at-age data for American shad (*Alosa sapidissima*) from the Connecticut River. The data currently are being used in some models that I maintain with collaborators from NOAA Fisheries, the US Geological Survey, the US Fish and Wildlife Service,. The data were provided by CT Department of Energy and Environmental Protection and come from adult fish that are returning to the river from the ocean to spawn.
 
 ```{r, eval = FALSE, echo = TRUE}
 # Start by reading in the data from the class website

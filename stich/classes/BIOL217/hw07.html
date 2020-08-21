@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>hw07.utf8.md</title>
+<title>hw07.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -366,35 +369,11 @@ $(document).ready(function () {
      
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Teaching
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../../teaching.html">Teaching home</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
-    </li>
-  </ul>
+<li>
+  <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
-  <a href="../../publications.html">Publications</a>
-</li>
-<li>
-  <a href="../../cv.html">CV</a>
+  <a href="resources.html">Additional Resources</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
@@ -432,11 +411,11 @@ Introduction
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Install the &#39;faraway&#39; package in R,</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># to get the data using data(&quot;gala&quot;):</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  <span class="co">#install.packages(&#39;faraway&#39;)</span></a>
-<a class="sourceLine" id="cb1-4" title="4">  <span class="kw">library</span>(faraway)</a>
-<a class="sourceLine" id="cb1-5" title="5">  <span class="kw">data</span>(gala)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Install the &#39;faraway&#39; package in R,</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># to get the data using data(&quot;gala&quot;):</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  <span class="co">#install.packages(&#39;faraway&#39;)</span></span>
+<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">library</span>(faraway)</span>
+<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">data</span>(gala)</span></code></pre></div>
 <p>The data explanation follows:</p>
 <p><code>Species</code>: number of plant species found on the island<br> <code>Endemics</code>: number of endemic species<br> <code>Area</code>: area of the island (km<sup>2</sup>)<br> <code>Elevation</code>: highest elevation of the island (m)<br> <code>Nearest</code>: distance from the nearest island (km)<br> <code>Scruz</code>: distance from Santa Cruz island (km)<br> <code>Adjacent</code>: area of the adjacent island (square km)<br></p>
 <p>The citation for the paper is:</p>
@@ -459,37 +438,37 @@ Introduction
 <p>Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.</p>
 <p>For a change of pace from previous labs, let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. Let’s have some fun!</p>
 <p>The models that Johnson and Raven tested looked like this</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Note: the results will not be exactly</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="co"># the same because missing data in the paper</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="co"># were filled in here.</span></a>
-<a class="sourceLine" id="cb2-4" title="4"></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="co"># Note also: we need to fix data point</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="co"># number 25 in Scruz because that is the</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="co"># island Scruz and we can&#39;t take the</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="co"># log of zero!!!</span></a>
-<a class="sourceLine" id="cb2-9" title="9">gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span></a>
-<a class="sourceLine" id="cb2-10" title="10"></a>
-<a class="sourceLine" id="cb2-11" title="11">S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</a>
-<a class="sourceLine" id="cb2-12" title="12">lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),</a>
-<a class="sourceLine" id="cb2-13" title="13">            <span class="dt">data=</span>gala)</a>
-<a class="sourceLine" id="cb2-14" title="14">S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</a>
-<a class="sourceLine" id="cb2-15" title="15">lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb2-16" title="16"><span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Note: the results will not be exactly</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># the same because missing data in the paper</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># were filled in here.</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Note also: we need to fix data point</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># number 25 in Scruz because that is the</span></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># island Scruz and we can&#39;t take the</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># log of zero!!!</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a>gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span></span>
+<span id="cb2-10"><a href="#cb2-10"></a></span>
+<span id="cb2-11"><a href="#cb2-11"></a>S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</span>
+<span id="cb2-12"><a href="#cb2-12"></a>lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),</span>
+<span id="cb2-13"><a href="#cb2-13"></a>            <span class="dt">data=</span>gala)</span>
+<span id="cb2-14"><a href="#cb2-14"></a>S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</span>
+<span id="cb2-15"><a href="#cb2-15"></a>lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb2-16"><a href="#cb2-16"></a><span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala)</span></code></pre></div>
 <p><strong>Question 5.</strong> Look at the summaries for each of these models once you fit them. Does the general pattern in the R<sup>2</sup> values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
 <p>This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his <a href="http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf">seminal 1974 paper</a> in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before).</p>
 <p>Let’s see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models.</p>
 <p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc<sub>i</sub>, <span class="math inline">\(\Delta\)</span>AICc<sub>i</sub>, and w<sub>i</sub> manually.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Install and load the necessary library</span></a>
-<a class="sourceLine" id="cb3-2" title="2">  <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3">  <span class="kw">library</span>(AICcmodavg)</a>
-<a class="sourceLine" id="cb3-4" title="4"></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co"># Next, you will need to make a</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="co"># list out of your models</span></a>
-<a class="sourceLine" id="cb3-7" title="7">  mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)</a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="co"># Make sure you give it some names, too</span></a>
-<a class="sourceLine" id="cb3-9" title="9">  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Install and load the necessary library</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Next, you will need to make a</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># list out of your models</span></span>
+<span id="cb3-7"><a href="#cb3-7"></a>  mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)</span>
+<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Make sure you give it some names, too</span></span>
+<span id="cb3-9"><a href="#cb3-9"></a>  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</span></code></pre></div>
 <p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can <a href="https://www.google.com/">Google</a> it, or you can do:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">?aictab</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>?aictab</span></code></pre></div>
 <p><strong>Question 6.</strong> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(\Delta\)</span>AICc and the ratio of w<sub>i</sub> for the two models (see reference script).</p>
 <p><strong>Question 7.</strong> How do the results of your AICc model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
 <p><strong>Question 8.</strong> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log<sup><em>e</em></sup> transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log<sup><em>e</em></sup> transform the explanatory variables if you do not wish to.</p>
@@ -499,32 +478,32 @@ Introduction
 <div id="model-validation" class="section level3">
 <h3>Model validation</h3>
 <p>Trucking on…First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># As a reminder, here is the model that you should be working with for this:</span></a>
-<a class="sourceLine" id="cb5-2" title="2">  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),<span class="dt">data=</span>gala)</a>
-<a class="sourceLine" id="cb5-3" title="3"></a>
-<a class="sourceLine" id="cb5-4" title="4">  <span class="kw">summary</span>(lnS1)</a>
-<a class="sourceLine" id="cb5-5" title="5"></a>
-<a class="sourceLine" id="cb5-6" title="6">Call<span class="op">:</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="kw">lm</span>(<span class="dt">formula =</span> <span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="st">    </span><span class="kw">log</span>(Adjacent), <span class="dt">data =</span> gala)</a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10">Residuals<span class="op">:</span></a>
-<a class="sourceLine" id="cb5-11" title="11"><span class="st">     </span>Min       1Q   Median       3Q      Max </a>
-<a class="sourceLine" id="cb5-12" title="12"><span class="fl">-1.61494</span> <span class="fl">-0.44016</span> <span class="fl">-0.01009</span>  <span class="fl">0.47420</span>  <span class="fl">1.39483</span> </a>
-<a class="sourceLine" id="cb5-13" title="13"></a>
-<a class="sourceLine" id="cb5-14" title="14">Coefficients<span class="op">:</span></a>
-<a class="sourceLine" id="cb5-15" title="15"><span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb5-16" title="16">(Intercept)    <span class="fl">3.13231</span>    <span class="fl">0.22380</span>  <span class="fl">13.996</span> <span class="fl">2.48e-13</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb5-17" title="17"><span class="kw">log</span>(Area)      <span class="fl">0.39389</span>    <span class="fl">0.04383</span>   <span class="fl">8.987</span> <span class="fl">2.64e-09</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb5-18" title="18"><span class="kw">log</span>(Nearest)  <span class="fl">-0.09074</span>    <span class="fl">0.10833</span>  <span class="fl">-0.838</span>    <span class="fl">0.410</span>    </a>
-<a class="sourceLine" id="cb5-19" title="19"><span class="kw">log</span>(Scruz)    <span class="fl">-0.03025</span>    <span class="fl">0.05413</span>  <span class="fl">-0.559</span>    <span class="fl">0.581</span>    </a>
-<a class="sourceLine" id="cb5-20" title="20"><span class="kw">log</span>(Adjacent) <span class="fl">-0.02448</span>    <span class="fl">0.04698</span>  <span class="fl">-0.521</span>    <span class="fl">0.607</span>    </a>
-<a class="sourceLine" id="cb5-21" title="21"><span class="op">---</span></a>
-<a class="sourceLine" id="cb5-22" title="22">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb5-23" title="23"></a>
-<a class="sourceLine" id="cb5-24" title="24">Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.7955</span> on <span class="dv">25</span> degrees of freedom</a>
-<a class="sourceLine" id="cb5-25" title="25">Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7768</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7411</span> </a>
-<a class="sourceLine" id="cb5-26" title="26">F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.75</span> on <span class="dv">4</span> and <span class="dv">25</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">7.731e-08</span></a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># As a reminder, here is the model that you should be working with for this:</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),<span class="dt">data=</span>gala)</span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">summary</span>(lnS1)</span>
+<span id="cb5-5"><a href="#cb5-5"></a></span>
+<span id="cb5-6"><a href="#cb5-6"></a>Call<span class="op">:</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">lm</span>(<span class="dt">formula =</span> <span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="st">    </span><span class="kw">log</span>(Adjacent), <span class="dt">data =</span> gala)</span>
+<span id="cb5-9"><a href="#cb5-9"></a></span>
+<span id="cb5-10"><a href="#cb5-10"></a>Residuals<span class="op">:</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a><span class="st">     </span>Min       1Q   Median       3Q      Max </span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="fl">-1.61494</span> <span class="fl">-0.44016</span> <span class="fl">-0.01009</span>  <span class="fl">0.47420</span>  <span class="fl">1.39483</span> </span>
+<span id="cb5-13"><a href="#cb5-13"></a></span>
+<span id="cb5-14"><a href="#cb5-14"></a>Coefficients<span class="op">:</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a><span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
+<span id="cb5-16"><a href="#cb5-16"></a>(Intercept)    <span class="fl">3.13231</span>    <span class="fl">0.22380</span>  <span class="fl">13.996</span> <span class="fl">2.48e-13</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb5-17"><a href="#cb5-17"></a><span class="kw">log</span>(Area)      <span class="fl">0.39389</span>    <span class="fl">0.04383</span>   <span class="fl">8.987</span> <span class="fl">2.64e-09</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb5-18"><a href="#cb5-18"></a><span class="kw">log</span>(Nearest)  <span class="fl">-0.09074</span>    <span class="fl">0.10833</span>  <span class="fl">-0.838</span>    <span class="fl">0.410</span>    </span>
+<span id="cb5-19"><a href="#cb5-19"></a><span class="kw">log</span>(Scruz)    <span class="fl">-0.03025</span>    <span class="fl">0.05413</span>  <span class="fl">-0.559</span>    <span class="fl">0.581</span>    </span>
+<span id="cb5-20"><a href="#cb5-20"></a><span class="kw">log</span>(Adjacent) <span class="fl">-0.02448</span>    <span class="fl">0.04698</span>  <span class="fl">-0.521</span>    <span class="fl">0.607</span>    </span>
+<span id="cb5-21"><a href="#cb5-21"></a><span class="op">---</span></span>
+<span id="cb5-22"><a href="#cb5-22"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb5-23"><a href="#cb5-23"></a></span>
+<span id="cb5-24"><a href="#cb5-24"></a>Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.7955</span> on <span class="dv">25</span> degrees of freedom</span>
+<span id="cb5-25"><a href="#cb5-25"></a>Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7768</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7411</span> </span>
+<span id="cb5-26"><a href="#cb5-26"></a>F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.75</span> on <span class="dv">4</span> and <span class="dv">25</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">7.731e-08</span></span></code></pre></div>
 <p>Use one of the methods from the reference script (<em>leave-one-out cross-validation</em> or <em>bootstrapped predictive</em> R<sup>2</sup>) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the <code>caret</code> package or the <code>DAAG</code> package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. <em>Note</em>: you do not need to make any plots for the above, but it is strongly encouraged.</p>
 <p>Use the same method to do model validation on the best model in your model set from question 9.</p>
 <p><strong>Question 10.</strong> How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?</p>

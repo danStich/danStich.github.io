@@ -3,7 +3,7 @@
 
 <h1 id="multi">Introduction to programming in R</h1>
 
-<img src="../../images/roh.png" alt="">
+<!-- <img src="../../images/roh.png" alt=""> -->
 
 <h2 id="multi">Introduction</h2>
 
@@ -58,10 +58,6 @@ Type the following line of code into a blank source file, and run it.
 > Section breaks help organization
 
 I like to use the built-in heading. It works really well for code-folding in R and when I've written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and type the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.
-
-
- 
-I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I've written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.
 
 ```{r}
 

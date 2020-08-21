@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>hw06.utf8.md</title>
+<title>hw06.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -366,35 +369,11 @@ $(document).ready(function () {
      
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Teaching
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../../teaching.html">Teaching home</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
-    </li>
-  </ul>
+<li>
+  <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
-  <a href="../../publications.html">Publications</a>
-</li>
-<li>
-  <a href="../../cv.html">CV</a>
+  <a href="resources.html">Additional Resources</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
@@ -435,27 +414,27 @@ Introduction
 Regression diagnostics
 </h3>
 <p>Let’s begin by doing some model diagnostics for a linear model. Remember, this should really be the first step, along with data exploration, in any analysis that you conduct using linear models. Let’s start off this week with the <code>ToothGrowth</code> data that some of you explored during the first lab. These data are from an experiment that studied the effects of three different doses of Vitamin C using one of two supplement types on the length of guinea pig teeth.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Load the ToothGrowth dataset</span></a>
-<a class="sourceLine" id="cb1-2" title="2">  <span class="kw">data</span>(<span class="st">&quot;ToothGrowth&quot;</span>)</a>
-<a class="sourceLine" id="cb1-3" title="3"></a>
-<a class="sourceLine" id="cb1-4" title="4"><span class="co"># To learn more about the data set, you can do</span></a>
-<a class="sourceLine" id="cb1-5" title="5">  ?ToothGrowth</a>
-<a class="sourceLine" id="cb1-6" title="6"></a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="co"># Take a look at the structure of the data</span></a>
-<a class="sourceLine" id="cb1-8" title="8">  <span class="kw">str</span>(ToothGrowth)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load the ToothGrowth dataset</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a>  <span class="kw">data</span>(<span class="st">&quot;ToothGrowth&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a></span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># To learn more about the data set, you can do</span></span>
+<span id="cb1-5"><a href="#cb1-5"></a>  ?ToothGrowth</span>
+<span id="cb1-6"><a href="#cb1-6"></a></span>
+<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Take a look at the structure of the data</span></span>
+<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">str</span>(ToothGrowth)</span></code></pre></div>
 <p>Dose is stored as a numeric variable, and that makes intuitive sense. However, we only have three different doses, so if we are assuming that dose is numeric, then we also need to assume that it is being randomly sampled from a population of potential doses, which I think is clearly not the case here (otherwise we would have some that weren’t nice round numbers). So, we should probably convert this to a factor.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Convert the dose variable to a factor</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  ToothGrowth<span class="op">$</span>dose =<span class="st"> </span><span class="kw">as.factor</span>(ToothGrowth<span class="op">$</span>dose)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Convert the dose variable to a factor</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  ToothGrowth<span class="op">$</span>dose =<span class="st"> </span><span class="kw">as.factor</span>(ToothGrowth<span class="op">$</span>dose)</span></code></pre></div>
 <p>Now, let’s get diagnosing.</p>
 <p>The first thing we will do is check to see if the distributions of the data are normal within groups. We can do this with a couple of tools. First, make a boxplot of tooth length (<code>'len'</code>) as a function of supplement type and dose.</p>
 <p><strong>Question 1.</strong> Based on the boxplot, does it appear that the distribution of tooth lengths is fairly normal within doses? What other kinds of plots could you use to visually inspect these distributions (note: not the residuals yet)?</p>
 <p>Next, we can look at the actual regression diagnostics to examine whether or not we are in major violation of assumptions about the residuals in our model. Remember, the two assumptions related to the residuals are 1) they are normally distributed with a mean of zero, and 2) homogeneity of variance.</p>
 <p>Start by fitting a model to test the additive effects of the supplement (<code>supp</code>) and doseage (<code>dose</code>) on tooth length (<code>len</code>) in guinea pigs.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Remember to store the model as an object,</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># like this, replacing the &#39;...&#39; in</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="co"># parentheses with the appropriate </span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="co"># formula and data arguments. Cruel, #Iknow.</span></a>
-<a class="sourceLine" id="cb3-5" title="5">  tooth.mod =<span class="st"> </span><span class="kw">lm</span>(...)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Remember to store the model as an object,</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># like this, replacing the &#39;...&#39; in</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="co"># parentheses with the appropriate </span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># formula and data arguments. Cruel, #Iknow.</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a>  tooth.mod =<span class="st"> </span><span class="kw">lm</span>(...)</span></code></pre></div>
 <p>Next, graph the diagnostic plots of the residual error for the fitted model object using the <code>plot</code> function. See the <a href="06_diagnosticsAndEffects.html">lecture module</a> for an example of how to do this. Remember, you can use the <code>mfrow</code> argument in the <code>par</code> function to get all four of these plots in one window if you prefer not to flip through them one by one.</p>
 <p><strong>Question 2.</strong> Based on our discussions about residual plots this week and the examples in the <a href="06_diagnosticsAndEffects.html">lecture module</a>, does it appear that the residuals in the plots you made are (more or less) normally distributed with a mean of zero? How did you come to this conclusion?</p>
 <p><strong>Question 3.</strong> Based on the residual plots you have made and our discussions, does it appear that your model violates the assumption about homogeneity of variances? How did you come to <em>this</em> conclusion?</p>
@@ -463,20 +442,20 @@ Regression diagnostics
 <h3>Interpreting main effects</h3>
 <p>Once you are satisfied that you have adequately reviewed the diagnostic plots and developed an opinion about whether or not we are violating assumptions, let’s move on.</p>
 <p>Now that we’ve done a little model validation to assure that we are not completely blowing the assumptions of linear models (hopefully you concluded this as well), it is time to take a look at our results. We will do this one step at a time. First, print the output of your model using the <code>anova</code> function to determine whether or not the main effects of each explanatory variable were significant.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Get the ANOVA table for your model,</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="co"># replacing &#39;tooth.mod&#39; with </span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="co"># whatever you named the model object.</span></a>
-<a class="sourceLine" id="cb4-4" title="4">  <span class="kw">anova</span>(tooth.mod)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Get the ANOVA table for your model,</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># replacing &#39;tooth.mod&#39; with </span></span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># whatever you named the model object.</span></span>
+<span id="cb4-4"><a href="#cb4-4"></a>  <span class="kw">anova</span>(tooth.mod)</span></code></pre></div>
 <p><strong>Question 4.</strong> Were there significant effects of supplement and/or dose on guinea pig tooth length?</p>
 <p><strong>Question 5.</strong> How much of the variability in guinea pig tooth length was explained by the additive effects of supplement and dose? Remember, there are multiple ways to find this information. If you can’t remember either method, check the <a href="05_linearModels.html">linear models tutorial</a> from last week or <code>Google</code> it.</p>
 <p>If you haven’t already done so, print a summary of the linear model so you can see the regression coefficients. Using what you learned in class this week, and the 1000-line long <a href="06_diagnosticsAndEffects.html">lecture module</a> that your wicked awesome prof made for you this week, predict the mean expected value of tooth length for each combination of <code>supp</code> and <code>dose</code>. <em>Remember:</em> there are multiple ways to do this. All are in the <a href="06_diagnosticsAndEffects.html">lecture module</a>. You can do the math by hand, or you can use the built-in <code>predict</code> function in R. Just pay close attention to how you do this, and make sure that your predictions make reasonable sense (they should if you do it correctly).</p>
 <p><strong>Question 6.</strong> Report the model-predicted tooth length for each combination of supplement and dose.</p>
 <p>Next, calculate the observed mean of tooth length for each combination of supplement and dose. The easiest way to do this is with the ddply function in the <code>plyr</code> package:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Load the plyr package</span></a>
-<a class="sourceLine" id="cb5-2" title="2">  <span class="kw">library</span>(plyr)</a>
-<a class="sourceLine" id="cb5-3" title="3">  </a>
-<a class="sourceLine" id="cb5-4" title="4"><span class="co"># Check out the function if you&#39;ve forgotten how to use it  </span></a>
-<a class="sourceLine" id="cb5-5" title="5">  ?ddply</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Load the plyr package</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">library</span>(plyr)</span>
+<span id="cb5-3"><a href="#cb5-3"></a>  </span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Check out the function if you&#39;ve forgotten how to use it  </span></span>
+<span id="cb5-5"><a href="#cb5-5"></a>  ?ddply</span></code></pre></div>
 <p><strong>Question 7.</strong> Do the model predictions of tooth length for each combination of supplement and dose approximate the values and patterns in the observed data reasonably well? Describe any discrepencies you notice.</p>
 <p><img src="hw06_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
 </div>
@@ -488,23 +467,23 @@ Regression diagnostics
 <p><strong>Question 8.</strong> Is the interaction term in this model significant?</p>
 <p><strong>Question 9.</strong> How much variability in guinea pig tooth length is explained by this model? Is that more or less than the model that did not include the interaction?</p>
 <p>Finally, use one of the methods from the <a href="06_diagnosticsAndEffects.html">lecture module</a> to plot the predicted values of guinea pig tooth length for each combination of supplement and dose using the model that included the interaction term. To do this, you will want to use the built-in <code>predict</code> function in R. This can get a little messy, so I will help you along your way.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># First, we need to get all combinations</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># of the unique values for supplement</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="co"># type and dose. To do this, we will</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="co"># use the &#39;expand.grid&#39; function. Note that we are</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="co"># basically telling R to cross tabulate all of the unique values of </span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="co"># supplement type with all of the unique values of dose</span></a>
-<a class="sourceLine" id="cb6-7" title="7">  levels =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="kw">unique</span>(ToothGrowth<span class="op">$</span>supp), <span class="kw">unique</span>(ToothGrowth<span class="op">$</span>dose))</a>
-<a class="sourceLine" id="cb6-8" title="8">  </a>
-<a class="sourceLine" id="cb6-9" title="9"><span class="co"># Give the new df names.</span></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co"># These names have to match the</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="co"># names of the variables</span></a>
-<a class="sourceLine" id="cb6-12" title="12"><span class="co"># used in fitting the model</span></a>
-<a class="sourceLine" id="cb6-13" title="13">  <span class="kw">names</span>(levels) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;supp&#39;</span>, <span class="st">&#39;dose&#39;</span>)</a>
-<a class="sourceLine" id="cb6-14" title="14">  </a>
-<a class="sourceLine" id="cb6-15" title="15"><span class="co"># Sort the dataframe by supplement for</span></a>
-<a class="sourceLine" id="cb6-16" title="16"><span class="co"># ease of plotting later on</span></a>
-<a class="sourceLine" id="cb6-17" title="17">  levels =<span class="st"> </span>levels[<span class="kw">with</span>(levels, <span class="kw">order</span>(supp)), ]  </a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># First, we need to get all combinations</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># of the unique values for supplement</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># type and dose. To do this, we will</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># use the &#39;expand.grid&#39; function. Note that we are</span></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># basically telling R to cross tabulate all of the unique values of </span></span>
+<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># supplement type with all of the unique values of dose</span></span>
+<span id="cb6-7"><a href="#cb6-7"></a>  levels =<span class="st"> </span><span class="kw">expand.grid</span>(<span class="kw">unique</span>(ToothGrowth<span class="op">$</span>supp), <span class="kw">unique</span>(ToothGrowth<span class="op">$</span>dose))</span>
+<span id="cb6-8"><a href="#cb6-8"></a>  </span>
+<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># Give the new df names.</span></span>
+<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># These names have to match the</span></span>
+<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># names of the variables</span></span>
+<span id="cb6-12"><a href="#cb6-12"></a><span class="co"># used in fitting the model</span></span>
+<span id="cb6-13"><a href="#cb6-13"></a>  <span class="kw">names</span>(levels) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;supp&#39;</span>, <span class="st">&#39;dose&#39;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15"></a><span class="co"># Sort the dataframe by supplement for</span></span>
+<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># ease of plotting later on</span></span>
+<span id="cb6-17"><a href="#cb6-17"></a>  levels =<span class="st"> </span>levels[<span class="kw">with</span>(levels, <span class="kw">order</span>(supp)), ]  </span></code></pre></div>
 <p>Now, you can make predictions using the predict function. Or, if you are a total masochist, you can do the calculations by hand using what you learned in lecture this week and the info you have in the <a href="06_diagnosticsAndEffects.html">lecture module</a>.</p>
 <p><img src="hw06_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
 <p>Once you have the predictions, plot the observed data and add your predictions to the plots using the <code>lines</code> function like we used in the <a href="06_diagnosticsAndEffects.html">lecture module</a>. <strong>One bonus point</strong> if you can get the observed data to plot by their own colors and get your predicted lines to match those colors like above. The plot will have a lot more meaning to the reader if you can make these kinds of distinctions. See the <a href="06_diagnosticsAndEffects.html">lecture module</a> for guidance on how to make a pretty graph of your observed data and predictions.</p>

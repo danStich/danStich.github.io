@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>hw02.utf8.md</title>
+<title>hw02.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -366,35 +369,11 @@ $(document).ready(function () {
      
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Teaching
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../../teaching.html">Teaching home</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
-    </li>
-  </ul>
+<li>
+  <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
-  <a href="../../publications.html">Publications</a>
-</li>
-<li>
-  <a href="../../cv.html">CV</a>
+  <a href="resources.html">Additional Resources</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
@@ -435,7 +414,7 @@ Introduction
 Data import
 </h2>
 <p>Read the data from <code>ctr_fish.csv</code> into R using one of the methods we used in class. If you named the file something different when you downloaded it, be sure to note the name for reference in the code that follows. If you forgot the name of the file, you can browse to it on your computer or through the Files tab in RStudio. If you saved your homework script in the same directory as the data (recommended), then you can just run <code>dir()</code> to see the file names. If you have gotten this far and have not saved your homework script, please do so now.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">am_shad =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span><span class="st">&quot;ctr_fish.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>am_shad =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span><span class="st">&quot;ctr_fish.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <div id="first-steps-in-dealing-with-a-dataset" class="section level3">
 <h3>First steps in dealing with a dataset</h3>
 <p>I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure using either <code>str()</code> or by clicking on the blue arrow to the left of the data set in your Environment tab. See explanation of data in the <a href="02_simulationAndVisualization.html">lecture module</a> for this unit to view variable explanations. Use the built-in function <code>summary()</code> to get a closer look at your data.</p>
@@ -461,11 +440,11 @@ Data import
 <h3>Stochastic simulation of age-specific fecundity</h3>
 <p>Now that we have fecundity estimates for each age based on some more-or-less empirical relationship with length, let’s simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says <code>install.packages()</code>, otherwise if you are using a non-lab computer, run the following code:</p>
 <p>Let’s install the package we need</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># Download the package from the internet (takes a couple minutes)</span></a>
-<a class="sourceLine" id="cb2-2" title="2">  <span class="kw">install.packages</span>(<span class="st">&#39;plyr&#39;</span>)</a>
-<a class="sourceLine" id="cb2-3" title="3"></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="co"># Loads the package from a library of installed packages.</span></a>
-<a class="sourceLine" id="cb2-5" title="5">  <span class="kw">library</span>(plyr)    </a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Download the package from the internet (takes a couple minutes)</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">install.packages</span>(<span class="st">&#39;plyr&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Loads the package from a library of installed packages.</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="kw">library</span>(plyr)    </span></code></pre></div>
 <p>With the package installed, use the function <code>ddply( )</code> to calculate the mean and standard deviation of fecundity for each age class. Remember to create a new object to hold this information! <strong>Hint</strong>: if you have difficulty, remember to try: <code>?ddply</code> for a couple of useful examples.</p>
 <p><strong>Question 6</strong>. What are the mean and standard deviation of fecundity for age-6 roes?</p>
 <p>Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function <code>rnorm</code> from the <a href="02_simulationAndVisualization.html">lecture module</a> to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic stock assessment models!</p>
@@ -479,11 +458,11 @@ Data import
 <p><strong>Question 9</strong>. What are your four least favorite things about this plot?</p>
 <p>Change them. Don’t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use <code>?hist</code> and <code>?par</code> to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, “Add custom tick mark labels to graph in R”. If you can’t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do.</p>
 <p>Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">hist</span>(age4, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="kw">hist</span>(age5, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="kw">hist</span>(age6, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="kw">hist</span>(age7, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">hist</span>(age4, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">hist</span>(age5, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">hist</span>(age6, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">hist</span>(age7, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span></code></pre></div>
 <p><strong>Question 10</strong>. What does the argument ‘mfrow’ do in this code block? <em>Hint: what happens if you change the numbers?</em></p>
 </div>
 <div id="bonus-1-pt" class="section level3">

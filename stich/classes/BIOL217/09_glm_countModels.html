@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html>
 
 <head>
 
 <meta charset="utf-8" />
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="pandoc" />
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
 
 
-<title>09_glm_countModels.utf8.md</title>
+<title>09_glm_countModels.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -21,6 +20,7 @@
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
+<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -40,9 +40,9 @@
 
 <style type="text/css">code{white-space: pre;}</style>
 <style type="text/css" data-origin="pandoc">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
+code.sourceCode > span { display: inline-block; line-height: 1.25; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -52,14 +52,16 @@ div.sourceCode { overflow: auto; }
 }
 @media print {
 code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(title);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -68,9 +70,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  { background-color: #f8f8f8; }
+  {  background-color: #f8f8f8; }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -321,6 +323,7 @@ $(document).ready(function () {
   border: none;
   display: inline-block;
   border-radius: 4px;
+  background-color: transparent;
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li {
@@ -366,35 +369,11 @@ $(document).ready(function () {
      
   </a>
 </li>
-<li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-    Teaching
-     
-    <span class="caret"></span>
-  </a>
-  <ul class="dropdown-menu" role="menu">
-    <li>
-      <a href="../../teaching.html">Teaching home</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL217/index.html">BIOL 217</a>
-    </li>
-    <li>
-      <a href="../../classes/BIOL678/index.html">BIOL 678</a>
-    </li>
-  </ul>
+<li>
+  <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="../../research.html">Research</a>
-</li>
-<li>
-  <a href="../../studentProjects.html">Current Students</a>
-</li>
-<li>
-  <a href="../../publications.html">Publications</a>
-</li>
-<li>
-  <a href="../../cv.html">CV</a>
+  <a href="resources.html">Additional Resources</a>
 </li>
 <li>
   <a href="../../contact.html">Contact</a>
@@ -433,13 +412,13 @@ Introduction
 <p>Poisson regression is useful for situations in which we have a response that is a count. These are discrete data that cannot be considered continuous because it is impossible for them to take on non-integer or non-negative values. Common examples of these types of responses include species count data in ecology, cell counts in biology, and the number of respondents or patients reporting a side-effect or symptom of interest in the health care profession.</p>
 <p>For the Poisson family, the link function that we will use is the ‘log’ link function. This function allows us to work with data that are constrained to be non-negative, a desireable property when we are working with count data.</p>
 <p>Let’s use a crab data set to demonstrate the GLM with Poisson data, we will walk through this data set for both the Poisson and negative binomial examples, addressing some distributional assumptions and model fit along the way.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="co"># Read in the data. These data also are available through</span></a>
-<a class="sourceLine" id="cb1-2" title="2"><span class="co"># the glm2 package in R.</span></a>
-<a class="sourceLine" id="cb1-3" title="3">  crabs =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crabs.csv&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb1-4" title="4"></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="co"># Have a look-see</span></a>
-<a class="sourceLine" id="cb1-6" title="6">  <span class="kw">head</span>(crabs)</a>
-<a class="sourceLine" id="cb1-7" title="7">  <span class="kw">str</span>(crabs)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data. These data also are available through</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># the glm2 package in R.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a>  crabs =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;crabs.csv&#39;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a></span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="co"># Have a look-see</span></span>
+<span id="cb1-6"><a href="#cb1-6"></a>  <span class="kw">head</span>(crabs)</span>
+<span id="cb1-7"><a href="#cb1-7"></a>  <span class="kw">str</span>(crabs)</span></code></pre></div>
 <pre><code>  color spine width mass satellites
 1     2     3  28.3 3.05          8
 2     3     3  26.0 2.60          4
@@ -458,20 +437,20 @@ Introduction
 <p>These data represent the number of satellite male crabs per female (rows) horseshoe crab in relation to a number of characteristics of the females, including their color, spine condition, carapace width, and mass (g).</p>
 <p>The full citation for the paper on which this data set is based:</p>
 <p>H. J. Brockmann. 1996. Satellite male groups in horseshoe crabs, <em>Limulus polyphemus</em>. Ethology 102:1-21. <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1439-0310.1996.tb01099.x">doi:10.1111/j.1439-0310.1996.tb01099.x</a></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># We want to convert color to</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="co"># a factor right off the bat</span></a>
-<a class="sourceLine" id="cb3-3" title="3">  crabs<span class="op">$</span>color =<span class="st"> </span><span class="kw">as.factor</span>(crabs<span class="op">$</span>color)</a>
-<a class="sourceLine" id="cb3-4" title="4"></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="co"># Fit a model</span></a>
-<a class="sourceLine" id="cb3-6" title="6">  count.mod =<span class="st"> </span><span class="kw">glm</span>(</a>
-<a class="sourceLine" id="cb3-7" title="7">    satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>spine<span class="op">+</span>color,</a>
-<a class="sourceLine" id="cb3-8" title="8">    <span class="dt">data=</span>crabs,</a>
-<a class="sourceLine" id="cb3-9" title="9">    <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>(<span class="dt">link=</span>log)</a>
-<a class="sourceLine" id="cb3-10" title="10">    )</a>
-<a class="sourceLine" id="cb3-11" title="11"></a>
-<a class="sourceLine" id="cb3-12" title="12"><span class="co"># Right away, we can see that</span></a>
-<a class="sourceLine" id="cb3-13" title="13"><span class="co"># this model is not a very good fit to the data.</span></a>
-<a class="sourceLine" id="cb3-14" title="14">  <span class="kw">plot</span>(count.mod)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># We want to convert color to</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># a factor right off the bat</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>  crabs<span class="op">$</span>color =<span class="st"> </span><span class="kw">as.factor</span>(crabs<span class="op">$</span>color)</span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Fit a model</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>  count.mod =<span class="st"> </span><span class="kw">glm</span>(</span>
+<span id="cb3-7"><a href="#cb3-7"></a>    satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>spine<span class="op">+</span>color,</span>
+<span id="cb3-8"><a href="#cb3-8"></a>    <span class="dt">data=</span>crabs,</span>
+<span id="cb3-9"><a href="#cb3-9"></a>    <span class="dt">family=</span><span class="st">&#39;poisson&#39;</span>(<span class="dt">link=</span>log)</span>
+<span id="cb3-10"><a href="#cb3-10"></a>    )</span>
+<span id="cb3-11"><a href="#cb3-11"></a></span>
+<span id="cb3-12"><a href="#cb3-12"></a><span class="co"># Right away, we can see that</span></span>
+<span id="cb3-13"><a href="#cb3-13"></a><span class="co"># this model is not a very good fit to the data.</span></span>
+<span id="cb3-14"><a href="#cb3-14"></a>  <span class="kw">plot</span>(count.mod)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-4-1.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-4-2.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-4-3.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-4-4.png" width="672" /></p>
 <p>This brings us to the next important point we need to make about GLMS…</p>
 <blockquote>
@@ -488,76 +467,76 @@ Introduction
 <p>Okay, moving on with life, let’s take a look at the negative binomial regression model.</p>
 <p>We will start this time by actually doing some data exploration before our analysis.</p>
 <p>First, look at the distribution of the data. Here, it should be pretty obvious to you by now that these are count data for which the mean is not equal to the variance…right?</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">hist</span>(crabs<span class="op">$</span>satellites)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="kw">hist</span>(crabs<span class="op">$</span>satellites)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>If you think back to a couple of weeks ago, you’ll remember this is a pretty typical example of the negative binomial distribution</p>
 <p>We can take a look at how this shakes out between our groups (color) as well</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">boxplot</span>(satellites<span class="op">~</span>color, <span class="dt">data=</span>crabs)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">boxplot</span>(satellites<span class="op">~</span>color, <span class="dt">data=</span>crabs)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>And, you can see here that even within groups the distributions do not look like they have equal means and variances, so we will fit a GLM that assumes the response is drawn from a negative binomial distribution. We will need to load a package for this (yay!):</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">library</span>(MASS)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">library</span>(MASS)</span></code></pre></div>
 <p>For this example, we will use a function called <code>glm.nb</code>. This function us estimate a GLM for lets us estimate parameters for a GLM that uses the negative binomial error distribution and estimates the “overdispersion parameter” for the negative binomial distribution. You, of course, remember this parameter and know it as <code>theta</code> from our discussions about probability distributions.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">?glm.nb</a></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>?glm.nb</span></code></pre></div>
 <p>Let’s start by fitting a model. Note that we do not need to specify the distributional family or the link function because the <code>glm.nb</code> function was created specifically for the case of negative binomial regression</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1">neg.mod =<span class="st"> </span><span class="kw">glm.nb</span>(satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color, <span class="dt">data=</span>crabs)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>neg.mod =<span class="st"> </span><span class="kw">glm.nb</span>(satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color, <span class="dt">data=</span>crabs)</span></code></pre></div>
 <p>OR, we could fit it with the GLM function like this:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1">neg.mod =<span class="st"> </span><span class="kw">glm</span>(satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color, <span class="dt">data=</span>crabs,</a>
-<a class="sourceLine" id="cb9-2" title="2">              <span class="dt">family=</span><span class="st">&#39;negative.binomial&#39;</span>(<span class="dt">theta =</span> <span class="dv">1</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>neg.mod =<span class="st"> </span><span class="kw">glm</span>(satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color, <span class="dt">data=</span>crabs,</span>
+<span id="cb9-2"><a href="#cb9-2"></a>              <span class="dt">family=</span><span class="st">&#39;negative.binomial&#39;</span>(<span class="dt">theta =</span> <span class="dv">1</span>))</span></code></pre></div>
 <p>Play around with the two formulations above and see if there’s a difference. <em>Clue</em>: there’s not really. Just two different ways to do the same thing. The functionality in the <code>glm</code> function only came around recently, that’s all.</p>
 <p>Now, let’s take a look at the distribution of the residuals.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1">res =<span class="st"> </span>neg.mod<span class="op">$</span>residuals</a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="kw">plot</span>(neg.mod)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>res =<span class="st"> </span>neg.mod<span class="op">$</span>residuals</span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">plot</span>(neg.mod)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-11-1.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-11-2.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-11-3.png" width="672" /><img src="09_glm_countModels_files/figure-html/unnamed-chunk-11-4.png" width="672" /></p>
 <p>Our residuals appear to also take on a negative binomial error distribution, but these plots start to become pretty meaningless in the world of GLMs without a few tweaks…</p>
 <p>Luckily, there is also a tool for this purpose:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># Load the boot package</span></a>
-<a class="sourceLine" id="cb11-2" title="2">  <span class="kw">library</span>(boot)</a>
-<a class="sourceLine" id="cb11-3" title="3"></a>
-<a class="sourceLine" id="cb11-4" title="4"><span class="co"># Run the diagnostic plots for our model</span></a>
-<a class="sourceLine" id="cb11-5" title="5">  <span class="kw">glm.diag.plots</span>(neg.mod)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Load the boot package</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>  <span class="kw">library</span>(boot)</span>
+<span id="cb11-3"><a href="#cb11-3"></a></span>
+<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Run the diagnostic plots for our model</span></span>
+<span id="cb11-5"><a href="#cb11-5"></a>  <span class="kw">glm.diag.plots</span>(neg.mod)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Here, we get a pretty clear picture that our model is adequately describing the overdispersion in the count data when we use the negative binomial distribution, but we may have some issues with extreme data points and excess zeroes.</p>
 <p><strong>But</strong>, how does this compare to the Poisson model for count data? We can use model selection to compare the Poisson model to the negative binomial model, since the response is the same in both cases.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="kw">AIC</span>(count.mod, neg.mod)</a>
-<a class="sourceLine" id="cb12-2" title="2">          df      AIC</a>
-<a class="sourceLine" id="cb12-3" title="3">count.mod  <span class="dv">7</span> <span class="fl">919.8796</span></a>
-<a class="sourceLine" id="cb12-4" title="4">neg.mod    <span class="dv">7</span> <span class="fl">759.9076</span></a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="kw">AIC</span>(count.mod, neg.mod)</span>
+<span id="cb12-2"><a href="#cb12-2"></a>          df      AIC</span>
+<span id="cb12-3"><a href="#cb12-3"></a>count.mod  <span class="dv">7</span> <span class="fl">919.8796</span></span>
+<span id="cb12-4"><a href="#cb12-4"></a>neg.mod    <span class="dv">7</span> <span class="fl">759.9076</span></span></code></pre></div>
 <p>Clearly the negative binomial model is far superior to the Poisson model here. Now, with a good model in hand we could proceed with data visualization, <code>...</code></p>
 <p>Still, this will not be satisfying to the purists out there as the two models are not “nested” in the sense that one is a subset of the other. There are some philosophical issues with an I-T approach in this situation, in which case a full-on model validation test might be necessary to determine which model posesses the best predictive properties. Thinking back to our previous conversations, this process potentially could include some measure of accuracy and precision (like the root mean squared error) for each model based on cross validation methods or boot strapping.</p>
 <p>But for now on with life again, and we can finally look at the model output.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="kw">summary</span>(neg.mod)</a>
-<a class="sourceLine" id="cb13-2" title="2"></a>
-<a class="sourceLine" id="cb13-3" title="3">Call<span class="op">:</span></a>
-<a class="sourceLine" id="cb13-4" title="4"><span class="kw">glm.nb</span>(<span class="dt">formula =</span> satellites <span class="op">~</span><span class="st"> </span>width <span class="op">+</span><span class="st"> </span>mass <span class="op">+</span><span class="st"> </span>color, <span class="dt">data =</span> crabs, </a>
-<a class="sourceLine" id="cb13-5" title="5">    <span class="dt">init.theta =</span> <span class="fl">0.9603230219</span>, <span class="dt">link =</span> log)</a>
-<a class="sourceLine" id="cb13-6" title="6"></a>
-<a class="sourceLine" id="cb13-7" title="7">Deviance Residuals<span class="op">:</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb13-8" title="8"><span class="st">    </span>Min       1Q   Median       3Q      Max  </a>
-<a class="sourceLine" id="cb13-9" title="9"><span class="fl">-1.8666</span>  <span class="fl">-1.3628</span>  <span class="fl">-0.3071</span>   <span class="fl">0.4325</span>   <span class="fl">2.2884</span>  </a>
-<a class="sourceLine" id="cb13-10" title="10"></a>
-<a class="sourceLine" id="cb13-11" title="11">Coefficients<span class="op">:</span></a>
-<a class="sourceLine" id="cb13-12" title="12"><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)  </a>
-<a class="sourceLine" id="cb13-13" title="13">(Intercept) <span class="fl">-0.74381</span>    <span class="fl">1.87517</span>  <span class="fl">-0.397</span>   <span class="fl">0.6916</span>  </a>
-<a class="sourceLine" id="cb13-14" title="14">width        <span class="fl">0.01753</span>    <span class="fl">0.09690</span>   <span class="fl">0.181</span>   <span class="fl">0.8565</span>  </a>
-<a class="sourceLine" id="cb13-15" title="15">mass         <span class="fl">0.65366</span>    <span class="fl">0.35033</span>   <span class="fl">1.866</span>   <span class="fl">0.0621</span> .</a>
-<a class="sourceLine" id="cb13-16" title="16">color2      <span class="fl">-0.25523</span>    <span class="fl">0.34845</span>  <span class="fl">-0.732</span>   <span class="fl">0.4639</span>  </a>
-<a class="sourceLine" id="cb13-17" title="17">color3      <span class="fl">-0.51990</span>    <span class="fl">0.38015</span>  <span class="fl">-1.368</span>   <span class="fl">0.1714</span>  </a>
-<a class="sourceLine" id="cb13-18" title="18">color4      <span class="fl">-0.48209</span>    <span class="fl">0.42875</span>  <span class="fl">-1.124</span>   <span class="fl">0.2608</span>  </a>
-<a class="sourceLine" id="cb13-19" title="19"><span class="op">---</span></a>
-<a class="sourceLine" id="cb13-20" title="20">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-21" title="21"></a>
-<a class="sourceLine" id="cb13-22" title="22">(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="fl">0.9603</span>) family taken to be <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb13-23" title="23"></a>
-<a class="sourceLine" id="cb13-24" title="24">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">220.09</span>  on <span class="dv">172</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb13-25" title="25">Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">196.61</span>  on <span class="dv">167</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb13-26" title="26">AIC<span class="op">:</span><span class="st"> </span><span class="fl">759.91</span></a>
-<a class="sourceLine" id="cb13-27" title="27"></a>
-<a class="sourceLine" id="cb13-28" title="28">Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb13-29" title="29"></a>
-<a class="sourceLine" id="cb13-30" title="30">              Theta<span class="op">:</span><span class="st">  </span><span class="fl">0.960</span> </a>
-<a class="sourceLine" id="cb13-31" title="31">          Std. Err.<span class="op">:</span><span class="st">  </span><span class="fl">0.175</span> </a>
-<a class="sourceLine" id="cb13-32" title="32"></a>
-<a class="sourceLine" id="cb13-33" title="33"> <span class="dv">2</span> x log<span class="op">-</span>likelihood<span class="op">:</span><span class="st">  </span><span class="fl">-745.908</span> </a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">summary</span>(neg.mod)</span>
+<span id="cb13-2"><a href="#cb13-2"></a></span>
+<span id="cb13-3"><a href="#cb13-3"></a>Call<span class="op">:</span></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="kw">glm.nb</span>(<span class="dt">formula =</span> satellites <span class="op">~</span><span class="st"> </span>width <span class="op">+</span><span class="st"> </span>mass <span class="op">+</span><span class="st"> </span>color, <span class="dt">data =</span> crabs, </span>
+<span id="cb13-5"><a href="#cb13-5"></a>    <span class="dt">init.theta =</span> <span class="fl">0.9603230219</span>, <span class="dt">link =</span> log)</span>
+<span id="cb13-6"><a href="#cb13-6"></a></span>
+<span id="cb13-7"><a href="#cb13-7"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb13-8"><a href="#cb13-8"></a><span class="st">    </span>Min       1Q   Median       3Q      Max  </span>
+<span id="cb13-9"><a href="#cb13-9"></a><span class="fl">-1.8666</span>  <span class="fl">-1.3628</span>  <span class="fl">-0.3071</span>   <span class="fl">0.4325</span>   <span class="fl">2.2884</span>  </span>
+<span id="cb13-10"><a href="#cb13-10"></a></span>
+<span id="cb13-11"><a href="#cb13-11"></a>Coefficients<span class="op">:</span></span>
+<span id="cb13-12"><a href="#cb13-12"></a><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)  </span>
+<span id="cb13-13"><a href="#cb13-13"></a>(Intercept) <span class="fl">-0.74381</span>    <span class="fl">1.87517</span>  <span class="fl">-0.397</span>   <span class="fl">0.6916</span>  </span>
+<span id="cb13-14"><a href="#cb13-14"></a>width        <span class="fl">0.01753</span>    <span class="fl">0.09690</span>   <span class="fl">0.181</span>   <span class="fl">0.8565</span>  </span>
+<span id="cb13-15"><a href="#cb13-15"></a>mass         <span class="fl">0.65366</span>    <span class="fl">0.35033</span>   <span class="fl">1.866</span>   <span class="fl">0.0621</span> .</span>
+<span id="cb13-16"><a href="#cb13-16"></a>color2      <span class="fl">-0.25523</span>    <span class="fl">0.34845</span>  <span class="fl">-0.732</span>   <span class="fl">0.4639</span>  </span>
+<span id="cb13-17"><a href="#cb13-17"></a>color3      <span class="fl">-0.51990</span>    <span class="fl">0.38015</span>  <span class="fl">-1.368</span>   <span class="fl">0.1714</span>  </span>
+<span id="cb13-18"><a href="#cb13-18"></a>color4      <span class="fl">-0.48209</span>    <span class="fl">0.42875</span>  <span class="fl">-1.124</span>   <span class="fl">0.2608</span>  </span>
+<span id="cb13-19"><a href="#cb13-19"></a><span class="op">---</span></span>
+<span id="cb13-20"><a href="#cb13-20"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb13-21"><a href="#cb13-21"></a></span>
+<span id="cb13-22"><a href="#cb13-22"></a>(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="fl">0.9603</span>) family taken to be <span class="dv">1</span>)</span>
+<span id="cb13-23"><a href="#cb13-23"></a></span>
+<span id="cb13-24"><a href="#cb13-24"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">220.09</span>  on <span class="dv">172</span>  degrees of freedom</span>
+<span id="cb13-25"><a href="#cb13-25"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">196.61</span>  on <span class="dv">167</span>  degrees of freedom</span>
+<span id="cb13-26"><a href="#cb13-26"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">759.91</span></span>
+<span id="cb13-27"><a href="#cb13-27"></a></span>
+<span id="cb13-28"><a href="#cb13-28"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb13-29"><a href="#cb13-29"></a></span>
+<span id="cb13-30"><a href="#cb13-30"></a>              Theta<span class="op">:</span><span class="st">  </span><span class="fl">0.960</span> </span>
+<span id="cb13-31"><a href="#cb13-31"></a>          Std. Err.<span class="op">:</span><span class="st">  </span><span class="fl">0.175</span> </span>
+<span id="cb13-32"><a href="#cb13-32"></a></span>
+<span id="cb13-33"><a href="#cb13-33"></a> <span class="dv">2</span> x log<span class="op">-</span>likelihood<span class="op">:</span><span class="st">  </span><span class="fl">-745.908</span> </span></code></pre></div>
 <p>The interpretation of this output is virtually identical to the output for linear models that we have been working with. Here, we see that no variable is significant with <span class="math inline">\(\alpha\)</span> 0.05, and that only the mass of females is marginally close to having a “significant” effect. How does this compare to the original findings? Go take a look.</p>
 </div>
 <div id="zero-inflation" class="section level2">
@@ -565,95 +544,95 @@ Introduction
 <p>The fits of these two models, in reality, suggest the need to for what is becoming an increasingly common statistical tool: the zero inflated count model. Zero inflation (excess zeroes in count data) can arise by one of two mechanisms: true (“process”) zeros and observational zeros that result from imperfect detection.</p>
 <p>One approach to dealing with this is to use a <strong>hurdle model</strong>. The idea is to make two separate models: 1) a logistic regression model to help us determine which factors influence whether the phenomenon of interest even occurred (0 or 1), and 2) a count model to help us determine what factors influence with the frequency of occurrence given that it occurred in the first place.</p>
 <p>First, we make a binary indicator variable to represent whether or not the phenomenon occurred:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Make a new column for presence</span></a>
-<a class="sourceLine" id="cb14-2" title="2"><span class="co"># and absence (of satellite males)</span></a>
-<a class="sourceLine" id="cb14-3" title="3"><span class="co"># and initialize to zero</span></a>
-<a class="sourceLine" id="cb14-4" title="4">crabs<span class="op">$</span>present &lt;-<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb14-5" title="5"></a>
-<a class="sourceLine" id="cb14-6" title="6"><span class="co"># Assign a &#39;1&#39; if any satellites were</span></a>
-<a class="sourceLine" id="cb14-7" title="7"><span class="co"># observed</span></a>
-<a class="sourceLine" id="cb14-8" title="8">crabs<span class="op">$</span>present[crabs<span class="op">$</span>satellites <span class="op">&gt;</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">1</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Make a new column for presence</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># and absence (of satellite males)</span></span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="co"># and initialize to zero</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>crabs<span class="op">$</span>present &lt;-<span class="st"> </span><span class="dv">0</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a></span>
+<span id="cb14-6"><a href="#cb14-6"></a><span class="co"># Assign a &#39;1&#39; if any satellites were</span></span>
+<span id="cb14-7"><a href="#cb14-7"></a><span class="co"># observed</span></span>
+<span id="cb14-8"><a href="#cb14-8"></a>crabs<span class="op">$</span>present[crabs<span class="op">$</span>satellites <span class="op">&gt;</span><span class="dv">0</span>] &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
 <p>Now, the first step in the hurdle model is to fit a logistic regression model to predict how our response is affected by some combination of explanatory variables.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">step1 =<span class="st"> </span><span class="kw">glm</span>(present<span class="op">~</span>mass, <span class="dt">data=</span>crabs, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>)</a>
-<a class="sourceLine" id="cb15-2" title="2"><span class="kw">summary</span>(step1)</a>
-<a class="sourceLine" id="cb15-3" title="3"></a>
-<a class="sourceLine" id="cb15-4" title="4">Call<span class="op">:</span></a>
-<a class="sourceLine" id="cb15-5" title="5"><span class="kw">glm</span>(<span class="dt">formula =</span> present <span class="op">~</span><span class="st"> </span>mass, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> crabs)</a>
-<a class="sourceLine" id="cb15-6" title="6"></a>
-<a class="sourceLine" id="cb15-7" title="7">Deviance Residuals<span class="op">:</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb15-8" title="8"><span class="st">    </span>Min       1Q   Median       3Q      Max  </a>
-<a class="sourceLine" id="cb15-9" title="9"><span class="fl">-2.1106</span>  <span class="fl">-1.0750</span>   <span class="fl">0.5427</span>   <span class="fl">0.9122</span>   <span class="fl">1.6323</span>  </a>
-<a class="sourceLine" id="cb15-10" title="10"></a>
-<a class="sourceLine" id="cb15-11" title="11">Coefficients<span class="op">:</span></a>
-<a class="sourceLine" id="cb15-12" title="12"><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb15-13" title="13">(Intercept)  <span class="fl">-3.6933</span>     <span class="fl">0.8799</span>  <span class="fl">-4.197</span> <span class="fl">2.70e-05</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb15-14" title="14">mass          <span class="fl">1.8145</span>     <span class="fl">0.3766</span>   <span class="fl">4.818</span> <span class="fl">1.45e-06</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb15-15" title="15"><span class="op">---</span></a>
-<a class="sourceLine" id="cb15-16" title="16">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb15-17" title="17"></a>
-<a class="sourceLine" id="cb15-18" title="18">(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb15-19" title="19"></a>
-<a class="sourceLine" id="cb15-20" title="20">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">225.76</span>  on <span class="dv">172</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb15-21" title="21">Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">195.74</span>  on <span class="dv">171</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb15-22" title="22">AIC<span class="op">:</span><span class="st"> </span><span class="fl">199.74</span></a>
-<a class="sourceLine" id="cb15-23" title="23"></a>
-<a class="sourceLine" id="cb15-24" title="24">Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>step1 =<span class="st"> </span><span class="kw">glm</span>(present<span class="op">~</span>mass, <span class="dt">data=</span>crabs, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>)</span>
+<span id="cb15-2"><a href="#cb15-2"></a><span class="kw">summary</span>(step1)</span>
+<span id="cb15-3"><a href="#cb15-3"></a></span>
+<span id="cb15-4"><a href="#cb15-4"></a>Call<span class="op">:</span></span>
+<span id="cb15-5"><a href="#cb15-5"></a><span class="kw">glm</span>(<span class="dt">formula =</span> present <span class="op">~</span><span class="st"> </span>mass, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> crabs)</span>
+<span id="cb15-6"><a href="#cb15-6"></a></span>
+<span id="cb15-7"><a href="#cb15-7"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb15-8"><a href="#cb15-8"></a><span class="st">    </span>Min       1Q   Median       3Q      Max  </span>
+<span id="cb15-9"><a href="#cb15-9"></a><span class="fl">-2.1106</span>  <span class="fl">-1.0750</span>   <span class="fl">0.5427</span>   <span class="fl">0.9122</span>   <span class="fl">1.6323</span>  </span>
+<span id="cb15-10"><a href="#cb15-10"></a></span>
+<span id="cb15-11"><a href="#cb15-11"></a>Coefficients<span class="op">:</span></span>
+<span id="cb15-12"><a href="#cb15-12"></a><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </span>
+<span id="cb15-13"><a href="#cb15-13"></a>(Intercept)  <span class="fl">-3.6933</span>     <span class="fl">0.8799</span>  <span class="fl">-4.197</span> <span class="fl">2.70e-05</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb15-14"><a href="#cb15-14"></a>mass          <span class="fl">1.8145</span>     <span class="fl">0.3766</span>   <span class="fl">4.818</span> <span class="fl">1.45e-06</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb15-15"><a href="#cb15-15"></a><span class="op">---</span></span>
+<span id="cb15-16"><a href="#cb15-16"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb15-17"><a href="#cb15-17"></a></span>
+<span id="cb15-18"><a href="#cb15-18"></a>(Dispersion parameter <span class="cf">for</span> binomial family taken to be <span class="dv">1</span>)</span>
+<span id="cb15-19"><a href="#cb15-19"></a></span>
+<span id="cb15-20"><a href="#cb15-20"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">225.76</span>  on <span class="dv">172</span>  degrees of freedom</span>
+<span id="cb15-21"><a href="#cb15-21"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">195.74</span>  on <span class="dv">171</span>  degrees of freedom</span>
+<span id="cb15-22"><a href="#cb15-22"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">199.74</span></span>
+<span id="cb15-23"><a href="#cb15-23"></a></span>
+<span id="cb15-24"><a href="#cb15-24"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
 <p>Here we see that mass has a significant effect on whether or not <em>any</em> satellite males are present. You could imagine fitting any number of plausible biological models for comparison using AIC at this point.</p>
 <p>Step 2 is to fit a count model to explain the effects of some combination of explanatory variables on the frequency with which the phenomenon occurs given that it ever occurred in the first place. <strong>Note</strong>: This does not have to be the same combination of explanatory variables. In fact, it is always conceivable that different processes influence these two distinct phenomena. As with the presence-absence model, you could even fit a candidate set of models and proceed with model comparisons using AIC.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># Make a model relating the number</span></a>
-<a class="sourceLine" id="cb16-2" title="2"><span class="co"># of satellite males to the mass</span></a>
-<a class="sourceLine" id="cb16-3" title="3"><span class="co"># of female crabs</span></a>
-<a class="sourceLine" id="cb16-4" title="4">  step2 =<span class="st"> </span><span class="kw">glm.nb</span>(</a>
-<a class="sourceLine" id="cb16-5" title="5">    satellites<span class="op">~</span>mass,</a>
-<a class="sourceLine" id="cb16-6" title="6">    <span class="dt">data=</span>crabs[crabs<span class="op">$</span>satellites<span class="op">!=</span><span class="dv">0</span>,]</a>
-<a class="sourceLine" id="cb16-7" title="7">    )</a>
-<a class="sourceLine" id="cb16-8" title="8"></a>
-<a class="sourceLine" id="cb16-9" title="9"><span class="co"># Print a summary of the model</span></a>
-<a class="sourceLine" id="cb16-10" title="10">  <span class="kw">summary</span>(step2)</a>
-<a class="sourceLine" id="cb16-11" title="11"></a>
-<a class="sourceLine" id="cb16-12" title="12">Call<span class="op">:</span></a>
-<a class="sourceLine" id="cb16-13" title="13"><span class="kw">glm.nb</span>(<span class="dt">formula =</span> satellites <span class="op">~</span><span class="st"> </span>mass, <span class="dt">data =</span> crabs[crabs<span class="op">$</span>satellites <span class="op">!=</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-14" title="14"><span class="st">    </span><span class="dv">0</span>, ], <span class="dt">init.theta =</span> <span class="fl">7.337959755</span>, <span class="dt">link =</span> log)</a>
-<a class="sourceLine" id="cb16-15" title="15"></a>
-<a class="sourceLine" id="cb16-16" title="16">Deviance Residuals<span class="op">:</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb16-17" title="17"><span class="st">    </span>Min       1Q   Median       3Q      Max  </a>
-<a class="sourceLine" id="cb16-18" title="18"><span class="fl">-1.8112</span>  <span class="fl">-0.7938</span>  <span class="fl">-0.1828</span>   <span class="fl">0.5061</span>   <span class="fl">2.6936</span>  </a>
-<a class="sourceLine" id="cb16-19" title="19"></a>
-<a class="sourceLine" id="cb16-20" title="20">Coefficients<span class="op">:</span></a>
-<a class="sourceLine" id="cb16-21" title="21"><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </a>
-<a class="sourceLine" id="cb16-22" title="22">(Intercept)  <span class="fl">1.02307</span>    <span class="fl">0.26164</span>   <span class="fl">3.910</span> <span class="fl">9.22e-05</span> <span class="op">**</span><span class="er">*</span></a>
-<a class="sourceLine" id="cb16-23" title="23">mass         <span class="fl">0.18675</span>    <span class="fl">0.09668</span>   <span class="fl">1.932</span>   <span class="fl">0.0534</span> .  </a>
-<a class="sourceLine" id="cb16-24" title="24"><span class="op">---</span></a>
-<a class="sourceLine" id="cb16-25" title="25">Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></a>
-<a class="sourceLine" id="cb16-26" title="26"></a>
-<a class="sourceLine" id="cb16-27" title="27">(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="fl">7.338</span>) family taken to be <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb16-28" title="28"></a>
-<a class="sourceLine" id="cb16-29" title="29">    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">114.67</span>  on <span class="dv">110</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb16-30" title="30">Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">111.05</span>  on <span class="dv">109</span>  degrees of freedom</a>
-<a class="sourceLine" id="cb16-31" title="31">AIC<span class="op">:</span><span class="st"> </span><span class="fl">523.94</span></a>
-<a class="sourceLine" id="cb16-32" title="32"></a>
-<a class="sourceLine" id="cb16-33" title="33">Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb16-34" title="34"></a>
-<a class="sourceLine" id="cb16-35" title="35">              Theta<span class="op">:</span><span class="st">  </span><span class="fl">7.34</span> </a>
-<a class="sourceLine" id="cb16-36" title="36">          Std. Err.<span class="op">:</span><span class="st">  </span><span class="fl">2.57</span> </a>
-<a class="sourceLine" id="cb16-37" title="37"></a>
-<a class="sourceLine" id="cb16-38" title="38"> <span class="dv">2</span> x log<span class="op">-</span>likelihood<span class="op">:</span><span class="st">  </span><span class="fl">-517.938</span> </a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Make a model relating the number</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># of satellite males to the mass</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a><span class="co"># of female crabs</span></span>
+<span id="cb16-4"><a href="#cb16-4"></a>  step2 =<span class="st"> </span><span class="kw">glm.nb</span>(</span>
+<span id="cb16-5"><a href="#cb16-5"></a>    satellites<span class="op">~</span>mass,</span>
+<span id="cb16-6"><a href="#cb16-6"></a>    <span class="dt">data=</span>crabs[crabs<span class="op">$</span>satellites<span class="op">!=</span><span class="dv">0</span>,]</span>
+<span id="cb16-7"><a href="#cb16-7"></a>    )</span>
+<span id="cb16-8"><a href="#cb16-8"></a></span>
+<span id="cb16-9"><a href="#cb16-9"></a><span class="co"># Print a summary of the model</span></span>
+<span id="cb16-10"><a href="#cb16-10"></a>  <span class="kw">summary</span>(step2)</span>
+<span id="cb16-11"><a href="#cb16-11"></a></span>
+<span id="cb16-12"><a href="#cb16-12"></a>Call<span class="op">:</span></span>
+<span id="cb16-13"><a href="#cb16-13"></a><span class="kw">glm.nb</span>(<span class="dt">formula =</span> satellites <span class="op">~</span><span class="st"> </span>mass, <span class="dt">data =</span> crabs[crabs<span class="op">$</span>satellites <span class="op">!=</span><span class="st"> </span></span>
+<span id="cb16-14"><a href="#cb16-14"></a><span class="st">    </span><span class="dv">0</span>, ], <span class="dt">init.theta =</span> <span class="fl">7.337959755</span>, <span class="dt">link =</span> log)</span>
+<span id="cb16-15"><a href="#cb16-15"></a></span>
+<span id="cb16-16"><a href="#cb16-16"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb16-17"><a href="#cb16-17"></a><span class="st">    </span>Min       1Q   Median       3Q      Max  </span>
+<span id="cb16-18"><a href="#cb16-18"></a><span class="fl">-1.8112</span>  <span class="fl">-0.7938</span>  <span class="fl">-0.1828</span>   <span class="fl">0.5061</span>   <span class="fl">2.6936</span>  </span>
+<span id="cb16-19"><a href="#cb16-19"></a></span>
+<span id="cb16-20"><a href="#cb16-20"></a>Coefficients<span class="op">:</span></span>
+<span id="cb16-21"><a href="#cb16-21"></a><span class="st">            </span>Estimate Std. Error z value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)    </span>
+<span id="cb16-22"><a href="#cb16-22"></a>(Intercept)  <span class="fl">1.02307</span>    <span class="fl">0.26164</span>   <span class="fl">3.910</span> <span class="fl">9.22e-05</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb16-23"><a href="#cb16-23"></a>mass         <span class="fl">0.18675</span>    <span class="fl">0.09668</span>   <span class="fl">1.932</span>   <span class="fl">0.0534</span> .  </span>
+<span id="cb16-24"><a href="#cb16-24"></a><span class="op">---</span></span>
+<span id="cb16-25"><a href="#cb16-25"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb16-26"><a href="#cb16-26"></a></span>
+<span id="cb16-27"><a href="#cb16-27"></a>(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="fl">7.338</span>) family taken to be <span class="dv">1</span>)</span>
+<span id="cb16-28"><a href="#cb16-28"></a></span>
+<span id="cb16-29"><a href="#cb16-29"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">114.67</span>  on <span class="dv">110</span>  degrees of freedom</span>
+<span id="cb16-30"><a href="#cb16-30"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">111.05</span>  on <span class="dv">109</span>  degrees of freedom</span>
+<span id="cb16-31"><a href="#cb16-31"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">523.94</span></span>
+<span id="cb16-32"><a href="#cb16-32"></a></span>
+<span id="cb16-33"><a href="#cb16-33"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb16-34"><a href="#cb16-34"></a></span>
+<span id="cb16-35"><a href="#cb16-35"></a>              Theta<span class="op">:</span><span class="st">  </span><span class="fl">7.34</span> </span>
+<span id="cb16-36"><a href="#cb16-36"></a>          Std. Err.<span class="op">:</span><span class="st">  </span><span class="fl">2.57</span> </span>
+<span id="cb16-37"><a href="#cb16-37"></a></span>
+<span id="cb16-38"><a href="#cb16-38"></a> <span class="dv">2</span> x log<span class="op">-</span>likelihood<span class="op">:</span><span class="st">  </span><span class="fl">-517.938</span> </span></code></pre></div>
 <p>From these results, we can see that our count models in the previous sections were really just picking up on the large number of zeroes in our data set. We know this because of the differences in the results between the models <code>step1</code> and <code>step2</code>.</p>
 <p>Likewise, we can take another look at our model diagnostics for <code>step2</code> to see if our diagnostic plots look more reasonable now</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Make diagnostic plots</span></a>
-<a class="sourceLine" id="cb17-2" title="2">  <span class="kw">glm.diag.plots</span>(step2)</a></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Make diagnostic plots</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="kw">glm.diag.plots</span>(step2)</span></code></pre></div>
 <p><img src="09_glm_countModels_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
 <p>Here, we can see that our residual plots indicate a pretty drastic improvement.</p>
 <p>Of course, there are a number of built-in functions available from different packages that can be used to do the same thing that we’ve done above. Here is one example from the <code>pscl</code> package:</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="co"># Load the pscl package</span></a>
-<a class="sourceLine" id="cb18-2" title="2">  <span class="kw">library</span>(pscl)</a>
-<a class="sourceLine" id="cb18-3" title="3"></a>
-<a class="sourceLine" id="cb18-4" title="4"><span class="co"># Fit a zero-inflated regression model</span></a>
-<a class="sourceLine" id="cb18-5" title="5">  neg.mod2 =<span class="st"> </span><span class="kw">zeroinfl</span>(</a>
-<a class="sourceLine" id="cb18-6" title="6">    satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color,</a>
-<a class="sourceLine" id="cb18-7" title="7">    <span class="dt">data=</span>crabs,</a>
-<a class="sourceLine" id="cb18-8" title="8">    <span class="dt">dist=</span><span class="st">&#39;negbin&#39;</span></a>
-<a class="sourceLine" id="cb18-9" title="9">    )</a></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co"># Load the pscl package</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a>  <span class="kw">library</span>(pscl)</span>
+<span id="cb18-3"><a href="#cb18-3"></a></span>
+<span id="cb18-4"><a href="#cb18-4"></a><span class="co"># Fit a zero-inflated regression model</span></span>
+<span id="cb18-5"><a href="#cb18-5"></a>  neg.mod2 =<span class="st"> </span><span class="kw">zeroinfl</span>(</span>
+<span id="cb18-6"><a href="#cb18-6"></a>    satellites<span class="op">~</span>width<span class="op">+</span>mass<span class="op">+</span>color,</span>
+<span id="cb18-7"><a href="#cb18-7"></a>    <span class="dt">data=</span>crabs,</span>
+<span id="cb18-8"><a href="#cb18-8"></a>    <span class="dt">dist=</span><span class="st">&#39;negbin&#39;</span></span>
+<span id="cb18-9"><a href="#cb18-9"></a>    )</span></code></pre></div>
 <p>The output here is essentially the same as that from above. The advantage to this approach is that the routine is packaged in a single call, so the output is likewise collected into a single object.</p>
 </div>
 
