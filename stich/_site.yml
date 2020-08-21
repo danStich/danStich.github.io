@@ -1,7 +1,7 @@
-name: "danStich"
+name: "Dan Stich"
 output_dir: "."
 navbar:
-  title: "danStich"
+  title: "Dan Stich"
   left:
     - icon: fa-home
       href: index.html
