@@ -5,11 +5,13 @@ navbar:
   left:
   - icon: fa-home
     href: index.html
+  - text: "Course content"
+    href: content.html
   - text: "Software needs"
     href: software.html
   - text: "Additional Resources"
     href: resources.html
-  - text: Contact
+  - text: "Contact"
     href: ../../contact.html
   right:
   - icon: fa-github
