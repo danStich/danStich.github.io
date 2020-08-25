@@ -16,6 +16,12 @@ All software required for this class is <b>freely available</b> and <b>easily in
 3. <b> Download the class data </b> from 
 <a href= https://github.com/danStich/classData>this github repository</a> following the instructions in the `README.md` file.
 
+**For this class, I will assume that you are working out of a single working directory (call it something like "quant_bio" or "biol217". That means I will assume your scripts (`.R` files) for each chapter are in the same folder on your computer as your the folder that contains your data.** 
+
+An example of your class folder might look like this:
+
+<img src="../../images/folders.png" alt="">
+
 
 <br>
  
