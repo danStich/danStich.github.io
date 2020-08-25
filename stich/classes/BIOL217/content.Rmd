@@ -1,68 +1,111 @@
 ```{r, child="../../_styles.Rmd"}
 ```
 
-## Course content (BIOL 217)
+# Course content (BIOL 217)
 
-To access the content from a given topic, please click on the  corresponding link below. Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
+----
 
-### Introduction to programming in R
+Please use the links below to access the content for each topic (week). Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
 
-<a href="./01_introToR.html"> Lecture tutorial </a><br> 
-<a href="./hw01_introToR.html"> Homework assignment</a> 
+The lecture tutorials provided below are linked directly to the online version of [The Worst Stats Text eveR](https://danstich.github.io/worst-r/){target="blank"}, the text book for the class. The links below will not open in a new tab unless you tell them to. PDF and eBook formats are coming soon!
 
-### Data simulation and visualization
+<h2 id = "multi"> **Introduction to programming in R** </h2>
+----
 
-<a href="./02_simulationAndVisualization.html"> Lecture tutorial </a><br> 
-<a href="./hw02.html"> Homework assignment </a> 
+<h3 id = "multi">Lecture tutorials</h3>
+[Introduction to programming in R](https://danstich.github.io/worst-r/1-Chapter1.html)<br>
+[Data Structures](https://danstich.github.io/worst-r/2-Chapter2.html)
+
+<h3 id = "multi">Homework exercises</h3>
+<a href="./hw01_introToR.html"> Introduction to R </a><br> 
+
+
+<h2 id = "multi">**Data manipulation and visualization** </h2>
+----
+
+<h3 id = "multi">Lecture tutorials</h3>
+[Working with data](https://danstich.github.io/worst-r/3-Chapter3.html)<br>
+[Plotting and graphics](https://danstich.github.io/worst-r/4-Chapter4.html)<br>
+
+<h3 id = "multi">Homework exercises</h3>
+<a href="./hw02.html"> Data manipulation and visualization </a>  
  
-### Probability distributions
-
+ 
+<h2 id = "multi"> **Probability distributions** </h2>
+----
 <a href="./03_probabilityDistributions.html"> Lecture tutorial </a><br> 
 <a href="./hw03.html"> Homework assignment </a> 
- 
-### Introduction to inferential statistics
 
+
+
+ 
+<h2 id = "multi"> **Introduction to inferential statistics** </h2>
+----
 <a href="./04_hypothesisTesting.html"> Lecture tutorial</a><br>
 <a href="./hw04.html"> Homework assignment </a> 
- 
-### Linear models
 
+
+
+ 
+<h2 id = "multi"> **Linear models** </h2>
+----
 <a href="./05_linearModels.html"> Lecture tutorial </a><br> 
 <a href="./hw05.html"> Homework assignment </a><br> 
 <a href="./05_anova.html"> ANOVA worked example </a><br> 
 <a href="./05_violinPlotsInR.html"> Violin plots in R </a> 
- 
-### Diagnostics and effect sizes
 
+
+
+ 
+<h2 id = "multi"> **Diagnostics and effect sizes** </h2>
+----
 <a href="./06_diagnosticsAndEffects.html"> Lecture tutorial </a><br> 
 <a href="./hw06.html"> Homework assignment </a> 
- 
-### Model selection
 
+
+
+ 
+<h2 id = "multi"> **Model selection** </h2>
+----
 <a href="./07_modelSelection.html"> Lecture tutorial </a><br> 
 <a href="./hw07.html"> Homework assignment </a> 
- 
-### GLM: Logistic regression
 
+
+
+ 
+<h2 id = "multi"> **GLM: Logistic regression** </h2>
+----
 <a href="./08_glm_logisticRegression.html"> Lecture tutorial </a><br> <a href="./hw08.html"> Homework assignment </a> 
- 
-### GLM: Count models
 
+
+
+ 
+<h2 id = "multi"> **GLM: Count models** </h2>
+----
 <a href="./09_glm_countModels.html"> Lecture tutorial </a><br> 
 <a href="./hw09.html"> Homework assignment </a> 
- 
-### Generalized linear mixed models
 
+
+
+ 
+<h2 id = "multi"> **Generalized linear mixed models** </h2>
+----
 <a href="./10_glmm.html"> Lecture tutorial </a><br> 
 <a href="./hw10.html"> Homework assignment </a> 
- 
-### Multivariate statistics
 
+ 
+ 
+ 
+<h2 id = "multi"> **Multivariate statistics** </h2>
+----
 <a href="./11_multivariate.html"> Lecture tutorial </a><br> 
 <a href="./hw11.html"> Homework assignment </a> 
- 
-### Classification and regression trees (CART)
 
+
+
+ 
+<h2 id = "multi"> **Classification and regression trees (CART)** </h2>
+----
 <a href="./12_cart.html"> Lecture tutorial </a><br> 
 <a href="./hw12.html"> Homework assignment </a>
  

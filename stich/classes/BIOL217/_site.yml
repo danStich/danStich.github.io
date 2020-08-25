@@ -9,11 +9,13 @@ navbar:
     href: content.html
   - text: "Software needs"
     href: software.html
-  - text: "Additional Resources"
+  - text: "Additional resources"
     href: resources.html
   - text: "Contact"
     href: contact.html
   right:
+  - text: "worst-r"
+    href: https://danstich.github.io/worst-r/ 
   - icon: fa-github
     href: https://github.com/danStich
       
@@ -27,7 +29,7 @@ output:
     includes:
       in_header: ../../_header.html
       after_body: ../../footer.html
-    css: ../../styles.css
+    css: styles.css
     lib_dir: site_libs
     self_contained: no
     

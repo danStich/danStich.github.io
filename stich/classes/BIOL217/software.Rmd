@@ -1,9 +1,9 @@
-```{r, child="_styles.Rmd"}
+```{r, child="../../_styles.Rmd"}
 ```
 
----
-title: "Software needs"
----
+# Software needs
+
+----
 
 <img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
