@@ -1,0 +1,6 @@
+Package: placeholder
+Type: Book
+Title: The Worst Stats Text eveR
+Version: 0.0.1
+URL: https://github.com/danStich/b_test
+Imports: bookdown, tidyverse, formatR
