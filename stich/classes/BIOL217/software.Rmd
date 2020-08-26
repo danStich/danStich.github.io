@@ -21,7 +21,7 @@ All software required for this class is <b>freely available</b> and <b>easily in
 
 An example of your class folder might look like this:
 
-<img src="../../images/folders.png" alt="">
+<img src="../../images/folders.PNG" alt="">
 
 <br>
  
