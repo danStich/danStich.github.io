@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.8.17)  25 AUG 2020 22:46
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.8.17)  26 AUG 2020 10:04
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -934,17 +934,17 @@ Overfull \hbox (117.0pt too wide) in paragraph at lines 1232--1232
 ..: 1 1 1 1 1 1 1 1 1 1 ...[] 
  []
 
-File: worstr_files/figure-latex/unnamed-chunk-53-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-53-1.pdf>
+File: .unnamed-chunk-53-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-53-1.pdf>
 
 Underfull \vbox (badness 1163) has occurred while \output is active []
 
 [33]
-File: worstr_files/figure-latex/unnamed-chunk-53-2.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-53-2.pdf>
+File: .unnamed-chunk-53-2.pdf Graphic file (type pdf)
+<use .unnamed-chunk-53-2.pdf>
 [34]
-File: worstr_files/figure-latex/unnamed-chunk-53-3.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-53-3.pdf>
+File: .unnamed-chunk-53-3.pdf Graphic file (type pdf)
+<use .unnamed-chunk-53-3.pdf>
 [35]
 Overfull \hbox (85.5pt too wide) in paragraph at lines 1342--1342
 []\TU/lmtt/m/n/10 ##  [1]  0.5  1.0  1.5  2.0  2.5  3.0  3.5  4.0  4.5  5.0  5.
@@ -1023,25 +1023,25 @@ RUE :13900[]
  []
 
 [41] [42] [43] [44] [45] [46] [47]
-File: worstr_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-76-1.pdf>
+File: .unnamed-chunk-76-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-76-1.pdf>
 
 Underfull \vbox (badness 5091) has occurred while \output is active []
 
 [48]
-File: worstr_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-78-1.pdf>
+File: .unnamed-chunk-78-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-78-1.pdf>
 
 Underfull \hbox (badness 10000) in paragraph at lines 1817--1819
 [][]
  []
 
 [49]
-File: worstr_files/figure-latex/unnamed-chunk-80-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-80-1.pdf>
+File: .unnamed-chunk-80-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-80-1.pdf>
 [50]
-File: worstr_files/figure-latex/unnamed-chunk-82-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-82-1.pdf>
+File: .unnamed-chunk-82-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-82-1.pdf>
 
 Underfull \hbox (badness 10000) in paragraph at lines 1872--1874
 [][]
@@ -1055,60 +1055,60 @@ Chapter 4.
 [53
 
 ] [54]
-File: worstr_files/figure-latex/unnamed-chunk-85-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-85-1.pdf>
+File: .unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-85-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [55]
-File: worstr_files/figure-latex/unnamed-chunk-86-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-86-1.pdf>
+File: .unnamed-chunk-86-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-86-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [56] [57]
-File: worstr_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-87-1.pdf>
-File: worstr_files/figure-latex/unnamed-chunk-90-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-90-1.pdf>
+File: .unnamed-chunk-87-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-87-1.pdf>
+File: .unnamed-chunk-90-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-90-1.pdf>
 
 Underfull \vbox (badness 7397) has occurred while \output is active []
 
 [58]
-File: worstr_files/figure-latex/unnamed-chunk-91-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-91-1.pdf>
+File: .unnamed-chunk-91-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-91-1.pdf>
 
 Underfull \vbox (badness 1102) has occurred while \output is active []
 
 [59]
-File: worstr_files/figure-latex/unnamed-chunk-92-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-92-1.pdf>
+File: .unnamed-chunk-92-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-92-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [60]
-File: worstr_files/figure-latex/unnamed-chunk-93-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-93-1.pdf>
+File: .unnamed-chunk-93-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-93-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [61]
-File: worstr_files/figure-latex/unnamed-chunk-94-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-94-1.pdf>
+File: .unnamed-chunk-94-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-94-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [62]
-File: worstr_files/figure-latex/unnamed-chunk-95-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-95-1.pdf>
+File: .unnamed-chunk-95-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-95-1.pdf>
 
 Underfull \vbox (badness 4569) has occurred while \output is active []
 
 [63] [64]
-File: worstr_files/figure-latex/unnamed-chunk-96-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-96-1.pdf>
-File: worstr_files/figure-latex/unnamed-chunk-97-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-97-1.pdf>
+File: .unnamed-chunk-96-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-96-1.pdf>
+File: .unnamed-chunk-97-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-97-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1116,83 +1116,72 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <14.4> not available
 (Font)              Font shape `TU/lmtt/b/n' tried instead on input line 2174.
 [66]
-File: worstr_files/figure-latex/unnamed-chunk-98-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-98-1.pdf>
-File: worstr_files/figure-latex/unnamed-chunk-99-1.pdf Graphic file (type pdf)
-<use worstr_files/figure-latex/unnamed-chunk-99-1.pdf>
+File: .unnamed-chunk-98-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-98-1.pdf>
+File: .unnamed-chunk-99-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-99-1.pdf>
 
 Underfull \vbox (badness 3019) has occurred while \output is active []
 
 [67]
-File: worstr_files/figure-latex/unnamed-chunk-100-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-100-1.pdf>
+File: .unnamed-chunk-100-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-100-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [68]
-File: worstr_files/figure-latex/unnamed-chunk-101-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-101-1.pdf>
+File: .unnamed-chunk-101-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-101-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [69]
-File: worstr_files/figure-latex/unnamed-chunk-103-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-103-1.pdf>
+File: .unnamed-chunk-103-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-103-1.pdf>
 [70]
-File: worstr_files/figure-latex/unnamed-chunk-104-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-104-1.pdf>
+File: .unnamed-chunk-104-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-104-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [71]
-File: worstr_files/figure-latex/unnamed-chunk-106-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-106-1.pdf>
+File: .unnamed-chunk-106-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-106-1.pdf>
 
 Underfull \hbox (badness 10000) in paragraph at lines 2337--2339
 [][]
  []
 
 [72]
-File: worstr_files/figure-latex/unnamed-chunk-107-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-107-1.pdf>
+File: .unnamed-chunk-107-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-107-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [73]
-File: worstr_files/figure-latex/unnamed-chunk-109-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-109-1.pdf>
+File: .unnamed-chunk-109-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-109-1.pdf>
 [74]
-File: worstr_files/figure-latex/unnamed-chunk-110-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-110-1.pdf>
+File: .unnamed-chunk-110-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-110-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [75]
-File: worstr_files/figure-latex/unnamed-chunk-111-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-111-1.pdf>
+File: .unnamed-chunk-111-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-111-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [76]
-File: worstr_files/figure-latex/unnamed-chunk-112-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-112-1.pdf>
+File: .unnamed-chunk-112-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-112-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [77]
-File: worstr_files/figure-latex/unnamed-chunk-113-1.pdf Graphic file (type pdf)
-
-<use worstr_files/figure-latex/unnamed-chunk-113-1.pdf>
+File: .unnamed-chunk-113-1.pdf Graphic file (type pdf)
+<use .unnamed-chunk-113-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1213,8 +1202,8 @@ LaTeX Warning: There were multiply-defined labels.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2485.
  ) 
 Here is how much of TeX's memory you used:
- 17620 strings out of 481691
- 317861 string characters out of 5931753
+ 17619 strings out of 481691
+ 313991 string characters out of 5931753
  729017 words of memory out of 5000000
  34451 multiletter control sequences out of 15000+600000
  541587 words of font info for 88 fonts, out of 8000000 for 9000

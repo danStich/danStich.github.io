@@ -11,6 +11,7 @@ description: ""
 
 ```{r, setup, include=FALSE, tidy=TRUE, message=FALSE, warning = FALSE}
   library(tidyverse)
+  knitr::opts_chunk$set(fig.path = ".")
 ```
 # The Worst Stats Text eveR {-#title}
 
