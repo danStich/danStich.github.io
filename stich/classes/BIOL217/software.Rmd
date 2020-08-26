@@ -7,6 +7,7 @@
 
 <img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
+
 All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each.
 
 1. <b> Download and install R </b> for <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=http://cran.us.r-project.org/> Mac </a>. You should download the most recent version of R for your operating system. Accept the default options.
@@ -21,7 +22,6 @@ All software required for this class is <b>freely available</b> and <b>easily in
 An example of your class folder might look like this:
 
 <img src="../../images/folders.png" alt="">
-
 
 <br>
  
