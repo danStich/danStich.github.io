@@ -1,0 +1,50 @@
+```{r, child="../../_styles.Rmd"}
+```
+
+# Weekly survival guide
+
+----
+
+<h3 id = "multi"><b>How to life???</b></h3>
+
+Getting started in R is brutal. Period. It is a rite of passage most of us who use it try hard to forget. Once you get over the initial struggle of acquainting yourself with the course website, downloading the software, and then doing some kind of magic with zippers on folders it can be tough to know what to do next. 
+
+In fact, this is as far as many people ever get in learning R. Some probably have multiple versions of R that they've never actually learned to use. The purpose of this page is to help make sure that's not you. Because once you start to learn R and you have a "system" it picks up quick.
+
+
+<h3 id = "multi"><b>Weekly routine</b></h3>
+
+**Start lecture and textbook work on Monday each week**<br>
+Then you can work through text sections gradually. It is easiest to learn R when you do a little every day. You can go on all-night code benders once you get comfortable. If you wait until the night before homework is due to start the lecture material, it is unlikely that you will finish it. 
+
+**Make an R script for lecture and text each week**<br>
+To do this, I would make an R script for each chapter or section - whichever you like. You can write or paste code from [worst-r](https://danstich.github.io/worst-r/) as you go. You can copy and paste lecture code from worst-r to play along at first. You don't have to write it out long-hand. The thing I really want you to do with the textbook (lecture) code is play with it to see how things work. Think of it like a nice, safe sandbox that you can play in. And, if you make a mess, just delete the file. Nothing we do in this class will break your computer.
+
+**Read and work along with the text book throughout the week** <br>
+The only way to really learn R is to read, write, and run R code. I can give you pointers, tell you jokes, and help you debug, but the only way to really learn it is to do it. It gets easier. You'll never stop getting frustrated, but it gets easier.
+
+**Return to early chapters of the book as needed**<br>
+There are all kinds of nuggets in those that make your eyes glaze over early but are super helpful once you hit your stride.
+
+**Don't start homework without working through assigned chapters**<br>
+Literally, don't. It won't make any sense to you unless you already know this stuff. In that case, I hope you have something better to read than [worst-r](https://danstich.github.io/worst-r/) this semester.
+
+**Start homework the day it is assigned**<br>
+Not earlier or later. If you start it too early you won't have digested the lecture content. Later in the semester it will be easier. Plus, I am constantly updating [worst-r](https://danstich.github.io/worst-r/) and the course website (like every semester, no matter what, because I like playing with new data!). So, you don't want to start it early and then have me change the assignment before class. Some day I'll become a lazy professor who never changes out their content. Of course, you also don't want to start too late, because you won't stand much of finishing the homework assignments if you do.
+
+**Ask questions**<br>
+It doesn't irritate me, I promise. I have the job I do because I like helping people learn about this stuff. If I didn't like it, I would go be a cave-dwelling coder troll. Sometimes things that are big hurdles for you are things I didn't think about - and it's probably not just you! Ask questions, or I will just blather on forever.
+
+**Work together**<br>
+It's not just allowed, it is encouraged! Just write your own code - that's all I ask.
+
+**Get creative**<br>
+Just because we didn't do it in class or the textbook (I mean, it is the Worst Stats Text eveR) that doesn't mean you can't do it for your homework. Go Google it.
+
+**Submit your homework by the due date**<br>
+Regardless of whether you make it all the way through the homework assignment. Half credit is better than no credit. You can't let it happen every week or you won't pass, but the code is not the only mark in your grade-books, it's just the one that scares people the most. The course is designed to help you absorb the occasional missed mark.
+
+**Reflect on where you started this class each week**<br>
+Each week, look back over your shoulder and think about how terrified you were the first time you tried to use R on your own. Celebrate the small victories like installing the software and getting your first code to run. Seriously. Most of my colleagues have never even gotten that far. In a couple of weeks, you will know how to write more code and do more statistics than most of your professors. But it hurts like hell getting there.
+
+<br>

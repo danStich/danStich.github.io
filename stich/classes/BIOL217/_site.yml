@@ -5,10 +5,12 @@ navbar:
   left:
   - icon: fa-home
     href: index.html
-  - text: "Course content"
-    href: content.html
   - text: "Getting started"
     href: software.html
+  - text: "Course content"
+    href: content.html    
+  - text: "Survival guide"
+    href: survival.html       
   - text: "Additional resources"
     href: resources.html
   - text: "Contact"
