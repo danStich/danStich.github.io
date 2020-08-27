@@ -7,7 +7,7 @@ navbar:
     href: index.html
   - text: "Course content"
     href: content.html
-  - text: "Software needs"
+  - text: "Getting started"
     href: software.html
   - text: "Additional resources"
     href: resources.html

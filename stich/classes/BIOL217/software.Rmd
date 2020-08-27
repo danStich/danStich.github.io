@@ -1,25 +1,44 @@
 ```{r, child="../../_styles.Rmd"}
 ```
 
-# Software needs
+# Getting started
 
 ----
 
 <img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
+<h2 id = "multi"><b>Software</b></h2>
 
-All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each.
+All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each. Instructional videos and download links are provided below.
 
-1. <b> Download and install R </b> for <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=http://cran.us.r-project.org/> Mac </a>. You should download the most recent version of R for your operating system. Accept the default options.
+[3 minute YouTube video for Mac](https://www.youtube.com/watch?v=EmZqlcKkJMM)<br>
+[3 minute YouTube video for Windows](https://www.youtube.com/watch?v=iLSvjyYvbpU)
 
-2. <b> Once you have R installed, download and install <a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio </a>. </b> You should download the most recent version. This program will not work without an existing installation of R.
+<h3 id = "multi"> Download and install R </h3>
+For <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=https://cran.r-project.org/bin/macosx/> Mac </a>. You should download the most recent version of R for your operating system. Accept the default options.
 
-3. <b> Download the class data </b> from 
-<a href= https://github.com/danStich/classData>this github repository</a> following the instructions in the `README.md` file.
+<h3 id = "multi"> Download and install Rstudio </h3>
+<a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio download site</a>. You should download the most recent version. This program will not work without an existing installation of R. Also accept default installation options.
 
-**For this class, I will assume that you are working out of a single working directory (call it something like "quant_bio" or "biol217". That means I will assume your scripts (`.R` files) for each chapter are in the same folder on your computer as your the folder that contains your data.** 
 
-An example of your class folder might look like this:
+<h2 id="multi">**Data**</h2>
+
+<h3 id = "multi">Download `data.zip`</h3>
+Download the class data as a zip file called `data.zip` from <a href= https://github.com/danStich/worst-r/blob/master/data.zip>the github repository</a> for The Worst Stats Text eveR.
+
+<h3 id = "multi">Put `data.zip` file your class folder</h3>
+If you did not choose which folder to download this file to, it will be in your Downloads folder. Please copy and paste it to a folder just for class code and data. The actual name and location of this folder are not important as long as you can remember it.
+
+<h3 id = "multi">Extract the zip file</h3>
+Once `data.zip` is in a location you will remember, extract (or "unzip") it. 
+
+On Mac, you should just need to double click `data.zip` to extract the contents.
+
+On Windows, Right click > Extract All will bring up a context menu that looks like the image on the left below. Be sure to delete "data" from the final name before clicking "Extract" (shown on right). Otherwise your data will be inside a folder called data that's inside another folder called data and you'll have to copy and paste everything up one level.
+
+<img src="../../images/extract_rename.PNG" alt="">
+
+Your class folder should look something like this when you are done (but you won't have any R files in there yet).
 
 <img src="../../images/folders.PNG" alt="">
 
