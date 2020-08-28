@@ -11,7 +11,7 @@ Welcome to the Quantitative Biology (BIOL 217) course website. This site is inte
 
 Lecture modules and homework assignments are available through the <a href="content.html">Course content</a> page.
 
-All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/classData"> here</a>.
+All data used for lecture modules and homework assignments are available <a href="https://github.com/danStich/worst-r/blob/master/data.zip"> here</a>.
 
 <br> 
  
