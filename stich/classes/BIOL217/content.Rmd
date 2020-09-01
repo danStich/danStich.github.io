@@ -7,7 +7,7 @@
 
 Please use the links below to access the content for each topic (week). Please review the <a href="rubric.html">rubric</a> for submitting programming assignments through Blackboard each week prior to submission.
 
-The lecture tutorials provided below are linked directly to the online version of [The Worst Stats Text eveR](https://danstich.github.io/worst-r/){target="blank"}, the text book for the class. The links below will not open in a new tab unless you tell them to. PDF and eBook formats are coming soon!
+The lecture tutorials provided below are linked directly to the online version of [The Worst Stats Text eveR](https://danstich.github.io/worst-r/){target="blank"}, the text book used for the class. The links below will not open in a new tab unless you tell them to. PDF and eBook formats are coming soon!
 
 <h2 id = "multi"> **Introduction to programming in R** </h2>
 ----
@@ -31,10 +31,13 @@ The lecture tutorials provided below are linked directly to the online version o
 <a href="./hw02.html"> Data manipulation and visualization </a>  
  
  
-<h2 id = "multi"> **Probability distributions** </h2>
+<h2 id = "multi"> **Probability and sampling distributions** </h2>
 ----
-<a href="./03_probabilityDistributions.html"> Lecture tutorial </a><br> 
-<a href="./hw03.html"> Homework assignment </a> 
+<h3 id = "multi">Lecture tutorials</h3>
+[Sampling distributions](https://danstich.github.io/worst-r/5-sampling-distributions-in-r.html)<br>
+
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw03.html"> Sampling distributions </a> 
 
 
 
