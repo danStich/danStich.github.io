@@ -112,7 +112,7 @@ which(is.na(...))
 
 **Question 6**. How many `NA` values are in the column `do_mgl` of `otsego`?
 
-Now that we now why we were getting `NA` values and we know we don't have that many, we can go ahead and tell R to remove those from our data summary `ann`. Let's do it again from the start. This time, we will add `na.rm = TRUE` inside the call to `mean()` in the last step of our data pipeline. I am going to overwrite `ann` with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you'll still have `ann` in your workspace unless you remove it with the `rm()` function (see [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove) or type `?rm`.
+Now that we now why we were getting `NA` values and we know we don't have that many, we can go ahead and tell R to remove those from our data summary `ann`. Let's do it again from the start. This time, we will add `na.rm = TRUE` inside the call to `mean()` in the last step of our data pipeline. I am going to overwrite `ann` with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you'll still have `ann` in your workspace unless you remove it with the `rm()` function (see [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove) or type `?rm`).
 
 ```{r, message = FALSE}
 ann <- # Front-end object assignment
