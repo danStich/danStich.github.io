@@ -6,11 +6,15 @@ title: "Publications"
 ```
 
 
-### 2019
+### 2020
 
 ---
 
-<!-- <b> Stich, D. S. </b>, E. Gilligan, and D. C. Oliver. *In review*. A flexible approach for estimating categorical and continuous effects on individual growth rate for mixed-stock and single population fisheries. Canadian Journal of Fisheries and Aquatic Sciences. -->
+Caves, S., J. R. Baumman, and <b>D. S. Stich</b>. *Accepted*. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management. <a href="https://github.com/danStich/grasscarp">[code]</a>
+
+### 2019
+
+---
 
 Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages 75-92 in M. J. Seipker and J. W. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. <a href="./pubs/Watson_etal_2019_AFS87.pdf">[PDF]</a>
 
