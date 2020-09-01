@@ -7,111 +7,205 @@
 
 <h2 id="multi"> Introduction </h2>
  
-The objective of this assignment is to reinforce your ability to use essential tools that you learned about last week and get you started developing necessary skills in data manipulation, simulation, and visualization. Most of the tools you will use will translate directly to other applications and functions in the R programming environment, so my hope is that we are starting to build a repertoire of useful skills for future labs.
+The objective of this assignment is to reinforce your ability to use tools that you learned about in [Chapter 3](https://danstich.github.io/worst-r/3-Chapter3.html) and [Chapter 4](https://danstich.github.io/worst-r/4-Chapter4.html) get you started developing necessary skills in data manipulation and visualization. We will continue to build these skills and integrate them into statistical analyses in later chapters.
 
-By the end of this lab, you should be comfortable: 1) reading data into R using at least one method, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots. 
+By the end of this assignment, you should be comfortable: 1) reading data into R, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots. 
 
 ## Exercises
 
-<h3 id="multi"> Data import </h2>
+<h3 id="multi"> Packages </h3>
 
-Read the data from `ctr_fish.csv` into R using one of the methods we used in class. If you named the file something different when you downloaded it, be sure to note the name for reference in the code that follows. If you forgot the name of the file, you can browse to it on your computer or through the Files tab in RStudio. If you saved your homework script in the same directory as the data (recommended), then you can just run `dir()` to see the file names. If you have gotten this far and have not saved your homework script, please do so now.
+We're going to work with the `dplyr` and `ggplot2` packages for this assignment, so you can go ahead and put some code in your homework script to load them both from the library where they were installed on your computer. If you installed them with the `tidyverse`, you can go ahead and load the whole thing.
+```{r}
+library(dplyr)
+library(ggplot2)
+```
 
+<h3> Data import </h3>
+
+Read the data from `physical.csv` into R using the `read.csv` function. If you saved your homework script in the same directory as the data, then you can just run `dir()` to see the file names and copy and paste from the output into your `read.csv` function so you don't mess up the name. 
 
 ```{r, eval=FALSE, echo=TRUE}
-am_shad = read.csv(file ="ctr_fish.csv", header = TRUE)
+otsego = read.csv(file ="data/physical.csv", header = TRUE)
 ```
 
 ```{r, eval=TRUE, echo=FALSE}
-am_shad = read.csv(file ="../../data/ctr_fish.csv", header = TRUE)
+otsego = read.csv(file ="../../data/physical.csv", header = TRUE)
 ```
 
-### First steps in dealing with a dataset
+If you have gotten this far and have not saved your homework script, please do so now.
 
-I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure using either `str()` or by clicking on the blue arrow to the left of the data set in your Environment tab. See explanation of data in the <a href="02_simulationAndVisualization.html">lecture module</a> for this unit to view variable explanations. Use the built-in function `summary()` to get a closer look at your data.
+### Data explanation
+From [Chapter 4.2](https://danstich.github.io/worst-r/4-2-base-graphics.html): These are data collected each year from Otsego Lake by students, staff, and faculty at the SUNY Oneonta Biological Field Station in Cooperstown, NY, USA. The data set includes temperature (°C), pH, dissolved oxygen, and specific conductance measurements from a period of about 40 years. There are all kinds of cool spatial and seasonal patterns in the data that we can look at. 
 
-**Question 1**. What is the minimum length of American shad in this dataset? Does this make sense to you when you look at the rest? If you are stuck think back to how we did this last week. Or, <a href="https://www.google.com/">Google</a> it.
+We will use `do_mgl` for the examples that follow. This variable is a measure of the amount of dissolved oxygen available in the water at each depth on each day of the data set. Dissolved oxygen is important for supporting aerobic organisms that can't produce their own food through photosynthesis (e.g. aquatic bugs, clams, fish). It has been measured along with other water characteristics to help monitor changes in the lake due to watershed and in-lake management as well as introduced species or climate change.
 
-### Fixing erroneous data points for QC
+One of the biggest changes to Otsego Lake in the last several decades was a reduction in the amount of dissolved oxygen in the deepest water (hypolimnion). A primary cause of this reduction in dissolved oxygen was the introduction of an invasive fish, the alewife (*Alosa pseudoharengus*). Alewife are really good at eating the microscoping animals (zooplankton) that graze on algae. When they were introduced, the alewife population increased rapidly and basically ate all of the microscopic crustaceans that eat algae. This allowed algae to grow out of control during the summer. Once the algae dies each year, it sinks to the bottom of the lake where it is decomposed by aerobic organisms that use up oxygen deep in the lake. The amount of oxygen available is fixed from about June until December each year until seasonal changes cause all of the water to mix together again. This means that the lowest oxygen levels were occuring in the deepest water around October or November each year. Oxygen levels got so low because of this that the deep, cold water needed by popular sportfish such as lake trout (*Salvelinus namaycush*) did not have enough oxygen to support them. Therefore, the New York State Department of Environmental Conservation (NYSDEC), SUNY Oneonta Biological Field Station, Otsego Lake Association, and others began stocking walleye (*Sander vitreus*) to eliminate the alewife. What a hot mess, huh?!
 
-After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, fix the erroneous length measurements by multiplying them by 10. Hint: you need to replace all values less than 10 cm.
+It turns out that NYSDEC et al. were actually successful in eliminating the alewife. Well, sort of. It is kind of a messy story thanks to the subsequent introduction of invasive zebra mussels (*Dreissena polymorpha*) in 2008, but as you'll find out in your literature readings, that's ecology.
 
-**Question 2**. Now what is the minimum length of American shad in this dataset where length was not back-calculated?
+For this assignment, we will weed through about 30 years of data to summarize changes in dissolved oxygen in Otsego Lake during the last 30 years. But, to get there we'll need to do some data munging and some quality-control to assure that we know what we're working with. These steps are pretty typical for most data sets you'll run into, and are a critical part of experimental design and the statistical analyses that we'll conduct later.
 
-### Deterministic variable generation
+### First steps for data
 
-Now that we have fixed that problem, let's generate some data using a deterministic relationship. As part of this project, we are using information about fish length to predict individual fecundity (number of eggs per female) at each age. Use your dataframe to create a new object that includes only females, and only those fish for which length is not back-calculated.
+I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure in your Environment tab or using the `str()` function. 
 
-**Question 3**. How many rows are in your new dataframe?
+You can also use the built-in function `summary()` to get a closer look at your data.
 
-Create a new column in the dataframe for fecundity using a mathematical relationship between length and fecundity. Federal scientists are currently collecting information about the relationship between length and fecundity for population models. We are still waiting on the final numbers (and a paper or two) before these can be included in stock assessment. As a modeler on the project, I have some inside information, though. I know that the average fecundity per female across all ages was about 302,000 eggs in 2015. I also know that fecundity is a non-linear function of length based on general characteristics of fish life-history. After some quick trial and error, the following equation does a pretty decent job of replicating the preliminary results of the federal fishery biologists: 
+Once you've taken a look at the data, let's check out some specifics.
 
-$F_i  = 0.445 × {L_i}^{3.5}$
-
-where F is fecundity and L is fork length of each individual, i. 
-
-Use this formula to create a new column in your dataframe called fecundity (and shhh...don’t tell them I hacked their eggs).
-
-**Question 4**. What is the mean value of fecundity across all ages in your dataframe? Does this seem like a reasonable value given the expected value of fecundity across all age classes in 2015?
-
-**Question 5**. What is the standard deviation of fecundity?
-
-### Stochastic simulation of age-specific fecundity
-
-Now that we have fecundity estimates for each age based on some more-or-less  empirical relationship with length, let's simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says `install.packages()`, otherwise if you are using a non-lab computer, run the following code:
-
-Let's install the package we need
-```{r, eval=FALSE}
-# Download the package from the internet (takes a couple minutes)
-  install.packages('plyr')
-
-# Loads the package from a library of installed packages.
-  library(plyr)    
-```
-
-With the package installed, use the function `ddply( )` to calculate the mean and standard deviation of fecundity for each age class. Remember to create a new object to hold this information! **Hint**: if you have difficulty, remember to try: `?ddply` for a couple of useful examples. 
-
-**Question 6**. What are the mean and standard deviation of fecundity for age-6 roes?
-
-Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function `rnorm` from the <a href="02_simulationAndVisualization.html">lecture module</a> to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic stock assessment models!
-
-**Question 7**. How does the mean and standard deviation of your simulated values for age-6 roes compare to the 'empirical' estimates? 
-
-**Question 8**. How does this change if you take 10 random samples instead of 10,000? Answers may vary.
-
-### Data visualization
-
-Let's wrap this up by making a couple of nice graphs. We'll start simple with a single panel, and then up our game to produce some nice multi-panel plots. 
-
-First, make a histogram of fecundity using your random sample for age-4 roes by using `hist(...)`, replacing '`...`' with whatever you named this data set. 
-
-**Question 9**. What are your four least favorite things about this plot?
-
-Change them. Don’t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use `?hist` and `?par` to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, "Add custom tick mark labels to graph in R". If you can’t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do. 
-
-Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:
-
-```{r, echo=FALSE}
-par(mfrow=c(2, 2), mar=c(5, 5, 1, 1))
-age4 = am_shad$Length[am_shad$Age==4]
-age5 = am_shad$Length[am_shad$Age==5]
-age6 = am_shad$Length[am_shad$Age==6]
-age7 = am_shad$Length[am_shad$Age==7]
-```
-
-```{r, eval = FALSE}
-par(mfrow=c(2, 2), mar=c(5, 5, 1, 1))
-hist(age4, main='', xlim=c(0,8e5))
-hist(age5, main='', xlim=c(0,8e5))
-hist(age6, main='', xlim=c(0,8e5))
-hist(age7, main='', xlim=c(0,8e5))
-```
-
-**Question 10**. What does the argument 'mfrow' do in this code block? *Hint: what happens if you change the numbers?*
-
-### BONUS (1 pt): 
- 
-Of course, now that it's a multi-panel plot, you will need to add labels like '(a), (b), (c), and (d)' before you can submit your work to a journal. To do this, you will need to use the function `text()`. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give $1/4$ point for every **nicely** placed label because I bet most of you will be able to get 1 label on there.
+**Question 1**. How many (unique) years are included in this data set? If you are stuck look back to how we did this in Chapter 2 and Chapter 3. Or, <a href="http://letmegooglethat.com/?q=how+to+find+unique+values+in+R">Google</a> it. (Note that I am not asking you for the range of years (1988-2018) because some years lack data.)
 
 <br>
- 
+
+Next, calculate the mean dissolved oxygen `do_mgl` throughout the water column each year. You can use the approach demonstrated in [Chapter 3.4](https://danstich.github.io/worst-r/3-4-better-data-summaries.html).
+
+Don't forget to assign this to a new object!
+```{r, message = FALSE}
+# This will do it all at once!
+ann <- # Front-end object assignment
+  otsego %>% # Pass otsego to the group_by function
+  group_by(year) %>% # Group by year and pass to summarize
+  summarize(avg = mean(do_mgl))
+
+```
+
+You'll notice that if you try to print `out` to the console, it does not display the whole object. If you'd like to see the whole thing, you can still use `View(ann)` to open it in the data viewer.
+
+Have a look at it...
+
+### Missing data and R
+Uh-oh, looks like something went wrong! We have a whole bunch of `NA` values in our data!
+
+Most of the time this is not a big deal, but the default behavior for some functions, such as `mean()` and `sd()` will return `NA` if *any* of the values in a column are `NA`. This is good because it lets us know something is funky, but we need to dig a little deeper to figure out why.
+
+<br>
+
+**Question 2**. How many of the values in the column `avg` of `ann` are `NA`? You can find this multiple ways.
+
+**Question 3**. To which years do these correspond? Again, you can find this multiple ways.
+
+<br>
+
+The next question we need to answer here is, "Why do we have `NA` values in `ann$avg` for some years but not for others?" To answer this, we need to go back to the original data frame, which I named `otsego`.
+
+Subset the `otsego` data to get only those data from one of the years above that had an `NA` in `out`. If you are having trouble remembering how to do this, have a look back at [Chapter 3.3](https://danstich.github.io/worst-r/3-3-subsetting-and-selecting-data.html#subsetting-and-summaries-in-base-r) of the text.
+
+I am going to use `1993` to demonstrate how to do it using one method from base R. *You must use a different year for the questions that follow*.
+```{r}
+ninety_three <- subset(otsego, year == 1993)
+```
+
+**Question 4**. Which year did you pick for this?
+
+**Question 5**. Are there any values of `do_mgl` in the subset that you created which are *not* `NA`?
+
+<br>
+
+Okay, now we know that the problem here is just that we are missing some data for some depths and years. Next we need to find out how many of the data points are `NA` to determine if this could influence analyses down the road.
+
+You could find out how many of these are missing by using a combination of `is.na` and `which`, replacing `...` with the name of the object you want to query (the column `do_mgl` in the dataframe `otsego`).
+
+```{r, eval=FALSE}
+which(is.na(...))
+```
+
+**Question 6**. How many `NA` values are in the column `do_mgl` of `otsego`?
+
+Now that we now why we were getting `NA` values and we know we don't have that many, we can go ahead and tell R to remove those from our data summary `ann`. Let's do it again from the start. This time, we will add `na.rm = TRUE` inside the call to `mean()` in the last step of our data pipeline. I am going to overwrite `ann` with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you'll still have `ann` in your workspace unless you remove it with the `rm()` function (see [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove) or type `?rm`.
+
+```{r, message = FALSE}
+ann <- # Front-end object assignment
+  otsego %>% # Pass otsego to the group_by function
+  group_by(year) %>% # Group by year and pass to summarize
+  summarize(avg = mean(do_mgl, na.rm = TRUE))
+
+```
+
+Now, you should have a numeric value of mean `do_mgl` in Otsego Lake for each `year` in `ann` for which there were data! Have a look at `ann` to confirm that this is true before moving on.
+
+
+### Subsetting
+
+Now that we have a handle on what the data look like we can start to look at some of the trends in dissolved oxygen that I mentioned earlier.
+
+Make a boxplot of `do_mgl` by `year` in the `otsego` data using one of the methods from [Chapter 4](https://danstich.github.io/worst-r/4-Chapter4.html). I know that this is data visualization, not subsetting (please don't post it as an issue!).
+
+I am going to make a quick box plot using the `ggplot2` package to see how `do_mgl` changes across years.
+
+Now, we make the boxplot:
+```{r, warning=FALSE, message=FALSE}
+bp <- ggplot(otsego, aes(x = year, y = do_mgl)) + 
+  geom_boxplot(mapping = aes(group = year))
+
+print(bp)
+```
+
+You probably got a warning message from this about non-finite values. This is because the `otsego` data had `NA` values in it. This will not affect your plot other except that it is ignoring `NA` values for `do_mgl`, which we've already discussed.
+
+More importantly, if you look at the trends in dissolved oxygen here they don't really match the story I told you (I guess maybe if you squint). Remember that this data set currently has data from the entire water column, and we are only really interested in what happened to dissolved oxygen in the deepest part of the lake during fall, when oxygen levels fall below critical levels needed by aerobic organisms at the bottom of the lake. Therefore, we need to subset the data to look at just the part in which we are interested.
+
+Let's get just those data where `depth` is greater than 40 meters (about 120 ft) in the month of October (late autumn before mixing occurs) to see if we can make out that trend a little more clearly.
+
+```{r}
+hypo <- # Front-end object assignment
+  otsego %>% # Pass otsego to the subset function
+  subset( depth > 40 & month == 10) # Select depths > 40 m in October
+```
+
+**Question 7**. How many rows are left in your new data frame (the one that I called `hypo`)?
+
+<br>
+
+Now that you've taken a look at your data, go ahead and make another quick box plot of `do_mgl` by year.
+
+```{r, warning=FALSE, message=FALSE}
+bp <- ggplot(hypo, aes(x = year, y = do_mgl)) + 
+  geom_boxplot(mapping = aes(group = year))
+
+print(bp)
+```
+
+Alright! This looks a lot more like the story I was telling you at the start of the homework assignment. If only the graph did it justice...don't worry, you'll have to make it pretty at the end.
+
+### Creating a new variable
+Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let's say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!! 
+
+We'll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the `hypo` data frame (shameful, I know).
+```{r}
+hypo <- hypo %>% 
+  subset(year > 1988)
+```
+
+Now that we have just the "alewife" and "post-alewife" years in our data, we can go ahead and assign each of the years to one of these two groups using a 2010 cut-off year.
+
+Create a new column in `hypo` that will hold a grouping variable for `alewife`. I initialize this by assigning it the value **`present`** for all rows. Note that I only supply a single value, but R knows to repeat this for each row in the data frame.
+```{r}
+hypo$alewife <- "present"
+```
+
+Next, we'll modify `hypo$alewife` to replace "present" with "absent" for all years after 2010!
+```{r}
+hypo$alewife[hypo$year > 2010] <- "absent"
+```
+
+**Question 8**. Using your this new data set, calculate the mean `do_mgl` in years were present or absent. There are a number of ways to do this. If you are struggling have a look at the examples using `group_by` and `summarize` from the `dplyr` package in [Chapter 3.4](https://danstich.github.io/worst-r/3-4-better-data-summaries.html)
+
+<br>
+
+### Make it pretty
+Okay, let's wrap it all up this week by making a nice plot to visually compare hypolimnetic oxygen (`hypo$do_mgl`) between years in which `alewife` was `"present"` or `"absent"`.
+
+Here is the basic plot to get you started:
+```{r, warning=FALSE, message=FALSE}
+bp <- ggplot(hypo, aes(x = alewife, y = do_mgl)) + 
+  geom_boxplot(mapping = aes(group = alewife))
+
+print(bp)
+```
+
+Next, I want you to modify this box plot using some of the examples shown in [Chapter 4.3.4](https://danstich.github.io/worst-r/4-3-plotting-with-ggplot2.html#ggboxplots). 
+
+**Question 9**. Choose at least 5 components of this graph to modify. Examples could include themes, colors, chart titles, axis labels, tick (group) labels, or more. I just want you to dig in and get creative here. Report (in your own words) each of the five changes that you made as the answer and show me the money...I mean the plot. Show me the plot. You don't have to paste the plot in your answer. I'll see it when I run your awesome code. 
+
+**Question 10**. Based on your box plot, and your answer to Question 9, do you think these groups are different? Note, I am still not asking you to do any statistical tests yet. I just want you to think about the kinds of comparisons we will make in a couple weeks.

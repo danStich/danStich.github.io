@@ -415,69 +415,126 @@ Data manipulation and visualization
 <h2 id="multi">
 Introduction
 </h2>
-<p>The objective of this assignment is to reinforce your ability to use essential tools that you learned about last week and get you started developing necessary skills in data manipulation, simulation, and visualization. Most of the tools you will use will translate directly to other applications and functions in the R programming environment, so my hope is that we are starting to build a repertoire of useful skills for future labs.</p>
-<p>By the end of this lab, you should be comfortable: 1) reading data into R using at least one method, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots.</p>
+<p>The objective of this assignment is to reinforce your ability to use tools that you learned about in <a href="https://danstich.github.io/worst-r/3-Chapter3.html">Chapter 3</a> and <a href="https://danstich.github.io/worst-r/4-Chapter4.html">Chapter 4</a> get you started developing necessary skills in data manipulation and visualization. We will continue to build these skills and integrate them into statistical analyses in later chapters.</p>
+<p>By the end of this assignment, you should be comfortable: 1) reading data into R, 2) conducting some basic data manipulation, 3) generating new variables deterministically and stochastically, and 4) creating and modifying basic plots.</p>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <h3 id="multi">
+Packages
+</h3>
+<p>We’re going to work with the <code>dplyr</code> and <code>ggplot2</code> packages for this assignment, so you can go ahead and put some code in your homework script to load them both from the library where they were installed on your computer. If you installed them with the <code>tidyverse</code>, you can go ahead and load the whole thing.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(ggplot2)</span></code></pre></div>
+<h3>
 Data import
-</h2>
-<p>Read the data from <code>ctr_fish.csv</code> into R using one of the methods we used in class. If you named the file something different when you downloaded it, be sure to note the name for reference in the code that follows. If you forgot the name of the file, you can browse to it on your computer or through the Files tab in RStudio. If you saved your homework script in the same directory as the data (recommended), then you can just run <code>dir()</code> to see the file names. If you have gotten this far and have not saved your homework script, please do so now.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>am_shad =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span><span class="st">&quot;ctr_fish.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
-<div id="first-steps-in-dealing-with-a-dataset" class="section level3">
-<h3>First steps in dealing with a dataset</h3>
-<p>I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure using either <code>str()</code> or by clicking on the blue arrow to the left of the data set in your Environment tab. See explanation of data in the <a href="02_simulationAndVisualization.html">lecture module</a> for this unit to view variable explanations. Use the built-in function <code>summary()</code> to get a closer look at your data.</p>
-<p><strong>Question 1</strong>. What is the minimum length of American shad in this dataset? Does this make sense to you when you look at the rest? If you are stuck think back to how we did this last week. Or, <a href="https://www.google.com/">Google</a> it.</p>
+</h3>
+<p>Read the data from <code>physical.csv</code> into R using the <code>read.csv</code> function. If you saved your homework script in the same directory as the data, then you can just run <code>dir()</code> to see the file names and copy and paste from the output into your <code>read.csv</code> function so you don’t mess up the name.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>otsego =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span><span class="st">&quot;data/physical.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p>If you have gotten this far and have not saved your homework script, please do so now.</p>
+<div id="data-explanation" class="section level3">
+<h3>Data explanation</h3>
+<p>From <a href="https://danstich.github.io/worst-r/4-2-base-graphics.html">Chapter 4.2</a>: These are data collected each year from Otsego Lake by students, staff, and faculty at the SUNY Oneonta Biological Field Station in Cooperstown, NY, USA. The data set includes temperature (°C), pH, dissolved oxygen, and specific conductance measurements from a period of about 40 years. There are all kinds of cool spatial and seasonal patterns in the data that we can look at.</p>
+<p>We will use <code>do_mgl</code> for the examples that follow. This variable is a measure of the amount of dissolved oxygen available in the water at each depth on each day of the data set. Dissolved oxygen is important for supporting aerobic organisms that can’t produce their own food through photosynthesis (e.g. aquatic bugs, clams, fish). It has been measured along with other water characteristics to help monitor changes in the lake due to watershed and in-lake management as well as introduced species or climate change.</p>
+<p>One of the biggest changes to Otsego Lake in the last several decades was a reduction in the amount of dissolved oxygen in the deepest water (hypolimnion). A primary cause of this reduction in dissolved oxygen was the introduction of an invasive fish, the alewife (<em>Alosa pseudoharengus</em>). Alewife are really good at eating the microscoping animals (zooplankton) that graze on algae. When they were introduced, the alewife population increased rapidly and basically ate all of the microscopic crustaceans that eat algae. This allowed algae to grow out of control during the summer. Once the algae dies each year, it sinks to the bottom of the lake where it is decomposed by aerobic organisms that use up oxygen deep in the lake. The amount of oxygen available is fixed from about June until December each year until seasonal changes cause all of the water to mix together again. This means that the lowest oxygen levels were occuring in the deepest water around October or November each year. Oxygen levels got so low because of this that the deep, cold water needed by popular sportfish such as lake trout (<em>Salvelinus namaycush</em>) did not have enough oxygen to support them. Therefore, the New York State Department of Environmental Conservation (NYSDEC), SUNY Oneonta Biological Field Station, Otsego Lake Association, and others began stocking walleye (<em>Sander vitreus</em>) to eliminate the alewife. What a hot mess, huh?!</p>
+<p>It turns out that NYSDEC et al. were actually successful in eliminating the alewife. Well, sort of. It is kind of a messy story thanks to the subsequent introduction of invasive zebra mussels (<em>Dreissena polymorpha</em>) in 2008, but as you’ll find out in your literature readings, that’s ecology.</p>
+<p>For this assignment, we will weed through about 30 years of data to summarize changes in dissolved oxygen in Otsego Lake during the last 30 years. But, to get there we’ll need to do some data munging and some quality-control to assure that we know what we’re working with. These steps are pretty typical for most data sets you’ll run into, and are a critical part of experimental design and the statistical analyses that we’ll conduct later.</p>
 </div>
-<div id="fixing-erroneous-data-points-for-qc" class="section level3">
-<h3>Fixing erroneous data points for QC</h3>
-<p>After receiving these data from the biologist responsible for their collection, I noticed that quite a few of the fish lengths were in the single digits. However, those fish were much too old to be that length. My suspicion was that the lengths had been entered incorrectly. After a quick phone call, this suspicion was confirmed. So, one problem was solved and another came up. Using what you have learned so far about logical tests and indexing in dataframes, fix the erroneous length measurements by multiplying them by 10. Hint: you need to replace all values less than 10 cm.</p>
-<p><strong>Question 2</strong>. Now what is the minimum length of American shad in this dataset where length was not back-calculated?</p>
-</div>
-<div id="deterministic-variable-generation" class="section level3">
-<h3>Deterministic variable generation</h3>
-<p>Now that we have fixed that problem, let’s generate some data using a deterministic relationship. As part of this project, we are using information about fish length to predict individual fecundity (number of eggs per female) at each age. Use your dataframe to create a new object that includes only females, and only those fish for which length is not back-calculated.</p>
-<p><strong>Question 3</strong>. How many rows are in your new dataframe?</p>
-<p>Create a new column in the dataframe for fecundity using a mathematical relationship between length and fecundity. Federal scientists are currently collecting information about the relationship between length and fecundity for population models. We are still waiting on the final numbers (and a paper or two) before these can be included in stock assessment. As a modeler on the project, I have some inside information, though. I know that the average fecundity per female across all ages was about 302,000 eggs in 2015. I also know that fecundity is a non-linear function of length based on general characteristics of fish life-history. After some quick trial and error, the following equation does a pretty decent job of replicating the preliminary results of the federal fishery biologists:</p>
-<p><span class="math inline">\(F_i = 0.445 × {L_i}^{3.5}\)</span></p>
-<p>where F is fecundity and L is fork length of each individual, i.</p>
-<p>Use this formula to create a new column in your dataframe called fecundity (and shhh…don’t tell them I hacked their eggs).</p>
-<p><strong>Question 4</strong>. What is the mean value of fecundity across all ages in your dataframe? Does this seem like a reasonable value given the expected value of fecundity across all age classes in 2015?</p>
-<p><strong>Question 5</strong>. What is the standard deviation of fecundity?</p>
-</div>
-<div id="stochastic-simulation-of-age-specific-fecundity" class="section level3">
-<h3>Stochastic simulation of age-specific fecundity</h3>
-<p>Now that we have fecundity estimates for each age based on some more-or-less empirical relationship with length, let’s simulate fecundity in each age class. First, we will need to load a package. If you are using one of the lab computers, the package should already be installed, so you can skip the line that says <code>install.packages()</code>, otherwise if you are using a non-lab computer, run the following code:</p>
-<p>Let’s install the package we need</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Download the package from the internet (takes a couple minutes)</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>  <span class="kw">install.packages</span>(<span class="st">&#39;plyr&#39;</span>)</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Loads the package from a library of installed packages.</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a>  <span class="kw">library</span>(plyr)    </span></code></pre></div>
-<p>With the package installed, use the function <code>ddply( )</code> to calculate the mean and standard deviation of fecundity for each age class. Remember to create a new object to hold this information! <strong>Hint</strong>: if you have difficulty, remember to try: <code>?ddply</code> for a couple of useful examples.</p>
-<p><strong>Question 6</strong>. What are the mean and standard deviation of fecundity for age-6 roes?</p>
-<p>Create a new object that corresponds to each age class and contains 10,000 random samples from a normal distribution using the mean and standard deviation for each age class. Use the function <code>rnorm</code> from the <a href="02_simulationAndVisualization.html">lecture module</a> to do this. Congratulations, you have just created an age-structured spawning population of American shad that can be used in heuristic stock assessment models!</p>
-<p><strong>Question 7</strong>. How does the mean and standard deviation of your simulated values for age-6 roes compare to the ‘empirical’ estimates?</p>
-<p><strong>Question 8</strong>. How does this change if you take 10 random samples instead of 10,000? Answers may vary.</p>
-</div>
-<div id="data-visualization" class="section level3">
-<h3>Data visualization</h3>
-<p>Let’s wrap this up by making a couple of nice graphs. We’ll start simple with a single panel, and then up our game to produce some nice multi-panel plots.</p>
-<p>First, make a histogram of fecundity using your random sample for age-4 roes by using <code>hist(...)</code>, replacing ‘<code>...</code>’ with whatever you named this data set.</p>
-<p><strong>Question 9</strong>. What are your four least favorite things about this plot?</p>
-<p>Change them. Don’t limit yourself to what we covered in class. Go out and figure out how to change things if you really want to change them. Remember, you can use <code>?hist</code> and <code>?par</code> to get more information about graphical parameters. Often, though, it is more reliable to search the web for something like, “Add custom tick mark labels to graph in R”. If you can’t find the answer you are looking for, you will probably come across a similar question that you can warp to fit your purposes or gain insight about what you actually want to do.</p>
-<p>Now, run the following code, after you replace age4, age5, age6, age7 with whatever you named your vectors that are holding your random samples for fecundity at each age:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">2</span>, <span class="dv">2</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="kw">hist</span>(age4, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
-<span id="cb3-3"><a href="#cb3-3"></a><span class="kw">hist</span>(age5, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="kw">hist</span>(age6, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">hist</span>(age7, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="fl">8e5</span>))</span></code></pre></div>
-<p><strong>Question 10</strong>. What does the argument ‘mfrow’ do in this code block? <em>Hint: what happens if you change the numbers?</em></p>
-</div>
-<div id="bonus-1-pt" class="section level3">
-<h3>BONUS (1 pt):</h3>
-<p>Of course, now that it’s a multi-panel plot, you will need to add labels like ‘(a), (b), (c), and (d)’ before you can submit your work to a journal. To do this, you will need to use the function <code>text()</code>. Hint: you will need to do it for each of the four histograms. Use whatever resources you need to figure it out. I will give <span class="math inline">\(1/4\)</span> point for every <strong>nicely</strong> placed label because I bet most of you will be able to get 1 label on there.</p>
+<div id="first-steps-for-data" class="section level3">
+<h3>First steps for data</h3>
+<p>I constantly forget about the fancy point-and-click tools that RStudio brings to the table. Make sure that you look at your data structure in your Environment tab or using the <code>str()</code> function.</p>
+<p>You can also use the built-in function <code>summary()</code> to get a closer look at your data.</p>
+<p>Once you’ve taken a look at the data, let’s check out some specifics.</p>
+<p><strong>Question 1</strong>. How many (unique) years are included in this data set? If you are stuck look back to how we did this in Chapter 2 and Chapter 3. Or, <a href="http://letmegooglethat.com/?q=how+to+find+unique+values+in+R">Google</a> it. (Note that I am not asking you for the range of years (1988-2018) because some years lack data.)</p>
 <p><br></p>
+<p>Next, calculate the mean dissolved oxygen <code>do_mgl</code> throughout the water column each year. You can use the approach demonstrated in <a href="https://danstich.github.io/worst-r/3-4-better-data-summaries.html">Chapter 3.4</a>.</p>
+<p>Don’t forget to assign this to a new object!</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># This will do it all at once!</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the group_by function</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Group by year and pass to summarize</span></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl))</span></code></pre></div>
+<p>You’ll notice that if you try to print <code>out</code> to the console, it does not display the whole object. If you’d like to see the whole thing, you can still use <code>View(ann)</code> to open it in the data viewer.</p>
+<p>Have a look at it…</p>
+</div>
+<div id="missing-data-and-r" class="section level3">
+<h3>Missing data and R</h3>
+<p>Uh-oh, looks like something went wrong! We have a whole bunch of <code>NA</code> values in our data!</p>
+<p>Most of the time this is not a big deal, but the default behavior for some functions, such as <code>mean()</code> and <code>sd()</code> will return <code>NA</code> if <em>any</em> of the values in a column are <code>NA</code>. This is good because it lets us know something is funky, but we need to dig a little deeper to figure out why.</p>
+<p><br></p>
+<p><strong>Question 2</strong>. How many of the values in the column <code>avg</code> of <code>ann</code> are <code>NA</code>? You can find this multiple ways.</p>
+<p><strong>Question 3</strong>. To which years do these correspond? Again, you can find this multiple ways.</p>
+<p><br></p>
+<p>The next question we need to answer here is, “Why do we have <code>NA</code> values in <code>ann$avg</code> for some years but not for others?” To answer this, we need to go back to the original data frame, which I named <code>otsego</code>.</p>
+<p>Subset the <code>otsego</code> data to get only those data from one of the years above that had an <code>NA</code> in <code>out</code>. If you are having trouble remembering how to do this, have a look back at <a href="https://danstich.github.io/worst-r/3-3-subsetting-and-selecting-data.html#subsetting-and-summaries-in-base-r">Chapter 3.3</a> of the text.</p>
+<p>I am going to use <code>1993</code> to demonstrate how to do it using one method from base R. <em>You must use a different year for the questions that follow</em>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>ninety_three &lt;-<span class="st"> </span><span class="kw">subset</span>(otsego, year <span class="op">==</span><span class="st"> </span><span class="dv">1993</span>)</span></code></pre></div>
+<p><strong>Question 4</strong>. Which year did you pick for this?</p>
+<p><strong>Question 5</strong>. Are there any values of <code>do_mgl</code> in the subset that you created which are <em>not</em> <code>NA</code>?</p>
+<p><br></p>
+<p>Okay, now we know that the problem here is just that we are missing some data for some depths and years. Next we need to find out how many of the data points are <code>NA</code> to determine if this could influence analyses down the road.</p>
+<p>You could find out how many of these are missing by using a combination of <code>is.na</code> and <code>which</code>, replacing <code>...</code> with the name of the object you want to query (the column <code>do_mgl</code> in the dataframe <code>otsego</code>).</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="kw">which</span>(<span class="kw">is.na</span>(...))</span></code></pre></div>
+<p><strong>Question 6</strong>. How many <code>NA</code> values are in the column <code>do_mgl</code> of <code>otsego</code>?</p>
+<p>Now that we now why we were getting <code>NA</code> values and we know we don’t have that many, we can go ahead and tell R to remove those from our data summary <code>ann</code>. Let’s do it again from the start. This time, we will add <code>na.rm = TRUE</code> inside the call to <code>mean()</code> in the last step of our data pipeline. I am going to overwrite <code>ann</code> with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you’ll still have <code>ann</code> in your workspace unless you remove it with the <code>rm()</code> function (see <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove">here</a> or type <code>?rm</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the group_by function</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">group_by</span>(year) <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Group by year and pass to summarize</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl, <span class="dt">na.rm =</span> <span class="ot">TRUE</span>))</span></code></pre></div>
+<p>Now, you should have a numeric value of mean <code>do_mgl</code> in Otsego Lake for each <code>year</code> in <code>ann</code> for which there were data! Have a look at <code>ann</code> to confirm that this is true before moving on.</p>
+</div>
+<div id="subsetting" class="section level3">
+<h3>Subsetting</h3>
+<p>Now that we have a handle on what the data look like we can start to look at some of the trends in dissolved oxygen that I mentioned earlier.</p>
+<p>Make a boxplot of <code>do_mgl</code> by <code>year</code> in the <code>otsego</code> data using one of the methods from <a href="https://danstich.github.io/worst-r/4-Chapter4.html">Chapter 4</a>. I know that this is data visualization, not subsetting (please don’t post it as an issue!).</p>
+<p>I am going to make a quick box plot using the <code>ggplot2</code> package to see how <code>do_mgl</code> changes across years.</p>
+<p>Now, we make the boxplot:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(otsego, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> year))</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
+<p><img src="hw02_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<p>You probably got a warning message from this about non-finite values. This is because the <code>otsego</code> data had <code>NA</code> values in it. This will not affect your plot other except that it is ignoring <code>NA</code> values for <code>do_mgl</code>, which we’ve already discussed.</p>
+<p>More importantly, if you look at the trends in dissolved oxygen here they don’t really match the story I told you (I guess maybe if you squint). Remember that this data set currently has data from the entire water column, and we are only really interested in what happened to dissolved oxygen in the deepest part of the lake during fall, when oxygen levels fall below critical levels needed by aerobic organisms at the bottom of the lake. Therefore, we need to subset the data to look at just the part in which we are interested.</p>
+<p>Let’s get just those data where <code>depth</code> is greater than 40 meters (about 120 ft) in the month of October (late autumn before mixing occurs) to see if we can make out that trend a little more clearly.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>hypo &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the subset function</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">subset</span>( depth <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># Select depths &gt; 40 m in October</span></span></code></pre></div>
+<p><strong>Question 7</strong>. How many rows are left in your new data frame (the one that I called <code>hypo</code>)?</p>
+<p><br></p>
+<p>Now that you’ve taken a look at your data, go ahead and make another quick box plot of <code>do_mgl</code> by year.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> year))</span>
+<span id="cb9-3"><a href="#cb9-3"></a></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
+<p><img src="hw02_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
+<p>Alright! This looks a lot more like the story I was telling you at the start of the homework assignment. If only the graph did it justice…don’t worry, you’ll have to make it pretty at the end.</p>
+</div>
+<div id="creating-a-new-variable" class="section level3">
+<h3>Creating a new variable</h3>
+<p>Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let’s say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!!</p>
+<p>We’ll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the <code>hypo</code> data frame (shameful, I know).</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>hypo &lt;-<span class="st"> </span>hypo <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">subset</span>(year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1988</span>)</span></code></pre></div>
+<p>Now that we have just the “alewife” and “post-alewife” years in our data, we can go ahead and assign each of the years to one of these two groups using a 2010 cut-off year.</p>
+<p>Create a new column in <code>hypo</code> that will hold a grouping variable for <code>alewife</code>. I initialize this by assigning it the value <strong><code>present</code></strong> for all rows. Note that I only supply a single value, but R knows to repeat this for each row in the data frame.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>hypo<span class="op">$</span>alewife &lt;-<span class="st"> &quot;present&quot;</span></span></code></pre></div>
+<p>Next, we’ll modify <code>hypo$alewife</code> to replace “present” with “absent” for all years after 2010!</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>hypo<span class="op">$</span>alewife[hypo<span class="op">$</span>year <span class="op">&gt;</span><span class="st"> </span><span class="dv">2010</span>] &lt;-<span class="st"> &quot;absent&quot;</span></span></code></pre></div>
+<p><strong>Question 8</strong>. Using your this new data set, calculate the mean <code>do_mgl</code> in years were present or absent. There are a number of ways to do this. If you are struggling have a look at the examples using <code>group_by</code> and <code>summarize</code> from the <code>dplyr</code> package in <a href="https://danstich.github.io/worst-r/3-4-better-data-summaries.html">Chapter 3.4</a></p>
+<p><br></p>
+</div>
+<div id="make-it-pretty" class="section level3">
+<h3>Make it pretty</h3>
+<p>Okay, let’s wrap it all up this week by making a nice plot to visually compare hypolimnetic oxygen (<code>hypo$do_mgl</code>) between years in which <code>alewife</code> was <code>"present"</code> or <code>"absent"</code>.</p>
+<p>Here is the basic plot to get you started:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb13-2"><a href="#cb13-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> alewife))</span>
+<span id="cb13-3"><a href="#cb13-3"></a></span>
+<span id="cb13-4"><a href="#cb13-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
+<p><img src="hw02_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p>Next, I want you to modify this box plot using some of the examples shown in <a href="https://danstich.github.io/worst-r/4-3-plotting-with-ggplot2.html#ggboxplots">Chapter 4.3.4</a>.</p>
+<p><strong>Question 9</strong>. Choose at least 5 components of this graph to modify. Examples could include themes, colors, chart titles, axis labels, tick (group) labels, or more. I just want you to dig in and get creative here. Report (in your own words) each of the five changes that you made as the answer and show me the money…I mean the plot. Show me the plot. You don’t have to paste the plot in your answer. I’ll see it when I run your awesome code.</p>
+<p><strong>Question 10</strong>. Based on your box plot, and your answer to Question 9, do you think these groups are different? Note, I am still not asking you to do any statistical tests yet. I just want you to think about the kinds of comparisons we will make in a couple weeks.</p>
 </div>
 </div>
 
