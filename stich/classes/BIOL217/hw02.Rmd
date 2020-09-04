@@ -76,7 +76,7 @@ But, it can be a little confusing to get dive right in like this. If you are not
 
 ```{r, warning=FALSE, message=FALSE}
 tempdf <- group_by(otsego, year) # Create data frame to hold grouped data
-ann <- summarise(tempdf, avg = mean(do_mgl)) # Summarize, taking mean of do_mgl
+ann <- summarise(tempdf, avg = mean(do_mgl)) # Summarize mean do_mgl by year
 ```
 
 You'll notice that if you try to print `ann` to the console, it does not display the whole object. If you'd like to see the whole thing, you can still use `View(ann)` to open it in the data viewer.
@@ -105,6 +105,8 @@ I am going to use `1993` to demonstrate how to do it using one method from base 
 ninety_three <- subset(otsego, year == 1993)
 ```
 
+<br>
+
 **Question 4**. Which year did you pick for this?
 
 **Question 5**. Are there any values of `do_mgl` in the subset that you created which are *not* `NA`?
@@ -119,7 +121,11 @@ You could find out how many of these are missing by using a combination of `is.n
 which(is.na(...))
 ```
 
+<br>
+
 **Question 6**. How many `NA` values are in the column `do_mgl` of `otsego`?
+
+<br>
 
 Now that we now why we were getting `NA` values and we know we don't have that many, we can go ahead and tell R to remove those from our data summary `ann`. Let's do it again from the start. This time, we will add `na.rm = TRUE` inside the call to `mean()` in the last step of our data pipeline. I am going to overwrite `ann` with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you'll still have `ann` in your workspace unless you remove it with the `rm()` function (see [here](https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove) or type `?rm`).
 
@@ -150,7 +156,7 @@ bp <- ggplot(otsego, aes(x = year, y = do_mgl)) +
 print(bp)
 ```
 
-You probably got a warning message from this about non-finite values. This is because the `otsego` data had `NA` values in it. This will not affect your plot other except that it is ignoring `NA` values for `do_mgl`, which we've already discussed.
+You probably got a warning message from this about non-finite values. This is because the `otsego` data had `NA` values in it. This will not affect your plot except that it is ignoring `NA` values for `do_mgl`, the ramifications of which we've already discussed in the context of data management.
 
 More importantly, if you look at the trends in dissolved oxygen here they don't really match the story I told you (I guess maybe if you squint). Remember that this data set currently has data from the entire water column, and we are only really interested in what happened to dissolved oxygen in the deepest part of the lake during fall, when oxygen levels fall below critical levels needed by aerobic organisms at the bottom of the lake. Therefore, we need to subset the data to look at just the part in which we are interested.
 
@@ -218,3 +224,5 @@ Next, I want you to modify this box plot using some of the examples shown in [Ch
 **Question 9**. Choose at least 5 components of this graph to modify. Examples could include themes, colors, chart titles, axis labels, tick (group) labels, or more. I just want you to dig in and get creative here. Report (in your own words) each of the five changes that you made as the answer and show me the money...I mean the plot. Show me the plot. You don't have to paste the plot in your answer. I'll see it when I run your awesome code. 
 
 **Question 10**. Based on your box plot, and your answer to Question 9, do you think these groups are different? Note, I am still not asking you to do any statistical tests yet. I just want you to think about the kinds of comparisons we will make in a couple weeks.
+
+<br>

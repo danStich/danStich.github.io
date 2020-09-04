@@ -455,7 +455,7 @@ Data import
 <span id="cb3-5"><a href="#cb3-5"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl))</span></code></pre></div>
 <p>But, it can be a little confusing to get dive right in like this. If you are not yet comfortable with the <code>%&gt;%</code> (pipe) operator from the <code>magrittr</code> package, you could do also go step by step using the <code>group_by()</code> and <code>summarize()</code> functions:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>tempdf &lt;-<span class="st"> </span><span class="kw">group_by</span>(otsego, year) <span class="co"># Create data frame to hold grouped data</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>ann &lt;-<span class="st"> </span><span class="kw">summarise</span>(tempdf, <span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl)) <span class="co"># Summarize, taking mean of do_mgl</span></span></code></pre></div>
+<span id="cb4-2"><a href="#cb4-2"></a>ann &lt;-<span class="st"> </span><span class="kw">summarise</span>(tempdf, <span class="dt">avg =</span> <span class="kw">mean</span>(do_mgl)) <span class="co"># Summarize mean do_mgl by year</span></span></code></pre></div>
 <p>You’ll notice that if you try to print <code>ann</code> to the console, it does not display the whole object. If you’d like to see the whole thing, you can still use <code>View(ann)</code> to open it in the data viewer.</p>
 <p>Have a look at it…</p>
 </div>
@@ -471,13 +471,16 @@ Data import
 <p>Subset the <code>otsego</code> data to get only those data from one of the years above that had an <code>NA</code> in <code>out</code>. If you are having trouble remembering how to do this, have a look back at <a href="https://danstich.github.io/worst-r/3-3-subsetting-and-selecting-data.html#subsetting-and-summaries-in-base-r">Chapter 3.3</a> of the text.</p>
 <p>I am going to use <code>1993</code> to demonstrate how to do it using one method from base R. <em>You must use a different year for the questions that follow</em>.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>ninety_three &lt;-<span class="st"> </span><span class="kw">subset</span>(otsego, year <span class="op">==</span><span class="st"> </span><span class="dv">1993</span>)</span></code></pre></div>
+<p><br></p>
 <p><strong>Question 4</strong>. Which year did you pick for this?</p>
 <p><strong>Question 5</strong>. Are there any values of <code>do_mgl</code> in the subset that you created which are <em>not</em> <code>NA</code>?</p>
 <p><br></p>
 <p>Okay, now we know that the problem here is just that we are missing some data for some depths and years. Next we need to find out how many of the data points are <code>NA</code> to determine if this could influence analyses down the road.</p>
 <p>You could find out how many of these are missing by using a combination of <code>is.na</code> and <code>which</code>, replacing <code>...</code> with the name of the object you want to query (the column <code>do_mgl</code> in the dataframe <code>otsego</code>).</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">which</span>(<span class="kw">is.na</span>(...))</span></code></pre></div>
+<p><br></p>
 <p><strong>Question 6</strong>. How many <code>NA</code> values are in the column <code>do_mgl</code> of <code>otsego</code>?</p>
+<p><br></p>
 <p>Now that we now why we were getting <code>NA</code> values and we know we don’t have that many, we can go ahead and tell R to remove those from our data summary <code>ann</code>. Let’s do it again from the start. This time, we will add <code>na.rm = TRUE</code> inside the call to <code>mean()</code> in the last step of our data pipeline. I am going to overwrite <code>ann</code> with this change to avoid cluttering up my workspace. You can name it something different if you want, but pay attention because you’ll still have <code>ann</code> in your workspace unless you remove it with the <code>rm()</code> function (see <a href="https://www.rdocumentation.org/packages/base/versions/3.6.2/topics/remove">here</a> or type <code>?rm</code>).</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>ann &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the group_by function</span></span>
@@ -496,7 +499,7 @@ Data import
 <span id="cb8-3"><a href="#cb8-3"></a></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
 <p><img src="hw02_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>You probably got a warning message from this about non-finite values. This is because the <code>otsego</code> data had <code>NA</code> values in it. This will not affect your plot other except that it is ignoring <code>NA</code> values for <code>do_mgl</code>, which we’ve already discussed.</p>
+<p>You probably got a warning message from this about non-finite values. This is because the <code>otsego</code> data had <code>NA</code> values in it. This will not affect your plot except that it is ignoring <code>NA</code> values for <code>do_mgl</code>, the ramifications of which we’ve already discussed in the context of data management.</p>
 <p>More importantly, if you look at the trends in dissolved oxygen here they don’t really match the story I told you (I guess maybe if you squint). Remember that this data set currently has data from the entire water column, and we are only really interested in what happened to dissolved oxygen in the deepest part of the lake during fall, when oxygen levels fall below critical levels needed by aerobic organisms at the bottom of the lake. Therefore, we need to subset the data to look at just the part in which we are interested.</p>
 <p>Let’s get just those data where <code>depth</code> is greater than 40 meters (about 120 ft) in the month of October (late autumn before mixing occurs) to see if we can make out that trend a little more clearly.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>hypo &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
@@ -538,6 +541,7 @@ Data import
 <p>Next, I want you to modify this box plot using some of the examples shown in <a href="https://danstich.github.io/worst-r/4-3-plotting-with-ggplot2.html#ggboxplots">Chapter 4.3.4</a>.</p>
 <p><strong>Question 9</strong>. Choose at least 5 components of this graph to modify. Examples could include themes, colors, chart titles, axis labels, tick (group) labels, or more. I just want you to dig in and get creative here. Report (in your own words) each of the five changes that you made as the answer and show me the money…I mean the plot. Show me the plot. You don’t have to paste the plot in your answer. I’ll see it when I run your awesome code.</p>
 <p><strong>Question 10</strong>. Based on your box plot, and your answer to Question 9, do you think these groups are different? Note, I am still not asking you to do any statistical tests yet. I just want you to think about the kinds of comparisons we will make in a couple weeks.</p>
+<p><br></p>
 </div>
 </div>
 
