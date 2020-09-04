@@ -15,15 +15,14 @@ By the end of this assignment, you should be comfortable: 1) reading data into R
 
 <h3 id="multi"> Packages </h3>
 
-We're going to work with the `dplyr` and `ggplot2` packages for this assignment, so you can go ahead and put some code in your homework script to load them both from the library where they were installed on your computer. If you installed them with the `tidyverse`, you can go ahead and load the whole thing.
-```{r}
-library(dplyr)
-library(ggplot2)
+We're going to work with the `dplyr`, `ggplot2`, and `magrittr` packages for this assignment, so you can go ahead and put some code in your homework script to load them both from the library where they were installed on your computer. If you installed them with the `tidyverse`, you can go ahead and load the whole thing.
+```{r, message=FALSE, warning = FALSE}
+library(tidyverse)
 ```
 
 <h3> Data import </h3>
 
-Read the data from `physical.csv` into R using the `read.csv` function. If you saved your homework script in the same directory as the data, then you can just run `dir()` to see the file names and copy and paste from the output into your `read.csv` function so you don't mess up the name. 
+Read the data from `physical.csv` into R using the `read.csv` function. If you saved your homework script in the same directory as the data, then you can just run `dir()` to see the file names and copy and paste from the output into your `read.csv` function so you don't mess up the name. The `header = TRUE` tells R that our columns have names in the first row.
 
 ```{r, eval=FALSE, echo=TRUE}
 otsego = read.csv(file ="data/physical.csv", header = TRUE)
@@ -61,6 +60,9 @@ Once you've taken a look at the data, let's check out some specifics.
 Next, calculate the mean dissolved oxygen `do_mgl` throughout the water column each year. You can use the approach demonstrated in [Chapter 3.4](https://danstich.github.io/worst-r/3-4-better-data-summaries.html).
 
 Don't forget to assign this to a new object!
+
+Here is what this would look like using the `%>%` operator. Remember that the purpose of this is to allow us to pass the results of one function directly to another so we don't have to create intermediate objects. 
+
 ```{r, message = FALSE}
 # This will do it all at once!
 ann <- # Front-end object assignment
@@ -70,7 +72,14 @@ ann <- # Front-end object assignment
 
 ```
 
-You'll notice that if you try to print `out` to the console, it does not display the whole object. If you'd like to see the whole thing, you can still use `View(ann)` to open it in the data viewer.
+But, it can be a little confusing to get dive right in like this. If you are not yet comfortable with the `%>%` (pipe) operator from the `magrittr` package, you could do also go step by step using the `group_by()` and `summarize()` functions:
+
+```{r, warning=FALSE, message=FALSE}
+tempdf <- group_by(otsego, year) # Create data frame to hold grouped data
+ann <- summarise(tempdf, avg = mean(do_mgl)) # Summarize, taking mean of do_mgl
+```
+
+You'll notice that if you try to print `ann` to the console, it does not display the whole object. If you'd like to see the whole thing, you can still use `View(ann)` to open it in the data viewer.
 
 Have a look at it...
 
@@ -122,7 +131,7 @@ ann <- # Front-end object assignment
 
 ```
 
-Now, you should have a numeric value of mean `do_mgl` in Otsego Lake for each `year` in `ann` for which there were data! Have a look at `ann` to confirm that this is true before moving on.
+Now, you should have a numeric value of mean `do_mgl` in Otsego Lake for each `year` in an new tibble called `ann` for which there were data! Have a look at `ann` to confirm that this is true before moving on.
 
 
 ### Subsetting
