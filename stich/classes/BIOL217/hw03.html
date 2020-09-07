@@ -408,9 +408,9 @@ $(document).ready(function () {
 </div>
 
 
-<div id="probability-distributions" class="section level1">
-<h1>Probability distributions</h1>
-<p><img src="hw03_files/figure-html/unnamed-chunk-2-1.png" width="480" style="display: block; margin: auto auto auto 0;" /></p>
+<div id="sampling-distributions" class="section level1">
+<h1>Sampling distributions</h1>
+<p><img src="../../images/tempsims.png" alt=""></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -424,15 +424,15 @@ The normal distribution
 <p>Let’s start with the normal distribution to knock the rust off and get ourselves thinking about probability distributions again. Recall that we can simulate data from the normal using something like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>ndata &lt;-<span class="st"> </span><span class="kw">rnorm</span>(<span class="dt">n=</span><span class="dv">30</span>, <span class="dt">mean=</span><span class="dv">0</span>, <span class="dt">sd=</span><span class="dv">1</span>)</span></code></pre></div>
 <p>In this example, we have drawn <strong>30</strong> random samples from a normal distribution with a <em>mean</em> of 0 and a <em>standard deviation</em> of 1. Also recall that we can plot these data as samples from a <strong>continuous distribution</strong> using a curved line in R to see if it looks like it should:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">par</span>(<span class="dt">mar =</span> <span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
 <span id="cb2-2"><a href="#cb2-2"></a><span class="kw">plot</span>(<span class="kw">density</span>(ndata),</span>
-<span id="cb2-3"><a href="#cb2-3"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>,</span>
-<span id="cb2-4"><a href="#cb2-4"></a>     <span class="dt">xlab=</span><span class="kw">expression</span>(theta),</span>
-<span id="cb2-5"><a href="#cb2-5"></a>     <span class="dt">col=</span><span class="st">&#39;red&#39;</span>,</span>
-<span id="cb2-6"><a href="#cb2-6"></a>     <span class="dt">lwd=</span><span class="st">&#39;2&#39;</span>)</span></code></pre></div>
-<p><img src="hw03_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
+<span id="cb2-3"><a href="#cb2-3"></a>     <span class="dt">main =</span> <span class="st">&quot;&quot;</span>,</span>
+<span id="cb2-4"><a href="#cb2-4"></a>     <span class="dt">xlab =</span> <span class="kw">expression</span>(theta),</span>
+<span id="cb2-5"><a href="#cb2-5"></a>     <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>,</span>
+<span id="cb2-6"><a href="#cb2-6"></a>     <span class="dt">lwd =</span> <span class="st">&quot;2&quot;</span>)</span></code></pre></div>
+<p><img src="hw03_files/figure-html/unnamed-chunk-3-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p>Now, what if I gave you the following plot and asked you if you could find parameters of the normal distribution from which these samples were drawn?</p>
-<p><img src="hw03_files/figure-html/unnamed-chunk-5-1.png" width="576" style="display: block; margin: auto;" /></p>
+<p><img src="hw03_files/figure-html/unnamed-chunk-4-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Question 1.</strong> What are the approximate mean and standard deviation of the distribution that has been sampled here? Play with the <code>rnorm</code> function in R and change the values of the mean and standard deviation until you are able to approximately replicate the graph above. Use the <code>hist</code> function to plot the data each time you simulate them to check if the pattern is close. <strong>NOTE</strong>: You will be able to zero in on this faster if you use large sample sizes for n, <strong>but</strong> if n is too large it will take a long time to simulate each data set.</p>
 <p>What a pain, but it’s good to see how these parameters change the shape and location of the sampling distribution so we can understand what they do.</p>
 <p>Now let’s take a look at another way to do this. This time, instead of handing you a histogram, a researcher has provided you with the following data set for a project on which you are working. In this case it is for diastolic blood pressure measurements from 10,000 physically fit people (totally made up).</p>
@@ -441,22 +441,20 @@ The normal distribution
 <span id="cb3-3"><a href="#cb3-3"></a><span class="co"># in the data from a text file like</span></span>
 <span id="cb3-4"><a href="#cb3-4"></a><span class="co"># this (just make sure it is in</span></span>
 <span id="cb3-5"><a href="#cb3-5"></a><span class="co"># the correct directory):</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a>  dbp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;dbp.txt&#39;</span>) </span></code></pre></div>
-<p><strong>Question 2.</strong> Calculate the <em>mean</em> and <em>variance</em> of this distribution using the method of moments. Note that you can write your own function (as in the lecture tutorial), or you can use the built-in R functions that we talked about in class this week (see lecture tutorial). What are the <em>mean</em> and <em>variance</em> using this method?</p>
-<p><strong>Question 3.</strong> Now calculate the <em>mean</em> and the <em>variance</em> of this sampling distribution using maximum likelihood estimation. Recall that you can estimate the parameters using <code>optim</code> and by writing out the likelihood inside of a function, or you can use in the built-in <code>fitdistr</code> function in R. If you do the latter, remember to pay attention to the answers that R gives you.</p>
-<p><strong>Question 4.</strong> Calculate the 95% confidence limits for this distribution using the <code>quantile</code> function. Remember to think carefully about what probabilities you need to use for the 95% CI.</p>
+<span id="cb3-6"><a href="#cb3-6"></a>  dbp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/dbp.txt&quot;</span>) </span></code></pre></div>
+<p><strong>Question 2.</strong> Calculate the <em>mean</em> and <em>variance</em> of this distribution using the method of moments. You can write your own function, or you can use the built-in R functions like <code>mean()</code> that we used in <a href="https://danstich.github.io/worst-r/5-6-sample-statistics.html">Chapter 5.6</a> of the textbook. What are the estimated <em>mean</em> and <em>variance</em> using this method?</p>
+<p><strong>Question 3.</strong> Now calculate the <em>mean</em> and the <em>variance</em> of this sampling distribution using <strong>maximum likelihood estimation</strong>. Recall that you can estimate the parameters using the built-in <code>fitdistr()</code> function in R we covered in <a href="https://danstich.github.io/worst-r/5-6-sample-statistics.html">Chapter 5.6.2.2</a>. Just remember to pay attention to the answers that R gives you.</p>
+<p><strong>Question 4.</strong> Calculate the 95% confidence limits for this distribution using the <code>quantile</code> function. Remember to think carefully about what probabilities you need to use for the 95% CI (2.5<sup>th</sup> and 97.5<sup>th</sup> percentiles, not 5<sup>th</sup> and 95<sup>th</sup>).</p>
 <div id="the-beta-distribution" class="section level3">
 <h3>The beta distribution</h3>
 <p>We talked about this distribution in class this week, and about how useful it can be due to its flexibility. However, given that the Beta is controlled by two shape parameters, it can be tough to wrap your head around. Let’s play.</p>
-<p>Simulate <strong>10,000</strong> random samples from a beta distribution with parameters <span class="math inline">\(\alpha\)</span> <strong>(<code>shape1</code> in R) = 30</strong> and <span class="math inline">\(\beta\)</span> <strong>(<code>shape2</code> in R) = 12</strong> and plot a histogram of the sampling distribution:</p>
+<p>Simulate <strong>10,000</strong> random samples from a beta distribution with parameters <span class="math inline">\(\alpha\)</span> <strong>(<code>shape1</code> in R) = 30</strong> and <span class="math inline">\(\beta\)</span> <strong>(<code>shape2</code> in R) = 12</strong> and plot a histogram of the sampling distribution that I assigned to an object called <code>beta_sample</code>:</p>
 <div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Get a random sample from the beta</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>beta.sample &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dt">n=</span><span class="fl">1e4</span>,</span>
-<span id="cb4-3"><a href="#cb4-3"></a>                     <span class="dt">shape1=</span><span class="dv">30</span>,</span>
-<span id="cb4-4"><a href="#cb4-4"></a>                     <span class="dt">shape2=</span><span class="dv">12</span>)</span>
-<span id="cb4-5"><a href="#cb4-5"></a></span>
-<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># Plot a histogram</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="kw">hist</span>(beta.sample, <span class="dt">main=</span><span class="st">&#39;&#39;</span>, <span class="dt">col=</span><span class="st">&#39;gray&#39;</span>)</span></code></pre></div>
-<p><img src="hw03_files/figure-html/unnamed-chunk-8-1.png" width="576" style="display: block; margin: auto;" /></p>
+<span id="cb4-2"><a href="#cb4-2"></a>beta_sample &lt;-<span class="st"> </span><span class="kw">rbeta</span>(<span class="dt">n =</span> <span class="fl">1e4</span>, <span class="dt">shape1 =</span> <span class="dv">30</span>, <span class="dt">shape2 =</span> <span class="dv">12</span>)</span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># Plot a quick histogram in base graphics</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="kw">hist</span>(beta_sample, <span class="dt">main =</span> <span class="st">&quot;&quot;</span>, <span class="dt">col =</span> <span class="st">&quot;gray&quot;</span>)</span></code></pre></div>
+<p><img src="hw03_files/figure-html/unnamed-chunk-7-1.png" width="576" style="display: block; margin: auto;" /></p>
 <p><strong>Question 5.</strong> Now, play with <code>shape1</code> and <code>shape2</code> parameters in the code above to answer the following questions.</p>
 <ol style="list-style-type: lower-alpha">
 <li>What happens when you make the numbers approximately equal?<br />
@@ -480,35 +478,41 @@ The normal distribution
 <span id="cb5-2"><a href="#cb5-2"></a><span class="kw">library</span>(Rlab)            </span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
 <span id="cb5-4"><a href="#cb5-4"></a><span class="co"># Take a random sample from the Bernoulli</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>bern.sample &lt;-<span class="st"> </span><span class="kw">rbern</span>(<span class="dt">n=</span><span class="dv">1</span>, <span class="dt">prob=</span>.<span class="dv">5</span>) </span></code></pre></div>
-<p><strong>Question 6.</strong> If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a ‘1’)? Use the built in R functions to figure this out, don’t try to count all 2,500 elements in the vector. There are a few different ways to do this one.</p>
+<span id="cb5-5"><a href="#cb5-5"></a>bern.sample &lt;-<span class="st"> </span><span class="kw">rbern</span>(<span class="dt">n =</span> <span class="dv">1</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>) </span></code></pre></div>
+<p><br></p>
+<p><strong>Question 6.</strong> If you take 2,500 samples instead of just one in the code above, what is the total number of trials that result in success (the ones that are a ‘1’)? Use the built in R functions to figure this out, don’t try to count all 2,500 elements in the vector. There are a few different ways to do this one. Check out <a href="https://danstich.github.io/worst-r/2-2-operations.html">Chapter 2.2</a> in the text book if you are having trouble remembering some of those basic vector operations.</p>
 <p><strong>Question 7.</strong> How does this compare to what you expected?</p>
 </div>
 <div id="the-binomial-distribution" class="section level3">
 <h3>The binomial distribution</h3>
 <p>Remember the binomial distribution is like the Bernoulli, but instead of flipping one coin at a time, we are flipping <span class="math inline">\(N\)</span> number of coins (<code>size</code>) per trial:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">rbinom</span>(<span class="dt">n=</span><span class="dv">10</span>, <span class="dt">size=</span><span class="dv">10</span>, <span class="dt">prob=</span><span class="fl">0.5</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a> [<span class="dv">1</span>] <span class="dv">2</span> <span class="dv">2</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">5</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">6</span></span></code></pre></div>
-<p><strong>Question 8.</strong> Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (<code>size</code>) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (<code>n</code>) and patient survival is independent of surgeon? (I know you can do the math by hand- not the point of the exercise).</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span>
+<span id="cb6-2"><a href="#cb6-2"></a> [<span class="dv">1</span>] <span class="dv">6</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">3</span></span></code></pre></div>
+<p><br></p>
+<p><strong>Question 8.</strong> Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (<code>size</code>) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (<code>n</code>) and patient survival is independent of surgeon?</p>
 </div>
 <div id="the-poisson-distribution" class="section level3">
 <h3>The Poisson distribution</h3>
 <p>Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">rpois</span>(n &lt;-<span class="st"> </span><span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">10</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a> [<span class="dv">1</span>] <span class="dv">12</span> <span class="dv">10</span> <span class="dv">15</span> <span class="dv">10</span> <span class="dv">11</span> <span class="dv">12</span>  <span class="dv">7</span>  <span class="dv">9</span> <span class="dv">10</span> <span class="dv">10</span></span></code></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a> [<span class="dv">1</span>] <span class="dv">11</span> <span class="dv">10</span> <span class="dv">12</span> <span class="dv">11</span>  <span class="dv">7</span>  <span class="dv">7</span> <span class="dv">14</span>  <span class="dv">8</span> <span class="dv">15</span>  <span class="dv">6</span></span></code></pre></div>
 <p>The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.</p>
-<p>Suppose that we are interested in describing the distribution of the genus <em>Photinus</em> in Upstate New York. We collected as many speciments as we could in jars (at this point if you’re really confused then Google it) each night on 10 different nights at ten of our field sites. Now we want to know what is the mean and variance of the number of <em>Photinus</em> we caught each of those 10 nights in each of ten jars so we can compare these numbers to historical data.</p>
+<p>Suppose that we are interested in describing the distribution of the genus <em>Photinus</em> in Upstate New York. We collected as many speciments as we could on 10 different nights at ten field sites. Now we want to know what is the mean and variance of the number of <em>Photinus</em> we caught each night so we can compare these numbers to historical data.</p>
+<p>Here are the data:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>counts &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/counts.txt&#39;</span>)</span></code></pre></div>
+<p><br></p>
 <p><strong>Question 9.</strong> Using the data in the file <code>counts.txt</code> (you have to read it in first), estimate the mean and variance for the number of Photinus per night using any method appropriate for these data (see above or below for data read, but remember to change the file name to <code>counts.txt</code>).</p>
+<p><br></p>
 <p>Suppose that the data in question 9 looked more like those contained in this file:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>counts2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;counts2.txt&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>counts2 &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/counts2.txt&#39;</span>)</span></code></pre></div>
+<p><br></p>
 <p><strong>Question 10.</strong></p>
 <ol style="list-style-type: lower-alpha">
-<li><p>Is the mean of the data in <code>counts2</code> similar to that in <code>counts</code>?<br />
-</p></li>
+<li><p>Is the mean of the data in <code>counts2</code> similar to that in <code>counts</code>?</p></li>
 <li><p>What about the median?</p></li>
 <li><p>Do they look the same when you plot them?</p></li>
 <li><p>If not, what type of distribution is represented by the data in <code>counts2</code>?</p></li>
-<li><p>Calculate the parameters of the sample in <code>counts2</code> using maximum likelihood estimation.</p></li>
+<li><p>Calculate the parameters of the sample in <code>counts2</code> using maximum likelihood estimation for the distribution provided in your answer to “d”. Remember, the <code>fitdistr()</code> function is useful for distributions other than the normal.</p></li>
 </ol>
 </div>
 </div>
