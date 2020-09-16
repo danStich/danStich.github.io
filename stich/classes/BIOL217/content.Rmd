@@ -44,10 +44,11 @@ The lecture tutorials provided below are linked directly to the online version o
  
 <h2 id = "multi"> **Introduction to inferential statistics** </h2>
 ----
-<a href="./04_hypothesisTesting.html"> Lecture tutorial</a><br>
-<a href="./hw04.html"> Homework assignment </a> 
+<h3 id = "multi">Lecture tutorials</h3>
+[Sampling distributions](https://danstich.github.io/worst-r/6-inferential-statistics.html)<br>
 
-
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw04.html"> Hypothesis testing </a> 
 
  
 <h2 id = "multi"> **Linear models** </h2>
