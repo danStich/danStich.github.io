@@ -417,25 +417,26 @@ Introduction
 </h2>
 <p>The objective of this assignment is to help you formalize and test some simple hypotheses using basic statistical methods in R. This week we discussed questions we can ask with null hypothesis significance testing and the strengths and weaknesses of this approach. In this assignment, we will attempt to demonstrate some of those ideas while you become familiar with performing null hypothesis significance tests in R.</p>
 <p>By the end of this lab, you should be able to: 1) formally state the null hypothesis that is being tested, as well as alternatives to the null; 2) conduct some basic statistical tests of those hypotheses; and 3) communicate the results of those tests with respect to the original hypothesis.</p>
+<p>We’ll work with a few packages from the tidyverse this week, so go ahead and add this to the start of your homework file</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <h3 id="multi">
 The smolt data
 </h3>
 <p>This week we are going to work with a new dataset, called <code>smolts</code>. These data come from a lab experiment that examined differences in physiology, behavior, and survival of endangered, juvenile Atlantic salmon (<em>Salmo salar</em>) from the largest remaining population in the United States.</p>
-<p>The Atlantic salmon is an anadromous fish that spawns in fresh water and grows in the ocean. After they hatch from their eggs in fresh water, juvenile salmon spend about 2 years growing in streams until they grow large enough to make the migration to ocean feeding grounds off the west coast of Greenland. During the spring before they make this migration, the fish undergoes a transformation known as ‘smolting’, which involves a complex suite of physiological, morphological, and behavioral changes. Notable among these changes is the increased ability to osmoregulate in salt water. This ability is enhanced by upregulation and increased expression of gill Na<sup>+</sup>,K<sup>+</sup>-ATPase (NKA), an enzyme used in active transport of ions. The activity of nka increases seasonally from low levels early in the run, to high levels in the peak of the run, and eventually decreases late in the run due to warming temperatures. We can use gill NKA activity as an indicator of the physiological development of smolts to assess optimal stocking times.</p>
-<p>This study compared physiological measurements of smolts throughout the course of the migratory window to their preferences for salt water in laboratory experiments, as well as plasma osmolality and survival following exposure to full sea water. We used a two-chamber tank that allowed us to keep salt water in one compartment and fresh water in the other and we tracked fish behavior in the tank using high-end infrared cameras and sophisticated tracking software.</p>
-<blockquote>
-<p>Let’s read in the data:</p>
-</blockquote>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data from comma-seperated text file</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;smolts.txt&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Look at the first few rows of data</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">head</span>(smolts)</span>
-<span id="cb1-6"><a href="#cb1-6"></a>  </span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="co"># Examine data structure  </span></span>
-<span id="cb1-8"><a href="#cb1-8"></a>  <span class="kw">str</span>(smolts)</span></code></pre></div>
+<p>The Atlantic salmon is an anadromous (sea-run) fish that spawns in fresh water and grows in the ocean. After they hatch from their eggs in fresh water, juvenile salmon spend about 2 years growing in streams until they grow large enough to make the migration to ocean feeding grounds off the west coast of Greenland as <em>smolts</em>. During the spring before they make this migration, the fish undergoes a transformation known as ‘smolting’, which involves a complex suite of physiological, morphological, and behavioral changes. Notable among these changes is the increased ability to osmoregulate in salt water as they grow from pre-smolts to smolts. This ability is enhanced by up-regulation and increased expression of the saltwater isoform of gill Na<sup>+</sup>,K<sup>+</sup>-ATPase (NKA), an enzyme used in active transport of ions in the ocean.</p>
+<p>Gill NKA activity increases seasonally from low levels early in the run (pre-smolts), to high levels in the peak of the run (smolts), and eventually decreases late in the run (post-smolts) in response to changes in daylight (photoperiod) and warming temperatures in spring. We can use gill NKA activity as an indicator of the physiological development of smolts to assess their readiness to migrate from rivers to the ocean where they will grow into adults.</p>
+<p>This study compared physiological measurements of smolts throughout the course of the migratory window to their preferences for salt water or fresh water in laboratory experiments, as well as plasma osmolality (amount of salt in blood) and survival following exposure to full sea water. We used a two-chamber tank that allowed us to keep salt water in one compartment and fresh water in the other and we tracked fish behavior in the tank using high-end infrared cameras and sophisticated tracking software.</p>
+<p>Let’s read in the data. We’ll use the optional argument <code>stringsAsFactors = FALSE</code> to tell R to read in all string variables as character strings (not factors) because we’ll want to get rid of one our three groups for this week.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data from comma-separated text file</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  smolts =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;data/smolts.txt&#39;</span>, <span class="dt">stringsAsFactors =</span> <span class="ot">FALSE</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Look at the first few rows of data</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="kw">head</span>(smolts)</span>
+<span id="cb2-6"><a href="#cb2-6"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># Examine data structure  </span></span>
+<span id="cb2-8"><a href="#cb2-8"></a>  <span class="kw">str</span>(smolts)</span></code></pre></div>
 <p>The dataset contains nine columns, or <code>variables</code>, defined as:</p>
 <ul style="list-style-type:none;">
 <li>
@@ -466,147 +467,89 @@ The smolt data
 <code>n.switch</code>: the number of times the fish moved between high salt water and low salt water compartments of the behavior tank
 </li>
 </ul>
+<p>We will use these data to compare NKA of one group to the overall mean (one-sample tests), to compare differences in NKA and osmolality between groups (two-sample tests), and to compare the frequency of high- and low-osmolality responses between groups (frequency or contingency table analysis). We will also introduce a couple of tests for testing assumptions of normality (Shapiro-Wilk test) and for testing assumptions of equal variances (variance test) along the way.</p>
 <div id="one-sample-t-tests" class="section level3">
 <h3>One sample t-tests</h3>
-<p>Recall that with a one-sample t-test our objective is to determine whether or not a sample that we have taken deviates from the mean of a population of interest. We might be interested in this kind of question if we are trying to identify anomolous observations within a specific statistical or biological sample, or if we are trying to compare our data to literature values for which only a mean was reported. Remember that what we are doing statistically is to see whether or not the population mean is contained within the 95% confidence interval (CI) for the sampling distribution of our variable of interest.</p>
+<p>Recall that with a one-sample t-test our objective is to determine whether or not a sample that we have taken deviates from the mean of a population of interest. In this case, we require measurements of a single, continuous variable and some value to which we wish to compare those. We might be interested in this kind of question if we are trying to identify anomalous observations within a specific statistical or biological sample, or if we are trying to compare our data to literature values for which only a mean was reported (ugh!). Remember that what we are doing statistically is testing whether the population mean is contained within the 95% confidence interval (CI) for the sampling distribution of our variable of interest.</p>
 <p>First, we’ll make a couple of objects out of the data in the smolts dataframe</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Make a vector of smolt gill NKA activities</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>smolt.nka &lt;-<span class="st"> </span>smolts<span class="op">$</span>nka[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Smolt&#39;</span>]</span>
-<span id="cb2-3"><a href="#cb2-3"></a></span>
-<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Quick summary of the data</span></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">summary</span>(smolt.nka)</span>
-<span id="cb2-6"><a href="#cb2-6"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span id="cb2-7"><a href="#cb2-7"></a>  <span class="fl">0.531</span>   <span class="fl">4.346</span>   <span class="fl">5.577</span>   <span class="fl">5.551</span>   <span class="fl">6.886</span>  <span class="fl">10.543</span> </span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Make a vector of presmolt gill NKA activity     </span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>presmolt.nka &lt;-<span class="st"> </span>smolts<span class="op">$</span>nka[smolts<span class="op">$</span>stage<span class="op">==</span><span class="st">&#39;Presmolt&#39;</span>]</span>
-<span id="cb3-3"><a href="#cb3-3"></a></span>
-<span id="cb3-4"><a href="#cb3-4"></a><span class="co"># Another quick data summary</span></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="kw">summary</span>(presmolt.nka)</span>
-<span id="cb3-6"><a href="#cb3-6"></a>   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. </span>
-<span id="cb3-7"><a href="#cb3-7"></a>  <span class="fl">0.378</span>   <span class="fl">2.406</span>   <span class="fl">3.111</span>   <span class="fl">3.146</span>   <span class="fl">3.631</span>   <span class="fl">7.779</span> </span></code></pre></div>
-<p>Now let’s use these data to work out a simple example. Your objective is to compare nka activity of the stage <code>Smolt</code> to the sampling mean for gill NKA activity in the data set (4.16) using a one-sample t-test. You will need to choose an appropriate Type-I error rate (confidence level), and alternative hypothesis ahead of time in your analysis.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># If you have forgotten how to do this,</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># you can look at the lecture page,</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># or you can type:    </span></span>
-<span id="cb4-4"><a href="#cb4-4"></a>?t.test</span></code></pre></div>
-<p><strong>Question 1.</strong> First, formally state the null hypothesis for this test. Then, state the alternative hypothesis that you chose. If you want to use <code>greater</code> or <code>less</code> realize that this refers to the argument <code>x</code> in the <code>t.test</code> function as compared to <code>mu</code> or <code>y</code> (depending on whether it is a one or two sample test).</p>
+<p>Let’s make a new dataframe that includes only the stages <code>Presmolt</code> and <code>Smolt</code>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Make a subset of the smolts data that excludes </span></span>
+<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># the stage Postsmolt</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>ps &lt;-<span class="st"> </span><span class="kw">subset</span>(smolts, stage <span class="op">!=</span><span class="st"> &#39;Postsmolt&#39;</span>)</span></code></pre></div>
+<p>Have a look at each of these to see how R “sees” them before we move on using <code>str()</code>, <code>head()</code>, or whatever other methods you’ve picked up. This isn’t a homework question, just a good practice that you should be getting used to now.</p>
+<p>Now let’s use these data to work out a simple example. Your objective is to compare NKA activity of the stage <code>Smolt</code> to the sampling mean for gill NKA activity in the data set (<code>4.16</code>) using a one-sample t-test. You will need to choose an appropriate Type-I error rate (confidence level), and alternative hypothesis ahead of time in your analysis.</p>
+<p>If you have forgotten how to do this, you can look at <a href="https://danstich.github.io/worst-r/6-1-one-sample-tests.html">Chapter 6.1</a> of The Worst Stats Text eveR, or you can type:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>?t.test</span></code></pre></div>
+<p><strong>Question 1.</strong> First, formally state the null hypothesis for this test. Then, state the alternative hypothesis that you chose. If you want to use <code>greater</code> or <code>less</code> alternatives realize that this refers to the argument <code>x</code> in the <code>t.test</code> function as compared to <code>mu</code> or <code>y</code> (depending on whether it is a one or two sample test).</p>
 <p>Now, run the test.</p>
-<p><strong>Question 2.</strong> Does gill NKA activity of the stage <code>Smolt</code> differ significantly from the population mean? Report this along with:</p>
+<p><strong>Question 2.</strong> Does gill NKA activity of the stage <code>Smolt</code> differ significantly from the population mean? Report this <strong>in sentence format</strong> along with:</p>
 <ol style="list-style-type: lower-alpha">
-<li><p>The t-statistic, degrees of freedom, and p-value for the test</p></li>
 <li><p>The mean nka for the Smolt stage</p></li>
 <li><p>The confidence interval for this mean and state the confidence level in your answer (will depend on your choice of confidence level above)</p></li>
+<li><p>The t-statistic, degrees of freedom, and p-value for the test in parentheses at the very end of the sentence.</p></li>
 </ol>
 </div>
 <div id="two-sample-t-test" class="section level3">
 <h3>Two-sample t-test</h3>
-<p>Now we will look at what you might think of as a more ‘standard’ application of the t-test. Here we are interested in comparing two sampling distributions from one or more biological populations to determine whether or not they come from the same statistical population. For this example:</p>
+<p>Now we will look at what you might think of as a more ‘standard’ application of the t-test. Here we are interested in comparing two sampling distributions from one or more biological populations to determine whether or not they come from the same statistical population. In English, we want to test whether gill NKA activities differs between presmolts and smolts.</p>
+<p>For this example:</p>
 <p>First, test the assumptions of normality and equal variances.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># In case you forgot the functions:</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># Shapiro-Wilk normality test</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  ?shapiro.test </span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># Fisher&#39;s F test of equal variances</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a>  ?var.test     </span></code></pre></div>
-<p>We can also plot the distributions of gill NKA for the smolt and presmolt stages to see if they look normal.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Set plot margins using `par`</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="fl">4.5</span>, <span class="fl">4.5</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Make a histogram of smolt nka</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># activity (smolt.nka). The rgb</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># color function allows us to</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># specify an alpha channel for</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># transparency.</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="kw">hist</span>(<span class="dt">x=</span>smolt.nka,</span>
-<span id="cb6-10"><a href="#cb6-10"></a>     <span class="dt">col=</span><span class="kw">rgb</span>(<span class="dt">red=</span><span class="fl">0.1</span>, <span class="dt">green=</span><span class="fl">0.1</span>, <span class="dt">blue=</span><span class="fl">0.1</span>, <span class="dt">alpha =</span> <span class="fl">0.5</span>),</span>
-<span id="cb6-11"><a href="#cb6-11"></a>     <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">15</span>), <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>,<span class="dv">30</span>),</span>
-<span id="cb6-12"><a href="#cb6-12"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>,</span>
-<span id="cb6-13"><a href="#cb6-13"></a>     <span class="dt">xlab=</span><span class="st">&#39;gill NKA&#39;</span>,</span>
-<span id="cb6-14"><a href="#cb6-14"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,</span>
-<span id="cb6-15"><a href="#cb6-15"></a>     <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
-<span id="cb6-16"><a href="#cb6-16"></a>     <span class="dt">cex.lab=</span><span class="fl">1.5</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a>     )</span>
-<span id="cb6-18"><a href="#cb6-18"></a></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co"># Add a second histogram for presmolt </span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co"># nka activity (presmolt.nka)</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="co"># The argument &#39;add&#39; lets us add this</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co"># histogram to the first one.</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="kw">hist</span>(presmolt.nka,</span>
-<span id="cb6-24"><a href="#cb6-24"></a>     <span class="dt">col=</span><span class="kw">rgb</span>(<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.8</span>,<span class="fl">0.5</span>),</span>
-<span id="cb6-25"><a href="#cb6-25"></a>     <span class="dt">add=</span><span class="ot">TRUE</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a>     )</span>
-<span id="cb6-27"><a href="#cb6-27"></a></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="co"># Add x and y axes (x=side 1, y=side 2)</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)</span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">0</span>, <span class="dt">las=</span><span class="dv">2</span>, <span class="dt">cex.axis=</span><span class="fl">1.15</span>)</span>
-<span id="cb6-31"><a href="#cb6-31"></a></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="co"># Add vertical (v) lines for the group means</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(smolt.nka), <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="kw">abline</span>(<span class="dt">v=</span><span class="kw">mean</span>(presmolt.nka), <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>)</span>
-<span id="cb6-35"><a href="#cb6-35"></a></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="co"># Add text labels for each of the means </span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="co"># at the correct location. See the help</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="co"># file for `text` for clarification</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(smolt.nka), <span class="dt">y=</span><span class="dv">30</span>,</span>
-<span id="cb6-40"><a href="#cb6-40"></a>     <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;Smolt&#39;</span>])),</span>
-<span id="cb6-41"><a href="#cb6-41"></a>     <span class="dt">adj=</span><span class="op">-</span>.<span class="dv">25</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="kw">text</span>(<span class="dt">x =</span> <span class="kw">mean</span>(presmolt.nka), <span class="dt">y=</span><span class="dv">30</span>, </span>
-<span id="cb6-43"><a href="#cb6-43"></a>     <span class="kw">expression</span>(<span class="kw">paste</span>(mu[<span class="st">&#39;Presmolt&#39;</span>])),</span>
-<span id="cb6-44"><a href="#cb6-44"></a>     <span class="dt">adj=</span><span class="fl">1.25</span>, <span class="dt">cex=</span><span class="fl">1.25</span>)</span>
-<span id="cb6-45"><a href="#cb6-45"></a></span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="co"># Add a legend to the plot</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="kw">legend</span>(<span class="dt">x=</span><span class="dv">10</span>, <span class="dt">y=</span><span class="dv">25</span>,</span>
-<span id="cb6-48"><a href="#cb6-48"></a>       <span class="dt">legend=</span><span class="kw">c</span>(<span class="st">&#39;Smolt&#39;</span>, <span class="st">&#39;Presmolt&#39;</span>),</span>
-<span id="cb6-49"><a href="#cb6-49"></a>       <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&#39;gray40&#39;</span>, <span class="st">&#39;gray87&#39;</span>),</span>
-<span id="cb6-50"><a href="#cb6-50"></a>       <span class="dt">col=</span><span class="st">&#39;black&#39;</span>, <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>)    </span></code></pre></div>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># Shapiro-Wilk normality test</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>?shapiro.test </span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Fisher&#39;s F test of equal variances</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a>?var.test     </span></code></pre></div>
+<p>We can also plot the distributions of gill <code>nka</code> for the <code>Presmolt</code> and <code>Smolt</code> stages to see if they look normal.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">ggplot</span>(ps, <span class="kw">aes</span>(<span class="dt">x =</span> nka, <span class="dt">fill =</span> stage)) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="st">  </span><span class="kw">geom_histogram</span>() <span class="op">+</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Gill NKA Activity&quot;</span>) <span class="op">+</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Count&quot;</span>)</span></code></pre></div>
 <p><img src="hw04_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p><strong>Question 3.</strong> Are the sampling distributions for gill NKA activity of smolts and presmolts normal based on the results of the Shapiro-Wilk test and the histogram above? Are the variances equal based on the F test?</p>
-<p>Conduct a two-sample t-test to compare gill NKA activities between <code>Smolt</code> and <code>Presmolt</code> stages.</p>
-<p><strong>Question 4.</strong> State the null hypothesis for the test and the alternative hypothesis that you chose. Justify your choice of alternative.</p>
-<p><strong>Question 5.</strong> Did you specify the <code>var.equal</code> argument? If so, what did you choose and what was the corresponding degrees of freedom?</p>
-<p>If you did not specify this argument, note that R made a choice for you on the fly, and you can tell what that choice was by the df. We discussed the df for the t-test in class. In the case of the two-sample test, the df should be calculated as <span class="math inline">\((n_1-1)+(n_2-1)\)</span>, or 111 in this case, if the variances are equal. If you ran the <code>t.test</code> with this assumption, go back and run it the other way and look at the df:</p>
+<p><strong>Question 3.</strong> Are the sampling distributions for gill NKA activity of smolts and presmolts both <em>normal</em> based on the results of the Shapiro-Wilk test and the histogram above? Are the variances equal based on the F test?</p>
+<p>Conduct a two-sample t-test to compare gill NKA activity (<code>nka</code>) between <code>Smolt</code> and <code>Presmolt</code> stages.</p>
+<p><strong>Question 4.</strong> State the null hypothesis for the two-sample t-test and the alternative hypothesis that you chose. Justify your choice of alternative.</p>
+<p><strong>Question 5.</strong> Did you specify the <code>var.equal</code> argument? If so, what did you choose and what was the corresponding degrees of freedom (<code>df</code>)?</p>
+<p>If you did not specify this argument, note that R made a choice for you on the fly, and you can tell what that choice was by the <code>df</code> listed in the output from the test. We discussed the df for the t-test in class. In the case of the two-sample test, the df should be calculated as <span class="math inline">\((n_1-1)+(n_2-1)\)</span>, or 111 in this case, if the variances are equal. If you ran the <code>t.test</code> with this assumption the first time, go back and run it the other way and look at the <code>df</code>:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Re-run the two-sample test</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">t.test</span>(smolt.nka, presmolt.nka)    </span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">t.test</span>(nka <span class="op">~</span><span class="st"> </span>stage, <span class="dt">data =</span> ps)    </span>
 <span id="cb7-3"><a href="#cb7-3"></a></span>
 <span id="cb7-4"><a href="#cb7-4"></a>    Welch Two Sample t<span class="op">-</span>test</span>
 <span id="cb7-5"><a href="#cb7-5"></a></span>
-<span id="cb7-6"><a href="#cb7-6"></a>data<span class="op">:</span><span class="st">  </span>smolt.nka and presmolt.nka</span>
-<span id="cb7-7"><a href="#cb7-7"></a>t =<span class="st"> </span><span class="fl">7.6894</span>, df =<span class="st"> </span><span class="fl">105.22</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">8.247e-12</span></span>
+<span id="cb7-6"><a href="#cb7-6"></a>data<span class="op">:</span><span class="st">  </span>nka by stage</span>
+<span id="cb7-7"><a href="#cb7-7"></a>t =<span class="st"> </span><span class="fl">-7.6894</span>, df =<span class="st"> </span><span class="fl">105.22</span>, p<span class="op">-</span>value =<span class="st"> </span><span class="fl">8.247e-12</span></span>
 <span id="cb7-8"><a href="#cb7-8"></a>alternative hypothesis<span class="op">:</span><span class="st"> </span>true difference <span class="cf">in</span> means is not equal to <span class="dv">0</span></span>
 <span id="cb7-9"><a href="#cb7-9"></a><span class="dv">95</span> percent confidence interval<span class="op">:</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="st"> </span><span class="fl">1.784862</span> <span class="fl">3.025163</span></span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="st"> </span><span class="fl">-3.025163</span> <span class="fl">-1.784862</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a>sample estimates<span class="op">:</span></span>
-<span id="cb7-12"><a href="#cb7-12"></a>mean of x mean of y </span>
-<span id="cb7-13"><a href="#cb7-13"></a> <span class="fl">5.551050</span>  <span class="fl">3.146038</span> </span></code></pre></div>
+<span id="cb7-12"><a href="#cb7-12"></a>mean <span class="cf">in</span> group Presmolt    mean <span class="cf">in</span> group Smolt </span>
+<span id="cb7-13"><a href="#cb7-13"></a>              <span class="fl">3.146038</span>               <span class="fl">5.551050</span> </span></code></pre></div>
 <p>Weird, huh? How do you get a part of a degree of freedom?? And, it looks like we are short a few degrees of freedom, doesn’t it? So, what’s happening here?</p>
-<p>We have to sacrifice a few extra degrees of freedom to stay conservative and avoid making a Type-I error. So, we need to base the df on the means and variances of the two sampling distributions. Check out the calculation on this <code>definitely not wrong and totally reliable</code> <a href="https://en.wikipedia.org/wiki/Welch%27s_t_test">Wikepedia page</a>.</p>
+<p>We have to sacrifice a few extra degrees of freedom to stay conservative and avoid making a Type-I error here. What this means is that we assume our sample size is a little smaller than it really is, so estimate of the pooled variance is increased and it is more difficult to detect differences between the groups. So, we need to base the <code>df</code> on the means and variances of the two sampling distributions. Check out the calculation on this <code>definitely not wrong and totally reliable</code> <a href="https://en.wikipedia.org/wiki/Welch%27s_t_test">Wikepedia page</a>.</p>
 </div>
 <div id="wilcoxon-test" class="section level3">
 <h3>Wilcoxon test</h3>
-<p>Moving on to the next variable…don’t worry, we will come back to the gill NKA data next week when we talk about ANOVA, because I know you are all dying to know about the postsmolt group.</p>
-<p>Here, we will continue to look at the presmolt and smolt life stages. First, create two vectors: the first should hold all values of the variable <code>osmolality</code> for presmolts, and the second should hold all values of the variable <code>osmolality</code> for smolts.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># In case you have forgotten</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a><span class="co"># the data strucure already:</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="kw">str</span>(smolts)</span></code></pre></div>
-<p><strong>Question 6.</strong> Do these sampling distributions conform to the normal distribution? Why or why not (note that there are multiple reasons).</p>
-<p>Plot a histogram of the distributions. Can’t remember how to do this?</p>
-<p><span class="math inline">\(p(in the lecture module = 1.00)\)</span></p>
-<p>Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can’t remember how to do it? See the <a href="04_hypothesisTesting.html">lecture module</a>.</p>
-<p><strong>Question 7.</strong> Formally state the null hypothesis and the alternative that you chose. Justify your choice.</p>
+<p>Moving on to the next variable… (Don’t worry, we will come back to the gill NKA data next week when we talk about ANOVA, because I know you are all dying to know about the postsmolt group.)</p>
+<p>Next, we will examine at differences in <code>osmolality</code> between the presmolt and smolt stages.</p>
+<p><strong>Question 6.</strong> Do the sampling distributions for <code>osmolality</code> of <code>Presmolts</code> and <code>Smolts</code> conform to the normal distribution? Why or why not (there are multiple reasons).</p>
+<p>If you are struggling here, plot a histogram of the distributions. Can’t remember how to do this?</p>
+<p><span class="math inline">\(p(in the textbook) = 1.00\)</span></p>
+<p>Okay, now that you have plotted an awesome histogram to check distributional assumptions, use a Wilcoxon test to determine whether the sampling distributions differ from one another. Can’t remember how to do it? See textbook <a href="https://danstich.github.io/worst-r/6-1-one-sample-tests.html#wilcox-test">Chapter 6.1.2</a>.</p>
+<p><strong>Question 7.</strong> Formally state the null hypothesis and the alternative that you chose for the Wilcox test above. Justify your choice. (Any choice is fine - just tell me why you picked it!)</p>
 <p><strong>Question 8.</strong> Did you reject the null hypothesis or did you fail to reject? What was the Type-I error rate that you assumed for this test?</p>
-<p><strong>Question 9.</strong> Does this make biological sense based on the description of the dataset above? Does this make statistical sense based on the results of the two-sample t-test above?</p>
-<p>Make a boxplot of the variable ‘max’ by lifestage only for presmolts and smolts. <strong>NOTE</strong>: it may be helpful to make a seperate dataframe that does not contain postsmolts and then transform the variable ‘stage’ to character using tools we learned in previous labs. Call the dataframe <code>smolts2</code> for ease below.</p>
+<p><strong>Question 9.</strong> Does the result make biological sense based on the description of the data set above? Does the result tell you the same thing as the result of the two-sample t-test above?</p>
+<p>Make a boxplot of the variable <code>max</code> by <code>stage</code> to examine the maximum time spent in the full saltwater tank by <code>Presmolts</code> and <code>Smolts</code>. It can be really tough to distinguish between these two samples if you, like me, lack a crystal ball for such feats. Whatever will we do? Glad you ask!</p>
 </div>
 <div id="chi2-frequency-analysis" class="section level3">
 <h3><span class="math inline">\(\chi^2\)</span> frequency analysis</h3>
-<p>Last time we met, we conducted a <span class="math inline">\(\chi^2\)</span> frequency analysis by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwile as a tool in your modeling toolbox.</p>
+<p>In the textbook exercises for this week, we conducted a <span class="math inline">\(\chi^2\)</span> frequency analysis and I gave you a link to show you how easy it is to do by hand. I will not make you do that here. I will not even make you calculate it in Excel, because here we can do it in a single line of code. Hopefully this makes the programming worthwhile as a tool in your modeling kit.</p>
 <p>Create a new column in your dataframe that ranks osmolality as <code>high</code> if it is &gt;= 400 mosm, and <code>low</code> if it is &lt; 400 mosm.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Like this:</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&gt;=</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;high&#39;</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>smolts2<span class="op">$</span>rank[smolts2<span class="op">$</span>osmolality<span class="op">&lt;</span><span class="dv">400</span>] &lt;-<span class="st"> &#39;low&#39;</span></span></code></pre></div>
-<p>Conduct a <span class="math inline">\(\chi^2\)</span> test to test for differences in the frequency of high and low osmolality between the presmolt and smolt stages. Use the <a href="04_hypothesisTesting.html">lecture module</a> to extract the observed and expected values from the <span class="math inline">\(\chi^2\)</span> test object.</p>
-<p><strong>Question 10.</strong> Okay, no surprises that the frequency of high and low osmolality differs between these given what we already knew. Use the observed and expected tables to describe the primary differences in frequencies between these two groups in your own words.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Like this:</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>ps<span class="op">$</span>rank[ps<span class="op">$</span>osmolality <span class="op">&gt;=</span><span class="st"> </span><span class="dv">400</span>] &lt;-<span class="st"> &#39;high&#39;</span></span>
+<span id="cb8-3"><a href="#cb8-3"></a>ps<span class="op">$</span>rank[ps<span class="op">$</span>osmolality <span class="op">&lt;</span><span class="st"> </span><span class="dv">400</span>] &lt;-<span class="st"> &#39;low&#39;</span></span></code></pre></div>
+<p>Have a look at your data to make sure that you now have a variable called <code>rank</code> in one column that contains values of <code>high</code> and <code>low</code></p>
+<p>Conduct a <span class="math inline">\(\chi^2\)</span> test to test for differences in the frequency of high and low <code>rank</code> (y) as a function of <code>stage</code> (x).</p>
+<p><strong>Question 10.</strong> Do you reject or fail to reject the null in this case? What does that mean with regard to the biological question? Report the test statistic and the p-value to support this conclusion.</p>
 </div>
 </div>
 
