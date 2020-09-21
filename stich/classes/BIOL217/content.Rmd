@@ -40,12 +40,10 @@ The lecture tutorials provided below are linked directly to the online version o
 <a href="./hw03.html"> Sampling distributions </a> 
 
 
-
- 
 <h2 id = "multi"> **Introduction to inferential statistics** </h2>
 ----
 <h3 id = "multi">Lecture tutorials</h3>
-[Sampling distributions](https://danstich.github.io/worst-r/6-inferential-statistics.html)<br>
+[Intro to inferential](https://danstich.github.io/worst-r/6-inferential-statistics.html)<br>
 
 <h3 id = "multi"> Homework exercises</h3>
 <a href="./hw04.html"> Hypothesis testing </a> 
