@@ -51,12 +51,12 @@ The lecture tutorials provided below are linked directly to the online version o
  
 <h2 id = "multi"> **Linear models** </h2>
 ----
-<!-- <a href="./05_linearModels.html"> Lecture tutorial </a><br> -->
-<!-- <a href="./hw05.html"> Homework assignment </a><br>  -->
-<!-- <a href="./05_anova.html"> ANOVA worked example </a><br>  -->
-<!-- <a href="./05_violinPlotsInR.html"> Violin plots in R </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+[Linear models](https://danstich.github.io/worst-r/7-Chapter7.html)<br>
+[General linear models](https://danstich.github.io/worst-r/8-Chapter8.html)<br>
 
-
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw05.html"> Linear models </a>
 
 
 <h2 id = "multi"> **Diagnostics and effect sizes** </h2>

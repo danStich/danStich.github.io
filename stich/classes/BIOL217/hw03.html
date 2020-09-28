@@ -487,7 +487,7 @@ The normal distribution
 <h3>The binomial distribution</h3>
 <p>Remember the binomial distribution is like the Bernoulli, but instead of flipping one coin at a time, we are flipping <span class="math inline">\(N\)</span> number of coins (<code>size</code>) per trial:</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="kw">rbinom</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">size =</span> <span class="dv">10</span>, <span class="dt">prob =</span> <span class="fl">0.5</span>)</span>
-<span id="cb6-2"><a href="#cb6-2"></a> [<span class="dv">1</span>] <span class="dv">6</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">8</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">3</span></span></code></pre></div>
+<span id="cb6-2"><a href="#cb6-2"></a> [<span class="dv">1</span>] <span class="dv">6</span> <span class="dv">3</span> <span class="dv">7</span> <span class="dv">5</span> <span class="dv">1</span> <span class="dv">6</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">7</span> <span class="dv">4</span></span></code></pre></div>
 <p><br></p>
 <p><strong>Question 8.</strong> Imagine that there is an 85% chance of surviving a procedure. If the procedure was performed on 14 patients (<code>size</code>) by each surgeon in my operating room next year, what is the average number I should expect to survive if I have 13 surgeons (<code>n</code>) and patient survival is independent of surgeon?</p>
 </div>
@@ -495,7 +495,7 @@ The normal distribution
 <h3>The Poisson distribution</h3>
 <p>Recall that the Poisson distribution was created to explain the number of events that occur over some period of time. We can simulate data from the Poisson using (for example):</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">rpois</span>(n &lt;-<span class="st"> </span><span class="dv">10</span>, <span class="dt">lambda =</span> <span class="dv">10</span>)</span>
-<span id="cb7-2"><a href="#cb7-2"></a> [<span class="dv">1</span>] <span class="dv">11</span> <span class="dv">10</span> <span class="dv">12</span> <span class="dv">11</span>  <span class="dv">7</span>  <span class="dv">7</span> <span class="dv">14</span>  <span class="dv">8</span> <span class="dv">15</span>  <span class="dv">6</span></span></code></pre></div>
+<span id="cb7-2"><a href="#cb7-2"></a> [<span class="dv">1</span>] <span class="dv">13</span>  <span class="dv">5</span> <span class="dv">12</span> <span class="dv">14</span> <span class="dv">10</span> <span class="dv">16</span> <span class="dv">12</span>  <span class="dv">8</span> <span class="dv">12</span>  <span class="dv">9</span></span></code></pre></div>
 <p>The code above takes 10 random samples from a Poisson distribution with a mean (and variance!) of 10.</p>
 <p>Suppose that we are interested in describing the distribution of the genus <em>Photinus</em> in Upstate New York. We collected as many speciments as we could on 10 different nights at ten field sites. Now we want to know what is the mean and variance of the number of <em>Photinus</em> we caught each night so we can compare these numbers to historical data.</p>
 <p>Here are the data:</p>
