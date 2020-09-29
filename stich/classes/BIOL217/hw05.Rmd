@@ -66,11 +66,9 @@ Remember, to use linear regression in R, we are still going to work with the `lm
 
 Let's look at the relationship between `nka` activity and plasma osmolality of the fish used in this study. Use the `lm` function to test the effects of gill nka on plasma osmolality following exposure to salt water. 
 
-**Question 4.** State the null hypothesis for the test and report the Type-I error rate ($\alpha$) in sentence form.
+**Question 5.** State the null hypothesis for the test and report the Type-I error rate ($\alpha$) in sentence form.
 
-**Question 5.** Is there a significant effect of `nka` activity on plasma osmolality following exposure to saltwater? Remember, you need to use the `summary()` function to answer this question. 
-
-**Question 6.** What is the direction of this relationship (positive or negative), and what response in plasma osmolality would you expect to see with increasing `nka` activity?  
+**Question 6.** Is there a significant effect of `nka` activity on plasma osmolality following exposure to saltwater? Remember, you need to use the `summary()` function to answer this question. What is the direction of this relationship (positive or negative), and what response in plasma osmolality would you expect to see with increasing `nka` activity? 
 
 **Question 7.** How much of the variability in plasma osmolality does `nka` activity explain (think R^2^)?  
 
