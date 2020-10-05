@@ -21,7 +21,7 @@ We will use the simple case of the one-way ANOVA to practice our newly acquired 
 
 ```{r, eval=FALSE}
 # Read in the smolt data
-smolts <- read.csv('smolts.txt')
+smolts <- read.csv("smolts.txt")
 
 # Look at the first few lines for a sanity check
 head(smolts)
@@ -29,7 +29,7 @@ head(smolts)
 
 ```{r, echo=FALSE}
 # Read in the smolt data
-smolts <- read.csv('../../data/smolts.txt')
+smolts <- read.csv("../../data/smolts.txt")
 
 # Look at the first few lines for a sanity check
 head(smolts)

@@ -61,9 +61,12 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **Diagnostics and effect sizes** </h2>
 ----
-<!-- <a href="./06_diagnosticsAndEffects.html"> Lecture tutorial </a><br>  -->
-<!-- <a href="./hw06.html"> Homework assignment </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+[Assumptions of linear models](https://danstich.github.io/worst-r/9-Chapter9.html)<br>
+[Communicating effects](https://danstich.github.io/worst-r/10-Chapter10.html)<br>
 
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw06.html"> Diagnostics and effects </a>
 
 
 

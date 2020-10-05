@@ -32,24 +32,24 @@ Let's read in the data. We'll use the optional argument `stringsAsFactors = FALS
 
 ```{r, eval=FALSE, echo=TRUE}
 # Read in the data from comma-separated text file
-  smolts = read.csv('data/smolts.txt', stringsAsFactors = FALSE)
+smolts <- read.csv("data/smolts.txt", stringsAsFactors = FALSE)
 
 # Look at the first few rows of data
-  head(smolts)
-  
-# Examine data structure  
-  str(smolts)
+head(smolts)
+
+# Examine data structure
+str(smolts)
 ```
 
 ```{r, eval=TRUE, echo=FALSE, results='hide'}
 # Read in the data from comma-seperated text file
-  smolts = read.csv('../../data/smolts.txt', stringsAsFactors = FALSE)
+smolts <- read.csv("../../data/smolts.txt", stringsAsFactors = FALSE)
 
 # Look at the first few rows of data
-  head(smolts)
-  
-# Examine data structure  
-  str(smolts)
+head(smolts)
+
+# Examine data structure
+str(smolts)
 ```
 
 The dataset contains nine columns, or `variables`, defined as:  
@@ -76,10 +76,9 @@ First, we'll make a couple of objects out of the data in the smolts dataframe
 
 Let's make a new dataframe that includes only the stages `Presmolt` and `Smolt`.
 ```{r}
-# Make a subset of the smolts data that excludes 
+# Make a subset of the smolts data that excludes
 # the stage Postsmolt
-ps <- subset(smolts, stage != 'Postsmolt')
-
+ps <- subset(smolts, stage != "Postsmolt")
 ```  
 
 Have a look at each of these to see how R "sees" them before we move on using `str()`, `head()`, or whatever other methods you've picked up. This isn't a homework question, just a good practice that you should be getting used to now.
@@ -116,16 +115,16 @@ First, test the assumptions of normality and equal variances.
 ```{r, eval = FALSE}
 # In case you forgot the functions:
 # Shapiro-Wilk normality test
-?shapiro.test 
+?shapiro.test
 
 # Fisher's F test of equal variances
-?var.test     
+?var.test
 ```
 
 We can also plot the distributions of gill `nka` for the `Presmolt` and `Smolt` stages to see if they look normal.
 
 ```{r, warning = FALSE, message = FALSE}
-ggplot(ps, aes(x = nka, fill = stage)) + 
+ggplot(ps, aes(x = nka, fill = stage)) +
   geom_histogram() +
   xlab("Gill NKA Activity") +
   ylab("Count")
@@ -143,8 +142,7 @@ If you did not specify this argument, note that R made a choice for you on the f
 
 ```{r, collapse=TRUE}
 # Re-run the two-sample test
-t.test(nka ~ stage, data = ps)    
-
+t.test(nka ~ stage, data = ps)
 ```
 
 Weird, huh? How do you get a part of a degree of freedom?? And, it looks like we are short a few degrees of freedom, doesn't it? So, what's happening here?
@@ -181,9 +179,8 @@ Create a new column in your dataframe that ranks osmolality as `high` if it  is 
 
 ```{r}
 # Like this:
-ps$rank[ps$osmolality >= 400] <- 'high'
-ps$rank[ps$osmolality < 400] <- 'low'
-
+ps$rank[ps$osmolality >= 400] <- "high"
+ps$rank[ps$osmolality < 400] <- "low"
 ```
 
 Have a look at your data to make sure that you now have a variable called `rank` in one column that contains values of `high` and `low`

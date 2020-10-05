@@ -428,7 +428,7 @@ Packages
 Data import
 </h3>
 <p>Read the data from <code>physical.csv</code> into R using the <code>read.csv</code> function. If you saved your homework script in the same directory as the data, then you can just run <code>dir()</code> to see the file names and copy and paste from the output into your <code>read.csv</code> function so you don’t mess up the name. The <code>header = TRUE</code> tells R that our columns have names in the first row.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>otsego =<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span><span class="st">&quot;data/physical.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="dt">file =</span> <span class="st">&quot;data/physical.csv&quot;</span>, <span class="dt">header =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p>If you have gotten this far and have not saved your homework script, please do so now.</p>
 <div id="data-explanation" class="section level3">
 <h3>Data explanation</h3>
@@ -494,7 +494,7 @@ Data import
 <p>Make a boxplot of <code>do_mgl</code> by <code>year</code> in the <code>otsego</code> data using one of the methods from <a href="https://danstich.github.io/worst-r/4-Chapter4.html">Chapter 4</a>. I know that this is data visualization, not subsetting (please don’t post it as an issue!).</p>
 <p>I am going to make a quick box plot using the <code>ggplot2</code> package to see how <code>do_mgl</code> changes across years.</p>
 <p>Now, we make the boxplot:</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(otsego, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(otsego, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> year))</span>
 <span id="cb8-3"><a href="#cb8-3"></a></span>
 <span id="cb8-4"><a href="#cb8-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
@@ -504,11 +504,11 @@ Data import
 <p>Let’s get just those data where <code>depth</code> is greater than 40 meters (about 120 ft) in the month of October (late autumn before mixing occurs) to see if we can make out that trend a little more clearly.</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>hypo &lt;-<span class="st"> </span><span class="co"># Front-end object assignment</span></span>
 <span id="cb9-2"><a href="#cb9-2"></a><span class="st">  </span>otsego <span class="op">%&gt;%</span><span class="st"> </span><span class="co"># Pass otsego to the subset function</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">subset</span>( depth <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># Select depths &gt; 40 m in October</span></span></code></pre></div>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">subset</span>(depth <span class="op">&gt;</span><span class="st"> </span><span class="dv">40</span> <span class="op">&amp;</span><span class="st"> </span>month <span class="op">==</span><span class="st"> </span><span class="dv">10</span>) <span class="co"># Select depths &gt; 40 m in October</span></span></code></pre></div>
 <p><strong>Question 7</strong>. How many rows are left in your new data frame (the one that I called <code>hypo</code>)?</p>
 <p><br></p>
 <p>Now that you’ve taken a look at your data, go ahead and make another quick box plot of <code>do_mgl</code> by year.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> year, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
 <span id="cb10-2"><a href="#cb10-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> year))</span>
 <span id="cb10-3"><a href="#cb10-3"></a></span>
 <span id="cb10-4"><a href="#cb10-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>
@@ -519,7 +519,7 @@ Data import
 <h3>Creating a new variable</h3>
 <p>Okay, our subsetting approach seems to have done the trick in terms of narrowing the window for the range of data in which we are interested. What, now, if we wanted to visualize the differences in dissolved oxygen during years with alewife (let’s say 1992 through 2010) and years without alewife (2011 and later)? Glad you ask!!</p>
 <p>We’ll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the <code>hypo</code> data frame (shameful, I know).</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>hypo &lt;-<span class="st"> </span>hypo <span class="op">%&gt;%</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>hypo &lt;-<span class="st"> </span>hypo <span class="op">%&gt;%</span></span>
 <span id="cb11-2"><a href="#cb11-2"></a><span class="st">  </span><span class="kw">subset</span>(year <span class="op">&gt;</span><span class="st"> </span><span class="dv">1988</span>)</span></code></pre></div>
 <p>Now that we have just the “alewife” and “post-alewife” years in our data, we can go ahead and assign each of the years to one of these two groups using a 2010 cut-off year.</p>
 <p>Create a new column in <code>hypo</code> that will hold a grouping variable for <code>alewife</code>. I initialize this by assigning it the value <strong><code>present</code></strong> for all rows. Note that I only supply a single value, but R knows to repeat this for each row in the data frame.</p>
@@ -533,7 +533,7 @@ Data import
 <h3>Make it pretty</h3>
 <p>Okay, let’s wrap it all up this week by making a nice plot to visually compare hypolimnetic oxygen (<code>hypo$do_mgl</code>) between years in which <code>alewife</code> was <code>"present"</code> or <code>"absent"</code>.</p>
 <p>Here is the basic plot to get you started:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl)) <span class="op">+</span><span class="st"> </span></span>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>bp &lt;-<span class="st"> </span><span class="kw">ggplot</span>(hypo, <span class="kw">aes</span>(<span class="dt">x =</span> alewife, <span class="dt">y =</span> do_mgl)) <span class="op">+</span></span>
 <span id="cb14-2"><a href="#cb14-2"></a><span class="st">  </span><span class="kw">geom_boxplot</span>(<span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">group =</span> alewife))</span>
 <span id="cb14-3"><a href="#cb14-3"></a></span>
 <span id="cb14-4"><a href="#cb14-4"></a><span class="kw">print</span>(bp)</span></code></pre></div>

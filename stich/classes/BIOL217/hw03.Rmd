@@ -17,27 +17,29 @@ By the end of this lab, you should be able to 1) simulate data from a wide varie
 Let's start with the normal distribution to knock the rust off and get ourselves thinking about probability distributions again. Recall that we can simulate data from the normal using something like this: 
 
 ```{r}
-ndata <- rnorm(n=30, mean=0, sd=1)
+ndata <- rnorm(n = 30, mean = 0, sd = 1)
 ```
 
 In this example, we have drawn **30** random samples from a normal distribution with a *mean* of 0 and a *standard deviation* of 1. Also recall that we can plot these data as samples from a **continuous distribution** using a curved line in R to see if it looks like it should:
 
 ```{r, fig.align='center', fig.width=6, fig.height=4}
-par(mar = c(5,5,1,1))
+par(mar = c(5, 5, 1, 1))
 plot(density(ndata),
-     main = "",
-     xlab = expression(theta),
-     col = "red",
-     lwd = "2")
+  main = "",
+  xlab = expression(theta),
+  col = "red",
+  lwd = "2"
+)
 ```
 
 Now, what if I gave you the following plot and asked you if you could find parameters of the normal distribution from which these samples were drawn? 
 
 ```{r, echo=FALSE, fig.align='center', fig.width=6, fig.height=4}
-hist(rnorm(1e5, mean = 34, sd = 14), 
-     main = "Mystery distribution",
-     xlab=expression(theta), 
-     col="gray")
+hist(rnorm(1e5, mean = 34, sd = 14),
+  main = "Mystery distribution",
+  xlab = expression(theta),
+  col = "gray"
+)
 ```
 
 **Question 1.** What are the approximate mean and standard deviation of the distribution that has been sampled here? Play with the `rnorm` function in R and change the values of the mean and standard deviation until you are able to approximately replicate the graph above. Use the `hist` function to plot the data each time you simulate them to check if the pattern is close. **NOTE**: You will be able to zero in on this faster if you use large sample sizes for n, **but** if n is too large it will take a long time to simulate each data set. 
@@ -52,13 +54,13 @@ Now let's take a look at another way to do this. This time, instead of handing y
 # in the data from a text file like
 # this (just make sure it is in
 # the correct directory):
-  dbp <- read.csv("data/dbp.txt") 
+dbp <- read.csv("data/dbp.txt")
 ``` 
  
 ```{r, echo=FALSE}
 # I'll simulate the data for you in another file and you can read in the data
 # from a text file like this (just make sure it is in the correct directory):
-  dbp <- read.csv("../../data/dbp.txt") 
+dbp <- read.csv("../../data/dbp.txt")
 ```
 
 **Question 2.** Calculate the *mean* and *variance* of this distribution using the method of moments. You can write your own function, or you can use the built-in R functions like `mean()` that we used in <a href="https://danstich.github.io/worst-r/5-6-sample-statistics.html">Chapter 5.6</a> of the textbook. What are the estimated *mean* and *variance* using this method?  
@@ -98,10 +100,10 @@ Take a random draw from a Bernoulli distribution. Remember, this distribution is
 
 ```{r, eval = FALSE}
 # Load the package
-library(Rlab)            
+library(Rlab)
 
 # Take a random sample from the Bernoulli
-bern.sample <- rbern(n = 1, prob = 0.5) 
+bern.sample <- rbern(n = 1, prob = 0.5)
 ```
 
 <br>
@@ -136,11 +138,11 @@ Suppose that we are interested in describing the distribution of the genus _Phot
 
 Here are the data:
 ```{r, eval=FALSE}
-counts <- read.csv('data/counts.txt')
+counts <- read.csv("data/counts.txt")
 ```
  
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-counts <- read.csv('../../data/counts.txt')
+counts <- read.csv("../../data/counts.txt")
 ```
  
 <br>
@@ -153,11 +155,11 @@ Using the data in the file `counts.txt` (you have to read it in first), estimate
 Suppose that the data in question 9 looked more like those contained in this file:  
 
 ```{r, eval=FALSE}
-counts2 <- read.csv('data/counts2.txt')
+counts2 <- read.csv("data/counts2.txt")
 ```
  
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-counts2 <- read.csv('../../data/counts2.txt')
+counts2 <- read.csv("../../data/counts2.txt")
 ```
  
 <br> 

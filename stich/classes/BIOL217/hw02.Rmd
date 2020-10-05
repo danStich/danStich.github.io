@@ -25,11 +25,11 @@ library(tidyverse)
 Read the data from `physical.csv` into R using the `read.csv` function. If you saved your homework script in the same directory as the data, then you can just run `dir()` to see the file names and copy and paste from the output into your `read.csv` function so you don't mess up the name. The `header = TRUE` tells R that our columns have names in the first row.
 
 ```{r, eval=FALSE, echo=TRUE}
-otsego = read.csv(file ="data/physical.csv", header = TRUE)
+otsego <- read.csv(file = "data/physical.csv", header = TRUE)
 ```
 
 ```{r, eval=TRUE, echo=FALSE}
-otsego = read.csv(file ="../../data/physical.csv", header = TRUE)
+otsego <- read.csv(file = "../../data/physical.csv", header = TRUE)
 ```
 
 If you have gotten this far and have not saved your homework script, please do so now.
@@ -69,7 +69,6 @@ ann <- # Front-end object assignment
   otsego %>% # Pass otsego to the group_by function
   group_by(year) %>% # Group by year and pass to summarize
   summarize(avg = mean(do_mgl))
-
 ```
 
 But, it can be a little confusing to get dive right in like this. If you are not yet comfortable with the `%>%` (pipe) operator from the `magrittr` package, you could do also go step by step using the `group_by()` and `summarize()` functions:
@@ -134,7 +133,6 @@ ann <- # Front-end object assignment
   otsego %>% # Pass otsego to the group_by function
   group_by(year) %>% # Group by year and pass to summarize
   summarize(avg = mean(do_mgl, na.rm = TRUE))
-
 ```
 
 Now, you should have a numeric value of mean `do_mgl` in Otsego Lake for each `year` in an new tibble called `ann` for which there were data! Have a look at `ann` to confirm that this is true before moving on.
@@ -150,7 +148,7 @@ I am going to make a quick box plot using the `ggplot2` package to see how `do_m
 
 Now, we make the boxplot:
 ```{r, warning=FALSE, message=FALSE}
-bp <- ggplot(otsego, aes(x = year, y = do_mgl)) + 
+bp <- ggplot(otsego, aes(x = year, y = do_mgl)) +
   geom_boxplot(mapping = aes(group = year))
 
 print(bp)
@@ -165,7 +163,7 @@ Let's get just those data where `depth` is greater than 40 meters (about 120 ft)
 ```{r}
 hypo <- # Front-end object assignment
   otsego %>% # Pass otsego to the subset function
-  subset( depth > 40 & month == 10) # Select depths > 40 m in October
+  subset(depth > 40 & month == 10) # Select depths > 40 m in October
 ```
 
 **Question 7**. How many rows are left in your new data frame (the one that I called `hypo`)?
@@ -175,7 +173,7 @@ hypo <- # Front-end object assignment
 Now that you've taken a look at your data, go ahead and make another quick box plot of `do_mgl` by year.
 
 ```{r, warning=FALSE, message=FALSE}
-bp <- ggplot(hypo, aes(x = year, y = do_mgl)) + 
+bp <- ggplot(hypo, aes(x = year, y = do_mgl)) +
   geom_boxplot(mapping = aes(group = year))
 
 print(bp)
@@ -188,7 +186,7 @@ Okay, our subsetting approach seems to have done the trick in terms of narrowing
 
 We'll drop the 1988 data because it was around that time that alewife were introduced. Here, I am just going to overwrite the `hypo` data frame (shameful, I know).
 ```{r}
-hypo <- hypo %>% 
+hypo <- hypo %>%
   subset(year > 1988)
 ```
 
@@ -213,7 +211,7 @@ Okay, let's wrap it all up this week by making a nice plot to visually compare h
 
 Here is the basic plot to get you started:
 ```{r, warning=FALSE, message=FALSE}
-bp <- ggplot(hypo, aes(x = alewife, y = do_mgl)) + 
+bp <- ggplot(hypo, aes(x = alewife, y = do_mgl)) +
   geom_boxplot(mapping = aes(group = alewife))
 
 print(bp)
