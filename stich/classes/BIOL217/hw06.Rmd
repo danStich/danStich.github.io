@@ -70,17 +70,18 @@ ggplot(ToothGrowth, aes(x = supp, y = len, fill = supp)) +
   facet_wrap(~dose)
 ```
 
-That should get you started. Now, you just need to do this for the residuals instead of the raw data.
+That should get you started. Now, you just need to do this for the residuals instead of the raw data.You can plot all of the residuals at once, split them into VC vs OJ, look at them by dose, or look at them in groups by dose and groups all at once.
+
 
 **Question 2.** Based on our discussions about residual plots this week and the examples in [Chapter 9.6](https://danstich.github.io/worst-r/9-6-anova-diagnostics.html) does it appear that the residuals in the plots you made are (more or less) normally distributed with a mean of zero? How did you come to this conclusion?
 
-**Question 3.** Based on the residual plots you have made and our discussions, does it appear that your model violates the assumption about homogeneity of variances? How did you come to *this* conclusion?
+**Question 3.** Based on the residual plots you have made and our discussions, does it appear that your model violates the assumption about homogeneity of variances? How did you come to *this* conclusion? 
 
 ### Interpreting main effects
 
 Once you are satisfied that you have adequately reviewed the diagnostic plots and developed an opinion about whether or not we are violating assumptions, let's move on and do the analysis one way or another.
 
-Now that we've done a little model validation to assure that we are not completely blowing the assumptions of linear models (hopefully you concluded this as well), it is time to take a look at our results. We will do this one step at a time. First, print the output of your model using the `anova` function to determine whether or not the main effects of each explanatory variable were significant.
+Now that we've done a little model validation to assure that we are not completely blowing the assumptions of linear models, it is time to take a look at our results (You may have concluded something different in your previous answer - totally fine. I will show you residual train wrecks moving forward that make these ones look great!). We will do this one step at a time. First, print the output of your model using the `anova` function to determine whether or not the main effects of each explanatory variable were significant.
 
 ```{r, eval=FALSE}
 # Get the ANOVA table for your model,
