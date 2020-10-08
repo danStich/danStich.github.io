@@ -117,11 +117,8 @@ tooth.mod <- lm(len ~ supp + dose, data = ToothGrowth)
 
 # Get group combinations
 groups <- data.frame(
-  with(ToothGrowth, expand.grid(supp, dose))
+  with(ToothGrowth, unique(data.frame(supp, dose)))
 )
-names(groups) <- c("supp", "dose")
-
-groups <- unique(groups)
 
 # Make predictions
 tooth_y_pred <- predict(
@@ -180,14 +177,8 @@ tooth.mod <- lm(len ~ supp * dose, data = ToothGrowth)
 
 # Get group combinations
 groups <- data.frame(
-  with(ToothGrowth, expand.grid(supp, dose))
+  with(ToothGrowth, unique(data.frame(supp, dose)))
 )
-
-# Make sure names match original data
-names(groups) <- c("supp", "dose")
-
-# Just keep the unique groupings
-groups <- unique(groups)
 ```    
 
 Now, you can make predictions using the `predict()` function. Or, if you are a total masochist, you can do the matrix math directly using the examples in [Chapter 10.1](https://danstich.github.io/worst-r/10-1-one-way-anova.html#prediction).

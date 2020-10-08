@@ -491,14 +491,8 @@ Regression diagnostics
 <span id="cb7-9"><a href="#cb7-9"></a></span>
 <span id="cb7-10"><a href="#cb7-10"></a><span class="co"># Get group combinations</span></span>
 <span id="cb7-11"><a href="#cb7-11"></a>groups &lt;-<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb7-12"><a href="#cb7-12"></a>  <span class="kw">with</span>(ToothGrowth, <span class="kw">expand.grid</span>(supp, dose))</span>
-<span id="cb7-13"><a href="#cb7-13"></a>)</span>
-<span id="cb7-14"><a href="#cb7-14"></a></span>
-<span id="cb7-15"><a href="#cb7-15"></a><span class="co"># Make sure names match original data</span></span>
-<span id="cb7-16"><a href="#cb7-16"></a><span class="kw">names</span>(groups) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;supp&quot;</span>, <span class="st">&quot;dose&quot;</span>)</span>
-<span id="cb7-17"><a href="#cb7-17"></a></span>
-<span id="cb7-18"><a href="#cb7-18"></a><span class="co"># Just keep the unique groupings</span></span>
-<span id="cb7-19"><a href="#cb7-19"></a>groups &lt;-<span class="st"> </span><span class="kw">unique</span>(groups)</span></code></pre></div>
+<span id="cb7-12"><a href="#cb7-12"></a>  <span class="kw">with</span>(ToothGrowth, <span class="kw">unique</span>(<span class="kw">data.frame</span>(supp, dose)))</span>
+<span id="cb7-13"><a href="#cb7-13"></a>)</span></code></pre></div>
 <p>Now, you can make predictions using the <code>predict()</code> function. Or, if you are a total masochist, you can do the matrix math directly using the examples in <a href="https://danstich.github.io/worst-r/10-1-one-way-anova.html#prediction">Chapter 10.1</a>.</p>
 <p>Once you have the predictions, plot the observed data and add your predictions to the plots.</p>
 <p><strong>Question 10.</strong> Now that you’ve had a chance to look at these things side by side, does the interaction model appear to make more intuitive sense than the main effects model? Is this supported by the amount of variability is explained by each of the models (think R<sup>2</sup>)?</p>
