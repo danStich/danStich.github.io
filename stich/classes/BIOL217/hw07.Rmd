@@ -1,11 +1,11 @@
 ```{r child="../../_styles.Rmd"}
 ```
 
-<h1 id="multi"> Model selection </h1>
+# Model selection
 
-<img src="../../images/glass.jpg">
+<img src = "../../images/glass.jpg">
 
-<h2 id="multi"> Introduction </h2>  
+## Introduction  
 
 This week we are going to wrap up our discussions about linear models by looking at how to choose between them. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case. So, we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to  provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework. We'll also use log-transformations in this lab as one way to "fix" non-linear relationships between X and Y.
 

@@ -408,13 +408,11 @@ $(document).ready(function () {
 </div>
 
 
-<h1 id="multi">
-Model selection
-</h1>
+<div id="model-selection" class="section level1">
+<h1>Model selection</h1>
 <p><img src="../../images/glass.jpg"></p>
-<h2 id="multi">
-Introduction
-</h2>
+<div id="introduction" class="section level2">
+<h2>Introduction</h2>
 <p>This week we are going to wrap up our discussions about linear models by looking at how to choose between them. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case. So, we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework. We’ll also use log-transformations in this lab as one way to “fix” non-linear relationships between X and Y.</p>
 <p>By the end of this lab, you should 1) be comfortable fitting and interpretting linear models such as ANOVA, linear regression, and ANCOVA, 2) be able to state competing hypotheses represented by different models, and 3) be able to use modern tools to choose between competing hypotheses and make predictions that can be used to test the overall quality of your “best” model.</p>
 <p>We’ll be working with the <code>gala</code> data from the <code>faraway</code> package this week, in addition to our usual pile of functions from the <code>tidyverse</code> and some new ones from the <code>AICcmodavg</code> package. You can go ahead and load those at the top of your homework code like this after you install any you don’t have.</p>
@@ -425,6 +423,7 @@ Introduction
 <span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(faraway)</span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="kw">library</span>(tidyverse)</span>
 <span id="cb1-6"><a href="#cb1-6"></a><span class="kw">library</span>(jtools)</span></code></pre></div>
+</div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <p>This week, we are going to work with some classic data from species counts on the Galapagos Islands. You can load the <code>gala</code> data from the <code>faraway</code> package once you have installed and loaded it. The data contains a bunch of explanatory variables that can be used to test hypotheses about how the number of <code>Species</code> and the number of <code>Endemics</code> on an island change in response to changes in other variables such as <code>Area</code>, <code>Elevation</code>, and distance from other islands.</p>
@@ -453,7 +452,7 @@ Introduction
 <p>Now, make a plot of the residuals from <em>this</em> model to see if it has resolved any of the issues you noted in your answer to Question 1.</p>
 <p><strong>Question 2.</strong> Based on the regression diagnostics for your new model, have you violated any of the assumptions of linear models?</p>
 </div>
-<div id="model-selection" class="section level3">
+<div id="model-selection-1" class="section level3">
 <h3>Model selection</h3>
 <p>Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.</p>
 <p>Let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. To re-create their analysis.</p>
@@ -534,6 +533,7 @@ Introduction
 <p><strong>(1)</strong> The t-statistic, significance of each explanatory variable (X, right side of equation) from output of the <code>summary()</code> function for the best model,</p>
 <p><strong>(2)</strong> the direction of relationships between explanatory variables and the response (<code>Species</code>)</p>
 <p>Yay, no group means this week!</p>
+</div>
 </div>
 </div>
 
