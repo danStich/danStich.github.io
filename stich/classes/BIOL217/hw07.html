@@ -415,16 +415,20 @@ Model selection
 <h2 id="multi">
 Introduction
 </h2>
-<p>This week we are going to wrap up our discussions about linear models. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case, so we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to introduce some new kinds of explanatory variables (“polynomials”), provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework.</p>
+<p>This week we are going to wrap up our discussions about linear models by looking at how to choose between them. In reality, our discussions and the exercises that we have been doing related to model diagnostics, interpretation, and selection apply broadly to a larger class of models of which linear models are a special case. So, we will continue to apply these tools during the next three weeks of lab. The objectives of this lab are to provide you with some tools for choosing between models (start thinking of these as competing hypotheses), and show you how to present the results of hypothesis testing within this framework. We’ll also use log-transformations in this lab as one way to “fix” non-linear relationships between X and Y.</p>
 <p>By the end of this lab, you should 1) be comfortable fitting and interpretting linear models such as ANOVA, linear regression, and ANCOVA, 2) be able to state competing hypotheses represented by different models, and 3) be able to use modern tools to choose between competing hypotheses and make predictions that can be used to test the overall quality of your “best” model.</p>
+<p>We’ll be working with the <code>gala</code> data from the <code>faraway</code> package this week, in addition to our usual pile of functions from the <code>tidyverse</code> and some new ones from the <code>AICcmodavg</code> package. You can go ahead and load those at the top of your homework code like this after you install any you don’t have.</p>
+<p>We will also explore the effect_plot() function from the <code>jtools</code> package, which greatly simplifies prediction for multiple regression models.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Mine is alphabetical - nothing magic</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># about the order of these otherwise.</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(AICcmodavg)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(faraway)</span>
+<span id="cb1-5"><a href="#cb1-5"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-6"><a href="#cb1-6"></a><span class="kw">library</span>(jtools)</span></code></pre></div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
-<p>This week, we are going to work with some data from species counts on the Galapagos Islands. The data for these exercises are as follows:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Install the &#39;faraway&#39; package in R,</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># to get the data using data(&quot;gala&quot;):</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a>  <span class="co">#install.packages(&#39;faraway&#39;)</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a>  <span class="kw">library</span>(faraway)</span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">data</span>(gala)</span></code></pre></div>
+<p>This week, we are going to work with some classic data from species counts on the Galapagos Islands. You can load the <code>gala</code> data from the <code>faraway</code> package once you have installed and loaded it. The data contains a bunch of explanatory variables that can be used to test hypotheses about how the number of <code>Species</code> and the number of <code>Endemics</code> on an island change in response to changes in other variables such as <code>Area</code>, <code>Elevation</code>, and distance from other islands.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="kw">data</span>(gala)</span></code></pre></div>
 <p>The data explanation follows:</p>
 <p><code>Species</code>: number of plant species found on the island<br> <code>Endemics</code>: number of endemic species<br> <code>Area</code>: area of the island (km<sup>2</sup>)<br> <code>Elevation</code>: highest elevation of the island (m)<br> <code>Nearest</code>: distance from the nearest island (km)<br> <code>Scruz</code>: distance from Santa Cruz island (km)<br> <code>Adjacent</code>: area of the adjacent island (square km)<br></p>
 <p>The citation for the paper is:</p>
@@ -432,90 +436,104 @@ Introduction
 <p>Johnson, M. P., and P. H. Raven. 1973. Species number and endemism: The Galapagos Archipelago revisited. Science 179:893-895.</p>
 </blockquote>
 <p>It is available through the course website <a href="JohnsonAndRaven1973.pdf">here</a>.</p>
-<p><strong>Question 1.</strong> Thinking back to last week and our discussions about assumptions of linear models, and setting the stage for next week….What is the problem with using species counts as a continuous response variable in linear models?</p>
-<div id="interpreting-polynomials" class="section level3">
-<h3>Interpreting polynomials</h3>
-<p>The first thing we will do this week is lay out an example to help you interpret polynomial terms in regression analyses- just to make sure this concept is crystal clear. We will use the data from Johnson and Raven (1973) to demonstrate this concept. A major finding of this paper was that the relationship between species number on a given island and the area of an island was “non-linear”. That study used log<sub><em>e</em></sub> transformation to demonstrate this. We will try to use a polynomial to see if we can show this another way.</p>
-<p><strong>Question 2.</strong> Given what you have learned in other courses (e.g. BIOL 181), what would you expect the relationship between island area and species number to look like? Would you expect the number of species to increase indefinitely with island area? Is there any reason to suspect that the number of species would ever decrease with continued increases in area?</p>
-<p>Fit a model that includes both linear and quadratic effects of Area on Species.</p>
-<p><strong>Question 3.</strong> What is the coefficient of determination (R<sup>2</sup>) of this model? How does this compare the the R<sup>2</sup> values reported for the models in Johnson and Raven (1973)?</p>
-<p><strong>Question 4.</strong> Based on the hypothesis that you gave above, do the results of this regression make sense to you? Why or why not? HINT: you <em>can</em> tell from the signs of the two regression coefficients whether or not the results fall in line with your hypothesis (<a href="https://www.google.com/">Google</a> it), but if you are in a pinch, you could also use the coefficients to make some quick predictions and plot them against the raw data.</p>
-<p>In any case, it looks like we won’t be refuting any seminal papers about species abundances in the Galapagos Islands this week. Oh, well. At least we can use the paper to guide us through the rest of our lab.</p>
+<div id="interpreting-log-linear-relationships" class="section level3">
+<h3>Interpreting log-linear relationships</h3>
+<p>The first thing we will do this week is lay out an example to help you interpret regression analyses- just to make sure this concept is crystal clear. A major finding of Johnson and Raven (1973) was that the relationship between number of species number a given island and the area of the island was “non-linear”. This means that the number of species “levels off” or “asymptotes” at some point. That study used log<sub><em>e</em></sub> transformation to account for this. They tested whether the biological hypothesis was better supported than a linear relationship between number of <code>Species</code> and <code>Area</code> with the adjusted R<sup>2</sup> statistic. We will use the data from Johnson and Raven (1973) to demonstrate this concept and we’ll follow loosely along with the analyses they did in that paper. We will make one important change by using the Akaike information criterion (AIC<sub>c</sub>) for model selection since that was proposed shortly after Johnson and Raven (1973) published their seminal work.</p>
+</div>
+<div id="analysis" class="section level3">
+<h3>Analysis</h3>
+<p>Let’s start by fitting a model. We will use un-transformed variables to diagnose assumptions of linear models before moving on to model selection and interpretation of the results. Fit a linear model that incorporates effect of <code>Area</code> on <code>Species</code>. Both variables are continuous, so this is a simple linear regression. <code>Species</code> should be your response.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>area_lm  &lt;-<span class="st"> </span><span class="kw">lm</span>(Species <span class="op">~</span><span class="st"> </span>Area, <span class="dt">data =</span> gala)</span></code></pre></div>
+<p>Next, make a plot of the residuals for this model. If you are having trouble remembering how to do this, have a look back to <a href="https://danstich.github.io/worst-r/9-7-linear-regression-diagnostics.html">Chapter 9.7</a>.</p>
+<p><strong>Question 1.</strong> Based on your regression diagnostics, have you violated any of the assumptions of linear models here? Does anything else in the residual plot raise red flags for you? Again, if you are having trouble remembering what these are you can check out <a href="https://danstich.github.io/worst-r/9-2-assumptions-of-linear-models.html">Chapter 9.2</a> in the text book.</p>
+<p>Next, we will fit a model following the log-transformation used by Johnson and Raven (1973) to demonstrate how that works and how it affects our residuals.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Fit the model</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>area_llm  &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area), <span class="dt">data =</span> gala)</span></code></pre></div>
+<p>Now, make a plot of the residuals from <em>this</em> model to see if it has resolved any of the issues you noted in your answer to Question 1.</p>
+<p><strong>Question 2.</strong> Based on the regression diagnostics for your new model, have you violated any of the assumptions of linear models?</p>
 </div>
 <div id="model-selection" class="section level3">
 <h3>Model selection</h3>
 <p>Now that we have looked at how the form of our model might change based on the underlying characteristics of our study system (or at least our assumptions about them), let us have a look at how we choose between competing hypotheses that attempt to explain the same phenomenon.</p>
-<p>For a change of pace from previous labs, let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. Let’s have some fun!</p>
-<p>The models that Johnson and Raven tested looked like this</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Note: the results will not be exactly</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="co"># the same because missing data in the paper</span></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="co"># were filled in here.</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="co"># Note also: we need to fix data point</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a><span class="co"># number 25 in Scruz because that is the</span></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="co"># island Scruz and we can&#39;t take the</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="co"># log of zero!!!</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a>gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span></span>
-<span id="cb2-10"><a href="#cb2-10"></a></span>
-<span id="cb2-11"><a href="#cb2-11"></a>S1 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</span>
-<span id="cb2-12"><a href="#cb2-12"></a>lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),</span>
-<span id="cb2-13"><a href="#cb2-13"></a>            <span class="dt">data=</span>gala)</span>
-<span id="cb2-14"><a href="#cb2-14"></a>S2 =<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</span>
-<span id="cb2-15"><a href="#cb2-15"></a>lnS2 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb2-16"><a href="#cb2-16"></a><span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data=</span>gala)</span></code></pre></div>
-<p><strong>Question 5.</strong> Look at the summaries for each of these models once you fit them. Does the general pattern in the R<sup>2</sup> values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
+<p>Let’s keep following the Johnson and Raven (1973) paper down the rabbit hole. To re-create their analysis.</p>
+<p>Here are the four models from Table 4 in Johnson and Raven (1973):</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Note: the results will not be exactly</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># the same because missing data in the paper</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># were filled in here.</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Note also: we need to fix data point</span></span>
+<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># number 25 in Scruz because that is the</span></span>
+<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># island Scruz and we can&#39;t take the</span></span>
+<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># log of zero! We&#39;ll talk more about this</span></span>
+<span id="cb5-9"><a href="#cb5-9"></a><span class="co"># when we get to count regressions</span></span>
+<span id="cb5-10"><a href="#cb5-10"></a>gala<span class="op">$</span>Scruz[<span class="dv">25</span>] =<span class="st"> </span><span class="fl">0.00001</span></span>
+<span id="cb5-11"><a href="#cb5-11"></a></span>
+<span id="cb5-12"><a href="#cb5-12"></a><span class="co"># Okay, finally here are the models. </span></span>
+<span id="cb5-13"><a href="#cb5-13"></a><span class="co"># S1 and lnS1 and S2 and lnS2 are identical</span></span>
+<span id="cb5-14"><a href="#cb5-14"></a><span class="co"># except that both X and Y are log-transformed</span></span>
+<span id="cb5-15"><a href="#cb5-15"></a>S1 &lt;-<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data=</span>gala)</span>
+<span id="cb5-16"><a href="#cb5-16"></a></span>
+<span id="cb5-17"><a href="#cb5-17"></a>lnS1 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),</span>
+<span id="cb5-18"><a href="#cb5-18"></a>            <span class="dt">data =</span> gala)</span>
+<span id="cb5-19"><a href="#cb5-19"></a></span>
+<span id="cb5-20"><a href="#cb5-20"></a>S2 &lt;-<span class="st"> </span><span class="kw">lm</span>(Species<span class="op">~</span>Area <span class="op">+</span><span class="st"> </span>Elevation <span class="op">+</span><span class="st"> </span>Nearest <span class="op">+</span><span class="st"> </span>Scruz <span class="op">+</span><span class="st"> </span>Adjacent, <span class="dt">data =</span> gala)</span>
+<span id="cb5-21"><a href="#cb5-21"></a></span>
+<span id="cb5-22"><a href="#cb5-22"></a>lnS2 &lt;-<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Elevation) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span></span>
+<span id="cb5-23"><a href="#cb5-23"></a><span class="st">            </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent), <span class="dt">data =</span> gala)</span></code></pre></div>
+<p><br></p>
+<p><strong>Question 3.</strong> Look at the summaries for each of these models once you fit them. Does the general pattern in the R<sup>2</sup> values for these four models follow what you might expect to see for the same models as they are presented in Table 3 from Johnson and Raven (1973)?</p>
 <p>This paper was written before information theory became widespread, and in fact the study was done the year before Hiortugo Akaike published his <a href="http://www.unt.edu/rss/class/Jon/MiscDocs/Akaike_1974.pdf">seminal 1974 paper</a> in which he revolutionized model selection (although he introduced the concept as part of a conference proceedings the year before).</p>
-<p>Let’s see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models.</p>
-<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc<sub>i</sub>, <span class="math inline">\(\Delta\)</span>AICc<sub>i</sub>, and w<sub>i</sub> manually.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Install and load the necessary library</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  <span class="kw">install.packages</span>(<span class="st">&#39;AICcmodavg&#39;</span>)</span>
-<span id="cb3-3"><a href="#cb3-3"></a>  <span class="kw">library</span>(AICcmodavg)</span>
-<span id="cb3-4"><a href="#cb3-4"></a></span>
-<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Next, you will need to make a</span></span>
-<span id="cb3-6"><a href="#cb3-6"></a><span class="co"># list out of your models</span></span>
-<span id="cb3-7"><a href="#cb3-7"></a>  mods =<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)</span>
-<span id="cb3-8"><a href="#cb3-8"></a><span class="co"># Make sure you give it some names, too</span></span>
-<span id="cb3-9"><a href="#cb3-9"></a>  <span class="kw">names</span>(mods) =<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39; lnS2&#39;</span>)</span></code></pre></div>
+<p>Let’s see what would have happened if Johnson and Raven had waited a year to publish! We will compare the two best models from that paper to evaluate parsimony of the closely-ranked models. Note that we use the two best models in this case only because it is a no-no to use AIC or most other model selection tools on models that have different response forms so <code>AICcmodavg::tab</code> will throw an error if we want to do it that way. Again, things that weren’t (well) known at the time this study was conducted.</p>
+<p>We will use the <code>AICcmodavg</code> introduced in class for this example, but recall that we could use the <code>AIC</code> function in R for this as well. Using the latter approach, you would have to calculate the sample-size corrected AICc<sub>i</sub>, <span class="math inline">\(\Delta\)</span>AICc<sub>i</sub>, and w<sub>i</sub> manually. Let’s avoid that if we can here.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># You will need to make a</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># list out of your models</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>  mods &lt;-<span class="st"> </span><span class="kw">list</span>(lnS1, lnS2)</span>
+<span id="cb6-4"><a href="#cb6-4"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Make sure you give it some names, too</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="kw">names</span>(mods) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;lnS1&#39;</span>, <span class="st">&#39;lnS2&#39;</span>)</span></code></pre></div>
 <p>Now, use the <code>aictab</code> function to calculate model selection statistics for information-theoretic approach using AIC. If you’ve forgotten how to do this, you can <a href="https://www.google.com/">Google</a> it, or you can do:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>?aictab</span></code></pre></div>
-<p><strong>Question 6.</strong> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(\Delta\)</span>AICc and the ratio of w<sub>i</sub> for the two models (see reference script).</p>
-<p><strong>Question 7.</strong> How do the results of your AICc model selection compare to the R<sup>2</sup> values you calculated for each of these models above? Why do you think this is the case?</p>
-<p><strong>Question 8.</strong> Now that you have these two models, I want you to choose two additional models (combinations of explanatory variables) that you are interested in testing against the best models of Johnson and Raven (1973). Give the formula for each of those models here. Please note that you will need to use the log<sup><em>e</em></sup> transformation of the response that Johnson and Raven used in order to compare these models with AICc, but you do not need to log<sup><em>e</em></sup> transform the explanatory variables if you do not wish to.</p>
-<p>First, fit your new models and make a list object containing these two models and <code>lnS1</code> and <code>lnS2</code> from above. Don’t forget to assign names to your list (see example above). Now, use the AICc model selection method from above to compare your models to the results of <code>lnS1</code> and <code>lnS2</code>.</p>
-<p><strong>Question 9.</strong> How do your models compare to the models of Johnson and Raven (1973) with respect to the model selection statistics?</p>
-</div>
-<div id="model-validation" class="section level3">
-<h3>Model validation</h3>
-<p>Trucking on…First, we will use the best model from Johnson and Raven (1973) to do some model validation using one of the methods we discussed in class this week.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># As a reminder, here is the model that you should be working with for this:</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  lnS1 =<span class="st"> </span><span class="kw">lm</span>(<span class="kw">log</span>(Species)<span class="op">~</span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Adjacent),<span class="dt">data=</span>gala)</span>
-<span id="cb5-3"><a href="#cb5-3"></a></span>
-<span id="cb5-4"><a href="#cb5-4"></a>  <span class="kw">summary</span>(lnS1)</span>
-<span id="cb5-5"><a href="#cb5-5"></a></span>
-<span id="cb5-6"><a href="#cb5-6"></a>Call<span class="op">:</span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="kw">lm</span>(<span class="dt">formula =</span> <span class="kw">log</span>(Species) <span class="op">~</span><span class="st"> </span><span class="kw">log</span>(Area) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Nearest) <span class="op">+</span><span class="st"> </span><span class="kw">log</span>(Scruz) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="st">    </span><span class="kw">log</span>(Adjacent), <span class="dt">data =</span> gala)</span>
-<span id="cb5-9"><a href="#cb5-9"></a></span>
-<span id="cb5-10"><a href="#cb5-10"></a>Residuals<span class="op">:</span></span>
-<span id="cb5-11"><a href="#cb5-11"></a><span class="st">     </span>Min       1Q   Median       3Q      Max </span>
-<span id="cb5-12"><a href="#cb5-12"></a><span class="fl">-1.61494</span> <span class="fl">-0.44016</span> <span class="fl">-0.01009</span>  <span class="fl">0.47420</span>  <span class="fl">1.39483</span> </span>
-<span id="cb5-13"><a href="#cb5-13"></a></span>
-<span id="cb5-14"><a href="#cb5-14"></a>Coefficients<span class="op">:</span></span>
-<span id="cb5-15"><a href="#cb5-15"></a><span class="st">              </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
-<span id="cb5-16"><a href="#cb5-16"></a>(Intercept)    <span class="fl">3.13231</span>    <span class="fl">0.22380</span>  <span class="fl">13.996</span> <span class="fl">2.48e-13</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb5-17"><a href="#cb5-17"></a><span class="kw">log</span>(Area)      <span class="fl">0.39389</span>    <span class="fl">0.04383</span>   <span class="fl">8.987</span> <span class="fl">2.64e-09</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb5-18"><a href="#cb5-18"></a><span class="kw">log</span>(Nearest)  <span class="fl">-0.09074</span>    <span class="fl">0.10833</span>  <span class="fl">-0.838</span>    <span class="fl">0.410</span>    </span>
-<span id="cb5-19"><a href="#cb5-19"></a><span class="kw">log</span>(Scruz)    <span class="fl">-0.03025</span>    <span class="fl">0.05413</span>  <span class="fl">-0.559</span>    <span class="fl">0.581</span>    </span>
-<span id="cb5-20"><a href="#cb5-20"></a><span class="kw">log</span>(Adjacent) <span class="fl">-0.02448</span>    <span class="fl">0.04698</span>  <span class="fl">-0.521</span>    <span class="fl">0.607</span>    </span>
-<span id="cb5-21"><a href="#cb5-21"></a><span class="op">---</span></span>
-<span id="cb5-22"><a href="#cb5-22"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
-<span id="cb5-23"><a href="#cb5-23"></a></span>
-<span id="cb5-24"><a href="#cb5-24"></a>Residual standard error<span class="op">:</span><span class="st"> </span><span class="fl">0.7955</span> on <span class="dv">25</span> degrees of freedom</span>
-<span id="cb5-25"><a href="#cb5-25"></a>Multiple R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7768</span>,    Adjusted R<span class="op">-</span>squared<span class="op">:</span><span class="st">  </span><span class="fl">0.7411</span> </span>
-<span id="cb5-26"><a href="#cb5-26"></a>F<span class="op">-</span>statistic<span class="op">:</span><span class="st"> </span><span class="fl">21.75</span> on <span class="dv">4</span> and <span class="dv">25</span> DF,  p<span class="op">-</span>value<span class="op">:</span><span class="st"> </span><span class="fl">7.731e-08</span></span></code></pre></div>
-<p>Use one of the methods from the reference script (<em>leave-one-out cross-validation</em> or <em>bootstrapped predictive</em> R<sup>2</sup>) to do some model validation on this model. Alternatively, you can choose to use one of the alternative methods from the <code>caret</code> package or the <code>DAAG</code> package if you are feeling adventurous, but I will leave it to you to do the research on that one if you choose it. <em>Note</em>: you do not need to make any plots for the above, but it is strongly encouraged.</p>
-<p>Use the same method to do model validation on the best model in your model set from question 9.</p>
-<p><strong>Question 10.</strong> How do the model validation results for these two models compare? Is one clearly better than the other? If there were not a clear difference between these models, what is one tool we learned about this week that could be used to incorporate this uncertainty in our interpretation of the results?</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>?aictab</span></code></pre></div>
+<p><strong>Question 4.</strong> Is there a clear best model in this case? Defend your answer based on the general rules of thumb that we talked about in class, including <span class="math inline">\(\Delta\)</span>AICc and the ratio of w<sub>i</sub> for the two models (see <a href="https://danstich.github.io/worst-r/11-5-a-priori.html#tools-for-a-priori-model-selection">Chapter 11.5.3.3</a>). Wow, I have too many subsections.</p>
+<p>Now that we have a best model, clear winner or not, let’s go ahead and walk through how on Earth to plot the results of multiple regression using the <code>lnS1</code> model from above.</p>
+<p>At this stage, when faced with multiple linear regression you can either make predictions for a single X variable at a time while holding all others at their means by or using the fitted data and “confidence” intervals. The former is convoluted and ignores relationships between the X variables in our models (which we never checked!). More advanced methods allow us to consider those relationships, but require deeper understanding of the dreaded <code>model.matrix()</code> and [gasp] the even more dreaded variance-covariance matrix (which is so gross that most people are still ignoring it most of the time, sigh, it is actually super cool).</p>
+<p>To make predictions from the observed data, we can do this. Just remember, this time our predictions are going to be on the log scale, so we’ll have to exponentiate them to show our predictions of species!</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Get predictions from the model</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>log_preds &lt;-<span class="st"> </span><span class="kw">predict</span>(lnS1, <span class="dt">interval =</span> <span class="st">&#39;confidence&#39;</span>)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Exponentiate the predictions</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a><span class="co"># We use apply() to apply the </span></span>
+<span id="cb8-6"><a href="#cb8-6"></a><span class="co"># exp() function (FUN = exp)</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a><span class="co"># to each column (MARGIN = 2)</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X =</span>log_preds, <span class="dt">MARGIN =</span> <span class="dv">2</span>, <span class="dt">FUN =</span> exp)</span>
+<span id="cb8-9"><a href="#cb8-9"></a></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="co"># Combine predictions with the observed data</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a>gala_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(gala, real_preds)</span></code></pre></div>
+<p>Then, we can plot them one at a time or all together like this.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Make a pretty plot showing raw data and model predictions</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">ggplot</span>(gala_preds, <span class="kw">aes</span>(<span class="dt">x =</span> Area, <span class="dt">y =</span> Species)) <span class="op">+</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">colour =</span> <span class="st">&#39;plum3&#39;</span>, <span class="dt">fill =</span> <span class="st">&#39;plum3&#39;</span>, <span class="dt">alpha =</span> <span class="fl">0.75</span>, <span class="dt">size =</span> <span class="dv">4</span>) <span class="op">+</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="st">  </span><span class="kw">geom_line</span>( <span class="kw">aes</span>(<span class="dt">y =</span> fit), <span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">color=</span><span class="st">&#39;purple&#39;</span>, <span class="dt">alpha =</span> <span class="fl">.5</span>) <span class="op">+</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lwr, <span class="dt">ymax =</span> upr), </span>
+<span id="cb9-6"><a href="#cb9-6"></a>              <span class="dt">color =</span> <span class="st">&#39;purple4&#39;</span>, </span>
+<span id="cb9-7"><a href="#cb9-7"></a>              <span class="dt">fill =</span> <span class="st">&#39;lavender&#39;</span>, </span>
+<span id="cb9-8"><a href="#cb9-8"></a>              <span class="dt">alpha =</span> <span class="fl">.4</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>              <span class="dt">lty =</span> <span class="dv">2</span>,</span>
+<span id="cb9-10"><a href="#cb9-10"></a>              <span class="dt">lwd =</span> <span class="fl">.5</span>) <span class="op">+</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span><span class="st"> </span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>, <span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())</span></code></pre></div>
+<p><img src="hw07_files/figure-html/unnamed-chunk-13-1.png" width="672" /></p>
+<p>Wow, that looks like shit. And you know how I feel about shitty graphs. More importantly: why does it look like shit?</p>
+<p>When we make predictions from the raw data, we don’t get nice smooth lines. Instead, we get crap that looks like this. This “crap” comes from the fact that there are other factors influencing <code>Species</code> that we are not showing here - exactly the problem with visualizing multiple regression. This is why we usually just plot our response <code>Species</code> one X (explanatory) variable at a time, and then assign the mean value to all the other X variables.</p>
+<p>Thankfully, the <code>jtools</code> package will handle this for us really nicely.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="kw">effect_plot</span>(lnS1, <span class="dt">pred =</span> Area, <span class="dt">interval =</span> <span class="ot">TRUE</span>, <span class="dt">plot.points =</span> <span class="ot">TRUE</span>, <span class="dt">partial.residuals =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<p><img src="hw07_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>What? How <em>easy</em> was <em>that</em>? As always, we give up a little control when we move further away from the base R functions, but this one is totally worth it in my opinion! Plus, we can still make it pretty with a little work. One thing we’ll give up for now is the ability to bring these predictions back off the log scale for <code>Species</code>. For a publication-quality figure that is easily readable we may want to leave <code>effect_plot()</code> behind or reconsider the use of strictly linear regression. We’ll wait until next week for that!</p>
+<p>Finally…Go through and make one of these plots for each of the variables in your best model. Play around with it and check out the help file with <code>?effect_plot</code> to see if you can figure out how to modify colors and other aesthetics.</p>
+<p><strong>Question 5.</strong> Report the results for the best model <em>in sentence form</em> using the managerie of summaries and plots you have created here. This should include:</p>
+<p><strong>(1)</strong> The t-statistic, significance of each explanatory variable (X, right side of equation) from output of the <code>summary()</code> function for the best model,</p>
+<p><strong>(2)</strong> the direction of relationships between explanatory variables and the response (<code>Species</code>)</p>
+<p>Yay, no group means this week!</p>
 </div>
 </div>
 
