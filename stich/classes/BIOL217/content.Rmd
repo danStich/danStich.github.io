@@ -86,9 +86,7 @@ The lecture tutorials provided below are linked directly to the online version o
 [Chapter 12: Logistic regression](https://danstich.github.io/worst-r/12-Chapter12.html)<br>
 
 <h3 id = "multi"> Homework exercises</h3>
-<!-- <a href="./hw08.html"> Logistic regression </a> -->
-
-
+<a href="./hw08.html"> Logistic regression </a>
 
 
 <h2 id = "multi"> **GLM: Count models** </h2>

@@ -419,7 +419,7 @@ Introduction
 <h2>The data</h2>
 <p>For our exercise this week, we will work with a data set from a Biological Field Station intern project. The purpose of the project was to test the efficacy of Virkon as a molluscicide for dissinfecting equipment following exposure to zebra mussels <em>Dreissena polymorpha</em>. The study examined the effects of exposure time and concentration on mortality. The response in this data set is <code>dead</code>, a 1/0 variable indicating whether or not a zebra mussel was dead. Usually, with this kind of data, we use a <code>1</code> to indicate survival, but it seemed like too much fun to pass up the opportunity to model mortality as a success. So, for this data set a <code>1</code> indicates dead.</p>
 <p>Start by reading in the data.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vd =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;veligers.csv&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a>vd &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/veligers.csv&quot;</span>)</span></code></pre></div>
 <p>This data set contains a <em>pile</em> of variables, which of course makes it very fun to play with. We will work with some, but not all, of these variable this week for lab.</p>
 <p>Explanations of variables are as follows:</p>
 <p><code>Date</code>: calendar date for start of each lab test</p>
@@ -428,7 +428,7 @@ Introduction
 <p><code>Concentration</code>: concentration of Virkon in solution</p>
 <p><code>Time</code>: exposure time</p>
 <p>We will treat concentration as a categorical variable because we only have a few different concentrations, although the argument could be made either way.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>vd<span class="op">$</span>Concentration =<span class="st"> </span><span class="kw">as.factor</span>(vd<span class="op">$</span>Concentration)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a>vd<span class="op">$</span>Concentration &lt;-<span class="st"> </span><span class="kw">as.factor</span>(vd<span class="op">$</span>Concentration)</span></code></pre></div>
 <p>The remaining variables are physical and chemical parameters of water measured either in Otsego Lake, or in the Virkon solution. We will come back to these.</p>
 </div>
 <div id="exercises" class="section level2">
@@ -441,18 +441,18 @@ A worked example
 <h4>Analysis</h4>
 <p>To fit this model we will use the <code>glm</code> function in R, being sure to specify <code>family = 'binomial'</code> in our call:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Fit the model</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>  v.mod =<span class="st"> </span><span class="kw">glm</span>(dead<span class="op">~</span>Concentration<span class="op">+</span>Time, <span class="dt">family=</span><span class="st">&#39;binomial&#39;</span>, <span class="dt">data=</span>vd)</span></code></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a>v.mod &lt;-<span class="st"> </span><span class="kw">glm</span>(dead <span class="op">~</span><span class="st"> </span>Concentration <span class="op">+</span><span class="st"> </span>Time, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, <span class="dt">data =</span> vd)</span></code></pre></div>
 <p>Cool, that was easy!</p>
 </div>
 <div id="results" class="section level4">
 <h4>Results</h4>
 <p>Let’s have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the <code>Anova()</code> function in the <code>car</code> package to use the correct calculations because we have continuous and categorical variables. The only difference is that we are now using an analysis of deviance to summarize significance, which requires the use of a Type-II test instead of a Type-III test.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Load the car library so we can get a </span></span>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Load the car library so we can get a</span></span>
 <span id="cb4-2"><a href="#cb4-2"></a><span class="co"># meaningful ANOVA table for our model</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  <span class="kw">library</span>(car)</span>
+<span id="cb4-3"><a href="#cb4-3"></a><span class="kw">library</span>(car)</span>
 <span id="cb4-4"><a href="#cb4-4"></a></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Print the summary of the model</span></span>
-<span id="cb4-6"><a href="#cb4-6"></a>  <span class="kw">Anova</span>(v.mod, <span class="dt">Type=</span><span class="st">&#39;II&#39;</span>)</span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="kw">Anova</span>(v.mod, <span class="dt">Type =</span> <span class="st">&quot;II&quot;</span>)</span>
 <span id="cb4-7"><a href="#cb4-7"></a>Analysis of Deviance <span class="kw">Table</span> (Type II tests)</span>
 <span id="cb4-8"><a href="#cb4-8"></a></span>
 <span id="cb4-9"><a href="#cb4-9"></a>Response<span class="op">:</span><span class="st"> </span>dead</span>
@@ -464,7 +464,7 @@ A worked example
 <p><strong>Question 1.</strong> At the default confidence level (<span class="math inline">\(\alpha\)</span> = 0.05), what can you determine about effects of <code>Concentration</code> and <code>Time</code> with respect to statistical significance? Answer in sentence form, stating the null hypotheses and supporting statistics.</p>
 <p>Just as with all of our other models, we can use the <code>summary()</code> function to get the output from R.</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Print the summary of the model</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">summary</span>(v.mod)</span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="kw">summary</span>(v.mod)</span>
 <span id="cb5-3"><a href="#cb5-3"></a></span>
 <span id="cb5-4"><a href="#cb5-4"></a>Call<span class="op">:</span></span>
 <span id="cb5-5"><a href="#cb5-5"></a><span class="kw">glm</span>(<span class="dt">formula =</span> dead <span class="op">~</span><span class="st"> </span>Concentration <span class="op">+</span><span class="st"> </span>Time, <span class="dt">family =</span> <span class="st">&quot;binomial&quot;</span>, </span>
@@ -506,108 +506,48 @@ A worked example
 <p><strong>Question 4.</strong> How much of the variation in zebra mussel mortality is explained by the additive effects of <code>Concentration</code> and <code>Time</code>?</p>
 <p>Now that we have a feel for just how much variability this model explains, the next step in reporting our results here is to extract some information about how <code>dead</code> changes with <code>Time</code> beyond simply stating that it was either “inversely” or “proportionally” related to <code>Time</code>. We will include <code>Concentration</code> in our predictions to account for changes between doses.</p>
 <p>Recall that we can make predictions from our model either by hand or by using the <code>predict</code> function in R. <strong>Note</strong> that if we use the <code>predict</code> function for <code>glm</code> objects in R, we no longer have the ability to set the <code>interval</code> argument as we did for objects resulting from the <code>lm()</code> function (well, we can- it will just be ignored). But, we can get standard error estimates if we make predictions on the link scale. Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).</p>
-<p>Start by making some new data that we can use for predictions. Recall from <a href="06_diagnosticsAndEffects.html">lecture module 6</a> that this gets a little more complicated when we have multiple explanatory variables. The <code>predict</code> function requires a <code>data.frame</code> with <code>names</code> that match the <code>names</code> of explanatory variables from our original data set, <code>vd</code>.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Start with Time by making a sequence from the minimum</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># observed Time to the maximum observed Time in equal</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># increments of 1 hour</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>  Time =<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="kw">min</span>(vd<span class="op">$</span>Time), <span class="dt">to=</span><span class="kw">max</span>(vd<span class="op">$</span>Time), <span class="dt">by=</span><span class="dv">1</span>)</span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># Now, make a column for each Concentration that is the same length</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  Concentration =<span class="st"> </span><span class="kw">rep</span>(<span class="kw">unique</span>(vd<span class="op">$</span>Concentration), <span class="kw">length</span>(Time))</span>
-<span id="cb6-8"><a href="#cb6-8"></a>  </span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># Now, duplicate the Time column so it is repeated </span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># for all Concentrationes</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  Time =<span class="st"> </span><span class="kw">rep</span>(Time, <span class="kw">length</span>(<span class="kw">unique</span>(Concentration)))</span>
-<span id="cb6-12"><a href="#cb6-12"></a>  </span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># Put it all together in a dataframe</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a>  newD =<span class="st"> </span><span class="kw">data.frame</span>(Concentration, Time)</span>
-<span id="cb6-15"><a href="#cb6-15"></a>  newD =<span class="st"> </span>newD[<span class="kw">with</span>(newD, <span class="kw">order</span>(Concentration, Time)), ]</span></code></pre></div>
-<p>Now that we have new data for making predictions, let’s go ahead and do it!</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Calculate mean predicted value and SE for the predictions</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># on the link scale</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>  preds =<span class="st"> </span><span class="kw">data.frame</span>(</span>
-<span id="cb7-4"><a href="#cb7-4"></a>    <span class="kw">predict</span>(v.mod, newD, <span class="dt">type=</span><span class="st">&#39;link&#39;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>]</span>
-<span id="cb7-5"><a href="#cb7-5"></a>  )</span>
-<span id="cb7-6"><a href="#cb7-6"></a></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="co"># Now get lower and upper CIs</span></span>
-<span id="cb7-8"><a href="#cb7-8"></a>  preds<span class="op">$</span>lwr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.025</span>)</span>
-<span id="cb7-9"><a href="#cb7-9"></a>  preds<span class="op">$</span>upr =<span class="st"> </span>preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>preds<span class="op">$</span>se.fit<span class="op">*</span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</span></code></pre></div>
+<p>Start by making some predictions. Recall from that this gets a little more complicated when we have multiple explanatory variables. The <code>predict</code> function requires a <code>data.frame</code> with <code>names</code> that match the <code>names</code> of explanatory variables from our original data set, <code>vd</code>.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Calculate mean predicted value and SE for the predictions</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># on the link scale</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a>logit_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>( <span class="kw">predict</span>(v.mod, <span class="dt">type =</span> <span class="st">&quot;link&quot;</span>, <span class="dt">se.fit =</span> <span class="ot">TRUE</span>) )</span>
+<span id="cb6-4"><a href="#cb6-4"></a></span>
+<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># Now get lower and upper CIs</span></span>
+<span id="cb6-6"><a href="#cb6-6"></a>logit_preds<span class="op">$</span>lwr &lt;-<span class="st"> </span>logit_preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>logit_preds<span class="op">$</span>se.fit <span class="op">*</span><span class="st"> </span><span class="kw">qnorm</span>(<span class="fl">0.025</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>logit_preds<span class="op">$</span>upr &lt;-<span class="st"> </span>logit_preds<span class="op">$</span>fit <span class="op">+</span><span class="st"> </span>logit_preds<span class="op">$</span>se.fit <span class="op">*</span><span class="st"> </span><span class="kw">qnorm</span>(<span class="fl">0.975</span>)</span></code></pre></div>
 <p>Now, we need to define a function to invert the logit link function if we want to get our predictions back on the probability scale (and we do).</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>inv.logit =<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="kw">exp</span>(x)<span class="op">/</span>(<span class="dv">1</span><span class="op">+</span><span class="kw">exp</span>(x))</span>
-<span id="cb8-3"><a href="#cb8-3"></a>}</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>invlogit &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">exp</span>(x) <span class="op">/</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="kw">exp</span>(x))</span>
+<span id="cb7-3"><a href="#cb7-3"></a>}</span></code></pre></div>
 <p>Now we can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our <code>preds</code> dataframe using the <code>apply</code> function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Convert the predictions to the probability scale</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] =<span class="st"> </span><span class="kw">apply</span>(<span class="dt">X=</span>preds[ , <span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)],</span>
-<span id="cb9-3"><a href="#cb9-3"></a>                             <span class="dt">MARGIN=</span><span class="dv">2</span>,</span>
-<span id="cb9-4"><a href="#cb9-4"></a>                             <span class="dt">FUN=</span>inv.logit</span>
-<span id="cb9-5"><a href="#cb9-5"></a>                             )</span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Add our new data to the dataframe</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a>  preds =<span class="st"> </span><span class="kw">data.frame</span>(preds, newD)</span></code></pre></div>
-<p>Finally, let’s plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice. We could go through and plot these one at a time (see lecture content), but here I will demonstrate how one might do this using a loop, followed by a number of conditionals for axis labeling. All in the name of gross overkill (oh, wait, I mean responsive programming and data visualization!).</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Plot the predictions</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="co"># Set graphical parameters</span></span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="kw">par</span>(<span class="dt">mfrow=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">2</span>), <span class="dt">oma=</span><span class="kw">c</span>(<span class="dv">3</span>,<span class="dv">4</span>,<span class="dv">0</span>,<span class="dv">0</span>), <span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">1</span>,.<span class="dv">5</span>,.<span class="dv">5</span>))</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="co"># Loop over the different doses to plot probability</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="co"># of mortality by exposure time</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">length</span>(<span class="kw">unique</span>(preds<span class="op">$</span>Concentration))){</span>
-<span id="cb10-8"><a href="#cb10-8"></a>  <span class="co"># Plot the mean</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a>    <span class="kw">plot</span>(<span class="dt">y=</span>preds<span class="op">$</span>fit[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</span>
-<span id="cb10-10"><a href="#cb10-10"></a>         <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</span>
-<span id="cb10-11"><a href="#cb10-11"></a>         <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&#39;black&#39;</span>),</span>
-<span id="cb10-12"><a href="#cb10-12"></a>         <span class="dt">type=</span><span class="st">&#39;l&#39;</span>,</span>
-<span id="cb10-13"><a href="#cb10-13"></a>         <span class="dt">lty=</span><span class="dv">1</span>, <span class="dt">lwd=</span><span class="dv">1</span>,</span>
-<span id="cb10-14"><a href="#cb10-14"></a>         <span class="dt">ylim=</span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>),</span>
-<span id="cb10-15"><a href="#cb10-15"></a>         <span class="dt">ylab =</span> <span class="st">&#39;&#39;</span>,</span>
-<span id="cb10-16"><a href="#cb10-16"></a>         <span class="dt">xlab =</span> <span class="st">&#39;&#39;</span>,</span>
-<span id="cb10-17"><a href="#cb10-17"></a>         <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span></span>
-<span id="cb10-18"><a href="#cb10-18"></a>         )</span>
-<span id="cb10-19"><a href="#cb10-19"></a>  <span class="co"># Lower 95% CI</span></span>
-<span id="cb10-20"><a href="#cb10-20"></a>    <span class="kw">lines</span>(preds<span class="op">$</span>lwr[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]], </span>
-<span id="cb10-21"><a href="#cb10-21"></a>          <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</span>
-<span id="cb10-22"><a href="#cb10-22"></a>          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</span>
-<span id="cb10-23"><a href="#cb10-23"></a>  <span class="co"># Upper 95% CI</span></span>
-<span id="cb10-24"><a href="#cb10-24"></a>    <span class="kw">lines</span>(preds<span class="op">$</span>upr[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]], </span>
-<span id="cb10-25"><a href="#cb10-25"></a>          <span class="dt">x=</span>preds<span class="op">$</span>Time[preds<span class="op">$</span>Concentration<span class="op">==</span><span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]],</span>
-<span id="cb10-26"><a href="#cb10-26"></a>          <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">lty=</span><span class="dv">2</span>)</span>
-<span id="cb10-27"><a href="#cb10-27"></a>    </span>
-<span id="cb10-28"><a href="#cb10-28"></a>  <span class="co"># Add the name of the metric to the plots  </span></span>
-<span id="cb10-29"><a href="#cb10-29"></a>    <span class="kw">text</span>(<span class="dt">x =</span> <span class="dv">60</span>, <span class="dt">y =</span> <span class="fl">0.25</span>,</span>
-<span id="cb10-30"><a href="#cb10-30"></a>         <span class="dt">labels =</span> <span class="kw">paste</span>(<span class="st">&quot;Concentration =&quot;</span>, <span class="kw">unique</span>(preds<span class="op">$</span>Concentration)[i]),</span>
-<span id="cb10-31"><a href="#cb10-31"></a>         <span class="dt">adj =</span> <span class="dv">1</span>)</span>
-<span id="cb10-32"><a href="#cb10-32"></a>    </span>
-<span id="cb10-33"><a href="#cb10-33"></a>    <span class="co"># Add x(side=1) and y (side=2) tick marks to all plots </span></span>
-<span id="cb10-34"><a href="#cb10-34"></a>    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">labels =</span> <span class="ot">FALSE</span>, <span class="dt">tick =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb10-35"><a href="#cb10-35"></a>    <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),</span>
-<span id="cb10-36"><a href="#cb10-36"></a>         <span class="dt">labels =</span> <span class="ot">FALSE</span>, <span class="dt">tick =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb10-37"><a href="#cb10-37"></a>    </span>
-<span id="cb10-38"><a href="#cb10-38"></a>  <span class="co"># Add x-axis tick labels only if plot 11 or 12</span></span>
-<span id="cb10-39"><a href="#cb10-39"></a>    <span class="cf">if</span>((i<span class="op">==</span><span class="dv">5</span>) <span class="op">||</span><span class="st"> </span>(i<span class="op">==</span><span class="dv">6</span>)){</span>
-<span id="cb10-40"><a href="#cb10-40"></a>      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="kw">max</span>(preds<span class="op">$</span>Time)), <span class="dv">10</span>),</span>
-<span id="cb10-41"><a href="#cb10-41"></a>           <span class="dt">labels =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="kw">round</span>(<span class="kw">max</span>(preds<span class="op">$</span>Time)), <span class="dv">10</span>))  </span>
-<span id="cb10-42"><a href="#cb10-42"></a>    }     </span>
-<span id="cb10-43"><a href="#cb10-43"></a>    </span>
-<span id="cb10-44"><a href="#cb10-44"></a>  <span class="co"># Add y-axis tick labels only if plot number is even  </span></span>
-<span id="cb10-45"><a href="#cb10-45"></a>    <span class="cf">if</span>((i <span class="op">%%</span><span class="st"> </span><span class="dv">2</span>) <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>) {</span>
-<span id="cb10-46"><a href="#cb10-46"></a>      <span class="kw">axis</span>(<span class="dt">side =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),</span>
-<span id="cb10-47"><a href="#cb10-47"></a>           <span class="dt">labels =</span> <span class="kw">format</span>(<span class="kw">seq</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.25</span>),<span class="dt">digits =</span> <span class="dv">2</span>), <span class="dt">las=</span><span class="dv">2</span>)  </span>
-<span id="cb10-48"><a href="#cb10-48"></a>    }    </span>
-<span id="cb10-49"><a href="#cb10-49"></a>    </span>
-<span id="cb10-50"><a href="#cb10-50"></a>}</span>
-<span id="cb10-51"><a href="#cb10-51"></a></span>
-<span id="cb10-52"><a href="#cb10-52"></a><span class="co"># Add x and y-axis labels to the plot    </span></span>
-<span id="cb10-53"><a href="#cb10-53"></a><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&quot;Probability of mortality&quot;</span>,</span>
-<span id="cb10-54"><a href="#cb10-54"></a>      <span class="dt">side=</span><span class="dv">2</span>, <span class="dt">line=</span><span class="fl">2.75</span>, <span class="dt">cex=</span><span class="dv">1</span>,</span>
-<span id="cb10-55"><a href="#cb10-55"></a>      <span class="dt">adj=</span>.<span class="dv">5</span>, <span class="dt">outer=</span><span class="ot">TRUE</span></span>
-<span id="cb10-56"><a href="#cb10-56"></a>      )</span>
-<span id="cb10-57"><a href="#cb10-57"></a><span class="kw">mtext</span>(<span class="dt">text=</span><span class="st">&quot;Time (h)&quot;</span>,</span>
-<span id="cb10-58"><a href="#cb10-58"></a>      <span class="dt">side=</span><span class="dv">1</span>, <span class="dt">line=</span><span class="dv">2</span>, <span class="dt">cex=</span><span class="dv">1</span>,</span>
-<span id="cb10-59"><a href="#cb10-59"></a>      <span class="dt">adj=</span>.<span class="dv">5</span>, <span class="dt">outer=</span><span class="ot">TRUE</span>)</span></code></pre></div>
-<p><img src="hw08_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Convert the predictions to the probability scale</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(logit_preds, <span class="dv">2</span>, invlogit)</span>
+<span id="cb8-3"><a href="#cb8-3"></a></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="co"># Add our predictions back to the original data</span></span>
+<span id="cb8-5"><a href="#cb8-5"></a>vd_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(vd, real_preds)</span></code></pre></div>
+<p>Finally, let’s plot our predictions. Note that here we will plot our raw data as the proportion of zebra mussels dead at a given time and concentration by trial (date).</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb9-2"><a href="#cb9-2"></a></span>
+<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Summarize proportion dead at time by concentration</span></span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Use dates so we can show reps</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a>sum_points &lt;-<span class="st"> </span>vd_preds <span class="op">%&gt;%</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="st">  </span><span class="kw">group_by</span>(Concentration, Time, Date) <span class="op">%&gt;%</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">props =</span> <span class="kw">sum</span>(dead)<span class="op">/</span><span class="kw">length</span>(dead))</span>
+<span id="cb9-8"><a href="#cb9-8"></a></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># Plot the predictions</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="kw">ggplot</span>(vd_preds, <span class="kw">aes</span>(<span class="dt">x =</span> Time, <span class="dt">y =</span> fit)) <span class="op">+</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(</span>
+<span id="cb9-12"><a href="#cb9-12"></a>    <span class="kw">aes</span>(<span class="dt">ymin =</span> lwr, <span class="dt">ymax =</span> upr, <span class="dt">fill =</span> Concentration), <span class="dt">alpha =</span> <span class="fl">0.25</span>) <span class="op">+</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">color =</span> Concentration)) <span class="op">+</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a><span class="st">  </span><span class="kw">geom_jitter</span>(</span>
+<span id="cb9-15"><a href="#cb9-15"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> Time, <span class="dt">y =</span> props, <span class="dt">color =</span> Concentration), <span class="dt">data =</span> sum_points,</span>
+<span id="cb9-16"><a href="#cb9-16"></a>    <span class="dt">width =</span> <span class="dv">1</span>) <span class="op">+</span></span>
+<span id="cb9-17"><a href="#cb9-17"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Hours&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Probability of mortality&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="st">  </span><span class="kw">theme_bw</span>() <span class="op">+</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">panel.grid =</span> <span class="kw">element_blank</span>())</span></code></pre></div>
+<p><img src="hw08_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p>Using either the graph or the estimates in the <code>fit</code> column of <code>preds</code>, we can estimate about how much <code>dead</code> changes across the range of <code>Time</code> observed. We can report this by <code>Time</code> to convey more information.</p>
-<p><strong>Question 5.</strong> Use the graph you have created, along with the model results to describe how zebra mussel mortality changed with <code>Concentration</code> and <code>Time</code>.</p>
-<p>If you have been paying close attention this semester, you may be wondering why we don’t fit an interaction that would allow the effect of exposure time to vary across <code>Concentration</code>, and indeed that is a fair question. Unfortunately, the degree of mortality that results after short exposure to the higher concentrations is so high that variance estimation in the model becomes unstable and we predict confidence intervals from zero to one (despite increasing the R<sup>2</sup> to 0.94 and producing much more intuitive curves).</p>
+<p><strong>Question 5.</strong> Use the graph you have created, along with the model results to describe how zebra mussel mortality changed with <code>Concentration</code> and <code>Time</code>. Be sure to report the relevant test statistics along with your answer.</p>
 </div>
 </div>
 </div>

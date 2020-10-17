@@ -15,11 +15,11 @@ For our exercise this week, we will work with a data set from a Biological Field
 Start by reading in the data.
 
 ```{r, eval=FALSE, echo=TRUE, class.source="rCode"}
-vd = read.csv('veligers.csv')
+vd <- read.csv("data/veligers.csv")
 ```
 
 ```{r, eval=TRUE, echo=FALSE}
-vd = read.csv('../../data/veligers.csv')
+vd <- read.csv("../../data/veligers.csv")
 ```
 
 This data set contains a *pile* of variables, which of course makes it very fun to play with. We will work with some, but not all, of these variable this week for lab. 
@@ -38,7 +38,7 @@ Explanations of variables are as follows:
 
 We will treat concentration as a categorical variable because we only have a few different concentrations, although the argument could be made either way.
 ```{r}
-vd$Concentration = as.factor(vd$Concentration)
+vd$Concentration <- as.factor(vd$Concentration)
 ```
 
 The remaining variables are physical and chemical parameters of water measured either in Otsego Lake, or in the Virkon solution. We will come back to these.
@@ -52,7 +52,7 @@ Let's start with a simple example to get you moving along. First, we are interes
 To fit this model we will use the `glm` function in R, being sure to specify `family = 'binomial'` in our call:
 ```{r}
 # Fit the model
-  v.mod = glm(dead~Concentration+Time, family='binomial', data=vd)
+v.mod <- glm(dead ~ Concentration + Time, family = "binomial", data = vd)
 ```
 
 Cool, that was easy! 
@@ -61,12 +61,12 @@ Cool, that was easy!
 #### Results
 Let's have a look at what the model tells us about our biological questions of interest now. Remember, we need to work with the `Anova()` function in the `car` package to use the correct calculations because we have continuous and categorical variables. The only difference is that we are now using an analysis of deviance to summarize significance, which requires the use of a Type-II test instead of a Type-III test.
 ```{r, message=FALSE, warning=FALSE}
-# Load the car library so we can get a 
+# Load the car library so we can get a
 # meaningful ANOVA table for our model
-  library(car)
+library(car)
 
 # Print the summary of the model
-  Anova(v.mod, Type='II')
+Anova(v.mod, Type = "II")
 ```
 
 **Question 1.** At the default confidence level ($\alpha$ = 0.05), what can you determine about effects of `Concentration` and `Time` with respect to statistical significance? Answer in sentence form, stating the null hypotheses and supporting statistics.
@@ -74,7 +74,7 @@ Let's have a look at what the model tells us about our biological questions of i
 Just as with all of our other models, we can use the `summary()` function to get the output from R.
 ```{r}
 # Print the summary of the model
-  summary(v.mod)
+summary(v.mod)
 ```
 
 
@@ -104,121 +104,61 @@ Now that we have a feel for just how much variability this model explains, the n
  
 Recall that we can make predictions from our model either by hand or by using the `predict` function in R. **Note** that if we use the `predict` function for `glm` objects in R, we no longer have the ability to set the `interval` argument as we did for objects resulting from the `lm()` function (well, we can- it will just be ignored). But, we can get standard error estimates if we make predictions on the link scale. Therefore, if we want confidence intervals on our predictions, we will need to do it by hand (well, in the computer).
  
-Start by making some new data that we can use for predictions. Recall from <a href="06_diagnosticsAndEffects.html">lecture module 6</a> that this gets a little more complicated when we have multiple explanatory variables. The `predict` function requires a `data.frame` with `names` that match the `names` of explanatory variables from our original data set, `vd`.
-```{r}
-# Start with Time by making a sequence from the minimum
-# observed Time to the maximum observed Time in equal
-# increments of 1 hour
-  Time = seq(from=min(vd$Time), to=max(vd$Time), by=1)
-
-# Now, make a column for each Concentration that is the same length
-  Concentration = rep(unique(vd$Concentration), length(Time))
-  
-# Now, duplicate the Time column so it is repeated 
-# for all Concentrationes
-  Time = rep(Time, length(unique(Concentration)))
-  
-# Put it all together in a dataframe
-  newD = data.frame(Concentration, Time)
-  newD = newD[with(newD, order(Concentration, Time)), ]
-```
-
-Now that we have new data for making predictions, let's go ahead and do it!
+Start by making some predictions. Recall from that this gets a little more complicated when we have multiple explanatory variables. The `predict` function requires a `data.frame` with `names` that match the `names` of explanatory variables from our original data set, `vd`.
 ```{r}
 # Calculate mean predicted value and SE for the predictions
 # on the link scale
-  preds = data.frame(
-    predict(v.mod, newD, type='link', se.fit = TRUE)[1:2]
-  )
+logit_preds <- data.frame( predict(v.mod, type = "link", se.fit = TRUE) )
 
 # Now get lower and upper CIs
-  preds$lwr = preds$fit + preds$se.fit*qnorm(0.025)
-  preds$upr = preds$fit + preds$se.fit*qnorm(0.975)
+logit_preds$lwr <- logit_preds$fit + logit_preds$se.fit * qnorm(0.025)
+logit_preds$upr <- logit_preds$fit + logit_preds$se.fit * qnorm(0.975)
 ```
 
 Now, we need to define a function to invert the logit link function if we want to get our predictions back on the probability scale (and we do).
 ```{r}
-inv.logit = function(x){
-  exp(x)/(1+exp(x))
+invlogit <- function(x) {
+  exp(x) / (1 + exp(x))
 }
 ```
 
 Now we can convert our predictions to the probability scale. Here, we loop over columns 1, 3, and 4 of our `preds` dataframe using the `apply` function because the second column is just the standard errors for our predicted fit at each point. This gives us mean and 95% CI on the probability scale.
 ```{r}  
 # Convert the predictions to the probability scale
-  preds[ , c(1,3,4)] = apply(X=preds[ , c(1,3,4)],
-                             MARGIN=2,
-                             FUN=inv.logit
-                             )
-# Add our new data to the dataframe
-  preds = data.frame(preds, newD)
+real_preds <- apply(logit_preds, 2, invlogit)
+
+# Add our predictions back to the original data
+vd_preds <- data.frame(vd, real_preds)
 ```
 
-Finally, let's plot our predictions. Note that we do not plot our raw data here because it is a huge number of ones and zeros that do not lend themselves to visual interpretation (I tried), but this is generally good practice. We could go through and plot these one at a time (see lecture content), but here I will demonstrate how one might do this using a loop, followed by a number of conditionals for axis labeling. All in the name of gross overkill (oh, wait, I mean responsive programming and data visualization!).
-```{r}
+Finally, let's plot our predictions. Note that here we will plot our raw data as the proportion of zebra mussels dead at a given time and concentration by trial (date).
+
+```{r, message=FALSE, warning=FALSE}
+library(tidyverse)
+
+# Summarize proportion dead at time by concentration
+# Use dates so we can show reps
+sum_points <- vd_preds %>%
+  group_by(Concentration, Time, Date) %>%
+  summarize(props = sum(dead)/length(dead))
+
 # Plot the predictions
-# Set graphical parameters
-  par(mfrow=c(3,2), oma=c(3,4,0,0), mar=c(1,1,.5,.5))
+ggplot(vd_preds, aes(x = Time, y = fit)) +
+  geom_ribbon(
+    aes(ymin = lwr, ymax = upr, fill = Concentration), alpha = 0.25) +
+  geom_line(aes(color = Concentration)) +
+  geom_jitter(
+    aes(x = Time, y = props, color = Concentration), data = sum_points,
+    width = 1) +
+  xlab("Hours") +
+  ylab("Probability of mortality") +
+  theme_bw() +
+  theme(panel.grid = element_blank())
 
-# Loop over the different doses to plot probability
-# of mortality by exposure time
-for(i in 1:length(unique(preds$Concentration))){
-  # Plot the mean
-    plot(y=preds$fit[preds$Concentration==unique(preds$Concentration)[i]],
-         x=preds$Time[preds$Concentration==unique(preds$Concentration)[i]],
-         col=c('black'),
-         type='l',
-         lty=1, lwd=1,
-         ylim=c(0, 1),
-         ylab = '',
-         xlab = '',
-         yaxt='n', xaxt='n'
-         )
-  # Lower 95% CI
-    lines(preds$lwr[preds$Concentration==unique(preds$Concentration)[i]], 
-          x=preds$Time[preds$Concentration==unique(preds$Concentration)[i]],
-          col='red', lty=2)
-  # Upper 95% CI
-    lines(preds$upr[preds$Concentration==unique(preds$Concentration)[i]], 
-          x=preds$Time[preds$Concentration==unique(preds$Concentration)[i]],
-          col='red', lty=2)
-    
-  # Add the name of the metric to the plots  
-    text(x = 60, y = 0.25,
-         labels = paste("Concentration =", unique(preds$Concentration)[i]),
-         adj = 1)
-    
-	# Add x(side=1) and y (side=2) tick marks to all plots 
-    axis(side = 1, labels = FALSE, tick = TRUE)
-    axis(side = 2, at = seq(0, 1, 0.25),
-         labels = FALSE, tick = TRUE)
-    
-  # Add x-axis tick labels only if plot 11 or 12
-    if((i==5) || (i==6)){
-      axis(side = 1, at = seq(0, round(max(preds$Time)), 10),
-           labels = seq(0, round(max(preds$Time)), 10))  
-    }     
-    
-  # Add y-axis tick labels only if plot number is even  
-    if((i %% 2) != 0) {
-      axis(side = 2, at = seq(0, 1, 0.25),
-           labels = format(seq(0, 1, 0.25),digits = 2), las=2)  
-    }    
-    
-}
-
-# Add x and y-axis labels to the plot    
-mtext(text="Probability of mortality",
-      side=2, line=2.75, cex=1,
-      adj=.5, outer=TRUE
-      )
-mtext(text="Time (h)",
-      side=1, line=2, cex=1,
-      adj=.5, outer=TRUE)
 ```
 
 Using either the graph or the estimates in the `fit` column of `preds`, we can estimate about how much `dead` changes across the range of `Time` observed. We can report this by `Time` to convey more information. 
 
-**Question 5.** Use the graph you have created, along with the model results to describe how zebra mussel mortality changed with `Concentration` and `Time`.
+**Question 5.** Use the graph you have created, along with the model results to describe how zebra mussel mortality changed with `Concentration` and `Time`. Be sure to report the relevant test statistics along with your answer.
 
-If you have been paying close attention this semester, you may be wondering why we don't fit an interaction that would allow the effect of exposure time to vary across `Concentration`, and indeed that is a fair question. Unfortunately, the degree of mortality that results after short exposure to the higher concentrations is so high that variance estimation in the model becomes unstable and we predict confidence intervals from zero to one (despite increasing the R^2^ to 0.94 and producing much more intuitive curves).
+
