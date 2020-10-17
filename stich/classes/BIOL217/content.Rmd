@@ -82,7 +82,11 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **GLM: Logistic regression** </h2>
 ----
-<!-- <a href="./08_glm_logisticRegression.html"> Lecture tutorial </a><br> <a href="./hw08.html"> Homework assignment </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+[Chapter 12: Logistic regression](https://danstich.github.io/worst-r/12-Chapter12.html)<br>
+
+<h3 id = "multi"> Homework exercises</h3>
+<!-- <a href="./hw08.html"> Logistic regression </a> -->
 
 
 
