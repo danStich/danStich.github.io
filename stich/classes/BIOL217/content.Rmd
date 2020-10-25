@@ -91,10 +91,11 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **GLM: Count models** </h2>
 ----
-<!-- <a href="./09_glm_countModels.html"> Lecture tutorial </a><br>  -->
-<!-- <a href="./hw09.html"> Homework assignment </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+[Chapter 13: Count models](https://danstich.github.io/worst-r/13-Chapter13.html)<br>
 
-
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw09.html"> Count models </a>
 
 
 <h2 id = "multi"> **Generalized linear mixed models** </h2>
@@ -103,14 +104,10 @@ The lecture tutorials provided below are linked directly to the online version o
 <!-- <a href="./hw10.html"> Homework assignment </a>  -->
 
 
-
-
 <h2 id = "multi"> **Multivariate statistics** </h2>
 ----
 <!-- <a href="./11_multivariate.html"> Lecture tutorial </a><br>  -->
 <!-- <a href="./hw11.html"> Homework assignment </a>  -->
-
-
 
 
 <h2 id = "multi"> **Classification and regression trees (CART)** </h2>
