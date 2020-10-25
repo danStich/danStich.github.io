@@ -417,14 +417,18 @@ Introduction
 </h2>
 <p>This week we continued to work with the generalized linear model (GLM) and discussed why we might want to use it and how to interpret the results of these tools. The purpose of this lab is to get you comfortable with regression for count data, and help you get comfortable with some of the diagnostics we will use with these tools, while continuing to work with interpreting results with respect to the link functions we are working with. Next week, we will talk about how we can deal with things like repeated measures on the same categories and nested designs.</p>
 <p>By the end of this lab, you should 1) be comfortable specifying general linear models for count data in R, 2) be able to apply this tool to analyze count data from start to finish, and 3) be able to diagnose and interpret the results of these models.</p>
+<p>We’ll be working with functions from the <code>tidyverse</code> as usual and the <code>MASS</code> package for the <code>negative.binomial</code> family, so go ahead and load those up when you are ready to start!</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse) <span class="co"># For everything we love</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(MASS) <span class="co"># For negative.binomial family</span></span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(car) <span class="co"># For Anova()</span></span></code></pre></div>
 <div id="exercises" class="section level2">
 <h2>Exercises</h2>
 <p>Let’s start by reading the file and taking a look at the structure of the data set that we’ll be working with this week.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  uw =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;weights.csv&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a></span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Look at the data</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">head</span>(uw)</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>uw &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/weights.csv&quot;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a></span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Look at the data</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="kw">head</span>(uw)</span></code></pre></div>
 <pre><code>  year region  country    sex number
 1 1986 Africa  Senegal Female   15.3
 2 1987 Africa     Mali Female   27.0
@@ -433,168 +437,125 @@ Introduction
 5 1988 Africa Zimbabwe Female    7.2
 6 1988 Africa   Uganda Female   19.1</code></pre>
 <p>These are data that I downloaded from the World Health Organization’s website free of charge. The data set contains 1099 observations of 5 variables. The variables are <code>year</code>, <code>region</code>, <code>country</code>, <code>sex</code>, and <code>number</code> of individuals per 100 that were underweight. These data are estimates, so they are presented as numeric values. We know that they actually represent counts per some unit (i.e. a <em>rate</em>) so we want to convert them to integer class before we start working with them.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Now we need to make the counts into an integer because these are</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># counts and counts are</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  uw<span class="op">$</span>number =<span class="st"> </span><span class="kw">as.integer</span>(uw<span class="op">$</span>number)</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Now we need to make the counts into an integer because these are</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># counts and counts are</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a>uw<span class="op">$</span>number &lt;-<span class="st"> </span><span class="kw">as.integer</span>(uw<span class="op">$</span>number)</span></code></pre></div>
 <div id="poisson-regression" class="section level3">
 <h3>Poisson regression</h3>
 <p>Start by looking at a single region, we will use <code>Africa</code> in this case.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Make a new dataframe that contains only those records for which</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># the region is `Africa`</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a>  africa =<span class="st"> </span>uw[uw<span class="op">$</span>region<span class="op">==</span><span class="st">&#39;Africa&#39;</span>,]</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Make a new dataframe that contains only those records for which</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># the region is `Africa`</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a>africa &lt;-</span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span>uw <span class="op">%&gt;%</span></span>
+<span id="cb5-5"><a href="#cb5-5"></a><span class="st">  </span><span class="kw">filter</span>(region <span class="op">==</span><span class="st"> &quot;Africa&quot;</span>)</span></code></pre></div>
 <p>Let’s do some data exploration to look at the our sampling distribution of <code>number</code>. Here, a quick histogram of your data should show you what you are looking for.</p>
-<p>Do these data appear to conform to a Poisson distribution? Why or why not?</p>
+<p>For thought: Do these data appear to conform to a Poisson distribution?</p>
 <p>Now, let’s fit a model using <code>number</code> as the response and take a quick look at some regression diagnostics for the model. We will include the variable <code>sex</code> to see if there are differences between males and females. We will also include the variable <code>year</code> as a numeric variable to determine whether or not there is a linear increase or decrease in the <code>number</code> throughout the time series.</p>
-<p>Before you look at the summary of the model, be sure to have a look at the regression diagnostics for the count model.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># To begin with, look at the regression diagnostics</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">library</span>(boot)</span>
-<span id="cb5-3"><a href="#cb5-3"></a>  <span class="kw">glm.diag.plots</span>(model)</span></code></pre></div>
-<p><img src="hw09_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
-<p>Have a look. Does it appear that you have violated the assumptions underlying the model that you have fit? Think about why or why not.</p>
-<p>Now that you have looked at the regression diagnostics, take a look at the model summary</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Print the summary of the model</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">summary</span>(model)</span>
-<span id="cb6-3"><a href="#cb6-3"></a></span>
-<span id="cb6-4"><a href="#cb6-4"></a>Call<span class="op">:</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="kw">glm</span>(<span class="dt">formula =</span> number <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>sex, <span class="dt">family =</span> <span class="kw">negative.binomial</span>(<span class="dt">theta =</span> <span class="dv">1</span>), </span>
-<span id="cb6-6"><a href="#cb6-6"></a>    <span class="dt">data =</span> africa)</span>
-<span id="cb6-7"><a href="#cb6-7"></a></span>
-<span id="cb6-8"><a href="#cb6-8"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="st">     </span>Min        1Q    Median        3Q       Max  </span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="fl">-1.41262</span>  <span class="fl">-0.26729</span>  <span class="fl">-0.08145</span>   <span class="fl">0.25462</span>   <span class="fl">0.93405</span>  </span>
-<span id="cb6-11"><a href="#cb6-11"></a></span>
-<span id="cb6-12"><a href="#cb6-12"></a>Coefficients<span class="op">:</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
-<span id="cb6-14"><a href="#cb6-14"></a>(Intercept) <span class="fl">36.269089</span>   <span class="fl">6.045822</span>   <span class="fl">5.999</span> <span class="fl">4.68e-09</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a>year        <span class="fl">-0.016632</span>   <span class="fl">0.003018</span>  <span class="fl">-5.511</span> <span class="fl">6.65e-08</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a>sexMale      <span class="fl">0.142461</span>   <span class="fl">0.041978</span>   <span class="fl">3.394</span> <span class="fl">0.000763</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="op">---</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a></span>
-<span id="cb6-20"><a href="#cb6-20"></a>(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="dv">1</span>) family taken to be <span class="fl">0.1587279</span>)</span>
-<span id="cb6-21"><a href="#cb6-21"></a></span>
-<span id="cb6-22"><a href="#cb6-22"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">72.861</span>  on <span class="dv">377</span>  degrees of freedom</span>
-<span id="cb6-23"><a href="#cb6-23"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">66.292</span>  on <span class="dv">375</span>  degrees of freedom</span>
-<span id="cb6-24"><a href="#cb6-24"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">3065.2</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a></span>
-<span id="cb6-26"><a href="#cb6-26"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
+<p>This is basically just ANCOVA, but with a count for <code>y</code> and a different sampling distribution!</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Fit the model, being sure to specify</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># the appropriate error distribution and</span></span>
+<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># link function.</span></span>
+<span id="cb6-4"><a href="#cb6-4"></a>model &lt;-<span class="st"> </span><span class="kw">glm</span>(number <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>sex,</span>
+<span id="cb6-5"><a href="#cb6-5"></a>  <span class="dt">data =</span> africa,</span>
+<span id="cb6-6"><a href="#cb6-6"></a>  <span class="dt">family =</span> <span class="st">&quot;negative.binomial&quot;</span>(<span class="dt">theta =</span> <span class="dv">1</span>)</span>
+<span id="cb6-7"><a href="#cb6-7"></a>)</span></code></pre></div>
+<p>Before you look at the summary of the model, be sure to have a look at the regression diagnostics for the count model. Does it appear that you have violated the assumptions underlying the model that you have fit? Think about why or why not. This is not a homework question, it is doing the analysis the right way.</p>
+<p>Now that you have looked at the regression diagnostics, take a look at the model summary.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Print the summary of the model</span></span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">summary</span>(model)</span>
+<span id="cb7-3"><a href="#cb7-3"></a></span>
+<span id="cb7-4"><a href="#cb7-4"></a>Call<span class="op">:</span></span>
+<span id="cb7-5"><a href="#cb7-5"></a><span class="kw">glm</span>(<span class="dt">formula =</span> number <span class="op">~</span><span class="st"> </span>year <span class="op">+</span><span class="st"> </span>sex, <span class="dt">family =</span> <span class="kw">negative.binomial</span>(<span class="dt">theta =</span> <span class="dv">1</span>), </span>
+<span id="cb7-6"><a href="#cb7-6"></a>    <span class="dt">data =</span> africa)</span>
+<span id="cb7-7"><a href="#cb7-7"></a></span>
+<span id="cb7-8"><a href="#cb7-8"></a>Deviance Residuals<span class="op">:</span><span class="st"> </span></span>
+<span id="cb7-9"><a href="#cb7-9"></a><span class="st">     </span>Min        1Q    Median        3Q       Max  </span>
+<span id="cb7-10"><a href="#cb7-10"></a><span class="fl">-1.41262</span>  <span class="fl">-0.26729</span>  <span class="fl">-0.08145</span>   <span class="fl">0.25462</span>   <span class="fl">0.93405</span>  </span>
+<span id="cb7-11"><a href="#cb7-11"></a></span>
+<span id="cb7-12"><a href="#cb7-12"></a>Coefficients<span class="op">:</span></span>
+<span id="cb7-13"><a href="#cb7-13"></a><span class="st">             </span>Estimate Std. Error t value <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>t<span class="op">|</span>)    </span>
+<span id="cb7-14"><a href="#cb7-14"></a>(Intercept) <span class="fl">36.269089</span>   <span class="fl">6.045822</span>   <span class="fl">5.999</span> <span class="fl">4.68e-09</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb7-15"><a href="#cb7-15"></a>year        <span class="fl">-0.016632</span>   <span class="fl">0.003018</span>  <span class="fl">-5.511</span> <span class="fl">6.65e-08</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb7-16"><a href="#cb7-16"></a>sexMale      <span class="fl">0.142461</span>   <span class="fl">0.041978</span>   <span class="fl">3.394</span> <span class="fl">0.000763</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb7-17"><a href="#cb7-17"></a><span class="op">---</span></span>
+<span id="cb7-18"><a href="#cb7-18"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span>
+<span id="cb7-19"><a href="#cb7-19"></a></span>
+<span id="cb7-20"><a href="#cb7-20"></a>(Dispersion parameter <span class="cf">for</span> Negative <span class="kw">Binomial</span>(<span class="dv">1</span>) family taken to be <span class="fl">0.1587279</span>)</span>
+<span id="cb7-21"><a href="#cb7-21"></a></span>
+<span id="cb7-22"><a href="#cb7-22"></a>    Null deviance<span class="op">:</span><span class="st"> </span><span class="fl">72.861</span>  on <span class="dv">377</span>  degrees of freedom</span>
+<span id="cb7-23"><a href="#cb7-23"></a>Residual deviance<span class="op">:</span><span class="st"> </span><span class="fl">66.292</span>  on <span class="dv">375</span>  degrees of freedom</span>
+<span id="cb7-24"><a href="#cb7-24"></a>AIC<span class="op">:</span><span class="st"> </span><span class="fl">3065.2</span></span>
+<span id="cb7-25"><a href="#cb7-25"></a></span>
+<span id="cb7-26"><a href="#cb7-26"></a>Number of Fisher Scoring iterations<span class="op">:</span><span class="st"> </span><span class="dv">4</span></span></code></pre></div>
 <p>You’ll note that we have included both categorical and numerical explanatory variables in this model. This makes the interpretation of the model slightly more complicated than some of the simpler models we have looked at so far.</p>
-<p>If you try to predict the mean expected value for females (<code>Intercept</code> term) from these coefficients as we have done with previous excercises, we get <strong>huge</strong> values that don’t make much logical sense. The reason for this is the combination of categorical and numerical explanatory variables. <strong>Remember:</strong> the interpretation of regression coefficients (or <span class="math inline">\(Beta_j\)</span>) is the effect of <span class="math inline">\(X_i\)</span> on <span class="math inline">\(Y_i\)</span> given that all other <span class="math inline">\(X\)</span> are held constant. If we simply do:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Demonstrate use of the inverse link function</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">exp</span>(<span class="dv">36</span>)</span>
-<span id="cb7-3"><a href="#cb7-3"></a>[<span class="dv">1</span>] <span class="fl">4.311232e+15</span></span></code></pre></div>
-<p>…then we are implicitly telling R that the variable <code>year</code> is being held constant at zero. Because the scale of year is <em>large</em> (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of <code>number</code> for<code>female</code> without specifying a reasonable value for <code>year</code>. So, if we want to get a reasonable prediction for the mean expected value of <code>number</code> for females, we need a reasonable value of <code>year</code>. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal):</p>
+<p>If you try to predict the mean expected value for females (<code>Intercept</code> term) from these coefficients as we have done with previous exercises, we get <strong>huge</strong> values that don’t make much logical sense. The reason for this is the combination of categorical and numerical explanatory variables. <strong>Remember:</strong> the interpretation of regression coefficients (or <span class="math inline">\(Beta_j\)</span>) is the effect of <span class="math inline">\(X_i\)</span> on <span class="math inline">\(Y_i\)</span> given that all other <span class="math inline">\(X\)</span> are held constant. If we simply do:</p>
+<p><code>exp(beta)</code></p>
+<p>…then we are implicitly telling R that the variable <code>year</code> is being held constant at zero. Because the scale of year is <em>large</em> (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of <code>number</code> for<code>female</code> without specifying a reasonable value for <code>year</code>. So, if we want to get a reasonable prediction for the mean expected value of <code>number</code> for females, we need a reasonable value of <code>year</code>. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal if it is significant!):</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Predict mean values of female</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  female =<span class="st"> </span><span class="fl">36.269089</span> <span class="fl">-0.016106</span><span class="op">*</span><span class="kw">mean</span>(africa<span class="op">$</span>year)</span>
-<span id="cb8-3"><a href="#cb8-3"></a>  female</span>
+<span id="cb8-2"><a href="#cb8-2"></a>female &lt;-<span class="st"> </span><span class="fl">36.269089</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.016106</span> <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>(africa<span class="op">$</span>year)</span>
+<span id="cb8-3"><a href="#cb8-3"></a>female</span>
 <span id="cb8-4"><a href="#cb8-4"></a>[<span class="dv">1</span>] <span class="fl">4.004595</span></span>
-<span id="cb8-5"><a href="#cb8-5"></a>  </span>
+<span id="cb8-5"><a href="#cb8-5"></a></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Now, we need to use the inverse of the link function to get our prediction.</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Since the link function was &#39;log&#39;, we use:</span></span>
-<span id="cb8-8"><a href="#cb8-8"></a>  <span class="kw">exp</span>(female)</span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="kw">exp</span>(female)</span>
 <span id="cb8-9"><a href="#cb8-9"></a>[<span class="dv">1</span>] <span class="fl">54.84963</span></span></code></pre></div>
 <p>We see that the mean number of females per 100 in the African region that were underweight during the time period from 1986 through 2015 was about 19. What if we wanted to do this for males? Your turn:</p>
-<p><strong>Question 1</strong>. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this.</p>
-<p>Realize that we could also make these predictions across <code>year</code> for each <code>sex</code>, or for both sexes if we used a value of 0.5 for <code>sexMale</code>. Let’s do it for both here.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Make a sequence of years for prediction</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  years =<span class="st"> </span><span class="kw">seq</span>(<span class="dv">1986</span>, <span class="dv">2015</span>, <span class="dv">1</span>)</span>
-<span id="cb9-3"><a href="#cb9-3"></a>  </span>
-<span id="cb9-4"><a href="#cb9-4"></a><span class="co"># Make the predictions</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a>  bothSexes_preds =<span class="st"> </span><span class="kw">exp</span>( <span class="fl">36.269089</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.016632</span><span class="op">*</span>years <span class="op">+</span><span class="st"> </span><span class="fl">0.142461</span><span class="op">*</span>.<span class="dv">5</span> )</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  </span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># Plot the results</span></span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="kw">plot</span>(africa<span class="op">$</span>year, africa<span class="op">$</span>number, <span class="dt">pch=</span><span class="dv">21</span>, <span class="dt">bg=</span><span class="kw">c</span>(<span class="st">&#39;gray&#39;</span>, <span class="st">&#39;black&#39;</span>)[africa<span class="op">$</span>sex],</span>
-<span id="cb9-9"><a href="#cb9-9"></a>       <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>, <span class="dt">xlab=</span><span class="st">&#39;Year&#39;</span>, <span class="dt">ylab=</span><span class="st">&#39;Number underweight per 100&#39;</span>)</span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="kw">axis</span>(<span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</span>
-<span id="cb9-11"><a href="#cb9-11"></a>  </span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co"># Add the predictions</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>  <span class="kw">lines</span>(years, bothSexes_preds, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;red&#39;</span>)</span></code></pre></div>
-<p><img src="hw09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
-<p>Now, do this for males and females separately by replacing <code>0.5</code> with a <code>1</code> or a <code>0</code>. Plot the raw data only once, as shown above, and add a predictive line for each sex. This plotting exercise is not optional.</p>
+<p><strong>Question 1</strong>. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this like I demonstrated above.</p>
+<p>Plot the predictions from your model. Note that you may need to combine information from <a href="https://danstich.github.io/worst-r/13-4-zero-inflation.html">Chapter 13.4</a> and <a href="https://danstich.github.io/worst-r/10-4-ancova.html#plotting-2">Chapter 10.4</a> to accomplish this. Remember: you essentially have a <code>glm()</code> count model that is structured like ANCOVA.</p>
 <p><strong>Question 2</strong>. Using either your predicted values or the plots you have made, what is the mean difference between males and females during the time period under study? The difference is statistically significant…do you think it is biologically meaningful? Defend your answer.</p>
 </div>
 <div id="negative-binomial-regression" class="section level3">
 <h3>Negative binomial regression</h3>
 <p>Now, we will take a step back and start working with the entire data set. Let’s take another quick look at it just to refresh our memories.</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Look at the first 10 rows of data</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="kw">head</span>(uw, <span class="dv">10</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a>   year region                     country    sex number</span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="dv">1</span>  <span class="dv">1986</span> Africa                     Senegal Female     <span class="dv">15</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a><span class="dv">2</span>  <span class="dv">1987</span> Africa                        Mali Female     <span class="dv">27</span></span>
-<span id="cb10-6"><a href="#cb10-6"></a><span class="dv">3</span>  <span class="dv">1987</span> Africa                     Burundi Female     <span class="dv">27</span></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="dv">4</span>  <span class="dv">1988</span> Africa                        Togo Female     <span class="dv">19</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a><span class="dv">5</span>  <span class="dv">1988</span> Africa                    Zimbabwe Female      <span class="dv">7</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="dv">6</span>  <span class="dv">1988</span> Africa                      Uganda Female     <span class="dv">19</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="dv">7</span>  <span class="dv">1988</span> Africa                       Ghana Female     <span class="dv">23</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="dv">8</span>  <span class="dv">1990</span> Africa                     Nigeria Female     <span class="dv">33</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="dv">9</span>  <span class="dv">1990</span> Africa                  Mauritania Female     <span class="dv">42</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="dv">10</span> <span class="dv">1991</span> Africa United Republic of Tanzania Female     <span class="dv">23</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a>  </span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="co"># Let&#39;s find out how many unique regions we have in the data set</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a>  <span class="kw">unique</span>(uw<span class="op">$</span>region)</span>
-<span id="cb10-17"><a href="#cb10-17"></a>[<span class="dv">1</span>] Africa                Americas              Eastern Mediterranean Europe                South<span class="op">-</span>East Asia       Western Pacific      </span>
-<span id="cb10-18"><a href="#cb10-18"></a>Levels<span class="op">:</span><span class="st"> </span>Africa Americas Eastern Mediterranean Europe South<span class="op">-</span>East Asia Western Pacific</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Look at the first 10 rows of data</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="kw">head</span>(uw, <span class="dv">10</span>)</span>
+<span id="cb9-3"><a href="#cb9-3"></a>   year region                     country    sex number</span>
+<span id="cb9-4"><a href="#cb9-4"></a><span class="dv">1</span>  <span class="dv">1986</span> Africa                     Senegal Female     <span class="dv">15</span></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="dv">2</span>  <span class="dv">1987</span> Africa                        Mali Female     <span class="dv">27</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a><span class="dv">3</span>  <span class="dv">1987</span> Africa                     Burundi Female     <span class="dv">27</span></span>
+<span id="cb9-7"><a href="#cb9-7"></a><span class="dv">4</span>  <span class="dv">1988</span> Africa                        Togo Female     <span class="dv">19</span></span>
+<span id="cb9-8"><a href="#cb9-8"></a><span class="dv">5</span>  <span class="dv">1988</span> Africa                    Zimbabwe Female      <span class="dv">7</span></span>
+<span id="cb9-9"><a href="#cb9-9"></a><span class="dv">6</span>  <span class="dv">1988</span> Africa                      Uganda Female     <span class="dv">19</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a><span class="dv">7</span>  <span class="dv">1988</span> Africa                       Ghana Female     <span class="dv">23</span></span>
+<span id="cb9-11"><a href="#cb9-11"></a><span class="dv">8</span>  <span class="dv">1990</span> Africa                     Nigeria Female     <span class="dv">33</span></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="dv">9</span>  <span class="dv">1990</span> Africa                  Mauritania Female     <span class="dv">42</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a><span class="dv">10</span> <span class="dv">1991</span> Africa United Republic of Tanzania Female     <span class="dv">23</span></span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co"># Let&#39;s find out how many unique regions we have in the data set</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a><span class="kw">unique</span>(uw<span class="op">$</span>region)</span>
+<span id="cb9-17"><a href="#cb9-17"></a>[<span class="dv">1</span>] Africa                Americas              Eastern Mediterranean Europe                South<span class="op">-</span>East Asia       Western Pacific      </span>
+<span id="cb9-18"><a href="#cb9-18"></a>Levels<span class="op">:</span><span class="st"> </span>Africa Americas Eastern Mediterranean Europe South<span class="op">-</span>East Asia Western Pacific</span></code></pre></div>
 <p>Okay, so now instead of looking at just one <code>region</code> from the data set, we will look at all six to see if there are differences between regions. Leave us have another exploratory look at the data:</p>
-<p><img src="hw09_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="hw09_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>It’s pretty obvious here that no matter which way we slice it, these are decidedly <em>not</em> coming from a Poisson distribution. So, what do we do? This is GLM! We just need to use a different error distribution. From our histogram, it should be clear that we are now working with a negative binomial error structure.</p>
-<p>Start by fitting a negative binomial regression model to the data. We will use the <code>glm.nb</code> function in the <code>MASS</code> package.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Load the Mass package</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  <span class="kw">library</span>(MASS)</span>
-<span id="cb11-3"><a href="#cb11-3"></a>  </span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Now fit a model</span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  nb.mod =<span class="st"> </span><span class="kw">glm.nb</span>(<span class="dt">formula=</span>number<span class="op">~</span>region, <span class="dt">data=</span>uw)</span></code></pre></div>
-<p>Use the <code>glm.diag.plots()</code> function to look at the residual diagnostics for this model, understanding that things may look a <em>little</em> funky given that we are in the land of GLM.</p>
+<p>Start by fitting a negative binomial regression model to the data that tests the effect of <code>region</code> (x) on <code>number</code> (y). This one is essentially an ANOVA model, but with counts and a different sampling distribution that we can fit with <code>glm()</code>!</p>
+<p>Plot the residual diagnostics for this model following the approach in <a href="https://danstich.github.io/worst-r/13-3-negbin.html">Chapter 13.3</a> of the textbook.</p>
 <p><strong>Question 3</strong>. Based on the residual diagnostics, does it look like this model provides a reasonable fit to our data? Are we in obvious violations of any of our assumptions?</p>
-<p>Now that we have done some model validation, let’s have a look at the actual results of our model using the <code>summary</code> function. We can also look at the overall effect of <code>region</code> on <code>number</code> using the <code>Anova</code> function in the <code>car</code> package.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Load the library</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a>  <span class="kw">library</span>(car)</span>
-<span id="cb12-3"><a href="#cb12-3"></a>  </span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="co"># Using the car package</span></span>
-<span id="cb12-5"><a href="#cb12-5"></a>  <span class="kw">Anova</span>(model, <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</span></code></pre></div>
+<p>Now that we have done some model validation, let’s have a look at the actual results of our model.</p>
+<p>First, check the overall effect of <code>region</code> on <code>number</code> using the <code>Anova()</code> function from the <code>car</code> package:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Example:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">Anova</span>(model, <span class="dt">Type =</span> <span class="st">&quot;III&quot;</span>)</span>
+<span id="cb10-3"><a href="#cb10-3"></a>Analysis of Deviance <span class="kw">Table</span> (Type II tests)</span>
+<span id="cb10-4"><a href="#cb10-4"></a></span>
+<span id="cb10-5"><a href="#cb10-5"></a>Response<span class="op">:</span><span class="st"> </span>number</span>
+<span id="cb10-6"><a href="#cb10-6"></a>     LR Chisq Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    </span>
+<span id="cb10-7"><a href="#cb10-7"></a>year   <span class="fl">29.960</span>  <span class="dv">1</span>   <span class="fl">4.41e-08</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>sex    <span class="fl">11.509</span>  <span class="dv">1</span>  <span class="fl">0.0006926</span> <span class="op">**</span><span class="er">*</span></span>
+<span id="cb10-9"><a href="#cb10-9"></a><span class="op">---</span></span>
+<span id="cb10-10"><a href="#cb10-10"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span></code></pre></div>
 <p>We can see from the output, that there was there a significant effect of <code>region</code> on the number of individuals per 100 that were underweight.</p>
-<p>Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study <em>using the coefficients from the model</em>. The <code>predict</code> function that we have been working with the last few weeks does not have a method for dealing with <code>glm.nb</code> models yet, so we will need to do this by hand:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Get the summary of the model coefficients</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  res =<span class="st"> </span><span class="kw">summary</span>(nb.mod)<span class="op">$</span>coefficients</span>
-<span id="cb13-3"><a href="#cb13-3"></a>  res</span>
-<span id="cb13-4"><a href="#cb13-4"></a>                              Estimate Std. Error    z value      <span class="kw">Pr</span>(<span class="op">&gt;</span><span class="er">|</span>z<span class="op">|</span>)</span>
-<span id="cb13-5"><a href="#cb13-5"></a>(Intercept)                  <span class="fl">3.0314620</span> <span class="fl">0.03232841</span>  <span class="fl">93.770839</span>  <span class="fl">0.000000e+00</span></span>
-<span id="cb13-6"><a href="#cb13-6"></a>regionAmericas              <span class="fl">-1.2397025</span> <span class="fl">0.05831411</span> <span class="fl">-21.259049</span> <span class="fl">2.718702e-100</span></span>
-<span id="cb13-7"><a href="#cb13-7"></a>regionEastern Mediterranean <span class="fl">-0.4789620</span> <span class="fl">0.06336443</span>  <span class="fl">-7.558847</span>  <span class="fl">4.066585e-14</span></span>
-<span id="cb13-8"><a href="#cb13-8"></a>regionEurope                <span class="fl">-1.5658119</span> <span class="fl">0.07876244</span> <span class="fl">-19.880185</span>  <span class="fl">6.041058e-88</span></span>
-<span id="cb13-9"><a href="#cb13-9"></a>regionSouth<span class="op">-</span>East Asia        <span class="fl">0.4721631</span> <span class="fl">0.06113325</span>   <span class="fl">7.723507</span>  <span class="fl">1.131716e-14</span></span>
-<span id="cb13-10"><a href="#cb13-10"></a>regionWestern Pacific       <span class="fl">-0.2141699</span> <span class="fl">0.06935241</span>  <span class="fl">-3.088139</span>  <span class="fl">2.014141e-03</span></span>
-<span id="cb13-11"><a href="#cb13-11"></a>  </span>
-<span id="cb13-12"><a href="#cb13-12"></a><span class="co"># Now, make the predictions</span></span>
-<span id="cb13-13"><a href="#cb13-13"></a>  preds =<span class="st"> </span><span class="kw">c</span>()</span>
-<span id="cb13-14"><a href="#cb13-14"></a>  <span class="cf">for</span>(i <span class="cf">in</span> <span class="dv">1</span><span class="op">:</span><span class="kw">nrow</span>(res)){</span>
-<span id="cb13-15"><a href="#cb13-15"></a>    <span class="cf">if</span>(i<span class="op">==</span><span class="dv">1</span>){</span>
-<span id="cb13-16"><a href="#cb13-16"></a>      preds[i] =<span class="st"> </span><span class="kw">exp</span>(res[<span class="dv">1</span>, <span class="dv">1</span>])</span>
-<span id="cb13-17"><a href="#cb13-17"></a>    } <span class="cf">else</span> {</span>
-<span id="cb13-18"><a href="#cb13-18"></a>      preds[i] =<span class="st"> </span><span class="kw">exp</span>(res[<span class="dv">1</span>, <span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>res[i, <span class="dv">1</span>])</span>
-<span id="cb13-19"><a href="#cb13-19"></a>    }</span>
-<span id="cb13-20"><a href="#cb13-20"></a>  }</span>
-<span id="cb13-21"><a href="#cb13-21"></a></span>
-<span id="cb13-22"><a href="#cb13-22"></a><span class="co"># Give the vector names to facilitate comparison  </span></span>
-<span id="cb13-23"><a href="#cb13-23"></a>  <span class="kw">names</span>(preds) =<span class="st"> </span><span class="kw">row.names</span>(res)</span>
-<span id="cb13-24"><a href="#cb13-24"></a>  <span class="kw">names</span>(preds) =<span class="st"> </span><span class="kw">gsub</span>(<span class="kw">names</span>(preds), <span class="dt">pattern =</span> <span class="st">&#39;region&#39;</span>, <span class="dt">replacement =</span> <span class="st">&#39;&#39;</span>)  </span>
-<span id="cb13-25"><a href="#cb13-25"></a>  <span class="kw">names</span>(preds)[<span class="dv">1</span>] =<span class="st"> &#39;Africa&#39;</span></span>
-<span id="cb13-26"><a href="#cb13-26"></a>  </span>
-<span id="cb13-27"><a href="#cb13-27"></a><span class="co"># Print the results</span></span>
-<span id="cb13-28"><a href="#cb13-28"></a>  preds</span>
-<span id="cb13-29"><a href="#cb13-29"></a>               Africa              Americas Eastern Mediterranean                Europe       South<span class="op">-</span>East Asia       Western Pacific </span>
-<span id="cb13-30"><a href="#cb13-30"></a>            <span class="fl">20.727513</span>              <span class="fl">6.000000</span>             <span class="fl">12.839161</span>              <span class="fl">4.330357</span>             <span class="fl">33.235714</span>             <span class="fl">16.731481</span> </span></code></pre></div>
+<p>Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study using the approach demonstrated in <a href="https://danstich.github.io/worst-r/13-4-negbin.html">Chapter 13.4</a>.</p>
 <p><strong>Question 4</strong>. Which region reported the greatest number of individuals that were underweight? Which region reported the fewest number of individuals that were underweight?</p>
-<p>Now that you have your model results, make a boxplot of <code>number</code> by <code>region</code> to determine whether or not your model results make sense. If they do not, do it again.</p>
-<p>Finally, we can use these data to determine how the number of underweight individuals changed during the time series by region to determine if there were differences in how these numbers changed over time.</p>
-<p>Make two models for this section. For the first model, consider only the additive effects of <code>region</code> and <code>year</code> on <code>number</code>. In the second model, include the interaction effect between <code>region</code> and <code>year</code> on <code>number</code>.</p>
-<p>Use the <code>AIC</code> function in base R to get the AIC score for each of the two models you have created. Note that we could make a model selection table for these two models, but we would have to build our own function for this, telling R how to do it by hand because the function has not yet been defined for this model class…I will show you how to do this <em>next week</em>. For now, let’s keep it a little simple(<code>R</code>).</p>
-<p><strong>Question 5</strong>. According to the AIC scores that you have extracted, is there unequivocal evidence to indicate that one of these models is better than the other?</p>
+<p>Now that you have your model results, make a boxplot or violin plot of <code>number</code> by <code>region</code> that shows your predictions over your raw data like we did in <a href="https://danstich.github.io/worst-r/10-1-one-way-anova.html#prediction">Chapter 10.4.1</a> when we were doing ANOVA (because these are the same things!).</p>
 </div>
-<div id="bonus-1pt" class="section level3">
-<h3>Bonus: 1pt</h3>
-<p>Digging deeper, we probably want to know whether all regions change in pretty much the same way, or if they differ.</p>
-<p>Given that we know all regions showed a tendency to decrease in the number of individuals that were underweight during the course of this study, which region decreased the most? (You will need to look at the model coefficients using <code>summary()</code> to see which is most negative in the interaction model).</p>
-<p>Another way of asking this is: in which <code>region</code> did people tend to gain the most weight? Is this surprising to you given what you know about trends in social behaviors and obesity during the past half century in this <code>region</code>?</p>
+<div id="model-selection-for-count-regression" class="section level3">
+<h3>Model selection for count regression</h3>
+<p>Finally, we can use these data to determine how the number of underweight individuals changed during the time series by region to determine if there were differences in how these numbers changed over time.</p>
+<p>Make two models for this section. For the first model, consider only the <strong>additive</strong> effects of <code>region</code> and <code>year</code> (x variables) on <code>number</code> (y). In the second model, include the <strong>interaction</strong> effect between <code>region</code> and <code>year</code> on <code>number</code>.</p>
+<p>Use the <code>AIC</code> function in base R to get the AIC score for each of the two models you have created.</p>
+<p>Plot the predictions of the best model.</p>
+<p><strong>Question 5</strong>. According to the AIC scores that you have extracted, is there unequivocal evidence to indicate that one of these models is better than the other? Does this make sense based on your plots?</p>
 <p><br></p>
 </div>
 </div>

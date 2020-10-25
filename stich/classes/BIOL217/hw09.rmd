@@ -11,6 +11,14 @@ This week we continued to work with the generalized linear model (GLM) and discu
 
 By the end of this lab, you should 1) be comfortable specifying general linear models for count data in R, 2) be able to apply this tool to analyze count data from start to finish, and 3) be able to diagnose and interpret the results of these models.
 
+We'll be working with functions from the `tidyverse` as usual and the `MASS` package for the `negative.binomial` family, so go ahead and load those up when you are ready to start!
+
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse) # For everything we love
+library(MASS) # For negative.binomial family
+library(car) # For Anova()
+```
+
 ## Exercises
 
 Let's start by reading the file and taking a look at the structure of the data set that we'll be working with this week.
@@ -18,18 +26,18 @@ Let's start by reading the file and taking a look at the structure of the data s
 
 ```{r, eval=FALSE, echo=TRUE}
 # Read in the data
-  uw = read.csv('weights.csv')
+uw <- read.csv("data/weights.csv")
 
 # Look at the data
-  head(uw)
+head(uw)
 ```
 
 ```{r, echo=FALSE, eval=TRUE}
 # Read in the data
-  uw = read.csv('../../data/weights.csv')
+uw <- read.csv("../../data/weights.csv")
 
 # Look at the data
-  head(uw)
+head(uw)
 ```
 
  
@@ -39,7 +47,7 @@ These are data that I downloaded from the World Health Organization's website fr
 ```{r}
 # Now we need to make the counts into an integer because these are
 # counts and counts are
-  uw$number = as.integer(uw$number)
+uw$number <- as.integer(uw$number)
 ```
 
 
@@ -50,212 +58,220 @@ Start by looking at a single region, we will use `Africa` in this case.
 ```{r}
 # Make a new dataframe that contains only those records for which
 # the region is `Africa`
-  africa = uw[uw$region=='Africa',]
+africa <-
+  uw %>%
+  filter(region == "Africa")
 ```
 
 Let's do some data exploration to look at the our sampling distribution of `number`. Here, a quick histogram of your data should show you what you are looking for.
 
 ```{r,  include=FALSE}  
-  hist(africa$number, col='gray87', main='', xlab='Number of individuals underweight per 100')
+hist(africa$number,
+  col = "gray87",
+  main = "",
+  xlab = "Number of individuals underweight per 100"
+)
 ```
 
-Do these data appear to conform to a Poisson distribution? Why or why not?
+For thought: Do these data appear to conform to a Poisson distribution?
 
 Now, let's fit a model using `number` as the response and take a quick look at some regression diagnostics for the model. We will include the variable `sex` to see if there are differences between males and females. We will also include the variable `year` as a numeric variable to determine whether or not there is a linear increase or decrease in the `number` throughout the time series.
 
-```{r, include=FALSE, warning=FALSE, message=FALSE}
-# Load the MASS library
-  library(MASS)
-
-# Fit the model, being sure to specify 
-# the appropriate error distribution and 
+This is basically just ANCOVA, but with a count for `y` and a different sampling distribution!
+```{r}
+# Fit the model, being sure to specify
+# the appropriate error distribution and
 # link function.
-  model = glm(number~year + sex, data=africa, family='negative.binomial'(theta=1))
+model <- glm(number ~ year + sex,
+  data = africa,
+  family = "negative.binomial"(theta = 1)
+)
 ```
 
-Before you look at the summary of the model, be sure to have a look at the regression diagnostics for the count model.
+Before you look at the summary of the model, be sure to have a look at the regression diagnostics for the count model. Does it appear that you have violated the assumptions underlying the model that you have fit? Think about why or why not. This is not a homework question, it is doing the analysis the right way.
 
-```{r, message=FALSE, warning=FALSE}
-# To begin with, look at the regression diagnostics
-  library(boot)
-  glm.diag.plots(model)
-```
-
-Have a look. Does it appear that you have violated the assumptions underlying the model that you have fit? Think about why or why not.
-
-Now that you have looked at the regression diagnostics, take a look at the model summary
+Now that you have looked at the regression diagnostics, take a look at the model summary.
 
 ```{r}
 # Print the summary of the model
-  summary(model)
+summary(model)
 ```
 
 You'll note that we have included both categorical and numerical explanatory variables in this model. This makes the interpretation of the model slightly more complicated than some of the simpler models we have looked at so far.
 
-If you try to predict the mean expected value for females (`Intercept` term) from these coefficients as we have done with previous excercises, we get **huge** values that don't make much logical sense. The reason for this is the combination of categorical and numerical explanatory variables. **Remember:** the interpretation of regression coefficients (or $Beta_j$) is the effect of $X_i$ on $Y_i$ given that all other $X$ are held constant. If we simply do:
+If you try to predict the mean expected value for females (`Intercept` term) from these coefficients as we have done with previous exercises, we get **huge** values that don't make much logical sense. The reason for this is the combination of categorical and numerical explanatory variables. **Remember:** the interpretation of regression coefficients (or $Beta_j$) is the effect of $X_i$ on $Y_i$ given that all other $X$ are held constant. If we simply do:
 
- 
-```{r}
-# Demonstrate use of the inverse link function
-  exp(36)
-```
+`exp(beta)`
 
-...then we are implicitly telling R that the variable `year` is being held constant at zero. Because the scale of year is *large* (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of `number` for`female` without specifying a reasonable value for `year`. So, if we want to get a reasonable prediction for the mean expected value of `number` for females, we need a reasonable value of `year`. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal):
+...then we are implicitly telling R that the variable `year` is being held constant at zero. Because the scale of year is *large* (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of `number` for`female` without specifying a reasonable value for `year`. So, if we want to get a reasonable prediction for the mean expected value of `number` for females, we need a reasonable value of `year`. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal if it is significant!):
+
 
 ```{r}
 # Predict mean values of female
-  female = 36.269089 -0.016106*mean(africa$year)
-  female
-  
+female <- 36.269089 - 0.016106 * mean(africa$year)
+female
+
 # Now, we need to use the inverse of the link function to get our prediction.
 # Since the link function was 'log', we use:
-  exp(female)
+exp(female)
 ```  
 
 We see that the mean number of females per 100 in the African region that were underweight during the time period from 1986 through 2015 was about 19. What if we wanted to do this for males? Your turn:
 
-**Question 1**. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this.
+**Question 1**. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this like I demonstrated above.
 
-Realize that we could also make these predictions across `year` for each `sex`, or for both sexes if we used a value of 0.5 for `sexMale`. Let's do it for both here.
-
-```{r}
-# Make a sequence of years for prediction
-  years = seq(1986, 2015, 1)
-  
-# Make the predictions
-  bothSexes_preds = exp( 36.269089 - 0.016632*years + 0.142461*.5 )
-  
-# Plot the results
-  plot(africa$year, africa$number, pch=21, bg=c('gray', 'black')[africa$sex],
-       yaxt='n', xlab='Year', ylab='Number underweight per 100')
-  axis(2, las=2)
-  
-# Add the predictions
-  lines(years, bothSexes_preds, lwd=2, col='red')
-```  
-
-Now, do this for males and females separately by replacing `0.5` with a `1` or a `0`. Plot the raw data only once, as shown above, and add a predictive line for each sex. This plotting exercise is not optional.
-
+Plot the predictions from your model. Note that you may need to combine information from [Chapter 13.4](https://danstich.github.io/worst-r/13-4-zero-inflation.html) and [Chapter 10.4](https://danstich.github.io/worst-r/10-4-ancova.html#plotting-2) to accomplish this. Remember: you essentially have a `glm()` count model that is structured like ANCOVA.
 
 **Question 2**. Using either your predicted values or the plots you have made, what is the mean difference between males and females during the time period under study? The difference is statistically significant...do you think it is biologically meaningful? Defend your answer.
 
 
 ### Negative binomial regression
-
 Now, we will take a step back and start working with the entire data set. Let's take another quick look at it just to refresh our memories.
 
 ```{r}
 # Look at the first 10 rows of data
-  head(uw, 10)
-  
-# Let's find out how many unique regions we have in the data set
-  unique(uw$region)
-```
+head(uw, 10)
 
+# Let's find out how many unique regions we have in the data set
+unique(uw$region)
+```
 
 Okay, so now instead of looking at just one `region` from the data set, we will look at all six to see if there are differences between regions. Leave us have another exploratory look at the data:
 
 ```{r, echo=FALSE, fig.height=4, fig.width=7}
 # Make a histogram
-  par(mfrow=c(1,2), mar=c(5,1,1,1))
-  hist(uw$number, yaxt='n', ylab='', col='gray87', main='', 
-       xlab='Number underweight per 100')
-  
+par(mfrow = c(1, 2), mar = c(5, 1, 1, 1))
+hist(uw$number,
+  yaxt = "n", ylab = "", col = "gray87", main = "",
+  xlab = "Number underweight per 100"
+)
+
 # Make a boxplot
-  boxplot(number~region, data=uw, xaxt='n', xlab='Region', yaxt='n',
-          col='gray87')
-  axis(1, labels = NULL)
-  par(mfrow=c(1,1))  
+boxplot(number ~ region,
+  data = uw, xaxt = "n", xlab = "Region", yaxt = "n",
+  col = "gray87"
+)
+axis(1, labels = NULL)
+
+# Resetting your mfrow parameter at the end of the code
+par(mfrow = c(1, 1))
 ```
 
 
 It's pretty obvious here that no matter which way we slice it, these are decidedly *not* coming from a Poisson distribution. So, what do we do? This is GLM! We just need to use a different error distribution. From our histogram, it should be clear that we are now working with a negative binomial error structure.
 
-Start by fitting a negative binomial regression model to the data. We will use the `glm.nb` function in the `MASS` package.
+Start by fitting a negative binomial regression model to the data that tests the effect of `region` (x) on `number` (y). This one is essentially an ANOVA model, but with counts and a different sampling distribution that we can fit with `glm()`!
 
-```{r}
-# Load the Mass package
-  library(MASS)
-  
-# Now fit a model
-  nb.mod = glm.nb(formula=number~region, data=uw)
+```{r, include=FALSE}
+nb.mod <- glm(
+  formula = number ~ region,
+  data = uw,
+  family = "negative.binomial"(theta = 1)
+)
 ```
 
-Use the `glm.diag.plots()` function to look at the residual diagnostics for this model, understanding that things may look a *little* funky given that we are in the land of GLM.
+Plot the residual diagnostics for this model following the approach in [Chapter 13.3](https://danstich.github.io/worst-r/13-3-negbin.html) of the textbook.
+
+```{r, include = FALSE}
+ggplot(nb.mod, aes(x = .fitted, y = .resid, fill = region)) +
+  geom_violin(alpha = 0.25) +
+  geom_jitter(aes(color = region), width = .1, alpha = 0.1) +
+  xlab("Fitted values") +
+  ylab(expression(paste(epsilon)))
+```
 
 **Question 3**. Based on the residual diagnostics, does it look like this model provides a reasonable fit to our data? Are we in obvious violations of any of our assumptions?
 
-Now that we have done some model validation, let's have a look at the actual results of our model using the `summary` function. We can also look at the overall effect of `region` on `number` using the `Anova` function in the `car` package.
+Now that we have done some model validation, let's have a look at the actual results of our model. 
 
-```{r, eval=FALSE}
-# Load the library
-  library(car)
-  
-# Using the car package
-  Anova(model, Type='III')
+First, check the overall effect of `region` on `number` using the `Anova()` function from the `car` package:
+
+```{r, warning=FALSE, message = FALSE}
+# Example:
+Anova(model, Type = "III")
 ```
 
 We can see from the output, that there was there a significant effect of `region` on the number of individuals per 100 that were underweight.
 
-Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study *using the coefficients from the model*. The `predict` function that we have been working with the last few weeks does not have a method for dealing with `glm.nb` models yet, so we will need to do this by hand:
+Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study using the approach demonstrated in [Chapter 13.4](https://danstich.github.io/worst-r/13-4-negbin.html).
 
-```{r}
+```{r, include=FALSE}
 # Get the summary of the model coefficients
-  res = summary(nb.mod)$coefficients
-  res
-  
-# Now, make the predictions
-  preds = c()
-  for(i in 1:nrow(res)){
-    if(i==1){
-      preds[i] = exp(res[1, 1])
-    } else {
-      preds[i] = exp(res[1, 1] + res[i, 1])
-    }
-  }
+res <- summary(nb.mod)$coefficients
+res
 
-# Give the vector names to facilitate comparison  
-  names(preds) = row.names(res)
-  names(preds) = gsub(names(preds), pattern = 'region', replacement = '')  
-  names(preds)[1] = 'Africa'
-  
+# Now, make the predictions
+preds <- c()
+for (i in 1:nrow(res)) {
+  if (i == 1) {
+    preds[i] <- exp(res[1, 1])
+  } else {
+    preds[i] <- exp(res[1, 1] + res[i, 1])
+  }
+}
+
+# Give the vector names to facilitate comparison
+names(preds) <- row.names(res)
+names(preds) <- gsub(names(preds), pattern = "region", replacement = "")
+names(preds)[1] <- "Africa"
+
 # Print the results
-  preds
+preds
 ```
 
 
 **Question 4**. Which region reported the greatest number of individuals that were underweight? Which region reported the fewest number of individuals that were underweight?
 
-Now that you have your model results, make a boxplot of `number` by `region` to determine whether or not your model results make sense. If they do not, do it again.
+Now that you have your model results, make a boxplot or violin plot of `number` by `region` that shows your predictions over your raw data like we did in [Chapter 10.4.1](https://danstich.github.io/worst-r/10-1-one-way-anova.html#prediction) when we were doing ANOVA (because these are the same things!).
 
+
+### Model selection for count regression
 Finally, we can use these data to determine how the number of underweight individuals changed during the time series by region to determine if there were differences in how these numbers changed over time.
 
-Make two models for this section. For the first model, consider only the additive effects of `region` and `year` on `number`. In the second model, include the interaction effect between `region` and `year` on `number`.
+Make two models for this section. For the first model, consider only the **additive** effects of `region` and `year` (x variables) on `number` (y). In the second model, include the **interaction** effect between `region` and `year` on `number`.
 
 ```{r, include=FALSE}
 # Fit the models
-  nb.add = glm.nb(formula=number~region + year, data=uw)
-  nb.int = glm.nb(formula=number~region * year, data=uw)
-  
+nb.add <- glm.nb(formula = number ~ region + year, data = uw)
+nb.int <- glm.nb(formula = number ~ region * year, data = uw)
+
 # Look at the results
-  AIC(nb.add, nb.int)
-  
+AIC(nb.add, nb.int)
+
 # No evidence for a significant interaction at alpha of 0.05
-  library(car)
-  Anova(nb.int, Type='III')
+library(car)
+Anova(nb.int, Type = "III")
 ```  
 
-Use the `AIC` function in base R to get the AIC score for each of the two models you have created. Note that we could make a model selection table for these two models, but we would have to build our own function for this, telling R how to do it by hand because the function has not yet been defined for this model class...I will show you how to do this *next week*. For now, let's keep it a little simple(`R`).
+Use the `AIC` function in base R to get the AIC score for each of the two models you have created.
 
-**Question 5**. According to the AIC scores that you have extracted, is there unequivocal evidence to indicate that one of these models is better than the other? 
+Plot the predictions of the best model.
+
+```{r, include = FALSE}
+
+pd <- data.frame(unique(data.frame(uw$region, uw$year)))
+names(pd) <- c("region", "year")
+
+prep <- data.frame(
+  predict(nb.int, pd, type = "link", se.fit = TRUE)
+)
+prep$lwr <- prep$fit + prep$se.fit * qnorm(0.025)
+prep$upr <- prep$fit + prep$se.fit * qnorm(0.975)
+
+pred <- apply(prep, 2, exp)
+
+preds <- data.frame(pd, pred)
+
+ggplot(preds, aes(x = year, y = fit, fill = region)) +
+  geom_line() +
+  geom_point(aes(x = year, y = number, color = region), data = uw, alpha = 0.1) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +
+  xlab("Year") +
+  ylab("Number of underweight people per 100")
+```
 
 
-### Bonus: 1pt
 
-Digging deeper, we probably want to know whether all regions change in pretty much the same way, or if they differ.
+**Question 5**. According to the AIC scores that you have extracted, is there unequivocal evidence to indicate that one of these models is better than the other? Does this make sense based on your plots?
 
-Given that we know all regions showed a tendency to decrease in the number of individuals that were underweight during the course of this study, which region decreased the most? (You will need to look at the model coefficients using `summary()` to see which is most negative in the interaction model). 
-
-Another way of asking this is:  in which `region` did people tend to gain the most weight? Is this surprising to you given what you know about trends in social behaviors and obesity during the past half century in this `region`?
- 
 <br>
