@@ -492,14 +492,14 @@ Introduction
 <p><code>exp(beta)</code></p>
 <p>…then we are implicitly telling R that the variable <code>year</code> is being held constant at zero. Because the scale of year is <em>large</em> (1986-2015) relative to our counts, we get ridiculously large values if we try to predict the mean value of <code>number</code> for<code>female</code> without specifying a reasonable value for <code>year</code>. So, if we want to get a reasonable prediction for the mean expected value of <code>number</code> for females, we need a reasonable value of <code>year</code>. In most cases, unless you are predicting across the range of years, using the mean is fine (although not ideal if it is significant!):</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Predict mean values of female</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>female &lt;-<span class="st"> </span><span class="fl">36.269089</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.016106</span> <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>(africa<span class="op">$</span>year)</span>
+<span id="cb8-2"><a href="#cb8-2"></a>female &lt;-<span class="st"> </span><span class="fl">36.269089</span> <span class="op">-</span><span class="st"> </span><span class="fl">0.016632</span> <span class="op">*</span><span class="st"> </span><span class="kw">mean</span>(africa<span class="op">$</span>year)</span>
 <span id="cb8-3"><a href="#cb8-3"></a>female</span>
-<span id="cb8-4"><a href="#cb8-4"></a>[<span class="dv">1</span>] <span class="fl">4.004595</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a>[<span class="dv">1</span>] <span class="fl">2.950881</span></span>
 <span id="cb8-5"><a href="#cb8-5"></a></span>
 <span id="cb8-6"><a href="#cb8-6"></a><span class="co"># Now, we need to use the inverse of the link function to get our prediction.</span></span>
 <span id="cb8-7"><a href="#cb8-7"></a><span class="co"># Since the link function was &#39;log&#39;, we use:</span></span>
 <span id="cb8-8"><a href="#cb8-8"></a><span class="kw">exp</span>(female)</span>
-<span id="cb8-9"><a href="#cb8-9"></a>[<span class="dv">1</span>] <span class="fl">54.84963</span></span></code></pre></div>
+<span id="cb8-9"><a href="#cb8-9"></a>[<span class="dv">1</span>] <span class="fl">19.12279</span></span></code></pre></div>
 <p>We see that the mean number of females per 100 in the African region that were underweight during the time period from 1986 through 2015 was about 19. What if we wanted to do this for males? Your turn:</p>
 <p><strong>Question 1</strong>. What is the mean number of males per 100 in the African region that were underweight during the time period under study? Use the model coefficients to determine this like I demonstrated above.</p>
 <p>Plot the predictions from your model. Note that you may need to combine information from <a href="https://danstich.github.io/worst-r/13-4-zero-inflation.html">Chapter 13.4</a> and <a href="https://danstich.github.io/worst-r/10-4-ancova.html#plotting-2">Chapter 10.4</a> to accomplish this. Remember: you essentially have a <code>glm()</code> count model that is structured like ANCOVA.</p>

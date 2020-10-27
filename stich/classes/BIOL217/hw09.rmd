@@ -108,7 +108,7 @@ If you try to predict the mean expected value for females (`Intercept` term) fro
 
 ```{r}
 # Predict mean values of female
-female <- 36.269089 - 0.016106 * mean(africa$year)
+female <- 36.269089 - 0.016632 * mean(africa$year)
 female
 
 # Now, we need to use the inverse of the link function to get our prediction.
