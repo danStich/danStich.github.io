@@ -534,16 +534,6 @@ Introduction
 <p><strong>Question 3</strong>. Based on the residual diagnostics, does it look like this model provides a reasonable fit to our data? Are we in obvious violations of any of our assumptions?</p>
 <p>Now that we have done some model validation, let’s have a look at the actual results of our model.</p>
 <p>First, check the overall effect of <code>region</code> on <code>number</code> using the <code>Anova()</code> function from the <code>car</code> package:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Example:</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">Anova</span>(model, <span class="dt">Type =</span> <span class="st">&quot;III&quot;</span>)</span>
-<span id="cb10-3"><a href="#cb10-3"></a>Analysis of Deviance <span class="kw">Table</span> (Type II tests)</span>
-<span id="cb10-4"><a href="#cb10-4"></a></span>
-<span id="cb10-5"><a href="#cb10-5"></a>Response<span class="op">:</span><span class="st"> </span>number</span>
-<span id="cb10-6"><a href="#cb10-6"></a>     LR Chisq Df <span class="kw">Pr</span>(<span class="op">&gt;</span>Chisq)    </span>
-<span id="cb10-7"><a href="#cb10-7"></a>year   <span class="fl">29.960</span>  <span class="dv">1</span>   <span class="fl">4.41e-08</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>sex    <span class="fl">11.509</span>  <span class="dv">1</span>  <span class="fl">0.0006926</span> <span class="op">**</span><span class="er">*</span></span>
-<span id="cb10-9"><a href="#cb10-9"></a><span class="op">---</span></span>
-<span id="cb10-10"><a href="#cb10-10"></a>Signif. codes<span class="op">:</span><span class="st">  </span><span class="dv">0</span> <span class="st">&#39;***&#39;</span> <span class="fl">0.001</span> <span class="st">&#39;**&#39;</span> <span class="fl">0.01</span> <span class="st">&#39;*&#39;</span> <span class="fl">0.05</span> <span class="st">&#39;.&#39;</span> <span class="fl">0.1</span> <span class="st">&#39; &#39;</span> <span class="dv">1</span></span></code></pre></div>
 <p>We can see from the output, that there was there a significant effect of <code>region</code> on the number of individuals per 100 that were underweight.</p>
 <p>Now, predict the mean number of individuals that were underweight per 100 for each of the regions in this study using the approach demonstrated in <a href="https://danstich.github.io/worst-r/13-4-negbin.html">Chapter 13.4</a>.</p>
 <p><strong>Question 4</strong>. Which region reported the greatest number of individuals that were underweight? Which region reported the fewest number of individuals that were underweight?</p>

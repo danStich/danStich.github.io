@@ -186,9 +186,9 @@ Now that we have done some model validation, let's have a look at the actual res
 
 First, check the overall effect of `region` on `number` using the `Anova()` function from the `car` package:
 
-```{r, warning=FALSE, message = FALSE}
+```{r, warning=FALSE, message = FALSE, include=FALSE}
 # Example:
-Anova(model, Type = "III")
+Anova(nb.mod, Type = "III")
 ```
 
 We can see from the output, that there was there a significant effect of `region` on the number of individuals per 100 that were underweight.
