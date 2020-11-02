@@ -445,10 +445,14 @@ Introduction
 <div id="linear-mixed-models-lmm--a-special-case-of-glmm" class="section level3">
 <h3>Linear mixed models (LMM- a special case of GLMM)</h3>
 <p>We have looked at the GLMM initially this week because of it’s utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on uses. For example, we might refer to them as ‘repeated measures’ ANOVA, ‘nested’ or ‘factorial’ ANOVA, or ‘linear mixed models’ (LMM).</p>
-<p>Let’s take a look at a new data set for this example. Read in the data file called <code>est.mvmt.txt</code>, either from the course website or from your working directory.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  est.mvmt =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;est.mvmt.txt&#39;</span>)</span></code></pre></div>
-<p>These data are from endangered Atlantic salmon <em>Salmo salar</em> smolts. The response in the data is <code>Rate</code> and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]).</p>
+<p>You’ll want the <code>tidyverse</code> loaded as always, and we’ll also be playing with the new functions we learned about from <code>lme4</code> and <code>merTools</code>. You can go ahead and load those when you are ready to get started.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(lme4)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(merTools)</span></code></pre></div>
+<p>Let’s take a look at a new data set for this example. Read in the data file called <code>est.mvmt.txt</code> from the class data sets.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>est_mvmt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/est.mvmt.txt&quot;</span>)</span></code></pre></div>
+<p>These data are from endangered Atlantic salmon <em>Salmo salar</em> smolts. The response in the data is <code>Rate</code> and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]). To understand if there were non-linear, or “optimal” relationships between movement rate and seasonal variables like photoperiod (<code>Ph</code>), movement date (<code>MovDate</code>) and river kilometer (<code>RKM</code>), we also investigated <strong>quadratic</strong> or <strong>polynomial</strong> terms that allow for a parabolic relationship between each of these variables and the movement <code>Rate</code> of individual fish.</p>
 <p>A brief description of the data follows:</p>
 <pre><code>  TagID: individual fish ID
   FL: forklength of fish
@@ -471,135 +475,71 @@ Introduction
   Dis: mean river discharge over movement period
   Phs: photoperiod (daylength) for the movement period
   Ph2s: a quadratic term for daylength for movement period</code></pre>
-<p>All of the covariates (potential explanatory variables) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found <a href="http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185">here</a></p>
+<p>All of the potential explanatory variables (<strong>covariates</strong>) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found <a href="http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185">here</a></p>
 <p>Your charge will be to fit a series of models and analyze them within the context of a linear mixed effects model.</p>
-<p>First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly colinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.</p>
-<p>I will place two stipulations on this:</p>
+<p>First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly collinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.</p>
+<p>I will place a few stipulations on this:</p>
 <ol style="list-style-type: decimal">
-<li><p>you need to account for repeat measurements of movement rates from individual fish in this study because there are varying numbers of measurements for each individual, and this lack of balance has the potential to bias the results if not accounted for. That means you need to include a random effect of individual on the intercept.</p></li>
+<li><p>You need to account for repeat measurements of movement rates within years of this study. The original analysis used individual random effects (<code>TagID</code>) but the computational machinery has changed in <code>lmer()</code> and that now throws warnings about singularity that freak people out. This occurs because the actual standard deviation on our random effect of individual is very near to zero. This has caused a lot of huff in recent years as it is a change from the initial routines used by <code>lmer()</code>. Note that these warnings were not produced in any of the previous versions of this data analysis (yikes!). In this specific case, the warning can be safely ignored because we expect this, but it may be a sign that we don’t actually need the random effect (we’ll keep it in all models). In any case, we will work with <code>Year</code> as a random effect in all of these models.</p></li>
 <li><p>Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.</p></li>
 </ol>
-<p>Make a list object of the models that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Here is an example of ONE FORM of the syntax we might use to</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a><span class="co"># fit a linear mixed model in the &quot;lme4&quot; package using lme4::lmer</span></span>
-<span id="cb3-3"><a href="#cb3-3"></a>  Mov.mod =<span class="st"> </span><span class="kw">lmer</span>(<span class="kw">log</span>(Rate) <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span><span class="op">|</span>TagID) <span class="op">+</span><span class="st">  </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,</span>
-<span id="cb3-4"><a href="#cb3-4"></a>                <span class="dt">data =</span> est.mvmt)</span></code></pre></div>
-<pre><code>## boundary (singular) fit: see ?isSingular</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Note that this doesn&#39;t look much different that the specification that </span></span>
-<span id="cb5-2"><a href="#cb5-2"></a><span class="co"># we used for generalized linear mixed effects models earlier in the</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a><span class="co"># within lme4. The only difference is that we have dropped the &#39;g&#39; from</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a><span class="co"># the front-end of the function.</span></span>
-<span id="cb5-5"><a href="#cb5-5"></a>  </span>
-<span id="cb5-6"><a href="#cb5-6"></a><span class="co"># PLEASE </span><span class="al">NOTE</span><span class="co">: you do not need to build this model for the exercise. It </span></span>
-<span id="cb5-7"><a href="#cb5-7"></a><span class="co"># just happened to be the first in the list of candidate models from the</span></span>
-<span id="cb5-8"><a href="#cb5-8"></a><span class="co"># R script that we used to analyze these data for the study.</span></span></code></pre></div>
-<p><strong>Question 1.</strong> Why did you choose to test this model set? What factors did you consider in their development?</p>
-<p>Next we will use an information-theoretic approach to model selection based on Akaike’s information criterion. <strong>Another great example of how fast this field is moving forward</strong>: the last time I taught this class, I wrote <em>…we cannot rely on the canned functions from <code>AICcmodavg</code> package that have been so convenient for the past several weeks. The functions in that package have still not been adapted for use with linear mixed effects models or generalized linear models in <code>lme4</code>. Part of this reason lies in the philosophical debate within the statistical community about how many degrees of freedom we should use for the estimation of the random effect in these models. I won’t torture you with the gory details, but suffice it to say that this is yet another hotly contested issue in statistics that has not seen much resolution. Like I’ve been saying all week- this is what happens when you work on the bleeding edge of the razor. Luckily, we can write our own set of calculations, wrapped in a function called <code>aic.tableR</code> that we will <code>source</code> from a separate file.</em></p>
-<p>Let’s take a look at the function so we know how it works. <strong>Note</strong> that you will not be able to source the file because you don’t have it.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Just typing the name of any function in R (and running the code) </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># will allow us to see how it works!</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="kw">source</span>(<span class="st">&quot;aic.tableR.R&quot;</span>)</span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># Like this:    </span></span>
-<span id="cb6-5"><a href="#cb6-5"></a>  aic.tableR</span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co">## function(x, y=NULL){</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co">##       # Create a column to hold number of parameters for our model</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co">##         k &lt;- c()</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co">##       # Get number of parameters for each ith model in our candidate model set</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co">##         for (i in 1:length(x)){</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co">##         # Note that we are adding a one to the number of parameters in each</span></span>
-<span id="cb6-12"><a href="#cb6-12"></a><span class="co">##         # model. This is to account for the df needed to estimate the random</span></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co">##         # effect. I suppose we could use a different number or a series of</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co">##         # numbers if we were interested in evaluating the sensitivity of</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co">##         # model selection statistics to the</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co">##           k[i]&lt;-nrow(data.frame(summary(x[[i]])[10]))+1</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a><span class="co">##         }</span></span>
-<span id="cb6-18"><a href="#cb6-18"></a><span class="co">##       # Make blank columns to hold statistics</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a><span class="co">##         AICc &lt;- c(rep(0, length(k)))        # AICc score</span></span>
-<span id="cb6-20"><a href="#cb6-20"></a><span class="co">##         DeltaAIC &lt;- c(rep(0, length(k)))    # Delta AICc</span></span>
-<span id="cb6-21"><a href="#cb6-21"></a><span class="co">##         AICWeight &lt;- c(rep(0, length(k)))   # Wi</span></span>
-<span id="cb6-22"><a href="#cb6-22"></a><span class="co">##         Deviance &lt;- c(rep(0, length(k)))    # Model deviance</span></span>
-<span id="cb6-23"><a href="#cb6-23"></a><span class="co">##         R.lik&lt;-c(rep(0, length(k)))         # Rel. likelihood for wi</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a><span class="co">##       # Make a dataframe to hold results of model selection</span></span>
-<span id="cb6-25"><a href="#cb6-25"></a><span class="co">##         if(is.null(y)){ y=rep(&quot;&quot;, length(x))}</span></span>
-<span id="cb6-26"><a href="#cb6-26"></a><span class="co">## </span></span>
-<span id="cb6-27"><a href="#cb6-27"></a><span class="co">##         ranks&lt;-data.frame(y, k, AICc, DeltaAIC, AICWeight)</span></span>
-<span id="cb6-28"><a href="#cb6-28"></a><span class="co">##         names(ranks)[1] &lt;- &quot;Model&quot;</span></span>
-<span id="cb6-29"><a href="#cb6-29"></a><span class="co">##       # Get AICc for each model</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a><span class="co">##           # Note that we are penalizing the likelihood of each model based on</span></span>
-<span id="cb6-32"><a href="#cb6-32"></a><span class="co">##           # the number of parameters in each model in addition to sample size</span></span>
-<span id="cb6-33"><a href="#cb6-33"></a><span class="co">##           ranks$AICc[i] &lt;- AIC(x[[i]])+(((2*k[i])*(k[i]+1))/</span></span>
-<span id="cb6-34"><a href="#cb6-34"></a><span class="co">##             (nrow(est.mvmt)-k[i]-1))</span></span>
-<span id="cb6-35"><a href="#cb6-35"></a><span class="co">##         }</span></span>
-<span id="cb6-36"><a href="#cb6-36"></a><span class="co">##       # Sort the table by AICc to get them in order for calculations</span></span>
-<span id="cb6-37"><a href="#cb6-37"></a><span class="co">##         ranks &lt;- ranks[with(ranks, order(AICc)), ]</span></span>
-<span id="cb6-38"><a href="#cb6-38"></a><span class="co">##       # Calculate delta AIC</span></span>
-<span id="cb6-39"><a href="#cb6-39"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
-<span id="cb6-40"><a href="#cb6-40"></a><span class="co">##           ranks$DeltaAIC[i] &lt;- ranks$AICc[i]-ranks$AICc[1]</span></span>
-<span id="cb6-41"><a href="#cb6-41"></a><span class="co">##         }</span></span>
-<span id="cb6-42"><a href="#cb6-42"></a><span class="co">##       # Calculate the relative likelihood for each of the models</span></span>
-<span id="cb6-43"><a href="#cb6-43"></a><span class="co">##         for(i in 1:nrow(ranks)){</span></span>
-<span id="cb6-44"><a href="#cb6-44"></a><span class="co">##           R.lik[i] &lt;- exp(-.5*ranks$DeltaAIC[i])</span></span>
-<span id="cb6-45"><a href="#cb6-45"></a><span class="co">##         }</span></span>
-<span id="cb6-46"><a href="#cb6-46"></a><span class="co">##       # Calculate AIC weight for each of the models based on the relative</span></span>
-<span id="cb6-47"><a href="#cb6-47"></a><span class="co">##       # likelihood</span></span>
-<span id="cb6-48"><a href="#cb6-48"></a><span class="co">##         for(i in 1:length(R.lik)){</span></span>
-<span id="cb6-49"><a href="#cb6-49"></a><span class="co">##           ranks$AICWeight[i] &lt;- R.lik[i]/sum(R.lik[1:length(R.lik)])</span></span>
-<span id="cb6-50"><a href="#cb6-50"></a><span class="co">##         }</span></span>
-<span id="cb6-51"><a href="#cb6-51"></a><span class="co">##       # Round off the calculated columns to two decimal places because that is</span></span>
-<span id="cb6-52"><a href="#cb6-52"></a><span class="co">##       # really all we need for wi and we want the rest to be standardized.</span></span>
-<span id="cb6-53"><a href="#cb6-53"></a><span class="co">##         ranks[ , 3:5] &lt;- round(ranks[ , 3:5], 2)</span></span>
-<span id="cb6-54"><a href="#cb6-54"></a><span class="co">##       # Print the model selection results</span></span>
-<span id="cb6-55"><a href="#cb6-55"></a><span class="co">##         return(ranks)</span></span>
-<span id="cb6-56"><a href="#cb6-56"></a><span class="co">##   }</span></span></code></pre></div>
-<p>Fast forward a couple of years, and now model selection for GLMM has been implemented in the <code>AICcmodavg</code> package. So, you can now use the <code>aictab</code> function in the <code>AICcmodavg</code> package instead of the <code>aic.tableR</code> function we have defined above to calculate model selection statistics for your model list (thank goodness because I am having a heck of a time trying to source this through the web over the campus network). Go ahead: do it.</p>
-<p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model?</p>
-<!-- What is the probability that your top model is the best in the candidate set? Using the $w_i$ ratio that we introduced a few weeks back, how many times better supported is your best model compared to your second best model? -->
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create a separate variable for log movement rate</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>est_mvmt<span class="op">$</span>logRate &lt;-<span class="st"> </span><span class="kw">log</span>(est_mvmt<span class="op">$</span>Rate)</span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>There are a number of second-order polynomials included in the data set. These can be used to investigate non-linear effects of X on Y. For example, we might expect that movement <code>Rate</code> would increase initially with Photoperiod (daylight) and then decrease as daylight continues to increase during the summer because there is an optimal window for timing in this migration. If you choose to include one of these relationships in your model, you must include both the first and the second order term. For example, if you would like to investigate non-linear seasonal changes in movement <code>Rate</code> that are dependent upon photoperiod <code>Ph</code>, then you must include both <code>Ph</code> and <code>Ph2</code> in your model, like this:</li>
+</ol>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>photo_mod &lt;-<span class="st"> </span><span class="kw">lmer</span>(logRate <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Year) <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S, <span class="dt">data =</span> est_mvmt)</span></code></pre></div>
+<p>Make a list object of at least 5 models like this that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.</p>
+<p>Here is one more example of ONE FORM of the syntax we might use to fit a linear mixed model in the “lme4” package using <code>lme4::lmer()</code>. PLEASE NOTE: you do not need to build this model for the exercise. It just happened to be the first in the list of candidate models from the R script that we used to analyze these data for the real study.</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>move_mod_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">lmer</span>(</span>
+<span id="cb6-2"><a href="#cb6-2"></a>  <span class="kw">log</span>(Rate) <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Year) <span class="op">+</span><span class="st"> </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,</span>
+<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">data =</span> est_mvmt</span>
+<span id="cb6-4"><a href="#cb6-4"></a>)</span></code></pre></div>
+<p><strong>Question 1.</strong> Why did you choose to test this model set? What factors did you consider in their development and what hypotheses do these represent?</p>
+<p>Next we will use an information-theoretic approach to model selection based on Akaike’s information criterion. You can use the <code>aictab</code> function in the <code>AICcmodavg</code> package using the same methods we learned in <a href="https://danstich.github.io/worst-r/11-5-a-priori.html#tools-for-a-priori-model-selection">Chapter 11</a>.</p>
+<p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model (use <span class="math inline">\(\Delta\)</span>AIC and w<sub>i</sub> to decide)?</p>
 <p><strong>Question 3.</strong> Were there any variables that were clearly more important than others in your candidate set?</p>
-<p>Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model using the <code>plot()</code> function.</p>
-<p>Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values? Notice that there is only one plot for the diagnostics here. This is because we are pretty much only concerned with the fact that the residuals of the random effect are normally distributed. Now that’s what I call flexibility.</p>
+<p>Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model.</p>
+<p>Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values?</p>
 <p>Now go ahead and look at the summary of your best model.</p>
-<p><strong>Food for thought</strong>: What factors were included in your best model? Are they all considered significant at <span class="math inline">\(alpha\)</span> = 0.05?</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Note that if you have factors in your model,</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="co"># you can still get an overall significance</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="co"># level for your variables for GLMM and LMM using</span></span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># car::Anova. Here is the first one from the model</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># list from the paper:</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a>  <span class="kw">library</span>(car)</span>
-<span id="cb7-7"><a href="#cb7-7"></a>  <span class="kw">Anova</span>(Mov.mods[[<span class="dv">1</span>]], <span class="dt">Type=</span><span class="st">&#39;III&#39;</span>)</span></code></pre></div>
+<p><strong>Food for thought</strong>: What factors were included in your best model? Are they all considered significant at <span class="math inline">\(alpha\)</span> = 0.05? You could use the <code>Anova()</code> function from the <code>car</code> library to find out. This is what it would look like for the example model that I made above.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(car)</span>
+<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">Anova</span>(photo_mod, <span class="dt">Type =</span> <span class="st">&quot;III&quot;</span>)</span></code></pre></div>
 <pre><code>## Analysis of Deviance Table (Type II Wald chisquare tests)
 ## 
-## Response: log(Rate)
-##        Chisq Df Pr(&gt;Chisq)    
-## RKM  29.5398  1  5.478e-08 ***
-## RKM2  1.6987  1     0.1925    
-## Dis   5.2070  1     0.0225 *  
-## PhS  24.7536  1  6.515e-07 ***
-## Ph2S  0.5392  1     0.4628    
-## ---
-## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
-<p><strong>Question 4.</strong> Using the standardized regression coefficients, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results?</p>
-<p>Finally, let’s actually look at the interpretation of our random effect. We can interpret this term as the amount of variability that exists between individuals in these models. In general, if the variance for our error term (<code>TagID</code> in this case) is larger than the residual variance, then the random effect can be thought of as ‘important’. That is, a model that does not include the random effect should result in a much poorer fit than the model that includes the random effect.</p>
-<p>Philosophically, there is some reasonable opposition to the comparison of mixed effects models with their fixed effects counterparts, namely that exclusion of the fixed effect (if part of experimental design) is pseudo-replication (more specifically, it is ‘sacrificial pseudoreplication’ according to <a href = "www.masterenbiodiversidad.org/docs/asig3/Hurlbert_1984_Pseudoreplication.pdf">Hurlbert (1984)</a>.</p>
-<p>The <em>point</em> of all of this is that we included the random effect in order to account for issues with experimental design, so we might want to use it to temper our predictions to improve the accuracy of estimating population-level means.</p>
-<p>For the example model I have been using we can get a 95% CI on the mean movement rate of individuals as follows:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Get coefficients and ses</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  cc =<span class="st"> </span><span class="kw">fixef</span>(Mov.mods[[<span class="dv">1</span>]])[<span class="dv">1</span>]                   <span class="co"># Intercept</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>  ss =<span class="st"> </span><span class="kw">sqrt</span>(<span class="kw">unlist</span>(<span class="kw">VarCorr</span>(Mov.mods[[<span class="dv">1</span>]])))      <span class="co"># Random effects SD</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  se =<span class="st"> </span><span class="kw">summary</span>(Mov.mods[[<span class="dv">1</span>]])<span class="op">$</span>coefficients[<span class="dv">1</span>,<span class="dv">2</span>]  <span class="co"># Intercept se</span></span>
-<span id="cb9-5"><a href="#cb9-5"></a></span>
-<span id="cb9-6"><a href="#cb9-6"></a><span class="co"># Print the mean movement rate for</span></span>
-<span id="cb9-7"><a href="#cb9-7"></a><span class="co"># smolts (in body lengths per second). </span></span>
-<span id="cb9-8"><a href="#cb9-8"></a><span class="co"># Note that we need to use exp() because</span></span>
-<span id="cb9-9"><a href="#cb9-9"></a><span class="co"># the analysis was on the log scale.</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>  <span class="kw">exp</span>(cc)</span></code></pre></div>
-<pre><code>## (Intercept) 
-##    1.352833</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Now we can ask R to give us a 95% CI on the estimate Note that we</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># need to use exp() because the analysis was on the log scale.</span></span>
-<span id="cb11-3"><a href="#cb11-3"></a>  <span class="kw">exp</span>(<span class="kw">qnorm</span>(<span class="kw">c</span>(<span class="fl">0.025</span>,<span class="fl">0.975</span>), <span class="dt">mean=</span>cc,<span class="dt">sd=</span>ss<span class="op">+</span>se)) </span></code></pre></div>
-<pre><code>## [1] 1.303878 1.403625</code></pre>
-<p><strong>Question 5.</strong> Using the code above, do the same thing for your best model and report the model-predicted mean and 95% CI for smolt movement through the estuary. How does this compare to the median movement rate of of smolts in the data set? Why do you suppose this is? I will take one of two answers, only one is correct though.</p>
+## Response: logRate
+##       Chisq Df Pr(&gt;Chisq)
+## PhS  1.0354  1     0.3089
+## Ph2S 0.4842  1     0.4865</code></pre>
+<p><strong>Question 4.</strong> Comparing the magnitude of the (<em>standardized</em>) regression coefficients in your summary, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results? <em>Note: we can compare the magnitude of regression coefficients in this case because the variables were all transformed to z-scores for the analysis - something we’ve not discussed in detail</em></p>
+<p>To wrap things up, let’s go ahead and make predictions from our best models following the examples in <a href="https://danstich.github.io/worst-r/14-5-lmm-worked.html#random-intercepts-model">Chapter 14.5</a></p>
+<p>Here is what this would look like for my example model. Notice how similar this is to how we’ve plotted everything else since week 6?</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Simulate predictions from the relationship</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># stored in the model fit using our original data</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>log_preds &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(</span>
+<span id="cb9-4"><a href="#cb9-4"></a>  <span class="dt">merMod =</span> photo_mod,</span>
+<span id="cb9-5"><a href="#cb9-5"></a>  <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">1000</span>,</span>
+<span id="cb9-6"><a href="#cb9-6"></a>  <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>,</span>
+<span id="cb9-7"><a href="#cb9-7"></a>  <span class="dt">type =</span> <span class="st">&quot;linear.prediction&quot;</span>,</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  <span class="dt">which =</span> <span class="st">&quot;fixed&quot;</span>,</span>
+<span id="cb9-9"><a href="#cb9-9"></a>  <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span></span>
+<span id="cb9-10"><a href="#cb9-10"></a>)</span>
+<span id="cb9-11"><a href="#cb9-11"></a></span>
+<span id="cb9-12"><a href="#cb9-12"></a><span class="co"># Convert them to the real scale for plotting</span></span>
+<span id="cb9-13"><a href="#cb9-13"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(log_preds, <span class="dv">2</span>, exp)</span>
+<span id="cb9-14"><a href="#cb9-14"></a></span>
+<span id="cb9-15"><a href="#cb9-15"></a><span class="co"># Combine predictions with the original data</span></span>
+<span id="cb9-16"><a href="#cb9-16"></a>mer_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(est_mvmt, real_preds)</span>
+<span id="cb9-17"><a href="#cb9-17"></a></span>
+<span id="cb9-18"><a href="#cb9-18"></a><span class="kw">ggplot</span>(mer_preds, <span class="kw">aes</span>(<span class="dt">x =</span> PhS, <span class="dt">y =</span> Rate, <span class="dt">color =</span> Year, <span class="dt">fill =</span> Year)) <span class="op">+</span></span>
+<span id="cb9-19"><a href="#cb9-19"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>) <span class="op">+</span></span>
+<span id="cb9-20"><a href="#cb9-20"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lwr, <span class="dt">ymax =</span> upr, <span class="dt">color =</span> <span class="ot">NULL</span>), <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
+<span id="cb9-21"><a href="#cb9-21"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> fit), <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb9-22"><a href="#cb9-22"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Year) <span class="op">+</span></span>
+<span id="cb9-23"><a href="#cb9-23"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Standardized Photoperiod&quot;</span>) <span class="op">+</span></span>
+<span id="cb9-24"><a href="#cb9-24"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Rate&quot;</span>)</span></code></pre></div>
+<p><img src="hw10_files/figure-html/unnamed-chunk-10-1.png" width="672" /> Wow, mine looks like garbage because this predictor was not significant all on its own. Perhaps yours will look better?</p>
+<p><strong>Question 5.</strong> Use the <code>summary()</code> of your best model, in addition to the predictive plots you have made to report statistical significance of your explanatory variables and the direction of their relationships to <code>logRate</code>.</p>
 </div>
 </div>
 </div>

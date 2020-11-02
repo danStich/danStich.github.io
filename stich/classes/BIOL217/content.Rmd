@@ -100,8 +100,11 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **Generalized linear mixed models** </h2>
 ----
-<!-- <a href="./10_glmm.html"> Lecture tutorial </a><br>  -->
-<!-- <a href="./hw10.html"> Homework assignment </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+[Chapter 14: Linear mixed models](https://danstich.github.io/worst-r/14-Chapter14.html)<br>
+
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw10.html"> Linear mixed models </a>
 
 
 <h2 id = "multi"> **Multivariate statistics** </h2>
