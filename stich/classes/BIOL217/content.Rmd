@@ -102,6 +102,7 @@ The lecture tutorials provided below are linked directly to the online version o
 ----
 <h3 id = "multi">Lecture tutorials</h3>
 [Chapter 14: Linear mixed models](https://danstich.github.io/worst-r/14-Chapter14.html)<br>
+[Chapter 15: Generalized linear mixed models](https://danstich.github.io/worst-r/15-Chapter15.html)<br>
 
 <h3 id = "multi"> Homework exercises</h3>
 <a href="./hw10.html"> Linear mixed models </a>
