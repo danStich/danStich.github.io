@@ -83,7 +83,7 @@ I will place a few stipulations on this:
 est_mvmt$logRate <- log(est_mvmt$Rate)
 ```
 
-3) There are a number of second-order polynomials included in the data set. These can be used to investigate non-linear effects of X on Y. For example, we might expect that movement `Rate` would increase initially with Photoperiod (daylight) and then decrease as daylight continues to increase during the summer because there is an optimal window for timing in this migration. If you choose to include one of these relationships in your model, you must include both the first and the second order term. For example, if you would like to investigate non-linear seasonal changes in movement `Rate` that are dependent upon photoperiod `Ph`, then you must include both `Ph` and `Ph2` in your model, like this: 
+3) There are a number of second-order polynomials included in the data set. These can be used to investigate non-linear effects of X on Y. For example, we might expect that movement `Rate` would increase initially with Photoperiod (daylight) and then decrease as daylight continues to increase during the summer because there is an optimal window for timing in this migration. If you choose to include one of these relationships in your model, you must include both the first and the second order term. For example, if you would like to investigate non-linear seasonal changes in movement `Rate` that are dependent upon photoperiod `PhS`, then you must include both `PhS` and `Ph2S` in your model, like this: 
  
 ```{r}
 photo_mod <- lmer(logRate ~ (1 | Year) + PhS + Ph2S, data = est_mvmt)
@@ -156,7 +156,7 @@ MovNames[26] <- "RKM + Dis + Org + RelKM + PhS + PhS2"
 Here is one more example of ONE FORM of the syntax we might use to fit a linear mixed model in the "lme4" package using `lme4::lmer()`. PLEASE NOTE: you do not need to build this model for the exercise. It just happened to be the first in the list of candidate models from the R script that we used to analyze these data for the real study.
 ```{r, eval = TRUE, results="hide"}
 move_mod_01 <- lmer(
-  log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + PhS + Ph2S,
+  logRate ~ (1 | Year) + RKM + RKM2 + Dis + PhS + Ph2S,
   data = est_mvmt
 )
 ```
