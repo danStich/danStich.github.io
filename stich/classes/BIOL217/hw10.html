@@ -539,6 +539,25 @@ Introduction
 <span id="cb9-23"><a href="#cb9-23"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Standardized Photoperiod&quot;</span>) <span class="op">+</span></span>
 <span id="cb9-24"><a href="#cb9-24"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Rate&quot;</span>)</span></code></pre></div>
 <p><img src="hw10_files/figure-html/unnamed-chunk-10-1.png" width="672" /> Wow, mine looks like garbage because this predictor was not significant all on its own. Perhaps yours will look better?</p>
+<p>If you are having trouble with the <code>merTools</code> package (common on older versions of OS-X) you can also make predictions using the built-in <code>predict()</code> function as we’ve done in the past, you just won’t have sweet (garbage?) prediction intervals.</p>
+<p>Here is how:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Make predictions from the model:</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a>log_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fit =</span> <span class="kw">predict</span>(photo_mod, <span class="dt">type=</span><span class="st">&quot;link&quot;</span>))</span>
+<span id="cb10-3"><a href="#cb10-3"></a></span>
+<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Convert them to the real scale for plotting</span></span>
+<span id="cb10-5"><a href="#cb10-5"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(log_preds, <span class="dv">2</span>, exp)</span>
+<span id="cb10-6"><a href="#cb10-6"></a></span>
+<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Combine predictions with the original data</span></span>
+<span id="cb10-8"><a href="#cb10-8"></a>est_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(est_mvmt, real_preds)</span>
+<span id="cb10-9"><a href="#cb10-9"></a></span>
+<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">ggplot</span>(est_preds, <span class="kw">aes</span>(<span class="dt">x =</span> PhS, <span class="dt">y =</span> Rate, <span class="dt">color =</span> Year, <span class="dt">fill =</span> Year)) <span class="op">+</span></span>
+<span id="cb10-11"><a href="#cb10-11"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>) <span class="op">+</span></span>
+<span id="cb10-12"><a href="#cb10-12"></a><span class="st">  </span><span class="co"># geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +</span></span>
+<span id="cb10-13"><a href="#cb10-13"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> fit), <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
+<span id="cb10-14"><a href="#cb10-14"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Year) <span class="op">+</span></span>
+<span id="cb10-15"><a href="#cb10-15"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Standardized Photoperiod&quot;</span>) <span class="op">+</span></span>
+<span id="cb10-16"><a href="#cb10-16"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Rate&quot;</span>)</span></code></pre></div>
+<p><img src="hw10_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><strong>Question 5.</strong> Use the <code>summary()</code> of your best model, in addition to the predictive plots you have made to report statistical significance of your explanatory variables and the direction of their relationships to <code>logRate</code>.</p>
 </div>
 </div>

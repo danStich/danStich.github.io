@@ -216,6 +216,30 @@ ggplot(mer_preds, aes(x = PhS, y = Rate, color = Year, fill = Year)) +
 ```
 Wow, mine looks like garbage because this predictor was not significant all on its own. Perhaps yours will look better?
 
+If you are having trouble with the `merTools` package (common on older versions of OS-X) you can also make predictions using the built-in `predict()` function as we've done in the past, you just won't have sweet (garbage?) prediction intervals.
+
+Here is how:
+
+```{r}
+# Make predictions from the model:
+log_preds <- data.frame(fit = predict(photo_mod, type="link"))
+
+# Convert them to the real scale for plotting
+real_preds <- apply(log_preds, 2, exp)
+
+# Combine predictions with the original data
+est_preds <- data.frame(est_mvmt, real_preds)
+
+ggplot(est_preds, aes(x = PhS, y = Rate, color = Year, fill = Year)) +
+  geom_point(alpha = 0.10) +
+  # geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +
+  geom_line(aes(y = fit), lwd = 1, alpha = 0.50) +
+  facet_wrap(~Year) +
+  xlab("Standardized Photoperiod") +
+  ylab("Rate")
+
+```
+
 **Question 5.** Use the `summary()` of your best model, in addition to the predictive plots you have made to report statistical significance of your explanatory variables and the direction of their relationships to `logRate`.
 
 
