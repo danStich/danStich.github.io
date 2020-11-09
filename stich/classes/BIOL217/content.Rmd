@@ -110,8 +110,11 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **Multivariate statistics** </h2>
 ----
-<!-- <a href="./11_multivariate.html"> Lecture tutorial </a><br>  -->
-<!-- <a href="./hw11.html"> Homework assignment </a>  -->
+<h3 id = "multi">Lecture tutorials</h3>
+<a href="./11_multivariate.html"> Intro to multivariate statistics </a><br>
+
+<h3 id = "multi"> Homework exercises</h3>
+<a href="./hw11.html"> NMDS </a>
 
 
 <h2 id = "multi"> **Classification and regression trees (CART)** </h2>

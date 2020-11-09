@@ -7,9 +7,9 @@
 
 <h2 id="multi"> Introduction </h2>
  
-This week, we are moving into a very different realm of quantitative biology. For the first two thirds of this class, we focused on what to do in specific situations for which we were dealing only with a single, independent response at a time. These methods have taken us a long way along the road from dealing with comparisons of distributions, means, and examining correlations and effect sizes in a generalized modeling framework used to analyze univariate and bivariate relationships with one response and one or more explanatory variables of interest. We have cast this largely as a framework for modern hypothesis testing through deductive and inductive inference.
+This week, we are moving into a very different realm of quantitative biology. So far in this class, we focused on what to do in specific situations for which we were dealing only with a single, independent response at a time. These methods have taken us a long way along the road from dealing with comparisons of distributions, means, and examining correlations and effect sizes in a generalized modeling framework used to analyze univariate and bivariate relationships with one response and one or more explanatory variables of interest. We have cast this largely as a framework for modern hypothesis testing through deductive and inductive inference.
 
-Now, we will set all of this aside for a couple of weeks and move into the realm of descriptive and exploratory data analyses in those cases for which we have multiple response variables that are related to one another. This can be a rather common problem in biology and ecology because of the interelatedness of variables in natural systems. Very often, our goal is not to test a specific hypothesis but rather to do some exploratory analyses that describe the patterns that we see in complex systems and help us to develop hypotheses that we might test down the road with other methods. This is the realm of multivariate data analysis!
+Now, we will set all of this aside for a couple of weeks and move into the realm of descriptive and exploratory data analyses in those cases for which we have multiple response variables that are related to one another. This can be a rather common problem in biology and ecology because of the interelatedness (definitely a word) of variables in natural systems. Very often, our goal is not to test a specific hypothesis but rather to do some exploratory analyses that describe the patterns that we see in complex systems and help us to develop hypotheses that we might test down the road with other methods. This is the realm of multivariate data analysis!
 
 
 ## Principle component analysis 
@@ -24,24 +24,26 @@ Adapted from Thiago G. Martins (2013). Let's use the iris data in R to demonstra
 
 ```{r}
 # Load data
-  data(iris)
+data(iris)
 
 # Have a look at the data
-  head(iris, 10)
+head(iris, 10)
 
 # Apply a log transformation to the morphometric data to make sure that
 # we are working on a normal(ish) distribution and get rid of skew
-  log.ir = log(iris[, 1:4])
-  ir.species = iris[, 5]
+log_ir <- log(iris[, 1:4])
+
+# Get species as a vector
+ir_species <- iris[, 5]
 ```
  
 Run the PCA. In most cases, we want to work with standardized values to avoid effects of variable scale on our interpretation of the results, so we center and scale the variables inside the call to `prcomp`.
 
 ```{r}
-  ir.pca = prcomp(log.ir, center = TRUE, scale. = TRUE)
+ir_pca <- prcomp(log_ir, center = TRUE, scale. = TRUE)
 
 # Print the results for our PCA
-  print(ir.pca)
+print(ir_pca)
 ```
 
 The summary of the PCA includes the standard deviations of each of the four principle components, in addition to their rotations (loadings).
@@ -50,10 +52,10 @@ We can also look at a plot of how the standard deviation of our principle compon
  
 ```{r}  
 # We can look at a barplot of this (default)
-  plot(ir.pca)
+plot(ir_pca)
 
 # But a line graph is a little easier to interpret
-  plot(ir.pca, type='l', lwd=2, col='blue')
+plot(ir_pca, type = "l", lwd = 2, col = "blue")
 ```
 
 These plots help us determine how many of the principle components we need to retain for further analyses. In this case, it is pretty clear to see that we probably only need to keep the first two components of the PCA to achieve an adequate description of the data. After that point, the amount of variation that we explain trails off very quickly.
@@ -61,7 +63,7 @@ These plots help us determine how many of the principle components we need to re
 For a more-reliable approach to this, we can also look at the summary of our PCA to compare relative importance of the different components and the amount of variation that each explains.
 
 ```{r}  
-  summary(ir.pca)
+summary(ir_pca)
 ```
 
 Let's take a closer look. Our summary provides us with the following info for each of the principle components in our analysis
@@ -72,7 +74,7 @@ Let's take a closer look. Our summary provides us with the following info for ea
 
 3. Cumulative proportion- total variance explained by our model
 
-A couple of things should jump right out at you here. Right off the bat, it is clear that the first component explains the most variance, and that additions beyond the second component improve the picture minimally at best. Second, by the time we reach the second component, we have explained 96% of the total variance in our data, so we shoulde be pretty happy with this. The take home is that these data will be conducive to projecting onto 2-dimensional space!
+A couple of things should jump right out at you here. Right off the bat, it is clear that the first component explains the most variance, and that additions beyond the second component improve the picture minimally at best. Second, by the time we reach the second component, we have explained 96% of the total variance in our data, so we should be pretty happy with this. The take home is that these data will be conducive to projecting onto 2-dimensional space!
 
 There are multiple tools for visualizing our data in 2-d space (commonly referred to as a "biplot").
 
@@ -80,47 +82,48 @@ For the "prettier" option, you will need to install a couple of packages Note th
 
 ```{r, warning=FALSE, message=FALSE}
 # devtools package
-  #install.package('devtools')
-  library(devtools)
+# install.package('devtools')
+library(devtools)
 
 # ggbiplot and vqv packages from a git hub repository
-  #install_github("vqv/ggbiplot")
-  library(ggbiplot)
+# install_github("vqv/ggbiplot")
+library(ggbiplot)
 ```
 
-The `ggbiplot` package makes some pretty nice biplots, but the syntax for these plots (and other `ggplot` packages) is quite different from what we have been working with in the base graphics.
+The `ggbiplot` package makes some pretty nice biplots, but as always we need to give up a little control to use them. Note that if you have trouble installing these packages, it is not required for the homework this week and I'll provide alternatives below.
 
 ```{r}
 # First, we have to specify the graphical parameters
 # in the function
-  g = ggbiplot(ir.pca, obs.scale = 1, var.scale = 1,
-                groups = ir.species, ellipse = TRUE,
-                circle = TRUE)
-# Now we specify the colors that we want to use
-  g = g + scale_color_discrete(name = '')
-# Add a legend
-  g = g + theme(legend.direction = 'horizontal',
-                legend.position = 'top')
-# And finally, we can actually print the biplot
-# to our graphics device
-  print(g)
+ggbiplot(ir_pca,
+  obs.scale = 1, var.scale = 1,
+  groups = ir_species, ellipse = TRUE,
+  circle = TRUE
+) + 
+scale_color_discrete(name = "") +
+theme(
+  legend.direction = "horizontal",
+  legend.position = "top"
+)
+
 ```
 
 If you have difficulty loading these packages, we could go ahead and make a *very* clunky biplot with base graphics, but this doesn't really give us the nice explanation that we get from `ggbiplot`.
  
 ```{r}
 # Plot the PCA
-  biplot(ir.pca)
+biplot(ir_pca)
 ```
 
 We can extract the raw PCA output and use this, too. This will get us a nicer representation of the data in 2-d space and will show us how our species fall out with respect to the first two components.
 
 ```{r}
 # Plot the PCA (again)
-  biplot(ir.pca)
+biplot(ir_pca)
+
 # Plot the points with species-specific colors
-  raw = ir.pca$x[,1:2]
-  points(raw[,1], raw[,2], col=rainbow(3)[ir.species], pch=20)
+raw <- ir_pca$x[, 1:2]
+points(raw[, 1], raw[, 2], col = rainbow(3)[ir_species], pch = 20)
 ```
 
 ## Multivariate analysis of variance (MANOVA) 
@@ -129,24 +132,30 @@ This is great for visualizing data, but what if we actually want to test the hyp
 
 ```{r}
 # Let's start by shortening the names to make the code shorter:
-  names(iris) <- c("SL", "SW", "PL", "PW", "SPP")
+names(iris) <- c("SL", "SW", "PL", "PW", "SPP")
 
 # Now, we can fit a MANOVA to see if the species differ WRT traits
-  manova.iris <- lm(cbind(SL, SW, PL, PW) ~ SPP, data=iris)
+manova_iris <- lm(cbind(SL, SW, PL, PW) ~ SPP, data = iris)
 ```
 
 We can summarize the statistical results, and we see that there are significant differences across responses between species.
 
 ```{r, warning=FALSE, message=FALSE}
 # Load the car package
-  library(car)
+library(car)
+
 # Do the type II Anova test on the object
-  results = Anova(manova.iris)
+results <- Anova(manova_iris)
+
 # Print the overall results, default is Pillai's statistical test
-  print(results)
-# Or, you could look at several different significance tests for this.
-# In this case they all tell us the same thing
-  summary(results)
+print(results)
+
+```
+
+Or, you could look at several different significance tests for this. In this case they all tell us the same thing.
+```{r}
+summary(results)
+
 ```
 
 ## Non-metric multidimensional scaling 
@@ -159,85 +168,98 @@ Non-metric multidimensional scaling (NMDS) is very similar in nature to PCA, but
 
 Let's have a look at an example that uses some simulated community data to show how we run the analyses, do some data visualization, and interpret the results.
 
+We'll start by simulating some community data. This will end up being a matrix with 10 plant communities in rows and 30 species in the columns. The matrix cells are counts of each species at each site. We assign the first five plant communities to `Treatment1` and the last five plant communities to `Treatment2`.
+
 ```{r, warning=FALSE, message=FALSE}
 # install.packages('vegan') # Uncomment to install
-  library(vegan)
+library(vegan)
 
 # Let's start by simulating some data that we can use for this example
 # Set the seed for reproducibility
-  set.seed(2)
+set.seed(2)
 
 # Now, simulate the data. We tell R to turn the data into a matrix right up
 # front
-  community_matrix = matrix(
-    # Take 300 samples between 1 and 100, with replacement
-      sample(1:100, 300, replace=T),
-    # Tell R that we want the matrix we are making to have 10 rows, so
-    # it will have 30 columns by default
-      nrow=10,
-    # We will call the rows community 1 through 10 and the columns will be
-    # species 1 through 30
-      dimnames=list(paste("community", 1:10, sep=""), paste("sp", 1:30, sep=""))
-    )
+community_matrix <- matrix(
+  # Take 300 samples between 1 and 100, with replacement
+  sample(1:100, 300, replace = T),
+  # Tell R that we want the matrix we are making to have 10 rows, so
+  # it will have 30 columns by default
+  nrow = 10,
+  # We will call the rows community 1 through 10 and the columns will be
+  # species 1 through 30
+  dimnames = list(paste("community", 1:10, sep = ""), paste("sp", 1:30, sep = ""))
+)
 
-  # We define two treatments, separately from the matrix to which we will
-  # assign the communities.
-    treat=c(rep("Treatment1",5),rep("Treatment2",5))
+# We define two treatments, separately from the matrix to which we will
+# assign the communities.
+treat <- c(rep("Treatment1", 5), rep("Treatment2", 5))
+
 ```
 
-Now, we will fit the NMDS using the `metaMDS` function in the vegan package
+You don't need to understand the simulation code here, but do have a look at the `community_matrix` object that results from the code above:
+
+```{r eval = FALSE}
+View(community_matrix)
+```
+
+
+Now, we will fit the NMDS using the `metaMDS()` function in the `vegan` package.
 
 ```{r}
 # Fit the NMDS
-  example_NMDS=metaMDS(
-    community_matrix, # Community-by-species matrix
-    k=2 # The number of reduced dimensions we want to use
-  )
+example_NMDS <- metaMDS(
+  community_matrix, # Community-by-species matrix
+  k = 2 # The number of reduced dimensions we want to use
+)
 
 # Let's take a look at the summary to make sure we know what is going on here
-  print(example_NMDS)
+print(example_NMDS)
 
 # Take a look at the stress plot for the ordination
-  stressplot(example_NMDS)
+stressplot(example_NMDS)
+
 ```
 
 Now we can plot the ordination for our NMDS given that we are satisfied with the stress parameter and the convergence
 
 ```{r}
 # First, make a blank plot of the nmds
-  ordiplot(example_NMDS, type="n")
- 
+ordiplot(example_NMDS, type = "n")
+
 # Now, we can add some ellipses to show
 # the grouping indicated by nmds
-  ordiellipse(example_NMDS,
-              groups=treat,
-              draw="polygon",
-              col="grey90",
-              label=F)
+ordiellipse(example_NMDS,
+  groups = treat,
+  draw = "polygon",
+  col = "grey90",
+  label = F
+)
 
 # Add the raw species data. Note that no
 # matter what the columns actually represent,
-# you will always use `species` for these 
-# plots because that is what these tools 
+# you will always use `species` for these
+# plots because that is what these tools
 # were originally designed for.
-  orditorp(example_NMDS,
-           display="species",
-           col="red",
-           air=0.01
-           )
+orditorp(example_NMDS,
+  display = "species",
+  col = "red",
+  air = 0.01
+)
 
 # Next, add the `communities` to the plot.
-# Same as above, these will always be called 
-# `sites` even if that isn't what your rows 
-# represent. It is just a convention based 
+# Same as above, these will always be called
+# `sites` even if that isn't what your rows
+# represent. It is just a convention based
 # on the purpose for which the tools were built.
-  orditorp(example_NMDS, 
-           display="sites", 
-           col=c(rep("green", 5), 
-                 rep("blue", 5)
-                 ), 
-           air=0.01,cex=1.25
-           )
+orditorp(example_NMDS,
+  display = "sites",
+  col = c(
+    rep("green", 5),
+    rep("blue", 5)
+  ),
+  air = 0.01, cex = 1.25
+)
 ```
 
 That looks pretty good, but we need to do some actual statistics if we want to draw inferences about how the species in this community tend to cluster together.
@@ -258,12 +280,13 @@ Let's take a look at the dissimilarity matrix, just so we have an idea what we a
 vegdist(community_matrix)
 ```
 
-This matrix gives a measure of distance between any two communities in the data with respect to the species that those communities contain. If we use ANOSIM to test for differences between `treatment1` and `treatment2`, what we are really testing is the null hypothesis that the dissimilarity between communities in different treatments is less than or equal to the dissimilarity between communities in the same treatments. If we reject this null hypothesis, then the alternative is that communities exposed to the different treatments are more different from one another than communities that are exposed to the same treatment.
+This matrix gives a measure of distance between any two communities in the data with respect to the species that those communities contain. If we use ANOSIM to test for differences between `Treatment1` and `Treatment2`, what we are really testing is the null hypothesis that the dissimilarity between communities in different treatments is less than or equal to the dissimilarity between communities in the same treatments. If we reject this null hypothesis, then the alternative is that communities exposed to the different treatments are more different from one another than communities that are exposed to the same treatment.
 
 ```{r} 
 # Fit the ANOSIM model
-  test = anosim(vegdist(community_matrix), grouping = treat)
-  summary(test)
+test <- anosim(vegdist(community_matrix), grouping = treat)
+summary(test)
+
 ```
 
 Here, we see that the dissimilarity between classes is greater than the dissimilarity within classes (p = `r test$signif`), so we reject the null hypothesis. Do be careful to understand that the ANOSIM statistic `R` is **not the same** as the correlation coefficient `r`.

@@ -441,219 +441,207 @@ Introduction
 </h2>
 <p>This week we are going to tak a hard left (or right depending on which is your dominant hand) and begin to discuss methods with which we can examine <em>emergent patterns</em> in complex, messy data sets. To begin these discussions, we will take a look at the use of multivariate techniques this week. This class of analysis kind of stands on its own compared to a lot of the other methods we have discussed so far this semester. One of the biggest changes that we will see in this lab is that we are no longer working with a single response variable and one or more explanatory variables, but rather <em>many</em> response variables and one or more explanatory variables. These methods rely heavily on linear algebra, as we have discussed in class, and more broadly these and other machine-learning techniques make extensive use of distance-based measurements between observations. This week, we will try to give you a taste of what these tools can be used for. Next week, we will continue to push into some (slightly) more-advanced techniques.</p>
 <p>By the end of this lab, you should 1) understand why we use multivariate analyses and how they do or do not fit in the context of what we have discussed so far, 2) be comfortable analyzing and visualizing associations with these methods, and 3) be able to interpret the results of some basic multivariate analyses.</p>
-<div id="exercises" class="section level2">
-<h2>Exercises</h2>
-<h3 id="multi">
-The data
-</h3>
-<p>This week we will work with a data set from a student in the Biology Department at SUNY Oneonta!! These data are from a study that examined the number of plant species at 4 different field sites in New York in the presence or absence of turtles.</p>
-<p>Let’s start by reading in the data file.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Read in the data file</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a>  turtles =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;indTurtles.csv&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a>  </span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="co"># Have a look at the data</span></span>
-<span id="cb1-5"><a href="#cb1-5"></a>  <span class="kw">str</span>(turtles)</span></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    32 obs. of  38 variables:
-##  $ SITE                        : Factor w/ 4 levels &quot;AC&quot;,&quot;CB&quot;,&quot;CC&quot;,..: 3 3 3 3 1 1 1 1 4 4 ...
-##  $ TURTLE                      : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ STREAM.WIDTH..M.            : num  8.2 17.5 11.6 10.8 20.2 ...
-##  $ AVG.FLOW..M.S.              : num  0.613 0.471 0.493 0.307 0 ...
-##  $ DISTANCE..M.                : num  8.62 5.7 16.6 4.5 2.1 3.1 1.9 2.4 6.6 2.2 ...
-##  $ CANOPY                      : num  0.542 0.594 0.958 0.532 0.818 ...
-##  $ ASSESSMENT                  : int  156 125 153 142 86 145 146 151 121 150 ...
-##  $ Artemisia.sp.               : int  3 3 0 3 0 0 0 0 0 0 ...
-##  $ Rumex.sp.                   : int  1 0 0 0 0 0 0 0 0 0 ...
-##  $ Symphyotrichium.puniceum    : int  1 2 0 0 1 2 0 2 0 0 ...
-##  $ Ranunculus.sp.              : int  1 0 0 0 3 3 3 1 0 0 ...
-##  $ Juncaceae                   : int  1 0 0 0 0 0 0 1 0 1 ...
-##  $ Oxalis.sp.                  : int  1 0 0 0 0 2 1 1 2 0 ...
-##  $ Rosa.multiflora             : int  0 1 0 0 0 0 0 0 2 1 ...
-##  $ Stellaria.media             : int  0 1 0 0 0 0 0 0 2 0 ...
-##  $ Impatiens.capensis          : int  0 1 0 0 0 1 0 1 0 1 ...
-##  $ Galium.palustre             : int  0 1 0 0 0 3 0 0 0 0 ...
-##  $ Poaceae                     : int  0 1 0 1 1 0 1 2 2 2 ...
-##  $ Symphyotrichium.ericoides   : int  0 0 1 0 0 0 0 0 0 0 ...
-##  $ Solidago.sp.                : int  0 0 1 2 1 2 1 0 0 2 ...
-##  $ Eupatorium.perfoliatum      : int  0 0 0 2 0 0 0 0 0 0 ...
-##  $ Euthamia.graminifolia       : int  0 0 0 2 2 2 1 1 0 1 ...
-##  $ Menthus.sp.                 : int  0 0 0 1 0 1 0 1 0 0 ...
-##  $ Polygonum.sp.               : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Salix.sp.                   : int  0 0 0 0 2 0 2 1 0 0 ...
-##  $ Fragaria.virginiana         : int  0 0 0 0 1 2 0 1 2 1 ...
-##  $ Alnus.sp.                   : int  0 0 0 0 0 0 1 0 0 0 ...
-##  $ Angelica.atropurpurea       : int  0 0 0 0 0 0 1 1 0 0 ...
-##  $ Pastinaca.sativa            : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Bryophyta                   : int  0 0 0 0 0 0 0 0 0 3 ...
-##  $ Taraxacum.officinale        : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Alliaria.petiolata          : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Symphyotrichum.novae.angliae: int  0 0 0 0 0 0 0 0 3 1 ...
-##  $ Myosotis.sp.                : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Veronica.sp.                : int  0 0 0 0 0 0 0 0 0 0 ...
-##  $ Snails                      : int  0 0 0 0 0 7 2 0 10 0 ...
-##  $ Slugs                       : int  0 4 2 1 0 2 4 0 14 0 ...
-##  $ Other.organisms             : int  4 2 1 2 0 1 1 0 0 1 ...</code></pre>
-<p>The <em>very</em> brief decsription of the data is as follows:</p>
-<pre><code>  # Site:     Site ID
-  # turtle:   Turtles present or absent
-  # 3-6:      Habitat variables
-  # 8-35:     Plant taxa counts
-  # Snails:   Snail counts
-  # Slugs:    Number of slugs
-  # Other.organisms:  Number of other organisms </code></pre>
-<div id="pca-for-habitat-variables" class="section level3">
-<h3>PCA for habitat variables</h3>
-<p>First, let’s start out by looking at how habiat variables differ between sites. We can use PCA to ordinate and visualize the habitats for us in just a few dimensions. Then we can test to see if certain combinations of habitat variables are associated with the different sites using a multivariate analysis of variance (MANOVA).</p>
-<p>First, we will need to reformat our data a little bit to get it in shape for R. I’ve done some of this ahead of time to make things go a little more quickly- mostly deleting blank rows, and some calculations that were done in Excel<span class="math inline">\(^\circledR\)</span>.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Make a matrix out of the habitat data</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>  ttl.mat =<span class="st"> </span>turtles[ , <span class="dv">3</span><span class="op">:</span><span class="dv">6</span>]</span></code></pre></div>
-<p>Next, fit a PCA to the habitat data, ‘<code>ttl.mat</code>’. See the <a href="11_multivariate.html">lecture module</a> for a walk through on how to do this. Use the <code>summary</code> function to look at the results of the PCA.</p>
-<p><strong>Question 1.</strong> How much of the variance is explained by the first two principal components? How many components do you need to go to before you have explained 95% of the variance?</p>
-<p>Remember that another way we can get this information is by plotting the SD of each principal component in order.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Plot the SD of the PCs</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>  <span class="kw">plot</span>(ttl.pca, <span class="dt">type=</span><span class="st">&#39;l&#39;</span>, <span class="dt">lwd=</span><span class="dv">2</span>, <span class="dt">col=</span><span class="st">&#39;blue&#39;</span>)</span></code></pre></div>
-<p><img src="hw11_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
-<p>Now, we can plot the PCA in two dimensional space reasonably well. We’ll use the pretty graphs that we talked about earlier this week for demonstration.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># There are multiple tools for visualizing</span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># our data in 2-d space (commonly</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># referred to as a &#39;biplot&#39;)</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a><span class="co"># For the &quot;prettier&quot; option, you will</span></span>
-<span id="cb6-5"><a href="#cb6-5"></a><span class="co"># need to install a couple of packages</span></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># devtools package</span></span>
-<span id="cb6-7"><a href="#cb6-7"></a>  <span class="co">#install.packages(&#39;devtools&#39;)</span></span>
-<span id="cb6-8"><a href="#cb6-8"></a>  <span class="kw">library</span>(devtools)</span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># ggbiplot and vqv packages from a git hub repository</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a>  <span class="co">#install_github(&quot;vqv/ggbiplot&quot;)</span></span>
-<span id="cb6-11"><a href="#cb6-11"></a>  <span class="kw">library</span>(ggbiplot)</span>
-<span id="cb6-12"><a href="#cb6-12"></a></span>
-<span id="cb6-13"><a href="#cb6-13"></a><span class="co"># The ggbiplot package makes some pretty nice biplots,</span></span>
-<span id="cb6-14"><a href="#cb6-14"></a><span class="co"># but the syntax for these plots (and other ggplot packages)</span></span>
-<span id="cb6-15"><a href="#cb6-15"></a><span class="co"># is quite different from what we have</span></span>
-<span id="cb6-16"><a href="#cb6-16"></a><span class="co"># been working with in the base graphics</span></span>
-<span id="cb6-17"><a href="#cb6-17"></a></span>
-<span id="cb6-18"><a href="#cb6-18"></a>  <span class="co"># First, we have to specify the graphical parameters in the function</span></span>
-<span id="cb6-19"><a href="#cb6-19"></a>    g =<span class="st"> </span><span class="kw">ggbiplot</span>(ttl.pca, <span class="dt">obs.scale =</span> <span class="dv">1</span>, <span class="dt">var.scale =</span> <span class="dv">1</span>,</span>
-<span id="cb6-20"><a href="#cb6-20"></a>                  <span class="dt">groups =</span> turtles<span class="op">$</span>SITE, <span class="dt">ellipse =</span> <span class="ot">TRUE</span>,</span>
-<span id="cb6-21"><a href="#cb6-21"></a>                  <span class="dt">circle =</span> <span class="ot">TRUE</span>)</span>
-<span id="cb6-22"><a href="#cb6-22"></a></span>
-<span id="cb6-23"><a href="#cb6-23"></a>  <span class="co"># Now we specify the colors that we want to use</span></span>
-<span id="cb6-24"><a href="#cb6-24"></a>    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">scale_color_discrete</span>(<span class="dt">name =</span> <span class="st">&#39;&#39;</span>)</span>
-<span id="cb6-25"><a href="#cb6-25"></a>    </span>
-<span id="cb6-26"><a href="#cb6-26"></a>  <span class="co"># Add a legend</span></span>
-<span id="cb6-27"><a href="#cb6-27"></a>    g =<span class="st"> </span>g <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">legend.direction =</span> <span class="st">&#39;horizontal&#39;</span>, <span class="dt">legend.position =</span> <span class="st">&#39;top&#39;</span>)</span>
-<span id="cb6-28"><a href="#cb6-28"></a>    </span>
-<span id="cb6-29"><a href="#cb6-29"></a>  <span class="co"># And finally, we can actually print</span></span>
-<span id="cb6-30"><a href="#cb6-30"></a>  <span class="co"># the biplot to our graphics device</span></span>
-<span id="cb6-31"><a href="#cb6-31"></a>    <span class="kw">print</span>(g)  </span></code></pre></div>
-<p><img src="hw11_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<!-- [](pca.png) -->
-<p>Wrap up this part of the analysis by using a multivariate analysis of variance (MANOVA) to see if the habitat variables actually vary significantly between sites. If you can’t install the <code>car</code> package to use the <code>Anova</code> function needed to calculate Type II sum of squares for this test, then you can use the <code>manova</code> function in base R to fit the model instead of the <code>lm</code> function that we used in the <a href="11_multivariate.html">lecture module</a>. The syntax is virtually identical. Note that either way, your response variable should be <code>as.matrix(ttl.mat)</code> to conform to the function’s requirement that a matrix be passed to the argument because we subsetted the dataframe above and neither <code>lm</code> or <code>manova</code> will take a dataframe as an argument.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># MANOVA    </span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>  <span class="kw">summary</span>(<span class="kw">manova</span>(<span class="kw">as.matrix</span>(ttl.mat)<span class="op">~</span>turtles[,<span class="dv">1</span>]))</span>
-<span id="cb7-3"><a href="#cb7-3"></a>    </span>
-<span id="cb7-4"><a href="#cb7-4"></a><span class="co"># This analysis indicates that the sites (turtles[,1])</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a><span class="co"># vary significantly with respect to the habitat</span></span>
-<span id="cb7-6"><a href="#cb7-6"></a><span class="co"># measurements that were taken at alpha = 0.05.</span></span>
-<span id="cb7-7"><a href="#cb7-7"></a><span class="op">-------------------------------------------------------------------------------</span><span class="st">    </span></span>
-<span id="cb7-8"><a href="#cb7-8"></a><span class="co"># Parameter       Df    Pillai    Approx. F    num Df    den Df       Pr(&gt;F)   </span></span>
-<span id="cb7-9"><a href="#cb7-9"></a><span class="op">-------------------------------------------------------------------------------</span></span>
-<span id="cb7-10"><a href="#cb7-10"></a><span class="co"># turtles[, 1]    3   0.87259       2.7686        12        81      0.003335 </span></span>
-<span id="cb7-11"><a href="#cb7-11"></a><span class="co"># Residuals      28                                           </span></span>
-<span id="cb7-12"><a href="#cb7-12"></a><span class="op">-------------------------------------------------------------------------------</span></span></code></pre></div>
-<p><strong>Question 2.</strong> Does the test you conducted indicate that the habitat variables vary significantly between sites at <span class="math inline">\(\alpha\)</span> = 0.05?</p>
+<p>We’ll be working with the <code>tidyverse</code> as always. We’ll also play with some functions from the <code>vegan</code> package that we demonstrated in the lecture tutorial, so you can go ahead and load those up now if you want to.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(vegan)</span></code></pre></div>
+<div id="data-explanation" class="section level2">
+<h2>Data explanation</h2>
+<p>This week we will work with a data set that was collected by faculty and students at SUNY Cobleskill and was analyzed by a lake management grad student at SUNY Oneonta (who also works at SUNY Cobleskill). These data are from a study that examined the response of fish communities to herbicide treatments in Saratoga Lake, New York.</p>
+<p>Let’s start by reading in the data file. This data set is not in the class data, so we will read it in straight from the raw file in one of my GitHub repositories:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data file</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a>  fish =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;https://raw.githubusercontent.com/danStich/danStich.github.io/master/stich/data/saratoga.csv&#39;</span>)</span>
+<span id="cb2-3"><a href="#cb2-3"></a>  </span>
+<span id="cb2-4"><a href="#cb2-4"></a><span class="co"># Have a look at the data</span></span>
+<span id="cb2-5"><a href="#cb2-5"></a>  <span class="kw">str</span>(fish)</span></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    635 obs. of  8 variables:
+##  $ Name.of.Water: Factor w/ 1 level &quot;Saratoga&quot;: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ Year         : int  2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...
+##  $ Date         : Factor w/ 3 levels &quot;10/10/2008&quot;,&quot;10/3/2007&quot;,..: 2 2 2 2 2 2 2 2 2 2 ...
+##  $ Site         : int  1 1 1 1 1 1 1 1 1 1 ...
+##  $ CommonName   : Factor w/ 10 levels &quot;BBH&quot;,&quot;BC&quot;,&quot;BG&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ Species.Code : int  598 598 598 598 598 598 598 598 598 598 ...
+##  $ Fish.Number  : int  1 2 3 4 5 6 7 8 9 10 ...
+##  $ Total.Length : int  40 56 62 63 64 67 70 70 70 72 ...</code></pre>
+<p>The brief decsription of the data is as follows:</p>
+<p><code>Name.of.Water</code>: Name of the lake<br> <code>Year</code>: Year during which electrofishing survey was conducted<br> <code>Date</code>: Date of survey<br> <code>Site</code>: Site ID (1, 2, 4, 5, 6). IDK why there is no three<br> <code>CommonName</code>: Abbreviated common names for species<br> <code>Species.Code</code>: Numeric code for each species in NYSDEC fisheries database<br> <code>Fish.Number</code>: Individual fish identifier<br> <code>Total.Length</code>: Total length of fish in millimeters<br></p>
+<p>Herbicides were applied to control Eurasian milfoil, an aquatic invasive plant species after in fall 2007. Fish communities were sampled prior to herbicide application in 2007, one year later in 2008, and two years later in 2009. The purpose of this study was to quantify any changes to the fish community at different sites. To do this, fish were collected from the lake at five sites using standardized electrofishing. Each fish was identified and measured.</p>
+<p>Now, we want to see if we can use counts of each species as related response variables to determine any differences in fish communities before and after herbicide application.</p>
 </div>
-<div id="community-analysis-with-nmds" class="section level3">
-<h3>Community analysis with NMDS</h3>
-<p>Moving along, we will now examine the associations between species, site, and the presence of turtles using non-metric multidimensional scaling (NMDS). To do this, we will use the <code>vegan</code> package in R.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Load the vegan library</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="co">#install.packages(&#39;vegan&#39;)</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a>  <span class="kw">library</span>(vegan)</span></code></pre></div>
-<p>Now that we have thought about why we want to use this technique, let’s go ahead and look at how we use it. First, we will need to do a little more data manipulation. Let’s reduce the data matrix down to its simplest form, by calculating the mean count for each species for each combination of <code>site</code> and <code>turtle</code>. Our reason for doing this is that there are <em>a lot</em> of zeroes in our data and we don’t want to rely too heavily on any technique to deal with those zeroes as they may influence our inference. If we had more sites with more reps at each site this might be less of a problem and we may choose to use the raw data. But in this case, we can reduce the dimensionality of our problem a bit before we move on.</p>
-<p>Use ddply to get the average of samples across sites. This is a slightly different use of the ddply function than we’ve seen previously, but it is really effective for summarizing data with a lot of columns.</p>
-<p><strong>Note</strong>: the following may not work for you (I still don’t know why). If this is the case, please skip the next two chunks of code.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Load the plyr library    </span></span>
-<span id="cb9-2"><a href="#cb9-2"></a>  <span class="kw">library</span>(plyr)    </span>
-<span id="cb9-3"><a href="#cb9-3"></a><span class="co"># Summarize the data</span></span>
-<span id="cb9-4"><a href="#cb9-4"></a>  turtles2 =<span class="st"> </span><span class="kw">ddply</span>(turtles, <span class="kw">c</span>(<span class="st">&#39;SITE&#39;</span>, <span class="st">&#39;TURTLE&#39;</span>), <span class="kw">numcolwise</span>(mean, <span class="dt">na.rm=</span><span class="ot">TRUE</span>))   </span></code></pre></div>
-<p><strong>If that did not work for you</strong>, then do this, otherwise do not:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>turtles2 =<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;turtles2.csv&#39;</span>)</span></code></pre></div>
-<p>Get a species x community matrix of the data for NMDS and assign a name to it. Here, we are leaving out the habitat data and removing the snails, slugs, and ‘other species’ to keep the question focused on the plant community.</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Make the matrix</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>  community_matrix =<span class="st"> </span><span class="kw">as.matrix</span>(turtles2[ , <span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)] )</span>
-<span id="cb11-3"><a href="#cb11-3"></a>  </span>
-<span id="cb11-4"><a href="#cb11-4"></a><span class="co"># Assign dimension names  </span></span>
-<span id="cb11-5"><a href="#cb11-5"></a>  <span class="kw">dimnames</span>(community_matrix) =<span class="st"> </span><span class="kw">list</span>(</span>
-<span id="cb11-6"><a href="#cb11-6"></a>    turtles2[ , <span class="dv">1</span>],</span>
-<span id="cb11-7"><a href="#cb11-7"></a>    <span class="kw">names</span>(turtles2)[<span class="kw">c</span>(<span class="dv">8</span><span class="op">:</span>(<span class="kw">ncol</span>(turtles2))<span class="op">-</span><span class="dv">3</span>)])</span></code></pre></div>
-<p>Now, fit the NMDS to the data. We still have quite a few zeros in these data, so let’s use the jaccard distance calculation for our <code>distance</code> argument here just to be on the safe side. In theory, if the zeros are not actually a problem, the Jaccard distance calculations <em>should</em> return the same distance matrix as the Bray-Curtis distance calculations.</p>
-<p><strong>Note the following</strong>: a) the transformation that was selected by the ordination algorithm, b) the number of runs before a solution was reached, and c) the stress at the final run. These are the kinds of things you will want to report when you do ordination.</p>
-<p><strong>Question 3.</strong> What is the qualitative evaluation for your the <code>stress</code> of this ordination based upon the rules of thumb we discussed for the interpretation of stress? If you can’t remember or didn’t write it down, hit the stack[Overflow].</p>
+<div id="data-manipulation" class="section level2">
+<h2>Data manipulation</h2>
+<p>We will have to do some data manipulation before we can move on with the analysis. In order to analyze the responses of multiple species to herbicide treatments, we need to get a matrix that contains counts of each species at each <code>Site</code> in each <code>Year</code>.</p>
+<p>First, we need to make a column called <code>seen</code>, which we will initialize in the <code>fish</code> data with a <code>1</code> because each of the rows in the data are individual fish.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a>fish<span class="op">$</span>seen &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<p>Next, we will group the dataframe by <code>Year</code> and <code>Site</code> and summarize <code>counts</code> as the <code>sum()</code> of the column <code>seen</code> in our <code>fish</code> dataframe. Then, we convert the dataframe from long form to wide form using the <code>pivot_wider()</code> function from <code>dplyr</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>mat1 =<span class="st"> </span>fish <span class="op">%&gt;%</span><span class="st"> </span></span>
+<span id="cb5-2"><a href="#cb5-2"></a><span class="st">  </span><span class="kw">group_by</span>(Year, Site, CommonName) <span class="op">%&gt;%</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a><span class="st">  </span><span class="kw">summarize</span>(<span class="dt">counts =</span> <span class="kw">sum</span>(seen)) <span class="op">%&gt;%</span></span>
+<span id="cb5-4"><a href="#cb5-4"></a><span class="st">  </span><span class="kw">pivot_wider</span>(</span>
+<span id="cb5-5"><a href="#cb5-5"></a>    <span class="dt">names_from =</span> CommonName,</span>
+<span id="cb5-6"><a href="#cb5-6"></a>    <span class="dt">values_from =</span> counts)</span></code></pre></div>
+<p>You can have a look at the new data format like this to see what we’ve done!</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>mat1</span></code></pre></div>
+<pre><code>## # A tibble: 9 x 12
+## # Groups:   Year, Site [9]
+##    Year  Site   BBH    BG    CP   LMB    PS   SMB    WE    YP    BC    NP
+##   &lt;int&gt; &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+## 1  2007     1     6    73     1    37     2     1     1     8    NA    NA
+## 2  2007     2    NA    24    NA    25     1    NA    NA    12    NA    NA
+## 3  2007     4     6    43    NA    28     3    NA     1    NA     1    NA
+## 4  2008     2     1    14     1    11     1     1     2    24     2    NA
+## 5  2008     4     2    11    NA    53     1     4     1    26    NA    NA
+## 6  2008     5    NA    11     2    57     5     1     1    21    NA    NA
+## 7  2009     2    NA    NA    NA    23    NA     5     2    17     1     2
+## 8  2009     4    NA    NA     1    13    NA     7     2    22     3    NA
+## 9  2009     6    NA    NA    NA     6    NA     1     2     2    NA    NA</code></pre>
+<p>We extract the <code>Year</code> column to a new object for convenience when we run the NMDS:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co">#Get year out of community matrix</span></span>
+<span id="cb8-2"><a href="#cb8-2"></a>year =<span class="st"> </span>mat1<span class="op">$</span>Year</span></code></pre></div>
+<p>We’ll also set aside everything but the first two columns (<code>Year</code> and <code>Site</code>) in a numeric matrix that we can feed into the <code>metaMDS()</code> function from <code>vegan</code>.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Get the community data by themselves as</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># a numeric matrix</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>mat2 =<span class="st"> </span><span class="kw">as.matrix</span>(mat1[ ,<span class="op">-</span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">2</span>)])</span>
+<span id="cb9-4"><a href="#cb9-4"></a></span>
+<span id="cb9-5"><a href="#cb9-5"></a><span class="co"># Have a look at the matrix</span></span>
+<span id="cb9-6"><a href="#cb9-6"></a>mat2</span></code></pre></div>
+<pre><code>##       BBH BG CP LMB PS SMB WE YP BC NP
+##  [1,]   6 73  1  37  2   1  1  8 NA NA
+##  [2,]  NA 24 NA  25  1  NA NA 12 NA NA
+##  [3,]   6 43 NA  28  3  NA  1 NA  1 NA
+##  [4,]   1 14  1  11  1   1  2 24  2 NA
+##  [5,]   2 11 NA  53  1   4  1 26 NA NA
+##  [6,]  NA 11  2  57  5   1  1 21 NA NA
+##  [7,]  NA NA NA  23 NA   5  2 17  1  2
+##  [8,]  NA NA  1  13 NA   7  2 22  3 NA
+##  [9,]  NA NA NA   6 NA   1  2  2 NA NA</code></pre>
+<p>Next, we want to replace all of the <code>NA</code> values with zeroes, since this is what they actually are:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="co"># Replace all NA elements of matrix with</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a><span class="co"># zeroes bc those species were not seen</span></span>
+<span id="cb11-3"><a href="#cb11-3"></a>mat2[<span class="kw">is.na</span>(mat2)] &lt;-<span class="st"> </span><span class="dv">0</span></span></code></pre></div>
+<p>And, finally, we will assign <code>dimnames</code> to the matrix that are our values for <code>Site</code>. This is something we haven’t played with much. Essentially, what we are doing here is assigning a vector of names to each the rows and the columns of our matrix.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co">#Swap out the row and clumn numbers for names </span></span>
+<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">dimnames</span>(mat2)=<span class="kw">list</span>(<span class="kw">paste</span>(<span class="st">&quot;site&quot;</span>, mat1<span class="op">$</span>Site, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>), </span>
+<span id="cb12-3"><a href="#cb12-3"></a>                    <span class="kw">colnames</span>(mat2))</span>
+<span id="cb12-4"><a href="#cb12-4"></a></span>
+<span id="cb12-5"><a href="#cb12-5"></a><span class="co"># Have one last look to make sure it worked correctly</span></span>
+<span id="cb12-6"><a href="#cb12-6"></a>mat2</span></code></pre></div>
+<pre><code>##       BBH BG CP LMB PS SMB WE YP BC NP
+## site1   6 73  1  37  2   1  1  8  0  0
+## site2   0 24  0  25  1   0  0 12  0  0
+## site4   6 43  0  28  3   0  1  0  1  0
+## site2   1 14  1  11  1   1  2 24  2  0
+## site4   2 11  0  53  1   4  1 26  0  0
+## site5   0 11  2  57  5   1  1 21  0  0
+## site2   0  0  0  23  0   5  2 17  1  2
+## site4   0  0  1  13  0   7  2 22  3  0
+## site6   0  0  0   6  0   1  2  2  0  0</code></pre>
+</div>
+<div id="community-analysis-with-nmds" class="section level2">
+<h2>Community analysis with NMDS</h2>
+<p>Now we can finally go ahead and analyze our data. Here, we will use the species counts, in <code>mat2</code> as our correlated response variables. Remember here that our sites and years are actually our categorical explanatory variables.</p>
+<p>We have quite a few zeros in these data, so let’s use the jaccard distance calculation for our <code>distance</code> argument here just to be on the safe side. In theory, if the zeros are not actually a problem, the Jaccard distance calculations <em>should</em> return the same distance matrix as the Bray-Curtis distance calculations.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Fit the NMDS</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>fish_NMDS=<span class="kw">metaMDS</span>(</span>
+<span id="cb14-3"><a href="#cb14-3"></a>  mat2, <span class="co"># Community-by-species matrix</span></span>
+<span id="cb14-4"><a href="#cb14-4"></a>  <span class="dt">k=</span><span class="dv">2</span>,   <span class="co"># The number of reduced dimensions we want to use</span></span>
+<span id="cb14-5"><a href="#cb14-5"></a>  <span class="dt">distance =</span> <span class="st">&quot;jaccard&quot;</span></span>
+<span id="cb14-6"><a href="#cb14-6"></a>)</span></code></pre></div>
+<pre><code>## Square root transformation
+## Wisconsin double standardization
+## Run 0 stress 0.0562265 
+## Run 1 stress 0.05622701 
+## ... Procrustes: rmse 0.0004415497  max resid 0.0006006445 
+## ... Similar to previous best
+## Run 2 stress 0.07867536 
+## Run 3 stress 0.0562265 
+## ... Procrustes: rmse 0.0001166929  max resid 0.0001651334 
+## ... Similar to previous best
+## Run 4 stress 0.08453212 
+## Run 5 stress 0.08453893 
+## Run 6 stress 0.05622653 
+## ... Procrustes: rmse 0.0001720544  max resid 0.0002521638 
+## ... Similar to previous best
+## Run 7 stress 0.2053914 
+## Run 8 stress 0.08453321 
+## Run 9 stress 0.08453294 
+## Run 10 stress 0.05622653 
+## ... Procrustes: rmse 4.45459e-05  max resid 6.862391e-05 
+## ... Similar to previous best
+## Run 11 stress 0.06418233 
+## Run 12 stress 0.1715924 
+## Run 13 stress 0.06418155 
+## Run 14 stress 0.05622669 
+## ... Procrustes: rmse 0.0003187  max resid 0.0004624102 
+## ... Similar to previous best
+## Run 15 stress 0.07793883 
+## Run 16 stress 0.08453453 
+## Run 17 stress 0.1715924 
+## Run 18 stress 0.05622683 
+## ... Procrustes: rmse 0.000404727  max resid 0.000567806 
+## ... Similar to previous best
+## Run 19 stress 0.05622662 
+## ... Procrustes: rmse 0.0002229563  max resid 0.0003157861 
+## ... Similar to previous best
+## Run 20 stress 0.07793888 
+## *** Solution reached</code></pre>
+<p><strong>Question 1.</strong> a) the transformation that was selected by the ordination algorithm, b) the number of runs before a solution was reached, and c) the stress at the final run. These are the kinds of things you will want to report when you do ordination.</p>
+<p><strong>Question 2.</strong> What is the qualitative evaluation for your the <code>stress</code> of this ordination based upon the rules of thumb we discussed for the interpretation of stress? If you can’t remember or didn’t write it down, hit the stack[Overflow].</p>
 <p>You can take a look at the fit by printing the fitted ordination to the console with the print function.</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="co"># Let&#39;s take a look at the summary to</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="co"># make sure we know what is going on here</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>  <span class="kw">print</span>(example_NMDS)</span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Let&#39;s take a look at the summary to</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a><span class="co"># make sure we know what is going on here</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>  <span class="kw">print</span>(fish_NMDS)</span></code></pre></div>
 <p>We can make a stress plot of the data to get a feel for the fit and get some sense of the fit of this model to our data. This will also give us a sense of how well the ordination captures the variability of the data.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="co"># Take a look at the stress plot for the ordination</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>  <span class="kw">stressplot</span>(example_NMDS)</span></code></pre></div>
-<p><strong>Question 4.</strong> How much of the variance in the data can be explained by the non-metric and linear fits for the ordination?</p>
-<p>Plot the ordination of species abundances by site and turtle treatment to visualize the associations:</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Now we can plot the ordination for our NMDS given that we are satisfied with</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="co"># the stress parameter and the convergenc</span></span>
-<span id="cb14-3"><a href="#cb14-3"></a>  <span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">1</span>, <span class="dv">1</span>))</span>
-<span id="cb14-4"><a href="#cb14-4"></a>  <span class="co"># First, make a blank plot of the nmds</span></span>
-<span id="cb14-5"><a href="#cb14-5"></a>    <span class="kw">ordiplot</span>(example_NMDS,<span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</span>
-<span id="cb14-6"><a href="#cb14-6"></a>    </span>
-<span id="cb14-7"><a href="#cb14-7"></a>  <span class="co"># Now, we can add some ellipses to</span></span>
-<span id="cb14-8"><a href="#cb14-8"></a>  <span class="co"># show the grouping indicated by nmds</span></span>
-<span id="cb14-9"><a href="#cb14-9"></a>    <span class="kw">ordiellipse</span>(example_NMDS,</span>
-<span id="cb14-10"><a href="#cb14-10"></a>                <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>],</span>
-<span id="cb14-11"><a href="#cb14-11"></a>                <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>,</span>
-<span id="cb14-12"><a href="#cb14-12"></a>                <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb14-13"><a href="#cb14-13"></a>                <span class="dt">label=</span>F,</span>
-<span id="cb14-14"><a href="#cb14-14"></a>                <span class="dt">show.groups =</span> <span class="dv">0</span></span>
-<span id="cb14-15"><a href="#cb14-15"></a>                )</span>
-<span id="cb14-16"><a href="#cb14-16"></a>    </span>
-<span id="cb14-17"><a href="#cb14-17"></a>  <span class="co"># Now, we can add some ellipses to show</span></span>
-<span id="cb14-18"><a href="#cb14-18"></a>  <span class="co"># the grouping indicated by nmds</span></span>
-<span id="cb14-19"><a href="#cb14-19"></a>    <span class="kw">ordiellipse</span>(example_NMDS,</span>
-<span id="cb14-20"><a href="#cb14-20"></a>                <span class="dt">groups=</span>turtles2[ , <span class="dv">2</span>],</span>
-<span id="cb14-21"><a href="#cb14-21"></a>                <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>,</span>
-<span id="cb14-22"><a href="#cb14-22"></a>                <span class="dt">col=</span><span class="kw">c</span>(<span class="st">&quot;red&quot;</span>),</span>
-<span id="cb14-23"><a href="#cb14-23"></a>                <span class="dt">label=</span>F,</span>
-<span id="cb14-24"><a href="#cb14-24"></a>                <span class="dt">show.groups =</span> <span class="dv">1</span>)  </span>
-<span id="cb14-25"><a href="#cb14-25"></a>    </span>
-<span id="cb14-26"><a href="#cb14-26"></a>  <span class="co"># Add the raw species data.</span></span>
-<span id="cb14-27"><a href="#cb14-27"></a>  <span class="co"># Note that no matter what the columns actually</span></span>
-<span id="cb14-28"><a href="#cb14-28"></a>  <span class="co"># represent, you will always use &quot;species&quot; for</span></span>
-<span id="cb14-29"><a href="#cb14-29"></a>  <span class="co"># these plots because that is</span></span>
-<span id="cb14-30"><a href="#cb14-30"></a>  <span class="co"># what these tools were originally designed for.</span></span>
-<span id="cb14-31"><a href="#cb14-31"></a>    <span class="kw">orditorp</span>(example_NMDS, <span class="dt">display=</span><span class="st">&quot;species&quot;</span>, <span class="dt">col=</span><span class="st">&quot;gray40&quot;</span>, <span class="dt">air=</span><span class="fl">0.1</span>)</span>
-<span id="cb14-32"><a href="#cb14-32"></a>    </span>
-<span id="cb14-33"><a href="#cb14-33"></a>  <span class="co"># Next, add the communities to the plot.</span></span>
-<span id="cb14-34"><a href="#cb14-34"></a>  <span class="co"># Same as above, these will always be</span></span>
-<span id="cb14-35"><a href="#cb14-35"></a>  <span class="co"># called &quot;sites&quot; even if that isn&#39;t what</span></span>
-<span id="cb14-36"><a href="#cb14-36"></a>  <span class="co"># your rows represent. It is just a</span></span>
-<span id="cb14-37"><a href="#cb14-37"></a>  <span class="co"># convention based on the purpose for</span></span>
-<span id="cb14-38"><a href="#cb14-38"></a>  <span class="co"># which the tools were built,</span></span>
-<span id="cb14-39"><a href="#cb14-39"></a>    <span class="kw">orditorp</span>(example_NMDS,</span>
-<span id="cb14-40"><a href="#cb14-40"></a>             <span class="dt">display=</span><span class="st">&quot;sites&quot;</span>,</span>
-<span id="cb14-41"><a href="#cb14-41"></a>             <span class="dt">col=</span><span class="kw">c</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>,<span class="st">&quot;red&quot;</span>),<span class="dv">4</span>)),</span>
-<span id="cb14-42"><a href="#cb14-42"></a>             <span class="dt">air=</span><span class="fl">0.01</span>,<span class="dt">cex=</span><span class="fl">1.25</span>)  </span>
-<span id="cb14-43"><a href="#cb14-43"></a>    <span class="kw">legend</span>(<span class="dt">x =</span> <span class="fl">-1.5</span>, <span class="dt">y=</span>.<span class="dv">85</span>,</span>
-<span id="cb14-44"><a href="#cb14-44"></a>           <span class="dt">legend =</span> <span class="kw">c</span>(<span class="st">&quot;Turtles absent&quot;</span>, <span class="st">&quot;Turtles present&quot;</span>),</span>
-<span id="cb14-45"><a href="#cb14-45"></a>           <span class="dt">bty=</span><span class="st">&#39;n&#39;</span>, <span class="dt">fill=</span><span class="kw">c</span>(<span class="st">&quot;blue&quot;</span>, <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb14-46"><a href="#cb14-46"></a>           )</span></code></pre></div>
-<p><img src="hw11_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
-<p>The ordination shows</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># Take a look at the stress plot for the ordination</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>  <span class="kw">stressplot</span>(fish_NMDS)</span></code></pre></div>
+<p><strong>Question 3.</strong> How much of the variance in the data can be explained by the non-metric and linear fits for the ordination?</p>
+<p>Plot the ordination of species abundances by <code>Site</code> and <code>year</code> treatment to visualize the associations:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="co">#Ordination Plots</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a><span class="co"># First, make a blank plot of the nmds</span></span>
+<span id="cb18-3"><a href="#cb18-3"></a><span class="kw">ordiplot</span>(fish_NMDS, <span class="dt">type=</span><span class="st">&quot;n&quot;</span>)</span>
+<span id="cb18-4"><a href="#cb18-4"></a></span>
+<span id="cb18-5"><a href="#cb18-5"></a><span class="co"># Now, we can add some ellipses to show</span></span>
+<span id="cb18-6"><a href="#cb18-6"></a><span class="co"># the grouping indicated by nmds</span></span>
+<span id="cb18-7"><a href="#cb18-7"></a><span class="kw">ordiellipse</span>(fish_NMDS,</span>
+<span id="cb18-8"><a href="#cb18-8"></a>            <span class="dt">groups=</span>year,</span>
+<span id="cb18-9"><a href="#cb18-9"></a>            <span class="dt">draw=</span><span class="st">&quot;polygon&quot;</span>,</span>
+<span id="cb18-10"><a href="#cb18-10"></a>            <span class="dt">col =</span> <span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
+<span id="cb18-11"><a href="#cb18-11"></a>            <span class="dt">alpha =</span> <span class="fl">0.10</span>,</span>
+<span id="cb18-12"><a href="#cb18-12"></a>            <span class="dt">label =</span> <span class="ot">FALSE</span></span>
+<span id="cb18-13"><a href="#cb18-13"></a>            )</span>
+<span id="cb18-14"><a href="#cb18-14"></a></span>
+<span id="cb18-15"><a href="#cb18-15"></a><span class="co"># Add the raw species data. Note that no</span></span>
+<span id="cb18-16"><a href="#cb18-16"></a><span class="co"># matter what the columns actually represent,</span></span>
+<span id="cb18-17"><a href="#cb18-17"></a><span class="co"># you will always use `species` for these </span></span>
+<span id="cb18-18"><a href="#cb18-18"></a><span class="co"># plots because that is what these tools </span></span>
+<span id="cb18-19"><a href="#cb18-19"></a><span class="co"># were originally designed for.</span></span>
+<span id="cb18-20"><a href="#cb18-20"></a><span class="kw">orditorp</span>(fish_NMDS,</span>
+<span id="cb18-21"><a href="#cb18-21"></a>         <span class="dt">display=</span><span class="st">&quot;species&quot;</span>,</span>
+<span id="cb18-22"><a href="#cb18-22"></a>         <span class="dt">col=</span><span class="st">&quot;black&quot;</span>,</span>
+<span id="cb18-23"><a href="#cb18-23"></a>         <span class="dt">air=</span><span class="fl">0.01</span></span>
+<span id="cb18-24"><a href="#cb18-24"></a>)</span>
+<span id="cb18-25"><a href="#cb18-25"></a> </span>
+<span id="cb18-26"><a href="#cb18-26"></a><span class="co"># Next, add the `communities` to the plot.</span></span>
+<span id="cb18-27"><a href="#cb18-27"></a><span class="co"># Same as above, these will always be called </span></span>
+<span id="cb18-28"><a href="#cb18-28"></a><span class="co"># `sites` even if that isn&#39;t what your rows </span></span>
+<span id="cb18-29"><a href="#cb18-29"></a><span class="co"># represent. It is just a convention based </span></span>
+<span id="cb18-30"><a href="#cb18-30"></a><span class="co"># on the purpose for which the tools were built.</span></span>
+<span id="cb18-31"><a href="#cb18-31"></a><span class="kw">orditorp</span>(fish_NMDS, </span>
+<span id="cb18-32"><a href="#cb18-32"></a>         <span class="dt">display=</span><span class="st">&quot;sites&quot;</span>, </span>
+<span id="cb18-33"><a href="#cb18-33"></a>         <span class="dt">col =</span> <span class="kw">rev</span>(<span class="kw">sort</span>(<span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&quot;red&quot;</span>, <span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>), <span class="dv">3</span>))),</span>
+<span id="cb18-34"><a href="#cb18-34"></a>         <span class="dt">air=</span><span class="fl">0.01</span>,<span class="dt">cex=</span><span class="dv">1</span></span>
+<span id="cb18-35"><a href="#cb18-35"></a>)</span></code></pre></div>
+<p><img src="hw11_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>The ordination suggests the following:</p>
 <ol style="list-style-type: decimal">
-<li><p>All of the sites appear to show some shift in the plant community for incidences where turtles were found and were not with the exception of site ‘CC’.</p></li>
-<li><p>An overall separation in the plant communities between sites when turtles were not found, but some similarity between sites AC and BC where turtles were found.</p></li>
-<li><p>A weak difference in plant communities in which turtles were found compared to plant communities in which turles were not found. This difference appears to be driven primarily by species on the NMDS2 axis.</p></li>
+<li><p>All of the sites appear to show some shift in the fish community between years.</p></li>
+<li><p>The community appears to change from a warm-water community typified by sunfishes (BG &amp; and PS) in 2007 to a cool-water</p></li>
+<li><p>Some suggestion of differences between sites in each year.</p></li>
 </ol>
-<p>Lastly, go ahead and test to see if there is a difference in community composition between sites and treatments. For this, we will use adonis (and the aptly named <code>adonis</code> function in R) to test additive effects of <code>site</code> and <code>turtle</code> on the species assemblage in each location. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the <code>turtle</code> variable as explanatory variables.</p>
-<p>The results show that the plant communities vary significantly by site (<code>turtles[,1]</code>) with the presence or absence of turtles (<code>turtles[,2]</code>) at a confidence level of <span class="math inline">\(\alpha\)</span> = 0.10, but not at <span class="math inline">\(\alpha\)</span> = 0.05. This is likely due to the fact that the plant communities within each site show some variability between locations in which turtles were found and locations in which they were not found. Future work might focus on a greater number of samples within sites to better characterize this variability during the growing season in addition to sampling a greater number of sites.</p>
-<p><strong>Question 5.</strong> Based on the plot of the ordination, and the results of the adonis test: is species composition associated with the presence of turtles within sites? What about between sites? Why do you suppose this is the case?</p>
+<p>Lastly, go ahead and test to see if there is a difference in community composition between sites and Years.</p>
+<p>For this, we will use the <code>adonis()</code> function in R to to test additive effects of <code>site</code> and <code>year</code> on the species assemblage. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the <code>turtle</code> variable as explanatory variables.</p>
+<p><strong>Question 4.</strong> Report the results of the adonis test in sentence format, being sure to include the test statistic and the p-values for both <code>Site</code> and <code>Year</code> in your reporting.</p>
+<p><strong>Question 5.</strong> Based on the plot of the ordination, and the results of this adonis test: is species composition associated with <code>year</code> and <code>site</code>? How does this relate to the herbicide treatment conducted after the sample collected in 2007?</p>
 <p><br></p>
-</div>
 </div>
 
 <!DOCTYPE html>
