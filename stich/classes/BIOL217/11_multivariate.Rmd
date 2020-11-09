@@ -78,7 +78,7 @@ A couple of things should jump right out at you here. Right off the bat, it is c
 
 There are multiple tools for visualizing our data in 2-d space (commonly referred to as a "biplot").
 
-For the "prettier" option, you will need to install a couple of packages Note that if you want to install devtools, you will first need to install `Rtools` utililities [here](https://cran.r-project.org/bin/windows/Rtools/) for windows or install `Xcode` Command Line Tools for Mac OSX following instructions provided [here]("http://osxdaily.com/2014/02/12/install-command-line-tools-mac-os-x/").
+For the "prettier" option, you will need to install a couple of packages Note that if you want to install devtools, you will first need to install `Rtools` utililities [here](https://cran.r-project.org/bin/windows/Rtools/) for windows or install `Xcode` Command Line Tools for Mac OSX following instructions provided [here]("https://apps.apple.com/us/app/xcode/id497799835?mt=12").
 
 ```{r, warning=FALSE, message=FALSE}
 # devtools package
