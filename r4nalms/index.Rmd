@@ -1,3 +1,4 @@
+
 ```{r, child="_styles.Rmd"}
 ```
 
@@ -14,7 +15,7 @@ The <a href="morning.html"> Introductory session </a> (12:00 - 3:00 pm ET Monday
 
 The <a href="afternoon.html"> Intermediate session </a> (12:00 - 3:00 pm ET Friday November 20 2020) will build on these techniques to demonstrate a couple of in-depth applications. We will explore more advanced data management techniques, some common statistical tools, plotting, and spatial data through worked examples using real data. Those less familiar with R should plan on attending both sessions, but those who have some experience using R could consider skipping the Introductory session and join us for the Intermediate session on Friday.
 
-Personal computers are required for both sessions. <b> All software is freely available and should be installed prior to the workshop </b>. Please see <a href="software.html"> this page </a> for software installation instructions.
+Personal computers are required for both sessions. <b>All software is freely available and should be installed prior to the workshop </b>. Please see <a href="software.html"> this page </a> for software installation instructions.
 
 <br>
  
