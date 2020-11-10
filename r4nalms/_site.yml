@@ -7,9 +7,9 @@ navbar:
       href: index.html
     - text: "Software needs"
       href: software.html
-    - text: "Morning session"
+    - text: "Introductory"
       href: morning.html
-    - text: "Afternoon session"
+    - text: "Intermediate"
       href: afternoon.html
     - text: "Instructors"
       href: instructors.html

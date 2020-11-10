@@ -2,10 +2,9 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-
-# Getting started
-
-----
+---
+title: Getting started
+---
 
 <img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
@@ -31,24 +30,26 @@ The desktop version will work best. The workshop will work best for you if you i
 
 <h2 id="multi">**Data and code files**</h2>
 
-<h3 id = "multi">Download `data.zip`</h3>
-Download the class data as a zip file called `data.zip` from <a href= https://github.com/danStich/worst-r/blob/master/data.zip>the github repository</a> for The Worst Stats Text eveR.
+Being updated!
 
-<h3 id = "multi">Put `data.zip` file your class folder</h3>
-If you did not choose which folder to download this file to, it will be in your Downloads folder. Please copy and paste it to a folder just for class code and data. The actual name and location of this folder are not important as long as you can remember it.
+<!-- <h3 id = "multi">Download `data.zip`</h3> -->
+<!-- Download the class data as a zip file called `data.zip` from <a href= https://github.com/danStich/worst-r/blob/master/data.zip>the github repository</a> for The Worst Stats Text eveR. -->
 
-<h3 id = "multi">Extract the zip file</h3>
-Once `data.zip` is in a location you will remember, extract (or "unzip") it. 
+<!-- <h3 id = "multi">Put `data.zip` file your class folder</h3> -->
+<!-- If you did not choose which folder to download this file to, it will be in your Downloads folder. Please copy and paste it to a folder just for class code and data. The actual name and location of this folder are not important as long as you can remember it. -->
 
-On Mac, you should just need to double click `data.zip` to extract the contents.
+<!-- <h3 id = "multi">Extract the zip file</h3> -->
+<!-- Once `data.zip` is in a location you will remember, extract (or "unzip") it.  -->
 
-On Windows, Right click > Extract All will bring up a context menu that looks like the image on the left below. Be sure to delete "data" from the final name before clicking "Extract" (shown on right). Otherwise your data will be inside a folder called data that's inside another folder called data and you'll have to copy and paste everything up one level.
+<!-- On Mac, you should just need to double click `data.zip` to extract the contents. -->
 
-<img src="../../images/extract_rename.PNG" alt="">
+<!-- On Windows, Right click > Extract All will bring up a context menu that looks like the image on the left below. Be sure to delete "data" from the final name before clicking "Extract" (shown on right). Otherwise your data will be inside a folder called data that's inside another folder called data and you'll have to copy and paste everything up one level. -->
 
-Your class folder should look something like this when you are done (but you won't have any R files in there yet).
+<!-- <img src="../../images/extract_rename.PNG" alt=""> -->
 
-<img src="../../images/folders.PNG" alt="">
+<!-- Your class folder should look something like this when you are done (but you won't have any R files in there yet). -->
+
+<!-- <img src="../../images/folders.PNG" alt=""> -->
 
 <br>
  

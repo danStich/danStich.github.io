@@ -370,10 +370,10 @@ $(document).ready(function () {
   <a href="software.html">Software needs</a>
 </li>
 <li>
-  <a href="morning.html">Morning session</a>
+  <a href="morning.html">Introductory</a>
 </li>
 <li>
-  <a href="afternoon.html">Afternoon session</a>
+  <a href="afternoon.html">Intermediate</a>
 </li>
 <li>
   <a href="instructors.html">Instructors</a>
@@ -813,11 +813,14 @@ Vectors
 <p>If it looks like nothing happened, then it probably worked. Have a look at your Environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>Now that we have some real data, let’s break it down a little bit.</p>
 <div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">ls</span>()            <span class="co"># We can use ls() to see what is in our environment</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>         <span class="st">&quot;A&quot;</span>         <span class="st">&quot;b&quot;</span>         <span class="st">&quot;c&quot;</span>         <span class="st">&quot;coord_dd&quot;</span>  <span class="st">&quot;coord_utm&quot;</span></span>
-<span id="cb69-3"><a href="#cb69-3"></a> [<span class="dv">7</span>] <span class="st">&quot;d&quot;</span>         <span class="st">&quot;dd&quot;</span>        <span class="st">&quot;e&quot;</span>         <span class="st">&quot;f&quot;</span>         <span class="st">&quot;hook1&quot;</span>     <span class="st">&quot;hook2&quot;</span>    </span>
-<span id="cb69-4"><a href="#cb69-4"></a>[<span class="dv">13</span>] <span class="st">&quot;im&quot;</span>        <span class="st">&quot;ins&quot;</span>       <span class="st">&quot;lim&quot;</span>       <span class="st">&quot;lmod&quot;</span>      <span class="st">&quot;mat&quot;</span>       <span class="st">&quot;means&quot;</span>    </span>
-<span id="cb69-5"><a href="#cb69-5"></a>[<span class="dv">19</span>] <span class="st">&quot;mod&quot;</span>       <span class="st">&quot;newd&quot;</span>      <span class="st">&quot;otsego&quot;</span>    <span class="st">&quot;plotter&quot;</span>   <span class="st">&quot;preds&quot;</span>     <span class="st">&quot;vermont&quot;</span>  </span>
-<span id="cb69-6"><a href="#cb69-6"></a>[<span class="dv">25</span>] <span class="st">&quot;VT&quot;</span>       </span></code></pre></div>
+<span id="cb69-2"><a href="#cb69-2"></a> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>           <span class="st">&quot;A&quot;</span>           <span class="st">&quot;b&quot;</span>           <span class="st">&quot;c&quot;</span>           <span class="st">&quot;coord_dd&quot;</span>   </span>
+<span id="cb69-3"><a href="#cb69-3"></a> [<span class="dv">6</span>] <span class="st">&quot;coord_utm&quot;</span>   <span class="st">&quot;cToF&quot;</span>        <span class="st">&quot;d&quot;</span>           <span class="st">&quot;dd&quot;</span>          <span class="st">&quot;e&quot;</span>          </span>
+<span id="cb69-4"><a href="#cb69-4"></a>[<span class="dv">11</span>] <span class="st">&quot;f&quot;</span>           <span class="st">&quot;hook1&quot;</span>       <span class="st">&quot;hook2&quot;</span>       <span class="st">&quot;im&quot;</span>          <span class="st">&quot;ins&quot;</span>        </span>
+<span id="cb69-5"><a href="#cb69-5"></a>[<span class="dv">16</span>] <span class="st">&quot;july&quot;</span>        <span class="st">&quot;lim&quot;</span>         <span class="st">&quot;limlist&quot;</span>     <span class="st">&quot;limnos&quot;</span>      <span class="st">&quot;lmod&quot;</span>       </span>
+<span id="cb69-6"><a href="#cb69-6"></a>[<span class="dv">21</span>] <span class="st">&quot;ltd&quot;</span>         <span class="st">&quot;mat&quot;</span>         <span class="st">&quot;means&quot;</span>       <span class="st">&quot;mod&quot;</span>         <span class="st">&quot;myList&quot;</span>     </span>
+<span id="cb69-7"><a href="#cb69-7"></a>[<span class="dv">26</span>] <span class="st">&quot;myMean&quot;</span>      <span class="st">&quot;newd&quot;</span>        <span class="st">&quot;otsego&quot;</span>      <span class="st">&quot;out&quot;</span>         <span class="st">&quot;out1&quot;</span>       </span>
+<span id="cb69-8"><a href="#cb69-8"></a>[<span class="dv">31</span>] <span class="st">&quot;plot&quot;</span>        <span class="st">&quot;plotter&quot;</span>     <span class="st">&quot;preds&quot;</span>       <span class="st">&quot;summarydata&quot;</span> <span class="st">&quot;test&quot;</span>       </span>
+<span id="cb69-9"><a href="#cb69-9"></a>[<span class="dv">36</span>] <span class="st">&quot;vermont&quot;</span>     <span class="st">&quot;VT&quot;</span>         </span></code></pre></div>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></span>
 <span id="cb70-2"><a href="#cb70-2"></a>         lake      date month year depth temp   pH do_mgl  cond do_sat</span>
 <span id="cb70-3"><a href="#cb70-3"></a><span class="dv">1</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">0.1</span> <span class="fl">0.39</span> <span class="fl">7.88</span>   <span class="fl">12.7</span> <span class="fl">0.300</span>     <span class="ot">NA</span></span>
