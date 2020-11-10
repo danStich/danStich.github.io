@@ -6,7 +6,7 @@
 title: Getting started
 ---
 
-<img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
+<img src="./images/logos.png" alt="logos for software">
 
 <h2 id = "multi"><b>Software needs</b></h2>
 
