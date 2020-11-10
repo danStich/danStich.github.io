@@ -12,6 +12,8 @@ title: Intermediate session
 
 The Intermediate session of this workshop series will expand on the Introductory session and demonstrate some of the powerful tools available through worked examples. It is our hope that by the end of this session, you will be comfortable conducting some basic analyses and producing related graphics. During this session, you will be exposed to more data manipulation in the `tidyverse`, some basic GIS functionality, statistical analyses, and a whole lot of plotting (including lake isopleths) using the powerful base graphics in R and the utilities provided through `ggplot2`. This workshop assumes a basic understanding of elementary statistics, and working knowledge of R and Rstudio. Those attending the Introductory session will be sufficiently prepared for the afternoon session.
 
+A direct link to the Intermediate content will be provided here prior to the workshop.
+
 <!-- The tutorial for the Intermediate session is located <a href="intermediate.html"> here </a>. -->
 
 <!-- The data and files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>.  -->
