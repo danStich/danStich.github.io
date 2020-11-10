@@ -18,13 +18,13 @@ For <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a hre
 <h3 id = "multi"> Download and install RStudio </h3>
 <a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio download site</a>. You should download the most recent version. This program will not work without an existing installation of R. Also accept default installation options.
 
-<h3 id = "multi"> Video instructions for installing R and RStudio </h3>
+<b> Video instructions for installing R and RStudio </b><br>
 If you are more of a visual learner, here are a couple of YouTube videos that walk through installation on Windows and Mac OS-X. If you are using linux, you know what to do.
 
 [3 minute YouTube video for Mac](https://www.youtube.com/watch?v=EmZqlcKkJMM)<br>
 [3 minute YouTube video for Windows](https://www.youtube.com/watch?v=iLSvjyYvbpU)
 
-<h3 id = "multi"> Download and Microsoft Teams </h3>
+<h3 id = "multi"> Download and install Microsoft Teams </h3>
 The desktop version will work best. The workshop will work best for you if you install Teams on the same computer as R so you can share code snippets and share screens in help channels. A web cam is not required.
 
 
