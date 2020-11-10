@@ -8,13 +8,13 @@ title: "R4NALMS"
 <h3 top-margin:10px;><b>NALMS International Symposium R Workshops</b></h3> 
 <img src="./images/graphs.png" alt="">
 
-Welcome to the <b>R4NALMS</b> homepage for R workshops at the International NALMS Symposium. This page hosts content for two in-person workshop sessions. 
+Welcome to the <b>R4NALMS</b> homepage for R workshops at the International NALMS Symposium. This page hosts content for both the Introductory and Intermediate workshop sessions. 
 
-The <a href="morning.html"> morning session </a> (8:00 am - 12:00 pm) will be an introduction to <a href=https://www.r-project.org/> R </a> as a functional, vectorized, and object-oriented programming language. It will cover R syntax (e.g., how to read and write R code), types of variables and objects, functions, basic data management (e.g., loading, referencing, manipulation, transformation, and subsets), basic descriptive statistics, and working with R packages. 
+The <a href="morning.html"> Introductory session </a> (12:00 - 3:00 pm Monday November 16 2020) will be an introduction to <a href=https://www.r-project.org/> R </a> as a functional, vectorized, and object-oriented programming language. It will cover R syntax (e.g., how to read and write R code), types of variables and objects, functions, basic data management (e.g., loading, referencing, manipulation, transformation, and subsets), basic descriptive statistics, and working with R packages like those included in the `tidyverse` for data summary and basic plotting. 
 
-The <a href="afternoon.html"> afternoon session </a> (1:00 - 5:00 pm) will build on these techniques for an Intermediate R Workshop. Topics will include more advanced data management, an overview of common statistical tools in R, and plotting utilities. Those less familiar with R should plan on attending both sessions, but those who have some experience using R could consider skipping the morning session and join after lunch for a half-day session.
+The <a href="afternoon.html"> Intermediate session </a> (1:00 - 5:00 pm) will build on these techniques to demonstrate a couple of in-depth applications. We will explore more advanced data management techniques, some common statistical tools, plotting, and spatial data through worked examples using real data. Those less familiar with R should plan on attending both sessions, but those who have some experience using R could consider skipping the Introductory session and join us for the Intermediate session on Friday.
 
-Laptop computers are required for both sessions. <b> All software is freely available and should be installed prior to the workshop </b>. Please see <a href="software.html"> this page </a> for software installation instructions.
+Personal computers are required for both sessions. <b> All software is freely available and should be installed prior to the workshop </b>. Please see <a href="software.html"> this page </a> for software installation instructions.
 
 <br>
  

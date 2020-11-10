@@ -11,7 +11,7 @@
 
 
 
-<title>Software needs</title>
+<title>software.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -309,21 +309,57 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Software needs</h1>
 
 </div>
 
 
-<p><img src="images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY"></p>
-<p>To make the most of our time together, you will need to install some software <em>before you arrive</em> for the workshop. All software is <b> freely available </b> and <b> easily installed </b>. Please download and install the most recent versions prior to the workshop. If you have questions or difficulties (beyond system administrative permissions), please <a href="contact.html"> contact</a> the workshop organizers.</p>
-<ol style="list-style-type: decimal">
-<li><p><b> Download and install R </b> for <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=http://cran.us.r-project.org/> Mac </a>. You should download the most recent version of R for your operating system. Most newer laptops are 64-bit.</p></li>
-<li><p><b> Once you have R installed, download and install <a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio </a>. </b> You should download the most recent version. This program will not work without an existing installation of R.</p></li>
-<li><p><b> Download the workshop data </b> from <a href= https://github.com/danStich/data4_r4nalms> this github repository</a> following the instructions in the <code>README.md</code> file.</p></li>
-<li><p><b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you’ll have access to all of the content even if you don’t have cell service or a wireless connection (like during travel!). Or, you can star the <a href="https://github.com/danStich/danStich.github.io/tree/master/r4nalms">GitHub repository</a> and download the code and data used to generate the website.</p></li>
-</ol>
-<p><strong>If you want to try working with code or data before the workshop, you will need to know how to install packages in R.</strong> To do this, you can type <code>install.packages("PACKAGE")</code> in the console and run, being sure to replace <code>PACKAGE</code> with the actual name of the package. If you are working with a recent version of Rstudio, you will probably get a prompt to install missing packages the first time you open <code>R4NALMS_intro.R</code> or <code>R4NALMS_intermediate.R</code>. The packages we are going to work with include: <code>akima</code>, <code>ggplot2</code>, <code>plyr</code>, <code>rgdal</code>, and <code>sp</code>.</p>
+<div id="getting-started" class="section level1">
+<h1>Getting started</h1>
+<hr />
+<p><img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY"></p>
+<h2 id="multi">
+<b>Software needs</b>
+</h2>
+<p>All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each before the workshop. Instructional videos and download links are provided below.</p>
+<h3 id="multi">
+Download and install R
+</h3>
+<p>For <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=https://cran.r-project.org/bin/macosx/> Mac </a>. You should download the most recent versions for your operating system. Accept the default options.</p>
+<h3 id="multi">
+Download and install RStudio
+</h3>
+<p><a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio download site</a>. You should download the most recent version. This program will not work without an existing installation of R. Also accept default installation options.</p>
+<h3 id="multi">
+Video instructions for installing R and RStudio
+</h3>
+<p>If you are more of a visual learner, here are a couple of YouTube videos that walk through installation on Windows and Mac OS-X. If you are using linux, you know what to do.</p>
+<p><a href="https://www.youtube.com/watch?v=EmZqlcKkJMM">3 minute YouTube video for Mac</a><br> <a href="https://www.youtube.com/watch?v=iLSvjyYvbpU">3 minute YouTube video for Windows</a></p>
+<h3 id="multi">
+Download and Microsoft Teams
+</h3>
+<p>The desktop version will work best. The workshop will work best for you if you install Teams on the same computer as R so you can share code snippets and share screens in help channels. A web cam is not required.</p>
+<h2 id="multi">
+<strong>Data and code files</strong>
+</h2>
+<h3 id="multi">
+Download <code>data.zip</code>
+</h3>
+<p>Download the class data as a zip file called <code>data.zip</code> from <a href= https://github.com/danStich/worst-r/blob/master/data.zip>the github repository</a> for The Worst Stats Text eveR.</p>
+<h3 id="multi">
+Put <code>data.zip</code> file your class folder
+</h3>
+<p>If you did not choose which folder to download this file to, it will be in your Downloads folder. Please copy and paste it to a folder just for class code and data. The actual name and location of this folder are not important as long as you can remember it.</p>
+<h3 id="multi">
+Extract the zip file
+</h3>
+<p>Once <code>data.zip</code> is in a location you will remember, extract (or “unzip”) it.</p>
+<p>On Mac, you should just need to double click <code>data.zip</code> to extract the contents.</p>
+<p>On Windows, Right click &gt; Extract All will bring up a context menu that looks like the image on the left below. Be sure to delete “data” from the final name before clicking “Extract” (shown on right). Otherwise your data will be inside a folder called data that’s inside another folder called data and you’ll have to copy and paste everything up one level.</p>
+<p><img src="../../images/extract_rename.PNG" alt=""></p>
+<p>Your class folder should look something like this when you are done (but you won’t have any R files in there yet).</p>
+<p><img src="../../images/folders.PNG" alt=""></p>
 <p><br></p>
+</div>
 
 <!DOCTYPE html>
 

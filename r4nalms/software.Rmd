@@ -2,24 +2,53 @@
 ```{r, child="_styles.Rmd"}
 ```
 
----
-title: "Software needs"
----
 
-<img src="./images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
+# Getting started
 
-To make the most of our time together, you will need to install some software *before you arrive* for the workshop. All software is <b> freely available </b> and <b> easily installed </b>. Please download and install the most recent versions prior to the workshop. If you have questions or difficulties (beyond system administrative permissions), please <a href="contact.html"> contact</a> the workshop organizers.
+----
 
-1. <b> Download and install R </b> for <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=http://cran.us.r-project.org/> Mac </a>. You should download the most recent version of R for your operating system. Most newer laptops are 64-bit.
+<img src="../../images/logos.png" alt="Super cool graphs showing temperature isopleths (left) and changes in thermocline depth (right) in Otsego Lake, NY">
 
-2. <b> Once you have R installed, download and install <a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio </a>. </b> You should download the most recent version. This program will not work without an existing installation of R.
+<h2 id = "multi"><b>Software needs</b></h2>
 
-3. <b> Download the workshop data </b> from 
-<a href= https://github.com/danStich/data4_r4nalms> this github repository</a> following the instructions in the `README.md` file.
+All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each before the workshop. Instructional videos and download links are provided below.
 
-4. <b> Save the webpage. </b> You can bookmark this webpage for easier access on mobile devices and PCs. Better yet, you can save the whole thing as a complete webpage so you'll have access to all of the content even if you don't have cell service or a wireless connection (like during travel!). Or, you can star the <a href="https://github.com/danStich/danStich.github.io/tree/master/r4nalms">GitHub repository</a> and download the code and data used to generate the website. 
+<h3 id = "multi"> Download and install R </h3>
+For <a href=https://cran.r-project.org/bin/windows/base/> Windows </a> or <a href=https://cran.r-project.org/bin/macosx/> Mac </a>. You should download the most recent versions for your operating system. Accept the default options.
 
-**If you want to try working with code or data before the workshop, you will need to know how to install packages in R.** To do this, you can type `install.packages("PACKAGE")` in the console and run, being sure to replace `PACKAGE` with the actual name of the package. If you are working with a recent version of Rstudio, you will probably get a prompt to install missing packages the first time you open `R4NALMS_intro.R` or `R4NALMS_intermediate.R`. The packages we are going to work with include: `akima`, `ggplot2`, `plyr`, `rgdal`, and `sp`.
+<h3 id = "multi"> Download and install RStudio </h3>
+<a href=https://www.rstudio.com/products/rstudio/download/#download> Rstudio download site</a>. You should download the most recent version. This program will not work without an existing installation of R. Also accept default installation options.
+
+<h3 id = "multi"> Video instructions for installing R and RStudio </h3>
+If you are more of a visual learner, here are a couple of YouTube videos that walk through installation on Windows and Mac OS-X. If you are using linux, you know what to do.
+
+[3 minute YouTube video for Mac](https://www.youtube.com/watch?v=EmZqlcKkJMM)<br>
+[3 minute YouTube video for Windows](https://www.youtube.com/watch?v=iLSvjyYvbpU)
+
+<h3 id = "multi"> Download and Microsoft Teams </h3>
+The desktop version will work best. The workshop will work best for you if you install Teams on the same computer as R so you can share code snippets and share screens in help channels. A web cam is not required.
+
+
+<h2 id="multi">**Data and code files**</h2>
+
+<h3 id = "multi">Download `data.zip`</h3>
+Download the class data as a zip file called `data.zip` from <a href= https://github.com/danStich/worst-r/blob/master/data.zip>the github repository</a> for The Worst Stats Text eveR.
+
+<h3 id = "multi">Put `data.zip` file your class folder</h3>
+If you did not choose which folder to download this file to, it will be in your Downloads folder. Please copy and paste it to a folder just for class code and data. The actual name and location of this folder are not important as long as you can remember it.
+
+<h3 id = "multi">Extract the zip file</h3>
+Once `data.zip` is in a location you will remember, extract (or "unzip") it. 
+
+On Mac, you should just need to double click `data.zip` to extract the contents.
+
+On Windows, Right click > Extract All will bring up a context menu that looks like the image on the left below. Be sure to delete "data" from the final name before clicking "Extract" (shown on right). Otherwise your data will be inside a folder called data that's inside another folder called data and you'll have to copy and paste everything up one level.
+
+<img src="../../images/extract_rename.PNG" alt="">
+
+Your class folder should look something like this when you are done (but you won't have any R files in there yet).
+
+<img src="../../images/folders.PNG" alt="">
 
 <br>
  
