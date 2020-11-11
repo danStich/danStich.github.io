@@ -10,9 +10,9 @@ Below, we run through a quick example of slightly more complex data manipulation
 ### **Package load**
 ```{r, echo=T, eval=F}
 # Load necessary packages
-library(lubridate, lib.loc = 'r_libs')
-library(rLakeAnalyzer, lib.loc = 'r_libs')
-library(ggplot2, lib.loc = 'r_libs')
+library(lubridate, lib.loc = "r_libs")
+library(rLakeAnalyzer, lib.loc = "r_libs")
+library(ggplot2, lib.loc = "r_libs")
 ```
 
 ```{r, echo=F, eval=T, message=F, warning=F}
@@ -26,21 +26,21 @@ library(ggplot2)
 ### **Data read**
 ```{r, eval=F, echo=T}
 # Read in the data
-limnos <- read.csv('physical.csv')
+limnos <- read.csv("physical.csv")
 ```
 
 ```{r, eval=T, echo=F}
 # Read in the data
-limnos <- read.csv('data/physical.csv')
+limnos <- read.csv("data/physical.csv")
 ```
 
 
 ### **Data manipulation**
 ```{r}
 # Data formatting & extraction
-limnos$date <- as.POSIXct(limnos$date, format="%m/%d/%Y")
+limnos$date <- as.POSIXct(limnos$date, format = "%m/%d/%Y")
 limnos$year <- year(limnos$date)
-limnos$day <-  yday(limnos$date)
+limnos$day <- yday(limnos$date)
 limnos$month <- month(limnos$date)
 
 # Remove rows with NA to make life easier for now
@@ -62,10 +62,10 @@ If you just have a single dataframe, you can pass the appropriate columns straig
 # is in the 6th column of each list element (matrix
 # or dataframe). This function creates a new
 # variable (column) called 'thermo' in each df,
-# and returns the original object modified in 
+# and returns the original object modified in
 # place.
-ltd <- function(x){
-  x$thermo <- rLakeAnalyzer::thermo.depth(x[,6], x[,5])
+ltd <- function(x) {
+  x$thermo <- rLakeAnalyzer::thermo.depth(x[, 6], x[, 5])
   return(x)
 }
 ```
@@ -73,7 +73,7 @@ ltd <- function(x){
 
 Now we can use the function we made to apply across all elements of our list.
 ```{r}
-# Create a test object that contains the 
+# Create a test object that contains the
 test <- lapply(limlist, ltd)
 ```
 
@@ -91,23 +91,27 @@ Now we can plot changes in thermocline depth and fit statistical models to descr
 
 First, subset the data so we are just working with July data.
 ```{r}
-# Make a plot of July thermocline depth 
+# Make a plot of July thermocline depth
 # across years, and include predictions from
 # a GAM for data viz.
 # First, subset the data
-out1 <- out[out$month==7,]
+out1 <- out[out$month == 7, ]
 ```
 
 Next, fit the plot. Note the differences between the `ggplot2` code and the code we have used thus far for plotting. You can do a lot more out of the box with `ggplot` graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.
 ```{r}
 # Now, plot it with ggplot2 functions
 plot <- ggplot(out1, aes(year, thermo)) +
-  geom_point(pch=21,cex=5, col='gray40', bg='gray40') +
-  geom_smooth(method='gam', level=.999,
-              col='red', bg='tomato') + 
-  xlab('Year') + xlim(2011, 2017) +
-  ylab('July thermocline depth (m)') + ylim(5,10)
-plot+theme(plot.margin=margin(5,5,10,10))
+  geom_point(pch = 21, cex = 5, col = "gray40", bg = "gray40") +
+  geom_smooth(
+    method = "gam", level = .999,
+    col = "red", bg = "tomato"
+  ) +
+  xlab("Year") +
+  xlim(2011, 2017) +
+  ylab("July thermocline depth (m)") +
+  ylim(5, 10)
+plot + theme(plot.margin = margin(5, 5, 10, 10))
 ```
 
 <br>
