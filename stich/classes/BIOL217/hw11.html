@@ -549,40 +549,35 @@ Introduction
 <pre><code>## Square root transformation
 ## Wisconsin double standardization
 ## Run 0 stress 0.0562265 
-## Run 1 stress 0.05622701 
-## ... Procrustes: rmse 0.0004415497  max resid 0.0006006445 
+## Run 1 stress 0.2077352 
+## Run 2 stress 0.08453308 
+## Run 3 stress 0.2077391 
+## Run 4 stress 0.08690251 
+## Run 5 stress 0.08691122 
+## Run 6 stress 0.2077362 
+## Run 7 stress 0.08646128 
+## Run 8 stress 0.06418149 
+## Run 9 stress 0.3209238 
+## Run 10 stress 0.0845342 
+## Run 11 stress 0.1715924 
+## Run 12 stress 0.05622652 
+## ... Procrustes: rmse 0.0001699692  max resid 0.0002578155 
 ## ... Similar to previous best
-## Run 2 stress 0.07867536 
-## Run 3 stress 0.0562265 
-## ... Procrustes: rmse 0.0001166929  max resid 0.0001651334 
+## Run 13 stress 0.05622683 
+## ... Procrustes: rmse 0.0004049582  max resid 0.0005784915 
 ## ... Similar to previous best
-## Run 4 stress 0.08453212 
-## Run 5 stress 0.08453893 
-## Run 6 stress 0.05622653 
-## ... Procrustes: rmse 0.0001720544  max resid 0.0002521638 
+## Run 14 stress 0.2053914 
+## Run 15 stress 0.06418151 
+## Run 16 stress 0.05622667 
+## ... Procrustes: rmse 0.000200282  max resid 0.0003127927 
 ## ... Similar to previous best
-## Run 7 stress 0.2053914 
-## Run 8 stress 0.08453321 
-## Run 9 stress 0.08453294 
-## Run 10 stress 0.05622653 
-## ... Procrustes: rmse 4.45459e-05  max resid 6.862391e-05 
+## Run 17 stress 0.08453278 
+## Run 18 stress 0.08453341 
+## Run 19 stress 0.05622649 
+## ... New best solution
+## ... Procrustes: rmse 4.650777e-05  max resid 7.075048e-05 
 ## ... Similar to previous best
-## Run 11 stress 0.06418233 
-## Run 12 stress 0.1715924 
-## Run 13 stress 0.06418155 
-## Run 14 stress 0.05622669 
-## ... Procrustes: rmse 0.0003187  max resid 0.0004624102 
-## ... Similar to previous best
-## Run 15 stress 0.07793883 
-## Run 16 stress 0.08453453 
-## Run 17 stress 0.1715924 
-## Run 18 stress 0.05622683 
-## ... Procrustes: rmse 0.000404727  max resid 0.000567806 
-## ... Similar to previous best
-## Run 19 stress 0.05622662 
-## ... Procrustes: rmse 0.0002229563  max resid 0.0003157861 
-## ... Similar to previous best
-## Run 20 stress 0.07793888 
+## Run 20 stress 0.08646048 
 ## *** Solution reached</code></pre>
 <p><strong>Question 1.</strong> a) the transformation that was selected by the ordination algorithm, b) the number of runs before a solution was reached, and c) the stress at the final run. These are the kinds of things you will want to report when you do ordination.</p>
 <p><strong>Question 2.</strong> What is the qualitative evaluation for your the <code>stress</code> of this ordination based upon the rules of thumb we discussed for the interpretation of stress? If you can’t remember or didn’t write it down, hit the stack[Overflow].</p>
@@ -638,7 +633,25 @@ Introduction
 <li><p>Some suggestion of differences between sites in each year.</p></li>
 </ol>
 <p>Lastly, go ahead and test to see if there is a difference in community composition between sites and Years.</p>
-<p>For this, we will use the <code>adonis()</code> function in R to to test additive effects of <code>site</code> and <code>year</code> on the species assemblage. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the <code>turtle</code> variable as explanatory variables.</p>
+<p>For this, we will use the <code>adonis()</code> function in R to to test additive effects of <code>site</code> and <code>year</code> on the species assemblage. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the <code>Year</code> variable as explanatory variables.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="co"># Do a significance test to see if plants vary by turtle presence/absence</span></span>
+<span id="cb19-2"><a href="#cb19-2"></a>  <span class="kw">adonis</span>(mat2<span class="op">~</span>mat1<span class="op">$</span>Site <span class="op">+</span><span class="st"> </span>mat1<span class="op">$</span>Year, <span class="dt">permutations =</span> <span class="dv">9999</span>)</span></code></pre></div>
+<pre><code>## 
+## Call:
+## adonis(formula = mat2 ~ mat1$Site + mat1$Year, permutations = 9999) 
+## 
+## Permutation: free
+## Number of permutations: 9999
+## 
+## Terms added sequentially (first to last)
+## 
+##           Df SumsOfSqs MeanSqs F.Model      R2 Pr(&gt;F)   
+## mat1$Site  1   0.16845 0.16845  1.7378 0.14088 0.1696   
+## mat1$Year  1   0.44565 0.44565  4.5975 0.37271 0.0067 **
+## Residuals  6   0.58160 0.09693         0.48641          
+## Total      8   1.19570                 1.00000          
+## ---
+## Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1</code></pre>
 <p><strong>Question 4.</strong> Report the results of the adonis test in sentence format, being sure to include the test statistic and the p-values for both <code>Site</code> and <code>Year</code> in your reporting.</p>
 <p><strong>Question 5.</strong> Based on the plot of the ordination, and the results of this adonis test: is species composition associated with <code>year</code> and <code>site</code>? How does this relate to the herbicide treatment conducted after the sample collected in 2007?</p>
 <p><br></p>

@@ -206,9 +206,9 @@ The ordination suggests the following:
 
 Lastly, go ahead and test to see if there is a difference in community composition between sites and Years. 
 
-For this, we will use the `adonis()` function in R to to test additive effects of `site` and `year` on the species assemblage. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the `turtle` variable as explanatory variables.
+For this, we will use the `adonis()` function in R to to test additive effects of `site` and `year` on the species assemblage. This test is very similar to the analysis of similarities that we used earlier this week, but it has a few advantages: 1) it is more flexible because it does not rely on any distributional assumptions, making it more appropriate for NMDS, and 2) the actual function is pretty intuitive to program, requiring only a formula argument by default. We can pass our matrix to the formula as the response, and include our sites and the `Year` variable as explanatory variables.
 
-```{r, echo=FALSE, results='hide'}    
+```{r}    
 # Do a significance test to see if plants vary by turtle presence/absence
   adonis(mat2~mat1$Site + mat1$Year, permutations = 9999)
 
