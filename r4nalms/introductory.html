@@ -709,7 +709,7 @@ Vectors
 <p>First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., <code>setwd("C:/Users/.../physical.csv")</code>), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in <em>this</em> case). Then, we can set the working directory in R to that folder using any number of different options. My preferences is to either work out of R projects, or to use <code>Session &gt; Set Working Directory &gt; To Source File Location</code>.</p>
 <p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our <code>Environment</code>. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
 <p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;physical.csv&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/physical.csv&quot;</span>)</span></code></pre></div>
 <p>If it looks like nothing happened, then it probably worked. Have a look at your <code>Environment</code> tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
 <p>You can also look at whether it is included in the Environment like this:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">ls</span>()</span></code></pre></div>
@@ -770,7 +770,7 @@ Vectors
 <div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">ggplot</span>(otsego_summary, <span class="kw">aes</span>(<span class="dt">x =</span> mean_temp, <span class="dt">y =</span> depth)) <span class="op">+</span></span>
 <span id="cb67-2"><a href="#cb67-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
 <span id="cb67-3"><a href="#cb67-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month)</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p><img src="introductory_files/figure-html/unnamed-chunk-38-1.png" width="672" /></p>
 <p>Wow, what a neat picture, but what if we wanted temperature in Fahrenheit for our stakeholders???</p>
 </div>
 <div id="creating-new-variables" class="section level2">

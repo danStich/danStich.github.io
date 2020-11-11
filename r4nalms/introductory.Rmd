@@ -336,12 +336,9 @@ Next, we have to assign our data to a new object, or R will just dump it to the 
 
 Finally, we have to tell R how to read the file and what the name of the file is. 
 
-```{r, eval=F}
-otsego <- read.csv("physical.csv")
-```
-
-```{r, eval=T, echo=F}
+```{r}
 otsego <- read.csv("data/physical.csv")
+
 ```
 
 If it looks like nothing happened, then it probably worked. Have a look at your `Environment` tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).

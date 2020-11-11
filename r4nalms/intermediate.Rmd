@@ -16,11 +16,7 @@ The plan for the afternoon is to introduce a subset of the **Secchi Dip-In data*
 ## **Data overview and management**
 Before we ever get into a statistical analysis, it is always good practice to have a good, long look at the data we are working with to make sure everything makes sense, and to note issues that may rear their heads down the road. Let's start by reading in part of the **Secchi Dip-In** data. This particular data set is a subset of the whole, and contains only those data that were collected in the state of Vermont. We read the data in with the argument `stringsAsFactors = FALSE` because there are a lot of string variables in the data, and factors can add extra handling time to our workflow (see <a href="introductory.html"> morning session tutorial </a>).
 
-```{r, eval=FALSE}
-vermont <- read.csv('vermont.csv', stringsAsFactors = FALSE)
-```
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+```{r}
 vermont <- read.csv('data/vermont.csv', stringsAsFactors = FALSE)
 ```
 
