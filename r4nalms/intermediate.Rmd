@@ -13,6 +13,8 @@ As folks learned in the Introductory session, once we have a basic grasp on how 
 
 The plan for the Intermediate session is to introduce a subset of the **Secchi Dip-In data** to do some standard statistical analysis with individual data points from many lakes, and then switch back to data visualization tools to create some isopleths of physical parameters measured at multiple times and depths over time in a single lake using the Otsego Lake data from the Introductory session.
 
+We will work with functions from a bunch of packages within the `tidyverse` for this session. You can go ahead and load that now. We will load a few others as we go along in this module, and during the live-stream workshops.
+
 ```{r, warning = FALSE, message= FALSE}
 library(tidyverse)
 
@@ -24,18 +26,21 @@ Before we ever get into a statistical analysis, it is always good practice to ha
 
 ```{r}
 minnesota <- read.csv("data/minnesota.csv", stringsAsFactors = FALSE)
+
 ```
 
 So, what are we working with here? Let's have a look. Remember from the Introductory session that it might be useful to understand how R sees your data first and foremost. The most reliable method for doing this with dataframes is to look at the **structure** of your data using `str()`.
 ```{r, eval=TRUE}
 # Like this:
 str(minnesota)
+
 ```
 
 Now that we have an idea of what the data set looks like, let's take a little closer look. First, there are a couple of things that we can do that will clean up our code down the road a little bit. Let's have a quick look at our column names again.
 
 ```{r}
 names(minnesota)
+
 ```
 
 Most of these are nice and clean, but there are some things that happen when we read data into R from Excel files. One of the things that R does is to replace all spaces and special characters with periods (`.`). This can make things a little difficult to read when we write code. For example, the column that said `Secchi (m)` in our Excel spreadsheet now says `Secchi..m.`. This confusion is compounded by the fact that some programming languages and R functions rely on the `.` for special purposes.
@@ -69,7 +74,7 @@ First, let's use the pipeline workflow from the `tidyverse` to summarize the dat
 ```{r}
 # So funny
 minnesummary <- minnesota %>%
-  group_by(Water.Body, GNIS.ID, GNIS.Class, Elevation) %>%
+  group_by(Water.Body, GNIS.ID, GNIS.Class) %>%
   summarize(
     Secchi = mean(Secchi),
     Latitude = mean(Latitude),
@@ -462,7 +467,7 @@ Here, we will fit a linear regression to test the effects of `Latitude` on `logS
 
 Next, we will fit the model using the same `lm()` function that we used for ANOVA above. The reason we can do this is that ANOVA, t-tests, and linear regressions are all just specific cases of the linear model.
 
-We will fit a model testing the effect of `Elevation` on `logSecchi`. But, first we'll drop rows that don't have `Latitude` information like we did when we were mapping.
+We will fit a model testing the effect of `Latitude` on `logSecchi`. But, first we'll drop rows that don't have `Latitude` information like we did when we were mapping.
 
 ```{r}
 # Drop rows with missing Latitudes
@@ -525,7 +530,7 @@ ggplot(mn_preds, aes(x = Latitude, y = Secchi)) +
   theme(legend.position = "none")
 ```
 
-Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. In fact, it looks like we're underpredicting basically all of the extremely high values of `Secchi`. **This should highlight the importance of communicating effects**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result.
+Wow, this graph is almost as underwhelming as the R^2^ for the model that was used to create it. In fact, it looks like we're under-predicting basically all of the extremely high values of `Secchi`. **This should highlight the importance of communicating effects**. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result.
 
 [gets off stump]
 

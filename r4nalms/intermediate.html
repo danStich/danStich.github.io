@@ -410,6 +410,7 @@ $(document).ready(function () {
 <h2 top-margin:10px;><b> Introduction </b></h2>
 <p>As folks learned in the Introductory session, once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and spend a little more time with data visualization tools.</p>
 <p>The plan for the Intermediate session is to introduce a subset of the <strong>Secchi Dip-In data</strong> to do some standard statistical analysis with individual data points from many lakes, and then switch back to data visualization tools to create some isopleths of physical parameters measured at multiple times and depths over time in a single lake using the Otsego Lake data from the Introductory session.</p>
+<p>We will work with functions from a bunch of packages within the <code>tidyverse</code> for this session. You can go ahead and load that now. We will load a few others as we go along in this module, and during the live-stream workshops.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
 <div id="data-overview-and-management" class="section level2">
 <h2><strong>Data overview and management</strong></h2>
@@ -452,7 +453,7 @@ $(document).ready(function () {
 <p>First, let’s use the pipeline workflow from the <code>tidyverse</code> to summarize the data like we did in the Introductory session:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># So funny</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a>minnesummary &lt;-<span class="st"> </span>minnesota <span class="op">%&gt;%</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">group_by</span>(Water.Body, GNIS.ID, GNIS.Class, Elevation) <span class="op">%&gt;%</span></span>
+<span id="cb7-3"><a href="#cb7-3"></a><span class="st">  </span><span class="kw">group_by</span>(Water.Body, GNIS.ID, GNIS.Class) <span class="op">%&gt;%</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="st">  </span><span class="kw">summarize</span>(</span>
 <span id="cb7-5"><a href="#cb7-5"></a>    <span class="dt">Secchi =</span> <span class="kw">mean</span>(Secchi),</span>
 <span id="cb7-6"><a href="#cb7-6"></a>    <span class="dt">Latitude =</span> <span class="kw">mean</span>(Latitude),</span>
@@ -769,7 +770,7 @@ $(document).ready(function () {
 <p>How about fitting this kind of model in R? It will take us less time than it did to write out the equations.</p>
 <p>Here, we will fit a linear regression to test the effects of <code>Latitude</code> on <code>logSecchi</code>. To do this, we can stick with the <code>lm()</code> function.</p>
 <p>Next, we will fit the model using the same <code>lm()</code> function that we used for ANOVA above. The reason we can do this is that ANOVA, t-tests, and linear regressions are all just specific cases of the linear model.</p>
-<p>We will fit a model testing the effect of <code>Elevation</code> on <code>logSecchi</code>. But, first we’ll drop rows that don’t have <code>Latitude</code> information like we did when we were mapping.</p>
+<p>We will fit a model testing the effect of <code>Latitude</code> on <code>logSecchi</code>. But, first we’ll drop rows that don’t have <code>Latitude</code> information like we did when we were mapping.</p>
 <div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># Drop rows with missing Latitudes</span></span>
 <span id="cb29-2"><a href="#cb29-2"></a>mn_data &lt;-<span class="st"> </span>minnesummary <span class="op">%&gt;%</span></span>
 <span id="cb29-3"><a href="#cb29-3"></a><span class="st">  </span><span class="kw">filter</span>(<span class="op">!</span><span class="kw">is.na</span>(Latitude) <span class="op">&amp;</span></span>
@@ -829,7 +830,7 @@ $(document).ready(function () {
 <span id="cb35-10"><a href="#cb35-10"></a>  ) <span class="op">+</span></span>
 <span id="cb35-11"><a href="#cb35-11"></a><span class="st">  </span><span class="kw">theme</span>(<span class="dt">legend.position =</span> <span class="st">&quot;none&quot;</span>)</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
-<p>Wow, this graph is almost as underwhelming as the R<sup>2</sup> for the model that was used to create it. In fact, it looks like we’re underpredicting basically all of the extremely high values of <code>Secchi</code>. <strong>This should highlight the importance of communicating effects</strong>. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result.</p>
+<p>Wow, this graph is almost as underwhelming as the R<sup>2</sup> for the model that was used to create it. In fact, it looks like we’re under-predicting basically all of the extremely high values of <code>Secchi</code>. <strong>This should highlight the importance of communicating effects</strong>. If we had just reported p-values, this would have gone un-noticed and someone might have misused the result.</p>
 <p>[gets off stump]</p>
 <p>For a more exciting linear regression example, you can have a look at <a href='thermoclines.html'> this </a> thermocline analysis.</p>
 </div>
