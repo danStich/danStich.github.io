@@ -407,16 +407,16 @@ $(document).ready(function () {
 
 
 <p><img src="images/roh.png" alt=""></p>
-<p>Welcome to programming in R! This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. We won’t follow this module to the letter in our time together, but we will discuss the same topics, and in about the same order. Hopefully, this tutorial will be helpful in either preparing you for the workshop or for revisiting important concepts after the workshop.</p>
+<p>Welcome to programming in R! This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. We won’t follow this internet module to the letter in our time together, but we will discuss the same topics, and in about the same order. Hopefully, this tutorial will be helpful in either preparing you for the workshop or for revisiting important concepts after the workshop. (I will add links to live-stream content after the workshops have concluded, permission pending.)</p>
 <p>Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or <a href="https://www.rstudio.com/resources/cheatsheets/">these</a>) can help you along the way by serving as handy references.</p>
 <div id="working-with-code" class="section level2">
 <h2><strong>Working with code</strong></h2>
-<p>We will spend a bit of time during the morning session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.</p>
+<p>We will spend a bit of time during the introductory session to orient attendees with the RStudio IDE and talk about file management. Here are some additional pointers about working with code.</p>
 <p>There are a lot of different ways to write computer code. Each has pros and cons and <strong>all</strong> of them are intended to increase efficiency and readability. There is no “right” way to edit your code, but it will make your life easier if you find a style you like and stick to those conventions. Here are a couple of points that can be helpful when you are just starting out:</p>
 <div id="commenting-code-is-helpful" class="section level3">
 <h3><strong>Commenting code is helpful</strong></h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># This is a comment. </span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># We know because it is preceded </span></span>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># This is a comment.</span></span>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="co"># We know because it is preceded</span></span>
 <span id="cb1-3"><a href="#cb1-3"></a><span class="co"># by a hashtag, or &#39;octothorpe&#39;.</span></span>
 <span id="cb1-4"><a href="#cb1-4"></a></span>
 <span id="cb1-5"><a href="#cb1-5"></a><span class="co"># R ignores comments so you have</span></span>
@@ -439,62 +439,52 @@ $(document).ready(function () {
 <p>Try it on your own!</p>
 </blockquote>
 <p>Type the following line of code into a blank source file, and run it using one of the methods above.</p>
-<blockquote>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Add 1 and 1 together</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span></code></pre></div>
-<pre><code>[1] 2</code></pre>
-</blockquote>
-</div>
-<div id="section-breaks-help-organization" class="section level3">
-<h3><strong>Section breaks help organization</strong></h3>
-<p>I like to use the built-in headings to separate big chunks of code and keep things organized. It works well for code-folding in R and when I’ve written a script that is several hundred lines long, some times all I want to see are the section headings. Go ahead and paste the code below into a source file. Press the upside-down triangle to the right of the line number to see what it does.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Section heading ----</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a><span class="co"># Follow a comment with four dashes</span></span>
-<span id="cb4-3"><a href="#cb4-3"></a><span class="co"># to insert a section heading</span></span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a><span class="dv">1</span> <span class="op">+</span><span class="st"> </span><span class="dv">1</span></span>
+<span id="cb2-3"><a href="#cb2-3"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
 </div>
 <div id="some-stricter-r-programming-rules" class="section level3">
 <h3><strong>Some stricter R programming rules:</strong></h3>
 <p>All code is in R is case sensitive.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Example (run the following lines):</span></span>
-<span id="cb5-2"><a href="#cb5-2"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb5-3"><a href="#cb5-3"></a>A &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb5-4"><a href="#cb5-4"></a></span>
-<span id="cb5-5"><a href="#cb5-5"></a><span class="co"># Are these two things equal?</span></span>
-<span id="cb5-6"><a href="#cb5-6"></a>a <span class="op">==</span><span class="st"> </span>A</span>
-<span id="cb5-7"><a href="#cb5-7"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Example (run the following lines):</span></span>
+<span id="cb3-2"><a href="#cb3-2"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb3-3"><a href="#cb3-3"></a>A &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb3-4"><a href="#cb3-4"></a></span>
+<span id="cb3-5"><a href="#cb3-5"></a><span class="co"># Are these two things equal?</span></span>
+<span id="cb3-6"><a href="#cb3-6"></a>a <span class="op">==</span><span class="st"> </span>A</span>
+<span id="cb3-7"><a href="#cb3-7"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span></span></code></pre></div>
 <p>We have few things going on above.</p>
 <ol style="list-style-type: decimal">
-<li><p>We’ve defined a couple of objects for the first time. You do this by assigning the value on the right of the arrow to the variable on the left. We can use the assignment arrow <code>&lt;-</code> or an equal sign <code>=</code>. The former is preferred, but for our purposes it will make absolutely no difference, and <code>=</code> is faster to type than <code>&lt;-</code>.</p></li>
-<li><p>Note in the output that the two objects are not the same, and R knows this when we test to see.</p></li>
+<li><p>We’ve defined a couple of objects for the first time. You do this by assigning the value on the right of the arrow to the variable on the left. We can use the assignment arrow <code>&lt;-</code> or an equal sign <code>=</code>. The former is preferred, but for our purposes it will make absolutely no difference, and <code>=</code> is faster to type than <code>&lt;-</code> until you know your speed-key combinations.</p></li>
 <li><p>The <code>==</code> that we typed is a logical test that checks to see if the two objects are identical. If they were, then R would have returned a <code>TRUE</code> instead of <code>FALSE</code>. This <strong>operator</strong> is very useful, and is common to a number of programming languages.</p></li>
+<li><p>Note in the output that the two objects are not the same, and R knows this when we test to see.</p></li>
 </ol>
 <p>You can’t start an object name with a number, but you can end it with one.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># In Rstudio there are nifty little </span></span>
-<span id="cb6-2"><a href="#cb6-2"></a><span class="co"># markers to show this is broken once</span></span>
-<span id="cb6-3"><a href="#cb6-3"></a><span class="co"># you have saved your source file.</span></span>
-<span id="cb6-4"><a href="#cb6-4"></a>1a &lt;-<span class="st"> </span><span class="dv">1</span> </span>
-<span id="cb6-5"><a href="#cb6-5"></a></span>
-<span id="cb6-6"><a href="#cb6-6"></a><span class="co"># But this one works </span></span>
-<span id="cb6-7"><a href="#cb6-7"></a><span class="co"># Try it by typing </span></span>
-<span id="cb6-8"><a href="#cb6-8"></a><span class="co"># a1,</span></span>
-<span id="cb6-9"><a href="#cb6-9"></a><span class="co"># print(a) or</span></span>
-<span id="cb6-10"><a href="#cb6-10"></a><span class="co"># show(a) </span></span>
-<span id="cb6-11"><a href="#cb6-11"></a><span class="co"># in the console: </span></span>
-<span id="cb6-12"><a href="#cb6-12"></a>a1 &lt;-<span class="st"> </span><span class="dv">1</span> </span></code></pre></div>
-<p>R will overwrite objects sequentially, so don’t name two things the same, unless you don’t need the first. Even then it is risky business. In the example below, our object <code>a</code> takes on the second value provided.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb7-2"><a href="#cb7-2"></a>a &lt;-<span class="st"> </span><span class="dv">2</span></span>
-<span id="cb7-3"><a href="#cb7-3"></a>a</span>
-<span id="cb7-4"><a href="#cb7-4"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># This won&#39;t work</span></span>
+<span id="cb4-2"><a href="#cb4-2"></a>1a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb4-3"><a href="#cb4-3"></a></span>
+<span id="cb4-4"><a href="#cb4-4"></a><span class="co"># But this one works</span></span>
+<span id="cb4-5"><a href="#cb4-5"></a><span class="co"># Try it by typing</span></span>
+<span id="cb4-6"><a href="#cb4-6"></a><span class="co"># a1,</span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># print(a) or</span></span>
+<span id="cb4-8"><a href="#cb4-8"></a><span class="co"># show(a)</span></span>
+<span id="cb4-9"><a href="#cb4-9"></a><span class="co"># in the console:</span></span>
+<span id="cb4-10"><a href="#cb4-10"></a>a1 &lt;-<span class="st"> </span><span class="dv">1</span></span></code></pre></div>
+<p>R will overwrite objects sequentially, so don’t name two things the same unless you don’t need the first. Even then it is risky business. In the example below, our object <code>a</code> takes on the second value provided.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb5-2"><a href="#cb5-2"></a>a &lt;-<span class="st"> </span><span class="dv">2</span></span>
+<span id="cb5-3"><a href="#cb5-3"></a></span>
+<span id="cb5-4"><a href="#cb5-4"></a>a</span>
+<span id="cb5-5"><a href="#cb5-5"></a>[<span class="dv">1</span>] <span class="dv">2</span></span></code></pre></div>
 <p>Some things can be expressed in multiple ways. For example, both “<code>T</code>” and “<code>TRUE</code>” can be used to indicate a logical value of <code>TRUE</code>.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></span>
-<span id="cb8-2"><a href="#cb8-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>T <span class="op">==</span><span class="st"> </span><span class="ot">TRUE</span></span>
+<span id="cb6-2"><a href="#cb6-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span></span></code></pre></div>
 <p>Some names are reserved or pre-defined. Did you notice that R already knew what <code>T</code> and <code>TRUE</code> were without us defining them? These reserved operators, and built in <strong>functions</strong> are the building blocks of the R language.</p>
 <p>For example,</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="cf">in</span>, <span class="cf">if</span>, <span class="cf">else</span>, <span class="cf">for</span>, <span class="cf">function</span>()</span></code></pre></div>
 <p>…and a mess of others have special uses. If it is not obvious already, we should avoid using these words to name objects that we define in our source files.</p>
 <p>Some <strong>symbols</strong> are also reserved for special use as operators, like:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="op">+</span>, <span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="op">+</span>, <span class="op">-</span>, <span class="op">*</span>, <span class="op">/</span>, <span class="op">% %</span>, <span class="op">&amp;</span>, <span class="op">|</span>, <span class="op">&lt;</span>, <span class="op">&gt;</span>, (, {, [, <span class="st">&#39;&#39;</span>, <span class="st">&quot;&quot;</span>, ...</span></code></pre></div>
 <p>…and a bunch of others.</p>
 <h3 id="multi">
 <strong>Some other handy tricks</strong>
@@ -503,11 +493,11 @@ $(document).ready(function () {
 <p>The <code>Tab</code> button on your keyboard will move the code to the right some number of spaces (user defined). Pressing <code>Shift + Tab</code> will move code to the left. These can help you organize your code quickly.</p>
 <p>A Single click of the mouse will move the cursor into position. Double-click will highlight the word you are clicking, and a triple left-click will highlight an entire line.</p>
 <p>Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press <code>Ctrl + F</code> to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.</p>
-<div id="functions-are-the-life-blood" class="section level4">
-<h4><strong>Functions are the life blood</strong></h4>
+</div>
+</div>
+<div id="functions-are-the-life-blood" class="section level2">
+<h2><strong>Functions are the life blood</strong></h2>
 <p>Functions make R what it is. These are all of the “commands” that are available to a user through the base software, or through <strong>packages</strong> that can be added on. When you can’t find the function you need, you can write one to do it (eventually). At their most basic level, <strong>functions</strong> do stuff to <strong>objects</strong> in R. This is what makes R both a functional programming language and an object-oriented programming language.</p>
-</div>
-</div>
 </div>
 <div id="data-structures-and-manipulation" class="section level2">
 <h2><strong>Data structures and manipulation</strong></h2>
@@ -517,9 +507,9 @@ Vectors
 <p>Despite the wide range of uses you hear about, R is a statistical programming language at its core. It is not a mathematical language or a general programming language, although it has a lot of functionality outside this original scope. R is what is known as a “high-level” or “interpreted” language. This means the pieces that make it up are a little more intuitive to the average user than low-level languages like C or C++. The back-end of R is, in fact, a collection of low-level code that builds up the functionality that we need. Because anyone can write new functions for R, it has a broad range of uses, from data management to math, and even GIS and data visualization tools, all of which are conveniently wrapped in an “intuitive”, “user-friendly” language.</p>
 <p>Part of this flexibility comes from the fact that R is also a “vectorized” language. Why do you care about that? This will help you wrap your head around how objects are created and stored in R, which will help you understand how to make, access, modify, and combine the data that you will need for any approach to data analysis.</p>
 <p>Let’s take a look at how this works and why it matters. Here, we have defined an object, <code>a</code>, as a variable with the value of <code>1</code>…or have we?</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>a  &lt;-<span class="st"> </span><span class="dv">1</span></span>
-<span id="cb11-2"><a href="#cb11-2"></a>a</span>
-<span id="cb11-3"><a href="#cb11-3"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>a &lt;-<span class="st"> </span><span class="dv">1</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>a</span>
+<span id="cb9-3"><a href="#cb9-3"></a>[<span class="dv">1</span>] <span class="dv">1</span></span></code></pre></div>
 <p>What is the square bracket in the output here? It’s an index. The index is telling us that the first element of <code>a</code> is <code>1</code>. This means that <code>a</code> is actually a “vector”, not a “scalar” or singular value. You can think of a vector as a column in a spreadsheet or a data table. By treating every variable as a vector, or an element thereof, the language becomes much more general.</p>
 <p>So, even if we define something with a single value, it is still just a vector with one element. For us, this is important because of the way that it lets us do math. It makes vector operations so easy that we don’t even need to think about them when we start to make statistical models. It makes working through the math a zillion times easier than on paper! In terms of programming, it can make a lot of things easier, too.</p>
 <p>The vector is the basic unit of information in R. Pretty much everything else is either made of vectors, or can be contained within one. Wow, what an existential paradox <em>that</em> is. Let’s play with some:</p>
@@ -539,700 +529,291 @@ Vectors
 </div>
 <div id="integers-and-numerics" class="section level4">
 <h4><strong>Integers and numerics</strong></h4>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1-5</span></span>
-<span id="cb12-2"><a href="#cb12-2"></a><span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></span>
-<span id="cb12-3"><a href="#cb12-3"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">show</span>(a)  <span class="co"># Another way to look at it</span></span>
-<span id="cb13-2"><a href="#cb13-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>a        <span class="co"># A third way to look at it</span></span>
-<span id="cb14-2"><a href="#cb14-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a><span class="kw">str</span>(a)   <span class="co"># Look at the structure, integer class</span></span>
-<span id="cb15-2"><a href="#cb15-2"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>a &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>) <span class="co"># Make a vector of integers 1-5</span></span>
+<span id="cb10-2"><a href="#cb10-2"></a><span class="kw">print</span>(a) <span class="co"># One way to look at our vector</span></span>
+<span id="cb10-3"><a href="#cb10-3"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a><span class="kw">show</span>(a) <span class="co"># Another way to look at it</span></span>
+<span id="cb11-2"><a href="#cb11-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a>a <span class="co"># A third way to look at it</span></span>
+<span id="cb12-2"><a href="#cb12-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="kw">str</span>(a) <span class="co"># Look at the structure, integer class</span></span>
+<span id="cb13-2"><a href="#cb13-2"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
 <p>Here is another way to make the same vector, but we need to pay attention to how R sees the data type. A closer look shows that these methods produce a <strong>numeric</strong> vector (<code>num</code>) instead of an <strong>integer</strong> vector (<code>int</code>). For the most part, this one won’t make a huge difference, but it can become important when writing statistical models.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="co"># Define the same vector using a sequence</span></span>
-<span id="cb16-2"><a href="#cb16-2"></a>a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span><span class="dv">1</span>, <span class="dt">to=</span><span class="dv">5</span>, <span class="dt">by=</span><span class="dv">1</span>) </span>
-<span id="cb16-3"><a href="#cb16-3"></a><span class="kw">str</span>(a)       </span>
-<span id="cb16-4"><a href="#cb16-4"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a><span class="co"># Define the same vector using a sequence</span></span>
+<span id="cb14-2"><a href="#cb14-2"></a>a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from =</span> <span class="dv">1</span>, <span class="dt">to =</span> <span class="dv">5</span>, <span class="dt">by =</span> <span class="dv">1</span>)</span>
+<span id="cb14-3"><a href="#cb14-3"></a><span class="kw">str</span>(a)</span>
+<span id="cb14-4"><a href="#cb14-4"></a> num [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
 </div>
 <div id="characters-and-factors" class="section level4">
 <h4><strong>Characters and factors</strong></h4>
 <p><strong>Characters</strong> are anything that is represented as text strings.</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;b&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;d&#39;</span>, <span class="st">&#39;e&#39;</span>) <span class="co"># Make a character vector</span></span>
-<span id="cb17-2"><a href="#cb17-2"></a>b                               <span class="co"># Print it to the console</span></span>
-<span id="cb17-3"><a href="#cb17-3"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">str</span>(b)                          <span class="co"># Now it&#39;s a character vector</span></span>
-<span id="cb18-2"><a href="#cb18-2"></a> chr [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>b &lt;-<span class="st"> </span><span class="kw">as.factor</span>(b)               <span class="co"># But we can change if we want</span></span>
-<span id="cb19-2"><a href="#cb19-2"></a>b                             </span>
-<span id="cb19-3"><a href="#cb19-3"></a>[<span class="dv">1</span>] a b c d e</span>
-<span id="cb19-4"><a href="#cb19-4"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="kw">str</span>(b)                          <span class="co"># Look at the data structure</span></span>
-<span id="cb20-2"><a href="#cb20-2"></a> Factor w<span class="op">/</span><span class="st"> </span><span class="dv">5</span> levels <span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>b &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>, <span class="st">&quot;d&quot;</span>, <span class="st">&quot;e&quot;</span>) <span class="co"># Make a character vector</span></span>
+<span id="cb15-2"><a href="#cb15-2"></a>b <span class="co"># Print it to the console</span></span>
+<span id="cb15-3"><a href="#cb15-3"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="kw">str</span>(b) <span class="co"># Now it&#39;s a character vector</span></span>
+<span id="cb16-2"><a href="#cb16-2"></a> chr [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>b &lt;-<span class="st"> </span><span class="kw">as.factor</span>(b) <span class="co"># But we can change if we want</span></span>
+<span id="cb17-2"><a href="#cb17-2"></a>b</span>
+<span id="cb17-3"><a href="#cb17-3"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb17-4"><a href="#cb17-4"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="kw">str</span>(b) <span class="co"># Look at the data structure</span></span>
+<span id="cb18-2"><a href="#cb18-2"></a> Factor w<span class="op">/</span><span class="st"> </span><span class="dv">5</span> levels <span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>,<span class="st">&quot;d&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
 <p><strong>Factors</strong> are a special kind of data type in R that we may run across from time to time. They have <strong>levels</strong> that can be ordered numerically. This is not important except that it becomes useful for coding variables used in statistical models- R does most of this behind the scenes and we won’t have to worry about it for the most part. In fact, in a lot of cases we will want to change factors to numerics or characters so they are easier to manipulate.</p>
 <p>This is what it looks like when we code a factor as number:</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">as.numeric</span>(b) </span>
-<span id="cb21-2"><a href="#cb21-2"></a></span>
-<span id="cb21-3"><a href="#cb21-3"></a><span class="co"># What did that do?</span></span>
-<span id="cb21-4"><a href="#cb21-4"></a>?as.numeric   </span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="kw">as.numeric</span>(b)</span>
+<span id="cb19-2"><a href="#cb19-2"></a></span>
+<span id="cb19-3"><a href="#cb19-3"></a><span class="co"># What did that do?</span></span>
+<span id="cb19-4"><a href="#cb19-4"></a>?as.numeric</span></code></pre></div>
 <p>Aside: we can ask R what functions mean by adding a question mark as we do above. And not just functions: we can ask it about pretty much any built-in object. The help pages take a little getting used to, but once you get the hang of it…in the mean time, the internet is your friend and you will find a multitude of online groups and forums with a quick search.</p>
 </div>
 <div id="logical-vectors" class="section level4">
 <h4><strong>Logical vectors</strong></h4>
 <p>Most of the logicals we deal with are yes/no or comparisons to determine whether a given piece of information matches a condition. Here, we use a logical check to see if the object <code>a</code> we created earlier is the same as object <code>b</code>. If we store the results of this logical check to a new vector <code>c</code>, we get a new logical vector of <code>TRUE</code> and <code>FALSE</code>.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span></span>
-<span id="cb22-2"><a href="#cb22-2"></a>c &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span>b </span>
-<span id="cb22-3"><a href="#cb22-3"></a>c            </span>
-<span id="cb22-4"><a href="#cb22-4"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">str</span>(c)       </span>
-<span id="cb23-2"><a href="#cb23-2"></a> logi [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a><span class="co"># The &#39;==&#39; compares the numeric vector to the factor one</span></span>
+<span id="cb20-2"><a href="#cb20-2"></a>c &lt;-<span class="st"> </span>a <span class="op">==</span><span class="st"> </span>b</span>
+<span id="cb20-3"><a href="#cb20-3"></a>c</span>
+<span id="cb20-4"><a href="#cb20-4"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="kw">str</span>(c)</span>
+<span id="cb21-2"><a href="#cb21-2"></a> logi [<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
 <p>We now have a logical vector. For the sake of demonstration, we could perform any number of logical checks on a vector (it does not need to be a logical like <code>c</code> above).</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="kw">is.na</span>(a)     <span class="co"># We can check for missing values</span></span>
-<span id="cb24-2"><a href="#cb24-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></span>
-<span id="cb25-2"><a href="#cb25-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="op">!</span><span class="kw">is.na</span>(a)    <span class="co"># The exclamation point means &#39;not&#39;</span></span>
-<span id="cb26-2"><a href="#cb26-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>a <span class="op">==</span><span class="st"> </span><span class="dv">3</span>       <span class="co"># We can see if specific elements meet a criterion</span></span>
-<span id="cb27-2"><a href="#cb27-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="kw">unique</span>(b)    <span class="co"># We can just look at unique values</span></span>
-<span id="cb28-2"><a href="#cb28-2"></a>[<span class="dv">1</span>] a b c d e</span>
-<span id="cb28-3"><a href="#cb28-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="kw">is.na</span>(a) <span class="co"># We can check for missing values</span></span>
+<span id="cb22-2"><a href="#cb22-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a><span class="kw">is.finite</span>(a) <span class="co"># We can make sure that all values are finite</span></span>
+<span id="cb23-2"><a href="#cb23-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a><span class="op">!</span><span class="kw">is.na</span>(a) <span class="co"># The exclamation point means &#39;not&#39;</span></span>
+<span id="cb24-2"><a href="#cb24-2"></a>[<span class="dv">1</span>] <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span> <span class="ot">TRUE</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a>a <span class="op">==</span><span class="st"> </span><span class="dv">3</span> <span class="co"># We can see if specific elements meet a criterion</span></span>
+<span id="cb25-2"><a href="#cb25-2"></a>[<span class="dv">1</span>] <span class="ot">FALSE</span> <span class="ot">FALSE</span>  <span class="ot">TRUE</span> <span class="ot">FALSE</span> <span class="ot">FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="kw">unique</span>(b) <span class="co"># We can just look at unique values</span></span>
+<span id="cb26-2"><a href="#cb26-2"></a>[<span class="dv">1</span>] a b c d e</span>
+<span id="cb26-3"><a href="#cb26-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
 <p>The examples above are all fairly simple vector operations. These form the basis for data manipulation and analysis in R.</p>
 </div>
 <div id="vector-operations" class="section level4">
 <h4><strong>Vector operations</strong></h4>
 <p>A lot of data manipulation in R is based on logical checks like the ones shown above. We can take these one step further to actually perform what one might think of as a query.</p>
 <p>For example, we can reference specific elements of vectors directly. Here, we specify that we want to print the third element of <code>a</code>.</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a><span class="co"># This one just prints it</span></span>
-<span id="cb29-2"><a href="#cb29-2"></a>a[<span class="dv">3</span>] </span>
-<span id="cb29-3"><a href="#cb29-3"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="co"># This one stores it in a new object</span></span>
-<span id="cb30-2"><a href="#cb30-2"></a>f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a><span class="co"># This one just prints it</span></span>
+<span id="cb27-2"><a href="#cb27-2"></a>a[<span class="dv">3</span>]</span>
+<span id="cb27-3"><a href="#cb27-3"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="co"># This one stores it in a new object</span></span>
+<span id="cb28-2"><a href="#cb28-2"></a>f &lt;-<span class="st"> </span>a[<span class="dv">3</span>]</span></code></pre></div>
 <blockquote>
 <p>Important</p>
 </blockquote>
 <p>If it is not yet obvious, we have to assign the output of functions to new objects for the values to be useable in the future. In the example above, <code>a</code> is never actually <em>changed</em>. This is a common source of confusion early on.</p>
 <p>Going further, we could select vector elements based on some condition. On the first line of code, we tell R to show us the indices of the elements in vector <code>b</code> that match the character string <code>c</code>. Outloud, we would say, “<code>b</code> where the value of <code>b</code> is equal to <code>c</code>” in the first example. We can also use built-in R functions to just store the indices for all elements of <code>b</code> where <code>b</code> is equal to the character string ‘<code>c</code>’.</p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>b[b<span class="op">==</span><span class="st">&#39;c&#39;</span>] </span>
-<span id="cb31-2"><a href="#cb31-2"></a>[<span class="dv">1</span>] c</span>
-<span id="cb31-3"><a href="#cb31-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="kw">which</span>(b<span class="op">==</span><span class="st">&#39;c&#39;</span>)</span>
-<span id="cb32-2"><a href="#cb32-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
-<p>Perhaps more practically speaking, we can do elementwise math operations on vectors easily in R.</p>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>a <span class="op">*</span><span class="st"> </span><span class="fl">.5</span>   <span class="co"># Multiplication</span></span>
-<span id="cb33-2"><a href="#cb33-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>a <span class="op">+</span><span class="st"> </span><span class="dv">100</span>  <span class="co"># Addition</span></span>
-<span id="cb34-2"><a href="#cb34-2"></a>[<span class="dv">1</span>] <span class="dv">101</span> <span class="dv">102</span> <span class="dv">103</span> <span class="dv">104</span> <span class="dv">105</span></span></code></pre></div>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>a <span class="op">-</span><span class="st"> </span><span class="dv">3</span>    <span class="co"># Subtraction</span></span>
-<span id="cb35-2"><a href="#cb35-2"></a>[<span class="dv">1</span>] <span class="dv">-2</span> <span class="dv">-1</span>  <span class="dv">0</span>  <span class="dv">1</span>  <span class="dv">2</span></span></code></pre></div>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a>a <span class="op">/</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Division</span></span>
-<span id="cb36-2"><a href="#cb36-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>a <span class="op">^</span><span class="st"> </span><span class="dv">2</span>    <span class="co"># Exponentiation</span></span>
-<span id="cb37-2"><a href="#cb37-2"></a>[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">4</span>  <span class="dv">9</span> <span class="dv">16</span> <span class="dv">25</span></span></code></pre></div>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">exp</span>(a)   <span class="co"># This is the same as &#39;e to the...&#39;</span></span>
-<span id="cb38-2"><a href="#cb38-2"></a>[<span class="dv">1</span>]   <span class="fl">2.718282</span>   <span class="fl">7.389056</span>  <span class="fl">20.085537</span>  <span class="fl">54.598150</span> <span class="fl">148.413159</span></span></code></pre></div>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a><span class="kw">log</span>(a)   <span class="co"># Natural logarithm</span></span>
-<span id="cb39-2"><a href="#cb39-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.6931472</span> <span class="fl">1.0986123</span> <span class="fl">1.3862944</span> <span class="fl">1.6094379</span></span></code></pre></div>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">log10</span>(a) <span class="co"># Log base 10</span></span>
-<span id="cb40-2"><a href="#cb40-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.3010300</span> <span class="fl">0.4771213</span> <span class="fl">0.6020600</span> <span class="fl">0.6989700</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1"></a>b[b <span class="op">==</span><span class="st"> &quot;c&quot;</span>]</span>
+<span id="cb29-2"><a href="#cb29-2"></a>[<span class="dv">1</span>] c</span>
+<span id="cb29-3"><a href="#cb29-3"></a>Levels<span class="op">:</span><span class="st"> </span>a b c d e</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="kw">which</span>(b <span class="op">==</span><span class="st"> &quot;c&quot;</span>)</span>
+<span id="cb30-2"><a href="#cb30-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<p>Perhaps more practically speaking, we can do elemen-twise math operations on vectors easily in R.</p>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1"></a>a <span class="op">*</span><span class="st"> </span><span class="fl">.5</span> <span class="co"># Multiplication</span></span>
+<span id="cb31-2"><a href="#cb31-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a>a <span class="op">+</span><span class="st"> </span><span class="dv">100</span> <span class="co"># Addition</span></span>
+<span id="cb32-2"><a href="#cb32-2"></a>[<span class="dv">1</span>] <span class="dv">101</span> <span class="dv">102</span> <span class="dv">103</span> <span class="dv">104</span> <span class="dv">105</span></span></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1"></a>a <span class="op">-</span><span class="st"> </span><span class="dv">3</span> <span class="co"># Subtraction</span></span>
+<span id="cb33-2"><a href="#cb33-2"></a>[<span class="dv">1</span>] <span class="dv">-2</span> <span class="dv">-1</span>  <span class="dv">0</span>  <span class="dv">1</span>  <span class="dv">2</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a>a <span class="op">/</span><span class="st"> </span><span class="dv">2</span> <span class="co"># Division</span></span>
+<span id="cb34-2"><a href="#cb34-2"></a>[<span class="dv">1</span>] <span class="fl">0.5</span> <span class="fl">1.0</span> <span class="fl">1.5</span> <span class="fl">2.0</span> <span class="fl">2.5</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>a<span class="op">^</span><span class="dv">2</span> <span class="co"># Exponentiation</span></span>
+<span id="cb35-2"><a href="#cb35-2"></a>[<span class="dv">1</span>]  <span class="dv">1</span>  <span class="dv">4</span>  <span class="dv">9</span> <span class="dv">16</span> <span class="dv">25</span></span></code></pre></div>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="kw">exp</span>(a) <span class="co"># This is the same as &#39;e to the...&#39;</span></span>
+<span id="cb36-2"><a href="#cb36-2"></a>[<span class="dv">1</span>]   <span class="fl">2.718282</span>   <span class="fl">7.389056</span>  <span class="fl">20.085537</span>  <span class="fl">54.598150</span> <span class="fl">148.413159</span></span></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a><span class="kw">log</span>(a) <span class="co"># Natural logarithm</span></span>
+<span id="cb37-2"><a href="#cb37-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.6931472</span> <span class="fl">1.0986123</span> <span class="fl">1.3862944</span> <span class="fl">1.6094379</span></span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="kw">log10</span>(a) <span class="co"># Log base 10</span></span>
+<span id="cb38-2"><a href="#cb38-2"></a>[<span class="dv">1</span>] <span class="fl">0.0000000</span> <span class="fl">0.3010300</span> <span class="fl">0.4771213</span> <span class="fl">0.6020600</span> <span class="fl">0.6989700</span></span></code></pre></div>
 <p>We can also do string manipulation really easily:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>b &lt;-<span class="st">  </span><span class="kw">as.character</span>(b)</span>
-<span id="cb41-2"><a href="#cb41-2"></a><span class="kw">paste</span>(b, <span class="st">&#39;AAAA&#39;</span>, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>)     <span class="co"># We can append text</span></span>
-<span id="cb41-3"><a href="#cb41-3"></a>[<span class="dv">1</span>] <span class="st">&quot;aAAAA&quot;</span> <span class="st">&quot;bAAAA&quot;</span> <span class="st">&quot;cAAAA&quot;</span> <span class="st">&quot;dAAAA&quot;</span> <span class="st">&quot;eAAAA&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>)     <span class="co"># We can do it the other way</span></span>
-<span id="cb42-2"><a href="#cb42-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;--&#39;</span>)   <span class="co"># Add symbols to separate</span></span>
-<span id="cb43-2"><a href="#cb43-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAA--a&quot;</span> <span class="st">&quot;AAAA--b&quot;</span> <span class="st">&quot;AAAA--c&quot;</span> <span class="st">&quot;AAAA--d&quot;</span> <span class="st">&quot;AAAA--e&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">gsub</span>(<span class="dt">pattern=</span><span class="st">&#39;c&#39;</span>, <span class="dt">replacement=</span><span class="st">&#39;AAAA&#39;</span>, b) <span class="co"># We can replace text</span></span>
-<span id="cb44-2"><a href="#cb44-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>    <span class="st">&quot;b&quot;</span>    <span class="st">&quot;AAAA&quot;</span> <span class="st">&quot;d&quot;</span>    <span class="st">&quot;e&quot;</span>   </span></code></pre></div>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>e &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&#39;AAAA&#39;</span>, b, <span class="dt">sep=</span><span class="st">&#39;&#39;</span>) <span class="co"># Make a new object</span></span>
-<span id="cb45-2"><a href="#cb45-2"></a>e                            <span class="co"># Print to console</span></span>
-<span id="cb45-3"><a href="#cb45-3"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a><span class="kw">substr</span>(e, <span class="dt">start=</span><span class="dv">5</span>, <span class="dt">stop=</span><span class="dv">5</span>)   <span class="co"># We can strip text (or dates, or times, etc.)</span></span>
-<span id="cb46-2"><a href="#cb46-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>b &lt;-<span class="st"> </span><span class="kw">as.character</span>(b)</span>
+<span id="cb39-2"><a href="#cb39-2"></a><span class="kw">paste</span>(b, <span class="st">&quot;AAAA&quot;</span>, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># We can append text</span></span>
+<span id="cb39-3"><a href="#cb39-3"></a>[<span class="dv">1</span>] <span class="st">&quot;aAAAA&quot;</span> <span class="st">&quot;bAAAA&quot;</span> <span class="st">&quot;cAAAA&quot;</span> <span class="st">&quot;dAAAA&quot;</span> <span class="st">&quot;eAAAA&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># We can do it the other way</span></span>
+<span id="cb40-2"><a href="#cb40-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;--&quot;</span>) <span class="co"># Add symbols to separate</span></span>
+<span id="cb41-2"><a href="#cb41-2"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAA--a&quot;</span> <span class="st">&quot;AAAA--b&quot;</span> <span class="st">&quot;AAAA--c&quot;</span> <span class="st">&quot;AAAA--d&quot;</span> <span class="st">&quot;AAAA--e&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a><span class="kw">gsub</span>(<span class="dt">pattern =</span> <span class="st">&quot;c&quot;</span>, <span class="dt">replacement =</span> <span class="st">&quot;AAAA&quot;</span>, b) <span class="co"># We can replace text</span></span>
+<span id="cb42-2"><a href="#cb42-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>    <span class="st">&quot;b&quot;</span>    <span class="st">&quot;AAAA&quot;</span> <span class="st">&quot;d&quot;</span>    <span class="st">&quot;e&quot;</span>   </span></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>e &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;AAAA&quot;</span>, b, <span class="dt">sep =</span> <span class="st">&quot;&quot;</span>) <span class="co"># Make a new object</span></span>
+<span id="cb43-2"><a href="#cb43-2"></a>e <span class="co"># Print to console</span></span>
+<span id="cb43-3"><a href="#cb43-3"></a>[<span class="dv">1</span>] <span class="st">&quot;AAAAa&quot;</span> <span class="st">&quot;AAAAb&quot;</span> <span class="st">&quot;AAAAc&quot;</span> <span class="st">&quot;AAAAd&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1"></a><span class="kw">substr</span>(e, <span class="dt">start =</span> <span class="dv">5</span>, <span class="dt">stop =</span> <span class="dv">5</span>) <span class="co"># We can strip text (or dates, or times, etc.)</span></span>
+<span id="cb44-2"><a href="#cb44-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;e&quot;</span></span></code></pre></div>
 <p>We can check how many elements are in a vector.</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></span>
-<span id="cb47-2"><a href="#cb47-2"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a>a         <span class="co"># Yup, looks about right</span></span>
-<span id="cb48-2"><a href="#cb48-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="kw">length</span>(a) <span class="co"># A has a length of 5, try it and check it</span></span>
+<span id="cb45-2"><a href="#cb45-2"></a>[<span class="dv">1</span>] <span class="dv">5</span></span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1"></a>a <span class="co"># Yup, looks about right</span></span>
+<span id="cb46-2"><a href="#cb46-2"></a>[<span class="dv">1</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span></span></code></pre></div>
 <p>And we can do lots of other nifty things like this.</p>
 </div>
 <div id="matrices" class="section level3">
 <h3><strong>Matrices</strong></h3>
 <p>Matrices are rectangular objects that we can think of as being made up of vectors.</p>
 <p>We can make matrices by binding vectors that already exist</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="kw">cbind</span>(a,e)</span>
-<span id="cb49-2"><a href="#cb49-2"></a>     a   e      </span>
-<span id="cb49-3"><a href="#cb49-3"></a>[<span class="dv">1</span>,] <span class="st">&quot;1&quot;</span> <span class="st">&quot;AAAAa&quot;</span></span>
-<span id="cb49-4"><a href="#cb49-4"></a>[<span class="dv">2</span>,] <span class="st">&quot;2&quot;</span> <span class="st">&quot;AAAAb&quot;</span></span>
-<span id="cb49-5"><a href="#cb49-5"></a>[<span class="dv">3</span>,] <span class="st">&quot;3&quot;</span> <span class="st">&quot;AAAAc&quot;</span></span>
-<span id="cb49-6"><a href="#cb49-6"></a>[<span class="dv">4</span>,] <span class="st">&quot;4&quot;</span> <span class="st">&quot;AAAAd&quot;</span></span>
-<span id="cb49-7"><a href="#cb49-7"></a>[<span class="dv">5</span>,] <span class="st">&quot;5&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="kw">cbind</span>(a, e)</span>
+<span id="cb47-2"><a href="#cb47-2"></a>     a   e      </span>
+<span id="cb47-3"><a href="#cb47-3"></a>[<span class="dv">1</span>,] <span class="st">&quot;1&quot;</span> <span class="st">&quot;AAAAa&quot;</span></span>
+<span id="cb47-4"><a href="#cb47-4"></a>[<span class="dv">2</span>,] <span class="st">&quot;2&quot;</span> <span class="st">&quot;AAAAb&quot;</span></span>
+<span id="cb47-5"><a href="#cb47-5"></a>[<span class="dv">3</span>,] <span class="st">&quot;3&quot;</span> <span class="st">&quot;AAAAc&quot;</span></span>
+<span id="cb47-6"><a href="#cb47-6"></a>[<span class="dv">4</span>,] <span class="st">&quot;4&quot;</span> <span class="st">&quot;AAAAd&quot;</span></span>
+<span id="cb47-7"><a href="#cb47-7"></a>[<span class="dv">5</span>,] <span class="st">&quot;5&quot;</span> <span class="st">&quot;AAAAe&quot;</span></span></code></pre></div>
 <p>Or we can make an empty one to fill.</p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow=</span><span class="dv">3</span>, <span class="dt">ncol=</span><span class="dv">4</span>)</span>
-<span id="cb50-2"><a href="#cb50-2"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>] [,<span class="dv">4</span>]</span>
-<span id="cb50-3"><a href="#cb50-3"></a>[<span class="dv">1</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
-<span id="cb50-4"><a href="#cb50-4"></a>[<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
-<span id="cb50-5"><a href="#cb50-5"></a>[<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1"></a><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">4</span>)</span>
+<span id="cb48-2"><a href="#cb48-2"></a>     [,<span class="dv">1</span>] [,<span class="dv">2</span>] [,<span class="dv">3</span>] [,<span class="dv">4</span>]</span>
+<span id="cb48-3"><a href="#cb48-3"></a>[<span class="dv">1</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
+<span id="cb48-4"><a href="#cb48-4"></a>[<span class="dv">2</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span>
+<span id="cb48-5"><a href="#cb48-5"></a>[<span class="dv">3</span>,]    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span>    <span class="dv">0</span></span></code></pre></div>
 <p>Or we can make one from scratch.</p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>mat &lt;-<span class="st">  </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol=</span><span class="dv">3</span>, <span class="dt">nrow=</span><span class="dv">4</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>mat &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="kw">seq</span>(<span class="dv">1</span>, <span class="dv">12</span>), <span class="dt">ncol =</span> <span class="dv">3</span>, <span class="dt">nrow =</span> <span class="dv">4</span>)</span></code></pre></div>
 <p>We can do all of the things we did with vectors to matrices, but now we have more than one column, and official ‘rows’ that we can also use to these ends:</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">ncol</span>(mat)   <span class="co"># Number of columns</span></span>
-<span id="cb52-2"><a href="#cb52-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="kw">nrow</span>(mat)   <span class="co"># Number of rows</span></span>
-<span id="cb53-2"><a href="#cb53-2"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></span>
-<span id="cb54-2"><a href="#cb54-2"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>mat[<span class="dv">2</span>, <span class="dv">3</span>]   <span class="co"># Value of row 2, column 3</span></span>
-<span id="cb55-2"><a href="#cb55-2"></a>[<span class="dv">1</span>] <span class="dv">10</span></span></code></pre></div>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">str</span>(mat)    </span>
-<span id="cb56-2"><a href="#cb56-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1"></a><span class="kw">ncol</span>(mat) <span class="co"># Number of columns</span></span>
+<span id="cb50-2"><a href="#cb50-2"></a>[<span class="dv">1</span>] <span class="dv">3</span></span></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="kw">nrow</span>(mat) <span class="co"># Number of rows</span></span>
+<span id="cb51-2"><a href="#cb51-2"></a>[<span class="dv">1</span>] <span class="dv">4</span></span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a><span class="kw">length</span>(mat) <span class="co"># Total number of entries</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a>[<span class="dv">1</span>] <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a>mat[<span class="dv">2</span>, <span class="dv">3</span>] <span class="co"># Value of row 2, column 3</span></span>
+<span id="cb53-2"><a href="#cb53-2"></a>[<span class="dv">1</span>] <span class="dv">10</span></span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a><span class="kw">str</span>(mat)</span>
+<span id="cb54-2"><a href="#cb54-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span></code></pre></div>
 <p>See how number of rows and columns is defined in data structure? With rows and columns, we can assign column names and row names.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="kw">colnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;first&#39;</span>, <span class="st">&#39;second&#39;</span>, <span class="st">&#39;third&#39;</span>)</span>
-<span id="cb57-2"><a href="#cb57-2"></a><span class="kw">rownames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;This&#39;</span>, <span class="st">&#39;is&#39;</span>, <span class="st">&#39;a&#39;</span>, <span class="st">&#39;matrix&#39;</span>)</span>
-<span id="cb57-3"><a href="#cb57-3"></a>mat</span>
-<span id="cb57-4"><a href="#cb57-4"></a>       first second third</span>
-<span id="cb57-5"><a href="#cb57-5"></a>This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span></span>
-<span id="cb57-6"><a href="#cb57-6"></a>is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span></span>
-<span id="cb57-7"><a href="#cb57-7"></a>a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span></span>
-<span id="cb57-8"><a href="#cb57-8"></a>matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span></span></code></pre></div>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">str</span>(mat) <span class="co"># Take a look to understand</span></span>
-<span id="cb58-2"><a href="#cb58-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span>
-<span id="cb58-3"><a href="#cb58-3"></a> <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;dimnames&quot;</span>)=List of <span class="dv">2</span></span>
-<span id="cb58-4"><a href="#cb58-4"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="st">&quot;This&quot;</span> <span class="st">&quot;is&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;matrix&quot;</span></span>
-<span id="cb58-5"><a href="#cb58-5"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="st">&quot;first&quot;</span> <span class="st">&quot;second&quot;</span> <span class="st">&quot;third&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a><span class="kw">colnames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;first&quot;</span>, <span class="st">&quot;second&quot;</span>, <span class="st">&quot;third&quot;</span>)</span>
+<span id="cb55-2"><a href="#cb55-2"></a><span class="kw">rownames</span>(mat) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;This&quot;</span>, <span class="st">&quot;is&quot;</span>, <span class="st">&quot;a&quot;</span>, <span class="st">&quot;matrix&quot;</span>)</span>
+<span id="cb55-3"><a href="#cb55-3"></a>mat</span>
+<span id="cb55-4"><a href="#cb55-4"></a>       first second third</span>
+<span id="cb55-5"><a href="#cb55-5"></a>This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span></span>
+<span id="cb55-6"><a href="#cb55-6"></a>is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span></span>
+<span id="cb55-7"><a href="#cb55-7"></a>a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span></span>
+<span id="cb55-8"><a href="#cb55-8"></a>matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span></span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a><span class="kw">str</span>(mat) <span class="co"># Take a look to understand</span></span>
+<span id="cb56-2"><a href="#cb56-2"></a> int [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="dv">1</span> <span class="dv">2</span> <span class="dv">3</span> <span class="dv">4</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">8</span> <span class="dv">9</span> <span class="dv">10</span> ...</span>
+<span id="cb56-3"><a href="#cb56-3"></a> <span class="op">-</span><span class="st"> </span><span class="kw">attr</span>(<span class="op">*</span>, <span class="st">&quot;dimnames&quot;</span>)=List of <span class="dv">2</span></span>
+<span id="cb56-4"><a href="#cb56-4"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>] <span class="st">&quot;This&quot;</span> <span class="st">&quot;is&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;matrix&quot;</span></span>
+<span id="cb56-5"><a href="#cb56-5"></a>  ..<span class="op">$</span><span class="st"> </span><span class="er">:</span><span class="st"> </span>chr [<span class="dv">1</span><span class="op">:</span><span class="dv">3</span>] <span class="st">&quot;first&quot;</span> <span class="st">&quot;second&quot;</span> <span class="st">&quot;third&quot;</span></span></code></pre></div>
 <p>All the same operations we did on vectors above…one example.</p>
-<p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices to do linear algebra behind the scenes in the models that we will be working with.</p>
+<p>More on matrices as we need them. We won’t use these a lot in this module, but R relies heavily on matrices (and arrays) to do the heavy lifting behind the scenes.</p>
 </div>
 <div id="dataframes" class="section level3">
 <h3><strong>Dataframes</strong></h3>
-<p>Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type!</p>
-<p><strong>Dataframes</strong> are made up of <strong>atomic vectors</strong>.</p>
-<p>This is probably the data structure that we will use most here, along with atomic vectors.</p>
-<p>Let’s make a dataframe to see how it works.</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="co"># Make a new object &#39;a&#39; from a sequence  </span></span>
-<span id="cb59-2"><a href="#cb59-2"></a>a &lt;-<span class="st"> </span><span class="kw">seq</span>(<span class="dt">from=</span>.<span class="dv">5</span>, <span class="dt">to=</span><span class="dv">10</span>, <span class="dt">by =</span> <span class="fl">.5</span>)  </span>
-<span id="cb59-3"><a href="#cb59-3"></a>  </span>
-<span id="cb59-4"><a href="#cb59-4"></a><span class="co"># Vector math: raise each &#39;a&#39; to power of 2</span></span>
-<span id="cb59-5"><a href="#cb59-5"></a>b &lt;-<span class="st"> </span>a<span class="op">^</span><span class="dv">2</span>                           </span>
-<span id="cb59-6"><a href="#cb59-6"></a></span>
-<span id="cb59-7"><a href="#cb59-7"></a><span class="co"># Replicates values in object a # of times  </span></span>
-<span id="cb59-8"><a href="#cb59-8"></a>c &lt;-<span class="st"> </span><span class="kw">rep</span>(<span class="kw">c</span>(<span class="st">&#39;a&#39;</span>,<span class="st">&#39;b&#39;</span>,<span class="st">&#39;c&#39;</span>,<span class="st">&#39;d&#39;</span>), <span class="dv">5</span>)    </span>
-<span id="cb59-9"><a href="#cb59-9"></a></span>
-<span id="cb59-10"><a href="#cb59-10"></a><span class="co"># Note, we don&#39;t use quotes for objects,</span></span>
-<span id="cb59-11"><a href="#cb59-11"></a><span class="co"># but we do for character variables</span></span>
-<span id="cb59-12"><a href="#cb59-12"></a>d &lt;-<span class="st"> </span><span class="kw">data.frame</span>(a, b, c)           </span></code></pre></div>
-<p>Now we can look at it:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>d <span class="co"># Print the dataframe</span></span>
-<span id="cb60-2"><a href="#cb60-2"></a>      a      b c</span>
-<span id="cb60-3"><a href="#cb60-3"></a><span class="dv">1</span>   <span class="fl">0.5</span>   <span class="fl">0.25</span> a</span>
-<span id="cb60-4"><a href="#cb60-4"></a><span class="dv">2</span>   <span class="fl">1.0</span>   <span class="fl">1.00</span> b</span>
-<span id="cb60-5"><a href="#cb60-5"></a><span class="dv">3</span>   <span class="fl">1.5</span>   <span class="fl">2.25</span> c</span>
-<span id="cb60-6"><a href="#cb60-6"></a><span class="dv">4</span>   <span class="fl">2.0</span>   <span class="fl">4.00</span> d</span>
-<span id="cb60-7"><a href="#cb60-7"></a><span class="dv">5</span>   <span class="fl">2.5</span>   <span class="fl">6.25</span> a</span>
-<span id="cb60-8"><a href="#cb60-8"></a><span class="dv">6</span>   <span class="fl">3.0</span>   <span class="fl">9.00</span> b</span>
-<span id="cb60-9"><a href="#cb60-9"></a><span class="dv">7</span>   <span class="fl">3.5</span>  <span class="fl">12.25</span> c</span>
-<span id="cb60-10"><a href="#cb60-10"></a><span class="dv">8</span>   <span class="fl">4.0</span>  <span class="fl">16.00</span> d</span>
-<span id="cb60-11"><a href="#cb60-11"></a><span class="dv">9</span>   <span class="fl">4.5</span>  <span class="fl">20.25</span> a</span>
-<span id="cb60-12"><a href="#cb60-12"></a><span class="dv">10</span>  <span class="fl">5.0</span>  <span class="fl">25.00</span> b</span>
-<span id="cb60-13"><a href="#cb60-13"></a><span class="dv">11</span>  <span class="fl">5.5</span>  <span class="fl">30.25</span> c</span>
-<span id="cb60-14"><a href="#cb60-14"></a><span class="dv">12</span>  <span class="fl">6.0</span>  <span class="fl">36.00</span> d</span>
-<span id="cb60-15"><a href="#cb60-15"></a><span class="dv">13</span>  <span class="fl">6.5</span>  <span class="fl">42.25</span> a</span>
-<span id="cb60-16"><a href="#cb60-16"></a><span class="dv">14</span>  <span class="fl">7.0</span>  <span class="fl">49.00</span> b</span>
-<span id="cb60-17"><a href="#cb60-17"></a><span class="dv">15</span>  <span class="fl">7.5</span>  <span class="fl">56.25</span> c</span>
-<span id="cb60-18"><a href="#cb60-18"></a><span class="dv">16</span>  <span class="fl">8.0</span>  <span class="fl">64.00</span> d</span>
-<span id="cb60-19"><a href="#cb60-19"></a><span class="dv">17</span>  <span class="fl">8.5</span>  <span class="fl">72.25</span> a</span>
-<span id="cb60-20"><a href="#cb60-20"></a><span class="dv">18</span>  <span class="fl">9.0</span>  <span class="fl">81.00</span> b</span>
-<span id="cb60-21"><a href="#cb60-21"></a><span class="dv">19</span>  <span class="fl">9.5</span>  <span class="fl">90.25</span> c</span>
-<span id="cb60-22"><a href="#cb60-22"></a><span class="dv">20</span> <span class="fl">10.0</span> <span class="fl">100.00</span> d</span></code></pre></div>
-<p>Notice that R assigns names to dataframes on the fly based on object names. They are not <code>colnames</code> as with matrices, they are <code>names</code>.</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="co"># We can look at these</span></span>
-<span id="cb61-2"><a href="#cb61-2"></a><span class="kw">names</span>(d)     <span class="co"># All of the names</span></span>
-<span id="cb61-3"><a href="#cb61-3"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">names</span>(d)[<span class="dv">2</span>]  <span class="co"># One at a time: note indexing, names(d) is a vector!!</span></span>
-<span id="cb62-2"><a href="#cb62-2"></a>[<span class="dv">1</span>] <span class="st">&quot;b&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="co"># We can change the names</span></span>
-<span id="cb63-2"><a href="#cb63-2"></a><span class="kw">names</span>(d) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&#39;Increment&#39;</span>, <span class="st">&#39;Squared&#39;</span>, <span class="st">&#39;Class&#39;</span>) <span class="co"># All at once- note quotes</span></span>
-<span id="cb63-3"><a href="#cb63-3"></a><span class="kw">names</span>(d)                <span class="co"># Print it to see what this does</span></span>
-<span id="cb63-4"><a href="#cb63-4"></a>[<span class="dv">1</span>] <span class="st">&quot;Increment&quot;</span> <span class="st">&quot;Squared&quot;</span>   <span class="st">&quot;Class&quot;</span>    </span></code></pre></div>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a><span class="kw">names</span>(d)[<span class="dv">3</span>] &lt;-<span class="st"> &#39;Letter&#39;</span> <span class="co"># Or, change one at a time..</span></span>
-<span id="cb64-2"><a href="#cb64-2"></a><span class="kw">names</span>(d)                <span class="co"># Print it again to see what changed</span></span>
-<span id="cb64-3"><a href="#cb64-3"></a>[<span class="dv">1</span>] <span class="st">&quot;Increment&quot;</span> <span class="st">&quot;Squared&quot;</span>   <span class="st">&quot;Letter&quot;</span>   </span></code></pre></div>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>e &lt;-<span class="st"> </span>d                  <span class="co"># We can also rename the entire dataframe</span></span>
-<span id="cb65-2"><a href="#cb65-2"></a><span class="kw">head</span>(e)                 <span class="co"># Head shows first six rows by default</span></span>
-<span id="cb65-3"><a href="#cb65-3"></a>  Increment Squared Letter</span>
-<span id="cb65-4"><a href="#cb65-4"></a><span class="dv">1</span>       <span class="fl">0.5</span>    <span class="fl">0.25</span>      a</span>
-<span id="cb65-5"><a href="#cb65-5"></a><span class="dv">2</span>       <span class="fl">1.0</span>    <span class="fl">1.00</span>      b</span>
-<span id="cb65-6"><a href="#cb65-6"></a><span class="dv">3</span>       <span class="fl">1.5</span>    <span class="fl">2.25</span>      c</span>
-<span id="cb65-7"><a href="#cb65-7"></a><span class="dv">4</span>       <span class="fl">2.0</span>    <span class="fl">4.00</span>      d</span>
-<span id="cb65-8"><a href="#cb65-8"></a><span class="dv">5</span>       <span class="fl">2.5</span>    <span class="fl">6.25</span>      a</span>
-<span id="cb65-9"><a href="#cb65-9"></a><span class="dv">6</span>       <span class="fl">3.0</span>    <span class="fl">9.00</span>      b</span></code></pre></div>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">head</span>(e, <span class="dv">10</span>)             <span class="co"># Or, we can look at any other number that we want</span></span>
-<span id="cb66-2"><a href="#cb66-2"></a>   Increment Squared Letter</span>
-<span id="cb66-3"><a href="#cb66-3"></a><span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a</span>
-<span id="cb66-4"><a href="#cb66-4"></a><span class="dv">2</span>        <span class="fl">1.0</span>    <span class="fl">1.00</span>      b</span>
-<span id="cb66-5"><a href="#cb66-5"></a><span class="dv">3</span>        <span class="fl">1.5</span>    <span class="fl">2.25</span>      c</span>
-<span id="cb66-6"><a href="#cb66-6"></a><span class="dv">4</span>        <span class="fl">2.0</span>    <span class="fl">4.00</span>      d</span>
-<span id="cb66-7"><a href="#cb66-7"></a><span class="dv">5</span>        <span class="fl">2.5</span>    <span class="fl">6.25</span>      a</span>
-<span id="cb66-8"><a href="#cb66-8"></a><span class="dv">6</span>        <span class="fl">3.0</span>    <span class="fl">9.00</span>      b</span>
-<span id="cb66-9"><a href="#cb66-9"></a><span class="dv">7</span>        <span class="fl">3.5</span>   <span class="fl">12.25</span>      c</span>
-<span id="cb66-10"><a href="#cb66-10"></a><span class="dv">8</span>        <span class="fl">4.0</span>   <span class="fl">16.00</span>      d</span>
-<span id="cb66-11"><a href="#cb66-11"></a><span class="dv">9</span>        <span class="fl">4.5</span>   <span class="fl">20.25</span>      a</span>
-<span id="cb66-12"><a href="#cb66-12"></a><span class="dv">10</span>       <span class="fl">5.0</span>   <span class="fl">25.00</span>      b</span></code></pre></div>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a>e<span class="op">$</span>Sqrt &lt;-<span class="st">  </span><span class="kw">sqrt</span>(e<span class="op">$</span>Increment) <span class="co"># We can make new columns in data frames like this!</span></span>
-<span id="cb67-2"><a href="#cb67-2"></a>e </span>
-<span id="cb67-3"><a href="#cb67-3"></a>   Increment Squared Letter      Sqrt</span>
-<span id="cb67-4"><a href="#cb67-4"></a><span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a <span class="fl">0.7071068</span></span>
-<span id="cb67-5"><a href="#cb67-5"></a><span class="dv">2</span>        <span class="fl">1.0</span>    <span class="fl">1.00</span>      b <span class="fl">1.0000000</span></span>
-<span id="cb67-6"><a href="#cb67-6"></a><span class="dv">3</span>        <span class="fl">1.5</span>    <span class="fl">2.25</span>      c <span class="fl">1.2247449</span></span>
-<span id="cb67-7"><a href="#cb67-7"></a><span class="dv">4</span>        <span class="fl">2.0</span>    <span class="fl">4.00</span>      d <span class="fl">1.4142136</span></span>
-<span id="cb67-8"><a href="#cb67-8"></a><span class="dv">5</span>        <span class="fl">2.5</span>    <span class="fl">6.25</span>      a <span class="fl">1.5811388</span></span>
-<span id="cb67-9"><a href="#cb67-9"></a><span class="dv">6</span>        <span class="fl">3.0</span>    <span class="fl">9.00</span>      b <span class="fl">1.7320508</span></span>
-<span id="cb67-10"><a href="#cb67-10"></a><span class="dv">7</span>        <span class="fl">3.5</span>   <span class="fl">12.25</span>      c <span class="fl">1.8708287</span></span>
-<span id="cb67-11"><a href="#cb67-11"></a><span class="dv">8</span>        <span class="fl">4.0</span>   <span class="fl">16.00</span>      d <span class="fl">2.0000000</span></span>
-<span id="cb67-12"><a href="#cb67-12"></a><span class="dv">9</span>        <span class="fl">4.5</span>   <span class="fl">20.25</span>      a <span class="fl">2.1213203</span></span>
-<span id="cb67-13"><a href="#cb67-13"></a><span class="dv">10</span>       <span class="fl">5.0</span>   <span class="fl">25.00</span>      b <span class="fl">2.2360680</span></span>
-<span id="cb67-14"><a href="#cb67-14"></a><span class="dv">11</span>       <span class="fl">5.5</span>   <span class="fl">30.25</span>      c <span class="fl">2.3452079</span></span>
-<span id="cb67-15"><a href="#cb67-15"></a><span class="dv">12</span>       <span class="fl">6.0</span>   <span class="fl">36.00</span>      d <span class="fl">2.4494897</span></span>
-<span id="cb67-16"><a href="#cb67-16"></a><span class="dv">13</span>       <span class="fl">6.5</span>   <span class="fl">42.25</span>      a <span class="fl">2.5495098</span></span>
-<span id="cb67-17"><a href="#cb67-17"></a><span class="dv">14</span>       <span class="fl">7.0</span>   <span class="fl">49.00</span>      b <span class="fl">2.6457513</span></span>
-<span id="cb67-18"><a href="#cb67-18"></a><span class="dv">15</span>       <span class="fl">7.5</span>   <span class="fl">56.25</span>      c <span class="fl">2.7386128</span></span>
-<span id="cb67-19"><a href="#cb67-19"></a><span class="dv">16</span>       <span class="fl">8.0</span>   <span class="fl">64.00</span>      d <span class="fl">2.8284271</span></span>
-<span id="cb67-20"><a href="#cb67-20"></a><span class="dv">17</span>       <span class="fl">8.5</span>   <span class="fl">72.25</span>      a <span class="fl">2.9154759</span></span>
-<span id="cb67-21"><a href="#cb67-21"></a><span class="dv">18</span>       <span class="fl">9.0</span>   <span class="fl">81.00</span>      b <span class="fl">3.0000000</span></span>
-<span id="cb67-22"><a href="#cb67-22"></a><span class="dv">19</span>       <span class="fl">9.5</span>   <span class="fl">90.25</span>      c <span class="fl">3.0822070</span></span>
-<span id="cb67-23"><a href="#cb67-23"></a><span class="dv">20</span>      <span class="fl">10.0</span>  <span class="fl">100.00</span>      d <span class="fl">3.1622777</span></span></code></pre></div>
-<p>Referencing specific elements of a dataframe is similar to a the same in a matrix, with some added capabilities. We’ll look at this with some real data so it’s more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let’s read in our first real data file as most of our data are stored that way and will be read in as <code>.csv</code> or <code>.txt</code> files.</p>
-</div>
-<div id="loading-data-from-files" class="section level3">
-<h3><strong>Loading data from files</strong></h3>
-<p>First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., <code>setwd("C:/Users/.../physical.csv")</code>), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in <em>this</em> case). Then, we can set the working directory in R to that folder using any number of different options. My preferences is to either work out of R projects, or to use <code>Session &gt; Set Working Directory &gt; To Source File Location</code>.</p>
-<p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our environment. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
-<p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</span></code></pre></div>
-<p>If it looks like nothing happened, then it probably worked. Have a look at your Environment tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
-<p>Now that we have some real data, let’s break it down a little bit.</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="kw">ls</span>()            <span class="co"># We can use ls() to see what is in our environment</span></span>
-<span id="cb69-2"><a href="#cb69-2"></a> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span>           <span class="st">&quot;A&quot;</span>           <span class="st">&quot;b&quot;</span>           <span class="st">&quot;c&quot;</span>           <span class="st">&quot;coord_dd&quot;</span>   </span>
-<span id="cb69-3"><a href="#cb69-3"></a> [<span class="dv">6</span>] <span class="st">&quot;coord_utm&quot;</span>   <span class="st">&quot;cToF&quot;</span>        <span class="st">&quot;d&quot;</span>           <span class="st">&quot;dd&quot;</span>          <span class="st">&quot;e&quot;</span>          </span>
-<span id="cb69-4"><a href="#cb69-4"></a>[<span class="dv">11</span>] <span class="st">&quot;f&quot;</span>           <span class="st">&quot;hook1&quot;</span>       <span class="st">&quot;hook2&quot;</span>       <span class="st">&quot;im&quot;</span>          <span class="st">&quot;ins&quot;</span>        </span>
-<span id="cb69-5"><a href="#cb69-5"></a>[<span class="dv">16</span>] <span class="st">&quot;july&quot;</span>        <span class="st">&quot;lim&quot;</span>         <span class="st">&quot;limlist&quot;</span>     <span class="st">&quot;limnos&quot;</span>      <span class="st">&quot;lmod&quot;</span>       </span>
-<span id="cb69-6"><a href="#cb69-6"></a>[<span class="dv">21</span>] <span class="st">&quot;ltd&quot;</span>         <span class="st">&quot;mat&quot;</span>         <span class="st">&quot;means&quot;</span>       <span class="st">&quot;mod&quot;</span>         <span class="st">&quot;myList&quot;</span>     </span>
-<span id="cb69-7"><a href="#cb69-7"></a>[<span class="dv">26</span>] <span class="st">&quot;myMean&quot;</span>      <span class="st">&quot;newd&quot;</span>        <span class="st">&quot;otsego&quot;</span>      <span class="st">&quot;out&quot;</span>         <span class="st">&quot;out1&quot;</span>       </span>
-<span id="cb69-8"><a href="#cb69-8"></a>[<span class="dv">31</span>] <span class="st">&quot;plot&quot;</span>        <span class="st">&quot;plotter&quot;</span>     <span class="st">&quot;preds&quot;</span>       <span class="st">&quot;summarydata&quot;</span> <span class="st">&quot;test&quot;</span>       </span>
-<span id="cb69-9"><a href="#cb69-9"></a>[<span class="dv">36</span>] <span class="st">&quot;vermont&quot;</span>     <span class="st">&quot;VT&quot;</span>         </span></code></pre></div>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">head</span>(otsego)    <span class="co"># Look at the first six rows of data in the object</span></span>
-<span id="cb70-2"><a href="#cb70-2"></a>         lake      date month year depth temp   pH do_mgl  cond do_sat</span>
-<span id="cb70-3"><a href="#cb70-3"></a><span class="dv">1</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">0.1</span> <span class="fl">0.39</span> <span class="fl">7.88</span>   <span class="fl">12.7</span> <span class="fl">0.300</span>     <span class="ot">NA</span></span>
-<span id="cb70-4"><a href="#cb70-4"></a><span class="dv">2</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">2.0</span> <span class="fl">1.43</span> <span class="fl">7.88</span>   <span class="fl">12.2</span> <span class="fl">0.297</span>     <span class="ot">NA</span></span>
-<span id="cb70-5"><a href="#cb70-5"></a><span class="dv">3</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">4.0</span> <span class="fl">1.47</span> <span class="fl">7.89</span>   <span class="fl">12.2</span> <span class="fl">0.301</span>     <span class="ot">NA</span></span>
-<span id="cb70-6"><a href="#cb70-6"></a><span class="dv">4</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">6.0</span> <span class="fl">1.49</span> <span class="fl">7.89</span>   <span class="fl">12.1</span> <span class="fl">0.301</span>     <span class="ot">NA</span></span>
-<span id="cb70-7"><a href="#cb70-7"></a><span class="dv">5</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>   <span class="fl">8.0</span> <span class="fl">1.59</span> <span class="fl">7.86</span>   <span class="fl">11.7</span> <span class="fl">0.302</span>     <span class="ot">NA</span></span>
-<span id="cb70-8"><a href="#cb70-8"></a><span class="dv">6</span> Otsego Lake <span class="dv">1</span><span class="op">/</span><span class="dv">29</span><span class="op">/</span><span class="dv">1988</span>     <span class="dv">1</span> <span class="dv">1988</span>  <span class="fl">10.0</span> <span class="fl">1.61</span> <span class="fl">7.86</span>   <span class="fl">11.8</span> <span class="fl">0.308</span>     <span class="ot">NA</span></span></code></pre></div>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="kw">nrow</span>(otsego)    <span class="co"># How many rows does it have?</span></span>
-<span id="cb71-2"><a href="#cb71-2"></a>[<span class="dv">1</span>] <span class="dv">10005</span></span></code></pre></div>
-<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">ncol</span>(otsego)    <span class="co"># How many columns?</span></span>
-<span id="cb72-2"><a href="#cb72-2"></a>[<span class="dv">1</span>] <span class="dv">10</span></span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a><span class="kw">names</span>(otsego)   <span class="co"># What are the column names?</span></span>
-<span id="cb73-2"><a href="#cb73-2"></a> [<span class="dv">1</span>] <span class="st">&quot;lake&quot;</span>   <span class="st">&quot;date&quot;</span>   <span class="st">&quot;month&quot;</span>  <span class="st">&quot;year&quot;</span>   <span class="st">&quot;depth&quot;</span>  <span class="st">&quot;temp&quot;</span>   <span class="st">&quot;pH&quot;</span>     <span class="st">&quot;do_mgl&quot;</span></span>
-<span id="cb73-3"><a href="#cb73-3"></a> [<span class="dv">9</span>] <span class="st">&quot;cond&quot;</span>   <span class="st">&quot;do_sat&quot;</span></span></code></pre></div>
-<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="kw">str</span>(otsego)     <span class="co"># Have a look at the data structure</span></span>
-<span id="cb74-2"><a href="#cb74-2"></a><span class="st">&#39;data.frame&#39;</span><span class="op">:</span><span class="st">   </span><span class="dv">10005</span> obs. of  <span class="dv">10</span> variables<span class="op">:</span></span>
-<span id="cb74-3"><a href="#cb74-3"></a><span class="st"> </span><span class="er">$</span><span class="st"> </span>lake  <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">1</span> level <span class="st">&quot;Otsego Lake&quot;</span><span class="op">:</span><span class="st"> </span><span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
-<span id="cb74-4"><a href="#cb74-4"></a> <span class="op">$</span><span class="st"> </span>date  <span class="op">:</span><span class="st"> </span>Factor w<span class="op">/</span><span class="st"> </span><span class="dv">539</span> levels <span class="st">&quot;1/10/1995&quot;</span>,<span class="st">&quot;1/10/1996&quot;</span>,..<span class="op">:</span><span class="st"> </span><span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> <span class="dv">9</span> ...</span>
-<span id="cb74-5"><a href="#cb74-5"></a> <span class="op">$</span><span class="st"> </span>month <span class="op">:</span><span class="st"> </span>int  <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> <span class="dv">1</span> ...</span>
-<span id="cb74-6"><a href="#cb74-6"></a> <span class="op">$</span><span class="st"> </span>year  <span class="op">:</span><span class="st"> </span>int  <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> <span class="dv">1988</span> ...</span>
-<span id="cb74-7"><a href="#cb74-7"></a> <span class="op">$</span><span class="st"> </span>depth <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.1</span> <span class="dv">2</span> <span class="dv">4</span> <span class="dv">6</span> <span class="dv">8</span> <span class="dv">10</span> <span class="dv">12</span> <span class="dv">14</span> <span class="dv">16</span> <span class="dv">18</span> ...</span>
-<span id="cb74-8"><a href="#cb74-8"></a> <span class="op">$</span><span class="st"> </span>temp  <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.39</span> <span class="fl">1.43</span> <span class="fl">1.47</span> <span class="fl">1.49</span> <span class="fl">1.59</span> <span class="fl">1.61</span> <span class="fl">1.66</span> <span class="fl">1.75</span> <span class="fl">1.79</span> <span class="fl">1.86</span> ...</span>
-<span id="cb74-9"><a href="#cb74-9"></a> <span class="op">$</span><span class="st"> </span>pH    <span class="op">:</span><span class="st"> </span>num  <span class="fl">7.88</span> <span class="fl">7.88</span> <span class="fl">7.89</span> <span class="fl">7.89</span> <span class="fl">7.86</span> <span class="fl">7.86</span> <span class="fl">7.85</span> <span class="fl">7.86</span> <span class="fl">7.84</span> <span class="fl">7.82</span> ...</span>
-<span id="cb74-10"><a href="#cb74-10"></a> <span class="op">$</span><span class="st"> </span>do_mgl<span class="op">:</span><span class="st"> </span>num  <span class="fl">12.7</span> <span class="fl">12.2</span> <span class="fl">12.2</span> <span class="fl">12.1</span> <span class="fl">11.7</span> <span class="fl">11.8</span> <span class="fl">11.7</span> <span class="fl">11.8</span> <span class="fl">11.5</span> <span class="fl">11.3</span> ...</span>
-<span id="cb74-11"><a href="#cb74-11"></a> <span class="op">$</span><span class="st"> </span>cond  <span class="op">:</span><span class="st"> </span>num  <span class="fl">0.3</span> <span class="fl">0.297</span> <span class="fl">0.301</span> <span class="fl">0.301</span> <span class="fl">0.302</span> <span class="fl">0.308</span> <span class="fl">0.309</span> <span class="fl">0.309</span> <span class="fl">0.308</span> <span class="fl">0.309</span> ...</span>
-<span id="cb74-12"><a href="#cb74-12"></a> <span class="op">$</span><span class="st"> </span>do_sat<span class="op">:</span><span class="st"> </span>num  <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> <span class="ot">NA</span> ...</span></code></pre></div>
-<div class="sourceCode" id="cb75"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="kw">summary</span>(otsego) <span class="co"># Summarize the variables in the dataframe</span></span>
-<span id="cb75-2"><a href="#cb75-2"></a>          lake               date          month             year     </span>
-<span id="cb75-3"><a href="#cb75-3"></a> Otsego Lake<span class="op">:</span><span class="dv">10005</span>   <span class="dv">8</span><span class="op">/</span><span class="dv">17</span><span class="op">/</span><span class="dv">2006</span> <span class="op">:</span><span class="st">  </span><span class="dv">24</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">1.000</span>   Min.   <span class="op">:</span><span class="dv">1988</span>  </span>
-<span id="cb75-4"><a href="#cb75-4"></a>                     <span class="dv">10</span><span class="op">/</span><span class="dv">18</span><span class="op">/</span><span class="dv">1994</span><span class="op">:</span><span class="st">  </span><span class="dv">20</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">5.000</span>   1st Qu.<span class="op">:</span><span class="dv">1995</span>  </span>
-<span id="cb75-5"><a href="#cb75-5"></a>                     <span class="dv">10</span><span class="op">/</span><span class="dv">3</span><span class="op">/</span><span class="dv">1994</span> <span class="op">:</span><span class="st">  </span><span class="dv">20</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">7.000</span>   Median <span class="op">:</span><span class="dv">2001</span>  </span>
-<span id="cb75-6"><a href="#cb75-6"></a>                     <span class="dv">11</span><span class="op">/</span><span class="dv">6</span><span class="op">/</span><span class="dv">1995</span> <span class="op">:</span><span class="st">  </span><span class="dv">20</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">7.268</span>   Mean   <span class="op">:</span><span class="dv">2002</span>  </span>
-<span id="cb75-7"><a href="#cb75-7"></a>                     <span class="dv">12</span><span class="op">/</span><span class="dv">13</span><span class="op">/</span><span class="dv">1994</span><span class="op">:</span><span class="st">  </span><span class="dv">20</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">9.000</span>   3rd Qu.<span class="op">:</span><span class="dv">2010</span>  </span>
-<span id="cb75-8"><a href="#cb75-8"></a>                     <span class="dv">6</span><span class="op">/</span><span class="dv">16</span><span class="op">/</span><span class="dv">1994</span> <span class="op">:</span><span class="st">  </span><span class="dv">20</span>   Max.   <span class="op">:</span><span class="fl">12.000</span>   Max.   <span class="op">:</span><span class="dv">2018</span>  </span>
-<span id="cb75-9"><a href="#cb75-9"></a>                     (Other)   <span class="op">:</span><span class="dv">9881</span>                                  </span>
-<span id="cb75-10"><a href="#cb75-10"></a>     depth            temp              pH             do_mgl      </span>
-<span id="cb75-11"><a href="#cb75-11"></a> Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.10</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.000</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">6.080</span>   Min.   <span class="op">:</span><span class="st"> </span><span class="fl">0.410</span>  </span>
-<span id="cb75-12"><a href="#cb75-12"></a> 1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.00</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">4.660</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">7.590</span>   1st Qu.<span class="op">:</span><span class="st"> </span><span class="fl">7.950</span>  </span>
-<span id="cb75-13"><a href="#cb75-13"></a> Median <span class="op">:</span><span class="fl">18.00</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">6.110</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">7.860</span>   Median <span class="op">:</span><span class="st"> </span><span class="fl">9.450</span>  </span>
-<span id="cb75-14"><a href="#cb75-14"></a> Mean   <span class="op">:</span><span class="fl">21.95</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">8.261</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">7.869</span>   Mean   <span class="op">:</span><span class="st"> </span><span class="fl">9.121</span>  </span>
-<span id="cb75-15"><a href="#cb75-15"></a> 3rd Qu.<span class="op">:</span><span class="fl">40.00</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">9.710</span>   3rd Qu.<span class="op">:</span><span class="st"> </span><span class="fl">8.130</span>   3rd Qu.<span class="op">:</span><span class="fl">10.960</span>  </span>
-<span id="cb75-16"><a href="#cb75-16"></a> Max.   <span class="op">:</span><span class="fl">50.00</span>   Max.   <span class="op">:</span><span class="fl">25.970</span>   Max.   <span class="op">:</span><span class="fl">11.020</span>   Max.   <span class="op">:</span><span class="fl">16.440</span>  </span>
-<span id="cb75-17"><a href="#cb75-17"></a> NA<span class="st">&#39;s   :1                        NA&#39;</span>s   <span class="op">:</span><span class="dv">504</span>      NA<span class="st">&#39;s   :40      </span></span>
-<span id="cb75-18"><a href="#cb75-18"></a><span class="st">      cond            do_sat       </span></span>
-<span id="cb75-19"><a href="#cb75-19"></a><span class="st"> Min.   :0.1430   Min.   :   0.30  </span></span>
-<span id="cb75-20"><a href="#cb75-20"></a><span class="st"> 1st Qu.:0.2640   1st Qu.:  77.90  </span></span>
-<span id="cb75-21"><a href="#cb75-21"></a><span class="st"> Median :0.2800   Median :  89.30  </span></span>
-<span id="cb75-22"><a href="#cb75-22"></a><span class="st"> Mean   :0.2804   Mean   :  86.51  </span></span>
-<span id="cb75-23"><a href="#cb75-23"></a><span class="st"> 3rd Qu.:0.3020   3rd Qu.:  97.00  </span></span>
-<span id="cb75-24"><a href="#cb75-24"></a><span class="st"> Max.   :0.3770   Max.   :1145.90  </span></span>
-<span id="cb75-25"><a href="#cb75-25"></a><span class="st"> NA&#39;</span>s   <span class="op">:</span><span class="dv">251</span>      NA<span class="st">&#39;s   :7800     </span></span></code></pre></div>
-<p>Now let’s look at some specific things.</p>
-<p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a>otsego[<span class="dv">12</span>, <span class="dv">4</span>]</span>
-<span id="cb76-2"><a href="#cb76-2"></a>[<span class="dv">1</span>] <span class="dv">1988</span></span></code></pre></div>
-<p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
-<div class="sourceCode" id="cb77"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a>otsego[<span class="dv">12</span>, <span class="st">&#39;depth&#39;</span>]</span>
-<span id="cb77-2"><a href="#cb77-2"></a>[<span class="dv">1</span>] <span class="dv">25</span></span></code></pre></div>
-<p>More realistically, we might want to know the avereage temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
-<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a><span class="kw">mean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="fl">10.0</span>] , <span class="dt">na.rm=</span><span class="ot">TRUE</span>)</span>
-<span id="cb78-2"><a href="#cb78-2"></a>[<span class="dv">1</span>] <span class="fl">10.49944</span></span></code></pre></div>
-<p>Wow…heavy stuff, but this is how the wheels turn. Let’s take another step back and break this down even further.</p>
-<p>In the example above, we are using a <strong>function</strong> called <code>mean</code> to do stuff to an object that is a subset of <code>otsego$temp</code>. The way these functions do things is critical to working in R.</p>
-<p>For example, we could write a new function to calculate the mean if we wanted to…right? Here, we define a function called <code>myMean</code> that takes one required <strong>argument</strong>. Each required argument can take on user-specified <strong>values</strong>. In this case, that value must be a vector that is or can be coerced into <code>numeric</code> format. Here, we also add a chunk of code to deal with <code>NA</code> values.</p>
-<div class="sourceCode" id="cb79"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a><span class="co"># Define a new function to calculate mean</span></span>
-<span id="cb79-2"><a href="#cb79-2"></a>myMean &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb79-3"><a href="#cb79-3"></a>  <span class="co"># If any of the observations are NA</span></span>
-<span id="cb79-4"><a href="#cb79-4"></a>  <span class="cf">if</span>(<span class="kw">any</span>(<span class="kw">is.na</span>(x))){</span>
-<span id="cb79-5"><a href="#cb79-5"></a>    <span class="co"># Then exclude those values of </span></span>
-<span id="cb79-6"><a href="#cb79-6"></a>    <span class="co"># x from calculation</span></span>
-<span id="cb79-7"><a href="#cb79-7"></a>    x_bar =<span class="st"> </span><span class="kw">sum</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])<span class="op">/</span><span class="kw">length</span>(x[<span class="op">!</span><span class="kw">is.na</span>(x)])</span>
-<span id="cb79-8"><a href="#cb79-8"></a>      <span class="co"># Otherwise</span></span>
-<span id="cb79-9"><a href="#cb79-9"></a>      } <span class="cf">else</span> {</span>
-<span id="cb79-10"><a href="#cb79-10"></a>        <span class="co"># Calculate from all values of x</span></span>
-<span id="cb79-11"><a href="#cb79-11"></a>        x_bar =<span class="st"> </span><span class="kw">sum</span>(x)<span class="op">/</span><span class="kw">length</span>(x)</span>
-<span id="cb79-12"><a href="#cb79-12"></a>      }</span>
-<span id="cb79-13"><a href="#cb79-13"></a>  </span>
-<span id="cb79-14"><a href="#cb79-14"></a>  <span class="kw">return</span>(x_bar)</span>
-<span id="cb79-15"><a href="#cb79-15"></a>  }</span></code></pre></div>
-<p>Just to make sure it works right, let’s go ahead and test it out.</p>
-<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>test &lt;-<span class="st"> </span><span class="kw">myMean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth<span class="op">==</span><span class="dv">10</span>])</span>
-<span id="cb80-2"><a href="#cb80-2"></a>test</span>
-<span id="cb80-3"><a href="#cb80-3"></a>[<span class="dv">1</span>] <span class="fl">10.49944</span></span></code></pre></div>
-<p>Yay!</p>
-<p>Now, what if we wanted to do something more useful, like convert temperature from celcius to Farenheit? We can apply the same idea here:</p>
-<div class="sourceCode" id="cb81"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a><span class="co"># Define a function to convert temperature</span></span>
-<span id="cb81-2"><a href="#cb81-2"></a><span class="co"># in celcius to temperature in farenheit:</span></span>
-<span id="cb81-3"><a href="#cb81-3"></a>cToF &lt;-<span class="st"> </span><span class="cf">function</span>(cels){</span>
-<span id="cb81-4"><a href="#cb81-4"></a>  faren &lt;-<span class="st"> </span>cels<span class="op">*</span>(<span class="dv">9</span><span class="op">/</span><span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">32</span></span>
-<span id="cb81-5"><a href="#cb81-5"></a>  <span class="kw">return</span>(faren)</span>
-<span id="cb81-6"><a href="#cb81-6"></a>}</span>
-<span id="cb81-7"><a href="#cb81-7"></a></span>
-<span id="cb81-8"><a href="#cb81-8"></a><span class="co"># Test the function out.</span></span>
-<span id="cb81-9"><a href="#cb81-9"></a><span class="co"># Here, we create a new variable in the</span></span>
-<span id="cb81-10"><a href="#cb81-10"></a><span class="co"># otsego dataframe to hold the result</span></span>
-<span id="cb81-11"><a href="#cb81-11"></a>otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego<span class="op">$</span>temp)</span>
-<span id="cb81-12"><a href="#cb81-12"></a></span>
-<span id="cb81-13"><a href="#cb81-13"></a><span class="co"># Look at the first few elements</span></span>
-<span id="cb81-14"><a href="#cb81-14"></a><span class="kw">head</span>(otsego<span class="op">$</span>tempF)</span>
-<span id="cb81-15"><a href="#cb81-15"></a>[<span class="dv">1</span>] <span class="fl">32.702</span> <span class="fl">34.574</span> <span class="fl">34.646</span> <span class="fl">34.682</span> <span class="fl">34.862</span> <span class="fl">34.898</span></span></code></pre></div>
-<p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Farenheit scale?).</p>
-<p>There are a couple of ways to do this.</p>
-<p>First, we could just use the <code>write.csv</code> function. This one is pretty limited in terms of options, but that also makes it easy to use. We just need to tell R what the object is that we want to write to a csv file and what the name of the file will be. Do be careful because this will overwrite existing files with the same name without asking if that is okay.</p>
-<div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="kw">write.csv</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>)</span></code></pre></div>
-<p>I like a little more flexibility in the file write process, so I usually use the <code>write.table</code> function. This can be used to achieve the same end depending on options, but allows other options like ommitting <code>row.names</code> from the output file. Here is an example of how it works:</p>
-<div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="co"># Write the data set to a csv file.</span></span>
-<span id="cb83-2"><a href="#cb83-2"></a><span class="co"># We specify the object, the filename, and</span></span>
-<span id="cb83-3"><a href="#cb83-3"></a><span class="co"># we tell R we don&#39;t want rownames or quotes</span></span>
-<span id="cb83-4"><a href="#cb83-4"></a><span class="co"># around character strings. Finally, we tell</span></span>
-<span id="cb83-5"><a href="#cb83-5"></a><span class="co"># R to separate columns using a comma.</span></span>
-<span id="cb83-6"><a href="#cb83-6"></a></span>
-<span id="cb83-7"><a href="#cb83-7"></a><span class="co"># We could do exactly the same thing, but use a &quot;.txt&quot;</span></span>
-<span id="cb83-8"><a href="#cb83-8"></a><span class="co"># file extensions, and we would get a comma-separated</span></span>
-<span id="cb83-9"><a href="#cb83-9"></a><span class="co"># text file if we needed one.</span></span>
-<span id="cb83-10"><a href="#cb83-10"></a><span class="kw">write.table</span>(<span class="dt">x=</span>otsego, <span class="dt">file=</span><span class="st">&#39;physicalF.csv&#39;</span>, <span class="dt">row.names=</span><span class="ot">FALSE</span>,</span>
-<span id="cb83-11"><a href="#cb83-11"></a>            <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</span></code></pre></div>
-<p>A third way to write objects from R to a file is by saving it as an R data file (<code>.rda</code> extension). This comes in handy when we have very large or very complex objects. In general, <code>.rda</code> files save and load more quickly because they are stored as <strong>compressed</strong> code (in the form of <strong>lists</strong>). Here is what it looks like:</p>
-<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="kw">save</span>(otsego, <span class="dt">file=</span><span class="st">&#39;otsego.rda&#39;</span>)</span></code></pre></div>
-<p>When this kind of a data file is loaded back into the environment (using <code>load(file='otsego.rda')</code>)’ it has the same name, but is stored as a <strong>list</strong>. Dun, dun, dun…</p>
+<p>Dataframes are like matrices, only not. They have a row/column structure like matrices. But, they can hold more than one data type! They are basically a whole bunch of vectors that are smashed together into a single container.</p>
+<p>Referencing specific elements of a dataframe is similar to a matrix, but we can also access columns (“variables”) by name using the <code>$</code> to reference the column we want from within a dataframe. We’ll look at this with some real data so it’s more fun. Most of the packages in R have built-in data sets that we can use for examples, too. For now, let’s read in our first real data file as most of our data are stored that way and will be read in as <code>.csv</code> or <code>.txt</code> files.</p>
 </div>
 <div id="lists" class="section level3">
 <h3><strong>Lists</strong></h3>
-<p>Lists are the ultimate container in R. They are actually a generalized vector that can hold different classes of data. Each element of a list can be any kind of object (an atomic vector, a matrix, a dataframe, or even another list!!). In fact, even a dataframe can be thought of as a list with just one element (the dataframe). In fact, a data frame is an element of the list that comprises our environments. Gross, right?</p>
-<p>The real, filthy R programming relies heavily on lists. We will have to work with them at some point, but we won’t take a ton of time on them here. In general, when you run a regression model or do an interpolation, you can expect that the results will come back in a list.</p>
-<p>Let’s make a list, just to see how they work</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a>myList &lt;-<span class="st">  </span><span class="kw">vector</span>(<span class="dt">mode=</span><span class="st">&#39;list&#39;</span>, <span class="dt">length=</span><span class="dv">4</span>)</span>
-<span id="cb85-2"><a href="#cb85-2"></a>myList[[<span class="dv">1</span>]] &lt;-<span class="st"> </span>a</span>
-<span id="cb85-3"><a href="#cb85-3"></a>myList[[<span class="dv">2</span>]] &lt;-<span class="st"> </span>c</span>
-<span id="cb85-4"><a href="#cb85-4"></a>myList[[<span class="dv">3</span>]] &lt;-<span class="st"> </span>mat</span>
-<span id="cb85-5"><a href="#cb85-5"></a>myList[[<span class="dv">4</span>]] &lt;-<span class="st"> </span>d</span>
-<span id="cb85-6"><a href="#cb85-6"></a></span>
-<span id="cb85-7"><a href="#cb85-7"></a>myList           <span class="co"># Print it - Cool, huh?</span></span>
-<span id="cb85-8"><a href="#cb85-8"></a>[[<span class="dv">1</span>]]</span>
-<span id="cb85-9"><a href="#cb85-9"></a> [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span></span>
-<span id="cb85-10"><a href="#cb85-10"></a>[<span class="dv">16</span>]  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span></span>
-<span id="cb85-11"><a href="#cb85-11"></a></span>
-<span id="cb85-12"><a href="#cb85-12"></a>[[<span class="dv">2</span>]]</span>
-<span id="cb85-13"><a href="#cb85-13"></a> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span></span>
-<span id="cb85-14"><a href="#cb85-14"></a>[<span class="dv">20</span>] <span class="st">&quot;d&quot;</span></span>
-<span id="cb85-15"><a href="#cb85-15"></a></span>
-<span id="cb85-16"><a href="#cb85-16"></a>[[<span class="dv">3</span>]]</span>
-<span id="cb85-17"><a href="#cb85-17"></a>       first second third</span>
-<span id="cb85-18"><a href="#cb85-18"></a>This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span></span>
-<span id="cb85-19"><a href="#cb85-19"></a>is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span></span>
-<span id="cb85-20"><a href="#cb85-20"></a>a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span></span>
-<span id="cb85-21"><a href="#cb85-21"></a>matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span></span>
-<span id="cb85-22"><a href="#cb85-22"></a></span>
-<span id="cb85-23"><a href="#cb85-23"></a>[[<span class="dv">4</span>]]</span>
-<span id="cb85-24"><a href="#cb85-24"></a>   Increment Squared Letter</span>
-<span id="cb85-25"><a href="#cb85-25"></a><span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a</span>
-<span id="cb85-26"><a href="#cb85-26"></a><span class="dv">2</span>        <span class="fl">1.0</span>    <span class="fl">1.00</span>      b</span>
-<span id="cb85-27"><a href="#cb85-27"></a><span class="dv">3</span>        <span class="fl">1.5</span>    <span class="fl">2.25</span>      c</span>
-<span id="cb85-28"><a href="#cb85-28"></a><span class="dv">4</span>        <span class="fl">2.0</span>    <span class="fl">4.00</span>      d</span>
-<span id="cb85-29"><a href="#cb85-29"></a><span class="dv">5</span>        <span class="fl">2.5</span>    <span class="fl">6.25</span>      a</span>
-<span id="cb85-30"><a href="#cb85-30"></a><span class="dv">6</span>        <span class="fl">3.0</span>    <span class="fl">9.00</span>      b</span>
-<span id="cb85-31"><a href="#cb85-31"></a><span class="dv">7</span>        <span class="fl">3.5</span>   <span class="fl">12.25</span>      c</span>
-<span id="cb85-32"><a href="#cb85-32"></a><span class="dv">8</span>        <span class="fl">4.0</span>   <span class="fl">16.00</span>      d</span>
-<span id="cb85-33"><a href="#cb85-33"></a><span class="dv">9</span>        <span class="fl">4.5</span>   <span class="fl">20.25</span>      a</span>
-<span id="cb85-34"><a href="#cb85-34"></a><span class="dv">10</span>       <span class="fl">5.0</span>   <span class="fl">25.00</span>      b</span>
-<span id="cb85-35"><a href="#cb85-35"></a><span class="dv">11</span>       <span class="fl">5.5</span>   <span class="fl">30.25</span>      c</span>
-<span id="cb85-36"><a href="#cb85-36"></a><span class="dv">12</span>       <span class="fl">6.0</span>   <span class="fl">36.00</span>      d</span>
-<span id="cb85-37"><a href="#cb85-37"></a><span class="dv">13</span>       <span class="fl">6.5</span>   <span class="fl">42.25</span>      a</span>
-<span id="cb85-38"><a href="#cb85-38"></a><span class="dv">14</span>       <span class="fl">7.0</span>   <span class="fl">49.00</span>      b</span>
-<span id="cb85-39"><a href="#cb85-39"></a><span class="dv">15</span>       <span class="fl">7.5</span>   <span class="fl">56.25</span>      c</span>
-<span id="cb85-40"><a href="#cb85-40"></a><span class="dv">16</span>       <span class="fl">8.0</span>   <span class="fl">64.00</span>      d</span>
-<span id="cb85-41"><a href="#cb85-41"></a><span class="dv">17</span>       <span class="fl">8.5</span>   <span class="fl">72.25</span>      a</span>
-<span id="cb85-42"><a href="#cb85-42"></a><span class="dv">18</span>       <span class="fl">9.0</span>   <span class="fl">81.00</span>      b</span>
-<span id="cb85-43"><a href="#cb85-43"></a><span class="dv">19</span>       <span class="fl">9.5</span>   <span class="fl">90.25</span>      c</span>
-<span id="cb85-44"><a href="#cb85-44"></a><span class="dv">20</span>      <span class="fl">10.0</span>  <span class="fl">100.00</span>      d</span></code></pre></div>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="kw">names</span>(myList)    <span class="co"># No names on the fly like a df</span></span>
-<span id="cb86-2"><a href="#cb86-2"></a><span class="ot">NULL</span></span></code></pre></div>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="kw">names</span>(myList) &lt;-<span class="st">  </span><span class="kw">c</span>(<span class="st">&#39;a&#39;</span>, <span class="st">&#39;c&#39;</span>, <span class="st">&#39;mat&#39;</span>, <span class="st">&#39;d&#39;</span>)  <span class="co"># Give it names like a df</span></span>
-<span id="cb87-2"><a href="#cb87-2"></a>myList           <span class="co"># See how the names work now?</span></span>
-<span id="cb87-3"><a href="#cb87-3"></a><span class="op">$</span>a</span>
-<span id="cb87-4"><a href="#cb87-4"></a> [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span></span>
-<span id="cb87-5"><a href="#cb87-5"></a>[<span class="dv">16</span>]  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span></span>
-<span id="cb87-6"><a href="#cb87-6"></a></span>
-<span id="cb87-7"><a href="#cb87-7"></a><span class="op">$</span>c</span>
-<span id="cb87-8"><a href="#cb87-8"></a> [<span class="dv">1</span>] <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span> <span class="st">&quot;d&quot;</span> <span class="st">&quot;a&quot;</span> <span class="st">&quot;b&quot;</span> <span class="st">&quot;c&quot;</span></span>
-<span id="cb87-9"><a href="#cb87-9"></a>[<span class="dv">20</span>] <span class="st">&quot;d&quot;</span></span>
-<span id="cb87-10"><a href="#cb87-10"></a></span>
-<span id="cb87-11"><a href="#cb87-11"></a><span class="op">$</span>mat</span>
-<span id="cb87-12"><a href="#cb87-12"></a>       first second third</span>
-<span id="cb87-13"><a href="#cb87-13"></a>This       <span class="dv">1</span>      <span class="dv">5</span>     <span class="dv">9</span></span>
-<span id="cb87-14"><a href="#cb87-14"></a>is         <span class="dv">2</span>      <span class="dv">6</span>    <span class="dv">10</span></span>
-<span id="cb87-15"><a href="#cb87-15"></a>a          <span class="dv">3</span>      <span class="dv">7</span>    <span class="dv">11</span></span>
-<span id="cb87-16"><a href="#cb87-16"></a>matrix     <span class="dv">4</span>      <span class="dv">8</span>    <span class="dv">12</span></span>
-<span id="cb87-17"><a href="#cb87-17"></a></span>
-<span id="cb87-18"><a href="#cb87-18"></a><span class="op">$</span>d</span>
-<span id="cb87-19"><a href="#cb87-19"></a>   Increment Squared Letter</span>
-<span id="cb87-20"><a href="#cb87-20"></a><span class="dv">1</span>        <span class="fl">0.5</span>    <span class="fl">0.25</span>      a</span>
-<span id="cb87-21"><a href="#cb87-21"></a><span class="dv">2</span>        <span class="fl">1.0</span>    <span class="fl">1.00</span>      b</span>
-<span id="cb87-22"><a href="#cb87-22"></a><span class="dv">3</span>        <span class="fl">1.5</span>    <span class="fl">2.25</span>      c</span>
-<span id="cb87-23"><a href="#cb87-23"></a><span class="dv">4</span>        <span class="fl">2.0</span>    <span class="fl">4.00</span>      d</span>
-<span id="cb87-24"><a href="#cb87-24"></a><span class="dv">5</span>        <span class="fl">2.5</span>    <span class="fl">6.25</span>      a</span>
-<span id="cb87-25"><a href="#cb87-25"></a><span class="dv">6</span>        <span class="fl">3.0</span>    <span class="fl">9.00</span>      b</span>
-<span id="cb87-26"><a href="#cb87-26"></a><span class="dv">7</span>        <span class="fl">3.5</span>   <span class="fl">12.25</span>      c</span>
-<span id="cb87-27"><a href="#cb87-27"></a><span class="dv">8</span>        <span class="fl">4.0</span>   <span class="fl">16.00</span>      d</span>
-<span id="cb87-28"><a href="#cb87-28"></a><span class="dv">9</span>        <span class="fl">4.5</span>   <span class="fl">20.25</span>      a</span>
-<span id="cb87-29"><a href="#cb87-29"></a><span class="dv">10</span>       <span class="fl">5.0</span>   <span class="fl">25.00</span>      b</span>
-<span id="cb87-30"><a href="#cb87-30"></a><span class="dv">11</span>       <span class="fl">5.5</span>   <span class="fl">30.25</span>      c</span>
-<span id="cb87-31"><a href="#cb87-31"></a><span class="dv">12</span>       <span class="fl">6.0</span>   <span class="fl">36.00</span>      d</span>
-<span id="cb87-32"><a href="#cb87-32"></a><span class="dv">13</span>       <span class="fl">6.5</span>   <span class="fl">42.25</span>      a</span>
-<span id="cb87-33"><a href="#cb87-33"></a><span class="dv">14</span>       <span class="fl">7.0</span>   <span class="fl">49.00</span>      b</span>
-<span id="cb87-34"><a href="#cb87-34"></a><span class="dv">15</span>       <span class="fl">7.5</span>   <span class="fl">56.25</span>      c</span>
-<span id="cb87-35"><a href="#cb87-35"></a><span class="dv">16</span>       <span class="fl">8.0</span>   <span class="fl">64.00</span>      d</span>
-<span id="cb87-36"><a href="#cb87-36"></a><span class="dv">17</span>       <span class="fl">8.5</span>   <span class="fl">72.25</span>      a</span>
-<span id="cb87-37"><a href="#cb87-37"></a><span class="dv">18</span>       <span class="fl">9.0</span>   <span class="fl">81.00</span>      b</span>
-<span id="cb87-38"><a href="#cb87-38"></a><span class="dv">19</span>       <span class="fl">9.5</span>   <span class="fl">90.25</span>      c</span>
-<span id="cb87-39"><a href="#cb87-39"></a><span class="dv">20</span>      <span class="fl">10.0</span>  <span class="fl">100.00</span>      d</span></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>myList[[<span class="dv">1</span>]]      <span class="co"># We reference these differently [[]]</span></span>
-<span id="cb88-2"><a href="#cb88-2"></a> [<span class="dv">1</span>]  <span class="fl">0.5</span>  <span class="fl">1.0</span>  <span class="fl">1.5</span>  <span class="fl">2.0</span>  <span class="fl">2.5</span>  <span class="fl">3.0</span>  <span class="fl">3.5</span>  <span class="fl">4.0</span>  <span class="fl">4.5</span>  <span class="fl">5.0</span>  <span class="fl">5.5</span>  <span class="fl">6.0</span>  <span class="fl">6.5</span>  <span class="fl">7.0</span>  <span class="fl">7.5</span></span>
-<span id="cb88-3"><a href="#cb88-3"></a>[<span class="dv">16</span>]  <span class="fl">8.0</span>  <span class="fl">8.5</span>  <span class="fl">9.0</span>  <span class="fl">9.5</span> <span class="fl">10.0</span></span></code></pre></div>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a>myList[[<span class="dv">2</span>]][<span class="dv">5</span>]   <span class="co"># But can still get into each object</span></span>
-<span id="cb89-2"><a href="#cb89-2"></a>[<span class="dv">1</span>] <span class="st">&quot;a&quot;</span></span></code></pre></div>
-<p>Very commonly, model objects and output are stored as lists. In fact, most objects that require a large amount of diverse information in R pack it all together in one place using lists, that way we always know where to find it. It seems like a lot to take in now, but will be very useful in the future.</p>
+<p>We won’t talk about lists for this workshop, but it is important that you’ve heard of them because most of the down-and-dirty, real programming in R relies heavily on lists. Lists are a special kind of vector that can hold multiple data types. Those data types can even be different types of objects, like vectors, dataframes, matrices, or even other lists! Loosely speaking, your workspace even functions as a special kind of list that contains each of the things you’ve created. It’s lists all the way down, people.</p>
 </div>
+</div>
+<div id="loading-data-from-files" class="section level2">
+<h2><strong>Loading data from files</strong></h2>
+<p>First, we need to make sure that the data are in a place where R can access them. One way to do this is to hard-code the file path (e.g., <code>setwd("C:/Users/.../physical.csv")</code>), but that makes it a pain when you hand off code or reorganize computer files. I usually just make sure that my data and my code are in the same directory on my computer if I am working on an analysis of some sort (or writing a website in <em>this</em> case). Then, we can set the working directory in R to that folder using any number of different options. My preferences is to either work out of R projects, or to use <code>Session &gt; Set Working Directory &gt; To Source File Location</code>.</p>
+<p>Next, we have to assign our data to a new object, or R will just dump it to the console and it won’t be stored in our <code>Environment</code>. In this case, I am going to give my data a meaningful name based on the lake from which they were collected.</p>
+<p>Finally, we have to tell R how to read the file and what the name of the file is.</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;physical.csv&quot;</span>)</span></code></pre></div>
+<p>If it looks like nothing happened, then it probably worked. Have a look at your <code>Environment</code> tab to make sure it is there (mine is bottom left, yours may be elsewhere depending on how you set up your pane layout).</p>
+<p>You can also look at whether it is included in the Environment like this:</p>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="kw">ls</span>()</span></code></pre></div>
+</div>
+<div id="data-summaries" class="section level2">
+<h2><strong>Data summaries</strong></h2>
+<p>Now that we have some real data, let’s break it down a little bit. Go ahead and give these a try to see what kind of information they each give you about the data set.</p>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a><span class="kw">ls</span>() <span class="co"># We can use ls() to see what is in our environment</span></span>
+<span id="cb59-2"><a href="#cb59-2"></a><span class="kw">head</span>(otsego) <span class="co"># Look at the first six rows of data in the object</span></span>
+<span id="cb59-3"><a href="#cb59-3"></a><span class="kw">nrow</span>(otsego) <span class="co"># How many rows does it have?</span></span>
+<span id="cb59-4"><a href="#cb59-4"></a><span class="kw">ncol</span>(otsego) <span class="co"># How many columns?</span></span>
+<span id="cb59-5"><a href="#cb59-5"></a><span class="kw">names</span>(otsego) <span class="co"># What are the column names?</span></span>
+<span id="cb59-6"><a href="#cb59-6"></a><span class="kw">str</span>(otsego) <span class="co"># Have a look at the data structure</span></span>
+<span id="cb59-7"><a href="#cb59-7"></a><span class="kw">summary</span>(otsego) <span class="co"># Summarize the variables in the dataframe</span></span></code></pre></div>
+<p>Now let’s look at some specific things.</p>
+<p>What is the value in 12th row of the 4th column of <code>otsego</code>? Notice that we have two indices now. That is because we have both rows (first dimension) and columns (second dimension) in our data set now!</p>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a>otsego[<span class="dv">12</span>, <span class="dv">4</span>]</span>
+<span id="cb60-2"><a href="#cb60-2"></a>[<span class="dv">1</span>] <span class="dv">1988</span></span></code></pre></div>
+<p>Another way to say this is, “What is the 12th value of <code>depth</code> in <code>otsego</code>”?</p>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>otsego[<span class="dv">12</span>, <span class="st">&quot;depth&quot;</span>]</span>
+<span id="cb61-2"><a href="#cb61-2"></a>[<span class="dv">1</span>] <span class="dv">25</span></span></code></pre></div>
+<p>More realistically, we might want to know the average temperature (<code>temp</code>) at a given <code>depth</code> in the lake. In the example below, we ask R for the mean temperature at 10 m across all observations (rows). Notice that now we are back to a single dimension inside our index brackets <code>[]</code> because the column <code>temp</code> is an atomic vector inside of <code>otsego</code>. The dollar sign (<code>$</code>) here is telling R to look for something called <code>temp</code> inside of the <code>otsego</code> dataframe.</p>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1"></a><span class="kw">mean</span>(otsego<span class="op">$</span>temp[otsego<span class="op">$</span>depth <span class="op">==</span><span class="st"> </span><span class="fl">10.0</span>], <span class="dt">na.rm =</span> <span class="ot">TRUE</span>)</span>
+<span id="cb62-2"><a href="#cb62-2"></a>[<span class="dv">1</span>] <span class="fl">10.49944</span></span></code></pre></div>
+<p>Wow…heavy stuff, but this is how the wheels turn.</p>
+<p>Let’s look at a better way to summarize these data by year. To do this, we’ll load the <code>tidyverse</code> package. This is actually a collection of packages designed to improve logical flow and presentation of data manipulation (so we don’t have to use <code>$</code> and <code>[ ]</code> all the time because that’s hard to read!!).</p>
+</div>
+<div id="better-data-summaries" class="section level2">
+<h2><strong>Better data summaries</strong></h2>
+<p>We’ll quickly demonstrate a very useful data summary pipeline that is supported by a couple of different packages from the <code>tidyverse</code>, so I am going to load the whole suite at once. You will need to install this first using <code>install.packages("tidyverse")</code> or one of the techniques demonstrated in live and recorded content.</p>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="kw">library</span>(tidyverse)</span></code></pre></div>
+<p>You will probably get a bunch of messages to tell you which packages have been loaded and if there were any <code>NAMESPACE</code> conflicts of functions that are “masked” from base R. None of these will affect us. I just told R not to print it on the website.</p>
+<p>Now that we’ve loaded this suite of data management tools, we can summarize temperature in our data set really easily.</p>
+<p>First, we will group the data set by month and depth so that behind the scenes R knows this is our grouping structure:</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1"></a>otsego &lt;-<span class="st"> </span><span class="kw">group_by</span>(otsego, month, depth)</span></code></pre></div>
+<p>Note that this changes <code>otsego</code> into a <code>tibble</code>, which is basically just a fancy dataframe with attributes like <code>Groups</code>.</p>
+<p>Now, we can summarize temperature by depth in each month across years:</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a>otsego_summary &lt;-<span class="st"> </span><span class="kw">summarize</span>(otsego, <span class="dt">mean_temp =</span> <span class="kw">mean</span>(temp), <span class="dt">sd_temp =</span> <span class="kw">sd</span>(temp))</span></code></pre></div>
+<p>You’ll get a message here to let you know that <code>summarise</code> is using the grouping structure that you had previously specified, and it is sorting by <code>month</code>.</p>
+<p>If you print your new object, you’ll see that it has four columns: <code>month</code>, <code>depth</code>, <code>mean_temp</code>, and <code>sd_temp</code>.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="kw">print</span>(otsego_summary)</span>
+<span id="cb66-2"><a href="#cb66-2"></a><span class="co"># A tibble: 272 x 4</span></span>
+<span id="cb66-3"><a href="#cb66-3"></a><span class="co"># Groups:   month [12]</span></span>
+<span id="cb66-4"><a href="#cb66-4"></a>   month depth mean_temp sd_temp</span>
+<span id="cb66-5"><a href="#cb66-5"></a>   <span class="op">&lt;</span>int<span class="op">&gt;</span><span class="st"> </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">     </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span><span class="st">   </span><span class="er">&lt;</span>dbl<span class="op">&gt;</span></span>
+<span id="cb66-6"><a href="#cb66-6"></a><span class="st"> </span><span class="dv">1</span>     <span class="dv">1</span>   <span class="fl">0.1</span>      <span class="fl">1.73</span>   <span class="fl">1.33</span> </span>
+<span id="cb66-7"><a href="#cb66-7"></a> <span class="dv">2</span>     <span class="dv">1</span>   <span class="dv">2</span>        <span class="fl">2.10</span>   <span class="fl">1.07</span> </span>
+<span id="cb66-8"><a href="#cb66-8"></a> <span class="dv">3</span>     <span class="dv">1</span>   <span class="dv">4</span>        <span class="fl">2.12</span>   <span class="fl">0.988</span></span>
+<span id="cb66-9"><a href="#cb66-9"></a> <span class="dv">4</span>     <span class="dv">1</span>   <span class="dv">6</span>        <span class="fl">2.25</span>   <span class="fl">0.962</span></span>
+<span id="cb66-10"><a href="#cb66-10"></a> <span class="dv">5</span>     <span class="dv">1</span>   <span class="dv">8</span>        <span class="fl">2.37</span>   <span class="fl">0.908</span></span>
+<span id="cb66-11"><a href="#cb66-11"></a> <span class="dv">6</span>     <span class="dv">1</span>  <span class="dv">10</span>        <span class="fl">2.39</span>   <span class="fl">0.880</span></span>
+<span id="cb66-12"><a href="#cb66-12"></a> <span class="dv">7</span>     <span class="dv">1</span>  <span class="dv">12</span>        <span class="fl">2.5</span>    <span class="fl">0.860</span></span>
+<span id="cb66-13"><a href="#cb66-13"></a> <span class="dv">8</span>     <span class="dv">1</span>  <span class="dv">14</span>        <span class="fl">2.52</span>   <span class="fl">0.813</span></span>
+<span id="cb66-14"><a href="#cb66-14"></a> <span class="dv">9</span>     <span class="dv">1</span>  <span class="dv">16</span>        <span class="fl">2.60</span>   <span class="fl">0.813</span></span>
+<span id="cb66-15"><a href="#cb66-15"></a><span class="dv">10</span>     <span class="dv">1</span>  <span class="dv">18</span>        <span class="fl">2.65</span>   <span class="fl">0.787</span></span>
+<span id="cb66-16"><a href="#cb66-16"></a><span class="co"># ... with 262 more rows</span></span></code></pre></div>
+<p>As a teaser for after the break, we could make a quick scatterplot using <code>ggplot()</code> as long as we have the <code>tidyverse</code> loaded!</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="#cb67-1"></a><span class="kw">ggplot</span>(otsego_summary, <span class="kw">aes</span>(<span class="dt">x =</span> mean_temp, <span class="dt">y =</span> depth)) <span class="op">+</span></span>
+<span id="cb67-2"><a href="#cb67-2"></a><span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span></span>
+<span id="cb67-3"><a href="#cb67-3"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>month)</span></code></pre></div>
+<p><img src="introductory_files/figure-html/unnamed-chunk-39-1.png" width="672" /></p>
+<p>Wow, what a neat picture, but what if we wanted temperature in Fahrenheit for our stakeholders???</p>
+</div>
+<div id="creating-new-variables" class="section level2">
+<h2><strong>Creating new variables</strong></h2>
+<p>So, what if we wanted to do something like convert temperature from Celcius to Fahrenheit? We could make a function to do this for us:</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a><span class="co"># Define a function to convert temperature</span></span>
+<span id="cb68-2"><a href="#cb68-2"></a><span class="co"># in celcius to temperature in farenheit:</span></span>
+<span id="cb68-3"><a href="#cb68-3"></a>cToF &lt;-<span class="st"> </span><span class="cf">function</span>(cels) {</span>
+<span id="cb68-4"><a href="#cb68-4"></a>  faren &lt;-<span class="st"> </span>cels <span class="op">*</span><span class="st"> </span>(<span class="dv">9</span> <span class="op">/</span><span class="st"> </span><span class="dv">5</span>) <span class="op">+</span><span class="st"> </span><span class="dv">32</span></span>
+<span id="cb68-5"><a href="#cb68-5"></a>  <span class="kw">return</span>(faren)</span>
+<span id="cb68-6"><a href="#cb68-6"></a>}</span></code></pre></div>
+<p>And then we can use it to create a new variable in the <code>otsego</code> dataframe, which I have named <code>tempF</code>. This variable (column) is created inside <code>otsego</code> automatically.</p>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1"></a><span class="co"># Test the function out.</span></span>
+<span id="cb69-2"><a href="#cb69-2"></a><span class="co"># Here, we create a new variable in the</span></span>
+<span id="cb69-3"><a href="#cb69-3"></a><span class="co"># otsego dataframe to hold the result</span></span>
+<span id="cb69-4"><a href="#cb69-4"></a>otsego<span class="op">$</span>tempF &lt;-<span class="st"> </span><span class="kw">cToF</span>(otsego<span class="op">$</span>temp)</span></code></pre></div>
+<p>Now that we have our new column, we may wish to write this back out to a file so we can share it with our collaborators (who for some reason need temperature measured on the Fahrenheit scale?).</p>
+<p>There are a couple of ways to do this.</p>
+<p>First, we could just use the <code>write.csv</code> function. This one is pretty limited in terms of options, but that also makes it easy to use. We just need to tell R what the object is that we want to write to a csv file and what the name of the file will be. Do be careful because this will overwrite existing files with the same name without asking if that is okay.</p>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1"></a><span class="kw">write.csv</span>(<span class="dt">x =</span> otsego, <span class="dt">file =</span> <span class="st">&quot;physicalF.csv&quot;</span>)</span></code></pre></div>
+<p>I like a little more flexibility in the file write process, so I usually use the <code>write.table</code> function. This can be used to achieve the same end depending on options, but allows other options like ommitting <code>row.names</code> from the output file. Here is an example of how it works:</p>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1"></a><span class="co"># Write the data set to a csv file.</span></span>
+<span id="cb71-2"><a href="#cb71-2"></a><span class="co"># We specify the object, the filename, and</span></span>
+<span id="cb71-3"><a href="#cb71-3"></a><span class="co"># we tell R we don&#39;t want rownames or quotes</span></span>
+<span id="cb71-4"><a href="#cb71-4"></a><span class="co"># around character strings. Finally, we tell</span></span>
+<span id="cb71-5"><a href="#cb71-5"></a><span class="co"># R to separate columns using a comma.</span></span>
+<span id="cb71-6"><a href="#cb71-6"></a></span>
+<span id="cb71-7"><a href="#cb71-7"></a><span class="co"># We could do exactly the same thing, but use a &quot;.txt&quot;</span></span>
+<span id="cb71-8"><a href="#cb71-8"></a><span class="co"># file extensions, and we would get a comma-separated</span></span>
+<span id="cb71-9"><a href="#cb71-9"></a><span class="co"># text file if we needed one.</span></span>
+<span id="cb71-10"><a href="#cb71-10"></a><span class="kw">write.table</span>(</span>
+<span id="cb71-11"><a href="#cb71-11"></a>  <span class="dt">x =</span> otsego, <span class="dt">file =</span> <span class="st">&quot;physicalF.csv&quot;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>,</span>
+<span id="cb71-12"><a href="#cb71-12"></a>  <span class="dt">quote =</span> <span class="ot">FALSE</span>, <span class="dt">sep =</span> <span class="st">&quot;,&quot;</span></span>
+<span id="cb71-13"><a href="#cb71-13"></a>)</span></code></pre></div>
+<p>A third way to write objects from R to a file is by saving it as an R data file (<code>.rda</code> extension). This comes in handy when we have very large or very complex objects. In general, <code>.rda</code> files save and load more quickly because they are stored as <strong>compressed</strong> code (in the form of <strong>lists</strong>). Here is what it looks like:</p>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a><span class="kw">save</span>(otsego, <span class="dt">file =</span> <span class="st">&quot;otsego.rda&quot;</span>)</span></code></pre></div>
+<p>When this kind of a data file is loaded back into the environment (using <code>load(file='otsego.rda')</code>)’ it has the same name, but is stored as a <strong>list</strong>. Dun, dun, dun…</p>
 </div>
 <div id="summarizing-and-visualizing-data" class="section level2">
 <h2><strong>Summarizing and visualizing data</strong></h2>
-<p>Now that we have a handle on how R works, and how to get our data in, let’s take a little time to examine statistical and graphical summaries of our data.</p>
-<div id="data-summaries" class="section level3">
-<h3><strong>Data summaries</strong></h3>
-<p>Some of the most fundamental work we do involves summarizing information across ranges of categories or factors (e.g. mean water temperature in July). This helps us start to detangle complicated patterns in data, and can be helpful to others when they read about our awesome research.</p>
-<p>Most data summaries are handled effectively using a limited number of R functions applied in different ways. A fairly small number of functions can be used to imitate the functionality of things like queries, look-up tables, and pivot tables that one might use in other software programs. Once you get used to working with these functions, the whole process is a lot faster and a lot more reproducible in R compared to other programs.</p>
-<p>We have already encountered a few functions for data summary in our time together. Most of these have intuitive names and serve obvious purposes once you know what they are called.</p>
-<p>Here is a quick run-down on a few of the basics. Each of these requires a vector as input.</p>
-<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="kw">mean</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) </span>
-<span id="cb90-2"><a href="#cb90-2"></a>[<span class="dv">1</span>] <span class="fl">8.261062</span></span></code></pre></div>
-<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a><span class="kw">median</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  </span>
-<span id="cb91-2"><a href="#cb91-2"></a>[<span class="dv">1</span>] <span class="fl">6.11</span></span></code></pre></div>
-<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="kw">min</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</span>
-<span id="cb92-2"><a href="#cb92-2"></a>[<span class="dv">1</span>] <span class="dv">0</span></span></code></pre></div>
-<div class="sourceCode" id="cb93"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="kw">max</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)</span>
-<span id="cb93-2"><a href="#cb93-2"></a>[<span class="dv">1</span>] <span class="fl">25.97</span></span></code></pre></div>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="kw">sd</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T)  <span class="co"># Standard deviation</span></span>
-<span id="cb94-2"><a href="#cb94-2"></a>[<span class="dv">1</span>] <span class="fl">5.732024</span></span></code></pre></div>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="kw">var</span>(otsego<span class="op">$</span>temp, <span class="dt">na.rm=</span>T) <span class="co"># Variance  </span></span>
-<span id="cb95-2"><a href="#cb95-2"></a>[<span class="dv">1</span>] <span class="fl">32.8561</span></span></code></pre></div>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a><span class="kw">quantile</span>(otsego<span class="op">$</span>temp, <span class="dt">probs=</span><span class="kw">c</span>(<span class="fl">0.025</span>, <span class="fl">0.975</span>), <span class="dt">na.rm=</span>T) <span class="co"># Quantiles, with user-defined thresholds</span></span>
-<span id="cb96-2"><a href="#cb96-2"></a>  <span class="fl">2.5</span><span class="op">%  97.5%</span><span class="st"> </span></span>
-<span id="cb96-3"><a href="#cb96-3"></a><span class="st"> </span><span class="fl">1.840</span> <span class="fl">22.888</span> </span></code></pre></div>
-<p>We can combine these into a single function to summarize entire dataframes, but this is not usually very useful. For example, we could use <code>summary</code> to return <code>min</code>, <code>median</code>, <code>mean</code>, <code>max</code> and the inner quartile range for each variable in an entire dataframe or matrix, but this is a little meaningless when we are looking at <strong>marginal</strong> summary stats for each variable.</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a><span class="kw">summary</span>(otsego)</span></code></pre></div>
-<p>Usually, we would like to summarize variables across groups (e.g., ‘control’ or ‘treatment’) or discrete ranges of data (e.g., <code>month</code> in <code>otsego</code>). There are a number of ways to do this in R, and what we use depends partly on the application, and partly on personal preference. Most of these operate using what is known as the <strong>split-apply-combine</strong> approach. The simplest is probably the <code>aggregate</code> function.</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a><span class="co"># Summarize temperature by month in otsego data</span></span>
-<span id="cb98-2"><a href="#cb98-2"></a><span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</span>
-<span id="cb98-3"><a href="#cb98-3"></a>   month      temp</span>
-<span id="cb98-4"><a href="#cb98-4"></a><span class="dv">1</span>      <span class="dv">1</span>  <span class="fl">2.645176</span></span>
-<span id="cb98-5"><a href="#cb98-5"></a><span class="dv">2</span>      <span class="dv">2</span>  <span class="fl">2.114755</span></span>
-<span id="cb98-6"><a href="#cb98-6"></a><span class="dv">3</span>      <span class="dv">3</span>  <span class="fl">2.201694</span></span>
-<span id="cb98-7"><a href="#cb98-7"></a><span class="dv">4</span>      <span class="dv">4</span>  <span class="fl">3.922480</span></span>
-<span id="cb98-8"><a href="#cb98-8"></a><span class="dv">5</span>      <span class="dv">5</span>  <span class="fl">6.657329</span></span>
-<span id="cb98-9"><a href="#cb98-9"></a><span class="dv">6</span>      <span class="dv">6</span>  <span class="fl">9.297003</span></span>
-<span id="cb98-10"><a href="#cb98-10"></a><span class="dv">7</span>      <span class="dv">7</span> <span class="fl">10.660528</span></span>
-<span id="cb98-11"><a href="#cb98-11"></a><span class="dv">8</span>      <span class="dv">8</span> <span class="fl">11.140326</span></span>
-<span id="cb98-12"><a href="#cb98-12"></a><span class="dv">9</span>      <span class="dv">9</span> <span class="fl">10.698824</span></span>
-<span id="cb98-13"><a href="#cb98-13"></a><span class="dv">10</span>    <span class="dv">10</span>  <span class="fl">9.495450</span></span>
-<span id="cb98-14"><a href="#cb98-14"></a><span class="dv">11</span>    <span class="dv">11</span>  <span class="fl">7.471370</span></span>
-<span id="cb98-15"><a href="#cb98-15"></a><span class="dv">12</span>    <span class="dv">12</span>  <span class="fl">5.375337</span></span></code></pre></div>
-<p>We can even use this to summarize a variable across multiple grouping variables. Perhaps we want to see mean temperature by month and depth?</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># Summarize temperature by month in otsego data</span></span>
-<span id="cb99-2"><a href="#cb99-2"></a><span class="kw">aggregate</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month<span class="op">+</span>depth, <span class="dt">data=</span>otsego, <span class="dt">FUN=</span>mean)</span></code></pre></div>
-<p>This returns a pretty unwieldy result because of the number of unique depths (go ahead and run the code). We will come back to this example when we make <strong>isopleths</strong> during the intermediate session in the afternoon.</p>
-<p>More importanly for now, we are limited in our ability to summarize a variable in more than one way using <code>aggregate</code> or other functions in the <code>base</code> package. For example, we frequently make tables for papers or reports that show means with standard deviations, confidence intervals, or both. To do this, we will need to make our first sojourn out of <code>base</code> and into the myriad <strong>packages</strong> that make up R.</p>
-<p>We can load a package from the default <strong>library</strong> location on our computers once we have installed it, like this:</p>
-<p>There are a couple of different ways to install packages in R. You can hard-code the package installation, but you don’t want to waste resources installing the package each time you run code, and you don’t want to overwrite someone else’s package if you hand-off code to them. Because of this, I generally recommend typing <code>install.packages("packagename")</code> directly into the console, or using the <code>Packages</code> tab in Rstudio.</p>
-<p>With the package loaded from our local library, we can now use the functions that it comprises. For this example, we will use <code>ddply</code> to summarize the <code>otsego</code> data. (There is also a function called <code>ddply</code> in the <code>dplyr</code> package that is a newer, beefed-up version of <code>plyr</code> focusing only on <code>dataframes</code> and remote <code>datatables</code>)</p>
-<p>Here is one way that we can use <code>ddply</code> to summarize temperature across multiple factors.</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="co"># Summarize mean and sd by month and depth</span></span>
-<span id="cb100-2"><a href="#cb100-2"></a>summarydata &lt;-<span class="st"> </span><span class="kw">ddply</span>(</span>
-<span id="cb100-3"><a href="#cb100-3"></a>  <span class="dt">.data =</span> otsego,</span>
-<span id="cb100-4"><a href="#cb100-4"></a>  <span class="dt">.variables =</span> <span class="kw">c</span>(<span class="st">&#39;month&#39;</span>, <span class="st">&#39;depth&#39;</span>),</span>
-<span id="cb100-5"><a href="#cb100-5"></a>  summarize,</span>
-<span id="cb100-6"><a href="#cb100-6"></a>  <span class="dt">mean =</span> <span class="kw">mean</span>(temp, <span class="dt">na.rm =</span> T),</span>
-<span id="cb100-7"><a href="#cb100-7"></a>  <span class="dt">sd =</span> <span class="kw">sd</span>(temp, <span class="dt">na.rm =</span> T)</span>
-<span id="cb100-8"><a href="#cb100-8"></a>)</span></code></pre></div>
-<p>Now, we can take a look at the summary:</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="kw">head</span>(<span class="dt">x=</span>summarydata, <span class="dt">n=</span><span class="dv">10</span>)</span>
-<span id="cb101-2"><a href="#cb101-2"></a>   month depth     mean        sd</span>
-<span id="cb101-3"><a href="#cb101-3"></a><span class="dv">1</span>      <span class="dv">1</span>   <span class="fl">0.1</span> <span class="fl">1.732143</span> <span class="fl">1.3281982</span></span>
-<span id="cb101-4"><a href="#cb101-4"></a><span class="dv">2</span>      <span class="dv">1</span>   <span class="fl">2.0</span> <span class="fl">2.099231</span> <span class="fl">1.0747904</span></span>
-<span id="cb101-5"><a href="#cb101-5"></a><span class="dv">3</span>      <span class="dv">1</span>   <span class="fl">4.0</span> <span class="fl">2.123571</span> <span class="fl">0.9881421</span></span>
-<span id="cb101-6"><a href="#cb101-6"></a><span class="dv">4</span>      <span class="dv">1</span>   <span class="fl">6.0</span> <span class="fl">2.248462</span> <span class="fl">0.9621144</span></span>
-<span id="cb101-7"><a href="#cb101-7"></a><span class="dv">5</span>      <span class="dv">1</span>   <span class="fl">8.0</span> <span class="fl">2.366923</span> <span class="fl">0.9079775</span></span>
-<span id="cb101-8"><a href="#cb101-8"></a><span class="dv">6</span>      <span class="dv">1</span>  <span class="fl">10.0</span> <span class="fl">2.385714</span> <span class="fl">0.8795341</span></span>
-<span id="cb101-9"><a href="#cb101-9"></a><span class="dv">7</span>      <span class="dv">1</span>  <span class="fl">12.0</span> <span class="fl">2.500000</span> <span class="fl">0.8600775</span></span>
-<span id="cb101-10"><a href="#cb101-10"></a><span class="dv">8</span>      <span class="dv">1</span>  <span class="fl">14.0</span> <span class="fl">2.515714</span> <span class="fl">0.8127703</span></span>
-<span id="cb101-11"><a href="#cb101-11"></a><span class="dv">9</span>      <span class="dv">1</span>  <span class="fl">16.0</span> <span class="fl">2.595385</span> <span class="fl">0.8133635</span></span>
-<span id="cb101-12"><a href="#cb101-12"></a><span class="dv">10</span>     <span class="dv">1</span>  <span class="fl">18.0</span> <span class="fl">2.649231</span> <span class="fl">0.7865162</span></span></code></pre></div>
-<p>And, we can write it out to a <code>.csv</code> file that we can use to build tables in Excel or Word (or any number of non-Microsoft applications that we also like!).</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="kw">write.table</span>(summarydata, <span class="st">&#39;summary.csv&#39;</span>, <span class="dt">row.names =</span> <span class="ot">FALSE</span>,</span>
-<span id="cb102-2"><a href="#cb102-2"></a>            <span class="dt">quote=</span><span class="ot">FALSE</span>, <span class="dt">sep=</span><span class="st">&#39;,&#39;</span>)</span></code></pre></div>
-<p>The result is a table that is ready to go with just a few formatting changes, even if it is ridiculously long.</p>
-</div>
-<div id="basic-graphs" class="section level3">
-<h3><strong>Basic graphs</strong></h3>
-<p>Now that we have an informative table, let’s see what we can do about distilling the 10,000 rows of data we have into a couple of simple graphs.</p>
-<p>One of the most attractive aspects of working with data in R is the power of the base graphics package. We basically have access to any kind of plot you can imagine, and if you can imagine a kind of plot that isn’t there, you can build it one way or another.</p>
-<p>One of the most powerful aspects of plotting in R is that we are working with a scripted language. That means, that if we go out and collect more data, we can add those to our existing data files, or replace the old files with new ones, and re-run our code, with minimal changes, to produce updated graphs. This will make you feel a lot better about writing 20 or 30 lines of code to produce the kind of graph that you’ll be happy with.</p>
-<div id="boxplots" class="section level4">
-<h4><strong>Boxplots</strong></h4>
-<p>Usually, when we are trying to summarize a <strong>continuous</strong> response across <strong>categorical</strong> explanatory variables, a <strong>boxplot</strong> is a reasonable starting place. Wow, that’s a lot of bold in one sentence.</p>
-<p>Why don’t we start simple? Let’s make a boxplot of temperatures by month in the lake.</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="co"># Make a simple boxplot of epilimnion temperatures by month</span></span>
-<span id="cb103-2"><a href="#cb103-2"></a><span class="co"># Note that I pass this restriction using the depth variable</span></span>
-<span id="cb103-3"><a href="#cb103-3"></a><span class="co"># in the Otsego data because I know (about) where the</span></span>
-<span id="cb103-4"><a href="#cb103-4"></a><span class="co"># thermocline is in that lake.</span></span>
-<span id="cb103-5"><a href="#cb103-5"></a><span class="kw">boxplot</span>(<span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,])</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-53-1.png" width="672" /></p>
-<p>Well, that was really easy, but let’s face it…it’s ugly. In fact, this is the kind of output that makes the old-school statisticians not like the “clunky” graphics from R, so let’s see if we can snaz it up a little bit. I am going to spread out the code across multiple lines so you can get a feel for what’s going on here.</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a><span class="co"># Make the plot</span></span>
-<span id="cb104-2"><a href="#cb104-2"></a><span class="kw">boxplot</span>(</span>
-<span id="cb104-3"><a href="#cb104-3"></a>  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],</span>
-<span id="cb104-4"><a href="#cb104-4"></a>  <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span></span>
-<span id="cb104-5"><a href="#cb104-5"></a>  <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span></span>
-<span id="cb104-6"><a href="#cb104-6"></a>  <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span></span>
-<span id="cb104-7"><a href="#cb104-7"></a>  <span class="dt">xlab=</span><span class="st">&#39;Month&#39;</span>, <span class="co"># Here is an x-axis label</span></span>
-<span id="cb104-8"><a href="#cb104-8"></a>  <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>))</span>
-<span id="cb104-9"><a href="#cb104-9"></a>)</span>
-<span id="cb104-10"><a href="#cb104-10"></a></span>
-<span id="cb104-11"><a href="#cb104-11"></a><span class="co"># Add x-axis. substr() takes the</span></span>
-<span id="cb104-12"><a href="#cb104-12"></a><span class="co"># first 3 letters of month</span></span>
-<span id="cb104-13"><a href="#cb104-13"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,</span>
-<span id="cb104-14"><a href="#cb104-14"></a>     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),</span>
-<span id="cb104-15"><a href="#cb104-15"></a>     <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)</span>
-<span id="cb104-16"><a href="#cb104-16"></a>     )</span>
-<span id="cb104-17"><a href="#cb104-17"></a></span>
-<span id="cb104-18"><a href="#cb104-18"></a><span class="co"># Add the y-axis, las rotates the labels</span></span>
-<span id="cb104-19"><a href="#cb104-19"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-54-1.png" width="672" /></p>
-<p>This is looking a lot better, and we didn’t even need to change that much to get here. But, we <em>could</em> do a little better by specifying some additional, low-level parameters (<code>pars</code>):</p>
-<div class="sourceCode" id="cb105"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a><span class="co"># Set up the plotting window</span></span>
-<span id="cb105-2"><a href="#cb105-2"></a><span class="kw">par</span>(<span class="dt">mar=</span><span class="kw">c</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">1</span>,<span class="dv">1</span>))</span>
-<span id="cb105-3"><a href="#cb105-3"></a><span class="co"># Make the plot</span></span>
-<span id="cb105-4"><a href="#cb105-4"></a><span class="kw">boxplot</span>(</span>
-<span id="cb105-5"><a href="#cb105-5"></a>  <span class="dt">formula=</span>temp<span class="op">~</span>month, <span class="dt">data=</span>otsego[otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>,],</span>
-<span id="cb105-6"><a href="#cb105-6"></a>  <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>, <span class="co"># Box color: the best one</span></span>
-<span id="cb105-7"><a href="#cb105-7"></a>  <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># We&#39;ll make our own x-axis</span></span>
-<span id="cb105-8"><a href="#cb105-8"></a>  <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,     <span class="co"># Same for the y-axis</span></span>
-<span id="cb105-9"><a href="#cb105-9"></a>  <span class="dt">xlab=</span><span class="st">&#39;Month&#39;</span>, <span class="co"># Here is an x-axis label</span></span>
-<span id="cb105-10"><a href="#cb105-10"></a>  <span class="dt">ylab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),</span>
-<span id="cb105-11"><a href="#cb105-11"></a>  <span class="dt">outline=</span><span class="ot">FALSE</span>,</span>
-<span id="cb105-12"><a href="#cb105-12"></a>  <span class="dt">pars=</span><span class="kw">list</span>(</span>
-<span id="cb105-13"><a href="#cb105-13"></a>    <span class="dt">staplewex=</span><span class="dv">0</span>,</span>
-<span id="cb105-14"><a href="#cb105-14"></a>    <span class="dt">boxcol=</span><span class="st">&#39;gray60&#39;</span>, <span class="co"># Another of the great grays</span></span>
-<span id="cb105-15"><a href="#cb105-15"></a>    <span class="dt">boxlwd=</span><span class="dv">2</span>,</span>
-<span id="cb105-16"><a href="#cb105-16"></a>    <span class="dt">medlwd=</span><span class="dv">1</span>, <span class="dt">medcol=</span><span class="st">&#39;gray60&#39;</span>,</span>
-<span id="cb105-17"><a href="#cb105-17"></a>    <span class="dt">medpch=</span><span class="dv">21</span>, <span class="dt">medbg=</span><span class="st">&#39;gray40&#39;</span>, <span class="co"># Yet another...so many!</span></span>
-<span id="cb105-18"><a href="#cb105-18"></a>    <span class="dt">whisklty=</span><span class="dv">1</span>, <span class="dt">whisklwd=</span><span class="dv">2</span>, <span class="dt">whiskcol=</span><span class="st">&#39;gray60&#39;</span></span>
-<span id="cb105-19"><a href="#cb105-19"></a>  )</span>
-<span id="cb105-20"><a href="#cb105-20"></a>)</span>
-<span id="cb105-21"><a href="#cb105-21"></a></span>
-<span id="cb105-22"><a href="#cb105-22"></a><span class="co"># Add x-axis</span></span>
-<span id="cb105-23"><a href="#cb105-23"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>,</span>
-<span id="cb105-24"><a href="#cb105-24"></a>     <span class="dt">at=</span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">12</span>),</span>
-<span id="cb105-25"><a href="#cb105-25"></a>     <span class="dt">labels=</span><span class="kw">substr</span>(month.name, <span class="dt">start=</span><span class="dv">1</span>, <span class="dt">stop=</span><span class="dv">3</span>)</span>
-<span id="cb105-26"><a href="#cb105-26"></a>     )</span>
-<span id="cb105-27"><a href="#cb105-27"></a></span>
-<span id="cb105-28"><a href="#cb105-28"></a><span class="co"># Add the y-axis</span></span>
-<span id="cb105-29"><a href="#cb105-29"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-55-1.png" width="672" /></p>
-<p>Alright, now our graph is starting to look pretty snazy!</p>
-<p>Let’s move on and check out a couple more plots to show off some of the power of the base <code>graphics</code> package that is loaded by default.</p>
-</div>
-<div id="scatterplots" class="section level4">
-<h4><strong>Scatterplots</strong></h4>
-<p>Here, we will skip the niceties and cut right to the chase. We will set a couple of graphical parameters up front so we can compare our two graphs side by side. To do this, we specify a graphical matrix using the argument <code>mfrow</code>, which needs to be a vector containing the number of rows, and the number of columns for the plotting window (defaults to <code>c(1,1)</code>). Then, we will make a default scatterplot on the left, and a juiced-up version on the right.</p>
-<div class="sourceCode" id="cb106"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a><span class="co"># Subset the data so we are just working with </span></span>
-<span id="cb106-2"><a href="#cb106-2"></a><span class="co"># temps from the epilimnion in July</span></span>
-<span id="cb106-3"><a href="#cb106-3"></a>july &lt;-<span class="st"> </span>otsego[otsego<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span> <span class="op">&amp;</span><span class="st"> </span>otsego<span class="op">$</span>depth<span class="op">&lt;</span><span class="dv">8</span>, ]</span>
-<span id="cb106-4"><a href="#cb106-4"></a></span>
-<span id="cb106-5"><a href="#cb106-5"></a><span class="co"># Let&#39;s improve on the default</span></span>
-<span id="cb106-6"><a href="#cb106-6"></a><span class="co"># scatter plot a little here.</span></span>
-<span id="cb106-7"><a href="#cb106-7"></a><span class="kw">plot</span>(july<span class="op">$</span>year, july<span class="op">$</span>temp,</span>
-<span id="cb106-8"><a href="#cb106-8"></a>     <span class="dt">xlab =</span> <span class="st">&#39;Year&#39;</span>, </span>
-<span id="cb106-9"><a href="#cb106-9"></a>     <span class="dt">ylab =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;Temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>)),</span>
-<span id="cb106-10"><a href="#cb106-10"></a>     <span class="dt">pch =</span> <span class="dv">21</span>,                 <span class="co"># Use a filled circle</span></span>
-<span id="cb106-11"><a href="#cb106-11"></a>     <span class="dt">bg =</span> <span class="kw">rgb</span>(.<span class="dv">5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>,<span class="fl">0.50</span>),  <span class="co"># RGB colors for point background</span></span>
-<span id="cb106-12"><a href="#cb106-12"></a>     <span class="dt">col =</span> <span class="kw">rgb</span>(.<span class="dv">5</span>,.<span class="dv">5</span>,.<span class="dv">5</span>,<span class="fl">0.50</span>), <span class="co"># RGB colors for point outline</span></span>
-<span id="cb106-13"><a href="#cb106-13"></a>     <span class="dt">cex =</span> <span class="fl">1.5</span>,                <span class="co"># Character expansion</span></span>
-<span id="cb106-14"><a href="#cb106-14"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>                  <span class="co"># Don&#39;t plot y-axis...yet</span></span>
-<span id="cb106-15"><a href="#cb106-15"></a>     )</span>
-<span id="cb106-16"><a href="#cb106-16"></a><span class="co"># Add the y-axis</span></span>
-<span id="cb106-17"><a href="#cb106-17"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-56-1.png" width="672" /></p>
-</div>
-<div id="histograms" class="section level4">
-<h4><strong>Histograms</strong></h4>
-<p>Scatterplots are great for looking at bivariate relationships, but sometimes all we want to see is a univariate distribution. We usually use histograms for this, and this is done very easily in R. We will take the same approach to the one we used to demonstrate scatterplots here, with some different tweaks and extra arguments because of the quirks associated with histograms in R.</p>
-<div class="sourceCode" id="cb107"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="co"># Again, adding some tweaks</span></span>
-<span id="cb107-2"><a href="#cb107-2"></a><span class="kw">hist</span>(july<span class="op">$</span>temp,</span>
-<span id="cb107-3"><a href="#cb107-3"></a>     <span class="dt">xlim=</span><span class="kw">c</span>(<span class="dv">17</span>,<span class="dv">27</span>),</span>
-<span id="cb107-4"><a href="#cb107-4"></a>     <span class="dt">col=</span><span class="st">&#39;gray87&#39;</span>,</span>
-<span id="cb107-5"><a href="#cb107-5"></a>     <span class="dt">xaxt=</span><span class="st">&#39;n&#39;</span>,</span>
-<span id="cb107-6"><a href="#cb107-6"></a>     <span class="dt">yaxt=</span><span class="st">&#39;n&#39;</span>,</span>
-<span id="cb107-7"><a href="#cb107-7"></a>     <span class="dt">main=</span><span class="st">&#39;&#39;</span>,</span>
-<span id="cb107-8"><a href="#cb107-8"></a>     <span class="dt">xlab=</span><span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&#39;July temperature (&#39;</span>, degree, <span class="st">&#39;C)&#39;</span>))</span>
-<span id="cb107-9"><a href="#cb107-9"></a>     )</span>
-<span id="cb107-10"><a href="#cb107-10"></a></span>
-<span id="cb107-11"><a href="#cb107-11"></a><span class="co"># Add the x-axis</span></span>
-<span id="cb107-12"><a href="#cb107-12"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">1</span>, <span class="dt">pos=</span><span class="dv">0</span>)</span>
-<span id="cb107-13"><a href="#cb107-13"></a></span>
-<span id="cb107-14"><a href="#cb107-14"></a><span class="co"># Add the x-axis</span></span>
-<span id="cb107-15"><a href="#cb107-15"></a><span class="kw">axis</span>(<span class="dt">side=</span><span class="dv">2</span>, <span class="dt">pos=</span><span class="dv">17</span>, <span class="dt">las=</span><span class="dv">2</span>)</span></code></pre></div>
-<p><img src="introductory_files/figure-html/unnamed-chunk-57-1.png" width="672" /></p>
-<p>This sets us up to do the kind of plotting that is fundamental to describing research results and providing our audiences with tangible, visual interpretations of our data and statistics, all of which will follow the lunch break.</p>
+<p>Now that we have a handle on how R works, and how to get our data in and back out, let’s take a quick break and then we’ll spend some time to re-inforce data manipulation and wrap things up with some plotting!</p>
 <p>Stay tuned!</p>
 <p><br></p>
-</div>
-</div>
 </div>
 
 <!DOCTYPE html>
