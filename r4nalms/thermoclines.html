@@ -367,7 +367,7 @@ $(document).ready(function () {
   <a href="index.html">Home</a>
 </li>
 <li>
-  <a href="software.html">Software needs</a>
+  <a href="software.html">Before the workshop</a>
 </li>
 <li>
   <a href="morning.html">Introductory</a>
@@ -376,18 +376,18 @@ $(document).ready(function () {
   <a href="afternoon.html">Intermediate</a>
 </li>
 <li>
-  <a href="instructors.html">Instructors</a>
-</li>
-<li>
   <a href="resources.html">Additional Resources</a>
 </li>
 <li>
-  <a href="contact.html">Contact</a>
+  <a href="instructors.html">Instructors</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/danStich">
+  <a href="contact.html">Contact</a>
+</li>
+<li>
+  <a href="https://github.com/danStich/danStich.github.io/tree/master/r4nalms">
     <span class="fa fa-github"></span>
      
   </a>
@@ -410,21 +410,21 @@ $(document).ready(function () {
 <div id="package-load" class="section level3">
 <h3><strong>Package load</strong></h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="co"># Load necessary packages</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span>
-<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&#39;r_libs&#39;</span>)</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(lubridate, <span class="dt">lib.loc =</span> <span class="st">&quot;r_libs&quot;</span>)</span>
+<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(rLakeAnalyzer, <span class="dt">lib.loc =</span> <span class="st">&quot;r_libs&quot;</span>)</span>
+<span id="cb1-4"><a href="#cb1-4"></a><span class="kw">library</span>(ggplot2, <span class="dt">lib.loc =</span> <span class="st">&quot;r_libs&quot;</span>)</span></code></pre></div>
 </div>
 <div id="data-read" class="section level3">
 <h3><strong>Data read</strong></h3>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&#39;physical.csv&#39;</span>)</span></code></pre></div>
+<span id="cb2-2"><a href="#cb2-2"></a>limnos &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;physical.csv&quot;</span>)</span></code></pre></div>
 </div>
 <div id="data-manipulation" class="section level3">
 <h3><strong>Data manipulation</strong></h3>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a><span class="co"># Data formatting &amp; extraction</span></span>
-<span id="cb3-2"><a href="#cb3-2"></a>limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format=</span><span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
+<span id="cb3-2"><a href="#cb3-2"></a>limnos<span class="op">$</span>date &lt;-<span class="st"> </span><span class="kw">as.POSIXct</span>(limnos<span class="op">$</span>date, <span class="dt">format =</span> <span class="st">&quot;%m/%d/%Y&quot;</span>)</span>
 <span id="cb3-3"><a href="#cb3-3"></a>limnos<span class="op">$</span>year &lt;-<span class="st"> </span><span class="kw">year</span>(limnos<span class="op">$</span>date)</span>
-<span id="cb3-4"><a href="#cb3-4"></a>limnos<span class="op">$</span>day &lt;-<span class="st">  </span><span class="kw">yday</span>(limnos<span class="op">$</span>date)</span>
+<span id="cb3-4"><a href="#cb3-4"></a>limnos<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">yday</span>(limnos<span class="op">$</span>date)</span>
 <span id="cb3-5"><a href="#cb3-5"></a>limnos<span class="op">$</span>month &lt;-<span class="st"> </span><span class="kw">month</span>(limnos<span class="op">$</span>date)</span>
 <span id="cb3-6"><a href="#cb3-6"></a></span>
 <span id="cb3-7"><a href="#cb3-7"></a><span class="co"># Remove rows with NA to make life easier for now</span></span>
@@ -444,14 +444,14 @@ $(document).ready(function () {
 <span id="cb4-4"><a href="#cb4-4"></a><span class="co"># is in the 6th column of each list element (matrix</span></span>
 <span id="cb4-5"><a href="#cb4-5"></a><span class="co"># or dataframe). This function creates a new</span></span>
 <span id="cb4-6"><a href="#cb4-6"></a><span class="co"># variable (column) called &#39;thermo&#39; in each df,</span></span>
-<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># and returns the original object modified in </span></span>
+<span id="cb4-7"><a href="#cb4-7"></a><span class="co"># and returns the original object modified in</span></span>
 <span id="cb4-8"><a href="#cb4-8"></a><span class="co"># place.</span></span>
-<span id="cb4-9"><a href="#cb4-9"></a>ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x){</span>
-<span id="cb4-10"><a href="#cb4-10"></a>  x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[,<span class="dv">6</span>], x[,<span class="dv">5</span>])</span>
+<span id="cb4-9"><a href="#cb4-9"></a>ltd &lt;-<span class="st"> </span><span class="cf">function</span>(x) {</span>
+<span id="cb4-10"><a href="#cb4-10"></a>  x<span class="op">$</span>thermo &lt;-<span class="st"> </span>rLakeAnalyzer<span class="op">::</span><span class="kw">thermo.depth</span>(x[, <span class="dv">6</span>], x[, <span class="dv">5</span>])</span>
 <span id="cb4-11"><a href="#cb4-11"></a>  <span class="kw">return</span>(x)</span>
 <span id="cb4-12"><a href="#cb4-12"></a>}</span></code></pre></div>
 <p>Now we can use the function we made to apply across all elements of our list.</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Create a test object that contains the </span></span>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="co"># Create a test object that contains the</span></span>
 <span id="cb5-2"><a href="#cb5-2"></a>test &lt;-<span class="st"> </span><span class="kw">lapply</span>(limlist, ltd)</span></code></pre></div>
 <p>Once we’ve done that, we can put everything back into a single dataframe.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="co"># Stack all of the dfs in the list into</span></span>
@@ -462,20 +462,24 @@ $(document).ready(function () {
 <h3><strong>Plot changes in thermocline depth</strong></h3>
 <p>Now we can plot changes in thermocline depth and fit statistical models to describe this change. We have fit regression models for this purpose already today, so here is an example of a slick plot of the result from the <code>ggplot2</code> library.</p>
 <p>First, subset the data so we are just working with July data.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Make a plot of July thermocline depth </span></span>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="co"># Make a plot of July thermocline depth</span></span>
 <span id="cb7-2"><a href="#cb7-2"></a><span class="co"># across years, and include predictions from</span></span>
 <span id="cb7-3"><a href="#cb7-3"></a><span class="co"># a GAM for data viz.</span></span>
 <span id="cb7-4"><a href="#cb7-4"></a><span class="co"># First, subset the data</span></span>
-<span id="cb7-5"><a href="#cb7-5"></a>out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month<span class="op">==</span><span class="dv">7</span>,]</span></code></pre></div>
+<span id="cb7-5"><a href="#cb7-5"></a>out1 &lt;-<span class="st"> </span>out[out<span class="op">$</span>month <span class="op">==</span><span class="st"> </span><span class="dv">7</span>, ]</span></code></pre></div>
 <p>Next, fit the plot. Note the differences between the <code>ggplot2</code> code and the code we have used thus far for plotting. You can do a lot more out of the box with <code>ggplot</code> graphics, but it is a bit of a different application of the R language compared to what we have seen so far. There is less flexibility than using basic graphics, too, but new features seem to be added all the time.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a><span class="co"># Now, plot it with ggplot2 functions</span></span>
 <span id="cb8-2"><a href="#cb8-2"></a>plot &lt;-<span class="st"> </span><span class="kw">ggplot</span>(out1, <span class="kw">aes</span>(year, thermo)) <span class="op">+</span></span>
-<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">pch=</span><span class="dv">21</span>,<span class="dt">cex=</span><span class="dv">5</span>, <span class="dt">col=</span><span class="st">&#39;gray40&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;gray40&#39;</span>) <span class="op">+</span></span>
-<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(<span class="dt">method=</span><span class="st">&#39;gam&#39;</span>, <span class="dt">level=</span>.<span class="dv">999</span>,</span>
-<span id="cb8-5"><a href="#cb8-5"></a>              <span class="dt">col=</span><span class="st">&#39;red&#39;</span>, <span class="dt">bg=</span><span class="st">&#39;tomato&#39;</span>) <span class="op">+</span><span class="st"> </span></span>
-<span id="cb8-6"><a href="#cb8-6"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&#39;Year&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">xlim</span>(<span class="dv">2011</span>, <span class="dv">2017</span>) <span class="op">+</span></span>
-<span id="cb8-7"><a href="#cb8-7"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&#39;July thermocline depth (m)&#39;</span>) <span class="op">+</span><span class="st"> </span><span class="kw">ylim</span>(<span class="dv">5</span>,<span class="dv">10</span>)</span>
-<span id="cb8-8"><a href="#cb8-8"></a>plot<span class="op">+</span><span class="kw">theme</span>(<span class="dt">plot.margin=</span><span class="kw">margin</span>(<span class="dv">5</span>,<span class="dv">5</span>,<span class="dv">10</span>,<span class="dv">10</span>))</span></code></pre></div>
+<span id="cb8-3"><a href="#cb8-3"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">pch =</span> <span class="dv">21</span>, <span class="dt">cex =</span> <span class="dv">5</span>, <span class="dt">col =</span> <span class="st">&quot;gray40&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;gray40&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-4"><a href="#cb8-4"></a><span class="st">  </span><span class="kw">geom_smooth</span>(</span>
+<span id="cb8-5"><a href="#cb8-5"></a>    <span class="dt">method =</span> <span class="st">&quot;gam&quot;</span>, <span class="dt">level =</span> <span class="fl">.999</span>,</span>
+<span id="cb8-6"><a href="#cb8-6"></a>    <span class="dt">col =</span> <span class="st">&quot;red&quot;</span>, <span class="dt">bg =</span> <span class="st">&quot;tomato&quot;</span></span>
+<span id="cb8-7"><a href="#cb8-7"></a>  ) <span class="op">+</span></span>
+<span id="cb8-8"><a href="#cb8-8"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Year&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-9"><a href="#cb8-9"></a><span class="st">  </span><span class="kw">xlim</span>(<span class="dv">2011</span>, <span class="dv">2017</span>) <span class="op">+</span></span>
+<span id="cb8-10"><a href="#cb8-10"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;July thermocline depth (m)&quot;</span>) <span class="op">+</span></span>
+<span id="cb8-11"><a href="#cb8-11"></a><span class="st">  </span><span class="kw">ylim</span>(<span class="dv">5</span>, <span class="dv">10</span>)</span>
+<span id="cb8-12"><a href="#cb8-12"></a>plot <span class="op">+</span><span class="st"> </span><span class="kw">theme</span>(<span class="dt">plot.margin =</span> <span class="kw">margin</span>(<span class="dv">5</span>, <span class="dv">5</span>, <span class="dv">10</span>, <span class="dv">10</span>))</span></code></pre></div>
 <p><img src="thermoclines_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
 <p><br></p>
 </div>

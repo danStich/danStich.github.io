@@ -1,45 +1,5 @@
-## ---- child="_styles.Rmd"---------------------------------------------------
 
-## ---- setup, include=FALSE--------------------------------------------------
-
-options(width=80)
-
-hook1 <- function(x){ gsub("```\n*```r*\n*", "", x) }
-hook2 <- function(x){ gsub("```\n+```\n", "", x) }
-
-knitr::knit_hooks$set(document = hook2)
-knitr::opts_chunk$set(comment = NA)
-knitr::opts_chunk$set(collapse = FALSE)
-knitr::opts_chunk$set(warning = FALSE)
-knitr::opts_chunk$set(message = FALSE)
-
-knitr::knit_hooks$set(
-  source = function(x, options) {
-    hook.r = function(x, options) {
-      fence <- "```"
-      language = tolower(options$engine)
-      if (language == 'node') language = 'javascript'
-      if (!options$highlight) language = 'text'
-      if(!is.null(options$foldcode)) {
-      paste0('\n\n', "<details><summary>View code</summary>\n", fence, language, '\n', x, fence,  '\n\n', "</details>\n")
-      } else {
-              paste0('\n\n', fence, language, '\n', x, fence,  '\n\n')
-      }
-    }
-    x = knitr:::hilight_source(x, 'markdown', options)
-    hook.r(
-      paste(c(
-        x, 
-        ''
-      ), collapse = '\n'), 
-      options
-    )
-  }
-)
-
-
-
-## ---- warning = FALSE, message= FALSE---------------------------------------
+## -------------------------------------------
 library(tidyverse)
 
 
@@ -81,7 +41,7 @@ minnesummary <- minnesota %>%
   )
 
 
-## ---- warning=FALSE, message=FALSE------------------------------------------
+## ----------------------------------------------
 library(rgdal)
 MN <- rgdal::readOGR("data/Boundaries_of_Minnesota.shp", verbose = FALSE)
 
@@ -131,7 +91,7 @@ proj4string(d) <- CRS("+init=epsg:26911")
 MN <- sp::spTransform(MN, CRS("+init=epsg:26911"))
 
 
-## ---- out.width="500%"------------------------------------------------------
+## ----------------------------------------------------------
 # We'll use the ggplot2 library
 library(ggplot2)
 
@@ -178,7 +138,7 @@ dd <- d[!is.na(ins[, 1]), ]
 minnesota_sp <- dd@data
 
 
-## ---- fig.width=10----------------------------------------------------------
+## --------------------------------------------------------------
 # We'll use the ggplot2 library
 library(ggplot2)
 
@@ -203,7 +163,7 @@ ggplot() +
   )
 
 
-## ---- fig.width=10----------------------------------------------------------
+## --------------------------------------------------------------
 # Make the plot...again
 ggplot() +
   geom_polygon(
@@ -279,11 +239,6 @@ wilcox.test(Secchi ~ GNIS.Class, data = mlr)
 # to adjust the calculated test statistic.
 t.test(logSecchi ~ GNIS.Class, data = mlr, equal = FALSE)
 
-
-## ---- echo = FALSE, results='hide', eval=TRUE-------------------------------
-mod <- t.test(logSecchi ~ GNIS.Class, data = mlr, equal = FALSE)
-
-
 ## ---------------------------------------------------------------------------
 ggplot(
   data = mlr,
@@ -325,7 +280,7 @@ lmod <- lm(logSecchi ~ Latitude, data = mn_data)
 summary(lmod)
 
 
-## ---- warning = FALSE, message = FALSE--------------------------------------
+## ------------------------------------------
 log_preds <- predict(lmod, interval = "prediction")
 
 
@@ -389,9 +344,8 @@ lim <- na.omit(otsego)
 lim$depth <- -1 * lim$depth
 
 
-## ---- warning=FALSE, message=FALSE------------------------------------------
+## ----------------------------------------------
 library(akima)
-
 
 
 ## ---------------------------------------------------------------------------

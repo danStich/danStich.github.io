@@ -5,21 +5,21 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Software needs"
+    - text: "Before the workshop"
       href: software.html
     - text: "Introductory"
       href: morning.html
     - text: "Intermediate"
       href: afternoon.html
-    - text: "Instructors"
-      href: instructors.html
     - text: "Additional Resources"
       href: resources.html
-    - text: "Contact"
-      href: contact.html
+    - text: "Instructors"
+      href: instructors.html      
   right:    
+    - text: "Contact"
+      href: contact.html  
     - icon: fa-github
-      href: https://github.com/danStich      
+      href: https://github.com/danStich/danStich.github.io/tree/master/r4nalms    
 output:
   html_document:
     theme: cosmo
