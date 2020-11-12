@@ -557,25 +557,28 @@ $(document).ready(function () {
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a><span class="co"># We&#39;ll use the ggplot2 library</span></span>
 <span id="cb17-2"><a href="#cb17-2"></a><span class="kw">library</span>(ggplot2)</span>
 <span id="cb17-3"><a href="#cb17-3"></a></span>
-<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># Make the plot</span></span>
-<span id="cb17-5"><a href="#cb17-5"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
-<span id="cb17-6"><a href="#cb17-6"></a><span class="st">  </span><span class="kw">geom_polygon</span>(</span>
-<span id="cb17-7"><a href="#cb17-7"></a>    <span class="dt">data =</span> <span class="kw">fortify</span>(MN),</span>
-<span id="cb17-8"><a href="#cb17-8"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
-<span id="cb17-9"><a href="#cb17-9"></a>    <span class="dt">fill =</span> <span class="st">&quot;gray60&quot;</span>,</span>
-<span id="cb17-10"><a href="#cb17-10"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat)</span>
-<span id="cb17-11"><a href="#cb17-11"></a>  ) <span class="op">+</span></span>
-<span id="cb17-12"><a href="#cb17-12"></a><span class="st">  </span><span class="kw">coord_sf</span>() <span class="op">+</span></span>
-<span id="cb17-13"><a href="#cb17-13"></a><span class="st">  </span><span class="kw">geom_point</span>(</span>
-<span id="cb17-14"><a href="#cb17-14"></a>    <span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</span>
-<span id="cb17-15"><a href="#cb17-15"></a>    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
-<span id="cb17-16"><a href="#cb17-16"></a>  ) <span class="op">+</span></span>
-<span id="cb17-17"><a href="#cb17-17"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Easting&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></span>
-<span id="cb17-18"><a href="#cb17-18"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Minnesota lakes&quot;</span>) <span class="op">+</span></span>
-<span id="cb17-19"><a href="#cb17-19"></a><span class="st">  </span><span class="kw">theme</span>(</span>
-<span id="cb17-20"><a href="#cb17-20"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
-<span id="cb17-21"><a href="#cb17-21"></a>    <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
-<span id="cb17-22"><a href="#cb17-22"></a>  )</span></code></pre></div>
+<span id="cb17-4"><a href="#cb17-4"></a><span class="co"># You may need to install sf library with </span></span>
+<span id="cb17-5"><a href="#cb17-5"></a><span class="co"># install.packages(&quot;sf&quot;) on some OS</span></span>
+<span id="cb17-6"><a href="#cb17-6"></a></span>
+<span id="cb17-7"><a href="#cb17-7"></a><span class="co"># Make the plot</span></span>
+<span id="cb17-8"><a href="#cb17-8"></a><span class="kw">ggplot</span>() <span class="op">+</span></span>
+<span id="cb17-9"><a href="#cb17-9"></a><span class="st">  </span><span class="kw">geom_polygon</span>(</span>
+<span id="cb17-10"><a href="#cb17-10"></a>    <span class="dt">data =</span> <span class="kw">fortify</span>(MN),</span>
+<span id="cb17-11"><a href="#cb17-11"></a>    <span class="dt">color =</span> <span class="st">&quot;black&quot;</span>,</span>
+<span id="cb17-12"><a href="#cb17-12"></a>    <span class="dt">fill =</span> <span class="st">&quot;gray60&quot;</span>,</span>
+<span id="cb17-13"><a href="#cb17-13"></a>    <span class="kw">aes</span>(<span class="dt">x =</span> long, <span class="dt">y =</span> lat)</span>
+<span id="cb17-14"><a href="#cb17-14"></a>  ) <span class="op">+</span></span>
+<span id="cb17-15"><a href="#cb17-15"></a><span class="st">  </span><span class="kw">coord_sf</span>() <span class="op">+</span></span>
+<span id="cb17-16"><a href="#cb17-16"></a><span class="st">  </span><span class="kw">geom_point</span>(</span>
+<span id="cb17-17"><a href="#cb17-17"></a>    <span class="dt">data =</span> <span class="kw">data.frame</span>(dd),</span>
+<span id="cb17-18"><a href="#cb17-18"></a>    <span class="dt">mapping =</span> <span class="kw">aes</span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)</span>
+<span id="cb17-19"><a href="#cb17-19"></a>  ) <span class="op">+</span></span>
+<span id="cb17-20"><a href="#cb17-20"></a><span class="st">  </span><span class="kw">labs</span>(<span class="dt">x =</span> <span class="st">&quot;Easting&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Northing&quot;</span>) <span class="op">+</span></span>
+<span id="cb17-21"><a href="#cb17-21"></a><span class="st">  </span><span class="kw">ggtitle</span>(<span class="st">&quot;Minnesota lakes&quot;</span>) <span class="op">+</span></span>
+<span id="cb17-22"><a href="#cb17-22"></a><span class="st">  </span><span class="kw">theme</span>(</span>
+<span id="cb17-23"><a href="#cb17-23"></a>    <span class="dt">plot.title =</span> <span class="kw">element_text</span>(<span class="dt">hjust =</span> <span class="fl">.5</span>),</span>
+<span id="cb17-24"><a href="#cb17-24"></a>    <span class="dt">text =</span> <span class="kw">element_text</span>(<span class="dt">size =</span> <span class="dv">10</span>)</span>
+<span id="cb17-25"><a href="#cb17-25"></a>  )</span></code></pre></div>
 <p><img src="intermediate_files/figure-html/unnamed-chunk-18-1.png" width="960" /></p>
 <p>Wow! That looks <em>a lot</em> better!</p>
 <p>Of course, we could really snaz this up!</p>
@@ -880,7 +883,7 @@ $(document).ready(function () {
 <span id="cb41-9"><a href="#cb41-9"></a><span class="co"># linear interpolation from the akima package</span></span>
 <span id="cb41-10"><a href="#cb41-10"></a>im &lt;-<span class="st"> </span><span class="kw">with</span>(</span>
 <span id="cb41-11"><a href="#cb41-11"></a>  plotter,</span>
-<span id="cb41-12"><a href="#cb41-12"></a>  <span class="kw">interp</span>(x, y, z,</span>
+<span id="cb41-12"><a href="#cb41-12"></a>  akima<span class="op">::</span><span class="kw">interp</span>(x, y, z,</span>
 <span id="cb41-13"><a href="#cb41-13"></a>    <span class="dt">duplicate =</span> <span class="st">&quot;mean&quot;</span>,</span>
 <span id="cb41-14"><a href="#cb41-14"></a>    <span class="dt">nx =</span> <span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>date)),</span>
 <span id="cb41-15"><a href="#cb41-15"></a>    <span class="dt">ny =</span> <span class="kw">length</span>(<span class="kw">unique</span>(lim<span class="op">$</span>depth))</span>
@@ -923,9 +926,9 @@ $(document).ready(function () {
 <span id="cb42-34"><a href="#cb42-34"></a>  <span class="dt">main =</span> <span class="kw">expression</span>(<span class="kw">paste</span>(<span class="st">&quot;Temperature (&quot;</span>, degree, <span class="st">&quot;C)&quot;</span>)),</span>
 <span id="cb42-35"><a href="#cb42-35"></a>  <span class="co"># Specify y-axis limits.</span></span>
 <span id="cb42-36"><a href="#cb42-36"></a>  <span class="dt">ylim =</span> <span class="kw">c</span>(<span class="kw">min</span>(im<span class="op">$</span>y), <span class="kw">max</span>(im<span class="op">$</span>y)),</span>
-<span id="cb42-37"><a href="#cb42-37"></a>  <span class="co"># Specify x-axis limits. In</span></span>
-<span id="cb42-38"><a href="#cb42-38"></a>  <span class="co"># this case, we are &quot;zooming in&quot;</span></span>
-<span id="cb42-39"><a href="#cb42-39"></a>  <span class="co"># on year 2017</span></span>
+<span id="cb42-37"><a href="#cb42-37"></a>  <span class="co"># Specify x-axis limits. In this case, we are &quot;zooming in&quot; on year 2017</span></span>
+<span id="cb42-38"><a href="#cb42-38"></a>  <span class="co"># Can use this one instead if date formatting throws error</span></span>
+<span id="cb42-39"><a href="#cb42-39"></a>  <span class="co"># xlim = c(as.numeric(as.Date(&quot;2017/05/01&quot;)), max(im$x)),</span></span>
 <span id="cb42-40"><a href="#cb42-40"></a>  <span class="dt">xlim =</span> <span class="kw">c</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2017/05/01&quot;</span>), <span class="kw">max</span>(im<span class="op">$</span>x)),</span>
 <span id="cb42-41"><a href="#cb42-41"></a>  <span class="co"># X-axis label</span></span>
 <span id="cb42-42"><a href="#cb42-42"></a>  <span class="dt">xlab =</span> <span class="st">&quot;Date&quot;</span>,</span>

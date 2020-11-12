@@ -208,6 +208,9 @@ We can plot the polygon and the points again just to double check:
 # We'll use the ggplot2 library
 library(ggplot2)
 
+# You may need to install sf library with 
+# install.packages("sf") on some OS
+
 # Make the plot
 ggplot() +
   geom_polygon(
@@ -605,7 +608,7 @@ plotter <- plotter[with(plotter, order(x, y)), ]
 # linear interpolation from the akima package
 im <- with(
   plotter,
-  interp(x, y, z,
+  akima::interp(x, y, z,
     duplicate = "mean",
     nx = length(unique(lim$date)),
     ny = length(unique(lim$depth))
@@ -651,9 +654,9 @@ filled.contour(
   main = expression(paste("Temperature (", degree, "C)")),
   # Specify y-axis limits.
   ylim = c(min(im$y), max(im$y)),
-  # Specify x-axis limits. In
-  # this case, we are "zooming in"
-  # on year 2017
+  # Specify x-axis limits. In this case, we are "zooming in" on year 2017
+  # Can use this one instead if date formatting throws error
+  # xlim = c(as.numeric(as.Date("2017/05/01")), max(im$x)),
   xlim = c(as.Date("2017/05/01"), max(im$x)),
   # X-axis label
   xlab = "Date",
