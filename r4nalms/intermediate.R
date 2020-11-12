@@ -1,38 +1,41 @@
 
-## -------------------------------------------
+## ---------------------------------------------
 library(tidyverse)
 
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 minnesota <- read.csv("data/minnesota.csv", stringsAsFactors = FALSE)
 
 
-## ---- eval=TRUE-------------------------------------------------------------
+
+## -------------------------------------------------------------------
 # Like this:
 str(minnesota)
 
 
-## ---------------------------------------------------------------------------
+
+## -----------------------------------------------------------------------------
 names(minnesota)
 
 
-## ---------------------------------------------------------------------------
+
+## -----------------------------------------------------------------------------
 # First, we replace Secchi..m. with Secchi
 names(minnesota)[8] <- "Secchi"
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Print the names of the df
 # to the console so we can
 # see them.
 names(minnesota)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # So funny
 minnesummary <- minnesota %>%
-  group_by(Water.Body, GNIS.ID, GNIS.Class, Elevation) %>%
+  group_by(Water.Body, GNIS.ID, GNIS.Class) %>%
   summarize(
     Secchi = mean(Secchi),
     Latitude = mean(Latitude),
@@ -41,12 +44,12 @@ minnesummary <- minnesota %>%
   )
 
 
-## ----------------------------------------------
+## ------------------------------------------------
 library(rgdal)
 MN <- rgdal::readOGR("data/Boundaries_of_Minnesota.shp", verbose = FALSE)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Remove those points with missing longitude and latitude
 d <- minnesummary %>%
   filter(!is.na(Latitude) &
@@ -55,7 +58,7 @@ d <- minnesummary %>%
     (Latitude >= 40 & Latitude <= 60))
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Load sp package
 library(sp)
 
@@ -68,17 +71,17 @@ ds <- d
 coordinates(ds) <- c("Longitude", "Latitude")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 proj4string(ds) <- CRS("+proj=longlat +datum=WGS84")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Get UTMs for the longitudes and latitudes using
 # the coordinate system of our shape file
 coord_utm <- sp::spTransform(ds, CRS("+init=epsg:26911"))
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Assign the coordinates to new columns
 # in our dataframe
 d$x <- coord_utm@coords[, 1]
@@ -87,11 +90,11 @@ coordinates(d) <- ~ x + y
 proj4string(d) <- CRS("+init=epsg:26911")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 MN <- sp::spTransform(MN, CRS("+init=epsg:26911"))
 
 
-## ----------------------------------------------------------
+## ------------------------------------------------------------
 # We'll use the ggplot2 library
 library(ggplot2)
 
@@ -120,7 +123,7 @@ ggplot() +
   coord_equal(ratio = .5)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Perform a spatial intersect between
 # the Minnesota shapefile (polygon) and
 # the SpatialPoints object.
@@ -138,9 +141,12 @@ dd <- d[!is.na(ins[, 1]), ]
 minnesota_sp <- dd@data
 
 
-## --------------------------------------------------------------
+## ----------------------------------------------------------------
 # We'll use the ggplot2 library
 library(ggplot2)
+
+# You may need to install sf library with 
+# install.packages("sf") on some OS
 
 # Make the plot
 ggplot() +
@@ -163,7 +169,7 @@ ggplot() +
   )
 
 
-## --------------------------------------------------------------
+## ----------------------------------------------------------------
 # Make the plot...again
 ggplot() +
   geom_polygon(
@@ -194,34 +200,34 @@ ggplot() +
   scale_colour_gradientn("", colours = c("gray90", "black"))
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot(minnesummary, aes(x = Secchi)) +
   geom_histogram(bins = 15)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 minnesummary$logSecchi <- log(minnesummary$Secchi)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot(minnesummary, aes(x = logSecchi)) +
   geom_histogram(bins = 15)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Haha, like the abbreviation for Holdren et al. (2006)!
 mlr <- minnesummary %>%
   filter(GNIS.Class == "Lake" | GNIS.Class == "Reservoir")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Wilcox test to assess the null hypothesis
 # that there is no difference in Secchi between
 # lakes and reservoirs.
 wilcox.test(Secchi ~ GNIS.Class, data = mlr)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # T-test to assess the null hypothesis
 # that there is no difference in Secchi
 # between lakes and reservoirs in Minnesota.
@@ -239,7 +245,12 @@ wilcox.test(Secchi ~ GNIS.Class, data = mlr)
 # to adjust the calculated test statistic.
 t.test(logSecchi ~ GNIS.Class, data = mlr, equal = FALSE)
 
-## ---------------------------------------------------------------------------
+
+## -------------------------------------
+mod <- t.test(logSecchi ~ GNIS.Class, data = mlr, equal = FALSE)
+
+
+## -----------------------------------------------------------------------------
 ggplot(
   data = mlr,
   aes(
@@ -251,22 +262,22 @@ ggplot(
   geom_jitter(width = 0.1, alpha = 0.20)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Fit an ANOVA to test for differences in
 # means between groups
 mod <- lm(logSecchi ~ GNIS.Class, data = mlr)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Get ANOVA summary for the model
 anova(mod)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 TukeyHSD(aov(mod))
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Drop rows with missing Latitudes
 mn_data <- minnesummary %>%
   filter(!is.na(Latitude) &
@@ -276,30 +287,30 @@ mn_data <- minnesummary %>%
 lmod <- lm(logSecchi ~ Latitude, data = mn_data)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 summary(lmod)
 
 
-## ------------------------------------------
+## --------------------------------------------
 log_preds <- predict(lmod, interval = "prediction")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Convert back to real scale
 real_preds <- apply(X = log_preds, MARGIN = 2, FUN = exp)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Take a look at the first few
 # rows of the preds dataframe
 head(real_preds)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 mn_preds <- data.frame(mn_data, real_preds)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 ggplot(mn_preds, aes(x = Latitude, y = Secchi)) +
   geom_point(alpha = 0.10) +
   geom_line(aes(y = fit), size = 1, color = "black") +
@@ -313,11 +324,11 @@ ggplot(mn_preds, aes(x = Latitude, y = Secchi)) +
   theme(legend.position = "none")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 otsego <- read.csv("data/physical.csv")
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Data formatting & extraction
 
 # First, we convert the date column
@@ -333,22 +344,23 @@ otsego$date <- as.Date(
 )
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Remove NA values to make life easier
 lim <- na.omit(otsego)
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Multiply depth column by -1 so depth will
 # plot from top to bottom.
 lim$depth <- -1 * lim$depth
 
 
-## ----------------------------------------------
+## ------------------------------------------------
 library(akima)
 
 
-## ---------------------------------------------------------------------------
+
+## -----------------------------------------------------------------------------
 # Create a data frame containing the
 # x, y, and z variables of interest
 plotter <- data.frame(x = lim$date, y = lim$depth, z = lim$temp)
@@ -360,7 +372,7 @@ plotter <- plotter[with(plotter, order(x, y)), ]
 # linear interpolation from the akima package
 im <- with(
   plotter,
-  interp(x, y, z,
+  akima::interp(x, y, z,
     duplicate = "mean",
     nx = length(unique(lim$date)),
     ny = length(unique(lim$depth))
@@ -368,7 +380,7 @@ im <- with(
 )
 
 
-## ---------------------------------------------------------------------------
+## -----------------------------------------------------------------------------
 # Plot the isopleth
 # filled.contour is the function that actually
 # makes the contour plot. This is the same function
@@ -405,9 +417,9 @@ filled.contour(
   main = expression(paste("Temperature (", degree, "C)")),
   # Specify y-axis limits.
   ylim = c(min(im$y), max(im$y)),
-  # Specify x-axis limits. In
-  # this case, we are "zooming in"
-  # on year 2017
+  # Specify x-axis limits. In this case, we are "zooming in" on year 2017
+  # Can use this one instead if date formatting throws error
+  # xlim = c(as.numeric(as.Date("2017/05/01")), max(im$x)),
   xlim = c(as.Date("2017/05/01"), max(im$x)),
   # X-axis label
   xlab = "Date",
