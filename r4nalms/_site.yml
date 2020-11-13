@@ -3,21 +3,19 @@ output_dir: "."
 navbar:
   title: "R4NALMS"
   left:
-    - text: "Home"
-      href: index.html
     - text: "Before the workshop"
       href: software.html
     - text: "Introductory"
       href: morning.html
     - text: "Intermediate"
       href: afternoon.html
-    - text: "Additional Resources"
+    - text: "Resources"
       href: resources.html
     - text: "Instructors"
       href: instructors.html      
   right:    
-    - text: "Contact"
-      href: contact.html  
+    - icon: fa-youtube
+      href: https://www.youtube.com/channel/UCcQsWXjTXYIfGTAJyxDaAyw/    
     - icon: fa-github
       href: https://github.com/danStich/danStich.github.io/tree/master/r4nalms    
 output:
