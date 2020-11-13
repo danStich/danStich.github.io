@@ -8,6 +8,8 @@ title: Getting started
 
 <img src="./images/logos.png" alt="logos for software">
 
+This page is here to get you started with software and files you'll need for the workshops. It will probably be easiest to get everything you need if you work through the steps below one at a time.
+
 <h2 id = "multi"><b>Software needs</b></h2>
 
 All software required for this class is <b>freely available</b> and <b>easily installed</b>. Please download and install the most recent versions of each before the workshop. Instructional videos and download links are provided below.
