@@ -14,7 +14,7 @@ In a way, CART can be thought of as a tool that is complementary to some of the 
 
 #### The **basics of CART** go something like this:
 
-We partition the response into the two most homogenous groups possible based on our explanatory variables (predictors). If categorical, this means splitting into two categories. In the case of a binomial predictor, we end up with two groups- each containg only a single category. In the case of a multinomial predictor with k categories, we still end up with two groups, but each side of the partition might contain anywhere from 1 to K-1 groups. If the predictor is numeric, then we use a rank-order to determine at which rank the distributions of two groups are most homogeneous. (This is the same concept that we used when we looked at non-parametric alternatives to t-tests and ANOVA back in the first couple weeks of the semester.) This initial split is found by maximizing homogeneity within groups in the partition based on all all possible splits for each of the explanatory variables.
+We partition the response into the two most homogenous groups possible based on our explanatory variables (predictors). If categorical, this means splitting into two categories. In the case of a binomial predictor, we end up with two groups- each containing only a single category. In the case of a multinomial predictor with k categories, we still end up with two groups, but each side of the partition might contain anywhere from 1 to K-1 groups. If the predictor is numeric, then we use a rank-order to determine at which rank the distributions of two groups are most homogeneous. (This is the same concept that we used when we looked at non-parametric alternatives to t-tests and ANOVA back in the first couple weeks of the semester.) This initial split is found by maximizing homogeneity of variance within groups in the partition based on all all possible splits for each of the explanatory variables.
 
 Once we have made the first split, we continue to repeat the process over and over again until the tree becomes sufficiently large that we have over-fit the model. This process is called 'growing' the tree. We can then use some form of k-fold cross validation to 'prune' the tree back based on the predictive performance of the model.
 
@@ -28,16 +28,16 @@ We will work with the `iris` data for this example. The response in the `iris` d
 First, let's load the library and the data set that we will need to use for this example. We'll start with the `rpart` package, but there are actually a few different packages that will do CART for us. Last, we set a seed for the random number generators in R so we all get the same results.
 
 ```{r, warning=FALSE, message=FALSE}
-  library(rpart)
+library(rpart)
 
 # Load the iris data that we've been working with
-  data(iris)
+data(iris)
 
 # Set the random number seed so that the results
 # are the same each time we run the example (if we
 # didn't set this the results might differ a bit each time
 # because the subsampling process below is stochastic)
-  set.seed(2568)
+set.seed(2568)
 ```
 
 Next, we will split our data into **training data** that we use to fit the model, and **test data** we use to validate the model. To do this, we will randomly select rows from our dataframe and assign them to the training data. All unsampled rows will be assigned to the test data set.
@@ -45,7 +45,7 @@ Next, we will split our data into **training data** that we use to fit the model
 ```{r}
 # Define a variable to subsample rows of the
 # iris dataframe
-  n = nrow(iris)
+n <- nrow(iris)
 
 # Define a random subsample of the original data.
 # We will use these data as a training data set,
@@ -53,44 +53,44 @@ Next, we will split our data into **training data** that we use to fit the model
 # `train` is just a random sample of row numbers from
 # the total number of rows ini the iris data.
 # Here, we take half the data
-  train = sort(sample(1:n, floor(n/2)))
+train <- sort(sample(1:n, floor(n / 2)))
 
 # We can define separate data frames for the training
 # data and the test data using the indices contained
 # in `train`.
-  
+
 # Training data
-  iris.train = iris[train, ]
-  
+iris.train <- iris[train, ]
+
 # Test data
-  iris.test = iris[-train, ]
+iris.test <- iris[-train, ]
 ```
 
 Then, we can fit the classification tree to the training data.
 
 ```{r}
 # Fit the tree
-  iris.ct = rpart(Species ~ . ,       # Formula: '.' means entire dataframe
-                  data = iris,        # Using iris data
-                  subset = train      # More specifically, the training data
-                  )
+iris_cart <- rpart(Species ~ ., # Formula: '.' means entire dataframe
+  data = iris, # Using iris data
+  subset = train # More specifically, the training data
+)
 ```
 
 We can print a summary of the tree to examine where the splits occurred and how these locations were chosen by the algorithm.
 
-```{r}
+```{r eval = FALSE}
 # Print the summary
-  summary(iris.ct)
+summary(iris_cart)
 ```
 
-Finally, we can make some very rudimentary plots in base graphics for the tree and this can greatly facilitate the interpretation of these trees. We will also add some text to the plot to make it a little easier to understand.
+Finally, we can make some very rudimentary plots in base graphics for the tree and this can greatly facilitate their interpretation. We will also add some text to the plot to make it a little easier to understand.
 
 ```{r}
 # Make the plot
-  plot(iris.ct, minbranch= 10, compress=TRUE, margin=.15, nspace=5)
+plot(iris_cart, minbranch = 10, compress = TRUE, margin = .15, nspace = 5)
 
 # Adding text to the plot makes the tree understandable
-  text(iris.ct, use.n = TRUE, all = FALSE, fancy = FALSE)
+text(iris_cart, use.n = TRUE, all = FALSE, fancy = FALSE)
 ```
 
 While this graphical representation is easier to understand than the summary output of the tree, it is not much nicer to look at than the tabular output. So, let's see if we can do something about that!
@@ -100,51 +100,59 @@ While this graphical representation is easier to understand than the summary out
 
 Let's load a new package for making some nicer trees that we might actually want to use in a talk, on a poster, or even in a paper. One trade off that we need to consider when making decisions about information and data visualization is what we gain and loose with various representations of our trees. For example, the plots above are a mess and we almost certainly wouldn't want to use them for data presentation in a paper, a talk, or poster. However, they do contain a lot of useful information that we are likely going to lose with nicer looking tools.
 
-We will rely on the aptly named `rpart.plot` package to start looking at our trees. Specifically, we are going to use the `prp` function for a nicer looking tree.
+We will rely on the aptly named `rpart.plot` package to start looking at our trees. We will use the `prp()` function for a nicer looking tree.
 
-You'll notice right away that we lose the neat-o group membership numbers that we got out of the ugly plots. On the other hand, this is a lot nicer to look at! Plus, it is a lot clearer to see which side the split for each variable represents.
+You'll notice right away that we lose the neat-o group membership numbers that we got out of the ugly plots. On the other hand, this is a lot nicer to look at! Plus, it is a lot clearer what the split for each variable represents.
 
 ```{r, warning=FALSE, message=FALSE}
 # Library load
-  library(rpart.plot)
+library(rpart.plot)
 
-# Plot the rpart object. Here, we add an 
+# Plot the rpart object. Here, we add an
 # argument to make the variable names shorter
 # so we can fit more in a single pane
-  prp(iris.ct, varlen = 3)
+prp(iris_cart, varlen = 3)
 ```
 
 But, wouldn't it be nice if we could get a *little* more information out of this nicer layout? **Glad you ask**!
 
-One simple way to do it is to pass values to the `extra` argument in the `prp` function. With all of the options available in this plotting utility, it is hard to imagine one named `extra`, but let's take a look at how a few of the possible values for `extra` change the plot (see `?prp` for a detailed list of possible display options.)
+One simple way to do it is to pass values to the `extra` argument in the `prp()` function. With all of the options available in this plotting utility, it is hard to imagine one named `extra`, but let's take a look at how a few of the possible values for `extra` change the plot (see `?prp` for a detailed list of possible display options.)
  
+We can get counts in each category for each split
+
 ```{r}
-  # We can get counts in each category for each split
-    prp(iris.ct, varlen = 3, extra=1)
-  # Classification rate (this one is only 
-  # for classification trees, not to be
-  # used for regression trees)
-    prp(iris.ct, varlen = 3, extra=2)
-  # Misclassification rates (also for classification trees only)
-    prp(iris.ct, varlen = 3, extra=3)
-  # Probability of membership in a node by class...
-    prp(iris.ct, varlen = 3, extra=4)
+prp(iris_cart, varlen = 3, extra = 1)
+```
+
+Classification rate (this one is only for classification trees, not to be used for regression trees):
+
+```{r}
+prp(iris_cart, varlen = 3, extra = 2)
+```
+
+Misclassification rates (also for classification trees only):
+
+```{r}
+prp(iris_cart, varlen = 3, extra = 3)
+```
+
+And, probability of membership in a node by class:
+
+```{r}
+prp(iris_cart, varlen = 3, extra = 4)
 ```
 
 > Here is a *really* nice way of visualizing these trees, though.
 
-**Note**: You may have let the package install a `.dll` file for `gtk+` in order to get the `RColorBrewer` package to work. `Gtk+` is the cross-platform `GIMP tool kit` for building graphical user interfaces (GUIs). This will not be required as part of the assignment this week because you will probably not be able to install this on the school PCs, but I want you to there is more to life (and machine learning) than ugly graphs. Now you have the code. 
+**Note**: You may have let the package install a `.dll` file for `gtk+` in order to get the `RColorBrewer` package to work. `Gtk+` is the cross-platform `GIMP tool kit` for building graphical user interfaces (GUIs). This will not be required as part of the assignment this week because you will probably not be able to install this on the school PCs or on some personal laptops, but I want you to there is more to life (and machine learning) than ugly graphs. Now you have the code. 
 
 ```{r, warning=FALSE, message=FALSE}
 # Install and load the packages
-  library(rattle) # We'll use this one to make some more functional plots
-  library(RColorBrewer) # We'll use this one for colors
+library(rattle) # We'll use this one to make some more functional plots
+library(RColorBrewer) # We'll use this one for colors
 
-# Make the plot
-  #prp(iris.ct)
-  
 # Now, make it fancy
-  fancyRpartPlot(iris.ct, main='', sub='')
+fancyRpartPlot(iris_cart, main = "", sub = "")
 ```
 
 Wicked awesome.
@@ -152,46 +160,46 @@ Wicked awesome.
 
 # Pruning the tree
 
-Now that we have looked at how to fit a tree and how to visualize a tree, we really should take a look at how to make sure the tree is not garbage. We can do this a few different ways. We have some tools available to us that we can use to determine the number of splits we should keep, what the predictive power of the resultant trees are, and we can even explore some statistical stopping rules that can eliminate the need for pruning, at least in theory.
+Now that we have looked at how to fit a tree and how to visualize a tree, we really should take a look at how to make sure the tree is not garbage. We can do this a few different ways. We have some tools available to us that we can use to determine the number of splits we should keep and the predictive power of the resultant trees. And we can even explore some statistical stopping rules that can eliminate the need for pruning, at least in theory.
 
 ```{r}
-# Let's start by fitting a tree to the data that we assume is overfit from the
-# get-go
-  set.seed(5)
-  iris.ot = rpart(
-                  Species ~ . ,
-                  data = iris,
-                  method = 'class',
-                  parms = list(split = 'information'),
-                  cp=0.000001,
-                  minsplit = 1,
-                  minbucket = 1)
+# Let's start by fitting a tree to the data 
+# that we assume is overfit
+set.seed(5)
+iris_full <- rpart(
+  Species ~ .,
+  data = iris,
+  method = "class",
+  parms = list(split = "information"),
+  cp = 0.000001,
+  minsplit = 1,
+  minbucket = 1
+)
 
 # Take a quick look at the plot
-  prp(iris.ot)
-  fancyRpartPlot(iris.ot, main='', sub='')
+prp(iris_full)
+fancyRpartPlot(iris_full, main = "", sub = "")
 ```
 
-Now we need to pick the tree size that minimizes misclassification rate (prediction error). To do this, we are basically going to look at changes in three things:
+Now we need to **pick the tree size that minimizes misclassification rate (prediction error)**. To do this, we are basically going to look at changes in three things:
 
 1. Training error (error in predicting training data): `relerror`
 2. Crossvalidation error (predictive error in x-validation): `xerror`
-3. Complexity parameter: `cp`
-   + This one tells us how much information gain we get for additional splits. In general, we are looking for the cp at which cross validation error is minimized so we can use that to decide how far back we want to prune our trees.
+3. Complexity parameter: `cp` This one tells us how much information gain we get for additional splits. In general, we are looking for the cp at which cross validation error is minimized so we can use that to decide how far back we want to prune our trees.
 
-First, let's look at how the cross-validation results change with respect to the size of our tree. This initial plot shows us how the relative error and the complexity parameter (cp) change with an increasing number of splits.
+First, let's look at how the cross-validation results change with respect to the size of our tree. This initial plot shows us how the relative error and the complexity parameter (`cp`) change with an increasing number of splits.
 
 In this plot, it is clear that by the third split we have minimized the xerror and decreases in information loss are minimized through the addition of more splits, but let's keep moving along.
   
 ```{r}  
-  plotcp(iris.ot)
+plotcp(iris_full)
 ```
 
 Another, perhaps more familiar, way to look at this is to plot changes in the predictive R-squared value for the tree with respect to subsequent splits. Again, it is clear that by the time we get two splits out from the root that we have essentially explained as much variance as we are going to squeeze out of this tree.
 
 ```{r, warning=FALSE, message=FALSE}
-  par(mfrow=c(1,2))
-  rsq.rpart(iris.ot)
+par(mfrow = c(1, 2))
+rsq.rpart(iris_full)
 ```
 
 We can also print the results of the model fit to take a look at the numbers behind all of these graphs.
@@ -204,41 +212,41 @@ Some simple calculations are helpful for this:
 We want the cp value (with a simpler tree) that minimizes the `xerror`. The key here is that we want the first model to minimize `xerror`.
 
 ```{r}
-  printcp(iris.ot)
+printcp(iris_full)
 ```
 
 Now we can get the cp for tree that is the first to reach the minimum xerror (with the fewest number of splits):
 
 ```{r}
-bestcp = iris.ot$cptable[which.min(iris.ot$cptable[,"xerror"]),"CP"]
+bestcp <- iris_full$cptable[which.min(iris_full$cptable[, "xerror"]), "CP"]
 bestcp
 ```
 
-We can use the information we have to calculate the misclassification rate for our optimal tree based on the equation on line 221. Here, we can see that our best tree will have a misclassification rate of 0.035. IN OTHER WORDS, we have effectively explained 96.5% of the variance in our data with this regression tree. Aw snap!
+We can use the information we have to calculate the misclassification rate for our optimal tree based on the equation shown below. Here, we can see that our best tree will have a misclassification rate of 0.035. **In other words**, we have effectively explained 96.5% of the variance in our data with this regression tree. Aw snap!
  
 ```{r}  
-  5e-3*.07*100
+5e-3 * .07 * 100
 ```
 
 Now we can use that cp to prune our tree by re-fitting our model with a new cp argument, changing nothing else, to see where the splits are and how they can be interpretted.
 
 ```{r}
-iris.pt = rpart(Species ~ . ,
-                data = iris,
-                method = 'class',
-                parms = list(split = 'information'),
-                cp=0.01
-                )
+iris_pruned <- rpart(Species ~ .,
+  data = iris,
+  method = "class",
+  parms = list(split = "information"),
+  cp = 0.01
+)
 ```
 
 We see that our plot is reduced compared to the original overfitted plot, and it actually is identical to the original, although this is not always the case.
 
 ```{r}
-  par(mfrow=c(1,1))
-  prp(iris.pt)
-  fancyRpartPlot(iris.pt, main='', sub='')
+par(mfrow = c(1, 1))
+prp(iris_pruned)
+fancyRpartPlot(iris_pruned, main = "", sub = "")
 ```
 
-That should get you started fitting and pruning CART models. Although the examples that we used above are for classification trees, you should understand that these concepts work the same way for regression trees, although the interpretation varies slightly. In fact, it is more straightforward because we are just counting the number of records in each node instead of the number of records within each group in each node.
+That should get you started fitting and pruning CART models. Although the examples that we used above are for classification trees, you should understand that these concepts work the same way for regression trees, although the interpretation varies slightly. In fact, it is more straightforward because we are just counting the number of records in each node instead of the number of records within each group in each node. We will explore regression trees further in the assignment for this week.
 
 <br>
