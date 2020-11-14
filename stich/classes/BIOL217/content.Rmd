@@ -119,8 +119,9 @@ The lecture tutorials provided below are linked directly to the online version o
 
 <h2 id = "multi"> **Classification and regression trees (CART)** </h2>
 ----
-<!-- <a href="./12_cart.html"> Lecture tutorial </a><br>  -->
-<!-- <a href="./hw12.html"> Homework assignment </a> -->
+<h3 id = "multi">Lecture tutorials</h3>
+<a href="./12_cart.html"> Lecture tutorial </a><br>
+<a href="./hw12.html"> Homework assignment </a>
 
 <br> 
  

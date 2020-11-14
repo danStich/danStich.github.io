@@ -51,15 +51,11 @@ There's no real meaningful way for us to deal with a few of the variables in thi
 
 We've done this so it is easier for us to use the entire dataframe when we make the call to `rpart`. We'll also get rid of species for now to make things a little easier to interpret. And, as long as we are at it, we need to cast all of the remaining variables in the dataframe as factors.
 
-Before you go any further, set a seed for random processes in your script. The reason for this is that it will make your results reproduceable when I run your code. Pick any number you like. you can choose it from a random number generator if you like, but enter the reuslt in the '`set.seed`' function, like this:
+Before you go any further, set a seed for random processes in your script. The reason for this is that it will make your results reproducable when I run your code. Pick any number you like.
 
-```{r, eval=FALSE}
+```{r}
 # Enter a random number seed like like this:
   set.seed(123)
-  
-# NOTE: your results won't match mine if you use this because I didn't set a
-# seed.  
-  
 ```  
 
 Now that you have the data ready for analysis, start by fitting a tree to the data that is overfit (the response is `TP`). Don't forget to load the `rpart` package if you haven't done so already. Remember the point of doing this is that we want to grow a big tree so we can prune it back to a reasonable size. unfortunately we won't know what that is until after we overfit the tree. 
@@ -71,51 +67,51 @@ Now that you have the data ready for analysis, start by fitting a tree to the da
   library(rattle)
 ```
 
-```{r, echo=FALSE, include=FALSE}
+```{r}
 # Overfit a tree
-  water.ot = rpart(TP ~ ., cp = 0.000001, data = water)
+  water_full = rpart(TP ~ ., cp = 0.000001, data = water)
 ```
 
 
 This is what my tree looked like. Now that is a tree we can prune!
 ```{r, warning=FALSE, message=FALSE}
 # Take a quick look at the plot
-# Replace 'water.ot' with the name of the tree that you built
+# Replace 'water_full' with the name of the tree that you built
   library(rpart.plot)
-  prp(water.ot)
+  prp(water_full)
 ```
  
 
-_**Question 1.**_ Your tree may look slightly different from mine given that they are randomly generated. How many "*leaves*" are on your overfit tree? You can find this out by looking at `obj$frame` where `obj` is the name of your regression tree.
+**Question 1.** Your tree may look slightly different from mine given that they are randomly generated. How many "*leaves*" are on your overfit tree? You can find this out by looking at `obj$frame` where `obj` is the name of your regression tree.
 
 ```{r, echo=FALSE, include=FALSE}  
-plotcp(water.ot)  
-printcp(water.ot)  
+plotcp(water_full)  
+printcp(water_full)  
 
-bestcp = water.ot$cptable[which.min(water.ot$cptable[,"xerror"]),"CP"]
+bestcp = water_full$cptable[which.min(water_full$cptable[,"xerror"]),"CP"]
 bestcp
 
-water.ft = rpart(TP ~ ., data = water, cp=bestcp)
+water_pruned = rpart(TP ~ ., data = water, cp=bestcp)
 
-prp(water.ft, extra = 1)  
-fancyRpartPlot(water.ft, main='', sub='')  
+prp(water_pruned, extra = 1)  
+fancyRpartPlot(water_pruned, main='', sub='')  
 
 par(mfrow=c(1,2))
-rsq.rpart(water.ft)
+rsq.rpart(water_pruned)
 par(mfrow=c(1,1))
 ```
  
  
-_**Question 2.**_ Using the `printcp` function, how many splits are in the model that minimizes cross validation error ('`xerror`')? What is the complexity parameter (cp) for this regression tree?
+**Question 2.** Using the `printcp` function, how many splits are in the model that minimizes cross validation error ('`xerror`')? What is the complexity parameter (`cp`) for this regression tree?
  
-Now go back and fit a new tree corresponding to the cp that was in your answer to *question 2*. Plot the fitted tree with the '`prp`' function, include the argument '`extra = 1`' in your call. 
+Now go back and fit a new tree corresponding to the cp that was in your answer to Question 2. Plot the fitted tree with the '`prp()`' function, and include the argument '`extra = 1`' in your call. 
  
-_**Question 3.**_ Which of the explanatory variables are included in the new tree? Go back into the description of the data <a href='../../data/water.pdf'>here</a> to find out what the abbreviations stand for if you need to.
+**Question 3.** Which of the explanatory variables are included in the new tree? Go back into the description of the data <a href='../../data/water.pdf'>here</a> to find out what the abbreviations stand for if you need to.
  
-Just as we could calculate a misclassification rate for classification trees, we can also calculate an R-squared value for our training models for regression trees. To do this, we subtract the relative error for our tree at the final split from 1.00. You can get relative error using the `printcp` fuunction like you did above.
+Just as we could calculate a misclassification rate for classification trees, we can also calculate an R-squared value for our training models for regression trees. To do this, we subtract the relative error for our tree at the final split from 1.00. You can get relative error using the `printcp()` function like you did above.
  
-_**Question 4**_ How much variance is explained by your regression tree. Does this surprise you given the number of explanatory variables you had at your disposal?
+**Question 4** How much variance is explained by your regression tree? 
  
-_**Question 5.**_ How do the results of your *predictive model* compare to the findings of the *hypothesis testing* reported in the abstract of <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454">the paper</a>? Can you say anything about the directionality of the relationships that you have identified with your regression tree?
+**Question 5.** How do the results of your *predictive model* compare to the findings of the *hypothesis testing* reported in the abstract of <a href="http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0135454">the paper</a>? Can you say anything about the directionality of the relationships that you have identified with your regression tree?
 
 <br>  
