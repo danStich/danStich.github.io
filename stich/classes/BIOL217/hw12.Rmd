@@ -23,7 +23,7 @@ The full description of these data is posted on the course website <a href='../.
 
 ```{r, eval=FALSE, echo=TRUE}
 # Read in the data set
-  water = read.csv("water.csv")
+  water = read.csv("data/water.csv")
   
 # Get a feel for the data structure:
 # Lots of numeric variables and a few factors
@@ -69,7 +69,7 @@ Now that you have the data ready for analysis, start by fitting a tree to the da
 
 ```{r}
 # Overfit a tree
-  water_full = rpart(TP ~ ., cp = 0.000001, data = water)
+  water_full = rpart(TP ~ ., cp = 0.00001, data = water)
 ```
 
 
