@@ -5,13 +5,11 @@
 title: "Course websites"
 ---
 
-Please use the links below to access course websites for Quantititative Biology (BIOL 217) and Advanced Quantitative Biology (BIOL 678).
+Please use the links below to access course websites for Quantitative Biology (BIOL 217) and Advanced Quantitative Biology (BIOL 678).
 
-These sites contain lecture content and homework exercises for each course module content changes from year to year (and sometimes day to day).
+These sites contain lecture content and homework exercises for each course. Content changes from year to year (and sometimes day to day). Links are provided so students have permanent access.
 
 <a href="classes/BIOL217/index.html"> Quantitative Biology  (BIOL 217) </a>
 
  
-<a href="classes/BIOL678/index.html"> Advanced Quantitative Biology (BIOL 678) </a>
-
-**Please note**: Data for these classes can be downloaded as a compressed folder from <a href="https://github.com/danStich/classData"> this </a> GitHub repository.
+<a href="https://danstich.github.io/BIOL678/index.html"> Advanced Quantitative Biology (BIOL 678) </a>
