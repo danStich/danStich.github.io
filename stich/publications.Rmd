@@ -12,7 +12,7 @@ title: "Publications"
 
 George, S. D., **D. S. Stich**, and B. P. Baldigo. *Accepted*. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences.
 
-Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. *In press*. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology. DOI: 10.1111/fwb.13642.<a href = "https://github.com/vasotola/MusselMarkRecap">[code]</a>
+Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. *In press*. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology. DOI: 10.1111/fwb.13642.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
 
 Caves, S., J. R. Baumman, and <b>D. S. Stich</b>. *In press*. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management. DOI: https://doi.org/10.1002/nafm.10515. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
@@ -23,11 +23,11 @@ Caves, S., J. R. Baumman, and <b>D. S. Stich</b>. *In press*. Density-Dependent 
 Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages 75-92 in M. J. Seipker and J. W. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 
 <!-- <a href="./pubs/Watson_etal_2019_AFS87.pdf">[PDF]</a> -->
 
-George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics">[code]</a>
+George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics"> [code]</a>
 
-Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="https://github.com/danStich/elliptioPhenology">[code]</a>
+Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="https://github.com/danStich/elliptioPhenology"> [code]</a>
 
-<b>Stich, D. S.</b>, T. F. Sheehan, and J. D. Zydlewski. 2019. A dam passage performance standard model for American Shad. Canadian Journal of Fisheries and Aquatic Sciences 76:762-779. <a href="https://github.com/danStich/shadia">[`shadia` R package]</a>
+<b>Stich, D. S.</b>, T. F. Sheehan, and J. D. Zydlewski. 2019. A dam passage performance standard model for American Shad. Canadian Journal of Fisheries and Aquatic Sciences 76:762-779. <a href="https://github.com/danStich/shadia"> [`shadia` R package]</a>
 
 
 ### 2017
