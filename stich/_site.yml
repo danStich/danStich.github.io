@@ -12,18 +12,18 @@ navbar:
         - text: "BIOL 217"
           href: classes/BIOL217/index.html          
         - text: "BIOL 678"
-          href: classes/BIOL678/index.html
+          href: https://danstich.github.io/BIOL678/
     - text: "Research"
       href: research.html
-    - text: "Current Students"
+    - text: "Students"
       href: studentProjects.html        
     - text: "Publications"
       href: publications.html
-    - text: "CV"
-      href: cv.html
     - text: "Contact"
       href: contact.html  
   right:
+    - text: "worst-r"
+      href: https://danstich.github.io/worst-r/
     - text: "shadia"
       href: https://shadia-ui.github.io/
     - icon: fa-github
