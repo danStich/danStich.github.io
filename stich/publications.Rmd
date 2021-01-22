@@ -6,15 +6,21 @@ title: "Publications"
 ```
 
 
-### 2020
+### Accepted or in press
 
 ---
 
 George, S. D., **D. S. Stich**, and B. P. Baldigo. *Accepted*. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences.
 
-Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. *In press*. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology. DOI: 10.1111/fwb.13642.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
-
 Caves, S., J. R. Baumman, and <b>D. S. Stich</b>. *In press*. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management. DOI: https://doi.org/10.1002/nafm.10515. <a href="https://github.com/danStich/grasscarp"> [code]</a>
+
+
+### 2021
+
+---
+
+Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. 2021. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology 66:349-361.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
+
 
 ### 2019
 
