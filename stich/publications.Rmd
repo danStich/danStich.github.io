@@ -5,7 +5,6 @@ title: "Publications"
 ```{r, child="_styles.Rmd"}
 ```
 
-
 ### Accepted or in press
 
 ---
@@ -18,7 +17,8 @@ Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zyd
 ### 2021
 
 ---
-Caves, S., J. R. Baumann, and <b>D. S. Stich</b>. 2021. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management. DOI: https://doi.org/10.1002/nafm.10515. <a href="https://github.com/danStich/grasscarp"> [code]</a>
+
+Caves, S., J. R. Baumann, and <b>D. S. Stich</b>. 2021. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
 George, S. D., **D. S. Stich**, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
 
