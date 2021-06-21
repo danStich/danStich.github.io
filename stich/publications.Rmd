@@ -5,18 +5,17 @@ title: "Publications"
 ```{r, child="_styles.Rmd"}
 ```
 
-### Accepted or in press
+<!-- ### Accepted or in press -->
 
----
-
-Oliver, D. O., N. Rude, G. W. Whitledge, and **D. S. Stich**. *In press*. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management.
-
-Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. *In press*. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society.
-
+<!-- --- -->
 
 ### 2021
 
 ---
+
+Oliver, D. O., N. Rude, G. W. Whitledge, and **D. S. Stich**. 2021. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management.[https://doi.org/10.1002/nafm.10595](https://doi.org/10.1002/nafm.10595).
+
+Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
 
 Caves, S., J. R. Baumann, and <b>D. S. Stich</b>. 2021. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
