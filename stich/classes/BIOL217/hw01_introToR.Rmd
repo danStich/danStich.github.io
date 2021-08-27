@@ -11,7 +11,7 @@ The objective of this assignment is to get you started working in R and help you
 
 For this and all other labs, read instructions carefully and keep all of the commands that you use in an R script that you will build in the RStudio IDE. To be clear: every time the lab instructions tell you to do something, there should be some code in your script that corresponds to those instructions. Please use comments to make your code clear to yourself and others. This is a key to conducting reproducible research and for writing code that you can come back to again and again for use in multiple applications. It will also help me figure out what the heck went wrong when something doesn’t look quite right.
 
-In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in blue below.
+In addition to your script, be sure to answer the questions, either as comments in your script, or as a list in a separate word document. These questions are in bold below.
 
 Example: If the instructions say, “Create a vector named `myData` that contains numbers one through five”, your script should include something like:
 
@@ -24,7 +24,7 @@ myData <- c(1, 2, 3, 4, 5)
 
 ### Exercises
 
-Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., `uspop`) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use `str()` to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: `data()`. If you are struggling to find a dataset that fits the criteria, any of these will work just fine, and we will use many of them during this class: `beaver1`, `beaver2`, `iris`, `mtcars`,`PlantGrowth`, `swiss`, `ToothGrowth`, and `USArrests`.
+Load one of the built-in data sets in R related to biology; you choose which one based on your own academic interests. For now, let’s avoid any of the time series data (e.g., `uspop`) because we haven’t discussed those object classes and likely will not use them in this course. If you are not sure if your dataset is a time series object, use `str()` to find out! Take a minute to choose something that you think might actually be interesting, though. To view a list of built-in datasets in the help window, you can type: `data()`. If you are struggling to find a dataset that fits the criteria, any of these will work just fine, and we will use many of them during this class:`iris`, `mtcars`,`PlantGrowth`, `swiss`, `ToothGrowth`, and `USArrests`.
  
 \* Don’t forget to put this and your data load in the script that you will hand in.
 
