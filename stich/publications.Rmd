@@ -13,15 +13,19 @@ title: "Publications"
 
 ---
 
-Oliver, D. O., N. Rude, G. W. Whitledge, and **D. S. Stich**. 2021. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management.[https://doi.org/10.1002/nafm.10595](https://doi.org/10.1002/nafm.10595).
-
-Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
-
 Caves, S., J. R. Baumann, and <b>D. S. Stich</b>. 2021. Density-Dependent Changes in Grass Carp Growth and Mortality in Long-Term Aquatic Plant Management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
 George, S. D., **D. S. Stich**, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
 
+Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
+
+Oliver, D. O., N. Rude, G. W. Whitledge, and **D. S. Stich**. 2021. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management.[https://doi.org/10.1002/nafm.10595](https://doi.org/10.1002/nafm.10595).
+
 Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. 2021. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology 66:349-361.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
+
+Vlk, A., E. Bastiaans, D. Stich, and D. Vogler. 2021. Effect of
+anthropogenic habitat disturbance on the nesting ecology of the wood 
+turtle (*Glyptemys insculpta*). Amphibian and Reptile Conservation 15(2):50-58.
 
 
 ### 2019
