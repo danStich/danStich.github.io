@@ -105,25 +105,25 @@ The lecture tutorials provided below are linked directly to the online version o
 [Chapter 15: Generalized linear mixed models](https://danstich.github.io/worst-r/15-Chapter15.html)<br>
 
 <h3 id = "multi"> Homework exercises</h3>
-<a href="./hw10.html"> Linear mixed models </a>
+<a href="./hw10.html"> Generalized linear mixed models </a>
 
 
-<h2 id = "multi"> **Multivariate statistics** </h2>
-----
-<h3 id = "multi">Lecture tutorials</h3>
-<a href="./11_multivariate.html"> Intro to multivariate statistics </a><br>
+<!-- <h2 id = "multi"> **Multivariate statistics** </h2> -->
+<!-- ---- -->
+<!-- <h3 id = "multi">Lecture tutorials</h3> -->
+<!-- <a href="./11_multivariate.html"> Intro to multivariate statistics </a><br> -->
 
-<h3 id = "multi"> Homework exercises</h3>
-<a href="./hw11.html"> NMDS </a>
+<!-- <h3 id = "multi"> Homework exercises</h3> -->
+<!-- <a href="./hw11.html"> NMDS </a> -->
 
 
-<h2 id = "multi"> **Classification and regression trees (CART)** </h2>
-----
-<h3 id = "multi">Lecture tutorials</h3>
-<a href="./12_cart.html"> Classification trees </a><br>
+<!-- <h2 id = "multi"> **Classification and regression trees (CART)** </h2> -->
+<!-- ---- -->
+<!-- <h3 id = "multi">Lecture tutorials</h3> -->
+<!-- <a href="./12_cart.html"> Classification trees </a><br> -->
 
-<h3 id = "multi"> Homework exercises</h3>
-<a href="./hw12.html"> Regression trees </a>
+<!-- <h3 id = "multi"> Homework exercises</h3> -->
+<!-- <a href="./hw12.html"> Regression trees </a> -->
 
 <br> 
  
