@@ -11,16 +11,25 @@
 
 
 
-<title>hw10.utf8</title>
+<title>hw10.knit</title>
 
+<script src="site_libs/header-attrs-2.9/header-attrs.js"></script>
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
 <script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
-<script src="site_libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
 <link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
 <!DOCTYPE html>
@@ -37,22 +46,38 @@
 <meta name="theme-color" content="#382121">
 </head>
 
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
 
-<style type="text/css">code{white-space: pre;}</style>
+
+<style type="text/css">
+  code {
+    white-space: pre;
+  }
+  .sourceCode {
+    overflow: visible;
+  }
+</style>
 <style type="text/css" data-origin="pandoc">
-code.sourceCode > span { display: inline-block; line-height: 1.25; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-code.sourceCode > span:empty { height: 1.2em; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 div.sourceCode { margin: 1em 0; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
 pre.numberSource code
   { counter-reset: source-line 0; }
@@ -72,7 +97,7 @@ pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-le
 div.sourceCode
   {  background-color: #f8f8f8; }
 @media screen {
-code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ef2929; } /* Alert */
 code span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
@@ -125,39 +150,9 @@ code span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warni
   }
 })();
 </script>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
 
 
-<style type="text/css">
-h1 {
-  font-size: 34px;
-}
-h1.title {
-  font-size: 38px;
-}
-h2 {
-  font-size: 30px;
-}
-h3 {
-  font-size: 24px;
-}
-h4 {
-  font-size: 18px;
-}
-h5 {
-  font-size: 16px;
-}
-h6 {
-  font-size: 12px;
-}
-.table th:not([align]) {
-  text-align: left;
-}
-</style>
+
 
 <link rel="stylesheet" href="styles.css" type="text/css" />
 
@@ -168,10 +163,6 @@ h6 {
   max-width: 940px;
   margin-left: auto;
   margin-right: auto;
-}
-code {
-  color: inherit;
-  background-color: rgba(0, 0, 0, 0.04);
 }
 img {
   max-width:100%;
@@ -188,40 +179,13 @@ button.code-folding-btn:focus {
 summary {
   display: list-item;
 }
+pre code {
+  padding: 0;
+}
 </style>
 
 
 <style type="text/css">
-/* padding for bootstrap navbar */
-body {
-  padding-top: 51px;
-  padding-bottom: 40px;
-}
-/* offset scroll position for anchor links (for fixed navbar)  */
-.section h1 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h2 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h3 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h4 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h5 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
-.section h6 {
-  padding-top: 56px;
-  margin-top: -56px;
-}
 .dropdown-submenu {
   position: relative;
 }
@@ -249,7 +213,7 @@ body {
   margin-right: -10px;
 }
 .dropdown-submenu:hover>a:after {
-  border-left-color: #ffffff;
+  border-left-color: #adb5bd;
 }
 .dropdown-submenu.pull-left {
   float: none;
@@ -261,7 +225,7 @@ body {
 }
 </style>
 
-<script>
+<script type="text/javascript">
 // manage active state of menu based on current page
 $(document).ready(function () {
   // active menu anchor
@@ -272,10 +236,23 @@ $(document).ready(function () {
   var menuAnchor = $('a[href="' + href + '"]');
 
   // mark it active
-  menuAnchor.parent().addClass('active');
+  menuAnchor.tab('show');
 
   // if it's got a parent navbar menu mark it active as well
   menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
 });
 </script>
 
@@ -287,7 +264,6 @@ $(document).ready(function () {
   max-height: 500px;
   min-height: 44px;
   overflow-y: auto;
-  background: white;
   border: 1px solid #ddd;
   border-radius: 4px;
 }
@@ -400,7 +376,7 @@ $(document).ready(function () {
   </div><!--/.container -->
 </div><!--/.navbar -->
 
-<div class="fluid-row" id="header">
+<div id="header">
 
 
 
@@ -434,7 +410,7 @@ pre code, pre, code {
 </style>
 <div id="generalized-linear-mixed-models" class="section level1">
 <h1>Generalized linear mixed models</h1>
-<p><img src="../../images/matrixSmolt.jpg" alt=""></p>
+<p><img src="../../images/horses.jpg" alt=""></p>
 <h2 id="multi">
 Introduction
 </h2>
@@ -445,120 +421,74 @@ Introduction
 <div id="linear-mixed-models-lmm--a-special-case-of-glmm" class="section level3">
 <h3>Linear mixed models (LMM- a special case of GLMM)</h3>
 <p>We have looked at the GLMM initially this week because of it’s utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on uses. For example, we might refer to them as ‘repeated measures’ ANOVA, ‘nested’ or ‘factorial’ ANOVA, or ‘linear mixed models’ (LMM).</p>
-<p>You’ll want the <code>tidyverse</code> loaded as always, and we’ll also be playing with the new functions we learned about from <code>lme4</code> and <code>merTools</code>. You can go ahead and load those when you are ready to get started.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="kw">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="kw">library</span>(lme4)</span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">library</span>(merTools)</span></code></pre></div>
-<p>Let’s take a look at a new data set for this example. Read in the data file called <code>est.mvmt.txt</code> from the class data sets.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="co"># Read in the data</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a>est_mvmt &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;data/est.mvmt.txt&quot;</span>)</span></code></pre></div>
-<p>These data are from endangered Atlantic salmon <em>Salmo salar</em> smolts. The response in the data is <code>Rate</code> and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]). To understand if there were non-linear, or “optimal” relationships between movement rate and seasonal variables like photoperiod (<code>Ph</code>), movement date (<code>MovDate</code>) and river kilometer (<code>RKM</code>), we also investigated <strong>quadratic</strong> or <strong>polynomial</strong> terms that allow for a parabolic relationship between each of these variables and the movement <code>Rate</code> of individual fish.</p>
+<p>You’ll want the <code>tidyverse</code> loaded as always, and we’ll also be playing with the new functions we learned about from <code>lme4</code>, <code>merTools</code>, and <code>lmerTest</code>. Finally, we’ll need some functions from the <code>car</code> and <code>AICcmodavg</code> packages as usual. You can go ahead and load those when you are ready to get started.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lme4)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(merTools)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(lmerTest)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(car)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(AICcmodavg)</span></code></pre></div>
+<p>Let’s take a look at a new data set for this example. Read in the data file called <code>horse_data.csv</code> from the class data sets.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>horses <span class="ot">&lt;-</span> <span class="fu">read.csv</span>(<span class="st">&quot;data/horse_data.csv&quot;</span>)</span></code></pre></div>
+<p>These data simulated from 10 populations of wild horses in the Apalachian highlands of the southeastern United States. The response in the data is the propotion of horses <code>infected</code> out of the total starting number (<code>N</code>), and is a measure of the number of horses in a given population that were infected with rain rot (<em>Dermatophilus congolensis</em>) during a 10-year observation period.</p>
 <p>A brief description of the data follows:</p>
-<pre><code>  TagID: individual fish ID
-  FL: forklength of fish
-  Mass: mass of individual fish
-  ATP: gill Na+,K+-ATPase activity
-  RelSite: release site
-  RelDate: release date (ordinal)
-  Org: rearing history (hatchery or wild)
-  Year: year of the study
-  SW: indicator for salt water for each relocation
-  RelKM: river kilometer of release site
-  Dams: the number of dams passed by individual fish
-  RKM_Loc: river kilometer of detections following release
-  Rate: movement rate of individual fish in various reaches
-  MovDate: the date on which movement occurred
-  k: fish condition (a measure of rotundity or plumpness)
-  MovDate2: a quadratic term for movement date
-  RKM: the river kilometer of relocation
-  RKM2: a quadratic term for each relocation
-  Dis: mean river discharge over movement period
-  Phs: photoperiod (daylength) for the movement period
-  Ph2s: a quadratic term for daylength for movement period</code></pre>
-<p>All of the potential explanatory variables (<strong>covariates</strong>) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found <a href="http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185">here</a></p>
-<p>Your charge will be to fit a series of models and analyze them within the context of a linear mixed effects model.</p>
-<p>First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly collinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.</p>
-<p>I will place a few stipulations on this:</p>
-<ol style="list-style-type: decimal">
-<li><p>You need to account for repeat measurements of movement rates within years of this study. The original analysis used individual random effects (<code>TagID</code>) but the computational machinery has changed in <code>lmer()</code> and that now throws warnings about singularity that freak people out. This occurs because the actual standard deviation on our random effect of individual is very near to zero. This has caused a lot of huff in recent years as it is a change from the initial routines used by <code>lmer()</code>. Note that these warnings were not produced in any of the previous versions of this data analysis (yikes!). In this specific case, the warning can be safely ignored because we expect this, but it may be a sign that we don’t actually need the random effect (we’ll keep it in all models). In any case, we will work with <code>Year</code> as a random effect in all of these models.</p></li>
-<li><p>Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.</p></li>
-</ol>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="co"># Create a separate variable for log movement rate</span></span>
-<span id="cb4-2"><a href="#cb4-2"></a>est_mvmt<span class="op">$</span>logRate &lt;-<span class="st"> </span><span class="kw">log</span>(est_mvmt<span class="op">$</span>Rate)</span></code></pre></div>
-<ol start="3" style="list-style-type: decimal">
-<li>There are a number of second-order polynomials included in the data set. These can be used to investigate non-linear effects of X on Y. For example, we might expect that movement <code>Rate</code> would increase initially with Photoperiod (daylight) and then decrease as daylight continues to increase during the summer because there is an optimal window for timing in this migration. If you choose to include one of these relationships in your model, you must include both the first and the second order term. For example, if you would like to investigate non-linear seasonal changes in movement <code>Rate</code> that are dependent upon photoperiod <code>PhS</code>, then you must include both <code>PhS</code> and <code>Ph2S</code> in your model, like this:</li>
-</ol>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>photo_mod &lt;-<span class="st"> </span><span class="kw">lmer</span>(logRate <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Year) <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S, <span class="dt">data =</span> est_mvmt)</span></code></pre></div>
-<p>Make a list object of at least 5 models like this that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.</p>
-<p>Here is one more example of ONE FORM of the syntax we might use to fit a linear mixed model in the “lme4” package using <code>lme4::lmer()</code>. PLEASE NOTE: you do not need to build this model for the exercise. It just happened to be the first in the list of candidate models from the R script that we used to analyze these data for the real study.</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a>move_mod_<span class="dv">01</span> &lt;-<span class="st"> </span><span class="kw">lmer</span>(</span>
-<span id="cb6-2"><a href="#cb6-2"></a>  logRate <span class="op">~</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">|</span><span class="st"> </span>Year) <span class="op">+</span><span class="st"> </span>RKM <span class="op">+</span><span class="st"> </span>RKM2 <span class="op">+</span><span class="st"> </span>Dis <span class="op">+</span><span class="st"> </span>PhS <span class="op">+</span><span class="st"> </span>Ph2S,</span>
-<span id="cb6-3"><a href="#cb6-3"></a>  <span class="dt">data =</span> est_mvmt</span>
-<span id="cb6-4"><a href="#cb6-4"></a>)</span></code></pre></div>
-<p><strong>Question 1.</strong> Why did you choose to test this model set? What factors did you consider in their development and what hypotheses do these represent?</p>
+<pre><code>  infected: Number of horses in population infected
+  N: number of horses observed within the population each year
+  rain: standardized measure of rain each year
+  temp: standardized temperature for each year
+  pop: population ID</code></pre>
+<p>Your charge will be to fit a series of models and analyze them within the context of a generalized linear mixed effects model to determine what influences rain and temperature have on the probability of infection across years.</p>
+<p>First, build a candidate model set with models corresponding to specific hypotheses. There are several covariates in this data set, so you will need to put some thought into how you choose your variables and what hypotheses these actually represent. You will need to make a minimum of 3 models and a maximum of 5.</p>
+<p>You need to account for repeat measurements within populations. Therefore, you must include <code>pop</code> as a random effect on the intercept within your models. You will also need to model the response as a binomial outcome (ie. number infected out of N) for each <code>pop</code> and <code>year</code>.</p>
+<p>Begin by making a variable in your data set to contain the number of horses that were <em>not</em> infected so we can do this.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>horses<span class="sc">$</span>not_infected <span class="ot">&lt;-</span> horses<span class="sc">$</span>N <span class="sc">-</span> horses<span class="sc">$</span>infected</span></code></pre></div>
+<p>We’ll also want to convert <code>pop</code> to a character string before we get started so that our plotting code is easier at the end of the assignment:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>horses<span class="sc">$</span>pop <span class="ot">&lt;-</span> <span class="fu">as.character</span>(horses<span class="sc">$</span>pop)</span></code></pre></div>
+<p>Now, you can fit a binomial GLMM that estimates the proportion of infected horses based on the numbers that were or were not infected in each year.</p>
+<p>Make a list object of at least 3 models like this that you chose to test so you can do model selection later. If you have forgotten how to do this, have a look in the text book.</p>
+<p>You may wish to begin by fitting a null model (model of the mean) for comparison with the others. Here is an example to get you started:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>null_model <span class="ot">&lt;-</span> <span class="fu">glmer</span>(</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">cbind</span>(infected, not_infected) <span class="sc">~</span> <span class="dv">1</span> <span class="sc">+</span> (<span class="dv">1</span> <span class="sc">|</span> pop),</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">data =</span> horses,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">family =</span> binomial</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
+<p><strong>Question 1.</strong> Why did you choose to test each of the models in your model set? What hypotheses do each of these models represent?</p>
 <p>Next we will use an information-theoretic approach to model selection based on Akaike’s information criterion. You can use the <code>aictab</code> function in the <code>AICcmodavg</code> package using the same methods we learned in <a href="https://danstich.github.io/worst-r/11-5-a-priori.html#tools-for-a-priori-model-selection">Chapter 11</a>.</p>
-<p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model (use <span class="math inline">\(\Delta\)</span>AIC and w<sub>i</sub> to decide)?</p>
-<p><strong>Question 3.</strong> Were there any variables that were clearly more important than others in your candidate set?</p>
-<p>Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model.</p>
-<p>Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values?</p>
+<pre><code>## 
+## Model selection based on AICc:
+## 
+##                 K    AICc Delta_AICc AICcWt Cum.Wt      LL
+## rain_temp_model 4  748.70       0.00   0.51   0.51 -370.22
+## rain_model      3  748.80       0.10   0.49   1.00 -371.32
+## null_model      2 1022.07     273.37   0.00   1.00 -509.00
+## temp_model      3 1023.39     274.69   0.00   1.00 -508.62</code></pre>
+<p><strong>Question 2.</strong> According to your model selection statistics, which of your models was the top model? Is there clear evidence for a <em>best</em> model (use <span class="math inline">\(\Delta\)</span>AIC and w<sub>i</sub> to decide)? Were there any variables that were clearly more important than others in your candidate set?</p>
+<p>Before you go any further (i.e., before you look at any of the model summaries) go ahead and estimate the overdispersion parameter, <span class="math inline">\(\hat{c}\)</span> for your most complex model using the <code>c_hat()</code> function in the <code>AICcmodavg</code> package to determine whether we need to adjust our model selection. Remember that if <span class="math inline">\(\hat{c} &gt; 1\)</span> we should adjust our model selection to account for overdispersion, like this:</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>c_hat_est <span class="ot">&lt;-</span> <span class="fu">c_hat</span>(my_model)</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>c_hat_est</span></code></pre></div>
+<p>If <span class="math inline">\(\hat{c} &gt; 1\)</span>, you can adjust your model selection as follows:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">aictab</span>(<span class="at">cand.set =</span> model_list, </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>       <span class="at">modnames =</span> model_names, </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>       <span class="at">c.hat =</span> c_hat_est)</span></code></pre></div>
+<p><strong>Question 3.</strong> What was the estimated value of <code>c_hat</code> for your most complex model? If you needed to adjust your model selection, did this change the results you reported in <strong>Question 2</strong>?</p>
 <p>Now go ahead and look at the summary of your best model.</p>
 <p><strong>Food for thought</strong>: What factors were included in your best model? Are they all considered significant at <span class="math inline">\(alpha\)</span> = 0.05? You could use the <code>Anova()</code> function from the <code>car</code> library to find out. This is what it would look like for the example model that I made above.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a><span class="kw">library</span>(car)</span>
-<span id="cb7-2"><a href="#cb7-2"></a><span class="kw">Anova</span>(photo_mod, <span class="dt">Type =</span> <span class="st">&quot;III&quot;</span>)</span></code></pre></div>
-<pre><code>## Analysis of Deviance Table (Type II Wald chisquare tests)
-## 
-## Response: logRate
-##       Chisq Df Pr(&gt;Chisq)
-## PhS  1.0354  1     0.3089
-## Ph2S 0.4842  1     0.4865</code></pre>
-<p><strong>Question 4.</strong> Comparing the magnitude of the (<em>standardized</em>) regression coefficients in your summary, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results? <em>Note: we can compare the magnitude of regression coefficients in this case because the variables were all transformed to z-scores for the analysis - something we’ve not discussed in detail</em></p>
-<p>To wrap things up, let’s go ahead and make predictions from our best models following the examples in <a href="https://danstich.github.io/worst-r/14-5-lmm-worked.html#random-intercepts-model">Chapter 14.5</a></p>
-<p>Here is what this would look like for my example model. Notice how similar this is to how we’ve plotted everything else since week 6?</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a><span class="co"># Simulate predictions from the relationship</span></span>
-<span id="cb9-2"><a href="#cb9-2"></a><span class="co"># stored in the model fit using our original data</span></span>
-<span id="cb9-3"><a href="#cb9-3"></a>log_preds &lt;-<span class="st"> </span><span class="kw">predictInterval</span>(</span>
-<span id="cb9-4"><a href="#cb9-4"></a>  <span class="dt">merMod =</span> photo_mod,</span>
-<span id="cb9-5"><a href="#cb9-5"></a>  <span class="dt">level =</span> <span class="fl">0.95</span>, <span class="dt">n.sims =</span> <span class="dv">1000</span>,</span>
-<span id="cb9-6"><a href="#cb9-6"></a>  <span class="dt">stat =</span> <span class="st">&quot;median&quot;</span>,</span>
-<span id="cb9-7"><a href="#cb9-7"></a>  <span class="dt">type =</span> <span class="st">&quot;linear.prediction&quot;</span>,</span>
-<span id="cb9-8"><a href="#cb9-8"></a>  <span class="dt">which =</span> <span class="st">&quot;fixed&quot;</span>,</span>
-<span id="cb9-9"><a href="#cb9-9"></a>  <span class="dt">include.resid.var =</span> <span class="ot">TRUE</span></span>
-<span id="cb9-10"><a href="#cb9-10"></a>)</span>
-<span id="cb9-11"><a href="#cb9-11"></a></span>
-<span id="cb9-12"><a href="#cb9-12"></a><span class="co"># Convert them to the real scale for plotting</span></span>
-<span id="cb9-13"><a href="#cb9-13"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(log_preds, <span class="dv">2</span>, exp)</span>
-<span id="cb9-14"><a href="#cb9-14"></a></span>
-<span id="cb9-15"><a href="#cb9-15"></a><span class="co"># Combine predictions with the original data</span></span>
-<span id="cb9-16"><a href="#cb9-16"></a>mer_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(est_mvmt, real_preds)</span>
-<span id="cb9-17"><a href="#cb9-17"></a></span>
-<span id="cb9-18"><a href="#cb9-18"></a><span class="kw">ggplot</span>(mer_preds, <span class="kw">aes</span>(<span class="dt">x =</span> PhS, <span class="dt">y =</span> Rate, <span class="dt">color =</span> Year, <span class="dt">fill =</span> Year)) <span class="op">+</span></span>
-<span id="cb9-19"><a href="#cb9-19"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>) <span class="op">+</span></span>
-<span id="cb9-20"><a href="#cb9-20"></a><span class="st">  </span><span class="kw">geom_ribbon</span>(<span class="kw">aes</span>(<span class="dt">ymin =</span> lwr, <span class="dt">ymax =</span> upr, <span class="dt">color =</span> <span class="ot">NULL</span>), <span class="dt">alpha =</span> <span class="fl">.3</span>) <span class="op">+</span></span>
-<span id="cb9-21"><a href="#cb9-21"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> fit), <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
-<span id="cb9-22"><a href="#cb9-22"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Year) <span class="op">+</span></span>
-<span id="cb9-23"><a href="#cb9-23"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Standardized Photoperiod&quot;</span>) <span class="op">+</span></span>
-<span id="cb9-24"><a href="#cb9-24"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Rate&quot;</span>)</span></code></pre></div>
-<p><img src="hw10_files/figure-html/unnamed-chunk-10-1.png" width="672" /> Wow, mine looks like garbage because this predictor was not significant all on its own. Perhaps yours will look better?</p>
-<p>If you are having trouble with the <code>merTools</code> package (common on older versions of OS-X) you can also make predictions using the built-in <code>predict()</code> function as we’ve done in the past, you just won’t have sweet (garbage?) prediction intervals.</p>
-<p>Here is how:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a><span class="co"># Make predictions from the model:</span></span>
-<span id="cb10-2"><a href="#cb10-2"></a>log_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">fit =</span> <span class="kw">predict</span>(photo_mod, <span class="dt">type=</span><span class="st">&quot;link&quot;</span>))</span>
-<span id="cb10-3"><a href="#cb10-3"></a></span>
-<span id="cb10-4"><a href="#cb10-4"></a><span class="co"># Convert them to the real scale for plotting</span></span>
-<span id="cb10-5"><a href="#cb10-5"></a>real_preds &lt;-<span class="st"> </span><span class="kw">apply</span>(log_preds, <span class="dv">2</span>, exp)</span>
-<span id="cb10-6"><a href="#cb10-6"></a></span>
-<span id="cb10-7"><a href="#cb10-7"></a><span class="co"># Combine predictions with the original data</span></span>
-<span id="cb10-8"><a href="#cb10-8"></a>est_preds &lt;-<span class="st"> </span><span class="kw">data.frame</span>(est_mvmt, real_preds)</span>
-<span id="cb10-9"><a href="#cb10-9"></a></span>
-<span id="cb10-10"><a href="#cb10-10"></a><span class="kw">ggplot</span>(est_preds, <span class="kw">aes</span>(<span class="dt">x =</span> PhS, <span class="dt">y =</span> Rate, <span class="dt">color =</span> Year, <span class="dt">fill =</span> Year)) <span class="op">+</span></span>
-<span id="cb10-11"><a href="#cb10-11"></a><span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">alpha =</span> <span class="fl">0.10</span>) <span class="op">+</span></span>
-<span id="cb10-12"><a href="#cb10-12"></a><span class="st">  </span><span class="co"># geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +</span></span>
-<span id="cb10-13"><a href="#cb10-13"></a><span class="st">  </span><span class="kw">geom_line</span>(<span class="kw">aes</span>(<span class="dt">y =</span> fit), <span class="dt">lwd =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="fl">0.50</span>) <span class="op">+</span></span>
-<span id="cb10-14"><a href="#cb10-14"></a><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span>Year) <span class="op">+</span></span>
-<span id="cb10-15"><a href="#cb10-15"></a><span class="st">  </span><span class="kw">xlab</span>(<span class="st">&quot;Standardized Photoperiod&quot;</span>) <span class="op">+</span></span>
-<span id="cb10-16"><a href="#cb10-16"></a><span class="st">  </span><span class="kw">ylab</span>(<span class="st">&quot;Rate&quot;</span>)</span></code></pre></div>
-<p><img src="hw10_files/figure-html/unnamed-chunk-11-1.png" width="672" /></p>
-<p><strong>Question 5.</strong> Use the <code>summary()</code> of your best model, in addition to the predictive plots you have made to report statistical significance of your explanatory variables and the direction of their relationships to <code>logRate</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Anova</span>(my_model, <span class="at">Type =</span> <span class="st">&quot;III&quot;</span>)</span></code></pre></div>
+<p>Remember, you can also examine directionality of relationships between explanatory variables in your best model and the response using the <code>summary()</code> function in R.</p>
+<p><strong>Question 4.</strong> Of the variables included in your best model, which were statistically significant predictors of the probability that horses were infected with rain rot? How did the probability of rain rot change with this/these variables based your estimated coefficients (slopes).</p>
+<p>To wrap things up, let’s go ahead and make predictions from our best models following the examples in the textbook.</p>
+<p>You can start by calculating the observed proportion of horses infected out of the total number in each year and population:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>horses<span class="sc">$</span>proportion <span class="ot">&lt;-</span> horses<span class="sc">$</span>infected<span class="sc">/</span>horses<span class="sc">$</span>N</span></code></pre></div>
+<p>Next, make your predictions using the methods demonstrated in <a href="https://danstich.github.io/worst-r/15-2-glmm-logistic.html">Chapter 15.2</a>.</p>
+<p><img src="hw10_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>And then begin your predictive plot by plotting the observed proportion in each population against the explanatory variable included in your best model. For the example below, I’ll use the <code>rain</code> variable as my <code>x</code> just for the sake of demonstration. Then, you will need to replace this if it was not <em>your</em> best supported explanatory variable and add your predictions:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(horses, </span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">aes</span>(<span class="at">x =</span> rain, <span class="at">y =</span> proportion, <span class="at">fill =</span> pop, <span class="at">color =</span> pop)) <span class="sc">+</span> </span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.20</span>) <span class="sc">+</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span>pop)</span></code></pre></div>
+<p><img src="hw10_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
+<p><strong>Question 5.</strong> Use the results of your model selection statistics, the <code>summary()</code> of your best model, and the predictive plots you have made to report your results in a <em>brief</em> (3-5 sentences max) paragraph.</p>
 </div>
 </div>
 </div>
@@ -579,7 +509,7 @@ Introduction
 
 // add bootstrap table styles to pandoc tables
 function bootstrapStylePandocTables() {
-  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
 }
 $(document).ready(function () {
   bootstrapStylePandocTables();
@@ -597,7 +527,7 @@ $(document).ready(function () {
 
 $(document).ready(function () {
   $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open')
+    $(this).parent().toggleClass('nav-tabs-open');
   });
 });
 </script>

@@ -3,7 +3,7 @@
 
 # Generalized linear mixed models
 
-<img src="../../images/matrixSmolt.jpg" alt="">
+<img src="../../images/horses.jpg" alt="">
 
 <h2 id="multi"> Introduction </h2> 
    
@@ -18,181 +18,158 @@ By the end of this lab, you should 1) understand why we use mixed effects models
 
 We have looked at the GLMM initially this week because of it's utility for handling the combination of fixed and random effects for the types of data that we commonly encounter in biology and ecology. But, as a special case of the GLMM, we could look at using a Gaussian (normal) error distribution or any suite of transformed distributions for our models, too! The advantage of doing this is that the models tend to be fit a little more easily (i.e. reliably) under the arguably unstable engines and ever-changing optimization algorithms for this model class. This special case of the GLMM goes by a variety of names depending on  uses. For example, we might refer to them as 'repeated measures' ANOVA, 'nested' or 'factorial' ANOVA, or 'linear mixed models' (LMM).
 
-You'll want the `tidyverse` loaded as always, and we'll also be playing with the new functions we learned about from `lme4` and `merTools`. You can go ahead and load those when you are ready to get started.
+You'll want the `tidyverse` loaded as always, and we'll also be playing with the new functions we learned about from `lme4`,  `merTools`, and `lmerTest`. Finally, we'll need some functions from the `car` and `AICcmodavg` packages as usual. You can go ahead and load those when you are ready to get started.
 
 ```{r, warning = FALSE, message = FALSE}
 library(tidyverse)
 library(lme4)
 library(merTools)
+library(lmerTest)
+library(car)
+library(AICcmodavg)
 ```
 
-Let's take a look at a new data set for this example. Read in the data file called `est.mvmt.txt` from the class data sets.
+Let's take a look at a new data set for this example. Read in the data file called `horse_data.csv` from the class data sets.
    
 ```{r, eval = FALSE, echo=TRUE}
 # Read in the data
-est_mvmt <- read.csv("data/est.mvmt.txt")
+horses <- read.csv("data/horse_data.csv")
 ```  
 
 ```{r, eval = TRUE, echo=FALSE}
 # Read in the data
-est_mvmt <- read.csv("../../data/est.mvmt.txt")
+horses <- read.csv("../../data/horse_data.csv")
 ```  
 
-These data are from endangered Atlantic salmon *Salmo salar* smolts. The response in the data is `Rate` and is a measure of the movement rate of individual fish (in body lengths per second). Federal fisheries managers were interested in how this movement rate was affected by seasonal changes in environmental factors, but also characteristics of the individual fish (as rearing history [hatchery or wild], length and mass, gill NKA activity) and factors related to the conservation hatchery practices (many of these same characteristics, but also release date and release site in the river[distance from ocean]). To understand if there were non-linear, or "optimal" relationships between movement rate and seasonal variables like photoperiod (`Ph`), movement date (`MovDate`) and river kilometer (`RKM`), we also investigated **quadratic** or **polynomial** terms that allow for a parabolic relationship between each of these variables and the movement `Rate` of individual fish.
+These data simulated from 10 populations of wild horses in the Apalachian highlands of the southeastern United States. The response in the data is the propotion of horses `infected` out of the total starting number (`N`), and is a measure of the number of horses in a given population that were infected with rain rot (*Dermatophilus congolensis*) during a 10-year observation period.
 
 A brief description of the data follows:
 
 ```
-  TagID: individual fish ID
-  FL: forklength of fish
-  Mass: mass of individual fish
-  ATP: gill Na+,K+-ATPase activity
-  RelSite: release site
-  RelDate: release date (ordinal)
-  Org: rearing history (hatchery or wild)
-  Year: year of the study
-  SW: indicator for salt water for each relocation
-  RelKM: river kilometer of release site
-  Dams: the number of dams passed by individual fish
-  RKM_Loc: river kilometer of detections following release
-  Rate: movement rate of individual fish in various reaches
-  MovDate: the date on which movement occurred
-  k: fish condition (a measure of rotundity or plumpness)
-  MovDate2: a quadratic term for movement date
-  RKM: the river kilometer of relocation
-  RKM2: a quadratic term for each relocation
-  Dis: mean river discharge over movement period
-  Phs: photoperiod (daylength) for the movement period
-  Ph2s: a quadratic term for daylength for movement period
+  infected: Number of horses in population infected
+  N: number of horses observed within the population each year
+  rain: standardized measure of rain each year
+  temp: standardized temperature for each year
+  pop: population ID
 ```
 
-All of the potential explanatory variables (**covariates**) for this data set were standardized (centered and scaled) prior to analysis in an effort to facilitate comparison between effects of various explanatory variables. The full citation for the study can be found [here](http://www.bioone.org/doi/pdf/10.1080/19425120.2015.1007185)
-
-Your charge will be to fit a series of models and analyze them within the context of a linear mixed effects model.
+Your charge will be to fit a series of models and analyze them within the context of a generalized linear mixed effects model to determine what influences rain and temperature have on the 
+probability of infection across years.
  
-First, build a candidate model set based on your own interests or the model selection table in the paper provided. There are a lot of covariates in this data set, and many of them are highly collinear, so you will need to put some thought into how you choose your variables. You will need to make a minimum of 5 models and a maximum of 10.
+First, build a candidate model set with models corresponding to specific hypotheses. There are several covariates in this data set, so you will need to put some thought into how you choose your variables and what hypotheses these actually represent. You will need to make a minimum of 3 models and a maximum of 5.
 
-I will place a few stipulations on this: 
+You need to account for repeat measurements within populations. Therefore, you must include `pop` as a random effect on the intercept within your models. You will also need to model the response as a binomial outcome (ie. number infected out of N) for each `pop` and `year`.
 
-1) You need to account for repeat measurements of movement rates within years of this study. The original analysis used individual random effects (`TagID`) but the computational machinery has changed in `lmer()` and that now throws warnings about singularity that freak people out. This occurs because the actual standard deviation on our random effect of individual is very near to zero. This has caused a lot of huff in recent years as it is a change from the initial routines used by `lmer()`. Note that these warnings were not produced in any of the previous versions of this data analysis (yikes!). In this specific case, the warning can be safely ignored because we expect this, but it may be a sign that we don't actually need the random effect (we'll keep it in all models). In any case, we will work with `Year` as a random effect in all of these models.
-
-2) Use the log of movement rate as the response. Movement rate is constrained to be greater than zero. While we are fairly robust to assumptions of normality within this framework, we do not want to allow negative predictions of movement rate.
+Begin by making a variable in your data set to contain the number of horses that were *not* infected so we can do this.
 
 ```{r}
-# Create a separate variable for log movement rate
-est_mvmt$logRate <- log(est_mvmt$Rate)
+horses$not_infected <- horses$N - horses$infected
 ```
 
-3) There are a number of second-order polynomials included in the data set. These can be used to investigate non-linear effects of X on Y. For example, we might expect that movement `Rate` would increase initially with Photoperiod (daylight) and then decrease as daylight continues to increase during the summer because there is an optimal window for timing in this migration. If you choose to include one of these relationships in your model, you must include both the first and the second order term. For example, if you would like to investigate non-linear seasonal changes in movement `Rate` that are dependent upon photoperiod `PhS`, then you must include both `PhS` and `Ph2S` in your model, like this: 
- 
+We'll also want to convert `pop` to a character string before we get started so that our plotting code is easier at the end of the assignment:
+
 ```{r}
-photo_mod <- lmer(logRate ~ (1 | Year) + PhS + Ph2S, data = est_mvmt)
+horses$pop <- as.character(horses$pop)
 ```
 
-Make a list object of at least 5 models like this that you chose to test so you can do model selection later. If you have forgotten how to do this, see the lecture notes.
+Now, you can fit a binomial GLMM that estimates the proportion of infected horses based on the numbers that were or were not infected in each year.
 
-```{r, echo=FALSE, include = FALSE, results='hide'}
-# Load the lme4 library
-library(lme4)
-# Create a candidate model set (this is the set used in the paper)
-Mov.mods <- list()
-Mov.mods[[1]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[2]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[3]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + k + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[4]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + ATP + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[5]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + Org + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[6]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[7]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + k + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[8]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + ATP + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[9]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + Org + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[10]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[11]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + k + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[12]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + ATP + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[13]] <- lmer(log(Rate) ~ (1 | Year) + RKM + RKM2 + Dis + Org + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[14]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[15]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[16]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + k + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[17]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + ATP + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[18]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + Org + SW + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[19]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[20]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + k + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[21]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + ATP + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[22]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + Org + Dams + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[23]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[24]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + k + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[25]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + ATP + RelKM + PhS + Ph2S, data = est_mvmt)
-Mov.mods[[26]] <- lmer(log(Rate) ~ (1 | Year) + RKM + Dis + Org + RelKM + PhS + Ph2S, data = est_mvmt)
+Make a list object of at least 3 models like this that you chose to test so you can do model selection later. If you have forgotten how to do this, have a look in the text book. 
 
-# Create a vector of names for the models
-MovNames <- c()
-MovNames[1] <- "RKM + RKM 2 + Dis + PhS + PhS2"
-MovNames[2] <- "RKM + RKM 2 + Dis + SW + PhS + PhS2"
-MovNames[3] <- "RKM + RKM 2 + Dis + k + SW + PhS + PhS2"
-MovNames[4] <- "RKM + RKM 2 + Dis + ATP + SW + PhS + PhS2"
-MovNames[5] <- "RKM + RKM 2 + Dis + Org + SW + PhS + PhS2"
-MovNames[6] <- "RKM + RKM 2 + Dis + Dams + PhS + PhS2"
-MovNames[7] <- "RKM + RKM 2 + Dis + k + Dams + PhS + PhS2"
-MovNames[8] <- "RKM + RKM 2 + Dis + ATP + Dams + PhS + PhS2"
-MovNames[9] <- "RKM + RKM 2 + Dis + Org + Dams + PhS + PhS2"
-MovNames[10] <- "RKM + RKM 2 + Dis + RelKM + PhS + PhS2"
-MovNames[11] <- "RKM + RKM 2 + Dis + k + RelKM + PhS + PhS2"
-MovNames[12] <- "RKM + RKM 2 + Dis + ATP + RelKM + PhS + PhS2"
-MovNames[13] <- "RKM + RKM 2 + Dis + Org + RelKM + PhS + PhS2"
-MovNames[14] <- "RKM + Dis + PhS + PhS2"
-MovNames[15] <- "RKM + Dis + SW + PhS + PhS2"
-MovNames[16] <- "RKM + Dis + k + SW + PhS + PhS2"
-MovNames[17] <- "RKM + Dis + ATP + SW + PhS + PhS2"
-MovNames[18] <- "RKM + Dis + Org + SW + PhS + PhS2"
-MovNames[19] <- "RKM + Dis + Dams + PhS + PhS2"
-MovNames[20] <- "RKM + Dis + k + Dams + PhS + PhS2"
-MovNames[21] <- "RKM + Dis + ATP + Dams + PhS + PhS2"
-MovNames[22] <- "RKM + Dis + Org + Dams + PhS + PhS2"
-MovNames[23] <- "RKM + Dis + RelKM + PhS + PhS2"
-MovNames[24] <- "RKM + Dis + k + RelKM + PhS + PhS2"
-MovNames[25] <- "RKM + Dis + ATP + RelKM + PhS + PhS2"
-MovNames[26] <- "RKM + Dis + Org + RelKM + PhS + PhS2"
-```
-
-Here is one more example of ONE FORM of the syntax we might use to fit a linear mixed model in the "lme4" package using `lme4::lmer()`. PLEASE NOTE: you do not need to build this model for the exercise. It just happened to be the first in the list of candidate models from the R script that we used to analyze these data for the real study.
+You may wish to begin by fitting a null model (model of the mean) for comparison with the others. Here is an example to get you started:
 ```{r, eval = TRUE, results="hide"}
-move_mod_01 <- lmer(
-  logRate ~ (1 | Year) + RKM + RKM2 + Dis + PhS + Ph2S,
-  data = est_mvmt
+null_model <- glmer(
+  cbind(infected, not_infected) ~ 1 + (1 | pop),
+  data = horses,
+  family = binomial
 )
 ```
     
-**Question 1.** Why did you choose to test this model set? What factors did you consider in their development and what hypotheses do these represent?
+```{r, eval = TRUE, echo=FALSE}
+null_model <- glmer(
+  cbind(infected, not_infected) ~ 1 + (1 | pop),
+  data = horses,
+  family = binomial)
+  
+rain_model <- glmer(
+  cbind(infected, not_infected) ~ rain + (1 | pop),
+  data = horses,
+  family = binomial)
+
+temp_model <- glmer(
+  cbind(infected, not_infected) ~ temp + (1 | pop),
+  data = horses,
+  family = binomial)
+
+rain_temp_model <- glmer(
+  cbind(infected, not_infected) ~ rain + temp + (1 | pop),
+  data = horses,
+  family = binomial)
+
+```    
+    
+**Question 1.** Why did you choose to test each of the models in your model set? What hypotheses do each of these models represent?
 
 Next we will use an information-theoretic approach to model selection based on Akaike's information criterion. You can use the `aictab` function in the `AICcmodavg` package using the same methods we learned in [Chapter 11](https://danstich.github.io/worst-r/11-5-a-priori.html#tools-for-a-priori-model-selection).
 
-**Question 2.** According to your model selection statistics, which of your models was the top model? Is there clear evidence for a *best* model (use $\Delta$AIC and w~i~ to decide)? 
+```{r eval=TRUE, echo=FALSE}
+model_list = list(null_model, rain_model,
+                  temp_model, rain_temp_model)
+model_names = c("null_model", 
+                "rain_model", 
+                "temp_model", 
+                "rain_temp_model")
 
-**Question 3.** Were there any variables that were clearly more important than others in your candidate set?
+aictab(model_list, model_names)
+```
 
-Before you go any further (i.e., before you look at any of the model summaries) have a look at the model diagnostics for your best model.
 
-Does the distribution appear to be (more or less) normal with a mean of zero with respect to the fitted values?
+**Question 2.** According to your model selection statistics, which of your models was the top model? Is there clear evidence for a *best* model (use $\Delta$AIC and w~i~ to decide)? Were there any variables that were clearly more important than others in your candidate set?
+
+Before you go any further (i.e., before you look at any of the model summaries) go ahead and estimate the overdispersion parameter, $\hat{c}$ for your most complex model using the `c_hat()` function in the `AICcmodavg` package to determine whether we need to adjust our model selection. Remember that if $\hat{c} > 1$ we should adjust our model selection to account for overdispersion, like this:
+
+```{r, echo = TRUE, eval=FALSE}
+c_hat_est <- c_hat(my_model)
+c_hat_est
+```
+
+If $\hat{c} > 1$, you can adjust your model selection as follows:
+
+```{r, echo = TRUE, eval = FALSE}
+aictab(cand.set = model_list, 
+       modnames = model_names, 
+       c.hat = c_hat_est)
+```
+
+**Question 3.** What was the estimated value of `c_hat` for your most complex model? If you needed to adjust your model selection, did this change the results you reported in **Question 2**?
 
 Now go ahead and look at the summary of your best model.
 
 **Food for thought**: What factors were included in your best model? Are they all considered significant at $alpha$ = 0.05? You could use the `Anova()` function from the `car` library to find out. This is what it would look like for the example model that I made above.
 
-```{r, warning=FALSE, message=FALSE}
-library(car)
-Anova(photo_mod, Type = "III")
+```{r, warning=FALSE, message=FALSE, eval = FALSE}
+Anova(my_model, Type = "III")
 ```  
 
-**Question 4.** Comparing the magnitude of the (*standardized*) regression coefficients in your summary, which variable included in your best model has the strongest effect on movement rate? Is this supported by your model selection results? *Note: we can compare the magnitude of regression coefficients in this case because the variables were all transformed to z-scores for the analysis - something we've not discussed in detail*
+Remember, you can also examine directionality of relationships between explanatory variables in your best model and the response using the `summary()` function in R.
 
-To wrap things up, let's go ahead and make predictions from our best models following the examples in [Chapter 14.5](https://danstich.github.io/worst-r/14-5-lmm-worked.html#random-intercepts-model)
+**Question 4.** Of the variables included in your best model, which were statistically significant predictors of the probability that horses were infected with rain rot? How did the probability of rain rot change with this/these variables based your estimated coefficients (slopes).
 
-Here is what this would look like for my example model. Notice how similar this is to how we've plotted everything else since week 6?
+To wrap things up, let's go ahead and make predictions from our best models following the examples in the textbook.
 
-```{r, warning=FALSE, message=FALSE}
+You can start by calculating the observed proportion of horses infected out of the total number in each year and population:
+
+```{r}
+horses$proportion <- horses$infected/horses$N
+```
+
+Next, make your predictions using the methods demonstrated in [Chapter 15.2](https://danstich.github.io/worst-r/15-2-glmm-logistic.html). 
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, eval = TRUE}
 # Simulate predictions from the relationship
 # stored in the model fit using our original data
-log_preds <- predictInterval(
-  merMod = photo_mod,
+logit_preds <- predictInterval(
+  merMod = rain_model,
   level = 0.95, n.sims = 1000,
   stat = "median",
   type = "linear.prediction",
@@ -201,46 +178,33 @@ log_preds <- predictInterval(
 )
 
 # Convert them to the real scale for plotting
-real_preds <- apply(log_preds, 2, exp)
+real_preds <- apply(logit_preds, 2, boot::inv.logit)
 
 # Combine predictions with the original data
-mer_preds <- data.frame(est_mvmt, real_preds)
+horse_preds <- data.frame(horses, real_preds)
 
-ggplot(mer_preds, aes(x = PhS, y = Rate, color = Year, fill = Year)) +
+ggplot(horse_preds, aes(x = rain, y = proportion,
+                      color = pop, fill = pop)) +
   geom_point(alpha = 0.10) +
-  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +
+  geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), 
+              alpha = .3) +
   geom_line(aes(y = fit), lwd = 1, alpha = 0.50) +
-  facet_wrap(~Year) +
-  xlab("Standardized Photoperiod") +
-  ylab("Rate")
+  facet_wrap(~pop) +
+  xlab("Rainfall") +
+  ylab("Probability of infection")
 ```
-Wow, mine looks like garbage because this predictor was not significant all on its own. Perhaps yours will look better?
 
-If you are having trouble with the `merTools` package (common on older versions of OS-X) you can also make predictions using the built-in `predict()` function as we've done in the past, you just won't have sweet (garbage?) prediction intervals.
-
-Here is how:
+And then begin your predictive plot by plotting the observed proportion in each population against the explanatory variable included in your best model. For the example below, I'll use the `rain` variable as my `x` just for the sake of demonstration. Then, you will need to replace this if it was not *your* best supported explanatory variable and add your predictions:
 
 ```{r}
-# Make predictions from the model:
-log_preds <- data.frame(fit = predict(photo_mod, type="link"))
-
-# Convert them to the real scale for plotting
-real_preds <- apply(log_preds, 2, exp)
-
-# Combine predictions with the original data
-est_preds <- data.frame(est_mvmt, real_preds)
-
-ggplot(est_preds, aes(x = PhS, y = Rate, color = Year, fill = Year)) +
-  geom_point(alpha = 0.10) +
-  # geom_ribbon(aes(ymin = lwr, ymax = upr, color = NULL), alpha = .3) +
-  geom_line(aes(y = fit), lwd = 1, alpha = 0.50) +
-  facet_wrap(~Year) +
-  xlab("Standardized Photoperiod") +
-  ylab("Rate")
+ggplot(horses, 
+  aes(x = rain, y = proportion, fill = pop, color = pop)) + 
+  geom_point(alpha = 0.20) +
+  facet_wrap(~pop)
 
 ```
 
-**Question 5.** Use the `summary()` of your best model, in addition to the predictive plots you have made to report statistical significance of your explanatory variables and the direction of their relationships to `logRate`.
+**Question 5.** Use the results of your model selection statistics, the `summary()` of your best model, and the predictive plots you have made to report your results in a *brief* (3-5 sentences max) paragraph.
 
 
    
