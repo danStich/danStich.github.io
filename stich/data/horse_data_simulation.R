@@ -5,14 +5,16 @@ pop <- gl(n = n_groups, k = n_years)
 # year <- rep(seq(1, 10, 1), n_groups)
 rain <- runif(n, 0, 1)
 temp <- runif(n, 0, 1)
-haplotype <- rbinom(n, 1, 0.5)
+# haplotype <- rbinom(n, 1, 0.5)
 N <- round(runif(n, 10, 50))
 Xmat <- model.matrix(~pop*rain - 1 - rain)
 
 intercept_mean <- -0.2
 intercept_sd <- 1
-slope_mean <- 2
+slope_mean <- 3
 slope_sd <- 0.10
+
+
 intercept_effects <- rnorm(n = n_groups, 
                            mean = intercept_mean, 
                            sd = intercept_sd)
