@@ -5,7 +5,12 @@ title: "Publications"
 ```{r, child="_styles.Rmd"}
 ```
 
-<!-- ### Accepted or in press -->
+### 2022
+
+---
+
+Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444.[Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
+
 
 ### 2021
 
