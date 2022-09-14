@@ -9,38 +9,38 @@ title: "Publications"
 
 ---
 
-Erikson, R. A., **D. S. Stich**, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444.[Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
+Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444. [Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
 
 
 ### 2021
 
 ---
 
-Caves, S., J. R. Baumann, and <b>D. S. Stich</b>. 2021. Density-dependent changes in Grass Carp growth and mortality in long-term aquatic plant management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
+Caves, S., J. R. Baumann, and D. S. Stich. 2021. Density-dependent changes in Grass Carp growth and mortality in long-term aquatic plant management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
-George, S. D., **D. S. Stich**, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
+George, S. D., D. S. Stich, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
 
-Gilligan-Lunda, E. K., **D. S. Stich**, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
+Gilligan-Lunda, E. K., D. S. Stich, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
 
-Oliver, D. O., N. Rude, G. W. Whitledge, and **D. S. Stich**. 2021. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management 41:S364-S378.
+Oliver, D. O., N. Rude, G. W. Whitledge, and D. S. Stich. 2021. Evaluation of recently implemented harvest regulations in a data-limited catfish fishery with Bayesian estimation. North American Journal of Fisheries Management 41:S364-S378.
 
-Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, **D. S. Stich**, and T. H. Bonner. 2021. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology 66:349-361.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
+Sotola, V. A., K. T. Sullivan, B. M. Littrell, N. H. Martin, D. S. Stich, and T. H. Bonner. 2021. Short-term responses of freshwater mussels to floods in a southwestern U.S.A. river estimated using mark-recapture sampling. Freshwater Biology 66:349-361.<a href = "https://github.com/vasotola/MusselMarkRecap"> [code]</a>
 
 Vlk, A., E. Bastiaans, D. Stich, and D. Vogler. 2021. Effect of
 anthropogenic habitat disturbance on the nesting ecology of the wood 
 turtle (*Glyptemys insculpta*). Amphibian and Reptile Conservation 15(2):50-58.
 
-Zydlewski, J., **D. S. Stich**, S. Roy, M. Bailey, T. Sheehan, and K. Sprankle. 2021. What Have We Lost? Modeling Dam Impacts on American Shad Populations Through Their Native Range. Frontiers in Marine Science.
+Zydlewski, J., D. S. Stich, S. Roy, M. Bailey, T. Sheehan, and K. Sprankle. 2021. What Have We Lost? Modeling Dam Impacts on American Shad Populations Through Their Native Range. Frontiers in Marine Science.
 <a href = "https://www.frontiersin.org/articles/10.3389/fmars.2021.734213/full"> [Open access] <a href = "https://github.com/danStich/anadrofish"> [anadrofish R package]</a>.
 
 ### 2019
 
 ---
 
-Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and <b>D. S. Stich</b>. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages 75-92 in M. J. Seipker and J. W. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 
+Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and D. S. Stich. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages 75-92 in M. J. Seipker and J. W. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 
 <!-- <a href="./pubs/Watson_etal_2019_AFS87.pdf">[PDF]</a> -->
 
-George, S. D., B. P. Baldigo, and <b>D. S. Stich</b>. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics"> [code]</a>
+George, S. D., B. P. Baldigo, and D. S. Stich. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics"> [code]</a>
 
 Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="https://github.com/danStich/elliptioPhenology"> [code]</a>
 
@@ -51,7 +51,7 @@ Franzem, T. P., M. Kugler, R. LaRochelle, <b>D. Stich</b>, A. Gascho Landis, and
 
 ---
  
-Hawkes, J. P., T. F. Sheehan, and <b>D. S. Stich</b>. 2017. Assessment of early migration dynamics of river-specific hatchery Atlantic salmon smolts. Transactions of the American Fisheries Society 146:1279-1290. 
+Hawkes, J. P., T. F. Sheehan, and D. S. Stich. 2017. Assessment of early migration dynamics of river-specific hatchery Atlantic salmon smolts. Transactions of the American Fisheries Society 146:1279-1290. 
 <!-- <a href="./pubs/Hawkes_etal_2017_TAFS_Dennys.pdf">[PDF]</a> -->
 
 
@@ -92,7 +92,7 @@ Zydlewski, J., <b>D. Stich</b>, and D. Sigourney. 2017. Hard choices in assessin
 <b>Stich, D. S.</b>, M. Bailey, J. D. Zydlewski. 2014. Survival of Atlantic Salmon *Salmo salar* smolts through a hydropower complex. Journal of Fish Biology 85:1074-1096. 
 <!-- <a href="./pubs/Stich_etal_2014_JFB_MarshIsland.pdf">[PDF]</a> -->
 
-Zydlewski, G. B., <b>D. S. Stich</b>, and S. D. McCormick. 2014. Photoperiod control of the initiation of downstream migration in Atlantic Salmon smolts. Journal of Fish Biology 85:1023-1041. 
+Zydlewski, G. B., D. S. Stich, and S. D. McCormick. 2014. Photoperiod control of the initiation of downstream migration in Atlantic Salmon smolts. Journal of Fish Biology 85:1023-1041. 
 <!-- <a href="./pubs/Zydlewski_etal_2014_JFB.pdf">[PDF]</a> -->
 
  
