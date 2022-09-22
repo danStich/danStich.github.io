@@ -11,6 +11,8 @@ title: "Publications"
 
 Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444. [Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
 
+Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-induced delays on system-wide survival of Atlantic salmon smolts during high-flow, high-survival years in the Penobscot River, Maine, USA. doi: [https://doi.org/10.1139/cjfas-2022-0055](https://doi.org/10.1139/cjfas-2022-0055)
+
 
 ### 2021
 
