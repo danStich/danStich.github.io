@@ -9,7 +9,7 @@ title: Intermediate R
 
 <h2 top-margin:10px;><b> Introduction </b></h2> 
 
-As folks learned in the Introductory session, once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and spend a little more time with data visualization tools.
+As folks learned in the Introductory session, once we have a basic grasp on how R works, and how and where to find help, the learning process becomes a lot less painful, and we can start to build an appreciation for how convenient it is to have a script we can come back to again and again. To show off this convenience, and the power of R as a statistics program, we will spend the afternoon session walking through some applied analyses and data visualization tools.
 
 The plan for the Intermediate session is to introduce a subset of the **Secchi Dip-In data** to do some standard statistical analysis with individual data points from many lakes, and then switch back to data visualization tools to create some isopleths of physical parameters measured at multiple times and depths over time in a single lake using the Otsego Lake data from the Introductory session.
 

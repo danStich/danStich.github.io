@@ -7,7 +7,7 @@ title: "Introductory R"
 
 <img src="./images/roh.png" alt="">
 
-Welcome to programming in R! This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. We won't follow this internet module to the letter in our time together, but we will discuss the same topics, and in about the same order. Hopefully, this tutorial will be helpful in either preparing you for the workshop or for revisiting important concepts after the workshop. (I will add links to live-stream content after the workshops have concluded, permission pending.)
+Welcome to programming in R! This module will serve as a tutorial to help you get acquainted with the R programming environment, and get you started with some basic tools and information to help along the way. We won't follow this internet module to the letter in our time together, but we will discuss the same topics, and in about the same order. Hopefully, this tutorial will be helpful in either preparing you for the workshop or for revisiting important concepts after the workshop.
 
 Like any language, the learning curve for R is steep (like a cliff, not a hill), but once you get the hang of it you can learn a lot quickly. Cheat sheets like the tutorial from the workshop (or [these](https://www.rstudio.com/resources/cheatsheets/)) can help you along the way by serving as handy references.
 
@@ -90,7 +90,7 @@ a1 <- 1
 
 ```
 
-R will overwrite objects sequentially, so don't name two things the same unless you don't need the first. Even then it is risky business. In the example below, our object `a` takes on the second value provided.
+R will overwrite objects sequentially, so don't name two things the same unless you don't need the first. Even then it is risky business. In the example below, our object `a` takes on the second value provided and the first is lost.
 ```{r}
 a <- 1
 a <- 2
@@ -124,7 +124,7 @@ The `Home` button will move you to the start of the line of code, and to the sta
 
 The `Tab` button on your keyboard will move the code to the right some number of spaces (user defined). Pressing `Shift + Tab` will move code to the left. These can help you organize your code quickly.
 
-A Single click of the mouse will move the cursor into position. Double-click will highlight the word you are clicking, and a triple left-click will highlight an entire line.
+A single click of the mouse will move the cursor into position. Double-click will highlight the word you are clicking, and a triple left-click will highlight an entire line.
 
 Use search and replace functionality to copy big chunks of code and change names as needed. You can also use this to just search your code. Press `Ctrl + F` to open the sub menu at the top. When code gets so redundant that you copy and paste the same code several times, you are probably better off writing a function that you can use whenever you like.
 
