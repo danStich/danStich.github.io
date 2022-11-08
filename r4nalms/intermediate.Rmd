@@ -53,7 +53,7 @@ Here is how it works:
 
 ```{r}
 # First, we replace temp with Temperature
-names(otsego)[3] <- "Temperature"
+names(otsego)[5] <- "Temperature"
 ```
 
 Have a quick look to make sure you are happy with the new names.
@@ -78,11 +78,8 @@ otsego$date <- as.Date(otsego$date, format = "%m/%d/%Y")
 # Make a variable to hold year in the df
 otsego$year <- year(otsego$date)
 
-# Make a variable to hold month
-otsego$month_num <- month(otsego$date)
-
-# Convert this to a factor so it can be easily re-leveled and ordered
-otsego$month <- month.abb[otsego$month_num]
+# Convert month to a factor so it can be easily re-leveled and ordered
+otsego$month <- month.abb[otsego$month]
 otsego$month <- factor(otsego$month, levels = month.abb)
 
 # Let's make an ordinal date variable to get day of year as well

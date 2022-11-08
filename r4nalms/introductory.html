@@ -892,11 +892,11 @@ give you about the data set.</p>
 because we have both rows (first dimension) and columns (second
 dimension) in our data set now!</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" aria-hidden="true" tabindex="-1"></a>otsego[<span class="dv">12</span>, <span class="dv">4</span>]</span>
-<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">1988</span></span></code></pre></div>
+<span id="cb60-2"><a href="#cb60-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">14</span></span></code></pre></div>
 <p>Another way to say this is, “What is the 12th value of
 <code>depth</code> in <code>otsego</code>”?</p>
 <div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a>otsego[<span class="dv">12</span>, <span class="st">&quot;depth&quot;</span>]</span>
-<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">25</span></span></code></pre></div>
+<span id="cb61-2"><a href="#cb61-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">14</span></span></code></pre></div>
 <p>More realistically, we might want to know the average temperature
 (<code>temp</code>) at a given <code>depth</code> in the lake. In the
 example below, we ask R for the mean temperature at 10 m across all
@@ -907,7 +907,7 @@ dollar sign (<code>$</code>) here is telling R to look for something
 called <code>temp</code> inside of the <code>otsego</code>
 dataframe.</p>
 <div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(otsego<span class="sc">$</span>temp[otsego<span class="sc">$</span>depth <span class="sc">==</span> <span class="fl">10.0</span>], <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">10.49944</span></span></code></pre></div>
+<span id="cb62-2"><a href="#cb62-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">10.7102</span></span></code></pre></div>
 <p>Wow…heavy stuff, but this is how the wheels turn.</p>
 <p>Let’s look at a better way to summarize these data by year. To do
 this, we’ll load the <code>tidyverse</code> package. This is actually a
@@ -946,21 +946,21 @@ it is sorting by <code>month</code>.</p>
 <code>month</code>, <code>depth</code>, <code>mean_temp</code>, and
 <code>sd_temp</code>.</p>
 <div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(otsego_summary)</span>
-<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 272 × 4</span></span>
+<span id="cb66-2"><a href="#cb66-2" aria-hidden="true" tabindex="-1"></a><span class="co"># A tibble: 284 × 4</span></span>
 <span id="cb66-3"><a href="#cb66-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Groups:   month [12]</span></span>
 <span id="cb66-4"><a href="#cb66-4" aria-hidden="true" tabindex="-1"></a>   month depth mean_temp sd_temp</span>
 <span id="cb66-5"><a href="#cb66-5" aria-hidden="true" tabindex="-1"></a>   <span class="sc">&lt;</span>int<span class="sc">&gt;</span> <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>     <span class="er">&lt;</span>dbl<span class="sc">&gt;</span>   <span class="er">&lt;</span>dbl<span class="sc">&gt;</span></span>
-<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>     <span class="dv">1</span>   <span class="fl">0.1</span>      <span class="fl">1.73</span>   <span class="fl">1.33</span> </span>
-<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>     <span class="dv">1</span>   <span class="dv">2</span>        <span class="fl">2.10</span>   <span class="fl">1.07</span> </span>
-<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>     <span class="dv">1</span>   <span class="dv">4</span>        <span class="fl">2.12</span>   <span class="fl">0.988</span></span>
-<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>     <span class="dv">1</span>   <span class="dv">6</span>        <span class="fl">2.25</span>   <span class="fl">0.962</span></span>
-<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>     <span class="dv">1</span>   <span class="dv">8</span>        <span class="fl">2.37</span>   <span class="fl">0.908</span></span>
-<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>     <span class="dv">1</span>  <span class="dv">10</span>        <span class="fl">2.39</span>   <span class="fl">0.880</span></span>
-<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>     <span class="dv">1</span>  <span class="dv">12</span>        <span class="fl">2.5</span>    <span class="fl">0.860</span></span>
-<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>     <span class="dv">1</span>  <span class="dv">14</span>        <span class="fl">2.52</span>   <span class="fl">0.813</span></span>
-<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>     <span class="dv">1</span>  <span class="dv">16</span>        <span class="fl">2.60</span>   <span class="fl">0.813</span></span>
-<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>     <span class="dv">1</span>  <span class="dv">18</span>        <span class="fl">2.65</span>   <span class="fl">0.787</span></span>
-<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># … with 262 more rows</span></span></code></pre></div>
+<span id="cb66-6"><a href="#cb66-6" aria-hidden="true" tabindex="-1"></a> <span class="dv">1</span>     <span class="dv">1</span>   <span class="dv">0</span>        <span class="fl">0.93</span>  <span class="cn">NA</span>    </span>
+<span id="cb66-7"><a href="#cb66-7" aria-hidden="true" tabindex="-1"></a> <span class="dv">2</span>     <span class="dv">1</span>   <span class="fl">0.1</span>      <span class="fl">1.79</span>   <span class="fl">1.36</span> </span>
+<span id="cb66-8"><a href="#cb66-8" aria-hidden="true" tabindex="-1"></a> <span class="dv">3</span>     <span class="dv">1</span>   <span class="dv">2</span>        <span class="fl">2.10</span>   <span class="fl">1.07</span> </span>
+<span id="cb66-9"><a href="#cb66-9" aria-hidden="true" tabindex="-1"></a> <span class="dv">4</span>     <span class="dv">1</span>   <span class="dv">4</span>        <span class="fl">2.12</span>   <span class="fl">0.988</span></span>
+<span id="cb66-10"><a href="#cb66-10" aria-hidden="true" tabindex="-1"></a> <span class="dv">5</span>     <span class="dv">1</span>   <span class="dv">6</span>        <span class="fl">2.25</span>   <span class="fl">0.962</span></span>
+<span id="cb66-11"><a href="#cb66-11" aria-hidden="true" tabindex="-1"></a> <span class="dv">6</span>     <span class="dv">1</span>   <span class="dv">8</span>        <span class="fl">2.37</span>   <span class="fl">0.908</span></span>
+<span id="cb66-12"><a href="#cb66-12" aria-hidden="true" tabindex="-1"></a> <span class="dv">7</span>     <span class="dv">1</span>  <span class="dv">10</span>        <span class="fl">2.39</span>   <span class="fl">0.880</span></span>
+<span id="cb66-13"><a href="#cb66-13" aria-hidden="true" tabindex="-1"></a> <span class="dv">8</span>     <span class="dv">1</span>  <span class="dv">12</span>        <span class="fl">2.5</span>    <span class="fl">0.860</span></span>
+<span id="cb66-14"><a href="#cb66-14" aria-hidden="true" tabindex="-1"></a> <span class="dv">9</span>     <span class="dv">1</span>  <span class="dv">14</span>        <span class="fl">2.52</span>   <span class="fl">0.813</span></span>
+<span id="cb66-15"><a href="#cb66-15" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>     <span class="dv">1</span>  <span class="dv">16</span>        <span class="fl">2.60</span>   <span class="fl">0.813</span></span>
+<span id="cb66-16"><a href="#cb66-16" aria-hidden="true" tabindex="-1"></a><span class="co"># … with 274 more rows</span></span></code></pre></div>
 <p>As a teaser for after the break, we could make a quick scatterplot
 using <code>ggplot()</code> as long as we have the
 <code>tidyverse</code> loaded!</p>
