@@ -34,7 +34,7 @@ It may be helpful to watch a couple of YouTube videos before the workshop, espec
 
 All data and code files needed for both sessions are located <a href="https://github.com/danStich/data4_r4nalms"> here </a>. There are instructions for downloading the workshop content as a compressed (`ZIP`) folder and extracting content in the README that should display at the bottom of the page linked.
 
-Here is a quick demo from the R4NALMS YouTube Channel: [Downloading R4NALMS workshop files](https://youtu.be/Gl63MHt6XeA).
+Here is a quick demo (no sound) from the R4NALMS YouTube Channel: [Downloading R4NALMS workshop files](https://youtu.be/Gl63MHt6XeA).
 
 <br>
  
