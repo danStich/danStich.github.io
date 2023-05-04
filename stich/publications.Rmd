@@ -5,6 +5,14 @@ title: "Publications"
 ```{r, child="_styles.Rmd"}
 ```
 
+
+
+### 2023
+
+---
+
+George, S. D., B. P. Baldigo, C. B. Rees, M. L. Bartron, J. J. Wiley Jr., D. S. Stich, S. M. Wells, and D. R. Winterhalter. 2023. Use of environmental DNA to assess American Eel distribution, abundance, and barriers in a river-canal system. Transactions of the American Fisheries Society. DOI: [https://doi.org/10.1002/tafs.10404](https://doi.org/10.1002/tafs.10404). [Open access](https://afspubs.onlinelibrary.wiley.com/doi/full/10.1002/tafs.10404)
+
 ### 2022
 
 ---
