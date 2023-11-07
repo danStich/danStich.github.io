@@ -15,7 +15,7 @@ George, S. D., B. P. Baldigo, C. B. Rees, M. L. Bartron, J. J. Wiley Jr., D. S. 
 
 Poulet, C., G. Lassalle, A. Jordaan, K. Limburg, C. Nack, J. Nye, A. O’Malley, B. O’Malley-Barber, D. Stich, J. Waldman, J. Zydlewski, and P. Lambert. <em>Accepted</em>. Effects of straying and reproductive strategies on the structure of American shad populations across its native range. Ecosphere.
 
-Zydlewski, J., S. Coghlan, C. Dillingham, G. Figueroa-Muñoz, C. Merriam, M. Payne Wynne, S. Smith, R. Smith, D. Stich, S. Vogel, K. Wilson, and G. Zydlewski. 2023. Seven dam challenges for migratory fish: insights from the Penobscot River. Frontiers in Ecology and Evolution.[Open access](https://www.frontiersin.org/articles/10.3389/fevo.2023.1253657/full)
+Zydlewski, J., S. Coghlan, C. Dillingham, G. Figueroa-Muñoz, C. Merriam, M. Payne Wynne, S. Smith, R. Smith, D. Stich, S. Vogel, K. Wilson, and G. Zydlewski. 2023. Seven dam challenges for migratory fish: insights from the Penobscot River. Frontiers in Ecology and Evolution. [Open access](https://www.frontiersin.org/articles/10.3389/fevo.2023.1253657/full)
 
 
 ### 2022
@@ -24,7 +24,7 @@ Zydlewski, J., S. Coghlan, C. Dillingham, G. Figueroa-Muñoz, C. Merriam, M. Pay
 
 Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444. [Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
 
-Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-induced delays on system-wide survival of Atlantic salmon smolts during high-flow, high-survival years in the Penobscot River, Maine, USA. doi: [https://doi.org/10.1139/cjfas-2022-0055](https://doi.org/10.1139/cjfas-2022-0055)
+Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-induced delays on system-wide survival of Atlantic salmon smolts during high-flow, high-survival years in the Penobscot River, Maine, USA. Canadian Journal of Fisheries and Aquatic Sciences 79:2237–2250. doi: [https://doi.org/10.1139/cjfas-2022-0055](https://doi.org/10.1139/cjfas-2022-0055)
 
 
 ### 2021
