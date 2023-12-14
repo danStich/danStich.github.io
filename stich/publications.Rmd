@@ -11,6 +11,8 @@ title: "Publications"
 
 ---
 
+Stich, D. S., W. E. Eakin, and G. Kenney. <em>Accepted</em>. Population responses of blueback herring to dam passage standards and additive mortality sources. Journal of Fish and Wildlife Management.   
+
 George, S. D., B. P. Baldigo, C. B. Rees, M. L. Bartron, J. J. Wiley Jr., D. S. Stich, S. M. Wells, and D. R. Winterhalter. 2023. Use of environmental DNA to assess American Eel distribution, abundance, and barriers in a river-canal system. Transactions of the American Fisheries Society. DOI: [https://doi.org/10.1002/tafs.10404](https://doi.org/10.1002/tafs.10404). [Open access](https://afspubs.onlinelibrary.wiley.com/doi/full/10.1002/tafs.10404)
 
 Poulet, C., G. Lassalle, A. Jordaan, K. Limburg, C. Nack, J. Nye, A. O’Malley, B. O’Malley-Barber, D. Stich, J. Waldman, J. Zydlewski, and P. Lambert. <em>Accepted</em>. Effects of straying and reproductive strategies on the structure of American shad populations across its native range. Ecosphere.
@@ -97,7 +99,6 @@ Zydlewski, J., <b>D. Stich</b>, and D. Sigourney. 2017. Hard choices in assessin
 
 <b>Stich, D. S.</b>, Y. Jiao, and B. R. Murphy. 2015. Life, death, and resurrection: Accounting for state uncertainty in survival estimation from radio-tagged Grass Carp. North American Journal of Fisheries Management 35:321-330. <a href="https://github.com/danStich/lazarus">[code]</a>
 <!-- <a href="./pubs/Stich_etal_2015_NAJFM_Lazarus.pdf">[PDF]</a>  -->
-
 
 
 ### 2014
