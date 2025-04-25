@@ -10,7 +10,7 @@ title: "Publications"
 
 ---
 
-Stich, D. S., D. A. Fox, A. L. Higgs, D. C. Kazyak, R. M. Pendleton, and S. A. Sethi. *Accepted*. Reconstructing relative abundance indices for Atlantic Sturgeon using hierarchical ecological models. Transactions of the American Fisheries Society.
+Stich, D. S., D. A. Fox, A. L. Higgs, D. C. Kazyak, R. M. Pendleton, and S. A. Sethi. 2025. Reconstructing relative abundance indices for Atlantic Sturgeon using hierarchical ecological models. Transactions of the American Fisheries Society. Open Access: [https://doi.org/10.1093/tafafs/vnae005](https://doi.org/10.1093/tafafs/vnae005)
 
 Stich, D. S., J. L. Nieland, and T. F. Sheehan. 2025. dia: An R package for the National Oceanic and Atmospheric Administration dam impact analysis. Journal of Open Source Software. [https://doi.org/10.21105/joss.07475](https://doi.org/10.21105/joss.07475)
 
