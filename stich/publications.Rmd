@@ -10,6 +10,8 @@ title: "Publications"
 
 ---
 
+Stich, D. S., J. D. Hardesty, N. T. Jordan, T. F. Sheehan, S. D. Snyder, and J. Zydlewski. anadrofish: Anadromous fish population responses to dams. Journal of Open Source Software [https://joss.theoj.org/papers/10.21105/joss.08564](https://joss.theoj.org/papers/10.21105/joss.08564)
+
 Stich, D. S., D. A. Fox, A. L. Higgs, D. C. Kazyak, R. M. Pendleton, and S. A. Sethi. 2025. Reconstructing relative abundance indices for Atlantic Sturgeon using hierarchical ecological models. Transactions of the American Fisheries Society 154:134-142. Open Access: [https://doi.org/10.1093/tafafs/vnae005](https://doi.org/10.1093/tafafs/vnae005)
 
 Stich, D. S., J. L. Nieland, and T. F. Sheehan. 2025. dia: An R package for the National Oceanic and Atmospheric Administration dam impact analysis. Journal of Open Source Software. [https://doi.org/10.21105/joss.07475](https://doi.org/10.21105/joss.07475)
