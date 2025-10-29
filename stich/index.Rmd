@@ -1,10 +1,10 @@
 ```{r, child="_styles.Rmd"}
 ```
 
-<h1 id="multi"> Associate Professor </h1>
+<h1 id="multi"> Professor </h1>
 <span style="font-size:16pt;">
 Biology Department and Biological Field Station<br>
-State University of New York College at Oneonta
+State University of New York Oneonta
 </span>
 <img id="multi" src="./images/logo.png" alt="Grass carp">
 
