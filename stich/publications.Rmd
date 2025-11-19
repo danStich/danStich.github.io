@@ -12,13 +12,13 @@ title: "Publications"
 
 Best, M., W. E. Eakin, D. Pierce, J. D. Zydlewski, and D. S. Stich. *Accepted*. Longitudinal Variability of Demographics and Life History in an Anadromous Spawning Population within a Large, Unimpeded East Coast USA Watershed. Transactions of the American Fisheries Society.
 
-Pipino, J. A., B. M. Quinby, E. Bastiaans, D. S. Stich, and C. M. Greenwood. Accepted. Competition for reproductive resources of *Nicrophorus* beetles in New York forests. Northeastern Naturalist 32(4):472-482.
+Pipino, J. A., B. M. Quinby, E. Bastiaans, D. S. Stich, and C. M. Greenwood. 2025. Competition for reproductive resources of *Nicrophorus* beetles in New York forests. Northeastern Naturalist 32(4):472-482.
 
-Stich, D. S., J. D. Hardesty, N. T. Jordan, S. G. Roy, T. F. Sheehan, S. D. Snyder, and J. Zydlewski. anadrofish: Anadromous fish population responses to dams. Journal of Open Source Software. [https://joss.theoj.org/papers/10.21105/joss.08564](https://joss.theoj.org/papers/10.21105/joss.08564)
+Stich, D. S., J. D. Hardesty, N. T. Jordan, S. G. Roy, T. F. Sheehan, S. D. Snyder, and J. Zydlewski. 2025. anadrofish: Anadromous fish population responses to dams. Journal of Open Source Software. [Open Access](https://joss.theoj.org/papers/10.21105/joss.08564)
 
-Stich, D. S., D. A. Fox, A. L. Higgs, D. C. Kazyak, R. M. Pendleton, and S. A. Sethi. 2025. Reconstructing relative abundance indices for Atlantic Sturgeon using hierarchical ecological models. Transactions of the American Fisheries Society 154:134-142. Open Access: [https://doi.org/10.1093/tafafs/vnae005](https://doi.org/10.1093/tafafs/vnae005)
+Stich, D. S., D. A. Fox, A. L. Higgs, D. C. Kazyak, R. M. Pendleton, and S. A. Sethi. 2025. Reconstructing relative abundance indices for Atlantic Sturgeon using hierarchical ecological models. Transactions of the American Fisheries Society 154:134-142. [Open Access](https://doi.org/10.1093/tafafs/vnae005)
 
-Stich, D. S., J. L. Nieland, and T. F. Sheehan. 2025. dia: An R package for the National Oceanic and Atmospheric Administration dam impact analysis. Journal of Open Source Software. [https://doi.org/10.21105/joss.07475](https://doi.org/10.21105/joss.07475)
+Stich, D. S., J. L. Nieland, and T. F. Sheehan. 2025. dia: An R package for the National Oceanic and Atmospheric Administration dam impact analysis. Journal of Open Source Software. [Open Access](https://doi.org/10.21105/joss.07475)
 
 
 ### 2024
@@ -32,20 +32,20 @@ Stich, D. S., W. E. Eakin, and G. Kenney. 2024. Population responses of blueback
 
 ---
 
-George, S. D., B. P. Baldigo, C. B. Rees, M. L. Bartron, J. J. Wiley Jr., D. S. Stich, S. M. Wells, and D. R. Winterhalter. 2023. Use of environmental DNA to assess American Eel distribution, abundance, and barriers in a river-canal system. Transactions of the American Fisheries Society. doi: [https://doi.org/10.1002/tafs.10404](https://doi.org/10.1002/tafs.10404). [Open access](https://afspubs.onlinelibrary.wiley.com/doi/full/10.1002/tafs.10404)
+George, S. D., B. P. Baldigo, C. B. Rees, M. L. Bartron, J. J. Wiley Jr., D. S. Stich, S. M. Wells, and D. R. Winterhalter. 2023. Use of environmental DNA to assess American Eel distribution, abundance, and barriers in a river-canal system. Transactions of the American Fisheries Society. [Open Access](https://afspubs.onlinelibrary.wiley.com/doi/full/10.1002/tafs.10404)
 
-Poulet, C., G. Lassalle, A. Jordaan, K. Limburg, C. Nack, J. Nye, A. O’Malley, B. O’Malley-Barber, D. Stich, J. Waldman, J. Zydlewski, and P. Lambert. 2023. Effect of straying, reproductive strategies, and ocean distribution on the structure of American shad populations. Ecosphere 14:e4712.doi: [https://doi.org/10.1002/ecs2.4712](https://doi.org/10.1002/ecs2.4712) [Open access](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.4712).
+Poulet, C., G. Lassalle, A. Jordaan, K. Limburg, C. Nack, J. Nye, A. O’Malley, B. O’Malley-Barber, D. Stich, J. Waldman, J. Zydlewski, and P. Lambert. 2023. Effect of straying, reproductive strategies, and ocean distribution on the structure of American shad populations. Ecosphere 14:e4712.doi: [Open Access](https://esajournals.onlinelibrary.wiley.com/doi/10.1002/ecs2.4712).
 
-Zydlewski, J., S. Coghlan, C. Dillingham, G. Figueroa-Muñoz, C. Merriam, M. Payne Wynne, S. Smith, R. Smith, D. Stich, S. Vogel, K. Wilson, and G. Zydlewski. 2023. Seven dam challenges for migratory fish: insights from the Penobscot River. Frontiers in Ecology and Evolution. [Open access](https://www.frontiersin.org/articles/10.3389/fevo.2023.1253657/full)
+Zydlewski, J., S. Coghlan, C. Dillingham, G. Figueroa-Muñoz, C. Merriam, M. Payne Wynne, S. Smith, R. Smith, D. Stich, S. Vogel, K. Wilson, and G. Zydlewski. 2023. Seven dam challenges for migratory fish: insights from the Penobscot River. Frontiers in Ecology and Evolution. [Open Access](https://www.frontiersin.org/articles/10.3389/fevo.2023.1253657/full)
 
 
 ### 2022
 
 ---
 
-Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444. [Open access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
+Erikson, R. A., D. S. Stich, and J. L. Hebert. 2022. fishStan: Hierarchical Bayesian models for fisheries. Journal of Open Source Software. doi: 10.21105/joss.03444. [Open Access](https://www.theoj.org/joss-papers/joss.03444/10.21105.joss.03444.pdf)
 
-Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-induced delays on system-wide survival of Atlantic salmon smolts during high-flow, high-survival years in the Penobscot River, Maine, USA. Canadian Journal of Fisheries and Aquatic Sciences 79:2237–2250. doi: [https://doi.org/10.1139/cjfas-2022-0055](https://doi.org/10.1139/cjfas-2022-0055)
+Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-induced delays on system-wide survival of Atlantic salmon smolts during high-flow, high-survival years in the Penobscot River, Maine, USA. Canadian Journal of Fisheries and Aquatic Sciences 79:2237–2250. doi: [Open Access](https://doi.org/10.1139/cjfas-2022-0055)
 
 
 ### 2021
@@ -54,7 +54,7 @@ Molina-Moctezuma, A., D. S. Stich, and J. D. Zydlewski. 2022. Effects of dam-ind
 
 Caves, S., J. R. Baumann, and D. S. Stich. 2021. Density-dependent changes in Grass Carp growth and mortality in long-term aquatic plant management. North American Journal of Fisheries Management 41:355-365. <a href="https://github.com/danStich/grasscarp"> [code]</a>
 
-George, S. D., D. S. Stich, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
+George, S. D., D. S. Stich, and B. P. Baldigo. 2021. Considerations of variability and power for long-term monitoring of stream fish assemblages. Canadian Journal of Fisheries and Aquatic Sciences 78:301-311. [Open Access](https://cdnsciencepub.com/doi/pdf/10.1139/cjfas-2020-0013).
 
 Gilligan-Lunda, E. K., D. S. Stich, K. E. Mills, M. M. Bailey, and J. D. Zydlewski. 2021. Climate change may cause shifts in growth and instantaneous natural mortality of American Shad throughout their native range. Transactions of the American Fisheries Society 150:407-421.
 
@@ -67,7 +67,7 @@ anthropogenic habitat disturbance on the nesting ecology of the wood
 turtle (*Glyptemys insculpta*). Amphibian and Reptile Conservation 15(2):50-58.
 
 Zydlewski, J., D. S. Stich, S. Roy, M. Bailey, T. Sheehan, and K. Sprankle. 2021. What Have We Lost? Modeling Dam Impacts on American Shad Populations Through Their Native Range. Frontiers in Marine Science.
-<a href = "https://www.frontiersin.org/articles/10.3389/fmars.2021.734213/full"> [Open access] <a href = "https://github.com/danStich/anadrofish"> [anadrofish R package]</a>.
+<a href = "https://www.frontiersin.org/articles/10.3389/fmars.2021.734213/full"> Open Access </a>.
 
 ### 2019
 
@@ -76,7 +76,7 @@ Zydlewski, J., D. S. Stich, S. Roy, M. Bailey, T. Sheehan, and K. Sprankle. 2021
 Watson, J. M., S. M. Coghlan, J. D. Zydlewski, D. B. Hayes, and D. S. Stich. 2019. Role of recovering river herring Alosa spp. populations on Smallmouth Bass diet and growth. Pages 75-92 in M. J. Seipker and J. W. Quinn Editors, Managing Centrarchid Fisheries, American Fisheries Society Symposium Number 87. American Fisheries Society, Bethesda, MD. 
 <!-- <a href="./pubs/Watson_etal_2019_AFS87.pdf">[PDF]</a> -->
 
-George, S. D., B. P. Baldigo, and D. S. Stich. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">[Link]</a> <a href="https://github.com/danStich/longtermCommunityMetrics"> [code]</a>
+George, S. D., B. P. Baldigo, and D. S. Stich. 2019. Temporal variability in stream fish assemblage metrics and implications for long-term monitoring. Ecological Indicators 101:661-669. <a href="https://www.sciencedirect.com/science/article/pii/S1470160X19300731">Open Access</a> <a href="https://github.com/danStich/longtermCommunityMetrics"> [code]</a>
 
 Franzem, T. P., M. Kugler, R. LaRochelle, D. Stich, A. Gascho Landis, and P. Lord. 2019. Reproductive phenology of *Elliptio complanata* in the Upper Susquehanna River tributaries of New York. Northeastern Naturalist 29:119-128. <a href="https://github.com/danStich/elliptioPhenology"> [code]</a>
 
